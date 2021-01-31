@@ -85,3 +85,15 @@ public static <T> T cloneObject(T t, Class<T> type) {
     }
 }
 ```
+> ### JAVA 8 OPTIONAL
+- **Optional** is a container object which may or maynot contain a non-null value. There are various methods available in the API to deal with the Optional in a convenient and reliable maner. <br>
+```java
+// Ex: Create an Optional Object contains non-null value
+String str = "abc";
+Optional<String> opt = Optional.of(str);
+```
+
+```java
+// Ex: Create an Optional Object contains value or empty if the input parameter is null
+Optional<String> opt = Optional.ofNullable(str);
+```
