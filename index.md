@@ -7,7 +7,9 @@
 - [More details]("https://www.tutorialspoint.com/java/")
 
 ## JAVA BASIC
+
 > ### COLLECTION FARMEWORK <br>
+
 - **java.util.collection** is the root interface of Collection Framework. It constains some important methods such as **size(), iterator(), add(), remove() and clear()**.
 
 - **List, Set Queue** are other important interfaces that inherit from the Collection interface.
@@ -35,6 +37,7 @@ ___
 ```
 - **Generic Class:** <br> 
 We can define our own classes with generic type. A generic type is a class or interface that is prameterized over types. We use bracket **(<>)** to specify the type parameter.
+
 ___
 
 ```java
@@ -57,6 +60,7 @@ ___
 ```
 
 - **Generic Interface:** <br>
+
 ___
 
 ```java
