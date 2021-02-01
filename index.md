@@ -1,3 +1,8 @@
+---
+layout: default
+---
+
+
 # GENERAL KNOWLEDGES ABOUT JAVA
 
 ## HISTORY
@@ -83,7 +88,6 @@ V - Value (Used in Map)
 S, U, V etc - 2nd, 3rdm 4th types
 ```
 <br>
-
 - Java Generic Method <br>
 
 ```java
