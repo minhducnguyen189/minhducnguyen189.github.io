@@ -1,4 +1,5 @@
-theme: jekyll-theme-cayman
+# theme: jekyll-theme-cayman
+theme: minima
 markdown: kramdown
 title: JAVA BASIC
 description: Basic knowledges about java laguage for every one.
