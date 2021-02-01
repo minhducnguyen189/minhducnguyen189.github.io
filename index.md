@@ -7,7 +7,7 @@
 - [More details]("https://www.tutorialspoint.com/java/")
 
 ## JAVA BASIC
-> ### COLLECTION FARMEWORK
+> ### COLLECTION FARMEWORK <br>
 - **java.util.collection** is the root interface of Collection Framework. It constains some important methods such as **size(), iterator(), add(), remove() and clear()**.
 
 - **List, Set Queue** are other important interfaces that inherit from the Collection interface.
@@ -16,7 +16,8 @@
 
 - All the collection framework interfaces are present in **java.util.package**
 
-> ### JAVA GENERIC
+> ### JAVA GENERIC <br>
+
 - Java Generics was added in Java 5 to provide complile time type checking and removing risk of **ClassCastException** which was common while working with collection classes.
 
 ___ 
@@ -35,6 +36,7 @@ ___
 - **Generic Class:** <br> 
 We can define our own classes with generic type. A generic type is a class or interface that is prameterized over types. We use bracket **(<>)** to specify the type parameter.
 ___
+
 ```java
 public class GenericsType<T>() {
     private T t;
@@ -53,17 +55,21 @@ ___
     GenericsType<String> type = new GenericsType<>();
     type.set("this is string");
 ```
-- **Generic Interface:**
+
+- **Generic Interface:** <br>
 ___
+
 ```java
 // Create Interface with Generic Type
 
 public interface Application(T, S) {
     public T getApplication(S appId);
 }
+
 ```
 - Java Generic Type: <br>
-Java Generic Type naming convention helps us understanding code easily and having a naming convention is one of the best practices of Java programming language. The most commonly used type parameter names are:
+Java Generic Type naming convention helps us understanding code easily and having a naming convention is one of the best practices of Java programming language. The most commonly used type parameter names are: <br>
+
 ```
 E - Element (used extensively by Java Collection Framework. Ex: ArrayList, Set, etc)
 K - Key (Used in Map)
@@ -72,8 +78,10 @@ T - Type
 V - Value (Used in Map)
 S, U, V etc - 2nd, 3rdm 4th types
 ```
+<br>
 
-- Java Generic Method
+- Java Generic Method <br>
+
 ```java
 public static <T> T cloneObject(T t, Class<T> type) {
     try {
@@ -85,8 +93,11 @@ public static <T> T cloneObject(T t, Class<T> type) {
     }
 }
 ```
-> ### JAVA 8 OPTIONAL
-- **Optional** is a container object which may or maynot contain a non-null value. There are various methods available in the API to deal with the Optional in a convenient and reliable maner. <br>
+> ### JAVA 8 OPTIONAL <br>
+
+- **Optional** is a container object which may or maynot contain a non-null value. There are various methods available in the API to deal with the Optional in a convenient and reliable maner. 
+<br>
+
 ```java
 // Ex: Create an Optional Object contains non-null value
 String str = "abc";
