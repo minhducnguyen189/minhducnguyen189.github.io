@@ -1,20 +1,116 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2021-02-08T00:09:23+07:00</updated><id>/feed.xml</id><title type="html">StepByStep</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">Welcome to Jekyll!</title><link href="/jekyll/update/2021/02/01/welcome-to-jekyll.html" rel="alternate" type="text/html" title="Welcome to Jekyll!" /><published>2021-02-01T20:15:47+07:00</published><updated>2021-02-01T20:15:47+07:00</updated><id>/jekyll/update/2021/02/01/welcome-to-jekyll</id><content type="html" xml:base="/jekyll/update/2021/02/01/welcome-to-jekyll.html">&lt;p&gt;You’ll find this post in your &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2021-02-08T17:27:36+07:00</updated><id>/feed.xml</id><title type="html">StepByStep</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">General Knowledges About Java Part 2</title><link href="/jekyll/update/2021/02/08/javageneral2.html" rel="alternate" type="text/html" title="General Knowledges About Java Part 2" /><published>2021-02-08T10:15:47+07:00</published><updated>2021-02-08T10:15:47+07:00</updated><id>/jekyll/update/2021/02/08/javageneral2</id><content type="html" xml:base="/jekyll/update/2021/02/08/javageneral2.html">&lt;h2 id=&quot;final-keyword-in-java&quot;&gt;FINAL KEYWORD IN JAVA&lt;/h2&gt;
 
-&lt;p&gt;Jekyll requires blog post files to be named according to the following format:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;final&lt;/code&gt; keyword in java is used to retrict the user. The java &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;final&lt;/code&gt; keyword can be used in many context. Final can be
+    &lt;ul&gt;
+      &lt;li&gt;variable&lt;/li&gt;
+      &lt;li&gt;method&lt;/li&gt;
+      &lt;li&gt;class&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;The final keyword can be applied with the variables, a final variable that have no value, it is called &lt;strong&gt;blank final variable&lt;/strong&gt; or &lt;strong&gt;uninitalized final variable&lt;/strong&gt;. It can be initialized in the constructor only. The &lt;strong&gt;blank final&lt;/strong&gt; variable can be &lt;strong&gt;static&lt;/strong&gt; also which will be initialized in the &lt;strong&gt;static block only&lt;/strong&gt;.
+    &lt;ul&gt;
+      &lt;li&gt;If you make any &lt;strong&gt;variable&lt;/strong&gt; as final, you can not change the value of final variable (It will be constant)&lt;/li&gt;
+      &lt;li&gt;If you make any &lt;strong&gt;method&lt;/strong&gt; as final, you can not ovveride it.&lt;/li&gt;
+      &lt;li&gt;If you make any &lt;strong&gt;class&lt;/strong&gt; as final, you can not inherit it.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;YEAR-MONTH-DAY-title.MARKUP&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&quot;hashmap-and-hashtable&quot;&gt;HASHMAP AND HASHTABLE&lt;/h2&gt;
 
-&lt;p&gt;Where &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;YEAR&lt;/code&gt; is a four-digit number, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MONTH&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DAY&lt;/code&gt; are both two-digit numbers, and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MARKUP&lt;/code&gt; is the file extension representing the format used in the file. After that, include the necessary front matter. Take a look at the source for this post to get an idea about how it works.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HashMap&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Hashtable&lt;/code&gt; both are used to store data in &lt;strong&gt;key and value&lt;/strong&gt; form. Both are using hashing technique to store unique keys.&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;p&gt;Jekyll also offers powerful support for code snippets:&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;HashMap&lt;/th&gt;
+      &lt;th&gt;Hashtable&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HashMap&lt;/code&gt; allows one null key and multiple null values&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Hashtable&lt;/code&gt; does not allow any null key or value&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HashMap&lt;/code&gt; is &lt;strong&gt;non synchronized&lt;/strong&gt;. It is &lt;strong&gt;not thread-safe&lt;/strong&gt; and can not be shared between many threads without proper &lt;strong&gt;synchronization&lt;/strong&gt; code&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Hashtable&lt;/code&gt; is &lt;strong&gt;synchronized&lt;/strong&gt;. It is &lt;strong&gt;thread-safe&lt;/strong&gt; and can be shared with many threads&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HashMap&lt;/code&gt; is fast&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Hashtable&lt;/code&gt; is slow&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Hi, &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Tom'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints 'Hi, Tom' to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;ul&gt;
+  &lt;li&gt;We can make the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HashMap&lt;/code&gt; as &lt;strong&gt;synchronized&lt;/strong&gt; by calling this code:
+    &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nc&quot;&gt;Map&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Collections&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;synchronizedMap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hashMap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt; 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;p&gt;Check out the &lt;a href=&quot;https://jekyllrb.com/docs/home&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;. If you have questions, you can ask them on &lt;a href=&quot;https://talk.jekyllrb.com/&quot;&gt;Jekyll Talk&lt;/a&gt;.&lt;/p&gt;</content><author><name></name></author><category term="jekyll" /><category term="update" /><summary type="html">You’ll find this post in your _posts directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run jekyll serve, which launches a web server and auto-regenerates your site when a file is updated.</summary></entry><entry><title type="html">General Knowledges About Java Part 1</title><link href="/jekyll/update/2021/02/01/javageneral.html" rel="alternate" type="text/html" title="General Knowledges About Java Part 1" /><published>2021-02-01T20:15:47+07:00</published><updated>2021-02-01T20:15:47+07:00</updated><id>/jekyll/update/2021/02/01/javageneral</id><content type="html" xml:base="/jekyll/update/2021/02/01/javageneral.html">&lt;h2 id=&quot;history&quot;&gt;HISTORY&lt;/h2&gt;
+&lt;h2 id=&quot;arraylist-and-linkedlist&quot;&gt;ARRAYLIST AND LINKEDLIST&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ArrayList&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;LinkedList&lt;/code&gt; both implemented list interface and maintains insertion order. Both are &lt;strong&gt;non synchronized&lt;/strong&gt; classes.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;ArrayList&lt;/th&gt;
+      &lt;th&gt;LinkedList&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ArrayList&lt;/code&gt; internally uses a &lt;strong&gt;dynamic array&lt;/strong&gt; to store the elements&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;LinkedList&lt;/code&gt; internally uses a &lt;strong&gt;doubly linked list&lt;/strong&gt; to store the elemnents&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Manipulation with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ArrayList&lt;/code&gt; is &lt;strong&gt;slow&lt;/strong&gt; because it internally uses an array. If any element is removed from the array, all the bits are shifted in memory&lt;/td&gt;
+      &lt;td&gt;Manipulation with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;LinkedList&lt;/code&gt; is &lt;strong&gt;faster&lt;/strong&gt; than &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ArrayList&lt;/code&gt; because it uses a doubly linked list, so no bit shifting is required in memory&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;An &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ArrayList&lt;/code&gt; can act as a &lt;strong&gt;list&lt;/strong&gt; only because it implements &lt;strong&gt;List&lt;/strong&gt; only&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;LinkedList&lt;/code&gt; class can act as a &lt;strong&gt;list&lt;/strong&gt; and &lt;strong&gt;queue&lt;/strong&gt; both because it implements &lt;strong&gt;List&lt;/strong&gt; and &lt;strong&gt;Dequeue&lt;/strong&gt; interfaces&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ArrayList&lt;/code&gt; is better for storing and accessing data&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;LinkedList&lt;/code&gt; is better for manipulation data&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;checked-and-unchecked-exception-in-java&quot;&gt;CHECKED AND UNCHECKED EXCEPTION IN JAVA&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;There are 2 types of exception in java: &lt;strong&gt;checked&lt;/strong&gt; and &lt;strong&gt;unchecked&lt;/strong&gt;. All &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;checked exception&lt;/code&gt; class are inherited from &lt;strong&gt;Exception&lt;/strong&gt; class except &lt;strong&gt;RuntimeException&lt;/strong&gt;. &lt;strong&gt;RuntimeException&lt;/strong&gt; is the base class of all &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;unchecked exception&lt;/code&gt; class, that is also a signal to recognize which one is checked exception or unchecked exception.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/checked-unchecked-exception.png&quot; alt=&quot;checked and unchecked exception&quot; title=&quot;Philadelphia's Magic Gardens&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;The difference between &lt;strong&gt;checked&lt;/strong&gt; and &lt;strong&gt;unchecked&lt;/strong&gt; exception classes is the time to identify the exception can happen. With &lt;strong&gt;checked exception&lt;/strong&gt;, checking is happened in &lt;strong&gt;compile time&lt;/strong&gt;, some IDE will help us by showing syntax errors if we use a method that can throw any &lt;strong&gt;checked exception&lt;/strong&gt; without try/catch. We have some checked exception: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;IOException&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Interrupted Exception&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;XMLParseException&lt;/code&gt;… With &lt;strong&gt;unchecked Exception&lt;/strong&gt;, checking exception can happen or not is only happened in the &lt;strong&gt;Runtime&lt;/strong&gt; time and IDE will not help us identify it. Some popular &lt;strong&gt;unchecked exception&lt;/strong&gt;: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;NullPointerException&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;IndexOutOfBoundException&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ClassCastException&lt;/code&gt;…&lt;/li&gt;
+  &lt;li&gt;So, in programming the &lt;strong&gt;unchecked exception&lt;/strong&gt; can be thrown in cases program have errors with logic. For errors that can be handle, the &lt;strong&gt;checked exception&lt;/strong&gt; should be thrown.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;java-static-keyword&quot;&gt;JAVA STATIC KEYWORD&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;static&lt;/code&gt; keyword in java is used for memory management mainly. We can apply &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;static&lt;/code&gt; keyword with
+    &lt;ul&gt;
+      &lt;li&gt;variable (also known as a class variable)&lt;/li&gt;
+      &lt;li&gt;method (also known as class method)&lt;/li&gt;
+      &lt;li&gt;block&lt;/li&gt;
+      &lt;li&gt;nested class&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.javatpoint.com/static-keyword-in-java&quot;&gt;More information&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;stringbufer-and-stringbuilder&quot;&gt;STRINGBUFER AND STRINGBUILDER&lt;/h2&gt;</content><author><name></name></author><category term="jekyll" /><category term="update" /><summary type="html">FINAL KEYWORD IN JAVA</summary></entry><entry><title type="html">General Knowledges About Java Part 1</title><link href="/jekyll/update/2021/02/01/javageneral.html" rel="alternate" type="text/html" title="General Knowledges About Java Part 1" /><published>2021-02-01T20:15:47+07:00</published><updated>2021-02-01T20:15:47+07:00</updated><id>/jekyll/update/2021/02/01/javageneral</id><content type="html" xml:base="/jekyll/update/2021/02/01/javageneral.html">&lt;h2 id=&quot;history&quot;&gt;HISTORY&lt;/h2&gt;
 
 &lt;ul&gt;
   &lt;li&gt;
@@ -249,7 +345,7 @@ S, U, V etc - 2nd, 3rdm 4th types
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;ul&gt;
-  &lt;li&gt;then we can see the results in the log as below:&lt;/li&gt;
+  &lt;li&gt;Then we can see the results in the log as below:&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    Interface null check
