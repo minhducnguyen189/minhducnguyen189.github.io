@@ -109,11 +109,11 @@
 </table>
 
 <ul>
-  <li>We can make the <code class="language-plaintext highlighter-rouge">HashMap</code> as <strong>synchronized</strong> by calling this code:
-    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Map</span> <span class="n">m</span> <span class="o">=</span> <span class="nc">Collections</span><span class="o">.</span><span class="na">synchronizedMap</span><span class="o">(</span><span class="n">hashMap</span><span class="o">);</span> 
-</code></pre></div>    </div>
-  </li>
+  <li>We can make the <code class="language-plaintext highlighter-rouge">HashMap</code> as <strong>synchronized</strong> by calling this code:</li>
 </ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Map</span> <span class="n">m</span> <span class="o">=</span> <span class="nc">Collections</span><span class="o">.</span><span class="na">synchronizedMap</span><span class="o">(</span><span class="n">hashMap</span><span class="o">);</span> 
+</code></pre></div></div>
 
 <h2 id="arraylist-and-linkedlist">ARRAYLIST AND LINKEDLIST</h2>
 <ul>
@@ -174,6 +174,51 @@
 
 <h2 id="stringbufer-and-stringbuilder">STRINGBUFER AND STRINGBUILDER</h2>
 
+<table>
+  <thead>
+    <tr>
+      <th>StringBuffer</th>
+      <th>StringBuilder</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">StringBuffer</code> (<strong>synchronized</strong>) and <strong>thread-safe</strong>. It means there are no two threads can access to a method of <code class="language-plaintext highlighter-rouge">StringBuffer</code> class at the same time</td>
+      <td><code class="language-plaintext highlighter-rouge">StringBuilder</code> (<strong>non-synchronized</strong>) and <strong>no thread-safe</strong>. It means there are two threads can access to a method of <code class="language-plaintext highlighter-rouge">StringBuilder</code> class at the same time</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">StringBuffer</code> is <strong>low</strong></td>
+      <td><code class="language-plaintext highlighter-rouge">StringBuilder</code> is <strong>fast</strong></td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="thread-safety-in-java">THREAD SAFETY IN JAVA</h2>
+<ul>
+  <li>Thread safety in java is the process to make our program safe to use in multi thread environment, there are different ways through which we can make our program thread safe.</li>
+  <li><strong>Synchonization</strong> is the easiest and most widely used tool for thread safety in java. JVM guarantes that <strong>synchronized code</strong> will be excuted by only on thread at a time. Java keyword <code class="language-plaintext highlighter-rouge">synchronized</code> is used to create <strong>synchronized code</strong> and internally it uses <strong>locks</strong> on object or class to make sure only one thread is executing the synchronized code.</li>
+  <li>Using Atomic Wrapper Classes from <strong>java.util.concurrent.atomic</strong> package Ex: AtomicInterger</li>
+  <li>Using locks from <strong>java.util.concurrent.locks</strong> package</li>
+  <li>Using thread safe collection classes, ex: <code class="language-plaintext highlighter-rouge">Hashtable</code></li>
+  <li>Using volitile keyword with variable to make every thread read the data from memory, not read from thread cache.</li>
+</ul>
+
+<h2 id="java-threadlocal">JAVA THREADLOCAL</h2>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">ThreadLocal</code> in java is another way to achieve thread-safety apart from writting immutable classes. Thread local can be considered as a scope of access like session scope or request scope. In threadlocal, you can set any object and this object will be local and global to the specific thread which is accessing this object.</li>
+  <li>Java <code class="language-plaintext highlighter-rouge">ThreadLocal</code> class provides thread-local variables. It enables you to create variables that can only be read and write by the same thread. If two threads are executing the same code and that code has a referece to a thread <code class="language-plaintext highlighter-rouge">ThreadLocal</code> variable then the two threads can not see the local variable of each other.</li>
+</ul>
+
+<h2 id="java-thread-pool">JAVA THREAD POOL</h2>
+<ul>
+  <li>Java <code class="language-plaintext highlighter-rouge">ThreadPool</code> represents a group of worker threads that are waiting for the job and reuse manytimes. In case of thread pool, a group of fixed size thread pool is pulled out and assigned a job by the service provider. After completeion of the job, thread is contained in the thread pool again.</li>
+  <li>Advantages of java thread pool:
+    <ul>
+      <li>Bester performance: It saves time because there is no need to create new thread.</li>
+      <li>Thread pool is used in Servlet and JSP where container creates a thread pool to process the request.</li>
+    </ul>
+  </li>
+</ul>
 
     </div><a class="u-url" href="/jekyll/update/2021/02/08/javageneral2.html" hidden></a>
   </article>

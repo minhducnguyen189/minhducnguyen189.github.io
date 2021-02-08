@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2021-02-08T17:27:36+07:00</updated><id>/feed.xml</id><title type="html">StepByStep</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">General Knowledges About Java Part 2</title><link href="/jekyll/update/2021/02/08/javageneral2.html" rel="alternate" type="text/html" title="General Knowledges About Java Part 2" /><published>2021-02-08T10:15:47+07:00</published><updated>2021-02-08T10:15:47+07:00</updated><id>/jekyll/update/2021/02/08/javageneral2</id><content type="html" xml:base="/jekyll/update/2021/02/08/javageneral2.html">&lt;h2 id=&quot;final-keyword-in-java&quot;&gt;FINAL KEYWORD IN JAVA&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2021-02-08T20:32:37+07:00</updated><id>/feed.xml</id><title type="html">StepByStep</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">General Knowledges About Java Part 2</title><link href="/jekyll/update/2021/02/08/javageneral2.html" rel="alternate" type="text/html" title="General Knowledges About Java Part 2" /><published>2021-02-08T10:15:47+07:00</published><updated>2021-02-08T10:15:47+07:00</updated><id>/jekyll/update/2021/02/08/javageneral2</id><content type="html" xml:base="/jekyll/update/2021/02/08/javageneral2.html">&lt;h2 id=&quot;final-keyword-in-java&quot;&gt;FINAL KEYWORD IN JAVA&lt;/h2&gt;
 
 &lt;ul&gt;
   &lt;li&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;final&lt;/code&gt; keyword in java is used to retrict the user. The java &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;final&lt;/code&gt; keyword can be used in many context. Final can be
@@ -47,11 +47,11 @@
 &lt;/table&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;We can make the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HashMap&lt;/code&gt; as &lt;strong&gt;synchronized&lt;/strong&gt; by calling this code:
-    &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nc&quot;&gt;Map&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Collections&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;synchronizedMap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hashMap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt; 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
+  &lt;li&gt;We can make the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HashMap&lt;/code&gt; as &lt;strong&gt;synchronized&lt;/strong&gt; by calling this code:&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nc&quot;&gt;Map&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Collections&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;synchronizedMap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hashMap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt; 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h2 id=&quot;arraylist-and-linkedlist&quot;&gt;ARRAYLIST AND LINKEDLIST&lt;/h2&gt;
 &lt;ul&gt;
@@ -110,7 +110,53 @@
   &lt;li&gt;&lt;a href=&quot;https://www.javatpoint.com/static-keyword-in-java&quot;&gt;More information&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&quot;stringbufer-and-stringbuilder&quot;&gt;STRINGBUFER AND STRINGBUILDER&lt;/h2&gt;</content><author><name></name></author><category term="jekyll" /><category term="update" /><summary type="html">FINAL KEYWORD IN JAVA</summary></entry><entry><title type="html">General Knowledges About Java Part 1</title><link href="/jekyll/update/2021/02/01/javageneral.html" rel="alternate" type="text/html" title="General Knowledges About Java Part 1" /><published>2021-02-01T20:15:47+07:00</published><updated>2021-02-01T20:15:47+07:00</updated><id>/jekyll/update/2021/02/01/javageneral</id><content type="html" xml:base="/jekyll/update/2021/02/01/javageneral.html">&lt;h2 id=&quot;history&quot;&gt;HISTORY&lt;/h2&gt;
+&lt;h2 id=&quot;stringbufer-and-stringbuilder&quot;&gt;STRINGBUFER AND STRINGBUILDER&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;StringBuffer&lt;/th&gt;
+      &lt;th&gt;StringBuilder&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;StringBuffer&lt;/code&gt; (&lt;strong&gt;synchronized&lt;/strong&gt;) and &lt;strong&gt;thread-safe&lt;/strong&gt;. It means there are no two threads can access to a method of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;StringBuffer&lt;/code&gt; class at the same time&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;StringBuilder&lt;/code&gt; (&lt;strong&gt;non-synchronized&lt;/strong&gt;) and &lt;strong&gt;no thread-safe&lt;/strong&gt;. It means there are two threads can access to a method of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;StringBuilder&lt;/code&gt; class at the same time&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;StringBuffer&lt;/code&gt; is &lt;strong&gt;low&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;StringBuilder&lt;/code&gt; is &lt;strong&gt;fast&lt;/strong&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;thread-safety-in-java&quot;&gt;THREAD SAFETY IN JAVA&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Thread safety in java is the process to make our program safe to use in multi thread environment, there are different ways through which we can make our program thread safe.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Synchonization&lt;/strong&gt; is the easiest and most widely used tool for thread safety in java. JVM guarantes that &lt;strong&gt;synchronized code&lt;/strong&gt; will be excuted by only on thread at a time. Java keyword &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;synchronized&lt;/code&gt; is used to create &lt;strong&gt;synchronized code&lt;/strong&gt; and internally it uses &lt;strong&gt;locks&lt;/strong&gt; on object or class to make sure only one thread is executing the synchronized code.&lt;/li&gt;
+  &lt;li&gt;Using Atomic Wrapper Classes from &lt;strong&gt;java.util.concurrent.atomic&lt;/strong&gt; package Ex: AtomicInterger&lt;/li&gt;
+  &lt;li&gt;Using locks from &lt;strong&gt;java.util.concurrent.locks&lt;/strong&gt; package&lt;/li&gt;
+  &lt;li&gt;Using thread safe collection classes, ex: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Hashtable&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Using volitile keyword with variable to make every thread read the data from memory, not read from thread cache.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;java-threadlocal&quot;&gt;JAVA THREADLOCAL&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ThreadLocal&lt;/code&gt; in java is another way to achieve thread-safety apart from writting immutable classes. Thread local can be considered as a scope of access like session scope or request scope. In threadlocal, you can set any object and this object will be local and global to the specific thread which is accessing this object.&lt;/li&gt;
+  &lt;li&gt;Java &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ThreadLocal&lt;/code&gt; class provides thread-local variables. It enables you to create variables that can only be read and write by the same thread. If two threads are executing the same code and that code has a referece to a thread &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ThreadLocal&lt;/code&gt; variable then the two threads can not see the local variable of each other.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;java-thread-pool&quot;&gt;JAVA THREAD POOL&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Java &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ThreadPool&lt;/code&gt; represents a group of worker threads that are waiting for the job and reuse manytimes. In case of thread pool, a group of fixed size thread pool is pulled out and assigned a job by the service provider. After completeion of the job, thread is contained in the thread pool again.&lt;/li&gt;
+  &lt;li&gt;Advantages of java thread pool:
+    &lt;ul&gt;
+      &lt;li&gt;Bester performance: It saves time because there is no need to create new thread.&lt;/li&gt;
+      &lt;li&gt;Thread pool is used in Servlet and JSP where container creates a thread pool to process the request.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><author><name></name></author><category term="jekyll" /><category term="update" /><summary type="html">FINAL KEYWORD IN JAVA</summary></entry><entry><title type="html">General Knowledges About Java Part 1</title><link href="/jekyll/update/2021/02/01/javageneral.html" rel="alternate" type="text/html" title="General Knowledges About Java Part 1" /><published>2021-02-01T20:15:47+07:00</published><updated>2021-02-01T20:15:47+07:00</updated><id>/jekyll/update/2021/02/01/javageneral</id><content type="html" xml:base="/jekyll/update/2021/02/01/javageneral.html">&lt;h2 id=&quot;history&quot;&gt;HISTORY&lt;/h2&gt;
 
 &lt;ul&gt;
   &lt;li&gt;
