@@ -193,6 +193,18 @@ S, U, V etc - 2nd, 3rdm 4th types
 <span class="c1">// or empty if the input parameter is null</span>
 <span class="nc">Optional</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">opt</span> <span class="o">=</span> <span class="nc">Optional</span><span class="o">.</span><span class="na">ofNullable</span><span class="o">(</span><span class="n">str</span><span class="o">);</span>
 </code></pre></div></div>
+<ul>
+  <li>Why use <code class="language-plaintext highlighter-rouge">Optional.of</code> over <code class="language-plaintext highlighter-rouge">Optional.ofNullable</code> ?</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c1">//Ex:</span>
+ <span class="nc">String</span> <span class="n">foobar</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">value</span> <span class="n">or</span> <span class="kc">null</span><span class="o">&gt;</span>
+ <span class="nc">Optional</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">foobar</span><span class="o">);</span> <span class="c1">//May throw NullPointerException</span>
+ <span class="nc">Optional</span><span class="o">.</span><span class="na">ofNullable</span><span class="o">(</span><span class="n">foobar</span><span class="o">);</span> <span class="c1">//Safe from NullPointerException</span>
+</code></pre></div></div>
+<ul>
+  <li>Answer: If you expect that your <strong>foobar</strong> is <strong>never null</strong> due to the program logic, it’s much better to use <code class="language-plaintext highlighter-rouge">Optional.of(foobar)</code> as you will see a <strong>NullPointerException</strong> which will indicate that your program has a bug. If you use <code class="language-plaintext highlighter-rouge">Optional.ofNullable(foobar)</code> and the <strong>foobar</strong> happens to be <strong>null</strong> due to the bug, then your program will silently continue working incorectly, which maybe a bigger disaster. This way of error may occur much later and it would be much harder to understand at which point it went wrong.</li>
+</ul>
 
 <blockquote>
   <h3 id="java-8-interface-with-default-method">JAVA 8 INTERFACE WITH DEFAULT METHOD</h3>
