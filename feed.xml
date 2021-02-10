@@ -1,4 +1,64 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2021-02-08T23:43:24+07:00</updated><id>/feed.xml</id><title type="html">StepByStep</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">General Knowledges About Java Part 2</title><link href="/jekyll/update/2021/02/08/javageneral2.html" rel="alternate" type="text/html" title="General Knowledges About Java Part 2" /><published>2021-02-08T10:15:47+07:00</published><updated>2021-02-08T10:15:47+07:00</updated><id>/jekyll/update/2021/02/08/javageneral2</id><content type="html" xml:base="/jekyll/update/2021/02/08/javageneral2.html">&lt;h2 id=&quot;final-keyword-in-java&quot;&gt;FINAL KEYWORD IN JAVA&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2021-02-10T15:58:21+07:00</updated><id>/feed.xml</id><title type="html">StepByStep</title><subtitle>Hi there! Let's explore some general knowleadges and briefly definitions  in programming. I hope that this website can help people saving time in learning, also give some motivations for those who have choice the developer path.</subtitle><entry><title type="html">Lamda Expression in Java 8</title><link href="/jekyll/update/2021/02/08/java-lamda-expression.html" rel="alternate" type="text/html" title="Lamda Expression in Java 8" /><published>2021-02-08T10:15:47+07:00</published><updated>2021-02-08T10:15:47+07:00</updated><id>/jekyll/update/2021/02/08/java-lamda-expression</id><content type="html" xml:base="/jekyll/update/2021/02/08/java-lamda-expression.html">&lt;blockquote&gt;
+  &lt;p&gt;Before going to the &lt;strong&gt;lamda expression&lt;/strong&gt; we will take a look about &lt;strong&gt;functional interface&lt;/strong&gt; in java 8. Then we can understand lamda expression easily.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;functional-interface-in-java-8&quot;&gt;FUNCTIONAL INTERFACE IN JAVA 8&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;An interface that only contain &lt;strong&gt;an abstract method&lt;/strong&gt; is called &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;functional interface&lt;/code&gt;. It can be called as &lt;strong&gt;Single Abstract Method (SAM)&lt;/strong&gt; also.&lt;/li&gt;
+  &lt;li&gt;We can use anotation &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;@FunctionalInterface&lt;/code&gt; to declare &lt;strong&gt;functional interface&lt;/strong&gt;. However, there are no issue if you don’t use this anotation, using this anotation just ensures for compile process which will throw exception if there are 2 abstract methods.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// functional interface without anotation&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Application&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getApplicationId&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;appNumber&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// functional interface with anotation&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@FunctionalInterface&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Application&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getApplicationId&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;appNumber&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;ul&gt;
+  &lt;li&gt;The main benefit of java 8 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;functional interface&lt;/code&gt; is helping us can use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lamda expression&lt;/code&gt; to declare &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;body method&lt;/code&gt; and avoid using &lt;strong&gt;anonymous class&lt;/strong&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;We will disscus on &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lamda expression&lt;/code&gt; in the next section below.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Java 8 collection API has been rewritten and new Stream API is introduced that uses a lot of &lt;strong&gt;functional interface&lt;/strong&gt; in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;java.util.function&lt;/code&gt; package. Some of the useful java 8 &lt;strong&gt;function interface&lt;/strong&gt; are &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Consumer&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Supplier&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Function&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Predicate&lt;/code&gt; …&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Java 8 Functional Interface&lt;/th&gt;
+      &lt;th&gt;Description&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Consumer Interface&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Consumer&amp;lt;T&amp;gt;&lt;/code&gt; represents an operation that &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;accepts&lt;/code&gt; &lt;strong&gt;a single input argument&lt;/strong&gt; and &lt;strong&gt;return no result (void)&lt;/strong&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Supplier Interface&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Supplier&amp;lt;T&amp;gt;&lt;/code&gt; represents a supplier of results with &lt;strong&gt;no input argument&lt;/strong&gt;.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Function Interface&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Function&amp;lt;T, R&amp;gt;&lt;/code&gt; represents a function that &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;accepts&lt;/code&gt; &lt;strong&gt;one argument&lt;/strong&gt; and &lt;strong&gt;produces a result&lt;/strong&gt;.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Predicate Interface&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Predicate&amp;lt;T&amp;gt;&lt;/code&gt; represents a predicate &lt;strong&gt;(return true/false)&lt;/strong&gt; of &lt;strong&gt;one argument&lt;/strong&gt;.&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;lamda-expression-in-java-8&quot;&gt;LAMDA EXPRESSION IN JAVA 8&lt;/h2&gt;</content><author><name></name></author><category term="jekyll" /><category term="update" /><summary type="html">Before going to the lamda expression we will take a look about functional interface in java 8. Then we can understand lamda expression easily.</summary></entry><entry><title type="html">General Knowledges About Java Part 2</title><link href="/jekyll/update/2021/02/08/java-general-part2.html" rel="alternate" type="text/html" title="General Knowledges About Java Part 2" /><published>2021-02-08T10:15:47+07:00</published><updated>2021-02-08T10:15:47+07:00</updated><id>/jekyll/update/2021/02/08/java-general-part2</id><content type="html" xml:base="/jekyll/update/2021/02/08/java-general-part2.html">&lt;h2 id=&quot;final-keyword-in-java&quot;&gt;FINAL KEYWORD IN JAVA&lt;/h2&gt;
 
 &lt;ul&gt;
   &lt;li&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;final&lt;/code&gt; keyword in java is used to retrict the user. The java &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;final&lt;/code&gt; keyword can be used in many context. Final can be
@@ -90,7 +150,7 @@
   &lt;li&gt;There are 2 types of exception in java: &lt;strong&gt;checked&lt;/strong&gt; and &lt;strong&gt;unchecked&lt;/strong&gt;. All &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;checked exception&lt;/code&gt; class are inherited from &lt;strong&gt;Exception&lt;/strong&gt; class except &lt;strong&gt;RuntimeException&lt;/strong&gt;. &lt;strong&gt;RuntimeException&lt;/strong&gt; is the base class of all &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;unchecked exception&lt;/code&gt; class, that is also a signal to recognize which one is checked exception or unchecked exception.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/images/checked-unchecked-exception.png&quot; alt=&quot;checked and unchecked exception&quot; title=&quot;Philadelphia's Magic Gardens&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/checked-unchecked-exception.png&quot; alt=&quot;checked and unchecked exception&quot; title=&quot;checked and unchecked exception&quot; /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;The difference between &lt;strong&gt;checked&lt;/strong&gt; and &lt;strong&gt;unchecked&lt;/strong&gt; exception classes is the time to identify the exception can happen. With &lt;strong&gt;checked exception&lt;/strong&gt;, checking is happened in &lt;strong&gt;compile time&lt;/strong&gt;, some IDE will help us by showing syntax errors if we use a method that can throw any &lt;strong&gt;checked exception&lt;/strong&gt; without try/catch. We have some checked exception: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;IOException&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Interrupted Exception&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;XMLParseException&lt;/code&gt;… With &lt;strong&gt;unchecked Exception&lt;/strong&gt;, checking exception can happen or not is only happened in the &lt;strong&gt;Runtime&lt;/strong&gt; time and IDE will not help us identify it. Some popular &lt;strong&gt;unchecked exception&lt;/strong&gt;: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;NullPointerException&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;IndexOutOfBoundException&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ClassCastException&lt;/code&gt;…&lt;/li&gt;
@@ -133,9 +193,9 @@
 
 &lt;h2 id=&quot;thread-safety-in-java&quot;&gt;THREAD SAFETY IN JAVA&lt;/h2&gt;
 &lt;ul&gt;
-  &lt;li&gt;Thread safety in java is the process to make our program safe to use in multi thread environment, there are different ways through which we can make our program thread safe.&lt;/li&gt;
+  &lt;li&gt;Thread safety in java is the process to make our program safe to use in multi threads environment, there are different ways through which we can make our program thread safe.&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;Synchonization&lt;/strong&gt; is the easiest and most widely used tool for thread safety in java. JVM guarantes that &lt;strong&gt;synchronized code&lt;/strong&gt; will be excuted by only on thread at a time. Java keyword &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;synchronized&lt;/code&gt; is used to create &lt;strong&gt;synchronized code&lt;/strong&gt; and internally it uses &lt;strong&gt;locks&lt;/strong&gt; on object or class to make sure only one thread is executing the synchronized code.&lt;/li&gt;
-  &lt;li&gt;Using Atomic Wrapper Classes from &lt;strong&gt;java.util.concurrent.atomic&lt;/strong&gt; package Ex: AtomicInterger&lt;/li&gt;
+  &lt;li&gt;Using Atomic Wrapper Classes from &lt;strong&gt;java.util.concurrent.atomic&lt;/strong&gt; package Ex: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;AtomicInterger&lt;/code&gt;&lt;/li&gt;
   &lt;li&gt;Using locks from &lt;strong&gt;java.util.concurrent.locks&lt;/strong&gt; package&lt;/li&gt;
   &lt;li&gt;Using thread safe collection classes, ex: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Hashtable&lt;/code&gt;&lt;/li&gt;
   &lt;li&gt;Using volitile keyword with variable to make every thread read the data from memory, not read from thread cache.&lt;/li&gt;
@@ -156,7 +216,12 @@
       &lt;li&gt;Thread pool is used in Servlet and JSP where container creates a thread pool to process the request.&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><author><name></name></author><category term="jekyll" /><category term="update" /><summary type="html">FINAL KEYWORD IN JAVA</summary></entry><entry><title type="html">General Knowledges About Java Part 1</title><link href="/jekyll/update/2021/02/01/javageneral.html" rel="alternate" type="text/html" title="General Knowledges About Java Part 1" /><published>2021-02-01T20:15:47+07:00</published><updated>2021-02-01T20:15:47+07:00</updated><id>/jekyll/update/2021/02/01/javageneral</id><content type="html" xml:base="/jekyll/update/2021/02/01/javageneral.html">&lt;h2 id=&quot;history&quot;&gt;HISTORY&lt;/h2&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/threadpool.jpg&quot; alt=&quot;thread pool&quot; title=&quot;thread pool&quot; /&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;We will continue to disscus about thread pool in Spring &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;@Async&lt;/code&gt; anotation.&lt;/li&gt;
+&lt;/ul&gt;</content><author><name></name></author><category term="jekyll" /><category term="update" /><summary type="html">FINAL KEYWORD IN JAVA</summary></entry><entry><title type="html">General Knowledges About Java Part 1</title><link href="/jekyll/update/2021/02/01/java-general-part1.html" rel="alternate" type="text/html" title="General Knowledges About Java Part 1" /><published>2021-02-01T20:15:47+07:00</published><updated>2021-02-01T20:15:47+07:00</updated><id>/jekyll/update/2021/02/01/java-general-part1</id><content type="html" xml:base="/jekyll/update/2021/02/01/java-general-part1.html">&lt;h2 id=&quot;history&quot;&gt;HISTORY&lt;/h2&gt;
 
 &lt;ul&gt;
   &lt;li&gt;
