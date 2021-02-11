@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2021-02-10T15:58:21+07:00</updated><id>/feed.xml</id><title type="html">StepByStep</title><subtitle>Hi there! Let's explore some general knowleadges and briefly definitions  in programming. I hope that this website can help people saving time in learning, also give some motivations for those who have choice the developer path.</subtitle><entry><title type="html">Lamda Expression in Java 8</title><link href="/jekyll/update/2021/02/08/java-lamda-expression.html" rel="alternate" type="text/html" title="Lamda Expression in Java 8" /><published>2021-02-08T10:15:47+07:00</published><updated>2021-02-08T10:15:47+07:00</updated><id>/jekyll/update/2021/02/08/java-lamda-expression</id><content type="html" xml:base="/jekyll/update/2021/02/08/java-lamda-expression.html">&lt;blockquote&gt;
-  &lt;p&gt;Before going to the &lt;strong&gt;lamda expression&lt;/strong&gt; we will take a look about &lt;strong&gt;functional interface&lt;/strong&gt; in java 8. Then we can understand lamda expression easily.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2021-02-11T13:16:49+07:00</updated><id>/feed.xml</id><title type="html">StepByStep</title><subtitle>Hi there! Let's explore some general knowleadges and briefly definitions  in programming. I hope that this website can help people saving time in learning, also give some motivations for those who have choice the developer path.</subtitle><entry><title type="html">Lambda Expression in Java 8</title><link href="/jekyll/update/2021/02/10/java-lambda-expression.html" rel="alternate" type="text/html" title="Lambda Expression in Java 8" /><published>2021-02-10T10:15:47+07:00</published><updated>2021-02-10T10:15:47+07:00</updated><id>/jekyll/update/2021/02/10/java-lambda-expression</id><content type="html" xml:base="/jekyll/update/2021/02/10/java-lambda-expression.html">&lt;blockquote&gt;
+  &lt;p&gt;Before going to the &lt;strong&gt;lambda expression&lt;/strong&gt; we will take a look about &lt;strong&gt;functional interface&lt;/strong&gt; in java 8. Then we can understand lamda expression easily.&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;h2 id=&quot;functional-interface-in-java-8&quot;&gt;FUNCTIONAL INTERFACE IN JAVA 8&lt;/h2&gt;
 &lt;ul&gt;
-  &lt;li&gt;An interface that only contain &lt;strong&gt;an abstract method&lt;/strong&gt; is called &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;functional interface&lt;/code&gt;. It can be called as &lt;strong&gt;Single Abstract Method (SAM)&lt;/strong&gt; also.&lt;/li&gt;
+  &lt;li&gt;An interface that only contain &lt;strong&gt;one abstract method&lt;/strong&gt; is called &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;functional interface&lt;/code&gt; (A functional interface may contain one or more &lt;strong&gt;default methods&lt;/strong&gt; or &lt;strong&gt;static methods&lt;/strong&gt;). It can be called as &lt;strong&gt;Single Abstract Method (SAM)&lt;/strong&gt; also.&lt;/li&gt;
   &lt;li&gt;We can use anotation &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;@FunctionalInterface&lt;/code&gt; to declare &lt;strong&gt;functional interface&lt;/strong&gt;. However, there are no issue if you don’t use this anotation, using this anotation just ensures for compile process which will throw exception if there are 2 abstract methods.&lt;/li&gt;
 &lt;/ul&gt;
 
@@ -20,11 +20,11 @@
 &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;ul&gt;
-  &lt;li&gt;The main benefit of java 8 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;functional interface&lt;/code&gt; is helping us can use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lamda expression&lt;/code&gt; to declare &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;body method&lt;/code&gt; and avoid using &lt;strong&gt;anonymous class&lt;/strong&gt;.&lt;/li&gt;
+  &lt;li&gt;The main benefit of java 8 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;functional interface&lt;/code&gt; is helping us can use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lambda expression&lt;/code&gt; to declare &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;body method&lt;/code&gt; and avoid using &lt;strong&gt;anonymous class&lt;/strong&gt;.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;We will disscus on &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lamda expression&lt;/code&gt; in the next section below.&lt;/p&gt;
+  &lt;p&gt;We will disscus on &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lambda expression&lt;/code&gt; in the next section below.&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;ul&gt;
@@ -58,7 +58,40 @@
   &lt;/tbody&gt;
 &lt;/table&gt;
 
-&lt;h2 id=&quot;lamda-expression-in-java-8&quot;&gt;LAMDA EXPRESSION IN JAVA 8&lt;/h2&gt;</content><author><name></name></author><category term="jekyll" /><category term="update" /><summary type="html">Before going to the lamda expression we will take a look about functional interface in java 8. Then we can understand lamda expression easily.</summary></entry><entry><title type="html">General Knowledges About Java Part 2</title><link href="/jekyll/update/2021/02/08/java-general-part2.html" rel="alternate" type="text/html" title="General Knowledges About Java Part 2" /><published>2021-02-08T10:15:47+07:00</published><updated>2021-02-08T10:15:47+07:00</updated><id>/jekyll/update/2021/02/08/java-general-part2</id><content type="html" xml:base="/jekyll/update/2021/02/08/java-general-part2.html">&lt;h2 id=&quot;final-keyword-in-java&quot;&gt;FINAL KEYWORD IN JAVA&lt;/h2&gt;
+&lt;h2 id=&quot;lambda-expression-in-java-8&quot;&gt;LAMBDA EXPRESSION IN JAVA 8&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Java 8 introduced an &lt;strong&gt;arrow&lt;/strong&gt;(function pointer) &lt;strong&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-&amp;gt;&lt;/code&gt;&lt;/strong&gt;. This is used in Lamda methods with the main purpose is seperating a Lamda method into 2 parts: &lt;strong&gt;parameters&lt;/strong&gt; and &lt;strong&gt;body method/function&lt;/strong&gt;(Lamda function body).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;something&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;};&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Lambda expression&lt;/code&gt; can be defined as an anonymous function because it has enough characteristics of a function: &lt;strong&gt;parameters&lt;/strong&gt; and &lt;strong&gt;body&lt;/strong&gt;. The &lt;strong&gt;parameters&lt;/strong&gt; of a function &lt;strong&gt;may or may not be required&lt;/strong&gt; and the &lt;strong&gt;body&lt;/strong&gt; may &lt;strong&gt;have or have not&lt;/strong&gt; the &lt;strong&gt;return value&lt;/strong&gt;.&lt;/li&gt;
+  &lt;li&gt;Base on the &lt;strong&gt;input parameters&lt;/strong&gt;, the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lambda expression&lt;/code&gt; will process codes in &lt;strong&gt;body&lt;/strong&gt; to return the result.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Lambda expression&lt;/code&gt; provides an implementation way for method defined in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;functional interface&lt;/code&gt;. In addition, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lambda expression&lt;/code&gt; is used in libraries of Collection as &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;filter&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;map&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;findAny&lt;/code&gt;…&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Lambda expression&lt;/code&gt; helps us to reduce the number of codes and support sequential and parallel streams effectively in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Stream API&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@FunctionalInterface&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Hello&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;sayHello&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;LambdaExpression&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;Hello&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hello&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Hello &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hello&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sayHello&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Lambda&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;//the result in the terminal
+
+Hello Lambda
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><category term="jekyll" /><category term="update" /><summary type="html">Before going to the lambda expression we will take a look about functional interface in java 8. Then we can understand lamda expression easily.</summary></entry><entry><title type="html">General Knowledges About Java Part 2</title><link href="/jekyll/update/2021/02/08/java-general-part2.html" rel="alternate" type="text/html" title="General Knowledges About Java Part 2" /><published>2021-02-08T10:15:47+07:00</published><updated>2021-02-08T10:15:47+07:00</updated><id>/jekyll/update/2021/02/08/java-general-part2</id><content type="html" xml:base="/jekyll/update/2021/02/08/java-general-part2.html">&lt;h2 id=&quot;final-keyword-in-java&quot;&gt;FINAL KEYWORD IN JAVA&lt;/h2&gt;
 
 &lt;ul&gt;
   &lt;li&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;final&lt;/code&gt; keyword in java is used to retrict the user. The java &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;final&lt;/code&gt; keyword can be used in many context. Final can be
