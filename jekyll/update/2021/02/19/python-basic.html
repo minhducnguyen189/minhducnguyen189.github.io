@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- bootstrap library and JS, Jquery -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Python Basic | StepByStep</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Python Basic" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="HISTORY" />
+<meta property="og:description" content="HISTORY" />
+<link rel="canonical" href="/jekyll/update/2021/02/19/python-basic.html" />
+<meta property="og:url" content="/jekyll/update/2021/02/19/python-basic.html" />
+<meta property="og:site_name" content="StepByStep" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-02-19T12:00:00+07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Python Basic" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","headline":"Python Basic","dateModified":"2021-02-19T12:00:00+07:00","datePublished":"2021-02-19T12:00:00+07:00","mainEntityOfPage":{"@type":"WebPage","@id":"/jekyll/update/2021/02/19/python-basic.html"},"url":"/jekyll/update/2021/02/19/python-basic.html","description":"HISTORY","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="StepByStep" /></head><body>
+  <div class="container-flush">
+    <div class="row"><!-- navigation bar -->
+<div class="col-lg-12">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" role="banner"><a class="navbar-brand site-title" rel="author" href="/">StepByStep</a><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="nav navbar-nav"><li class="nav-item active">
+          <a class="nav-link" href="/about/">About</a>
+        </li></ul>
+    </div></nav>
+</div></div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+  <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+    <header class="post-header">
+      <h1 class="post-title p-name" itemprop="name headline">Python Basic</h1>
+      <p class="post-meta">
+        <time class="dt-published" datetime="2021-02-19T12:00:00+07:00" itemprop="datePublished">Feb 19, 2021
+        </time></p>
+    </header>
+  
+    <div class="post-content e-content" itemprop="articleBody">
+      <h2 id="history">HISTORY</h2>
+
+<ul>
+  <li>
+    <p>Python is a general-purpose interpreted, interactive, object-oriented, and high-level programming language. It was created by Guido van Rossum during 1985- 1990. Like Perl, Python source code is also available under the GNU General Public License (GPL).</p>
+  </li>
+  <li>
+    <p>Python is a high-level, interpreted, interactive and object-oriented scripting language. Python is designed to be highly readable. It uses English keywords frequently where as other languages use punctuation, and it has fewer syntactical constructions than other languages.</p>
+  </li>
+  <li>
+    <p><a href="https://www.tutorialspoint.com/python/index.htm">More information</a></p>
+  </li>
+</ul>
+
+<h2 id="hello-world">HELLO WORLD</h2>
+
+<ul>
+  <li>To write and excute Python code, we can create a file with <code class="language-plaintext highlighter-rouge">.py</code>. For example we will create <code class="language-plaintext highlighter-rouge">hello.py</code> and to print some words to commandline we can use function <code class="language-plaintext highlighter-rouge">print()</code> that Python language provided.</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="s">"Hello, World!"</span><span class="p">)</span>
+</code></pre></div></div>
+<pre><code class="language-cmd">&lt;!-- result --&gt;
+Hello, World!
+</code></pre>
+
+<ul>
+  <li>We will create another file with name <code class="language-plaintext highlighter-rouge">name.py</code>. To receive the input value from <strong>Terminal</strong> when <code class="language-plaintext highlighter-rouge">name.py</code> is excecuted. We use function <code class="language-plaintext highlighter-rouge">input()</code> to collect the input value and put into the variable <code class="language-plaintext highlighter-rouge">name</code>. Then if we want to put this variable into <strong>a string</strong> we can use <code class="language-plaintext highlighter-rouge">f</code> <strong>outside a string</strong> and <code class="language-plaintext highlighter-rouge">{variableName}</code> <strong>into that string</strong>. So, the value of variable name will be put into string as in the example below .</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">name</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">"Name: "</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Hello, </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+</code></pre></div></div>
+<pre><code class="language-cmd">&lt;!-- result --&gt;
+Name: Duc
+Hello, Duc
+</code></pre>
+
+<h2 id="variable">VARIABLE</h2>
+<ul>
+  <li>Unlike other language programming, we don’t have to delare the <code class="language-plaintext highlighter-rouge">type</code> of variable in python. Python will automatically understand the <code class="language-plaintext highlighter-rouge">type</code> of variable base on the value of it’s variable.</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span> <span class="o">=</span> <span class="mi">28</span>          <span class="c1"># int
+</span><span class="n">b</span> <span class="o">=</span> <span class="mf">1.5</span>         <span class="c1"># float
+</span><span class="n">c</span> <span class="o">=</span> <span class="s">"Hello!"</span>    <span class="c1"># str
+</span><span class="n">d</span> <span class="o">=</span> <span class="bp">True</span>        <span class="c1"># bool
+</span><span class="n">e</span> <span class="o">=</span> <span class="bp">None</span>        <span class="c1"># NoneType (null)
+</span></code></pre></div></div>
+
+<h2 id="sequences">SEQUENCES</h2>
+<ul>
+  <li>We are serveral sequences in python</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>sequences</th>
+      <th>description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>list</td>
+      <td>sequence of mutable values</td>
+    </tr>
+    <tr>
+      <td>tuple</td>
+      <td>sequence of immutable values</td>
+    </tr>
+    <tr>
+      <td>set</td>
+      <td>collection of unique values</td>
+    </tr>
+    <tr>
+      <td>dict</td>
+      <td>collection of key-value pairs</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>In python <code class="language-plaintext highlighter-rouge">str</code> can be a sequence and we can access individual elements inside a string</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">name</span> <span class="o">=</span> <span class="s">"Harry"</span>
+<span class="k">print</span><span class="p">(</span><span class="n">name</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s">"Harry"</span><span class="p">,</span> <span class="s">"Ron"</span><span class="p">,</span> <span class="s">"Tom"</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">names</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+</code></pre></div></div>
+<pre><code class="language-cmd">&lt;!-- result --&gt;
+H
+Tom
+</code></pre>
+
+<h2 id="list">LIST</h2>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">List</code> is a sequence of mutable values. In python we can define a list of elements as in the example below. Then, to <strong>add new element</strong> into a list we can use <code class="language-plaintext highlighter-rouge">append()</code> and to sort a list we can use <code class="language-plaintext highlighter-rouge">sort()</code></li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#create an empty list
+</span><span class="n">my_list</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1">#create a list of names
+</span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s">"Harry"</span><span class="p">,</span> <span class="s">"Ron"</span><span class="p">,</span> <span class="s">"Tom"</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">names</span><span class="p">)</span>
+
+<span class="c1">#add a new element into a list with append()
+</span><span class="n">names</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">"Duc"</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">names</span><span class="p">)</span>
+
+<span class="c1">#sort list names with sort()
+</span><span class="n">names</span><span class="p">.</span><span class="n">sort</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">names</span><span class="p">)</span>
+</code></pre></div></div>
+<pre><code class="language-cmd">&lt;!-- result --&gt;
+['Harry', 'Ron', 'Tom']       
+['Harry', 'Ron', 'Tom', 'Duc']
+['Duc', 'Harry', 'Ron', 'Tom']
+</code></pre>
+
+<h2 id="set">SET</h2>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Set</code> is a collection of unique values. In python, we use <code class="language-plaintext highlighter-rouge">set()</code> to create an empty set then use <code class="language-plaintext highlighter-rouge">add()</code> to <strong>add new element</strong> into a set and <code class="language-plaintext highlighter-rouge">remove()</code> to <strong>remove an element</strong> of the set. Moreover, we can use <code class="language-plaintext highlighter-rouge">len()</code> to count the number of elements of <strong>list, set…</strong></li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#create an empty set
+</span><span class="n">s</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+
+<span class="c1"># add elements into set
+</span><span class="n">s</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">s</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">s</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="n">s</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">s</span><span class="p">.</span><span class="n">remove</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"the set has </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="si">}</span><span class="s"> elements."</span><span class="p">)</span>
+</code></pre></div></div>
+<pre><code class="language-cmd">&lt;!-- the result of terminal will be showed --&gt;
+{2, 3}
+the set has 2 elements.
+</code></pre>
+
+<h2 id="dictionary">DICTIONARY</h2>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">dict</code> is a collection of <strong>key-value</strong> pairs. Let’s see an example below for creating a dict.</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#create an empty dict
+</span><span class="n">my_dict</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="c1">#create a dict houses with key-value pairs
+</span><span class="n">houses</span> <span class="o">=</span> <span class="p">{</span><span class="s">"Harry"</span><span class="p">:</span> <span class="s">"Gryfindor"</span><span class="p">,</span> <span class="s">"Draco"</span><span class="p">:</span> <span class="s">"Slytherin"</span><span class="p">}</span>
+
+<span class="c1">#add new element of key-value pair into a dict
+</span><span class="n">houses</span><span class="p">[</span><span class="s">"Hermione"</span><span class="p">]</span> <span class="o">=</span> <span class="s">"Gryfindor"</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">houses</span><span class="p">[</span><span class="s">"Hermione"</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">houses</span><span class="p">[</span><span class="s">"Harry"</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">houses</span><span class="p">)</span>
+</code></pre></div></div>
+
+<pre><code class="language-cmd">&lt;!-- result --&gt;
+Gryfindor
+Gryfindor
+{'Harry': 'Gryfindor', 'Draco': 'Slytherin', 'Hermione': 'Gryfindor'}
+</code></pre>
+
+<h2 id="condition">CONDITION</h2>
+<ul>
+  <li>In python, we use <code class="language-plaintext highlighter-rouge">if</code>, <code class="language-plaintext highlighter-rouge">elif</code> and <code class="language-plaintext highlighter-rouge">else</code> for checking condition.</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s">"Number: "</span><span class="p">))</span>
+<span class="k">if</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"n is positive"</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"n is negative"</span><span class="p">)</span>    
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"n is not positive"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<pre><code class="language-cmd">&lt;!-- result --&gt;
+Number: 5
+n is positive
+</code></pre>
+
+<h2 id="loop">LOOP</h2>
+<ul>
+  <li>There are many way to loop an array or list in Python. So, let’s see the example below. The syntax of loop is like <strong><code class="language-plaintext highlighter-rouge">for</code> item <code class="language-plaintext highlighter-rouge">in</code> items</strong> (We read every <strong>single item</strong> in <strong>list of items</strong>)</li>
+</ul>
+
+<blockquote>
+  <h3 id="using-for-in-array">Using for in array</h3>
+</blockquote>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</code></pre></div></div>
+<pre><code class="language-cmd">&lt;!-- result --&gt;
+0
+1
+2
+3
+4
+5
+</code></pre>
+<blockquote>
+  <h3 id="using-for-in-range">Using for in <code class="language-plaintext highlighter-rouge">range()</code></h3>
+</blockquote>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</code></pre></div></div>
+<pre><code class="language-cmd">&lt;!-- result --&gt;
+0
+1
+2
+3
+4
+5
+</code></pre>
+
+<blockquote>
+  <h3 id="using-for-in-array-of-string">Using for in array of string</h3>
+</blockquote>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s">"Harry"</span><span class="p">,</span> <span class="s">"Duc"</span><span class="p">,</span> <span class="s">"Han"</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">names</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+</code></pre></div></div>
+<pre><code class="language-cmd">&lt;!-- result --&gt;
+Harry
+Duc
+Han
+</code></pre>
+
+<blockquote>
+  <h3 id="using-for-in-a-string">Using for in a string</h3>
+</blockquote>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">names</span> <span class="o">=</span> <span class="s">"Duc"</span>
+<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">names</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+</code></pre></div></div>
+<pre><code class="language-cmd">&lt;!-- result --&gt;
+D
+u
+c
+</code></pre>
+
+<h2 id="function">FUNCTION</h2>
+<ul>
+  <li>We can declare a function in python using this syntax <strong><code class="language-plaintext highlighter-rouge">def functionName(parameter):</code></strong>. The parameter is not need to have</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#define a function with name is "square" and parameter is x
+</span><span class="k">def</span> <span class="nf">square</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
+
+<span class="c1">#using square function in a loop
+</span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"The quare of </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s"> is </span><span class="si">{</span><span class="n">square</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+</code></pre></div></div>
+<pre><code class="language-cmd">&lt;!-- the result when we excute the python file above --&gt;
+The quare of 0 is 0
+The quare of 1 is 1
+The quare of 2 is 4
+The quare of 3 is 9
+The quare of 4 is 16
+The quare of 5 is 25
+The quare of 6 is 36
+The quare of 7 is 49
+The quare of 8 is 64
+The quare of 9 is 81
+</code></pre>
+
+<ul>
+  <li>So, how we can import a function from another python file? Let’s see the example below. Assume that we have two python files <strong>function.py</strong> and <strong>squares.py</strong></li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#function.py file
+</span><span class="k">def</span> <span class="nf">square</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#squares.py
+</span><span class="kn">import</span> <span class="nn">function</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"The quare of </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s"> is </span><span class="si">{</span><span class="n">function</span><span class="p">.</span><span class="n">square</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<ul>
+  <li>We can use <code class="language-plaintext highlighter-rouge">import {filename}</code> to import a python file into another python file and when we want to use the function of imported python file we just simply use <code class="language-plaintext highlighter-rouge">.{functionName}</code> to call the function.</li>
+  <li>We also have a different way to import function from other python file, we will use <code class="language-plaintext highlighter-rouge">from {fileName} import {functionName}</code> as the example below.</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#squares.py
+</span><span class="kn">from</span> <span class="nn">function</span> <span class="kn">import</span> <span class="n">square</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"The quare of </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s"> is </span><span class="si">{</span><span class="n">square</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<ul>
+  <li>This is the result when we execute the file <strong>squares.py</strong> for two way of import.</li>
+</ul>
+
+<pre><code class="language-cmd">&lt;!-- the result when we excute the squares.py file above --&gt;
+The quare of 0 is 0
+The quare of 1 is 1
+The quare of 2 is 4
+The quare of 3 is 9
+The quare of 4 is 16
+The quare of 5 is 25
+The quare of 6 is 36
+The quare of 7 is 49
+The quare of 8 is 64
+The quare of 9 is 81
+</code></pre>
+
+<hr />
+<p>TO BE CONTINUE</p>
+
+
+    </div><a class="u-url" href="/jekyll/update/2021/02/19/python-basic.html" hidden></a>
+  </article>
+  
+</div>
+
+
+    </div>
+  </div>
+</body><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">StepByStep</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">StepByStep</li><li><a class="u-email" href="mailto:minhducnguyen189@gmail.com">minhducnguyen189@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/jekyll"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">jekyll</span></a></li><li><a href="https://www.twitter.com/jekyllrb"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">jekyllrb</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Hi there! Let&#39;s explore some general knowleadges and briefly definitions  in programming. I hope that this website can help people saving time in learning, also give some motivations for those who have choice the developer path.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</html>
