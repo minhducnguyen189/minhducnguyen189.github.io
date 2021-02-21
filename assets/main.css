@@ -116,7 +116,7 @@ table td { border: 1px solid #e8e8e8; }
 
 .post-link:hover { text-decoration: none; background-color: #b2bec3; }
 
-.post-link:hover .post-meta h3 { color: black; }
+.post-link:hover .post-meta { color: black; }
 
 .post-link:hover > h3 { color: black; }
 

@@ -386,9 +386,119 @@ The quare of 8 is 64
 The quare of 9 is 81
 </code></pre>
 
-<hr />
-<p>TO BE CONTINUE</p>
+<h2 id="python-anonymouslambda-fucntion">PYTHON ANONYMOUS/LAMBDA FUCNTION</h2>
+<ul>
+  <li>In python, an anonymous function is a function that is defined without a name.</li>
+  <li>While normal functions are defined using the <code class="language-plaintext highlighter-rouge">def</code> keyword in Python, anonymous functions are defined using the  <code class="language-plaintext highlighter-rouge">lambda</code> keyword. Hence, anunymous functions are also called lambda functions.
+    <blockquote>
+      <h4 id="sysntax-of-lambda-function-in-python">Sysntax of Lambda function in python</h4>
+      <h4 id="lambda-arguments-expressionbody"><strong>lambda</strong> arguments<strong>:</strong> expression/body</h4>
+    </blockquote>
+  </li>
+  <li>
+    <p>Let’s see the example below:</p>
+  </li>
+  <li>Example 1
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># normal function with input parameter x and return x
+</span><span class="k">def</span> <span class="nf">identity</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+  <span class="k">return</span> <span class="n">x</span>
+</code></pre></div>    </div>
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># lambda function with input parameter x and return x
+</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span>
+</code></pre></div>    </div>
+  </li>
+  <li>Example 2
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># normal function with input parameter x, y 
+# and return x * y
+</span><span class="k">def</span> <span class="nf">identity</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+  <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span>
+</code></pre></div>    </div>
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># lambda function with input parameter x, y 
+# and return x * y
+</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span>
+</code></pre></div>    </div>
+  </li>
+  <li>Example 3</li>
+</ul>
 
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># We have a list of dict (list of 3 people) and 
+# we want to sort the list following name of person
+</span><span class="n">people</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="s">"name"</span><span class="p">:</span> <span class="s">"Harry"</span><span class="p">,</span> <span class="s">"house"</span><span class="p">:</span> <span class="s">"Gryffindor"</span><span class="p">},</span>
+    <span class="p">{</span><span class="s">"name"</span><span class="p">:</span> <span class="s">"Cho"</span><span class="p">,</span> <span class="s">"house"</span><span class="p">:</span> <span class="s">"Ravenclaw"</span><span class="p">},</span>
+    <span class="p">{</span><span class="s">"name"</span><span class="p">:</span> <span class="s">"Draco"</span><span class="p">,</span> <span class="s">"house"</span><span class="p">:</span> <span class="s">"Slytherin"</span><span class="p">}</span>
+<span class="p">]</span>
+
+<span class="c1"># Normal function that returns value 
+# of name (Harry or Cho or Draco)
+</span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">person</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">person</span><span class="p">[</span><span class="s">"name"</span><span class="p">]</span>
+
+<span class="c1"># We sort the list following key is name of person
+</span><span class="n">people</span><span class="p">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">people</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># We have a list of dict (list of 3 people) and 
+# we want to sort the list following name of person
+</span><span class="n">people</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="s">"name"</span><span class="p">:</span> <span class="s">"Harry"</span><span class="p">,</span> <span class="s">"house"</span><span class="p">:</span> <span class="s">"Gryffindor"</span><span class="p">},</span>
+    <span class="p">{</span><span class="s">"name"</span><span class="p">:</span> <span class="s">"Cho"</span><span class="p">,</span> <span class="s">"house"</span><span class="p">:</span> <span class="s">"Ravenclaw"</span><span class="p">},</span>
+    <span class="p">{</span><span class="s">"name"</span><span class="p">:</span> <span class="s">"Draco"</span><span class="p">,</span> <span class="s">"house"</span><span class="p">:</span> <span class="s">"Slytherin"</span><span class="p">}</span>
+<span class="p">]</span>
+
+<span class="c1"># We sort the list following key is name of person
+# Using lambda function we have input parameter is person
+# and we return the value of name in person
+</span><span class="n">people</span><span class="p">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">person</span><span class="p">:</span> <span class="n">person</span><span class="p">[</span><span class="s">"name"</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">people</span><span class="p">)</span>
+</code></pre></div></div>
+<pre><code class="language-cmd">&lt;!-- the result of both cases --&gt;
+
+[{'name': 'Cho', 'house': 'Ravenclaw'}, {'name': 'Draco', 'house': 'Slytherin'}, {'name': 'Harry', 'house': 'Gryffindor'}]
+</code></pre>
+
+<h2 id="exceptions">EXCEPTIONS</h2>
+<ul>
+  <li>In Python, We can use <code class="language-plaintext highlighter-rouge">try</code> and <code class="language-plaintext highlighter-rouge">except</code> to handle exceptions. Let’s see the example below.</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="c1"># We will check the input value from the terminal
+# If the input value is not int type the program will be exited
+</span><span class="k">try</span><span class="p">:</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s">"x: "</span><span class="p">))</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s">"y: "</span><span class="p">))</span>
+<span class="k">except</span> <span class="nb">ValueError</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"Error: Invalid input!"</span><span class="p">)</span>
+    <span class="n">sys</span><span class="p">.</span><span class="nb">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># We will check the callculation of x / y
+# if y is 0 the program will be exited
+</span><span class="k">try</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">x</span> <span class="o">/</span> <span class="n">y</span>
+<span class="k">except</span> <span class="nb">ZeroDivisionError</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"Error: Can not divide by 0."</span><span class="p">)</span>
+    <span class="n">sys</span><span class="p">.</span><span class="nb">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s"> / </span><span class="si">{</span><span class="n">y</span><span class="si">}</span><span class="s"> = </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s">"</span>
+
+</code></pre></div></div>
+<pre><code class="language-cmd">&lt;!-- exception with input value of x is not int --&gt;
+x: hello
+Error: Invalid input!
+
+&lt;!-- exception with input value of y is 0 --&gt;
+x: 5
+y: 0
+Error: Can not divide by 0.
+
+&lt;!-- result with no exception --&gt;
+x: 5
+y: 5
+5 / 5 = 1.0
+</code></pre>
 
     </div><a class="u-url" href="/jekyll/update/2021/02/19/python-basic.html" hidden></a>
   </article>
