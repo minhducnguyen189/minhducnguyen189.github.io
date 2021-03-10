@@ -1,4 +1,48 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2021-02-21T13:37:56+07:00</updated><id>/feed.xml</id><title type="html">StepByStep</title><subtitle>Hi there! Let's explore some general knowleadges and briefly definitions  in programming. I hope that this website can help people saving time in learning, also give some motivations for those who have choice the developer path.</subtitle><entry><title type="html">Python Basic</title><link href="/jekyll/update/2021/02/19/python-basic.html" rel="alternate" type="text/html" title="Python Basic" /><published>2021-02-19T12:00:00+07:00</published><updated>2021-02-19T12:00:00+07:00</updated><id>/jekyll/update/2021/02/19/python-basic</id><content type="html" xml:base="/jekyll/update/2021/02/19/python-basic.html">&lt;h2 id=&quot;history&quot;&gt;HISTORY&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2021-03-10T23:02:06+07:00</updated><id>/feed.xml</id><title type="html">StepByStep</title><subtitle>Hi there! Let's explore some general knowleadges and briefly definitions  in programming. I hope that this website can help people saving time in learning, also give some motivations for those who have choice the developer path.</subtitle><entry><title type="html">Spring Framework And Basic Concepts</title><link href="/jekyll/update/2021/03/09/java-spring-basic-concepts.html" rel="alternate" type="text/html" title="Spring Framework And Basic Concepts" /><published>2021-03-09T08:00:00+07:00</published><updated>2021-03-09T08:00:00+07:00</updated><id>/jekyll/update/2021/03/09/java-spring-basic-concepts</id><content type="html" xml:base="/jekyll/update/2021/03/09/java-spring-basic-concepts.html">&lt;blockquote&gt;
+  &lt;p&gt;Spring is one of the most popular frameworks for Java enterprise edition. Developers use Spring for developing reliable and high-quality applications.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Spring was designed by Rob Johnson.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.journaldev.com/2888/spring-tutorial-spring-core-tutorial&quot;&gt;More information&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;spring-core-concepts&quot;&gt;SPRING CORE CONCEPTS&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Inversion of control&lt;/code&gt;: This is the principle of object-oriented programming, in which objects of the program do not depend on concrete implementations of other objects, but may have knowledge about their abstractions (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;interfaces&lt;/code&gt;) for later interaction.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Dependency Injection&lt;/code&gt;: is &lt;strong&gt;a composition of strutural design partterns&lt;/strong&gt;, in which each function of the application there is one, a conditionally independent object (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;service&lt;/code&gt;) that can have the need to use other objects (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dependencies&lt;/code&gt;) know to it by &lt;strong&gt;interfaces&lt;/strong&gt;. Dependencies are transferred (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;implemented&lt;/code&gt;) to the service &lt;strong&gt;at the time of it’s creation&lt;/strong&gt;. This is the siatuation where we introduce an element of one class into another. In practise, DI is implemented to the constructor or using setters. Libraries that implement this approach are also called &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Ioc containers&lt;/code&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Aspect Oriented Programming&lt;/code&gt;: a programming paradigm that allows to distinguish cross-through (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;functional&lt;/code&gt;) functionality in application. These functions, which spam multiple application nodes, are call &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cross-cutting concerns&lt;/code&gt; and these &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cross-cutting nodes&lt;/code&gt; are seperated from the immediate business logic of the application. In OOP, the key unit is the class, which in AOP, the key element is the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;aspect&lt;/code&gt;. DI helps to separate application classes into separate modules, and APO helps to create &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cross-cutting concerns&lt;/code&gt; from the objects they effect.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;spring-ioc-container&quot;&gt;SPRING IOC CONTAINER&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Spring IoC Container&lt;/code&gt; is the machanism to achieve &lt;strong&gt;loose-coupling&lt;/strong&gt; between Object dependencies. To achieve loose coupling and dynamic binding of the objects at runtime, objects dependencies. Spring IoC container is the program that injects dependencies into an object and make it ready for our use.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Spring IoC Container&lt;/code&gt; classes are part of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;org.springframework.bean&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;org.springframework.context&lt;/code&gt; packages.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;BeanFactory&lt;/code&gt; is the root interface of spring IoC container. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ApplicationContext&lt;/code&gt; is the child interface of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;BeanFactory&lt;/code&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Usually, if you are working with Spring MVC application and your application is configured to use Spring Framework, Spring IoC container gets initialized when the application starts and when a bean is requested, the dependencies are injected automatically.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;spring-bean&quot;&gt;SPRING BEAN&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Spring Bean&lt;/code&gt; is nothing special, any object in the Spring Framework that initialize through spring container is call &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Spring Bean&lt;/code&gt;. Any normal &lt;strong&gt;Java POJO class&lt;/strong&gt; (&lt;strong&gt;Plain Old Java Object&lt;/strong&gt;) can be a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Spring Bean&lt;/code&gt; if it is configured to be initialized via container by providing configuration metadata information.&lt;/li&gt;
+&lt;/ul&gt;</content><author><name></name></author><category term="jekyll" /><category term="update" /><summary type="html">Spring is one of the most popular frameworks for Java enterprise edition. Developers use Spring for developing reliable and high-quality applications.</summary></entry><entry><title type="html">Python Basic</title><link href="/jekyll/update/2021/02/19/python-basic.html" rel="alternate" type="text/html" title="Python Basic" /><published>2021-02-19T12:00:00+07:00</published><updated>2021-02-19T12:00:00+07:00</updated><id>/jekyll/update/2021/02/19/python-basic</id><content type="html" xml:base="/jekyll/update/2021/02/19/python-basic.html">&lt;h2 id=&quot;history&quot;&gt;HISTORY&lt;/h2&gt;
 
 &lt;ul&gt;
   &lt;li&gt;

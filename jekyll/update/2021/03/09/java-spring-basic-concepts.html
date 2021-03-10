@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- bootstrap library and JS, Jquery -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Spring Framework And Basic Concepts | StepByStep</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Spring Framework And Basic Concepts" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Spring is one of the most popular frameworks for Java enterprise edition. Developers use Spring for developing reliable and high-quality applications." />
+<meta property="og:description" content="Spring is one of the most popular frameworks for Java enterprise edition. Developers use Spring for developing reliable and high-quality applications." />
+<link rel="canonical" href="/jekyll/update/2021/03/09/java-spring-basic-concepts.html" />
+<meta property="og:url" content="/jekyll/update/2021/03/09/java-spring-basic-concepts.html" />
+<meta property="og:site_name" content="StepByStep" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-03-09T08:00:00+07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Spring Framework And Basic Concepts" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","headline":"Spring Framework And Basic Concepts","dateModified":"2021-03-09T08:00:00+07:00","datePublished":"2021-03-09T08:00:00+07:00","mainEntityOfPage":{"@type":"WebPage","@id":"/jekyll/update/2021/03/09/java-spring-basic-concepts.html"},"url":"/jekyll/update/2021/03/09/java-spring-basic-concepts.html","description":"Spring is one of the most popular frameworks for Java enterprise edition. Developers use Spring for developing reliable and high-quality applications.","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="StepByStep" /></head><body>
+  <div class="container-flush">
+    <div class="row"><!-- navigation bar -->
+<div class="col-lg-12">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" role="banner"><a class="navbar-brand site-title" rel="author" href="/">StepByStep</a><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="nav navbar-nav"><li class="nav-item active">
+          <a class="nav-link" href="/about/">About</a>
+        </li></ul>
+    </div></nav>
+</div></div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+  <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+    <header class="post-header">
+      <h1 class="post-title p-name" itemprop="name headline">Spring Framework And Basic Concepts</h1>
+      <p class="post-meta">
+        <time class="dt-published" datetime="2021-03-09T08:00:00+07:00" itemprop="datePublished">Mar 9, 2021
+        </time></p>
+    </header>
+  
+    <div class="post-content e-content" itemprop="articleBody">
+      <blockquote>
+  <p>Spring is one of the most popular frameworks for Java enterprise edition. Developers use Spring for developing reliable and high-quality applications.</p>
+</blockquote>
+
+<blockquote>
+  <p>Spring was designed by Rob Johnson.</p>
+</blockquote>
+
+<ul>
+  <li><a href="https://www.journaldev.com/2888/spring-tutorial-spring-core-tutorial">More information</a></li>
+</ul>
+
+<h2 id="spring-core-concepts">SPRING CORE CONCEPTS</h2>
+<ul>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Inversion of control</code>: This is the principle of object-oriented programming, in which objects of the program do not depend on concrete implementations of other objects, but may have knowledge about their abstractions (<code class="language-plaintext highlighter-rouge">interfaces</code>) for later interaction.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Dependency Injection</code>: is <strong>a composition of strutural design partterns</strong>, in which each function of the application there is one, a conditionally independent object (<code class="language-plaintext highlighter-rouge">service</code>) that can have the need to use other objects (<code class="language-plaintext highlighter-rouge">dependencies</code>) know to it by <strong>interfaces</strong>. Dependencies are transferred (<code class="language-plaintext highlighter-rouge">implemented</code>) to the service <strong>at the time of it’s creation</strong>. This is the siatuation where we introduce an element of one class into another. In practise, DI is implemented to the constructor or using setters. Libraries that implement this approach are also called <code class="language-plaintext highlighter-rouge">Ioc containers</code>.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Aspect Oriented Programming</code>: a programming paradigm that allows to distinguish cross-through (<code class="language-plaintext highlighter-rouge">functional</code>) functionality in application. These functions, which spam multiple application nodes, are call <code class="language-plaintext highlighter-rouge">cross-cutting concerns</code> and these <code class="language-plaintext highlighter-rouge">cross-cutting nodes</code> are seperated from the immediate business logic of the application. In OOP, the key unit is the class, which in AOP, the key element is the <code class="language-plaintext highlighter-rouge">aspect</code>. DI helps to separate application classes into separate modules, and APO helps to create <code class="language-plaintext highlighter-rouge">cross-cutting concerns</code> from the objects they effect.</p>
+  </li>
+</ul>
+
+<h2 id="spring-ioc-container">SPRING IOC CONTAINER</h2>
+<ul>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Spring IoC Container</code> is the machanism to achieve <strong>loose-coupling</strong> between Object dependencies. To achieve loose coupling and dynamic binding of the objects at runtime, objects dependencies. Spring IoC container is the program that injects dependencies into an object and make it ready for our use.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Spring IoC Container</code> classes are part of <code class="language-plaintext highlighter-rouge">org.springframework.bean</code> and <code class="language-plaintext highlighter-rouge">org.springframework.context</code> packages.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">BeanFactory</code> is the root interface of spring IoC container. <code class="language-plaintext highlighter-rouge">ApplicationContext</code> is the child interface of <code class="language-plaintext highlighter-rouge">BeanFactory</code>.</p>
+  </li>
+  <li>
+    <p>Usually, if you are working with Spring MVC application and your application is configured to use Spring Framework, Spring IoC container gets initialized when the application starts and when a bean is requested, the dependencies are injected automatically.</p>
+  </li>
+</ul>
+
+<h2 id="spring-bean">SPRING BEAN</h2>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Spring Bean</code> is nothing special, any object in the Spring Framework that initialize through spring container is call <code class="language-plaintext highlighter-rouge">Spring Bean</code>. Any normal <strong>Java POJO class</strong> (<strong>Plain Old Java Object</strong>) can be a <code class="language-plaintext highlighter-rouge">Spring Bean</code> if it is configured to be initialized via container by providing configuration metadata information.</li>
+</ul>
+
+    </div><a class="u-url" href="/jekyll/update/2021/03/09/java-spring-basic-concepts.html" hidden></a>
+  </article>
+  
+</div>
+
+
+    </div>
+  </div>
+</body><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">StepByStep</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">StepByStep</li><li><a class="u-email" href="mailto:minhducnguyen189@gmail.com">minhducnguyen189@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/jekyll"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">jekyll</span></a></li><li><a href="https://www.twitter.com/jekyllrb"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">jekyllrb</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Hi there! Let&#39;s explore some general knowleadges and briefly definitions  in programming. I hope that this website can help people saving time in learning, also give some motivations for those who have choice the developer path.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</html>
