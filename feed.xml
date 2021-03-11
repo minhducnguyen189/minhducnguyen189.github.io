@@ -1,4 +1,59 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2021-03-10T23:02:06+07:00</updated><id>/feed.xml</id><title type="html">StepByStep</title><subtitle>Hi there! Let's explore some general knowleadges and briefly definitions  in programming. I hope that this website can help people saving time in learning, also give some motivations for those who have choice the developer path.</subtitle><entry><title type="html">Spring Framework And Basic Concepts</title><link href="/jekyll/update/2021/03/09/java-spring-basic-concepts.html" rel="alternate" type="text/html" title="Spring Framework And Basic Concepts" /><published>2021-03-09T08:00:00+07:00</published><updated>2021-03-09T08:00:00+07:00</updated><id>/jekyll/update/2021/03/09/java-spring-basic-concepts</id><content type="html" xml:base="/jekyll/update/2021/03/09/java-spring-basic-concepts.html">&lt;blockquote&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2021-03-11T21:32:46+07:00</updated><id>/feed.xml</id><title type="html">StepByStep</title><subtitle>Hi there! Let's explore some general knowleadges and briefly definitions  in programming. I hope that this website can help people saving time in learning, also give some motivations for those who have choice the developer path.</subtitle><entry><title type="html">SOLID Principles</title><link href="/jekyll/update/2021/03/11/solid-principles.html" rel="alternate" type="text/html" title="SOLID Principles" /><published>2021-03-11T00:00:00+07:00</published><updated>2021-03-11T00:00:00+07:00</updated><id>/jekyll/update/2021/03/11/solid-principles</id><content type="html" xml:base="/jekyll/update/2021/03/11/solid-principles.html">&lt;blockquote&gt;
+  &lt;p&gt;The SOLID Principles are five principles of Object-Oriented class design. They are a set of rules and best practices to follow while designing a class structure.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;These five principles help us understand the need for certain design patterns and software architecture in general.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Following the SOLID acronym, they are:&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;The Single Responsibility Principle&lt;/li&gt;
+  &lt;li&gt;The Open-Closed Principle&lt;/li&gt;
+  &lt;li&gt;The Liskov Substitution Principle&lt;/li&gt;
+  &lt;li&gt;The Interface Segregation Principle&lt;/li&gt;
+  &lt;li&gt;The Dependency Inversion Principle&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.freecodecamp.org/news/solid-principles-explained-in-plain-english/&quot;&gt;More information&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;the-single-responsibility-principle&quot;&gt;THE SINGLE RESPONSIBILITY PRINCIPLE&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;The Single Responsibility Principle&lt;/code&gt; states that a class should do &lt;strong&gt;one thing&lt;/strong&gt; and therefore it should have &lt;strong&gt;only a single reason to change&lt;/strong&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;the-open-closed-principle&quot;&gt;THE OPEN-CLOSED PRINCIPLE&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;The Open-Closed Principle&lt;/code&gt; requires that classes &lt;strong&gt;should be open for extension&lt;/strong&gt; and &lt;strong&gt;closed to modification&lt;/strong&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Modification&lt;/strong&gt; means changing the code of an existing class, and &lt;strong&gt;extension&lt;/strong&gt; means adding new functionality.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;liskov-substitution-principle&quot;&gt;LISKOV SUBSTITUTION PRINCIPLE&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;The Liskov Substitution Principle&lt;/code&gt; states that subclasses should be substitutable for their base classes.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;interface-segregation-principle&quot;&gt;INTERFACE SEGREGATION PRINCIPLE&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Segregation&lt;/code&gt; means &lt;strong&gt;keeping things separated&lt;/strong&gt;, and the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Interface Segregation Principle&lt;/code&gt; is about &lt;strong&gt;separating the interfaces&lt;/strong&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;The principle states that &lt;strong&gt;many client-specific interfaces are better than one general-purpose interface&lt;/strong&gt;. Clients should not be forced to implement a function they do no need.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;dependency-inversion-principle&quot;&gt;DEPENDENCY INVERSION PRINCIPLE&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;The Dependency Inversion principle states that our classes should depend upon interfaces or abstract classes instead of concrete classes and functions.&lt;/li&gt;
+&lt;/ul&gt;</content><author><name></name></author><category term="jekyll" /><category term="update" /><summary type="html">The SOLID Principles are five principles of Object-Oriented class design. They are a set of rules and best practices to follow while designing a class structure.</summary></entry><entry><title type="html">Spring Framework And Basic Concepts</title><link href="/jekyll/update/2021/03/09/java-spring-basic-concepts.html" rel="alternate" type="text/html" title="Spring Framework And Basic Concepts" /><published>2021-03-09T08:00:00+07:00</published><updated>2021-03-09T08:00:00+07:00</updated><id>/jekyll/update/2021/03/09/java-spring-basic-concepts</id><content type="html" xml:base="/jekyll/update/2021/03/09/java-spring-basic-concepts.html">&lt;blockquote&gt;
   &lt;p&gt;Spring is one of the most popular frameworks for Java enterprise edition. Developers use Spring for developing reliable and high-quality applications.&lt;/p&gt;
 &lt;/blockquote&gt;
 
