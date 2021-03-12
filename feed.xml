@@ -1,4 +1,49 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2021-03-11T21:32:46+07:00</updated><id>/feed.xml</id><title type="html">StepByStep</title><subtitle>Hi there! Let's explore some general knowleadges and briefly definitions  in programming. I hope that this website can help people saving time in learning, also give some motivations for those who have choice the developer path.</subtitle><entry><title type="html">SOLID Principles</title><link href="/jekyll/update/2021/03/11/solid-principles.html" rel="alternate" type="text/html" title="SOLID Principles" /><published>2021-03-11T00:00:00+07:00</published><updated>2021-03-11T00:00:00+07:00</updated><id>/jekyll/update/2021/03/11/solid-principles</id><content type="html" xml:base="/jekyll/update/2021/03/11/solid-principles.html">&lt;blockquote&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2021-03-12T13:01:59+07:00</updated><id>/feed.xml</id><title type="html">StepByStep</title><subtitle>Hi there! Let's explore some general knowleadges and briefly definitions  in programming. I hope that this website can help people saving time in learning, also give some motivations for those who have choice the developer path.</subtitle><entry><title type="html">Spring Boot And Basic Concepts</title><link href="/jekyll/update/2021/03/12/java-springboot-basic-concepts.html" rel="alternate" type="text/html" title="Spring Boot And Basic Concepts" /><published>2021-03-12T00:00:00+07:00</published><updated>2021-03-12T00:00:00+07:00</updated><id>/jekyll/update/2021/03/12/java-springboot-basic-concepts</id><content type="html" xml:base="/jekyll/update/2021/03/12/java-springboot-basic-concepts.html">&lt;blockquote&gt;
+  &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Spring Boot&lt;/code&gt; is a framework from “&lt;strong&gt;The Spring Team&lt;/strong&gt;” to ease the bootstrapping and development of new Spring applications. It provides default for code and annotation configuration to quick start new Spring projects within no time.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;It follows “&lt;strong&gt;Opinionated Defaults Configuration&lt;/strong&gt;” approach to avoid lots of boilerplate code and configuration to improve development, UnitTest and intergration test process.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Springboot = SpringFramework + EmbeddedHttp servers (Tomcat, Jetty) - xml&lt;bean&gt; Configuration or @Configuration&lt;/bean&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.journaldev.com/7969/spring-boot-tutorial&quot;&gt;More information&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;key-components-of-spring-boot-framework&quot;&gt;KEY COMPONENTS OF SPRING BOOT FRAMEWORK&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;There are 4 major components&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/springbootcomponents.png&quot; alt=&quot;spring boot components&quot; title=&quot;spring boot components&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;spring-boot-starter&quot;&gt;SPRING BOOT STARTER&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Spring boot starters&lt;/code&gt; is one of the major key features or components of &lt;strong&gt;Spring Boot Framework&lt;/strong&gt;. The main responsibility of Spring boot stater is to compine a group of common or related dependencies into single dependencies.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Major advantanges of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Spring boot Stater&lt;/code&gt;:
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Spring boot stater&lt;/code&gt; reduces defining many dependencies simplify project build dependencies.&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Spring boot stater&lt;/code&gt; simplifies project build dependencies.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Ex: To develop a spring WebApplication with Tomcat webserver, we need to add some dependencies and below into Maven’s &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pom.xml&lt;/code&gt; file.
+    &lt;ul&gt;
+      &lt;li&gt;Spring core jar file.&lt;/li&gt;
+      &lt;li&gt;Spring web jar file.&lt;/li&gt;
+      &lt;li&gt;Spring web MVC jar file.&lt;/li&gt;
+      &lt;li&gt;Servlet jar file.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;So, if we add “&lt;strong&gt;spring-boot-stater-web&lt;/strong&gt;” jar file dependency to our build file, then spring boot framework will &lt;strong&gt;automatically download all required jars&lt;/strong&gt; and add to our project classpath.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/spring-boot-starter-dependencies.png&quot; alt=&quot;spring-boot-starter-dependencies&quot; title=&quot;spring-boot-starter-dependencies&quot; /&gt;&lt;/p&gt;</content><author><name></name></author><category term="jekyll" /><category term="update" /><summary type="html">Spring Boot is a framework from “The Spring Team” to ease the bootstrapping and development of new Spring applications. It provides default for code and annotation configuration to quick start new Spring projects within no time.</summary></entry><entry><title type="html">SOLID Principles</title><link href="/jekyll/update/2021/03/11/solid-principles.html" rel="alternate" type="text/html" title="SOLID Principles" /><published>2021-03-11T00:00:00+07:00</published><updated>2021-03-11T00:00:00+07:00</updated><id>/jekyll/update/2021/03/11/solid-principles</id><content type="html" xml:base="/jekyll/update/2021/03/11/solid-principles.html">&lt;blockquote&gt;
   &lt;p&gt;The SOLID Principles are five principles of Object-Oriented class design. They are a set of rules and best practices to follow while designing a class structure.&lt;/p&gt;
 &lt;/blockquote&gt;
 
@@ -97,6 +142,29 @@
 &lt;h2 id=&quot;spring-bean&quot;&gt;SPRING BEAN&lt;/h2&gt;
 &lt;ul&gt;
   &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Spring Bean&lt;/code&gt; is nothing special, any object in the Spring Framework that initialize through spring container is call &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Spring Bean&lt;/code&gt;. Any normal &lt;strong&gt;Java POJO class&lt;/strong&gt; (&lt;strong&gt;Plain Old Java Object&lt;/strong&gt;) can be a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Spring Bean&lt;/code&gt; if it is configured to be initialized via container by providing configuration metadata information.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;spring-bean-scopes&quot;&gt;SPRING BEAN SCOPES&lt;/h2&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;There are 5 scopes definded for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;spring beans&lt;/code&gt;:&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;singleton&lt;/code&gt;: Only &lt;strong&gt;one instance&lt;/strong&gt; of the bean will be create for each container. This is the default scope of spring beans. While using this scope, make sure bean does not have shared instances variables otherwise it might lead to data insconsistency issues.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;prototype&lt;/code&gt;: a new instance will be created every time the bean is requested.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;request&lt;/code&gt;: This is the same as prototype scope, however it meant to be used for &lt;strong&gt;web application&lt;/strong&gt;. A new instance of the bean will be created for each HTTP request.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;session&lt;/code&gt;: A new bean will be created for each HTTP session by the container.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;global-session&lt;/code&gt;: This is used to create global session bean for Prolet applications.&lt;/p&gt;
+  &lt;/li&gt;
 &lt;/ul&gt;</content><author><name></name></author><category term="jekyll" /><category term="update" /><summary type="html">Spring is one of the most popular frameworks for Java enterprise edition. Developers use Spring for developing reliable and high-quality applications.</summary></entry><entry><title type="html">Python Basic</title><link href="/jekyll/update/2021/02/19/python-basic.html" rel="alternate" type="text/html" title="Python Basic" /><published>2021-02-19T12:00:00+07:00</published><updated>2021-02-19T12:00:00+07:00</updated><id>/jekyll/update/2021/02/19/python-basic</id><content type="html" xml:base="/jekyll/update/2021/02/19/python-basic.html">&lt;h2 id=&quot;history&quot;&gt;HISTORY&lt;/h2&gt;
 
 &lt;ul&gt;
