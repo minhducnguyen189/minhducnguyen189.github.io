@@ -107,6 +107,17 @@
 
 <p><img src="/assets/images/spring-boot-starter-dependencies.png" alt="spring-boot-starter-dependencies" title="spring-boot-starter-dependencies" /></p>
 
+<h2 id="spring-boot-autoconfigurator">SPRING BOOT AUTOCONFIGURATOR</h2>
+<ul>
+  <li>To develop a Spring-based application requires a lot of configuration (Either XM configuration of Annotation Configuration). The solution to this problem is Spring Boot AutoConfigurator. The main responsibility of Spring Boot Autoconfiguratior is to reduce the Spring Configuration. If we develop spring applications in Spring Boot, then we don’t need to define single XML configuration and almost no or minimal annotation configuration. Spring Boot Autoconfigurator component will take care of providing these information.</li>
+  <li>If we use <code class="language-plaintext highlighter-rouge">@SpringBootApplication</code> annotation at class level, then Spring Boot Autoconfigurator will automatically add all required annotations to Java Class ByteCode.</li>
+</ul>
+
+<hr />
+
+<p>@SpringBootApplication = @Configuration + @ComponentScan + @EnableAutoConfiguration.</p>
+
+<hr />
 
     </div><a class="u-url" href="/jekyll/update/2021/03/12/java-springboot-basic-concepts.html" hidden></a>
   </article>
