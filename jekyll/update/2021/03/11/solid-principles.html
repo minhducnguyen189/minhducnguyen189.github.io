@@ -196,7 +196,98 @@
   <li>
     <p><strong>Modification</strong> means changing the code of an existing class, and <strong>extension</strong> means adding new functionality.</p>
   </li>
+  <li>
+    <p>Example with non <strong>open-closed principle</strong></p>
+  </li>
 </ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">HealthInsuranceSurveyor</span><span class="o">{</span>
+        <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isValidClaim</span><span class="o">(){</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"HealthInsuranceSurveyor: Validating health insurance claim..."</span><span class="o">);</span>
+            <span class="cm">/*Logic to validate health insurance claims*/</span>
+            <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">ClaimApprovalManager</span> <span class="o">{</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">processHealthClaim</span> <span class="o">(</span><span class="nc">HealthInsuranceSurveyor</span> <span class="n">surveyor</span><span class="o">)</span>
+        <span class="o">{</span>
+            <span class="k">if</span><span class="o">(</span><span class="n">surveyor</span><span class="o">.</span><span class="na">isValidClaim</span><span class="o">()){</span>
+                <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"ClaimApprovalManager: Valid claim. Currently processing claim for approval...."</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="cm">/** Both the HealthInsuranceSurveyor and ClaimApprovalManager classes work fine
+     and the design for the insurance system appears perfect until a new requirement
+      to process vehicle insurance claims arises. 
+        We now need to include a new VehicleInsuranceSurveyor class, and this should not create any problems. 
+        But, what we also need is to modify the ClaimApprovalManager class to process vehicle insurance claims. 
+        This is how the modified ClaimApprovalManager will be:
+    **/</span>
+
+    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">ClaimApprovalManager</span> <span class="o">{</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">processHealthClaim</span> <span class="o">(</span><span class="nc">HealthInsuranceSurveyor</span> <span class="n">surveyor</span><span class="o">)</span>
+        <span class="o">{</span>
+            <span class="k">if</span><span class="o">(</span><span class="n">surveyor</span><span class="o">.</span><span class="na">isValidClaim</span><span class="o">()){</span>
+                <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"ClaimApprovalManager: Valid claim. Currently processing claim for approval...."</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">processVehicleClaim</span> <span class="o">(</span><span class="nc">VehicleInsuranceSurveyor</span> <span class="n">surveyor</span><span class="o">)</span>
+        <span class="o">{</span>
+            <span class="k">if</span><span class="o">(</span><span class="n">surveyor</span><span class="o">.</span><span class="na">isValidClaim</span><span class="o">()){</span>
+                <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"ClaimApprovalManager: Valid claim. Currently processing claim for approval...."</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<ul>
+  <li>Example with applying open-closed principle</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    
+    <span class="kd">public</span> <span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">InsuranceSurveyor</span> <span class="o">{</span>
+        <span class="kd">public</span> <span class="kd">abstract</span> <span class="kt">boolean</span> <span class="nf">isValidClaim</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">HealthInsuranceSurveyor</span> <span class="kd">extends</span> <span class="nc">InsuranceSurveyor</span><span class="o">{</span>
+        <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isValidClaim</span><span class="o">(){</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"HealthInsuranceSurveyor: Validating health insurance claim..."</span><span class="o">);</span>
+            <span class="cm">/*Logic to validate health insurance claims*/</span>
+            <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">VehicleInsuranceSurveyor</span> <span class="kd">extends</span> <span class="nc">InsuranceSurveyor</span><span class="o">{</span>
+        <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isValidClaim</span><span class="o">(){</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"VehicleInsuranceSurveyor: Validating vehicle insurance claim..."</span><span class="o">);</span>
+            <span class="cm">/*Logic to validate vehicle insurance claims*/</span>
+            <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">ClaimApprovalManager</span> <span class="o">{</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">processClaim</span><span class="o">(</span><span class="nc">InsuranceSurveyor</span> <span class="n">surveyor</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">if</span><span class="o">(</span><span class="n">surveyor</span><span class="o">.</span><span class="na">isValidClaim</span><span class="o">()){</span>
+                <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"ClaimApprovalManager: Valid claim. Currently processing claim for approval...."</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">ClaimApprovalManagerTest</span> <span class="o">{</span>
+        <span class="nd">@Test</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">testProcessClaim</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+        <span class="nc">HealthInsuranceSurveyor</span> <span class="n">healthInsuranceSurveyor</span><span class="o">=</span><span class="k">new</span> <span class="nc">HealthInsuranceSurveyor</span><span class="o">();</span>
+        <span class="nc">ClaimApprovalManager</span> <span class="n">claim1</span><span class="o">=</span><span class="k">new</span> <span class="nc">ClaimApprovalManager</span><span class="o">();</span>
+        <span class="n">claim1</span><span class="o">.</span><span class="na">processClaim</span><span class="o">(</span><span class="n">healthInsuranceSurveyor</span><span class="o">);</span>
+            <span class="nc">VehicleInsuranceSurveyor</span> <span class="n">vehicleInsuranceSurveyor</span><span class="o">=</span><span class="k">new</span> <span class="nc">VehicleInsuranceSurveyor</span><span class="o">();</span>
+            <span class="nc">ClaimApprovalManager</span> <span class="n">claim2</span><span class="o">=</span><span class="k">new</span> <span class="nc">ClaimApprovalManager</span><span class="o">();</span>
+            <span class="n">claim2</span><span class="o">.</span><span class="na">processClaim</span><span class="o">(</span><span class="n">vehicleInsuranceSurveyor</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+</code></pre></div></div>
 
 <h2 id="liskov-substitution-principle">LISKOV SUBSTITUTION PRINCIPLE</h2>
 <ul>
