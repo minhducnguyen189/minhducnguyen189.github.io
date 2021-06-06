@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2021-06-06T14:16:00+07:00</updated><id>/feed.xml</id><title type="html">StepByStep</title><subtitle>Hi there! Let's explore some general knowleadges and briefly definitions  in programming. I hope that this website can help people saving time in learning, also give some motivations for those who have choice the developer path.</subtitle><entry><title type="html">Spring boot with Multiple Datasources</title><link href="/jekyll/updatel/2021/06/06/java-springboot-multi-datasource.html" rel="alternate" type="text/html" title="Spring boot with Multiple Datasources" /><published>2021-06-06T00:00:00+07:00</published><updated>2021-06-06T00:00:00+07:00</updated><id>/jekyll/updatel/2021/06/06/java-springboot-multi-datasource</id><content type="html" xml:base="/jekyll/updatel/2021/06/06/java-springboot-multi-datasource.html">&lt;blockquote&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2021-06-06T20:27:48+07:00</updated><id>/feed.xml</id><title type="html">StepByStep</title><subtitle>Hi there! Let's explore some general knowleadges and briefly definitions  in programming. I hope that this website can help people saving time in learning, also give some motivations for those who have choice the developer path.</subtitle><entry><title type="html">Spring boot with Multiple Datasources</title><link href="/jekyll/updatel/2021/06/06/java-springboot-multi-datasource.html" rel="alternate" type="text/html" title="Spring boot with Multiple Datasources" /><published>2021-06-06T00:00:00+07:00</published><updated>2021-06-06T00:00:00+07:00</updated><id>/jekyll/updatel/2021/06/06/java-springboot-multi-datasource</id><content type="html" xml:base="/jekyll/updatel/2021/06/06/java-springboot-multi-datasource.html">&lt;blockquote&gt;
   &lt;p&gt;In some special cases, sometimes we have to connect to multi databases to handle the business logic. In this post I will show you step by step configuration for spring boot service.&lt;/p&gt;
 &lt;/blockquote&gt;
 
@@ -22,7 +22,7 @@
 
 &lt;h2 id=&quot;step-2-project-structure-overview&quot;&gt;STEP 2: PROJECT STRUCTURE OVERVIEW&lt;/h2&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/images/spring-boot-multi-datasource-project-structure.jpg&quot; alt=&quot;Project structure overview&quot; title=&quot;Project structure overview&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;/assets/images/spring-boot-multi-datasource-project-structure.jpg&quot;&gt;&lt;img src=&quot;/assets/images/spring-boot-multi-datasource-project-structure.jpg&quot; alt=&quot;Project structure overview&quot; title=&quot;Project structure overview&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;
@@ -404,9 +404,15 @@
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
+&lt;h2 id=&quot;step-9-testing&quot;&gt;STEP 9: TESTING&lt;/h2&gt;
+
 &lt;ul&gt;
-  &lt;li&gt;TODO need a tesing result here&lt;/li&gt;
-&lt;/ul&gt;</content><author><name></name></author><category term="jekyll" /><category term="updatel" /><summary type="html">In some special cases, sometimes we have to connect to multi databases to handle the business logic. In this post I will show you step by step configuration for spring boot service.</summary></entry><entry><title type="html">Spring Boot And Basic Concepts</title><link href="/jekyll/update/2021/03/12/java-springboot-basic-concepts.html" rel="alternate" type="text/html" title="Spring Boot And Basic Concepts" /><published>2021-03-12T00:00:00+07:00</published><updated>2021-03-12T00:00:00+07:00</updated><id>/jekyll/update/2021/03/12/java-springboot-basic-concepts</id><content type="html" xml:base="/jekyll/update/2021/03/12/java-springboot-basic-concepts.html">&lt;blockquote&gt;
+  &lt;li&gt;After saving data into two databases, we can go to primary and secondary database to check the data as the images below:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&quot;/assets/images/spring-boot-multi-datasource-project-primary-db-table.JPG&quot;&gt;&lt;img src=&quot;/assets/images/spring-boot-multi-datasource-project-primary-db-table.JPG&quot; alt=&quot;&amp;quot;Data in primary database (camunda schema)&amp;quot;&quot; title=&quot;Data in primary database (camunda schema)&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/assets/images/spring-boot-multi-datasource-project-secondary-db-table.JPG&quot;&gt;&lt;img src=&quot;/assets/images/spring-boot-multi-datasource-project-secondary-db-table.JPG&quot; alt=&quot;&amp;quot;Data in secondary database (mydb schema)&amp;quot;&quot; title=&quot;Data in secondary database (mydb schema)&quot; /&gt;&lt;/a&gt;.&lt;/p&gt;</content><author><name></name></author><category term="jekyll" /><category term="updatel" /><summary type="html">In some special cases, sometimes we have to connect to multi databases to handle the business logic. In this post I will show you step by step configuration for spring boot service.</summary></entry><entry><title type="html">Spring Boot And Basic Concepts</title><link href="/jekyll/update/2021/03/12/java-springboot-basic-concepts.html" rel="alternate" type="text/html" title="Spring Boot And Basic Concepts" /><published>2021-03-12T00:00:00+07:00</published><updated>2021-03-12T00:00:00+07:00</updated><id>/jekyll/update/2021/03/12/java-springboot-basic-concepts</id><content type="html" xml:base="/jekyll/update/2021/03/12/java-springboot-basic-concepts.html">&lt;blockquote&gt;
   &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Spring Boot&lt;/code&gt; is a framework from “&lt;strong&gt;The Spring Team&lt;/strong&gt;” to ease the bootstrapping and development of new Spring applications. It provides default for code and annotation configuration to quick start new Spring projects within no time.&lt;/p&gt;
 &lt;/blockquote&gt;
 
@@ -427,7 +433,7 @@
   &lt;li&gt;There are 4 major components&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/images/springbootcomponents.png&quot; alt=&quot;spring boot components&quot; title=&quot;spring boot components&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;/assets/images/springbootcomponents.png&quot;&gt;&lt;img src=&quot;/assets/images/springbootcomponents.png&quot; alt=&quot;spring boot components&quot; title=&quot;spring boot components&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;spring-boot-starter&quot;&gt;SPRING BOOT STARTER&lt;/h2&gt;
 &lt;ul&gt;
@@ -451,7 +457,7 @@
   &lt;li&gt;So, if we add “&lt;strong&gt;spring-boot-stater-web&lt;/strong&gt;” jar file dependency to our build file, then spring boot framework will &lt;strong&gt;automatically download all required jars&lt;/strong&gt; and add to our project classpath.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/images/spring-boot-starter-dependencies.png&quot; alt=&quot;spring-boot-starter-dependencies&quot; title=&quot;spring-boot-starter-dependencies&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;/assets/images/spring-boot-starter-dependencies.png&quot;&gt;&lt;img src=&quot;/assets/images/spring-boot-starter-dependencies.png&quot; alt=&quot;spring-boot-starter-dependencies&quot; title=&quot;spring-boot-starter-dependencies&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;spring-boot-autoconfigurator&quot;&gt;SPRING BOOT AUTOCONFIGURATOR&lt;/h2&gt;
 &lt;ul&gt;
@@ -1400,7 +1406,7 @@ Hello Lambda
   &lt;li&gt;There are 2 types of exception in java: &lt;strong&gt;checked&lt;/strong&gt; and &lt;strong&gt;unchecked&lt;/strong&gt;. All &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;checked exception&lt;/code&gt; class are inherited from &lt;strong&gt;Exception&lt;/strong&gt; class except &lt;strong&gt;RuntimeException&lt;/strong&gt;. &lt;strong&gt;RuntimeException&lt;/strong&gt; is the base class of all &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;unchecked exception&lt;/code&gt; class, that is also a signal to recognize which one is checked exception or unchecked exception.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/images/checked-unchecked-exception.png&quot; alt=&quot;checked and unchecked exception&quot; title=&quot;checked and unchecked exception&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;/assets/images/checked-unchecked-exception.png&quot;&gt;&lt;img src=&quot;/assets/images/checked-unchecked-exception.png&quot; alt=&quot;checked and unchecked exception&quot; title=&quot;checked and unchecked exception&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;The difference between &lt;strong&gt;checked&lt;/strong&gt; and &lt;strong&gt;unchecked&lt;/strong&gt; exception classes is the time to identify the exception can happen. With &lt;strong&gt;checked exception&lt;/strong&gt;, checking is happened in &lt;strong&gt;compile time&lt;/strong&gt;, some IDE will help us by showing syntax errors if we use a method that can throw any &lt;strong&gt;checked exception&lt;/strong&gt; without try/catch. We have some checked exception: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;IOException&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Interrupted Exception&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;XMLParseException&lt;/code&gt;… With &lt;strong&gt;unchecked Exception&lt;/strong&gt;, checking exception can happen or not is only happened in the &lt;strong&gt;Runtime&lt;/strong&gt; time and IDE will not help us identify it. Some popular &lt;strong&gt;unchecked exception&lt;/strong&gt;: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;NullPointerException&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;IndexOutOfBoundException&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ClassCastException&lt;/code&gt;…&lt;/li&gt;
@@ -1468,7 +1474,7 @@ Hello Lambda
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/images/threadpool.jpg&quot; alt=&quot;thread pool&quot; title=&quot;thread pool&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;/assets/images/threadpool.jpg&quot;&gt;&lt;img src=&quot;/assets/images/threadpool.jpg&quot; alt=&quot;thread pool&quot; title=&quot;thread pool&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;We will continue to disscus about thread pool in Spring &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;@Async&lt;/code&gt; anotation.&lt;/li&gt;
 &lt;/ul&gt;</content><author><name></name></author><category term="jekyll" /><category term="update" /><summary type="html">FINAL KEYWORD IN JAVA</summary></entry><entry><title type="html">General Knowledges About Java Part 1</title><link href="/jekyll/update/2021/02/01/java-general-part1.html" rel="alternate" type="text/html" title="General Knowledges About Java Part 1" /><published>2021-02-01T20:15:47+07:00</published><updated>2021-02-01T20:15:47+07:00</updated><id>/jekyll/update/2021/02/01/java-general-part1</id><content type="html" xml:base="/jekyll/update/2021/02/01/java-general-part1.html">&lt;h2 id=&quot;history&quot;&gt;HISTORY&lt;/h2&gt;
