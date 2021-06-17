@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- bootstrap library and JS, Jquery -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Connect to WebService(SOAP) by Spring Cloud Feign | StepByStep</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Connect to WebService(SOAP) by Spring Cloud Feign" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="In some projects, sometime we will meet some user stories that need us to make a connection to the SOAP service from our spring boot service by giving a file .wsdl. So This post will guild you step by step to archive it easily with the support of Spring Cloud Feign." />
+<meta property="og:description" content="In some projects, sometime we will meet some user stories that need us to make a connection to the SOAP service from our spring boot service by giving a file .wsdl. So This post will guild you step by step to archive it easily with the support of Spring Cloud Feign." />
+<link rel="canonical" href="/jekyll/updatel/2021/06/17/java-springboot-connect-SOAP-with-FeignClient.html" />
+<meta property="og:url" content="/jekyll/updatel/2021/06/17/java-springboot-connect-SOAP-with-FeignClient.html" />
+<meta property="og:site_name" content="StepByStep" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-06-17T00:00:00+07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Connect to WebService(SOAP) by Spring Cloud Feign" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","headline":"Connect to WebService(SOAP) by Spring Cloud Feign","dateModified":"2021-06-17T00:00:00+07:00","datePublished":"2021-06-17T00:00:00+07:00","mainEntityOfPage":{"@type":"WebPage","@id":"/jekyll/updatel/2021/06/17/java-springboot-connect-SOAP-with-FeignClient.html"},"url":"/jekyll/updatel/2021/06/17/java-springboot-connect-SOAP-with-FeignClient.html","description":"In some projects, sometime we will meet some user stories that need us to make a connection to the SOAP service from our spring boot service by giving a file .wsdl. So This post will guild you step by step to archive it easily with the support of Spring Cloud Feign.","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="StepByStep" /></head><body>
+  <div class="container-flush">
+    <div class="row"><!-- navigation bar -->
+<div class="col-lg-12">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" role="banner"><a class="navbar-brand site-title" rel="author" href="/">StepByStep</a><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="nav navbar-nav"><li class="nav-item active">
+          <a class="nav-link" href="/about/">About</a>
+        </li></ul>
+    </div></nav>
+</div></div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+  <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+    <header class="post-header">
+      <h1 class="post-title p-name" itemprop="name headline">Connect to WebService(SOAP) by Spring Cloud Feign</h1>
+      <p class="post-meta">
+        <time class="dt-published" datetime="2021-06-17T00:00:00+07:00" itemprop="datePublished">Jun 17, 2021
+        </time></p>
+    </header>
+  
+    <div class="post-content e-content" itemprop="articleBody">
+      <blockquote>
+  <p>In some projects, sometime we will meet some user stories that need us to make a connection to the SOAP service from our spring boot service by giving a file <code class="language-plaintext highlighter-rouge">.wsdl</code>. So This post will guild you step by step to archive it easily with the support of <code class="language-plaintext highlighter-rouge">Spring Cloud Feign</code>.</p>
+</blockquote>
+
+<blockquote>
+  <p>What is the <code class="language-plaintext highlighter-rouge">Spring Cloud Feign</code>? We will talk about it in detail in another post. For now, I can say that Spring Cloud Feign is a dependency of of spring spring framework which can help us to connect to other services by REST Ful API or SOAP.</p>
+</blockquote>
+
+<h2 id="step-1-prepare-the-environment-for-the-example">STEP 1: PREPARE THE ENVIRONMENT FOR THE EXAMPLE</h2>
+
+<ul>
+  <li>
+    <p>To make an example we need an online WebService, so we can go to <a href="http://sqa-dev.blogspot.com/2016/10/free-sample-wsdl-url-for-webservice.html">free SOAP service urls</a> and choose one to make an example.</p>
+  </li>
+  <li>
+    <p>In this example I will choose <a href="http://webservices.oorsprong.org/websamples.countryinfo/CountryInfoService.wso?WSDL">country list SOAP service</a> because it is the one that is working well.</p>
+  </li>
+  <li>
+    <p>So you need go to <a href="http://webservices.oorsprong.org/websamples.countryinfo/CountryInfoService.wso?WSDL">country list SOAP service</a> by your browser. Then <code class="language-plaintext highlighter-rouge">Right Click</code> and choose <code class="language-plaintext highlighter-rouge">Save As</code>. After that you <strong>save</strong> the file with type <code class="language-plaintext highlighter-rouge">.wsdl</code> into any package in <code class="language-plaintext highlighter-rouge">src/main/resources</code> of your spring boot project as the images below:</p>
+  </li>
+</ul>
+
+<p><a href="/assets/images/spring-boot-save-wsdl-from-webservice.JPG"><img src="/assets/images/spring-boot-save-wsdl-from-webservice.JPG" alt="Save WSDL file from WebService" title="Save WSDL file from WebService" /></a></p>
+
+<p><a href="/assets/images/spring-boot-save-wsdl-in-project.JPG"><img src="/assets/images/spring-boot-save-wsdl-in-project.JPG" alt="File WSDL is saved in spring boot project" title="File WSDL is saved in spring boot project" /></a></p>
+
+<h2 id="step-2-add-dependencies-for-spring-cloud-feign-and-soap-in-pomxml-file">STEP 2: ADD DEPENDENCIES FOR SPRING CLOUD FEIGN AND SOAP IN POM.XML FILE</h2>
+
+<ul>
+  <li>We need to add some dependencies for <code class="language-plaintext highlighter-rouge">Spring cloud fiegn</code> and SOAP in <code class="language-plaintext highlighter-rouge">pom.xml</code> file. In which, we need to note about the declaration of  <code class="language-plaintext highlighter-rouge">generatePackage</code> which is the package that contains all generated java classes when we run command <code class="language-plaintext highlighter-rouge">mvn compile</code> and the <code class="language-plaintext highlighter-rouge">schemaDirectory</code> which is the path to our <code class="language-plaintext highlighter-rouge">countries.wsdl</code> file of us.</li>
+</ul>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    <span class="c">&lt;!-- spring cloud feign dependencies --&gt;</span>
+
+    <span class="nt">&lt;dependencyManagement&gt;</span>
+        <span class="nt">&lt;dependencies&gt;</span>
+            <span class="nt">&lt;dependency&gt;</span>
+                <span class="nt">&lt;groupId&gt;</span>org.springframework.cloud<span class="nt">&lt;/groupId&gt;</span>
+                <span class="nt">&lt;artifactId&gt;</span>spring-cloud-dependencies<span class="nt">&lt;/artifactId&gt;</span>
+                <span class="nt">&lt;version&gt;</span>2020.0.3<span class="nt">&lt;/version&gt;</span>
+                <span class="nt">&lt;type&gt;</span>pom<span class="nt">&lt;/type&gt;</span>
+                <span class="nt">&lt;scope&gt;</span>import<span class="nt">&lt;/scope&gt;</span>
+            <span class="nt">&lt;/dependency&gt;</span>
+        <span class="nt">&lt;/dependencies&gt;</span>
+    <span class="nt">&lt;/dependencyManagement&gt;</span>
+
+
+    <span class="nt">&lt;dependency&gt;</span>
+      <span class="nt">&lt;groupId&gt;</span>org.springframework.cloud<span class="nt">&lt;/groupId&gt;</span>
+      <span class="nt">&lt;artifactId&gt;</span>spring-cloud-starter-openfeign<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>
+
+    <span class="nt">&lt;/dependency&gt;</span>
+        <span class="nt">&lt;dependency&gt;</span>
+        <span class="nt">&lt;groupId&gt;</span>io.github.openfeign<span class="nt">&lt;/groupId&gt;</span>
+        <span class="nt">&lt;artifactId&gt;</span>feign-soap<span class="nt">&lt;/artifactId&gt;</span>
+        <span class="nt">&lt;version&gt;</span>11.2<span class="nt">&lt;/version&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>
+
+
+    <span class="c">&lt;!-- dependencies for WSDL --&gt;</span>
+    <span class="nt">&lt;dependency&gt;</span>
+        <span class="nt">&lt;groupId&gt;</span>org.springframework.ws<span class="nt">&lt;/groupId&gt;</span>
+        <span class="nt">&lt;artifactId&gt;</span>spring-ws-core<span class="nt">&lt;/artifactId&gt;</span>
+        <span class="nt">&lt;version&gt;</span>2.2.0.RELEASE<span class="nt">&lt;/version&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>
+
+    <span class="nt">&lt;dependency&gt;</span>
+        <span class="nt">&lt;groupId&gt;</span>org.springframework<span class="nt">&lt;/groupId&gt;</span>
+        <span class="nt">&lt;artifactId&gt;</span>spring-oxm<span class="nt">&lt;/artifactId&gt;</span>
+        <span class="nt">&lt;version&gt;</span>5.3.7<span class="nt">&lt;/version&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>
+
+     <span class="c">&lt;!-- pom.xml plugin for WSDL --&gt;</span>
+    <span class="nt">&lt;plugin&gt;</span>
+        <span class="nt">&lt;groupId&gt;</span>org.jvnet.jaxb2.maven2<span class="nt">&lt;/groupId&gt;</span>
+        <span class="nt">&lt;artifactId&gt;</span>maven-jaxb2-plugin<span class="nt">&lt;/artifactId&gt;</span>
+        <span class="nt">&lt;version&gt;</span>0.14.0<span class="nt">&lt;/version&gt;</span>
+        <span class="nt">&lt;executions&gt;</span>
+        <span class="nt">&lt;execution&gt;</span>
+            <span class="nt">&lt;goals&gt;</span>
+                <span class="nt">&lt;goal&gt;</span>generate<span class="nt">&lt;/goal&gt;</span>
+            <span class="nt">&lt;/goals&gt;</span>
+        <span class="nt">&lt;/execution&gt;</span>
+        <span class="nt">&lt;/executions&gt;</span>
+        <span class="nt">&lt;configuration&gt;</span>
+            <span class="nt">&lt;schemaLanguage&gt;</span>WSDL<span class="nt">&lt;/schemaLanguage&gt;</span>
+            <span class="nt">&lt;generateDirectory&gt;</span>${project.basedir}/src/main/java<span class="nt">&lt;/generateDirectory&gt;</span>
+            <span class="c">&lt;!-- the package that will contain our generated java classes --&gt;</span>
+            <span class="nt">&lt;generatePackage&gt;</span>com.example.workflow.models.gen<span class="nt">&lt;/generatePackage&gt;</span>
+            <span class="c">&lt;!-- the path where we put the wsdl file --&gt;</span>
+            <span class="nt">&lt;schemaDirectory&gt;</span>${project.basedir}/src/main/resources<span class="nt">&lt;/schemaDirectory&gt;</span>
+            <span class="nt">&lt;schemaIncludes&gt;</span>
+                <span class="nt">&lt;include&gt;</span>countries.wsdl<span class="nt">&lt;/include&gt;</span>
+            <span class="nt">&lt;/schemaIncludes&gt;</span>
+        <span class="nt">&lt;/configuration&gt;</span>
+    <span class="nt">&lt;/plugin&gt;</span>
+
+</code></pre></div></div>
+
+<blockquote>
+  <p>Base on the version of spring boot that we will choose a version of spring cloud in tag <code class="language-plaintext highlighter-rouge">dependencyManagement</code>, <a href="https://spring.io/projects/spring-cloud">more detail</a></p>
+</blockquote>
+
+<table>
+  <thead>
+    <tr>
+      <th>Release Train</th>
+      <th>Boot Version</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Edgware</td>
+      <td>1.5.x</td>
+    </tr>
+    <tr>
+      <td>Dalston</td>
+      <td>1.5.x</td>
+    </tr>
+    <tr>
+      <td>Finchley</td>
+      <td>2.0.x</td>
+    </tr>
+    <tr>
+      <td>Greenwich</td>
+      <td>2.1.x</td>
+    </tr>
+    <tr>
+      <td>Hoxton</td>
+      <td>2.2.x, 2.3.x (Starting with SR5)</td>
+    </tr>
+    <tr>
+      <td>2020.0.x aka Ilford</td>
+      <td>2.4.x, 2.5.x (Starting with 2020.0.3)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="step-3-generate-java-classes-from-wsdl-file">STEP 3: GENERATE JAVA CLASSES FROM WSDL FILE</h2>
+
+<ul>
+  <li>
+    <p>So let’s open the <code class="language-plaintext highlighter-rouge">terminal/command line</code> then run <code class="language-plaintext highlighter-rouge">mvn compile</code>, then Maven will read the file <code class="language-plaintext highlighter-rouge">countries.wsdl</code> to generate java classes and put them into the <code class="language-plaintext highlighter-rouge">package</code> that we have already defined in the <strong>pom.xml</strong> of <strong>Step 2</strong>.</p>
+  </li>
+  <li>
+    <p>If you note that, java classes have been configured with many annotation of XML, So these class will be formatted as xml type when we transfer them to SOAP service.</p>
+  </li>
+</ul>
+
+<p><a href="/assets/images/spring-boot-generated-java-classes-from-wsdl.JPG"><img src="/assets/images/spring-boot-generated-java-classes-from-wsdl.JPG" alt="Generated Java classes with XML format" title="Generated Java classes with XML format" /></a></p>
+
+<h2 id="step-4-create-configuration-class-for-feign-client">STEP 4: CREATE CONFIGURATION CLASS FOR FEIGN CLIENT</h2>
+
+<ul>
+  <li>
+    <p>In this step we need to create a configuration class to configure the <code class="language-plaintext highlighter-rouge">Encoder</code> and <code class="language-plaintext highlighter-rouge">Decoder</code> of <strong>Feign Client</strong> which we will use for the <strong>feign client soap adapter</strong> later.</p>
+  </li>
+  <li>
+    <p>I will name this configuration class as <strong>FeignSOAPConfiguration</strong></p>
+  </li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="kn">package</span> <span class="nn">com.example.workflow.configurations</span><span class="o">;</span>
+
+    <span class="kn">import</span> <span class="nn">feign.jaxb.JAXBContextFactory</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">feign.soap.SOAPDecoder</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">feign.soap.SOAPEncoder</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Bean</span><span class="o">;</span>
+
+    <span class="cm">/**
+        We should not put the annotation @Configuration here
+        because Feign will override all other Feign clients with
+        this configuration class
+    */</span>
+    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">FeignSOAPConfiguration</span> <span class="o">{</span>
+
+
+        <span class="nd">@Bean</span>
+        <span class="kd">public</span> <span class="nc">JAXBContextFactory</span> <span class="nf">configJAXBContextFactory</span><span class="o">()</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="k">new</span> <span class="nc">JAXBContextFactory</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+                    <span class="o">.</span><span class="na">withMarshallerJAXBEncoding</span><span class="o">(</span><span class="s">"UTF-8"</span><span class="o">)</span>
+                    <span class="o">.</span><span class="na">withMarshallerSchemaLocation</span><span class="o">(</span><span class="s">"http://api rest http://api host/schema.xsd"</span><span class="o">)</span>
+                    <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+        <span class="o">}</span>
+
+        <span class="nd">@Bean</span>
+        <span class="kd">public</span> <span class="nc">SOAPDecoder</span> <span class="nf">feignDecoder</span><span class="o">()</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="k">new</span> <span class="nf">SOAPDecoder</span><span class="o">(</span><span class="n">configJAXBContextFactory</span><span class="o">());</span>
+        <span class="o">}</span>
+
+        <span class="nd">@Bean</span>
+        <span class="kd">public</span> <span class="nc">SOAPEncoder</span> <span class="nf">feignEncoder</span><span class="o">()</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="k">new</span> <span class="nf">SOAPEncoder</span><span class="o">(</span><span class="n">configJAXBContextFactory</span><span class="o">());</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+</code></pre></div></div>
+
+<h2 id="step-5-create-an-feign-client-adapter-to-call-to-soap-service">STEP 5: CREATE AN FEIGN CLIENT ADAPTER TO CALL TO SOAP SERVICE</h2>
+
+<ul>
+  <li>
+    <p>So in this step we will crate an interface feign client adapter to call to our SOAP service.</p>
+  </li>
+  <li>
+    <p>Remember that we have to put the class <code class="language-plaintext highlighter-rouge">FeignSOAPConfiguration</code> into the attribute <code class="language-plaintext highlighter-rouge">configuration</code> of <strong>annotation</strong> <code class="language-plaintext highlighter-rouge">@FeignClient</code>. Don’t for get give it a name with attribute <code class="language-plaintext highlighter-rouge">name</code> and put the <strong>url of SOAP service</strong> (the url that we used to save <code class="language-plaintext highlighter-rouge">countries.wsdl</code> from browser).</p>
+  </li>
+  <li>
+    <p>Because generated java classes (<code class="language-plaintext highlighter-rouge">CountryName.java</code> and <code class="language-plaintext highlighter-rouge">CountryNameResponse.java</code>) are formatted with xml so we have to define the <code class="language-plaintext highlighter-rouge">consumes</code> (Input) and <code class="language-plaintext highlighter-rouge">produces</code> (Output) as <code class="language-plaintext highlighter-rouge">text/xml</code> type.</p>
+  </li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="kn">package</span> <span class="nn">com.example.workflow.apis</span><span class="o">;</span>
+
+    <span class="kn">import</span> <span class="nn">com.example.workflow.FeignSOAPConfig</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">com.example.workflow.models.gen.CountryName</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">com.example.workflow.models.gen.CountryNameResponse</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">org.springframework.cloud.openfeign.FeignClient</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">org.springframework.http.MediaType</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.PostMapping</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RequestBody</span><span class="o">;</span>
+
+    <span class="cm">/**
+        this @FeignClient includes 3 attributes:
+        name of @FeignClient, url of SOAP service, configuration class for this FeignClient
+    */</span>
+    <span class="nd">@FeignClient</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"soap.client.example"</span><span class="o">,</span>
+            <span class="n">url</span> <span class="o">=</span> <span class="s">"${country.client.soap.url}"</span><span class="o">,</span>
+            <span class="n">configuration</span> <span class="o">=</span> <span class="nc">FeignSOAPConfiguration</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="kd">interface</span> <span class="nc">CountryClientAdapter</span> <span class="o">{</span>
+
+        <span class="cm">/**
+           @RequestBody (CountryName) and CountryNameResponse  are the Object classes
+            with format xml that was generated from the wsdl file.
+            So the attribute consumes and produces must be "text/xml"
+        */</span>
+        <span class="nd">@PostMapping</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">""</span><span class="o">,</span> <span class="n">consumes</span> <span class="o">=</span> <span class="nc">MediaType</span><span class="o">.</span><span class="na">TEXT_XML_VALUE</span><span class="o">,</span> <span class="n">produces</span> <span class="o">=</span> <span class="nc">MediaType</span><span class="o">.</span><span class="na">TEXT_XML_VALUE</span><span class="o">)</span>
+        <span class="nc">CountryNameResponse</span> <span class="nf">get</span><span class="o">(</span><span class="nd">@RequestBody</span> <span class="nc">CountryName</span> <span class="n">countryName</span><span class="o">);</span>
+    <span class="o">}</span>
+
+</code></pre></div></div>
+
+<p>## STEP 6: USING AND TESTING THE SOAP FEIGN ADAPTER</p>
+
+<ul>
+  <li>Finally, we just <code class="language-plaintext highlighter-rouge">@Autowired</code> the SOAP Feignclient adapter to any service or component and use it as in the code below.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    <span class="nd">@Autowired</span>
+    <span class="kd">private</span> <span class="nc">CountryClientAdapter</span> <span class="n">countryClientAdapter</span><span class="o">;</span>
+
+
+    <span class="kd">public</span> <span class="nc">CountryNameResponse</span> <span class="nf">getCountryName</span><span class="o">(</span><span class="nc">String</span> <span class="n">countryISO</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">CountryName</span> <span class="n">countryName</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">CountryName</span><span class="o">();</span>
+        <span class="n">countryName</span><span class="o">.</span><span class="na">setSCountryISOCode</span><span class="o">(</span><span class="n">countryISO</span><span class="o">);</span>
+        <span class="k">return</span> <span class="n">countryClientAdapter</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">countryName</span><span class="o">);</span>
+    <span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>The result we be showed as below, please not that the we use 3 ISO country code for test Ex: <strong>VNM</strong>, <strong>IDN</strong></li>
+</ul>
+
+<p><a href="/assets/images/spring-boot-soap-with-feign-test-result.JPG"><img src="/assets/images/spring-boot-soap-with-feign-test-result.JPG" alt="Calling SOAP with FeignClient result" title="Calling SOAP with FeignClient result" /></a></p>
+
+<ul>
+  <li>Thank you and have a nice day!</li>
+</ul>
+
+    </div><a class="u-url" href="/jekyll/updatel/2021/06/17/java-springboot-connect-SOAP-with-FeignClient.html" hidden></a>
+  </article>
+  
+</div>
+
+
+    </div>
+  </div>
+</body><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">StepByStep</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">StepByStep</li><li><a class="u-email" href="mailto:minhducnguyen189@gmail.com">minhducnguyen189@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/jekyll"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">jekyll</span></a></li><li><a href="https://www.twitter.com/jekyllrb"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">jekyllrb</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Hi there! Let&#39;s explore some general knowleadges and briefly definitions  in programming. I hope that this website can help people saving time in learning, also give some motivations for those who have choice the developer path.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</html>
