@@ -158,11 +158,11 @@ table td { border: 1px solid #e8e8e8; }
 
 .highlight .cm { color: #159957; font-style: italic; }
 
-.highlight .cp { color: #999; font-weight: bold; }
+.highlight .cp { color: #159957; font-weight: bold; }
 
-.highlight .c1 { color: #998; font-style: italic; }
+.highlight .c1 { color: #159957; font-style: italic; }
 
-.highlight .cs { color: #999; font-weight: bold; font-style: italic; }
+.highlight .cs { color: #159957; font-weight: bold; font-style: italic; }
 
 .highlight .gd { color: #000; background-color: #fdd; }
 
