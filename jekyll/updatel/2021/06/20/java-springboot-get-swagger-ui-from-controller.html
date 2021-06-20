@@ -120,18 +120,45 @@
 </code></pre></div></div>
 
 <ul>
-  <li>
-    <p>We can seclect which api should be showed or which controller should be show by edit the <code class="language-plaintext highlighter-rouge">RequestHandlerSelectors</code> and <code class="language-plaintext highlighter-rouge">PathSelectors</code></p>
-  </li>
-  <li>
-    <p>So this config will load all your <code class="language-plaintext highlighter-rouge">Controller</code> with all <code class="language-plaintext highlighter-rouge">rest apis</code> that are contained in your project. You can select which controller should be add into the swagger ui by edit the <strong>RequestHandlerSelectors</strong> and <strong>PathSelectors</strong>.</p>
-  </li>
+  <li>We can seclect which api should be showed or which controller should be show by edit the <code class="language-plaintext highlighter-rouge">RequestHandlerSelectors</code> and <code class="language-plaintext highlighter-rouge">PathSelectors</code>.
+For example below, I can choose only apis which is started with <code class="language-plaintext highlighter-rouge">/general/**</code> is showed on swagger.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    <span class="kn">package</span> <span class="nn">com.example.workflow.configurations</span><span class="o">;</span>
+
+    <span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Bean</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Configuration</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">springfox.documentation.builders.PathSelectors</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">springfox.documentation.builders.RequestHandlerSelectors</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">springfox.documentation.spi.DocumentationType</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">springfox.documentation.spring.web.plugins.Docket</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">springfox.documentation.swagger2.annotations.EnableSwagger2</span><span class="o">;</span>
+
+    <span class="nd">@Configuration</span>
+    <span class="nd">@EnableSwagger2</span>
+    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">SwaggerConfiguration</span> <span class="o">{</span>
+
+        <span class="nd">@Bean</span>
+        <span class="kd">public</span> <span class="nc">Docket</span> <span class="nf">docketConfiguration</span><span class="o">()</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="k">new</span> <span class="nf">Docket</span><span class="o">(</span><span class="nc">DocumentationType</span><span class="o">.</span><span class="na">SWAGGER_2</span><span class="o">)</span>
+                    <span class="o">.</span><span class="na">select</span><span class="o">()</span>
+                    <span class="o">.</span><span class="na">apis</span><span class="o">(</span><span class="nc">RequestHandlerSelectors</span><span class="o">.</span><span class="na">any</span><span class="o">())</span>
+                    <span class="o">.</span><span class="na">paths</span><span class="o">(</span><span class="nc">PathSelectors</span><span class="o">.</span><span class="na">ant</span><span class="o">(</span><span class="s">"/general/**"</span><span class="o">))</span>
+                    <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+</code></pre></div></div>
+
+<ul>
+  <li>So this config will load all your <code class="language-plaintext highlighter-rouge">Controller</code> with all <code class="language-plaintext highlighter-rouge">rest apis</code> that are contained in your project. You can select which controller should be add into the swagger ui by edit the <strong>RequestHandlerSelectors</strong> and <strong>PathSelectors</strong>.</li>
 </ul>
 
 <h2 id="step-3-testing">STEP 3: TESTING</h2>
 
 <ul>
-  <li>Let’s create your <code class="language-plaintext highlighter-rouge">Controller</code> class which contains some <code class="language-plaintext highlighter-rouge">REST apis</code>. For example:</li>
+  <li>Let’s create your <code class="language-plaintext highlighter-rouge">Controller</code> class which contains some <code class="language-plaintext highlighter-rouge">REST apis</code>. In this example I will show all apis in this class on swagger ui. For example:</li>
 </ul>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
