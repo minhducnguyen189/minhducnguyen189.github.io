@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- bootstrap library and JS, Jquery -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Generate Swagger UI from Controller in Spring Boot | StepByStep</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Generate Swagger UI from Controller in Spring Boot" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="In this topic we will learn how to generate swagger ui from Controller class in our spring boot project." />
+<meta property="og:description" content="In this topic we will learn how to generate swagger ui from Controller class in our spring boot project." />
+<link rel="canonical" href="/jekyll/updatel/2021/06/20/java-springboot-get-swagger-ui-from-controller.html" />
+<meta property="og:url" content="/jekyll/updatel/2021/06/20/java-springboot-get-swagger-ui-from-controller.html" />
+<meta property="og:site_name" content="StepByStep" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-06-20T00:00:00+07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Generate Swagger UI from Controller in Spring Boot" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","headline":"Generate Swagger UI from Controller in Spring Boot","dateModified":"2021-06-20T00:00:00+07:00","datePublished":"2021-06-20T00:00:00+07:00","mainEntityOfPage":{"@type":"WebPage","@id":"/jekyll/updatel/2021/06/20/java-springboot-get-swagger-ui-from-controller.html"},"url":"/jekyll/updatel/2021/06/20/java-springboot-get-swagger-ui-from-controller.html","description":"In this topic we will learn how to generate swagger ui from Controller class in our spring boot project.","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="StepByStep" /></head><body>
+  <div class="container-flush">
+    <div class="row"><!-- navigation bar -->
+<div class="col-lg-12">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" role="banner"><a class="navbar-brand site-title" rel="author" href="/">StepByStep</a><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="nav navbar-nav"><li class="nav-item active">
+          <a class="nav-link" href="/about/">About</a>
+        </li></ul>
+    </div></nav>
+</div></div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+  <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+    <header class="post-header">
+      <h1 class="post-title p-name" itemprop="name headline">Generate Swagger UI from Controller in Spring Boot</h1>
+      <p class="post-meta">
+        <time class="dt-published" datetime="2021-06-20T00:00:00+07:00" itemprop="datePublished">Jun 20, 2021
+        </time></p>
+    </header>
+  
+    <div class="post-content e-content" itemprop="articleBody">
+      <blockquote>
+  <p>In this topic we will learn how to generate swagger ui from <code class="language-plaintext highlighter-rouge">Controller</code> class in our spring boot project.</p>
+</blockquote>
+
+<h2 id="step-1-adding-spring-fox-swagger-dependencies-into-our-project">STEP 1: ADDING SPRING FOX SWAGGER DEPENDENCIES INTO OUR PROJECT</h2>
+
+<ul>
+  <li>We will add two spring fox dependencies into file <code class="language-plaintext highlighter-rouge">pom.xml</code> of our project as below:</li>
+</ul>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+     <span class="c">&lt;!--springfox-swagger2 --&gt;</span>
+        <span class="nt">&lt;dependency&gt;</span>
+            <span class="nt">&lt;groupId&gt;</span>io.springfox<span class="nt">&lt;/groupId&gt;</span>
+            <span class="nt">&lt;artifactId&gt;</span>springfox-swagger2<span class="nt">&lt;/artifactId&gt;</span>
+            <span class="nt">&lt;version&gt;</span>2.9.2<span class="nt">&lt;/version&gt;</span>
+        <span class="nt">&lt;/dependency&gt;</span>
+
+
+    <span class="c">&lt;!--springfox-swagger-ui --&gt;</span>
+    <span class="nt">&lt;dependency&gt;</span>
+        <span class="nt">&lt;groupId&gt;</span>io.springfox<span class="nt">&lt;/groupId&gt;</span>
+        <span class="nt">&lt;artifactId&gt;</span>springfox-swagger-ui<span class="nt">&lt;/artifactId&gt;</span>
+        <span class="nt">&lt;version&gt;</span>2.9.2<span class="nt">&lt;/version&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>
+
+</code></pre></div></div>
+
+<h2 id="step-2-create-a-swagger-configuration-class">STEP 2: CREATE A SWAGGER CONFIGURATION CLASS</h2>
+
+<ul>
+  <li>In this step we will create a class named <code class="language-plaintext highlighter-rouge">SwaggerConfiguration</code> and add a simple configuration code as below:</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="kn">package</span> <span class="nn">com.example.workflow.configurations</span><span class="o">;</span>
+
+    <span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Configuration</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">springfox.documentation.builders.PathSelectors</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">springfox.documentation.builders.RequestHandlerSelectors</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">springfox.documentation.spi.DocumentationType</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">springfox.documentation.spring.web.plugins.Docket</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">springfox.documentation.swagger2.annotations.EnableSwagger2</span><span class="o">;</span>
+
+    <span class="nd">@Configuration</span>
+    <span class="nd">@EnableSwagger2</span>
+    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">SwaggerConfiguration</span> <span class="o">{</span>
+
+        <span class="kd">public</span> <span class="nc">Docket</span> <span class="nf">docketConfiguration</span><span class="o">()</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="k">new</span> <span class="nf">Docket</span><span class="o">(</span><span class="nc">DocumentationType</span><span class="o">.</span><span class="na">SWAGGER_2</span><span class="o">)</span>
+                    <span class="o">.</span><span class="na">select</span><span class="o">()</span>
+                    <span class="o">.</span><span class="na">apis</span><span class="o">(</span><span class="nc">RequestHandlerSelectors</span><span class="o">.</span><span class="na">any</span><span class="o">())</span>
+                    <span class="o">.</span><span class="na">paths</span><span class="o">(</span><span class="nc">PathSelectors</span><span class="o">.</span><span class="na">any</span><span class="o">())</span>
+                    <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+</code></pre></div></div>
+
+<ul>
+  <li>So this config will load all your <code class="language-plaintext highlighter-rouge">Controller</code> with all <code class="language-plaintext highlighter-rouge">rest apis</code> that are contained in your project. You can select which controller should be add into the swagger ui by edit the <strong>RequestHandlerSelectors</strong> and <strong>PathSelectors</strong>.</li>
+</ul>
+
+<h2 id="step-3-testing">STEP 3: TESTING</h2>
+
+<ul>
+  <li>Let’s create your <code class="language-plaintext highlighter-rouge">Controller</code> class which contains some <code class="language-plaintext highlighter-rouge">REST apis</code>. For example:</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    <span class="kn">package</span> <span class="nn">com.example.workflow.controller</span><span class="o">;</span>
+
+    <span class="kn">import</span> <span class="nn">com.example.workflow.model.NewTable</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">com.example.workflow.model.gen.CountryNameResponse</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">com.example.workflow.service.GeneralService</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">org.springframework.http.MediaType</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">org.springframework.http.ResponseEntity</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.*</span><span class="o">;</span>
+
+    <span class="nd">@RestController</span>
+    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">GeneralController</span> <span class="o">{</span>
+
+
+        <span class="nd">@Autowired</span>
+        <span class="kd">private</span> <span class="nc">GeneralService</span> <span class="n">generalService</span><span class="o">;</span>
+
+
+        <span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">method</span> <span class="o">=</span> <span class="nc">RequestMethod</span><span class="o">.</span><span class="na">POST</span><span class="o">,</span> <span class="n">path</span> <span class="o">=</span> <span class="s">"/primary/newtable"</span><span class="o">,</span> <span class="n">consumes</span> <span class="o">=</span> <span class="nc">MediaType</span><span class="o">.</span><span class="na">APPLICATION_JSON_VALUE</span><span class="o">)</span>
+        <span class="kd">public</span> <span class="nc">ResponseEntity</span><span class="o">&lt;?&gt;</span> <span class="n">saveDataToCamundaNewTable</span><span class="o">(</span><span class="nd">@RequestBody</span> <span class="nc">NewTable</span> <span class="n">newTable</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="nc">ResponseEntity</span><span class="o">.</span><span class="na">ok</span><span class="o">(</span><span class="n">generalService</span><span class="o">.</span><span class="na">saveDataToCamundaNewTable</span><span class="o">(</span><span class="n">newTable</span><span class="o">));</span>
+        <span class="o">}</span>
+
+        <span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">method</span> <span class="o">=</span> <span class="nc">RequestMethod</span><span class="o">.</span><span class="na">POST</span><span class="o">,</span> <span class="n">path</span> <span class="o">=</span> <span class="s">"/secondary/newtable"</span><span class="o">,</span> <span class="n">consumes</span> <span class="o">=</span> <span class="nc">MediaType</span><span class="o">.</span><span class="na">APPLICATION_JSON_VALUE</span><span class="o">)</span>
+        <span class="kd">public</span> <span class="nc">ResponseEntity</span><span class="o">&lt;?&gt;</span> <span class="n">saveDataToMyDBNewTable</span><span class="o">(</span><span class="nd">@RequestBody</span> <span class="nc">NewTable</span> <span class="n">newTable</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="nc">ResponseEntity</span><span class="o">.</span><span class="na">ok</span><span class="o">(</span><span class="n">generalService</span><span class="o">.</span><span class="na">saveDataToMyDB</span><span class="o">(</span><span class="n">newTable</span><span class="o">));</span>
+        <span class="o">}</span>
+
+        <span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">method</span> <span class="o">=</span> <span class="nc">RequestMethod</span><span class="o">.</span><span class="na">POST</span><span class="o">,</span> <span class="n">path</span> <span class="o">=</span> <span class="s">"/general/newtable"</span><span class="o">,</span> <span class="n">consumes</span> <span class="o">=</span> <span class="nc">MediaType</span><span class="o">.</span><span class="na">APPLICATION_JSON_VALUE</span><span class="o">)</span>
+        <span class="kd">public</span> <span class="nc">ResponseEntity</span><span class="o">&lt;?&gt;</span> <span class="n">saveDataToAllDBNewTable</span><span class="o">(</span><span class="nd">@RequestBody</span> <span class="nc">NewTable</span> <span class="n">newTable</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="nc">ResponseEntity</span><span class="o">.</span><span class="na">ok</span><span class="o">(</span><span class="n">generalService</span><span class="o">.</span><span class="na">saveDataToAllDB</span><span class="o">(</span><span class="n">newTable</span><span class="o">));</span>
+        <span class="o">}</span>
+
+        <span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">method</span> <span class="o">=</span> <span class="nc">RequestMethod</span><span class="o">.</span><span class="na">GET</span><span class="o">,</span> <span class="n">path</span> <span class="o">=</span> <span class="s">"/general/history/tasks"</span><span class="o">,</span> <span class="n">produces</span> <span class="o">=</span> <span class="nc">MediaType</span><span class="o">.</span><span class="na">APPLICATION_JSON_VALUE</span><span class="o">)</span>
+        <span class="kd">public</span> <span class="nc">ResponseEntity</span><span class="o">&lt;?&gt;</span> <span class="n">getAllHistoryTasks</span><span class="o">()</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="nc">ResponseEntity</span><span class="o">.</span><span class="na">ok</span><span class="o">(</span><span class="n">generalService</span><span class="o">.</span><span class="na">getHistoryTasks</span><span class="o">());</span>
+        <span class="o">}</span>
+
+        <span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">method</span> <span class="o">=</span> <span class="nc">RequestMethod</span><span class="o">.</span><span class="na">GET</span><span class="o">,</span> <span class="n">path</span> <span class="o">=</span> <span class="s">"/general/history/process/key/{processKey}/variables"</span><span class="o">,</span>
+                <span class="n">produces</span> <span class="o">=</span> <span class="nc">MediaType</span><span class="o">.</span><span class="na">APPLICATION_JSON_VALUE</span><span class="o">)</span>
+        <span class="kd">public</span> <span class="nc">ResponseEntity</span><span class="o">&lt;?&gt;</span> <span class="n">getAllHistoryVariablesByProcessKey</span><span class="o">(</span><span class="nd">@PathVariable</span><span class="o">(</span><span class="s">"processKey"</span><span class="o">)</span> <span class="nc">String</span> <span class="n">processKey</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="nc">ResponseEntity</span><span class="o">.</span><span class="na">ok</span><span class="o">(</span><span class="n">generalService</span><span class="o">.</span><span class="na">getHistoryVariables</span><span class="o">(</span><span class="n">processKey</span><span class="o">));</span>
+        <span class="o">}</span>
+
+        <span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">method</span> <span class="o">=</span> <span class="nc">RequestMethod</span><span class="o">.</span><span class="na">GET</span><span class="o">,</span> <span class="n">path</span> <span class="o">=</span> <span class="s">"/general/soap/country/{countryISO}"</span><span class="o">,</span>
+                <span class="n">produces</span> <span class="o">=</span> <span class="nc">MediaType</span><span class="o">.</span><span class="na">TEXT_XML_VALUE</span><span class="o">)</span>
+        <span class="kd">public</span> <span class="nc">ResponseEntity</span><span class="o">&lt;?&gt;</span> <span class="n">getCountryNameByISO</span><span class="o">(</span><span class="nd">@PathVariable</span><span class="o">(</span><span class="s">"countryISO"</span><span class="o">)</span> <span class="nc">String</span> <span class="n">countryISO</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="nc">ResponseEntity</span><span class="o">.</span><span class="na">ok</span><span class="o">(</span><span class="n">generalService</span><span class="o">.</span><span class="na">getCountryName</span><span class="o">(</span><span class="n">countryISO</span><span class="o">));</span>
+        <span class="o">}</span>
+
+        <span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">method</span> <span class="o">=</span> <span class="nc">RequestMethod</span><span class="o">.</span><span class="na">GET</span><span class="o">,</span> <span class="n">path</span> <span class="o">=</span> <span class="s">"/general/soap/country/{countryISO}/v2"</span><span class="o">,</span>
+                <span class="n">produces</span> <span class="o">=</span> <span class="nc">MediaType</span><span class="o">.</span><span class="na">TEXT_XML_VALUE</span><span class="o">)</span>
+        <span class="kd">public</span> <span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">CountryNameResponse</span><span class="o">&gt;</span> <span class="nf">getCountryNameByISOV2</span><span class="o">(</span><span class="nd">@PathVariable</span><span class="o">(</span><span class="s">"countryISO"</span><span class="o">)</span> <span class="nc">String</span> <span class="n">countryISO</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="nc">ResponseEntity</span><span class="o">.</span><span class="na">ok</span><span class="o">(</span><span class="n">generalService</span><span class="o">.</span><span class="na">getCountryNameV2</span><span class="o">(</span><span class="n">countryISO</span><span class="o">));</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+</code></pre></div></div>
+
+<ul>
+  <li>So now let run your spring boot service and go to the url <code class="language-plaintext highlighter-rouge">localhost:8080/swagger-ui.html</code> then you can see the swagger ui as below</li>
+</ul>
+
+<p><img src="/assets/images/spring-boot-swagger-ui-from-controller.JPG" alt="Swagger UI that generated from controller java class" title="Swagger UI that generated from controller java class" /></p>
+
+<ul>
+  <li>That’s it. So, Thank you very much!</li>
+</ul>
+
+
+    </div><a class="u-url" href="/jekyll/updatel/2021/06/20/java-springboot-get-swagger-ui-from-controller.html" hidden></a>
+  </article>
+  
+</div>
+
+
+    </div>
+  </div>
+</body><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">StepByStep</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">StepByStep</li><li><a class="u-email" href="mailto:minhducnguyen189@gmail.com">minhducnguyen189@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/jekyll"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">jekyll</span></a></li><li><a href="https://www.twitter.com/jekyllrb"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">jekyllrb</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Hi there! Let&#39;s explore some general knowleadges and briefly definitions  in programming. I hope that this website can help people saving time in learning, also give some motivations for those who have choice the developer path.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</html>
