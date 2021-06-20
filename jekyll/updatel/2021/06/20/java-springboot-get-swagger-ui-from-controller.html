@@ -30,7 +30,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Generate Swagger UI from Controller in Spring Boot" />
 <script type="application/ld+json">
-{"@type":"BlogPosting","headline":"Generate Swagger UI from Controller in Spring Boot","dateModified":"2021-06-20T00:00:00+07:00","datePublished":"2021-06-20T00:00:00+07:00","mainEntityOfPage":{"@type":"WebPage","@id":"/jekyll/updatel/2021/06/20/java-springboot-get-swagger-ui-from-controller.html"},"url":"/jekyll/updatel/2021/06/20/java-springboot-get-swagger-ui-from-controller.html","description":"In this topic we will learn how to generate swagger ui from Controller class in our spring boot project.","@context":"https://schema.org"}</script>
+{"@type":"BlogPosting","headline":"Generate Swagger UI from Controller in Spring Boot","dateModified":"2021-06-20T00:00:00+07:00","datePublished":"2021-06-20T00:00:00+07:00","url":"/jekyll/updatel/2021/06/20/java-springboot-get-swagger-ui-from-controller.html","mainEntityOfPage":{"@type":"WebPage","@id":"/jekyll/updatel/2021/06/20/java-springboot-get-swagger-ui-from-controller.html"},"description":"In this topic we will learn how to generate swagger ui from Controller class in our spring boot project.","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="StepByStep" /></head><body>
   <div class="container-flush">
@@ -107,6 +107,7 @@
     <span class="nd">@EnableSwagger2</span>
     <span class="kd">public</span> <span class="kd">class</span> <span class="nc">SwaggerConfiguration</span> <span class="o">{</span>
 
+        <span class="nd">@Bean</span>
         <span class="kd">public</span> <span class="nc">Docket</span> <span class="nf">docketConfiguration</span><span class="o">()</span> <span class="o">{</span>
             <span class="k">return</span> <span class="k">new</span> <span class="nf">Docket</span><span class="o">(</span><span class="nc">DocumentationType</span><span class="o">.</span><span class="na">SWAGGER_2</span><span class="o">)</span>
                     <span class="o">.</span><span class="na">select</span><span class="o">()</span>
@@ -119,7 +120,12 @@
 </code></pre></div></div>
 
 <ul>
-  <li>So this config will load all your <code class="language-plaintext highlighter-rouge">Controller</code> with all <code class="language-plaintext highlighter-rouge">rest apis</code> that are contained in your project. You can select which controller should be add into the swagger ui by edit the <strong>RequestHandlerSelectors</strong> and <strong>PathSelectors</strong>.</li>
+  <li>
+    <p>We can seclect which api should be showed or which controller should be show by edit the <code class="language-plaintext highlighter-rouge">RequestHandlerSelectors</code> and <code class="language-plaintext highlighter-rouge">PathSelectors</code></p>
+  </li>
+  <li>
+    <p>So this config will load all your <code class="language-plaintext highlighter-rouge">Controller</code> with all <code class="language-plaintext highlighter-rouge">rest apis</code> that are contained in your project. You can select which controller should be add into the swagger ui by edit the <strong>RequestHandlerSelectors</strong> and <strong>PathSelectors</strong>.</p>
+  </li>
 </ul>
 
 <h2 id="step-3-testing">STEP 3: TESTING</h2>

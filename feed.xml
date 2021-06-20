@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2021-06-20T13:27:25+07:00</updated><id>/feed.xml</id><title type="html">StepByStep</title><subtitle>Hi there! Let's explore some general knowleadges and briefly definitions  in programming. I hope that this website can help people saving time in learning, also give some motivations for those who have choice the developer path.</subtitle><entry><title type="html">Generate Swagger UI from Controller in Spring Boot</title><link href="/jekyll/updatel/2021/06/20/java-springboot-get-swagger-ui-from-controller.html" rel="alternate" type="text/html" title="Generate Swagger UI from Controller in Spring Boot" /><published>2021-06-20T00:00:00+07:00</published><updated>2021-06-20T00:00:00+07:00</updated><id>/jekyll/updatel/2021/06/20/java-springboot-get-swagger-ui-from-controller</id><content type="html" xml:base="/jekyll/updatel/2021/06/20/java-springboot-get-swagger-ui-from-controller.html">&lt;blockquote&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2021-06-20T19:40:43+07:00</updated><id>/feed.xml</id><title type="html">StepByStep</title><subtitle>Hi there! Let's explore some general knowleadges and briefly definitions  in programming. I hope that this website can help people saving time in learning, also give some motivations for those who have choice the developer path.</subtitle><entry><title type="html">Generate Swagger UI from Controller in Spring Boot</title><link href="/jekyll/updatel/2021/06/20/java-springboot-get-swagger-ui-from-controller.html" rel="alternate" type="text/html" title="Generate Swagger UI from Controller in Spring Boot" /><published>2021-06-20T00:00:00+07:00</published><updated>2021-06-20T00:00:00+07:00</updated><id>/jekyll/updatel/2021/06/20/java-springboot-get-swagger-ui-from-controller</id><content type="html" xml:base="/jekyll/updatel/2021/06/20/java-springboot-get-swagger-ui-from-controller.html">&lt;blockquote&gt;
   &lt;p&gt;In this topic we will learn how to generate swagger ui from &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Controller&lt;/code&gt; class in our spring boot project.&lt;/p&gt;
 &lt;/blockquote&gt;
 
@@ -45,6 +45,7 @@
     &lt;span class=&quot;nd&quot;&gt;@EnableSwagger2&lt;/span&gt;
     &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;SwaggerConfiguration&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
 
+        &lt;span class=&quot;nd&quot;&gt;@Bean&lt;/span&gt;
         &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Docket&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;docketConfiguration&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
             &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Docket&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;DocumentationType&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;SWAGGER_2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
                     &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;select&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
@@ -57,7 +58,12 @@
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;So this config will load all your &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Controller&lt;/code&gt; with all &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rest apis&lt;/code&gt; that are contained in your project. You can select which controller should be add into the swagger ui by edit the &lt;strong&gt;RequestHandlerSelectors&lt;/strong&gt; and &lt;strong&gt;PathSelectors&lt;/strong&gt;.&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;We can seclect which api should be showed or which controller should be show by edit the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;RequestHandlerSelectors&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;PathSelectors&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;So this config will load all your &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Controller&lt;/code&gt; with all &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rest apis&lt;/code&gt; that are contained in your project. You can select which controller should be add into the swagger ui by edit the &lt;strong&gt;RequestHandlerSelectors&lt;/strong&gt; and &lt;strong&gt;PathSelectors&lt;/strong&gt;.&lt;/p&gt;
+  &lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h2 id=&quot;step-3-testing&quot;&gt;STEP 3: TESTING&lt;/h2&gt;
