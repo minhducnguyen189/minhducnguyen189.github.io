@@ -108,17 +108,37 @@ table td { border: 1px solid #e8e8e8; }
 
 .post-list { margin-left: 0; margin-top: 15px; list-style: none; display: flex; border-radius: 20px; }
 
-.post-meta { font-size: 17px; color: #2980b9; }
+.post-meta { font-size: 17px; color: #ffffff; }
 
-.post-link { display: block; padding: 10px; padding-left: 20px; padding-right: 20px; border: 2px solid #828282; border-radius: 20px; background-color: #dfe6e9; width: 100%; font-size: 20px; }
+.post-link { display: block; padding: 10px; padding-left: 20px; padding-right: 20px; border: 2px solid #16a085; border-radius: 20px; background-color: #16a085; width: 100%; font-size: 20px; }
 
-.post-link h3 { color: #2980b9; }
+.post-link h3 { color: #ffffff; }
 
-.post-link:hover { text-decoration: none; background-color: #b2bec3; }
+.post-link:hover { text-decoration: none; background-color: #b2bec3; border: 2px solid #b2bec3; }
 
 .post-link:hover .post-meta { color: black; }
 
 .post-link:hover > h3 { color: black; }
+
+.post-link-docker { display: block; padding: 10px; padding-left: 20px; padding-right: 20px; border: 2px solid #3498db; border-radius: 20px; background-color: #3498db; width: 100%; font-size: 20px; }
+
+.post-link-docker h3 { color: #ffffff; }
+
+.post-link-docker:hover { text-decoration: none; background-color: #b2bec3; border: 2px solid #b2bec3; }
+
+.post-link-docker:hover .post-meta { color: black; }
+
+.post-link-docker:hover > h3 { color: black; }
+
+.post-link-python { display: block; padding: 10px; padding-left: 20px; padding-right: 20px; border: 2px solid #f39c12; border-radius: 20px; background-color: #f39c12; width: 100%; font-size: 20px; }
+
+.post-link-python h3 { color: #ffffff; }
+
+.post-link-python:hover { text-decoration: none; background-color: #b2bec3; border: 2px solid #b2bec3; }
+
+.post-link-python:hover .post-meta { color: black; }
+
+.post-link-python:hover > h3 { color: black; }
 
 /** Posts */
 .post { margin-top: 40px; margin-bottom: 80px; }
