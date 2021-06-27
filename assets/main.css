@@ -81,7 +81,7 @@ table td { border: 1px solid #e8e8e8; }
 .site-title, .site-title:visited { color: #dfe6e9; }
 
 /** Site footer */
-.site-footer { border-top: 1px solid #e8e8e8; padding: 30px 0; }
+.site-footer { border-top: 1px solid #e8e8e8; padding: 30px 0; margin-top: 200px; }
 
 .footer-heading { font-size: 18px; margin-bottom: 15px; }
 
