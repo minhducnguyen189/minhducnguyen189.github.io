@@ -30,7 +30,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="General Knowledges Abound Docker" />
 <script type="application/ld+json">
-{"@type":"BlogPosting","headline":"General Knowledges Abound Docker","dateModified":"2021-06-26T20:15:47+07:00","datePublished":"2021-06-26T20:15:47+07:00","mainEntityOfPage":{"@type":"WebPage","@id":"/docker-posts/2021-06-26-docker-general.html"},"url":"/docker-posts/2021-06-26-docker-general.html","description":"WHAT IS THE DOCKER?","@context":"https://schema.org"}</script>
+{"@type":"BlogPosting","headline":"General Knowledges Abound Docker","dateModified":"2021-06-26T20:15:47+07:00","datePublished":"2021-06-26T20:15:47+07:00","url":"/docker-posts/2021-06-26-docker-general.html","mainEntityOfPage":{"@type":"WebPage","@id":"/docker-posts/2021-06-26-docker-general.html"},"description":"WHAT IS THE DOCKER?","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="StepByStep" /></head><body>
   <div class="container-flush">
@@ -145,6 +145,37 @@
   <li>
     <p><a href="https://searchitoperations.techtarget.com/definition/Docker-image">More indormation</a></p>
   </li>
+  <li>
+    <p>Example of a docker image to run a spring boot project</p>
+
+    <div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      <span class="c1">#get docker image with openjdk 8 installed from docker hub</span>
+      <span class="s">FROM openjdk:8-jdk-alpine</span>
+
+      <span class="s">#expose port 8080 to real machine</span>
+      <span class="s">EXPOSE </span><span class="m">8080</span>
+
+      <span class="c1">#some information for docker image</span>
+      <span class="s">LABEL owner="duc"</span>
+      <span class="s">LABEL maintainer="minhducnguyen189@gmail.com"</span>
+      <span class="s">LABEL description="test image my project"</span>
+
+      <span class="s">#copy the jar file in target folder into docker image</span>
+      <span class="s">COPY target/my-project-1.0.0-SNAPSHOT.jar my-project-1.0.0-SNAPSHOT.jar</span>
+
+      <span class="s">#run command java to run jar package when docker image is run</span>
+      <span class="s">ENTRYPOINT ["java","-jar","/my-project-1.0.0-SNAPSHOT.jar"]</span>
+
+</code></pre></div>    </div>
+
+    <ul>
+      <li>
+        <p>run command <code class="language-plaintext highlighter-rouge">docker build . --tag myproject</code> to build a docker image with name <code class="language-plaintext highlighter-rouge">myproject</code></p>
+      </li>
+      <li>
+        <p>run command <code class="language-plaintext highlighter-rouge">docker run -it -p8080:8080 myproject</code> to run a docker cotainer with 8080 is mapped out side to real machine.</p>
+      </li>
+    </ul>
+  </li>
 </ul>
 
 <h2 id="what-is-the-docker-hub-">WHAT IS THE DOCKER HUB ?</h2>
@@ -161,7 +192,61 @@
   </li>
 </ul>
 
-<h2 id="to-be-continue">TO BE CONTINUE</h2>
+<h2 id="what-is-the-docker-compose-">WHAT IS THE DOCKER-COMPOSE ?</h2>
+
+<ul>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Docker Compose</code> is a tool for <strong>defining and running multi-container Docker applications</strong>. With Docker Compose, you use a YAML file to configure your application’s services. Then, with a single command <code class="language-plaintext highlighter-rouge">docker-compose up</code>, you create and start all the services from your configuration.</p>
+  </li>
+  <li>
+    <p>Using Compose is basically a three-step process:</p>
+
+    <ul>
+      <li>
+        <p>Define your app’s environment with a <code class="language-plaintext highlighter-rouge">Dockerfile</code> so it can be reproduced anywhere.</p>
+      </li>
+      <li>
+        <p>Define the services that make up your app in <code class="language-plaintext highlighter-rouge">docker-compose.yml</code> so they can be run together in an isolated environment.</p>
+      </li>
+      <li>
+        <p>Run <code class="language-plaintext highlighter-rouge">docker-compose</code> up and the Docker compose command starts and runs your entire app. You can alternatively run <code class="language-plaintext highlighter-rouge">docker-compose up</code> using the docker-compose binary.</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>An docker-compose.yml is like the example below. In this example we can see that we have 2 services, one is the <strong>mysql_db_container</strong> which is using image <code class="language-plaintext highlighter-rouge">mysql:latest</code> from the <strong>docker hub</strong>. The second one is the <code class="language-plaintext highlighter-rouge">adminer_container</code> which is using the image <code class="language-plaintext highlighter-rouge">adminer:latest</code> from the <strong>docker hub</strong> also</p>
+
+    <div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      <span class="na">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">3.7'</span>
+      <span class="na">services</span><span class="pi">:</span>
+          <span class="na">mysql_db_container</span><span class="pi">:</span>
+              <span class="na">image</span><span class="pi">:</span> <span class="s">mysql:latest</span>
+              <span class="na">command</span><span class="pi">:</span> <span class="s">--default-authentication-plugin=mysql_native_password</span>
+              <span class="na">environment</span><span class="pi">:</span>
+              <span class="na">MYSQL_ROOT_PASSWORD</span><span class="pi">:</span> <span class="s">password</span>
+              <span class="na">MYSQL_DATABASE</span><span class="pi">:</span> <span class="s">todo</span>
+              <span class="na">ports</span><span class="pi">:</span>
+              <span class="pi">-</span> <span class="s">3306:3306</span>
+              <span class="na">volumes</span><span class="pi">:</span>
+              <span class="pi">-</span> <span class="s">./mysql:/var/lib/mysql:rw</span>
+          <span class="na">adminer_container</span><span class="pi">:</span>
+              <span class="na">image</span><span class="pi">:</span> <span class="s">adminer:latest</span>
+              <span class="na">environment</span><span class="pi">:</span>
+              <span class="na">ADMINER_DEFAULT_SERVER</span><span class="pi">:</span> <span class="s">mysql_db_container</span>
+              <span class="na">ports</span><span class="pi">:</span>
+              <span class="pi">-</span> <span class="s">9090:8080</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><a href="https://docs.docker.com/compose/">More information</a></p>
+  </li>
+</ul>
+
+<h2 id="install-docker">INSTALL DOCKER</h2>
+
+<ul>
+  <li>Go to link below to download and install as default:</li>
+  <li><a href="https://docs.docker.com/docker-for-windows/install/">Download Link</a></li>
+</ul>
 
     </div><a class="u-url" href="/docker-posts/2021-06-26-docker-general.html" hidden></a>
   </article>
