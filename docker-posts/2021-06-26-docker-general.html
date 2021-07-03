@@ -148,22 +148,22 @@
   <li>
     <p>Example of a docker image to run a spring boot project</p>
 
-    <div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      <span class="c1">#get docker image with openjdk 8 installed from docker hub</span>
-      <span class="s">FROM openjdk:8-jdk-alpine</span>
+    <div class="language-Dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      <span class="c">#get docker image with openjdk 8 installed from docker hub</span>
+      FROM openjdk:8-jdk-alpine
 
-      <span class="s">#expose port 8080 to real machine</span>
-      <span class="s">EXPOSE </span><span class="m">8080</span>
+      <span class="c">#expose port 8080 to real machine</span>
+      EXPOSE 8080
 
-      <span class="c1">#some information for docker image</span>
-      <span class="s">LABEL owner="duc"</span>
-      <span class="s">LABEL maintainer="minhducnguyen189@gmail.com"</span>
-      <span class="s">LABEL description="test image my project"</span>
+      <span class="c">#some information for docker image</span>
+      LABEL owner="duc"
+      LABEL maintainer="minhducnguyen189@gmail.com"
+      LABEL description="test image my project"
 
-      <span class="s">#copy the jar file in target folder into docker image</span>
-      <span class="s">COPY target/my-project-1.0.0-SNAPSHOT.jar my-project-1.0.0-SNAPSHOT.jar</span>
+      #copy the jar file in target folder into docker image
+      COPY target/my-project-1.0.0-SNAPSHOT.jar my-project-1.0.0-SNAPSHOT.jar
 
-      <span class="s">#run command java to run jar package when docker image is run</span>
-      <span class="s">ENTRYPOINT ["java","-jar","/my-project-1.0.0-SNAPSHOT.jar"]</span>
+      <span class="c">#run command java to run jar package when docker image is run</span>
+      ENTRYPOINT ["java","-jar","/my-project-1.0.0-SNAPSHOT.jar"]
 
 </code></pre></div>    </div>
 
