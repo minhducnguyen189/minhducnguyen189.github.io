@@ -108,7 +108,9 @@ table td { border: 1px solid #e8e8e8; }
 
 .post-list { margin-left: 0; margin-top: 15px; list-style: none; display: flex; border-radius: 20px; }
 
-.post-meta { font-size: 17px; color: #ffffff; }
+.post-meta { font-size: 30px; color: #2a7ae2; }
+
+.post-meta-span { color: #ffffff; }
 
 .post-link { display: block; padding: 10px; padding-left: 20px; padding-right: 20px; border: 2px solid #16a085; border-radius: 20px; background-color: #16a085; width: 100%; font-size: 22.5px; }
 
@@ -139,6 +141,16 @@ table td { border: 1px solid #e8e8e8; }
 .post-link-python:hover .post-meta { color: black; }
 
 .post-link-python:hover > h3 { color: black; }
+
+.post-link-database { display: block; padding: 10px; padding-left: 20px; padding-right: 20px; border: 2px solid #e74c3c; border-radius: 20px; background-color: #e74c3c; width: 100%; font-size: 22.5px; }
+
+.post-link-database h3 { color: #ffffff; }
+
+.post-link-database:hover { text-decoration: none; background-color: #b2bec3; border: 2px solid #b2bec3; }
+
+.post-link-database:hover .post-meta { color: black; }
+
+.post-link-database:hover > h3 { color: black; }
 
 /** Posts */
 .post { margin-top: 40px; margin-bottom: 80px; }
