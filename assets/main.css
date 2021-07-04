@@ -175,6 +175,14 @@ table td { border: 1px solid #e8e8e8; }
 
 @media screen and (max-width: 800px) { .post-content h4 { font-size: 20.25px; } }
 
+#search-container { margin-right: 75px; border-radius: 5px; background-color: #fdfdfd; }
+
+#search-container #search-input { width: 310px; height: 40px; border-radius: 5px; }
+
+#search-container #results-container { list-style-type: none; margin-left: 0px; width: 310px; z-index: 20; position: absolute; border-radius: 5px; background-color: #fdfdfd; }
+
+#search-container #results-container li { width: 100%; }
+
 /** Syntax highlighting styles */
 .highlight { background: #fff; }
 

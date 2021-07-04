@@ -1,0 +1,186 @@
+[
+  
+    {
+
+      "title"    : "@ConfigurationProperties to create Spring Bean",
+      "url"      : "/jekyll/updatel/2021/07/01/java-springboot-configuration-properties.html",
+      "category" : "jekyll, updatel",
+      "tags"     : "",
+      "date"     : "2021-07-01 00:00:00 +0700",
+      "discription" : ""
+
+    }
+    ,
+  
+    {
+
+      "title"    : "Generate Swagger UI from Controller in Spring Boot",
+      "url"      : "/jekyll/updatel/2021/06/20/java-springboot-get-swagger-ui-from-controller.html",
+      "category" : "jekyll, updatel",
+      "tags"     : "",
+      "date"     : "2021-06-20 00:00:00 +0700",
+      "discription" : ""
+
+    }
+    ,
+  
+    {
+
+      "title"    : "Connect to WebService(SOAP) by Spring Cloud Feign",
+      "url"      : "/jekyll/updatel/2021/06/17/java-springboot-connect-SOAP-with-FeignClient.html",
+      "category" : "jekyll, updatel",
+      "tags"     : "",
+      "date"     : "2021-06-17 00:00:00 +0700",
+      "discription" : ""
+
+    }
+    ,
+  
+    {
+
+      "title"    : "Spring boot with Multiple Datasources",
+      "url"      : "/jekyll/updatel/2021/06/06/java-springboot-multi-datasource.html",
+      "category" : "jekyll, updatel",
+      "tags"     : "",
+      "date"     : "2021-06-06 00:00:00 +0700",
+      "discription" : ""
+
+    }
+    ,
+  
+    {
+
+      "title"    : "Spring Boot And Basic Concepts",
+      "url"      : "/jekyll/update/2021/03/12/java-springboot-basic-concepts.html",
+      "category" : "jekyll, update",
+      "tags"     : "",
+      "date"     : "2021-03-12 00:00:00 +0700",
+      "discription" : ""
+
+    }
+    ,
+  
+    {
+
+      "title"    : "SOLID Principles",
+      "url"      : "/jekyll/update/2021/03/11/solid-principles.html",
+      "category" : "jekyll, update",
+      "tags"     : "",
+      "date"     : "2021-03-11 00:00:00 +0700",
+      "discription" : ""
+
+    }
+    ,
+  
+    {
+
+      "title"    : "Spring Framework And Basic Concepts",
+      "url"      : "/jekyll/update/2021/03/09/java-spring-basic-concepts.html",
+      "category" : "jekyll, update",
+      "tags"     : "",
+      "date"     : "2021-03-09 08:00:00 +0700",
+      "discription" : ""
+
+    }
+    ,
+  
+    {
+
+      "title"    : "Lambda Expression in Java 8",
+      "url"      : "/jekyll/update/2021/02/10/java-lambda-expression.html",
+      "category" : "jekyll, update",
+      "tags"     : "",
+      "date"     : "2021-02-10 10:15:47 +0700",
+      "discription" : ""
+
+    }
+    ,
+  
+    {
+
+      "title"    : "General Knowledges About Java Part 2",
+      "url"      : "/jekyll/update/2021/02/08/java-general-part2.html",
+      "category" : "jekyll, update",
+      "tags"     : "",
+      "date"     : "2021-02-08 10:15:47 +0700",
+      "discription" : ""
+
+    }
+    ,
+  
+    {
+
+      "title"    : "General Knowledges About Java Part 1",
+      "url"      : "/jekyll/update/2021/02/01/java-general-part1.html",
+      "category" : "jekyll, update",
+      "tags"     : "",
+      "date"     : "2021-02-01 20:15:47 +0700",
+      "discription" : ""
+
+    }
+    
+   ,
+  
+  {
+
+    "title"    : "General Knowledges About Docker",
+    "url"      : "/docker-posts/2021-06-26-docker-general.html",
+    "category" : "jekyll, update",
+    "tags"     : "",
+    "date"     : "2021-06-26 20:15:47 +0700",
+    "discription" : ""
+
+  } 
+  ,
+  
+  {
+
+    "title"    : "Docker With Spring Boot Project",
+    "url"      : "/docker-posts/2021-07-04-docker-with-springboot.html",
+    "category" : "jekyll, update",
+    "tags"     : "",
+    "date"     : "2021-07-04 08:15:47 +0700",
+    "discription" : ""
+
+  } 
+  
+   ,
+  
+  {
+
+    "title"    : "Python Basic",
+    "url"      : "/python-posts/2021-02-19-python-basic.html",
+    "category" : "jekyll, update",
+    "tags"     : "",
+    "date"     : "2021-02-19 12:00:00 +0700",
+    "discription" : ""
+
+  } 
+  
+   ,
+  
+  {
+
+    "title"    : "General Knowledges about Database",
+    "url"      : "/database-posts/2021-07-04-database-general.html",
+    "category" : "jekyll, updatel",
+    "tags"     : "",
+    "date"     : "2021-07-04 00:00:00 +0700",
+    "discription" : ""
+
+  } 
+  ,
+  
+  {
+
+    "title"    : "Basic SQL Queries That You Should Know",
+    "url"      : "/database-posts/2021-07-04-database-basic-sql-queries.html",
+    "category" : "jekyll, updatel",
+    "tags"     : "",
+    "date"     : "2021-07-04 12:00:00 +0700",
+    "discription" : ""
+
+  } 
+  
+  
+]
