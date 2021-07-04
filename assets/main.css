@@ -2,7 +2,7 @@
 body, h1, h2, h3, h4, h5, h6, p, blockquote, pre, hr, dl, dd, ol, ul, figure { margin: 0; padding: 0; }
 
 /** Basic styling */
-body { font: 400 16px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"; color: #111; background-color: #fdfdfd; -webkit-text-size-adjust: 100%; -webkit-font-feature-settings: "kern" 1; -moz-font-feature-settings: "kern" 1; -o-font-feature-settings: "kern" 1; font-feature-settings: "kern" 1; font-kerning: normal; display: flex; min-height: 100vh; flex-direction: column; }
+body { font: 400 18px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"; color: #111; background-color: #fdfdfd; -webkit-text-size-adjust: 100%; -webkit-font-feature-settings: "kern" 1; -moz-font-feature-settings: "kern" 1; -o-font-feature-settings: "kern" 1; font-feature-settings: "kern" 1; font-kerning: normal; display: flex; min-height: 100vh; flex-direction: column; }
 
 /** Set `margin-bottom` to maintain vertical rhythm */
 h1, h2, h3, h4, h5, h6, p, blockquote, pre, ul, ol, dl, figure, .highlight { margin-bottom: 15px; }
@@ -16,7 +16,7 @@ img { max-width: 100%; vertical-align: middle; }
 /** Figures */
 figure > img { display: block; }
 
-figcaption { font-size: 14px; }
+figcaption { font-size: 15.75px; }
 
 /** Lists */
 ul, ol { margin-left: 30px; }
@@ -38,12 +38,12 @@ a:hover { color: #111; text-decoration: underline; }
 .social-media-list a:hover .username { text-decoration: underline; }
 
 /** Blockquotes */
-blockquote { color: #2980b9; border-left: 4px solid #2980b9; padding-left: 15px; font-size: 18px; letter-spacing: -1px; font-style: italic; }
+blockquote { color: #2980b9; border-left: 4px solid #2980b9; padding-left: 15px; font-size: 20.25px; letter-spacing: -1px; font-style: italic; }
 
 blockquote > :last-child { margin-bottom: 0; }
 
 /** Code formatting */
-pre, code { font-size: 15px; border: 1px solid #e8e8e8; border-radius: 3px; background-color: #eef; }
+pre, code { font-size: 16.875px; border: 1px solid #e8e8e8; border-radius: 3px; background-color: #eef; }
 
 code { padding: 1px 5px; }
 
@@ -76,18 +76,18 @@ table th { background-color: #f0f0f0; border: 1px solid #dedede; border-bottom-c
 table td { border: 1px solid #e8e8e8; }
 
 /** Site header */
-.site-title { font-size: 26px; font-weight: 300; line-height: 54px; letter-spacing: -1px; margin-bottom: 0; float: left; }
+.site-title { font-size: 29.25px; font-weight: 300; line-height: 60.75px; letter-spacing: -1px; margin-bottom: 0; float: left; }
 
 .site-title, .site-title:visited { color: #dfe6e9; }
 
 /** Site footer */
 .site-footer { border-top: 1px solid #e8e8e8; padding: 30px 0; margin-top: 200px; }
 
-.footer-heading { font-size: 18px; margin-bottom: 15px; }
+.footer-heading { font-size: 20.25px; margin-bottom: 15px; }
 
 .contact-list, .social-media-list { list-style: none; margin-left: 0; }
 
-.footer-col-wrapper { font-size: 15px; color: #828282; margin-left: -15px; }
+.footer-col-wrapper { font-size: 16.875px; color: #828282; margin-left: -15px; }
 
 .footer-col { float: left; margin-bottom: 15px; padding-left: 15px; }
 
@@ -102,15 +102,15 @@ table td { border: 1px solid #e8e8e8; }
 @media screen and (max-width: 600px) { .footer-col { float: none; width: -webkit-calc(100% - (30px / 2)); width: calc(100% - (30px / 2)); } }
 
 /** Page content */
-.page-heading { font-size: 32px; }
+.page-heading { font-size: 36px; }
 
-.post-list-heading { margin-top: 20px; font-size: 28px; }
+.post-list-heading { margin-top: 20px; font-size: 31.5px; }
 
 .post-list { margin-left: 0; margin-top: 15px; list-style: none; display: flex; border-radius: 20px; }
 
 .post-meta { font-size: 17px; color: #ffffff; }
 
-.post-link { display: block; padding: 10px; padding-left: 20px; padding-right: 20px; border: 2px solid #16a085; border-radius: 20px; background-color: #16a085; width: 100%; font-size: 20px; }
+.post-link { display: block; padding: 10px; padding-left: 20px; padding-right: 20px; border: 2px solid #16a085; border-radius: 20px; background-color: #16a085; width: 100%; font-size: 22.5px; }
 
 .post-link h3 { color: #ffffff; }
 
@@ -120,7 +120,7 @@ table td { border: 1px solid #e8e8e8; }
 
 .post-link:hover > h3 { color: black; }
 
-.post-link-docker { display: block; padding: 10px; padding-left: 20px; padding-right: 20px; border: 2px solid #3498db; border-radius: 20px; background-color: #3498db; width: 100%; font-size: 20px; }
+.post-link-docker { display: block; padding: 10px; padding-left: 20px; padding-right: 20px; border: 2px solid #3498db; border-radius: 20px; background-color: #3498db; width: 100%; font-size: 22.5px; }
 
 .post-link-docker h3 { color: #ffffff; }
 
@@ -130,7 +130,7 @@ table td { border: 1px solid #e8e8e8; }
 
 .post-link-docker:hover > h3 { color: black; }
 
-.post-link-python { display: block; padding: 10px; padding-left: 20px; padding-right: 20px; border: 2px solid #f39c12; border-radius: 20px; background-color: #f39c12; width: 100%; font-size: 20px; }
+.post-link-python { display: block; padding: 10px; padding-left: 20px; padding-right: 20px; border: 2px solid #f39c12; border-radius: 20px; background-color: #f39c12; width: 100%; font-size: 22.5px; }
 
 .post-link-python h3 { color: #ffffff; }
 
@@ -145,23 +145,23 @@ table td { border: 1px solid #e8e8e8; }
 
 .post-header { margin-bottom: 30px; }
 
-.post-title { font-size: 42px; letter-spacing: -1px; line-height: 1; color: #159957; }
+.post-title { font-size: 47.25px; letter-spacing: -1px; line-height: 1; color: #159957; }
 
-@media screen and (max-width: 800px) { .post-title { font-size: 36px; } }
+@media screen and (max-width: 800px) { .post-title { font-size: 40.5px; } }
 
 .post-content { margin-bottom: 30px; }
 
-.post-content h2 { font-size: 32px; color: #159957; }
+.post-content h2 { font-size: 36px; color: #159957; }
 
-@media screen and (max-width: 800px) { .post-content h2 { font-size: 28px; } }
+@media screen and (max-width: 800px) { .post-content h2 { font-size: 31.5px; } }
 
-.post-content h3 { font-size: 26px; }
+.post-content h3 { font-size: 29.25px; }
 
-@media screen and (max-width: 800px) { .post-content h3 { font-size: 22px; } }
+@media screen and (max-width: 800px) { .post-content h3 { font-size: 24.75px; } }
 
-.post-content h4 { font-size: 20px; }
+.post-content h4 { font-size: 22.5px; }
 
-@media screen and (max-width: 800px) { .post-content h4 { font-size: 18px; } }
+@media screen and (max-width: 800px) { .post-content h4 { font-size: 20.25px; } }
 
 /** Syntax highlighting styles */
 .highlight { background: #fff; }
