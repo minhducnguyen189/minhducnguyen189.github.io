@@ -2,6 +2,18 @@
   
     {
 
+      "title"    : "Using Eureka And Zuul In Spring Boot Microservices",
+      "url"      : "/jekyll/updatel/2021/07/01/java-springboot-eureka-zuul.html",
+      "category" : "jekyll, updatel",
+      "tags"     : "",
+      "date"     : "2021-07-01 00:00:00 +0700",
+      "discription" : ""
+
+    }
+    ,
+  
+    {
+
       "title"    : "@ConfigurationProperties to create Spring Bean",
       "url"      : "/jekyll/updatel/2021/07/01/java-springboot-configuration-properties.html",
       "category" : "jekyll, updatel",
