@@ -20,8 +20,8 @@
 <meta name="generator" content="Jekyll v4.2.0" />
 <meta property="og:title" content="General Knowledges about Database" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="In this topic we will learn about basic concepts about database. I hope that after reading this post you can answer questions like: What is the database?, what are differences between relational (SQL) and non-relational (NoSQL) database? advantages and disavantages of relational and non-relational database and so on." />
-<meta property="og:description" content="In this topic we will learn about basic concepts about database. I hope that after reading this post you can answer questions like: What is the database?, what are differences between relational (SQL) and non-relational (NoSQL) database? advantages and disavantages of relational and non-relational database and so on." />
+<meta name="description" content="In this topic we will learn about basic concepts about database. I hope that after reading this post you can answer questions like: What is the database?, what are differences between relational (SQL) and non-relational (NoSQL) database? advantages and disavantages of relational and non-relational database." />
+<meta property="og:description" content="In this topic we will learn about basic concepts about database. I hope that after reading this post you can answer questions like: What is the database?, what are differences between relational (SQL) and non-relational (NoSQL) database? advantages and disavantages of relational and non-relational database." />
 <link rel="canonical" href="/database-posts/2021-07-04-database-general.html" />
 <meta property="og:url" content="/database-posts/2021-07-04-database-general.html" />
 <meta property="og:site_name" content="StepByStep" />
@@ -30,7 +30,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="General Knowledges about Database" />
 <script type="application/ld+json">
-{"@type":"BlogPosting","headline":"General Knowledges about Database","dateModified":"2021-07-04T00:00:00+07:00","datePublished":"2021-07-04T00:00:00+07:00","mainEntityOfPage":{"@type":"WebPage","@id":"/database-posts/2021-07-04-database-general.html"},"url":"/database-posts/2021-07-04-database-general.html","description":"In this topic we will learn about basic concepts about database. I hope that after reading this post you can answer questions like: What is the database?, what are differences between relational (SQL) and non-relational (NoSQL) database? advantages and disavantages of relational and non-relational database and so on.","@context":"https://schema.org"}</script>
+{"@type":"BlogPosting","headline":"General Knowledges about Database","dateModified":"2021-07-04T00:00:00+07:00","datePublished":"2021-07-04T00:00:00+07:00","mainEntityOfPage":{"@type":"WebPage","@id":"/database-posts/2021-07-04-database-general.html"},"url":"/database-posts/2021-07-04-database-general.html","description":"In this topic we will learn about basic concepts about database. I hope that after reading this post you can answer questions like: What is the database?, what are differences between relational (SQL) and non-relational (NoSQL) database? advantages and disavantages of relational and non-relational database.","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="StepByStep" /></head><body>
   <div class="container-flush">
@@ -86,7 +86,7 @@
   
     <div class="post-content e-content" itemprop="articleBody">
       <blockquote>
-  <p>In this topic we will learn about basic concepts about database. I hope that after reading this post you can answer questions like: What is the database?, what are differences between relational (SQL) and non-relational (NoSQL) database? advantages and disavantages of relational and non-relational database and so on.</p>
+  <p>In this topic we will learn about basic concepts about database. I hope that after reading this post you can answer questions like: What is the database?, what are differences between relational (SQL) and non-relational (NoSQL) database? advantages and disavantages of relational and non-relational database.</p>
 </blockquote>
 
 <h2 id="what-is-the-data">WHAT IS THE DATA?</h2>
@@ -116,11 +116,24 @@
     <p>The <code class="language-plaintext highlighter-rouge">main purpose of the database</code> is to <strong>operate</strong> a large amount of information by <strong>storing, retrieving, and managing data</strong>.</p>
   </li>
   <li>
-    <p>Modern databases are managed by the <code class="language-plaintext highlighter-rouge">database management system</code> (DBMS).</p>
+    <p>Modern databases are managed by the <code class="language-plaintext highlighter-rouge">database management system</code> (DBMS). It is a program that allows you to create, update, and administer <code class="language-plaintext highlighter-rouge">a relational database</code>.</p>
   </li>
 </ul>
 
-<h2 id="what-are-the-relational-database">WHAT ARE THE RELATIONAL DATABASE?</h2>
+<h2 id="tables-rows-and-columns">TABLES: ROWS AND COLUMNS?</h2>
+
+<ul>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Tables</code> can have hundreds, thousands, sometimes even millions of <code class="language-plaintext highlighter-rouge">rows</code> of data. These rows are often called <strong>records</strong>.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Tables</code> can also have many <code class="language-plaintext highlighter-rouge">columns</code> of data. <code class="language-plaintext highlighter-rouge">Columns</code> are labeled with a descriptive name (customerName, city for example) and have a specific <code class="language-plaintext highlighter-rouge">data type</code> (Number, String, …).</p>
+  </li>
+</ul>
+
+<p><a href="/assets/images/database/table-of-database.JPG"><img src="/assets/images/database/table-of-database.JPG" alt="A sample table of database" title="A sample table of database" /></a></p>
+
+<h2 id="what-is-the-relational-database">WHAT IS THE RELATIONAL DATABASE?</h2>
 
 <ul>
   <li>
@@ -134,9 +147,53 @@
   </li>
 </ul>
 
-<p><a href="/assets/images/database/table-of-database.JPG"><img src="/assets/images/database/table-of-database.JPG" alt="A sample table of database" title="A sample table of database" /></a></p>
-
 <p><a href="/assets/images/database/relationship-of-tables-in-database.JPG"><img src="/assets/images/database/relationship-of-tables-in-database.JPG" alt="A sample relationship of tables" title="A sample relationship of tables" /></a></p>
+
+<h2 id="what-is-the-non-relational-database">WHAT IS THE NON-RELATIONAL DATABASE?</h2>
+
+<ul>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">A non-relational database</code> is a database that <code class="language-plaintext highlighter-rouge">does not use the tabular schema of rows and columns</code> found in most traditional database systems. Instead, non-relational databases <strong>use a storage model</strong> that is optimized for the specific requirements of the type of data being stored. For example, data may be stored as simple key/value pairs, as JSON documents, or as a graph consisting of edges and vertices.</p>
+  </li>
+  <li>
+    <p><a href="https://docs.microsoft.com/en-us/azure/architecture/data-guide/big-data/non-relational-data">More information</a></p>
+
+    <p><a href="https://docs.microsoft.com/en-us/azure/architecture/data-guide/big-data/images/document.png"><img src="https://docs.microsoft.com/en-us/azure/architecture/data-guide/big-data/images/document.png" alt="non-relational database data" title="non-relational database data" /></a></p>
+  </li>
+</ul>
+
+<h2 id="advantages-and-disavantages-of-relational-and-non-relational-database">ADVANTAGES AND DISAVANTAGES OF RELATIONAL AND NON-RELATIONAL DATABASE</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>NoSQL Databases</th>
+      <th>Traditional SQL Databases</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Works with variable data</td>
+      <td>Requires data to be in a structured format</td>
+    </tr>
+    <tr>
+      <td>Can handle large volumes of rapidly changing data</td>
+      <td>Can handle considerably large volumes of similar data</td>
+    </tr>
+    <tr>
+      <td>Horizontal Scalability – Can scale across systems and servers</td>
+      <td>Vertical Scalability - Can scale better as the allocated system resources are increased</td>
+    </tr>
+    <tr>
+      <td>Designed with low-cost hardware in mind</td>
+      <td>Designed with high-performance hardware in mind</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li><a href="https://www.journaldev.com/36476/what-is-nosql-database">More information</a></li>
+</ul>
 
     </div><a class="u-url" href="/database-posts/2021-07-04-database-general.html" hidden></a>
   </article>
