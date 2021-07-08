@@ -20,8 +20,8 @@
 <meta name="generator" content="Jekyll v4.2.0" />
 <meta property="og:title" content="Basic SQL Queries That You Should Know" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Hi there! Let’s explore some general knowleadges and briefly definitions in programming. I hope that this website can help people saving time in learning, also give some motivations for those who have choice the developer path." />
-<meta property="og:description" content="Hi there! Let’s explore some general knowleadges and briefly definitions in programming. I hope that this website can help people saving time in learning, also give some motivations for those who have choice the developer path." />
+<meta name="description" content="In this topic we will learn about basic SQL queries in relational database." />
+<meta property="og:description" content="In this topic we will learn about basic SQL queries in relational database." />
 <link rel="canonical" href="/database-posts/2021-07-04-database-basic-sql-queries.html" />
 <meta property="og:url" content="/database-posts/2021-07-04-database-basic-sql-queries.html" />
 <meta property="og:site_name" content="StepByStep" />
@@ -30,7 +30,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Basic SQL Queries That You Should Know" />
 <script type="application/ld+json">
-{"@type":"BlogPosting","headline":"Basic SQL Queries That You Should Know","dateModified":"2021-07-04T12:00:00+07:00","datePublished":"2021-07-04T12:00:00+07:00","url":"/database-posts/2021-07-04-database-basic-sql-queries.html","mainEntityOfPage":{"@type":"WebPage","@id":"/database-posts/2021-07-04-database-basic-sql-queries.html"},"description":"Hi there! Let’s explore some general knowleadges and briefly definitions in programming. I hope that this website can help people saving time in learning, also give some motivations for those who have choice the developer path.","@context":"https://schema.org"}</script>
+{"@type":"BlogPosting","headline":"Basic SQL Queries That You Should Know","dateModified":"2021-07-04T12:00:00+07:00","datePublished":"2021-07-04T12:00:00+07:00","mainEntityOfPage":{"@type":"WebPage","@id":"/database-posts/2021-07-04-database-basic-sql-queries.html"},"url":"/database-posts/2021-07-04-database-basic-sql-queries.html","description":"In this topic we will learn about basic SQL queries in relational database.","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="StepByStep" /></head><body>
   <div class="container-flush">
@@ -85,7 +85,238 @@
     </header>
   
     <div class="post-content e-content" itemprop="articleBody">
-      
+      <blockquote>
+  <p>In this topic we will learn about basic SQL queries in relational database.</p>
+</blockquote>
+
+<h2 id="what-is-the-sql">WHAT IS THE SQL?</h2>
+
+<ul>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">SQL</code> is <code class="language-plaintext highlighter-rouge">Structured Query Language</code>, which is a computer language for <strong>storing, manipulating and retrieving data</strong> stored in a <code class="language-plaintext highlighter-rouge">relational database</code>.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">SQL</code> is the standard language for Relational Database System. All the Relational Database Management Systems (RDMS) like MySQL, MS Access, Oracle, Sybase, Informix, Postgres and SQL Server use SQL as their standard database language.</p>
+  </li>
+  <li>
+    <p><a href="https://www.tutorialspoint.com/sql/sql-overview.htm">More Information</a></p>
+  </li>
+</ul>
+
+<h2 id="setup-environment">SETUP ENVIRONMENT</h2>
+
+<ul>
+  <li>
+    <p>In this example we will <code class="language-plaintext highlighter-rouge">MySQL</code> database, this database is very common and many people usually use it.</p>
+  </li>
+  <li>
+    <p>First you should download <code class="language-plaintext highlighter-rouge">MySQL Installer</code> on <a href="https://dev.mysql.com/downloads/mysql/">mysql page</a>. If you don’t know how to install MySQL by <code class="language-plaintext highlighter-rouge">MySQL Installer</code> you can view <a href="https://www.sqlshack.com/how-to-install-mysql-database-server-8-0-19-on-windows-10/">the instruction here</a>.</p>
+  </li>
+  <li>
+    <p>After the installation you should install <code class="language-plaintext highlighter-rouge">MySQL Workbench</code> on <a href="https://dev.mysql.com/downloads/workbench/">mysql page</a> or <code class="language-plaintext highlighter-rouge">DBeaver</code> following <a href="https://dbeaver.io/">DBeaver page</a>. These are database tools which will support you very much to interact with database.</p>
+  </li>
+  <li>
+    <p>So we need some sample data and you can find it <a href="https://www.mysqltutorial.org/mysql-sample-database.aspx">in this website</a> by click <code class="language-plaintext highlighter-rouge">Download MySQL Sample Data</code>.</p>
+  </li>
+  <li>
+    <p>Given a databases with some tables and relationships as the image belows:</p>
+  </li>
+</ul>
+
+<p><a href="/assets/images/database/mysql-sample-database-diagram.JPG"><img src="/assets/images/database/mysql-sample-database-diagram.JPG" alt="A sample relationship of tables" title="A sample relationship of tables" /></a></p>
+
+<h2 id="basic-sql-queries">BASIC SQL QUERIES</h2>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="k">SELECT</span> <span class="n">customerName</span><span class="p">,</span> <span class="n">phone</span> <span class="k">FROM</span> <span class="n">customers</span> <span class="k">LIMIT</span> <span class="mi">20</span>
+
+<span class="k">SELECT</span> <span class="n">customerName</span><span class="p">,</span> <span class="n">addressLine1</span><span class="p">,</span> <span class="n">postalCode</span><span class="p">,</span> <span class="n">postalCode</span> <span class="o">+</span> <span class="mi">100</span> <span class="k">AS</span> <span class="n">postalCodeEdited</span>
+<span class="k">FROM</span> <span class="n">customers</span> 
+<span class="k">LIMIT</span> <span class="mi">20</span>
+
+<span class="k">SELECT</span> <span class="o">*</span><span class="p">,</span> <span class="n">postalCode</span> <span class="o">+</span> <span class="mi">100</span> <span class="k">AS</span> <span class="s1">'postalCodeEdited'</span>
+<span class="k">FROM</span> <span class="n">customers</span> 
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">customerName</span>
+<span class="k">LIMIT</span> <span class="mi">30</span>
+
+<span class="k">SELECT</span> <span class="k">DISTINCT</span> <span class="n">country</span>
+<span class="k">FROM</span> <span class="n">customers</span> 
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">country</span>
+<span class="k">LIMIT</span> <span class="mi">30</span>
+
+<span class="k">SELECT</span> <span class="o">*</span>
+<span class="k">FROM</span> <span class="n">customers</span>
+<span class="k">WHERE</span> <span class="n">creditLimit</span> <span class="o">&gt;</span> <span class="mi">100000</span>
+
+<span class="k">SELECT</span> <span class="n">productName</span><span class="p">,</span> <span class="n">buyPrice</span><span class="p">,</span> <span class="n">buyPrice</span> <span class="o">*</span> <span class="mi">1</span><span class="p">.</span><span class="mi">1</span> <span class="k">AS</span> <span class="s1">'new_buyPrice'</span>
+<span class="k">FROM</span> <span class="n">products</span>
+
+<span class="k">SELECT</span> <span class="o">*</span>
+<span class="k">FROM</span> <span class="k">order</span> <span class="n">s</span>
+<span class="k">WHERE</span> <span class="n">orderDate</span> <span class="o">&gt;</span> <span class="s1">'2005-01-01'</span> 
+
+<span class="k">SELECT</span> <span class="o">*</span>
+<span class="k">FROM</span> <span class="n">orders</span>
+<span class="k">WHERE</span> <span class="n">orderDate</span> <span class="o">&gt;</span> <span class="s1">'2005-01-01'</span> <span class="k">AND</span> <span class="n">customerNumber</span> <span class="o">&gt;</span> <span class="mi">400</span>  <span class="k">AND</span> <span class="p">(</span><span class="n">orders</span><span class="p">.</span><span class="n">status</span> <span class="o">=</span> <span class="s1">'On Hold'</span> <span class="k">OR</span> <span class="n">orders</span><span class="p">.</span><span class="n">status</span> <span class="o">=</span> <span class="s1">'Disputed'</span><span class="p">)</span>
+
+<span class="k">SELECT</span> <span class="o">*</span>
+<span class="k">FROM</span> <span class="n">orders</span>
+<span class="k">WHERE</span> <span class="n">orders</span><span class="p">.</span><span class="n">status</span>  <span class="k">IN</span> <span class="p">(</span><span class="s1">'On Hold'</span><span class="p">,</span> <span class="s1">'Disputed'</span><span class="p">)</span>
+
+<span class="k">SELECT</span> <span class="o">*</span>
+<span class="k">FROM</span> <span class="n">orders</span>
+<span class="k">WHERE</span> <span class="n">customerNumber</span> <span class="k">BETWEEN</span> <span class="mi">200</span> <span class="k">AND</span> <span class="mi">400</span>
+
+<span class="k">SELECT</span> <span class="o">*</span>
+<span class="k">FROM</span> <span class="n">orders</span>
+<span class="k">WHERE</span> <span class="n">orderDate</span> <span class="k">BETWEEN</span> <span class="s1">'2005-01-01'</span> <span class="k">AND</span> <span class="s1">'2005-04-30'</span>
+
+<span class="k">SELECT</span> <span class="o">*</span>
+<span class="k">FROM</span> <span class="n">customers</span>
+<span class="k">WHERE</span> <span class="n">customerName</span> <span class="k">LIKE</span> <span class="s1">'Au%'</span>
+
+<span class="k">SELECT</span> <span class="o">*</span>
+<span class="k">FROM</span> <span class="n">customers</span>
+<span class="k">WHERE</span> <span class="n">contactLastName</span> <span class="k">LIKE</span> <span class="s1">'____y'</span>
+
+<span class="k">SELECT</span> <span class="o">*</span>
+<span class="k">FROM</span> <span class="n">customers</span>
+<span class="k">WHERE</span> <span class="n">contactLastName</span> <span class="k">NOT</span> <span class="k">LIKE</span> <span class="s1">'____y'</span>
+
+<span class="k">SELECT</span> <span class="o">*</span>
+<span class="k">FROM</span> <span class="n">customers</span>
+<span class="k">WHERE</span> <span class="n">customerName</span> <span class="n">REGEXP</span> <span class="s1">'^Au'</span>
+
+<span class="k">SELECT</span> <span class="o">*</span>
+<span class="k">FROM</span> <span class="n">customers</span>
+<span class="k">WHERE</span> <span class="n">customerName</span> <span class="n">REGEXP</span> <span class="s1">'Co$|^Au'</span>
+
+<span class="k">SELECT</span> <span class="o">*</span>
+<span class="k">FROM</span> <span class="n">customers</span>
+<span class="k">WHERE</span> <span class="n">customerName</span> <span class="n">REGEXP</span> <span class="s1">'[a-h]e'</span>
+
+<span class="k">SELECT</span> <span class="o">*</span>
+<span class="k">FROM</span> <span class="n">customers</span>
+<span class="k">WHERE</span> <span class="k">state</span> <span class="k">IS</span> <span class="k">NOT</span> <span class="k">NULL</span>
+
+<span class="k">SELECT</span> <span class="o">*</span>
+<span class="k">FROM</span> <span class="n">customers</span>
+<span class="k">WHERE</span> <span class="k">state</span> <span class="k">IS</span> <span class="k">NULL</span>
+
+<span class="k">SELECT</span> <span class="o">*</span>
+<span class="k">FROM</span> <span class="n">customers</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">contactFirstName</span> <span class="k">DESC</span>
+
+<span class="k">SELECT</span> <span class="n">city</span><span class="p">,</span> <span class="n">contactFirstName</span>
+<span class="k">FROM</span> <span class="n">customers</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">city</span> <span class="p">,</span> <span class="n">contactFirstName</span>
+
+<span class="c1">-- try to avoid this use</span>
+<span class="k">SELECT</span> <span class="n">city</span><span class="p">,</span> <span class="n">contactFirstName</span><span class="p">,</span> <span class="mi">10</span> <span class="k">AS</span> <span class="n">points</span>
+<span class="k">FROM</span> <span class="n">customers</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="mi">1</span> <span class="p">,</span> <span class="mi">2</span>
+
+<span class="k">SELECT</span> <span class="n">city</span><span class="p">,</span> <span class="n">contactFirstName</span>
+<span class="k">FROM</span> <span class="n">customers</span>
+<span class="k">WHERE</span> <span class="n">city</span> <span class="k">LIKE</span> <span class="s1">'a%'</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">city</span><span class="p">,</span> <span class="n">contactFirstName</span>
+
+<span class="c1">-- get 2 continuos records (record 5 and record 6), ignone 4 frist records </span>
+<span class="k">SELECT</span> <span class="o">*</span>
+<span class="k">FROM</span> <span class="n">customers</span>
+<span class="k">LIMIT</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span>
+
+
+<span class="k">SELECT</span> <span class="n">orders</span><span class="p">.</span><span class="n">customerNumber</span><span class="p">,</span> <span class="n">orders</span><span class="p">.</span><span class="n">orderNumber</span><span class="p">,</span> <span class="n">customers</span><span class="p">.</span><span class="n">customerNumber</span> <span class="k">AS</span> <span class="s1">'id_of_customer_table'</span>
+<span class="k">FROM</span> <span class="n">orders</span>
+<span class="k">JOIN</span> <span class="n">customers</span> 
+	<span class="k">ON</span> <span class="n">orders</span><span class="p">.</span><span class="n">customerNumber</span> <span class="o">=</span> <span class="n">customers</span><span class="p">.</span><span class="n">customerNumber</span>
+
+<span class="c1">-- column that contain in two table had to use "o.customerName"</span>
+<span class="k">SELECT</span> <span class="n">o</span><span class="p">.</span><span class="n">customerNumber</span><span class="p">,</span> <span class="n">o</span><span class="p">.</span><span class="n">orderNumber</span><span class="p">,</span> <span class="k">c</span><span class="p">.</span><span class="n">customerNumber</span> <span class="k">AS</span> <span class="s1">'id_of_customer_table'</span>
+<span class="k">FROM</span> <span class="n">orders</span> <span class="n">o</span>
+<span class="k">JOIN</span> <span class="n">customers</span> <span class="k">c</span>
+	<span class="k">ON</span> <span class="n">o</span><span class="p">.</span><span class="n">customerNumber</span> <span class="o">=</span> <span class="k">c</span><span class="p">.</span><span class="n">customerNumber</span>
+
+
+
+<span class="c1">-- join table from 2 different database</span>
+<span class="k">SELECT</span> <span class="o">*</span>
+<span class="k">FROM</span> <span class="n">customers</span> <span class="k">c</span>
+<span class="k">JOIN</span> <span class="n">secondclassicmodels</span><span class="p">.</span><span class="n">orders</span> <span class="n">o</span>
+<span class="k">ON</span> <span class="k">c</span><span class="p">.</span><span class="n">customerNumber</span> <span class="o">=</span> <span class="n">o</span><span class="p">.</span><span class="n">customerNumber</span>
+
+<span class="c1">-- join table from 2 different database</span>
+<span class="n">USE</span> <span class="n">classicmodels</span><span class="p">;</span>
+<span class="k">SELECT</span> <span class="o">*</span>
+<span class="k">FROM</span> <span class="n">secondclassicmodels</span><span class="p">.</span><span class="n">customers</span> <span class="k">c</span>
+<span class="k">JOIN</span> <span class="n">orders</span> <span class="n">o</span>
+<span class="k">ON</span> <span class="n">o</span><span class="p">.</span><span class="n">customerNumber</span> <span class="o">=</span> <span class="k">c</span><span class="p">.</span><span class="n">customerNumber</span>
+    
+<span class="k">SELECT</span> <span class="k">c</span><span class="p">.</span><span class="n">customerNumber</span><span class="p">,</span> <span class="n">phone</span><span class="p">,</span> <span class="n">amount</span><span class="p">,</span> <span class="n">p</span><span class="p">.</span><span class="n">customerNumber</span> <span class="k">AS</span> <span class="s1">'payment'</span>
+<span class="k">FROM</span> <span class="n">customers</span> <span class="k">c</span>
+<span class="k">JOIN</span> <span class="n">payments</span> <span class="n">p</span>
+<span class="k">ON</span> <span class="k">c</span><span class="p">.</span><span class="n">customerNumber</span> <span class="o">=</span> <span class="n">p</span><span class="p">.</span><span class="n">customerNumber</span>
+
+<span class="c1">-- Join multiple tables together</span>
+<span class="k">SELECT</span> <span class="n">customerName</span><span class="p">,</span> 
+		<span class="k">c</span><span class="p">.</span><span class="n">customerNumber</span><span class="p">,</span> 
+		<span class="n">o</span><span class="p">.</span><span class="n">customerNumber</span> <span class="k">AS</span> <span class="s1">'orders_customer_numb'</span><span class="p">,</span>
+		<span class="n">o</span><span class="p">.</span><span class="n">orderNumber</span> 
+		<span class="n">comments</span><span class="p">,</span> 
+		<span class="n">productCode</span><span class="p">,</span>
+		<span class="n">quantityOrdered</span>
+<span class="k">FROM</span> <span class="n">customers</span> <span class="k">c</span>
+<span class="k">JOIN</span> <span class="n">orders</span> <span class="n">o</span>
+	<span class="k">ON</span> <span class="k">c</span><span class="p">.</span><span class="n">customerNumber</span> <span class="o">=</span> <span class="n">o</span><span class="p">.</span><span class="n">customerNumber</span>
+<span class="k">JOIN</span> <span class="n">orderdetails</span> <span class="n">od</span>
+	<span class="k">ON</span> <span class="n">o</span><span class="p">.</span><span class="n">orderNumber</span> <span class="o">=</span> <span class="n">od</span><span class="p">.</span><span class="n">orderNumber</span>	
+
+<span class="k">SELECT</span> <span class="o">*</span> 
+<span class="k">FROM</span> <span class="n">orderdetails</span> <span class="n">ord</span>
+<span class="k">JOIN</span> <span class="n">products</span> <span class="n">prd</span>
+<span class="k">ON</span> <span class="n">prd</span><span class="p">.</span><span class="n">productCode</span> <span class="o">=</span> <span class="n">ord</span><span class="p">.</span><span class="n">productCode</span>
+<span class="k">JOIN</span> <span class="n">orders</span> <span class="n">o</span>
+<span class="k">ON</span> <span class="n">o</span><span class="p">.</span><span class="n">orderNumber</span> <span class="o">=</span> <span class="n">ord</span><span class="p">.</span><span class="n">orderNumber</span>
+
+<span class="c1">-- Implpicit Join Syntax</span>
+<span class="k">SELECT</span> <span class="o">*</span> 
+<span class="k">FROM</span> <span class="n">orderdetails</span> <span class="n">ord</span><span class="p">,</span> <span class="n">orders</span> <span class="n">o</span>
+<span class="k">WHERE</span> <span class="n">ord</span><span class="p">.</span><span class="n">orderNumber</span> <span class="o">=</span> <span class="n">o</span><span class="p">.</span><span class="n">orderNumber</span>
+
+<span class="k">OUTER</span> <span class="k">JOIN</span><span class="p">,</span> <span class="n">we</span> <span class="n">will</span> <span class="n">you</span> <span class="k">left</span> <span class="k">join</span> <span class="k">or</span> <span class="k">right</span> <span class="k">join</span>
+<span class="c1">-- for left join, all the customer from left table (customer) will be return whether the join condition is true or not</span>
+<span class="c1">-- for right join, all the order from right table (orders) will be return whether the join condition is true or not</span>
+
+<span class="k">SELECT</span>
+	<span class="k">c</span><span class="p">.</span><span class="n">customerNumber</span><span class="p">,</span>
+    <span class="k">c</span><span class="p">.</span><span class="n">customerName</span><span class="p">,</span>
+    <span class="n">o</span><span class="p">.</span><span class="n">orderNumber</span>
+<span class="k">FROM</span> <span class="n">customers</span> <span class="k">c</span>
+<span class="k">LEFT</span> <span class="k">JOIN</span> <span class="n">orders</span> <span class="n">o</span>
+	<span class="k">ON</span> <span class="k">c</span><span class="p">.</span><span class="n">customerNumber</span> <span class="o">=</span> <span class="n">o</span><span class="p">.</span><span class="n">customerNumber</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="k">c</span><span class="p">.</span><span class="n">customerNumber</span>
+
+
+<span class="c1">-- description, we will get all the customer whether contains order or not</span>
+<span class="c1">-- then we will get all the order whether contains orderdetails or not    </span>
+<span class="k">SELECT</span>
+	<span class="k">c</span><span class="p">.</span><span class="n">customerNumber</span><span class="p">,</span>
+    <span class="k">c</span><span class="p">.</span><span class="n">customerName</span><span class="p">,</span>
+    <span class="n">o</span><span class="p">.</span><span class="n">orderNumber</span><span class="p">,</span>
+    <span class="n">d</span><span class="p">.</span><span class="n">productCode</span>
+<span class="k">FROM</span> <span class="n">customers</span> <span class="k">c</span>
+<span class="k">LEFT</span> <span class="k">JOIN</span> <span class="n">orders</span> <span class="n">o</span>
+	<span class="k">ON</span> <span class="k">c</span><span class="p">.</span><span class="n">customerNumber</span> <span class="o">=</span> <span class="n">o</span><span class="p">.</span><span class="n">customerNumber</span>
+<span class="k">LEFT</span> <span class="k">JOIN</span> <span class="n">orderdetails</span> <span class="n">d</span>
+	<span class="k">ON</span> <span class="n">o</span><span class="p">.</span><span class="n">orderNumber</span> <span class="o">=</span> <span class="n">d</span><span class="p">.</span><span class="n">orderNumber</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="k">c</span><span class="p">.</span><span class="n">customerNumber</span>
+    
+    
+    
+
+</code></pre></div></div>
+
 
     </div><a class="u-url" href="/database-posts/2021-07-04-database-basic-sql-queries.html" hidden></a>
   </article>
