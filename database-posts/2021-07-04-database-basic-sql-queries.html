@@ -119,13 +119,18 @@
     <p>So we need some sample data and you can find it <a href="https://www.mysqltutorial.org/mysql-sample-database.aspx">in this website</a> by click <code class="language-plaintext highlighter-rouge">Download MySQL Sample Data</code>.</p>
   </li>
   <li>
-    <p>Given a databases with some tables and relationships as the image belows:</p>
+    <p>Then import/execute your downloaded <code class="language-plaintext highlighter-rouge">SQL Sample Data</code> by <code class="language-plaintext highlighter-rouge">MySQL Workbench</code> or <code class="language-plaintext highlighter-rouge">DBeaver</code></p>
+  </li>
+  <li>
+    <p>So this is the relatation ship between tables in your <code class="language-plaintext highlighter-rouge">SQL Sample Data</code></p>
   </li>
 </ul>
 
 <p><a href="/assets/images/database/mysql-sample-database-diagram.JPG"><img src="/assets/images/database/mysql-sample-database-diagram.JPG" alt="A sample relationship of tables" title="A sample relationship of tables" /></a></p>
 
 <h2 id="basic-sql-queries">BASIC SQL QUERIES</h2>
+
+<!-- //TODO -->
 
 <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 <span class="k">SELECT</span> <span class="n">customerName</span><span class="p">,</span> <span class="n">phone</span> <span class="k">FROM</span> <span class="n">customers</span> <span class="k">LIMIT</span> <span class="mi">20</span>
@@ -312,9 +317,6 @@
 	<span class="k">ON</span> <span class="n">o</span><span class="p">.</span><span class="n">orderNumber</span> <span class="o">=</span> <span class="n">d</span><span class="p">.</span><span class="n">orderNumber</span>
 <span class="k">ORDER</span> <span class="k">BY</span> <span class="k">c</span><span class="p">.</span><span class="n">customerNumber</span>
     
-    
-    
-
 </code></pre></div></div>
 
 
