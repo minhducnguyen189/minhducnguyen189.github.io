@@ -127,7 +127,7 @@
     <p>Save the <code class="language-plaintext highlighter-rouge">docker-compose.yml</code> and open terminal and use commands <code class="language-plaintext highlighter-rouge">docker-compose up -d</code> to start the container and <code class="language-plaintext highlighter-rouge">docker-compose down</code> to stop the container.</p>
   </li>
   <li>
-    <p>After your orcal DB has start you can use these conection information to connect to your DB</p>
+    <p>After your mysql DB has started you can use these conection information to connect to your DB</p>
   </li>
 </ul>
 
@@ -161,7 +161,7 @@
 <h2 id="oracle-with-docker">ORACLE WITH DOCKER</h2>
 
 <ul>
-  <li>We don’t have many oracle database image on <code class="language-plaintext highlighter-rouge">DockerHub</code> so we will create an docker image for ourself to use.</li>
+  <li>We don’t have many oracle database image on <code class="language-plaintext highlighter-rouge">DockerHub</code> so you can use my oracle image on my dockerhub by command <code class="language-plaintext highlighter-rouge">docker pull minhducnguyen189/oracle-xe-18-4:latest</code>. Or you will create an docker image for yourself to use.</li>
 </ul>
 
 <blockquote>
@@ -309,8 +309,141 @@
 
 <h2 id="postgresql-with-docker">POSTGRESQL WITH DOCKER</h2>
 
+<ul>
+  <li>Let’s create a folder with anyname you like as <code class="language-plaintext highlighter-rouge">postgres docker</code> and in this folder we will create a folder name <code class="language-plaintext highlighter-rouge">data</code> and a file <code class="language-plaintext highlighter-rouge">docker-compose.yml</code> and put scripts as belows:</li>
+</ul>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">3.1'</span>
+
+<span class="na">services</span><span class="pi">:</span>
+
+  <span class="na">db</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">postgres</span>
+    <span class="na">container_name</span><span class="pi">:</span> <span class="s">postgres_database</span>
+    <span class="na">restart</span><span class="pi">:</span> <span class="s">always</span>
+    <span class="na">environment</span><span class="pi">:</span>
+      <span class="na">POSTGRES_USER</span><span class="pi">:</span> <span class="s">user</span>
+      <span class="na">POSTGRES_PASSWORD</span><span class="pi">:</span> <span class="s">password</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">./data:/var/lib/postgresql/data</span>
+    <span class="na">ports</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">5432:5432</span>
+
+<span class="na">volumes</span><span class="pi">:</span>
+  <span class="na">data</span><span class="pi">:</span>
+
+</code></pre></div></div>
+<ul>
+  <li>After your <code class="language-plaintext highlighter-rouge">prosgres database</code> has started you can use these conection information to connect to your DB</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>Field Name</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>USERNAME</td>
+      <td>user</td>
+    </tr>
+    <tr>
+      <td>PASSWORD</td>
+      <td>defined in docker-compose file: <code class="language-plaintext highlighter-rouge">password</code></td>
+    </tr>
+    <tr>
+      <td>PORT</td>
+      <td>defined docker-compose file, default <code class="language-plaintext highlighter-rouge">27017</code></td>
+    </tr>
+    <tr>
+      <td>HOST</td>
+      <td>localhost</td>
+    </tr>
+  </tbody>
+</table>
+
 <h2 id="mongodb-with-docker">MONGODB WITH DOCKER</h2>
 
+<ul>
+  <li>Let’s create a folder with anyname you like as <code class="language-plaintext highlighter-rouge">mongo docker</code> and in this folder we will create a folder name <code class="language-plaintext highlighter-rouge">data</code> and a file <code class="language-plaintext highlighter-rouge">docker-compose.yml</code> and put scripts as belows:</li>
+</ul>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="na">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">3.7'</span>
+
+<span class="na">services</span><span class="pi">:</span>
+
+  <span class="na">mongo</span><span class="pi">:</span>
+    <span class="c1"># use mongo image from dockerhub</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">mongo</span>
+    <span class="c1"># restart if service is failed</span>
+    <span class="na">restart</span><span class="pi">:</span> <span class="s">always</span>
+    <span class="na">container_name</span><span class="pi">:</span> <span class="s">mongodb</span>
+    <span class="na">environment</span><span class="pi">:</span>
+      <span class="na">MONGO_INITDB_ROOT_USERNAME</span><span class="pi">:</span> <span class="s">root</span>
+      <span class="na">MONGO_INITDB_ROOT_PASSWORD</span><span class="pi">:</span> <span class="s">example</span>
+    <span class="na">ports</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">27017:27017</span>
+    <span class="c1"># sync data from container to real machine</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">./data:/data/db</span>
+  
+  <span class="na">mongo-express</span><span class="pi">:</span>
+    <span class="c1"># use image from dockerhub</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">mongo-express</span>
+    <span class="na">container_name</span><span class="pi">:</span> <span class="s">mongo-express</span>
+    <span class="na">environment</span><span class="pi">:</span>
+      <span class="na">ME_CONFIG_MONGODB_ADMINUSERNAME</span><span class="pi">:</span> <span class="s">root</span>
+      <span class="na">ME_CONFIG_MONGODB_ADMINPASSWORD</span><span class="pi">:</span> <span class="s">example</span>
+      <span class="na">ME_CONFIG_MONGODB_SERVER</span><span class="pi">:</span> <span class="s">mongodb</span>
+    <span class="c1"># restart if service is failed</span>
+    <span class="na">restart</span><span class="pi">:</span> <span class="s">always</span>
+    <span class="na">depends_on</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">mongo</span>
+    <span class="na">ports</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">8081:8081</span>
+
+<span class="na">volumes</span><span class="pi">:</span>
+  <span class="na">data</span><span class="pi">:</span>
+
+</code></pre></div></div>
+
+<ul>
+  <li>After your mongodb has started you can use these conection information to connect to your DB</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>Field Name</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>USERNAME</td>
+      <td>root</td>
+    </tr>
+    <tr>
+      <td>PASSWORD</td>
+      <td>defined in docker-compose file: <code class="language-plaintext highlighter-rouge">example</code></td>
+    </tr>
+    <tr>
+      <td>PORT</td>
+      <td>defined docker-compose file, default <code class="language-plaintext highlighter-rouge">27017</code></td>
+    </tr>
+    <tr>
+      <td>HOST</td>
+      <td>localhost</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>Note that: everytime you start you container, it will create an anonymous volume. So you should delete it after you shut down your container by command <code class="language-plaintext highlighter-rouge">docker volume rm &lt;volume name&gt; -f</code>.</p>
+</blockquote>
 
     </div><a class="u-url" href="/docker-posts/2021-07-08-docker-for-creating-database.html" hidden></a>
   </article>
