@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2021-07-13T21:16:38+07:00</updated><id>/feed.xml</id><title type="html">StepByStep</title><subtitle>Hi there! Let's explore some general knowleadges and briefly definitions  in programming. I hope that this website can help people saving time in learning, also give some motivations for those who have choice the developer path.</subtitle><entry><title type="html">@ConfigurationProperties to create Spring Bean</title><link href="/jekyll/updatel/2021/07/01/java-springboot-configuration-properties.html" rel="alternate" type="text/html" title="@ConfigurationProperties to create Spring Bean" /><published>2021-07-01T00:00:00+07:00</published><updated>2021-07-01T00:00:00+07:00</updated><id>/jekyll/updatel/2021/07/01/java-springboot-configuration-properties</id><content type="html" xml:base="/jekyll/updatel/2021/07/01/java-springboot-configuration-properties.html">&lt;blockquote&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2021-07-14T22:29:13+07:00</updated><id>/feed.xml</id><title type="html">StepByStep</title><subtitle>Hi there! Let's explore some general knowleadges and briefly definitions  in programming. I hope that this website can help people saving time in learning, also give some motivations for those who have choice the developer path.</subtitle><entry><title type="html">@ConfigurationProperties to create Spring Bean</title><link href="/jekyll/updatel/2021/07/01/java-springboot-configuration-properties.html" rel="alternate" type="text/html" title="@ConfigurationProperties to create Spring Bean" /><published>2021-07-01T00:00:00+07:00</published><updated>2021-07-01T00:00:00+07:00</updated><id>/jekyll/updatel/2021/07/01/java-springboot-configuration-properties</id><content type="html" xml:base="/jekyll/updatel/2021/07/01/java-springboot-configuration-properties.html">&lt;blockquote&gt;
   &lt;p&gt;Sometimes we need to load a lot of environment variables from &lt;strong&gt;application.properties&lt;/strong&gt; or &lt;strong&gt;application.yml&lt;/strong&gt; to our spring boot project for use and it is not good way if we use traditional way with @Value.&lt;/p&gt;
 &lt;/blockquote&gt;
 
@@ -335,7 +335,356 @@
   &lt;li&gt;
     &lt;p&gt;So that’s it. Goodbye and see you on another topic! Thanks!&lt;/p&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><author><name></name></author><category term="jekyll" /><category term="updatel" /><summary type="html">Sometimes we need to load a lot of environment variables from application.properties or application.yml to our spring boot project for use and it is not good way if we use traditional way with @Value.</summary></entry><entry><title type="html">Using Eureka And Zuul In Spring Boot Microservices</title><link href="/jekyll/updatel/2021/07/01/java-springboot-eureka-zuul.html" rel="alternate" type="text/html" title="Using Eureka And Zuul In Spring Boot Microservices" /><published>2021-07-01T00:00:00+07:00</published><updated>2021-07-01T00:00:00+07:00</updated><id>/jekyll/updatel/2021/07/01/java-springboot-eureka-zuul</id><content type="html" xml:base="/jekyll/updatel/2021/07/01/java-springboot-eureka-zuul.html"></content><author><name></name></author><category term="jekyll" /><category term="updatel" /><summary type="html"></summary></entry><entry><title type="html">Generate Swagger UI from Controller in Spring Boot</title><link href="/jekyll/updatel/2021/06/20/java-springboot-get-swagger-ui-from-controller.html" rel="alternate" type="text/html" title="Generate Swagger UI from Controller in Spring Boot" /><published>2021-06-20T00:00:00+07:00</published><updated>2021-06-20T00:00:00+07:00</updated><id>/jekyll/updatel/2021/06/20/java-springboot-get-swagger-ui-from-controller</id><content type="html" xml:base="/jekyll/updatel/2021/06/20/java-springboot-get-swagger-ui-from-controller.html">&lt;blockquote&gt;
+&lt;/ul&gt;</content><author><name></name></author><category term="jekyll" /><category term="updatel" /><summary type="html">Sometimes we need to load a lot of environment variables from application.properties or application.yml to our spring boot project for use and it is not good way if we use traditional way with @Value.</summary></entry><entry><title type="html">Using Eureka And Zuul In Spring Boot Microservices</title><link href="/jekyll/updatel/2021/07/01/java-springboot-eureka-zuul.html" rel="alternate" type="text/html" title="Using Eureka And Zuul In Spring Boot Microservices" /><published>2021-07-01T00:00:00+07:00</published><updated>2021-07-01T00:00:00+07:00</updated><id>/jekyll/updatel/2021/07/01/java-springboot-eureka-zuul</id><content type="html" xml:base="/jekyll/updatel/2021/07/01/java-springboot-eureka-zuul.html">&lt;blockquote&gt;
+  &lt;p&gt;In this post we will learn about &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;EUREKA&lt;/code&gt; AND &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ZUUL&lt;/code&gt; server and the way to apply these servers into our microservices system.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;what-is-the-eureka-server&quot;&gt;WHAT IS THE EUREKA SERVER?&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Eureka Server&lt;/code&gt; is an application that holds the information about &lt;strong&gt;all client-service applications&lt;/strong&gt;. Every Micro service will register into the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Eureka server&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Eureka server&lt;/code&gt; knows all the client applications running on each port and IP address. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Eureka Server&lt;/code&gt; is also known as &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Discovery Server&lt;/code&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;https://www.tutorialspoint.com/spring_boot/spring_boot_eureka_server.htm&quot;&gt;More information&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;what-is-the-zuul-api-gateway&quot;&gt;WHAT IS THE ZUUL API GATEWAY?&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Zuul Server&lt;/code&gt; is a gateway application that handles all the requests and does the dynamic routing of microservice applications. The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Zuul Server&lt;/code&gt; is also known as &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Edge Server&lt;/code&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;For Example, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/api/user&lt;/code&gt; is mapped to the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;user service&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/api/products&lt;/code&gt; is mapped to the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;product service&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Zuul Server&lt;/code&gt; dynamically routes the requests to the respective backend application.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;https://www.tutorialspoint.com/spring_boot/spring_boot_zuul_proxy_server_and_routing.htm&quot;&gt;More information&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;eureka-server-example&quot;&gt;EUREKA SERVER EXAMPLE&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;h3 id=&quot;create-an-eureka-server&quot;&gt;CREATE AN EUREKA SERVER&lt;/h3&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Let’s create an spring boot project and name it &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;server&lt;/code&gt;. Then we need to add some dependecies in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pom.xml&lt;/code&gt; as below&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;properties&amp;gt;&lt;/span&gt;
+   &lt;span class=&quot;nt&quot;&gt;&amp;lt;java.version&amp;gt;&lt;/span&gt;1.8&lt;span class=&quot;nt&quot;&gt;&amp;lt;/java.version&amp;gt;&lt;/span&gt;
+   &lt;span class=&quot;nt&quot;&gt;&amp;lt;spring.cloud.version&amp;gt;&lt;/span&gt;Hoxton.SR10&lt;span class=&quot;nt&quot;&gt;&amp;lt;/spring.cloud.version&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/properties&amp;gt;&lt;/span&gt;
+
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;dependencyManagement&amp;gt;&lt;/span&gt;
+   &lt;span class=&quot;nt&quot;&gt;&amp;lt;dependencies&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
+         &lt;span class=&quot;nt&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;org.springframework.cloud&lt;span class=&quot;nt&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+         &lt;span class=&quot;nt&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;spring-cloud-dependencies&lt;span class=&quot;nt&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+         &lt;span class=&quot;nt&quot;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;${spring-cloud.version}&lt;span class=&quot;nt&quot;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+         &lt;span class=&quot;nt&quot;&gt;&amp;lt;type&amp;gt;&lt;/span&gt;pom&lt;span class=&quot;nt&quot;&gt;&amp;lt;/type&amp;gt;&lt;/span&gt;
+         &lt;span class=&quot;nt&quot;&gt;&amp;lt;scope&amp;gt;&lt;/span&gt;import&lt;span class=&quot;nt&quot;&gt;&amp;lt;/scope&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
+   &lt;span class=&quot;nt&quot;&gt;&amp;lt;/dependencies&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/dependencyManagement&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;dependencies&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;org.springframework.cloud&lt;span class=&quot;nt&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;spring-cloud-starter-netflix-eureka-server&lt;span class=&quot;nt&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
+
+    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- ...other dependencies --&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/dependencies&amp;gt;&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Then add annotation &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;@EnableEurekaServer&lt;/code&gt; into the main class&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    &lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;com.eureka.server&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.boot.SpringApplication&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.boot.autoconfigure.SpringBootApplication&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.cloud.netflix.eureka.server.EnableEurekaServer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;nd&quot;&gt;@SpringBootApplication&lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@EnableEurekaServer&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt;  &lt;span class=&quot;nc&quot;&gt;ServerApplication&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;nc&quot;&gt;SpringApplication&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;ServerApplication&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;In &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;application.properties&lt;/code&gt; file, add some configuration as below&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-properties highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    
+    &lt;span class=&quot;c&quot;&gt;#application name
+&lt;/span&gt;    &lt;span class=&quot;py&quot;&gt;spring.application.name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;eureka-server&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;#server run at port 8761
+&lt;/span&gt;    &lt;span class=&quot;py&quot;&gt;server.port&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;8761&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;#self register is false
+&lt;/span&gt;    &lt;span class=&quot;py&quot;&gt;eureka.client.register-with-eureka&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;false&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;#self fetch registry is false
+&lt;/span&gt;    &lt;span class=&quot;py&quot;&gt;eureka.client.fetch-registry&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;false&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Then run the service and access to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;http://localhost:8761&lt;/code&gt; to check the eureka service has run successfully.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&quot;/assets/images/spring-boot-eureka-server.JPG&quot;&gt;&lt;img src=&quot;/assets/images/spring-boot-eureka-server.JPG&quot; alt=&quot;Eureka server&quot; title=&quot;Eureka server&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Then you can check your service log and you can see the url as in the image below which will be used for client to register to eureka server (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;http://localhost:8761/eureka/&lt;/code&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&quot;/assets/images/spring-boot-eureka-server-console.JPG&quot;&gt;&lt;img src=&quot;/assets/images/spring-boot-eureka-server-console.JPG&quot; alt=&quot;Eureka server Console&quot; title=&quot;Eureka server Console&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;h3 id=&quot;config-eureka-client-to-connect-eureka-server&quot;&gt;CONFIG EUREKA CLIENT TO CONNECT EUREKA SERVER&lt;/h3&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;So on your spring boot service client for example &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;bff service&lt;/code&gt;. Let’s add some dependencies as below into &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pom.xml&lt;/code&gt; file&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;properties&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;java.version&amp;gt;&lt;/span&gt;1.8&lt;span class=&quot;nt&quot;&gt;&amp;lt;/java.version&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;eureka.client.version&amp;gt;&lt;/span&gt;2.2.3.RELEASE&lt;span class=&quot;nt&quot;&gt;&amp;lt;/eureka.client.version&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/properties&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;dependencies&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;org.springframework.cloud&lt;span class=&quot;nt&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;spring-cloud-starter-netflix-eureka-client&lt;span class=&quot;nt&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;${eureka.client.version}&lt;span class=&quot;nt&quot;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
+
+    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- ...other dependencies --&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/dependencies&amp;gt;&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;ul&gt;
+  &lt;li&gt;then add annotation &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;@EnableDiscoveryClient&lt;/code&gt; into main class&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    &lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;com.application.bff&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.boot.SpringApplication&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.boot.autoconfigure.SpringBootApplication&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.cloud.client.discovery.EnableDiscoveryClient&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.cloud.openfeign.EnableFeignClients&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+
+    &lt;span class=&quot;nd&quot;&gt;@EnableFeignClients&lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@SpringBootApplication&lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@EnableDiscoveryClient&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;BffApplication&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;nc&quot;&gt;SpringApplication&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;BffApplication&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;ul&gt;
+  &lt;li&gt;Then add some configurations into &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;application.properties&lt;/code&gt; file to connect to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;eureka server&lt;/code&gt;. The property &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;“eureka.client.serviceUrl.defaultZone”&lt;/code&gt; will be &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;the url for register of eureka server&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-properties highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    &lt;span class=&quot;c&quot;&gt;#service run at port 9090
+&lt;/span&gt;    &lt;span class=&quot;py&quot;&gt;server.port&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;9090&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;#service name which will be showed on eureka server dashboard
+&lt;/span&gt;    &lt;span class=&quot;py&quot;&gt;spring.application.name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;application-bff-service&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;#register this service to eureka server by url
+&lt;/span&gt;    &lt;span class=&quot;py&quot;&gt;eureka.client.serviceUrl.defaultZone&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;http://localhost:8761/eureka/&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Then recheck the eureka server dashboard and you can see client registered successfully.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&quot;/assets/images/spring-boot-eureka-register-successfully.JPG&quot;&gt;&lt;img src=&quot;/assets/images/spring-boot-eureka-register-successfully.JPG&quot; alt=&quot;register eureka server successfully&quot; title=&quot;register eureka server successfully&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;create-and-use-zuul-api-gateway-with-eureka-server&quot;&gt;CREATE AND USE ZUUL API GATEWAY WITH EUREKA SERVER&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Note: We need to assign &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ZUUL API GATEWAY service&lt;/code&gt; to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;EUREKA server&lt;/code&gt; which will help us configure routing easily.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;So our microservice system will contains services as below:
+    &lt;ul&gt;
+      &lt;li&gt;EUREKA-SERVER&lt;/li&gt;
+      &lt;li&gt;BLOG-ADAPTER-SERVICE&lt;/li&gt;
+      &lt;li&gt;APPLICATION-BFF-SERVICE&lt;/li&gt;
+      &lt;li&gt;ZUUL-EDGE-SERVER&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Scenario: In this example we will have a request from postman to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ZUUL-EDGE-SERVER&lt;/code&gt;, then the request will be navigated to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;APPLICATION-BFF-SERVICE&lt;/code&gt; in phase 1. Then in phase 2, the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;APPLICATION-BFF-SERVICE&lt;/code&gt; will call a request to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ZUUL-EDGE-SERVER&lt;/code&gt; and the request will be navigated to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;BLOG-ADAPTER-SERVICE&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&quot;/assets/images/spring-boot-eureka-zuul-services-map.JPG&quot;&gt;&lt;img src=&quot;/assets/images/spring-boot-eureka-zuul-services-map.JPG&quot; alt=&quot;Eureka-Zuul services map&quot; title=&quot;Eureka-Zuul services map&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;h3 id=&quot;step-1-create-eureka-server&quot;&gt;STEP 1: CREATE EUREKA SERVER&lt;/h3&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Let’s create a spring boot project and name it as &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;zuul&lt;/code&gt;. Then we need to add dependency into &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pom.xml&lt;/code&gt; as below&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
+   &lt;span class=&quot;nt&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;org.springframework.cloud&lt;span class=&quot;nt&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+   &lt;span class=&quot;nt&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;spring-cloud-starter-netflix-zuul&lt;span class=&quot;nt&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;h3 id=&quot;step-2-register-services-into-eureka-server&quot;&gt;STEP 2: REGISTER SERVICES INTO EUREKA SERVER&lt;/h3&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;we need to register &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;BFF-SERVICE&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ADAPTER-SERVICE&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ZUUL-EDGE-SERVER&lt;/code&gt; to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;EUREKA-SERVER&lt;/code&gt;. You can read the section EUREKA above to know how to register a service to EUREKA server.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&quot;/assets/images/spring-boot-eureka-server-2.JPG&quot;&gt;&lt;img src=&quot;/assets/images/spring-boot-eureka-server-2.JPG&quot; alt=&quot;Eureka server dashboard&quot; title=&quot;Eureka server dashboard&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;h3 id=&quot;step-3-configue-zuul-server&quot;&gt;STEP 3: CONFIGUE ZUUL SERVER&lt;/h3&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;In &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ZUUL-EDGE-SERVICE&lt;/code&gt; we add annotation &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;@EnableZuulProxy&lt;/code&gt; into the main class&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    &lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;com.gateway.zuul&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.boot.SpringApplication&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.boot.autoconfigure.SpringBootApplication&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.cloud.client.discovery.EnableDiscoveryClient&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.cloud.netflix.zuul.EnableZuulProxy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;nd&quot;&gt;@SpringBootApplication&lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@EnableDiscoveryClient&lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@EnableZuulProxy&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ZuulApplication&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;nc&quot;&gt;SpringApplication&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;ZuulApplication&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Then we add some configuration into the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;application.properties&lt;/code&gt; as below&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-properties highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    &lt;span class=&quot;c&quot;&gt;#server zuul run at port
+&lt;/span&gt;    &lt;span class=&quot;py&quot;&gt;server.port&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;7070&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;#application name of server zuul
+&lt;/span&gt;    &lt;span class=&quot;py&quot;&gt;spring.application.name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;zuul-edge-server&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;#register zuul into eureka server by url
+&lt;/span&gt;    &lt;span class=&quot;py&quot;&gt;eureka.client.serviceUrl.defaultZone&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;http://localhost:8761/eureka/&lt;/span&gt;
+    &lt;span class=&quot;py&quot;&gt;management.endpoint.health.show-details&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;always&lt;/span&gt;
+
+    &lt;span class=&quot;c&quot;&gt;#enable discovery services by application name
+&lt;/span&gt;    &lt;span class=&quot;py&quot;&gt;spring.cloud.gateway.discovery.locator.enabled&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;true&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;#enable using lower case application names for configuration 
+&lt;/span&gt;    &lt;span class=&quot;py&quot;&gt;spring.cloud.gateway.discovery.locator.lowerCaseServiceId&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;true&lt;/span&gt;
+
+    &lt;span class=&quot;c&quot;&gt;#phase 1: requests to zuul server with path begun with /edge
+&lt;/span&gt;    &lt;span class=&quot;py&quot;&gt;zuul.routes.bff.path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;/edge/**&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;#phase 1: then the requests will be navigated to `application-bff-service`
+&lt;/span&gt;    &lt;span class=&quot;py&quot;&gt;zuul.routes.bff.serviceId&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;application-bff-service&lt;/span&gt;
+
+    &lt;span class=&quot;c&quot;&gt;#phase 2: requests to zuul server with path begun with /adapter/post/
+&lt;/span&gt;    &lt;span class=&quot;py&quot;&gt;zuul.routes.adapter.path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;/adapter/post/**&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;#phase 2: then the requests will be navigated to `blog-adapter-service`
+&lt;/span&gt;    &lt;span class=&quot;py&quot;&gt;zuul.routes.adapter.serviceId&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;blog-adapter-service&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;a href=&quot;/assets/images/spring-boot-eureka-server-client-names.JPG&quot;&gt;&lt;img src=&quot;/assets/images/spring-boot-eureka-server-client-names.JPG&quot; alt=&quot;Eureka client names&quot; title=&quot;Eureka client names&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Configuration explaination:
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;spring.cloud.gateway.discovery.locator.enabled=true&lt;/code&gt; (enable discovery other services which assigned to eureka server)&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;spring.cloud.gateway.discovery.locator.lowerCaseServiceId=true&lt;/code&gt; (use lower case for names of services that registered to eureka server)&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;zuul.routes.bff.path=/edge/**&lt;/code&gt; (we define the path for routing of zuul, when request come to zuul with path /edge/** then Zuul will know which service should be navigated to)&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;zuul.routes.bff.serviceId=application-bff-service&lt;/code&gt; (we define the service name (lower case on eureka server) that the request should be navigated to, it is application-bff-service).
+        &lt;ul&gt;
+          &lt;li&gt;Ex: If request is /edge/** then we will navigate the request to application-bff-service. So we will configure as below&lt;/li&gt;
+          &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;zuul.routes.{routeName}.serviceId=/edge/**&lt;/code&gt;  (we will set the routeName is &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;“bff”&lt;/code&gt;)  zuul.routes.bff serviceId=/edge/**&lt;/li&gt;
+          &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;zuul.routes.bff.serviceId=application-bff-service&lt;/code&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;we will do the same for defining the route to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;BLOG-ADAPTER-SERVICE&lt;/code&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;zuul.routes.adapter.path=/adapter/post/**&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;zuul.routes.adapter.serviceId=blog-adapter-service&lt;/code&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;h3 id=&quot;step-4-configure-bff-service&quot;&gt;STEP 4: CONFIGURE BFF SERVICE&lt;/h3&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;change configuration in BFF service, the configuration of BFF service will be as below.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-properties highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    &lt;span class=&quot;c&quot;&gt;#server port of BFF-SERVICE
+&lt;/span&gt;    &lt;span class=&quot;py&quot;&gt;server.port&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;9090&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;#application name of BFF-SERVICE
+&lt;/span&gt;    &lt;span class=&quot;py&quot;&gt;spring.application.name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;application-bff-service&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;#register BFF-SERVICE to EUREKA-SERVER by url
+&lt;/span&gt;    &lt;span class=&quot;py&quot;&gt;eureka.client.serviceUrl.defaultZone&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;http://localhost:8761/eureka/&lt;/span&gt;
+    &lt;span class=&quot;py&quot;&gt;management.endpoint.health.show-details&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;always&lt;/span&gt;
+
+    &lt;span class=&quot;c&quot;&gt;#Call to ADAPTER-SERVICE api through ZUUL-SERVER
+&lt;/span&gt;    &lt;span class=&quot;py&quot;&gt;adapter.service.url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;http://localhost:7070/adapter/post&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;ul&gt;
+  &lt;li&gt;As you can see, we from &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;APPLICATION-BFF-SERVICE&lt;/code&gt; we don’t call to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;BLOG-ADAPTER-SERVICE&lt;/code&gt; directly, we will call to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ZUUL-EDGE-SERVER&lt;/code&gt; with the base path &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;“/adapter/post”&lt;/code&gt; as we defined in Zuul server at step 2. Then the request will be navigated to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;BLOG-ADAPTER-SERVICE&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;h3 id=&quot;step-5-testing&quot;&gt;STEP 5: TESTING&lt;/h3&gt;
+  &lt;ul&gt;
+    &lt;li&gt;use postman to test. We will call a request to zuul with base path is &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/edge&lt;/code&gt; and received the result as below.&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;a href=&quot;/assets/images/spring-boot-eureka-zuul-testing-result.JPG&quot;&gt;&lt;img src=&quot;/assets/images/spring-boot-eureka-zuul-testing-result.JPG&quot; alt=&quot;Testing zuul eureka result&quot; title=&quot;Testing zuul eureka result&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Note: So using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;zuul gateway&lt;/code&gt; we will make our system become more secure because user people outside will not know &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;the real service addresses&lt;/code&gt;. They are &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;all hidden behind the zuul gateway service&lt;/code&gt;. Furthermore, when the &lt;strong&gt;ip&lt;/strong&gt;, &lt;strong&gt;url&lt;/strong&gt; or &lt;strong&gt;port&lt;/strong&gt; of any service has changed we &lt;strong&gt;don’t need to update any configuration&lt;/strong&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;eureka and zuul&lt;/code&gt; will help us &lt;strong&gt;detect and forward requests automatically&lt;/strong&gt;.&lt;/li&gt;
+&lt;/ul&gt;</content><author><name></name></author><category term="jekyll" /><category term="updatel" /><summary type="html">In this post we will learn about EUREKA AND ZUUL server and the way to apply these servers into our microservices system.</summary></entry><entry><title type="html">Generate Swagger UI from Controller in Spring Boot</title><link href="/jekyll/updatel/2021/06/20/java-springboot-get-swagger-ui-from-controller.html" rel="alternate" type="text/html" title="Generate Swagger UI from Controller in Spring Boot" /><published>2021-06-20T00:00:00+07:00</published><updated>2021-06-20T00:00:00+07:00</updated><id>/jekyll/updatel/2021/06/20/java-springboot-get-swagger-ui-from-controller</id><content type="html" xml:base="/jekyll/updatel/2021/06/20/java-springboot-get-swagger-ui-from-controller.html">&lt;blockquote&gt;
   &lt;p&gt;In this topic we will learn how to generate swagger ui from &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Controller&lt;/code&gt; class in our spring boot project.&lt;/p&gt;
 &lt;/blockquote&gt;
 
