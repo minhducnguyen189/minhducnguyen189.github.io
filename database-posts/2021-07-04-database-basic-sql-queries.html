@@ -3,6 +3,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono" rel="stylesheet"> 
 
   <!-- bootstrap library and JS, Jquery -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
@@ -130,26 +132,44 @@
 
 <h2 id="basic-sql-queries">BASIC SQL QUERIES</h2>
 
-<!-- //TODO -->
+<ul>
+  <li>To pratise and executes sample queries you can use <code class="language-plaintext highlighter-rouge">MySQL WorkBench</code> or <code class="language-plaintext highlighter-rouge">DBeaver</code> tools.</li>
+</ul>
+
+<blockquote>
+  <h3 id="query-with-custom-column-and-limit-records">QUERY WITH CUSTOM COLUMN AND LIMIT RECORDS</h3>
+</blockquote>
 
 <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="c1">-- Get customerName and phone from customer table with 20 records</span>
 <span class="k">SELECT</span> <span class="n">customerName</span><span class="p">,</span> <span class="n">phone</span> <span class="k">FROM</span> <span class="n">customers</span> <span class="k">LIMIT</span> <span class="mi">20</span>
 
+<span class="c1">-- Get some columns with additional columns is </span>
+<span class="c1">-- `postalCodeEdited` with values is added 100 and limit 20 records</span>
 <span class="k">SELECT</span> <span class="n">customerName</span><span class="p">,</span> <span class="n">addressLine1</span><span class="p">,</span> <span class="n">postalCode</span><span class="p">,</span> <span class="n">postalCode</span> <span class="o">+</span> <span class="mi">100</span> <span class="k">AS</span> <span class="n">postalCodeEdited</span>
 <span class="k">FROM</span> <span class="n">customers</span> 
 <span class="k">LIMIT</span> <span class="mi">20</span>
 
+<span class="c1">-- Get all columns with additional columns is </span>
+<span class="c1">-- `postalCodeEdited` with values is added 100 and limit 30 records</span>
 <span class="k">SELECT</span> <span class="o">*</span><span class="p">,</span> <span class="n">postalCode</span> <span class="o">+</span> <span class="mi">100</span> <span class="k">AS</span> <span class="s1">'postalCodeEdited'</span>
 <span class="k">FROM</span> <span class="n">customers</span> 
 <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">customerName</span>
 <span class="k">LIMIT</span> <span class="mi">30</span>
 
+<span class="c1">-- Get all columns which is not `country` column, limit 30 records</span>
 <span class="k">SELECT</span> <span class="k">DISTINCT</span> <span class="n">country</span>
 <span class="k">FROM</span> <span class="n">customers</span> 
 <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">country</span>
 <span class="k">LIMIT</span> <span class="mi">30</span>
 
-<span class="k">SELECT</span> <span class="o">*</span>
+</code></pre></div></div>
+
+<blockquote>
+  <h3 id="query-with-conditions">QUERY WITH CONDITIONS</h3>
+</blockquote>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="o">*</span>
 <span class="k">FROM</span> <span class="n">customers</span>
 <span class="k">WHERE</span> <span class="n">creditLimit</span> <span class="o">&gt;</span> <span class="mi">100000</span>
 
@@ -176,6 +196,13 @@
 <span class="k">FROM</span> <span class="n">orders</span>
 <span class="k">WHERE</span> <span class="n">orderDate</span> <span class="k">BETWEEN</span> <span class="s1">'2005-01-01'</span> <span class="k">AND</span> <span class="s1">'2005-04-30'</span>
 
+</code></pre></div></div>
+
+<blockquote>
+  <h3 id="query-with-like">QUERY WITH LIKE</h3>
+</blockquote>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 <span class="k">SELECT</span> <span class="o">*</span>
 <span class="k">FROM</span> <span class="n">customers</span>
 <span class="k">WHERE</span> <span class="n">customerName</span> <span class="k">LIKE</span> <span class="s1">'Au%'</span>
@@ -200,6 +227,9 @@
 <span class="k">FROM</span> <span class="n">customers</span>
 <span class="k">WHERE</span> <span class="n">customerName</span> <span class="n">REGEXP</span> <span class="s1">'[a-h]e'</span>
 
+</code></pre></div></div>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 <span class="k">SELECT</span> <span class="o">*</span>
 <span class="k">FROM</span> <span class="n">customers</span>
 <span class="k">WHERE</span> <span class="k">state</span> <span class="k">IS</span> <span class="k">NOT</span> <span class="k">NULL</span>

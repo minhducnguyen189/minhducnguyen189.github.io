@@ -2,6 +2,18 @@
   
     {
 
+      "title"    : "Java Springboot Feign Client",
+      "url"      : "/2021/07/15/java-springboot-feign-client.html",
+      "category" : "",
+      "tags"     : "",
+      "date"     : "2021-07-15 00:00:00 +0700",
+      "discription" : ""
+
+    }
+    ,
+  
+    {
+
       "title"    : "Using Eureka And Zuul In Spring Boot Microservices",
       "url"      : "/jekyll/updatel/2021/07/01/java-springboot-eureka-zuul.html",
       "category" : "jekyll, updatel",
