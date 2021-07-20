@@ -30,7 +30,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Basic SQL Queries That You Should Know" />
 <script type="application/ld+json">
-{"description":"In this topic we will learn about basic SQL queries in relational database.","@type":"BlogPosting","url":"/database-posts/2021-07-04-database-basic-sql-queries.html","headline":"Basic SQL Queries That You Should Know","dateModified":"2021-07-04T12:00:00+07:00","datePublished":"2021-07-04T12:00:00+07:00","mainEntityOfPage":{"@type":"WebPage","@id":"/database-posts/2021-07-04-database-basic-sql-queries.html"},"@context":"https://schema.org"}</script>
+{"datePublished":"2021-07-04T12:00:00+07:00","@type":"BlogPosting","dateModified":"2021-07-04T12:00:00+07:00","mainEntityOfPage":{"@type":"WebPage","@id":"/database-posts/2021-07-04-database-basic-sql-queries.html"},"url":"/database-posts/2021-07-04-database-basic-sql-queries.html","description":"In this topic we will learn about basic SQL queries in relational database.","headline":"Basic SQL Queries That You Should Know","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="StepByStep" /></head><body>
   <div class="container-flush">
@@ -161,19 +161,22 @@
 <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">country</span>
 <span class="k">LIMIT</span> <span class="mi">30</span>
 
+<span class="c1">-- Get columns productName, buyPrice and new_buyPrice with values = buyPrice * 1.1</span>
+<span class="k">SELECT</span> <span class="n">productName</span><span class="p">,</span> <span class="n">buyPrice</span><span class="p">,</span> <span class="n">buyPrice</span> <span class="o">*</span> <span class="mi">1</span><span class="p">.</span><span class="mi">1</span> <span class="k">AS</span> <span class="s1">'new_buyPrice'</span>
+<span class="k">FROM</span> <span class="n">products</span>
+
 </code></pre></div></div>
 
 <blockquote>
   <h3 id="query-with-conditions">QUERY WITH CONDITIONS</h3>
 </blockquote>
 
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="o">*</span>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">-- Get all customers with creditLimit &gt; 100000</span>
+<span class="k">SELECT</span> <span class="o">*</span>
 <span class="k">FROM</span> <span class="n">customers</span>
 <span class="k">WHERE</span> <span class="n">creditLimit</span> <span class="o">&gt;</span> <span class="mi">100000</span>
 
-<span class="k">SELECT</span> <span class="n">productName</span><span class="p">,</span> <span class="n">buyPrice</span><span class="p">,</span> <span class="n">buyPrice</span> <span class="o">*</span> <span class="mi">1</span><span class="p">.</span><span class="mi">1</span> <span class="k">AS</span> <span class="s1">'new_buyPrice'</span>
-<span class="k">FROM</span> <span class="n">products</span>
-
+<span class="c1">-- Get all order with orderDate &gt; '2005-01-01' </span>
 <span class="k">SELECT</span> <span class="o">*</span>
 <span class="k">FROM</span> <span class="k">order</span> <span class="n">s</span>
 <span class="k">WHERE</span> <span class="n">orderDate</span> <span class="o">&gt;</span> <span class="s1">'2005-01-01'</span> 
@@ -182,14 +185,17 @@
 <span class="k">FROM</span> <span class="n">orders</span>
 <span class="k">WHERE</span> <span class="n">orderDate</span> <span class="o">&gt;</span> <span class="s1">'2005-01-01'</span> <span class="k">AND</span> <span class="n">customerNumber</span> <span class="o">&gt;</span> <span class="mi">400</span>  <span class="k">AND</span> <span class="p">(</span><span class="n">orders</span><span class="p">.</span><span class="n">status</span> <span class="o">=</span> <span class="s1">'On Hold'</span> <span class="k">OR</span> <span class="n">orders</span><span class="p">.</span><span class="n">status</span> <span class="o">=</span> <span class="s1">'Disputed'</span><span class="p">)</span>
 
+<span class="c1">-- Get all orders with statuses in list: ['On Hold', 'Disputed']</span>
 <span class="k">SELECT</span> <span class="o">*</span>
 <span class="k">FROM</span> <span class="n">orders</span>
 <span class="k">WHERE</span> <span class="n">orders</span><span class="p">.</span><span class="n">status</span>  <span class="k">IN</span> <span class="p">(</span><span class="s1">'On Hold'</span><span class="p">,</span> <span class="s1">'Disputed'</span><span class="p">)</span>
 
+<span class="c1">-- Get all orders BETWEEN 200 AND 400</span>
 <span class="k">SELECT</span> <span class="o">*</span>
 <span class="k">FROM</span> <span class="n">orders</span>
 <span class="k">WHERE</span> <span class="n">customerNumber</span> <span class="k">BETWEEN</span> <span class="mi">200</span> <span class="k">AND</span> <span class="mi">400</span>
 
+<span class="c1">-- Get all orders BETWEEN '2005-01-01' AND '2005-04-30'</span>
 <span class="k">SELECT</span> <span class="o">*</span>
 <span class="k">FROM</span> <span class="n">orders</span>
 <span class="k">WHERE</span> <span class="n">orderDate</span> <span class="k">BETWEEN</span> <span class="s1">'2005-01-01'</span> <span class="k">AND</span> <span class="s1">'2005-04-30'</span>
@@ -201,45 +207,59 @@
 </blockquote>
 
 <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="c1">-- Get all customers with customerName begin with `Au...`</span>
 <span class="k">SELECT</span> <span class="o">*</span>
 <span class="k">FROM</span> <span class="n">customers</span>
 <span class="k">WHERE</span> <span class="n">customerName</span> <span class="k">LIKE</span> <span class="s1">'Au%'</span>
 
+<span class="c1">-- Get all customers with contactLastName has last character 'y'</span>
 <span class="k">SELECT</span> <span class="o">*</span>
 <span class="k">FROM</span> <span class="n">customers</span>
 <span class="k">WHERE</span> <span class="n">contactLastName</span> <span class="k">LIKE</span> <span class="s1">'____y'</span>
 
+<span class="c1">-- Get all customers with contactLastName doesn't have last character 'y'</span>
 <span class="k">SELECT</span> <span class="o">*</span>
 <span class="k">FROM</span> <span class="n">customers</span>
 <span class="k">WHERE</span> <span class="n">contactLastName</span> <span class="k">NOT</span> <span class="k">LIKE</span> <span class="s1">'____y'</span>
 
+<span class="c1">-- Get all customers with customerName that is not begin with `Au`</span>
 <span class="k">SELECT</span> <span class="o">*</span>
 <span class="k">FROM</span> <span class="n">customers</span>
 <span class="k">WHERE</span> <span class="n">customerName</span> <span class="n">REGEXP</span> <span class="s1">'^Au'</span>
 
+<span class="c1">-- Get all customers with customerName end with </span>
 <span class="k">SELECT</span> <span class="o">*</span>
 <span class="k">FROM</span> <span class="n">customers</span>
 <span class="k">WHERE</span> <span class="n">customerName</span> <span class="n">REGEXP</span> <span class="s1">'Co$|^Au'</span>
 
+<span class="c1">-- Get all customers with customerName contain [a-h] and end with `e`.</span>
 <span class="k">SELECT</span> <span class="o">*</span>
 <span class="k">FROM</span> <span class="n">customers</span>
 <span class="k">WHERE</span> <span class="n">customerName</span> <span class="n">REGEXP</span> <span class="s1">'[a-h]e'</span>
 
 </code></pre></div></div>
 
+<blockquote>
+  <h3 id="query-with-order">QUERY WITH ORDER</h3>
+</blockquote>
+
 <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="c1">-- Get all customers with state is not null</span>
 <span class="k">SELECT</span> <span class="o">*</span>
 <span class="k">FROM</span> <span class="n">customers</span>
 <span class="k">WHERE</span> <span class="k">state</span> <span class="k">IS</span> <span class="k">NOT</span> <span class="k">NULL</span>
 
+<span class="c1">-- Get all customers with state is null</span>
 <span class="k">SELECT</span> <span class="o">*</span>
 <span class="k">FROM</span> <span class="n">customers</span>
 <span class="k">WHERE</span> <span class="k">state</span> <span class="k">IS</span> <span class="k">NULL</span>
 
+<span class="c1">-- Get all customers with contactFirstName is desc</span>
 <span class="k">SELECT</span> <span class="o">*</span>
 <span class="k">FROM</span> <span class="n">customers</span>
 <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">contactFirstName</span> <span class="k">DESC</span>
 
+<span class="c1">-- Get city, contactFirstName with ordered by city , contactFirstName</span>
 <span class="k">SELECT</span> <span class="n">city</span><span class="p">,</span> <span class="n">contactFirstName</span>
 <span class="k">FROM</span> <span class="n">customers</span>
 <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">city</span> <span class="p">,</span> <span class="n">contactFirstName</span>
@@ -254,13 +274,25 @@
 <span class="k">WHERE</span> <span class="n">city</span> <span class="k">LIKE</span> <span class="s1">'a%'</span>
 <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">city</span><span class="p">,</span> <span class="n">contactFirstName</span>
 
+</code></pre></div></div>
+
+<blockquote>
+  <h3 id="query-with-pagination">QUERY WITH PAGINATION</h3>
+</blockquote>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 <span class="c1">-- get 2 continuos records (record 5 and record 6), ignone 4 frist records </span>
 <span class="k">SELECT</span> <span class="o">*</span>
 <span class="k">FROM</span> <span class="n">customers</span>
 <span class="k">LIMIT</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span>
 
+</code></pre></div></div>
 
-<span class="k">SELECT</span> <span class="n">orders</span><span class="p">.</span><span class="n">customerNumber</span><span class="p">,</span> <span class="n">orders</span><span class="p">.</span><span class="n">orderNumber</span><span class="p">,</span> <span class="n">customers</span><span class="p">.</span><span class="n">customerNumber</span> <span class="k">AS</span> <span class="s1">'id_of_customer_table'</span>
+<blockquote>
+  <h3 id="query-with-join-tables">QUERY WITH JOIN TABLES</h3>
+</blockquote>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">orders</span><span class="p">.</span><span class="n">customerNumber</span><span class="p">,</span> <span class="n">orders</span><span class="p">.</span><span class="n">orderNumber</span><span class="p">,</span> <span class="n">customers</span><span class="p">.</span><span class="n">customerNumber</span> <span class="k">AS</span> <span class="s1">'id_of_customer_table'</span>
 <span class="k">FROM</span> <span class="n">orders</span>
 <span class="k">JOIN</span> <span class="n">customers</span> 
 	<span class="k">ON</span> <span class="n">orders</span><span class="p">.</span><span class="n">customerNumber</span> <span class="o">=</span> <span class="n">customers</span><span class="p">.</span><span class="n">customerNumber</span>
