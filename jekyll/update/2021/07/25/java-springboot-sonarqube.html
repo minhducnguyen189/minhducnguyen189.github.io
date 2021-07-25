@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- bootstrap library and JS, Jquery -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Spring Boot With Sonarqube | StepByStep</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Spring Boot With Sonarqube" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="In this post we will learn how to add plugin sonarqube into our springboot project" />
+<meta property="og:description" content="In this post we will learn how to add plugin sonarqube into our springboot project" />
+<link rel="canonical" href="/jekyll/update/2021/07/25/java-springboot-sonarqube.html" />
+<meta property="og:url" content="/jekyll/update/2021/07/25/java-springboot-sonarqube.html" />
+<meta property="og:site_name" content="StepByStep" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-07-25T00:00:00+07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Spring Boot With Sonarqube" />
+<script type="application/ld+json">
+{"datePublished":"2021-07-25T00:00:00+07:00","@type":"BlogPosting","dateModified":"2021-07-25T00:00:00+07:00","mainEntityOfPage":{"@type":"WebPage","@id":"/jekyll/update/2021/07/25/java-springboot-sonarqube.html"},"url":"/jekyll/update/2021/07/25/java-springboot-sonarqube.html","description":"In this post we will learn how to add plugin sonarqube into our springboot project","headline":"Spring Boot With Sonarqube","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="StepByStep" /></head><body>
+  <div class="container-flush">
+    <div class="row"><!-- navigation bar -->
+<div class="col-lg-12">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" role="banner"><a class="navbar-brand site-title" rel="author" href="/">StepByStep</a><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="nav navbar-nav"><li class="nav-item active">
+          <a class="nav-link" href="/about/">About</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/database/">Database</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/docker/">Docker</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/">Java</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/python/">Python</a>
+        </li></ul>
+    </div><!-- Html Elements for Search -->
+    <div id="search-container">
+      <input type="text" id="search-input" placeholder="search...">
+      <ul id="results-container"></ul>
+    </div>
+
+    <!-- Script pointing to search-script.js -->
+    <script src="/java-scripts/search-script.js" type="text/javascript"></script>
+
+    <!-- Configuration -->
+    <script>
+      SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('results-container'),
+        json: '/search.json'
+      })
+    </script>
+  </nav>
+</div></div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+  <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+    <header class="post-header">
+      <h1 class="post-title p-name" itemprop="name headline">Spring Boot With Sonarqube</h1>
+      <p class="post-meta">
+        <time class="dt-published" datetime="2021-07-25T00:00:00+07:00" itemprop="datePublished">Jul 25, 2021
+        </time></p>
+    </header>
+  
+    <div class="post-content e-content" itemprop="articleBody">
+      <blockquote>
+  <p>In this post we will learn how to add plugin sonarqube into our springboot project</p>
+</blockquote>
+
+<h2 id="sonarqube-server">SONARQUBE SERVER</h2>
+
+<ul>
+  <li>You need to create a sonarqube server, if you don’t know how to create one so you can view <a href="/docker-posts/2021-07-15-docker-with-sonarqube.html">this post</a></li>
+</ul>
+
+<h2 id="plugin">PLUGIN</h2>
+
+<ul>
+  <li>So let add this plugin into <code class="language-plaintext highlighter-rouge">pom.xml</code> file of your springboot project as below</li>
+</ul>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nt">&lt;properties&gt;</span>
+        <span class="nt">&lt;java.version&gt;</span>1.8<span class="nt">&lt;/java.version&gt;</span>
+        <span class="nt">&lt;sonar.coverage.jacoco.xmlReportPaths&gt;</span>target/site/jacoco/jacoco.xml<span class="nt">&lt;/sonar.coverage.jacoco.xmlReportPaths&gt;</span>
+        <span class="nt">&lt;sonar.exclusions&gt;</span>
+            **/models/**,
+            **/repositories/*,
+            **/constants/*
+        <span class="nt">&lt;/sonar.exclusions&gt;</span>
+        <span class="nt">&lt;jacoco.version&gt;</span>0.8.3<span class="nt">&lt;/jacoco.version&gt;</span>
+    <span class="nt">&lt;/properties&gt;</span>
+
+    <span class="nt">&lt;build&gt;</span>
+        <span class="nt">&lt;plugins&gt;</span>
+            <span class="nt">&lt;plugin&gt;</span>
+                <span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+                <span class="nt">&lt;artifactId&gt;</span>spring-boot-maven-plugin<span class="nt">&lt;/artifactId&gt;</span>
+            <span class="nt">&lt;/plugin&gt;</span>
+
+            <span class="c">&lt;!-- Jacoco report: code coverage report --&gt;</span>
+            <span class="nt">&lt;plugin&gt;</span>
+                <span class="nt">&lt;groupId&gt;</span>org.jacoco<span class="nt">&lt;/groupId&gt;</span>
+                <span class="nt">&lt;artifactId&gt;</span>jacoco-maven-plugin<span class="nt">&lt;/artifactId&gt;</span>
+                <span class="nt">&lt;version&gt;</span>${jacoco.version}<span class="nt">&lt;/version&gt;</span>
+                <span class="c">&lt;!-- packages are excluded --&gt;</span>
+                <span class="nt">&lt;configuration&gt;</span>
+                    <span class="nt">&lt;excludes&gt;</span>
+                        <span class="nt">&lt;exclude&gt;</span>**/models/**<span class="nt">&lt;/exclude&gt;</span>
+                        <span class="nt">&lt;exclude&gt;</span>**/repositories/*<span class="nt">&lt;/exclude&gt;</span>
+                        <span class="nt">&lt;exclude&gt;</span>**/constants/*<span class="nt">&lt;/exclude&gt;</span>
+                    <span class="nt">&lt;/excludes&gt;</span>
+                <span class="nt">&lt;/configuration&gt;</span>
+                <span class="nt">&lt;executions&gt;</span>
+                    <span class="nt">&lt;execution&gt;</span>
+                        <span class="nt">&lt;goals&gt;</span>
+                            <span class="nt">&lt;goal&gt;</span>prepare-agent<span class="nt">&lt;/goal&gt;</span>
+                        <span class="nt">&lt;/goals&gt;</span>
+                    <span class="nt">&lt;/execution&gt;</span>
+                    <span class="c">&lt;!-- attached to Maven test phase --&gt;</span>
+                    <span class="nt">&lt;execution&gt;</span>
+                        <span class="nt">&lt;id&gt;</span>report<span class="nt">&lt;/id&gt;</span>
+                        <span class="nt">&lt;phase&gt;</span>prepare-package<span class="nt">&lt;/phase&gt;</span>
+                        <span class="nt">&lt;goals&gt;</span>
+                            <span class="nt">&lt;goal&gt;</span>report<span class="nt">&lt;/goal&gt;</span>
+                        <span class="nt">&lt;/goals&gt;</span>
+                    <span class="nt">&lt;/execution&gt;</span>
+                <span class="nt">&lt;/executions&gt;</span>
+            <span class="nt">&lt;/plugin&gt;</span>
+        <span class="nt">&lt;/plugins&gt;</span>
+    <span class="nt">&lt;/build&gt;</span>
+
+    <span class="nt">&lt;profiles&gt;</span>
+        <span class="nt">&lt;profile&gt;</span>
+            <span class="nt">&lt;id&gt;</span>dev<span class="nt">&lt;/id&gt;</span>
+            <span class="nt">&lt;properties&gt;</span>
+                <span class="nt">&lt;activeatedProperties&gt;</span>dev<span class="nt">&lt;/activeatedProperties&gt;</span>
+                <span class="c">&lt;!-- sonarqube url and port --&gt;</span>
+                <span class="nt">&lt;sonar.host.url&gt;</span>http://localhost:9000<span class="nt">&lt;/sonar.host.url&gt;</span>
+                <span class="c">&lt;!-- sonarqube username --&gt;</span>
+                <span class="nt">&lt;sonar.login&gt;</span>admin<span class="nt">&lt;/sonar.login&gt;</span>
+                <span class="c">&lt;!-- sonarqube password --&gt;</span>
+                <span class="nt">&lt;sonar.password&gt;</span>password<span class="nt">&lt;/sonar.password&gt;</span>
+            <span class="nt">&lt;/properties&gt;</span>
+            <span class="nt">&lt;activation&gt;</span>
+                <span class="nt">&lt;activeByDefault&gt;</span>true<span class="nt">&lt;/activeByDefault&gt;</span>
+            <span class="nt">&lt;/activation&gt;</span>
+        <span class="nt">&lt;/profile&gt;</span>
+    <span class="nt">&lt;/profiles&gt;</span>
+
+</code></pre></div></div>
+
+<h2 id="execute-sonarqube-scan">EXECUTE SONARQUBE SCAN</h2>
+
+<ul>
+  <li>Now, you can command <code class="language-plaintext highlighter-rouge">mvn clean package sonar:sonar</code> to scan your springboot project. Then you will see an url that contain a sonarscan report. Just click it and you can view sonarqube reports</li>
+</ul>
+
+<p><a href="/assets/images/spring-boot-sonarqube-terminal.JPG"><img src="/assets/images/spring-boot-sonarqube-terminal.JPG" alt="&quot;Sonarqube url terminal&quot;" title="Sonarqube url terminal" /></a></p>
+
+<p><a href="/assets/images/spring-boot-sonarqube-dashboard.JPG"><img src="/assets/images/spring-boot-sonarqube-dashboard.JPG" alt="Sonarqube dashboard" title="Sonarqube dashboard" /></a></p>
+
+
+    </div><a class="u-url" href="/jekyll/update/2021/07/25/java-springboot-sonarqube.html" hidden></a>
+  </article>
+  
+</div>
+
+
+    </div>
+  </div>
+</body><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">StepByStep</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-4">
+        <ul class="contact-list">
+          <li class="p-name">StepByStep</li><li><a class="u-email" href="mailto:minhducnguyen189@gmail.com">minhducnguyen189@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-4"><ul class="social-media-list"><li><a href="https://github.com/minhducnguyen189"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">minhducnguyen189</span></a></li><li><a href="https://www.twitter.com/jekyllrb"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">jekyllrb</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-4">
+        <p>Hi there! Let&#39;s explore some general knowleadges and briefly definitions  in programming. I hope that this website can help people saving time in learning, also give some motivations for those who have choice the developer path.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</html>

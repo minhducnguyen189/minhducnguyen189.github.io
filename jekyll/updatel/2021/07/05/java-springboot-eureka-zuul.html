@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- bootstrap library and JS, Jquery -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Using Eureka And Zuul In Spring Boot Microservices | StepByStep</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Using Eureka And Zuul In Spring Boot Microservices" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="In this post we will learn about EUREKA AND ZUUL server and the way to apply these servers into our microservices system." />
+<meta property="og:description" content="In this post we will learn about EUREKA AND ZUUL server and the way to apply these servers into our microservices system." />
+<link rel="canonical" href="/jekyll/updatel/2021/07/05/java-springboot-eureka-zuul.html" />
+<meta property="og:url" content="/jekyll/updatel/2021/07/05/java-springboot-eureka-zuul.html" />
+<meta property="og:site_name" content="StepByStep" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-07-05T00:00:00+07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Using Eureka And Zuul In Spring Boot Microservices" />
+<script type="application/ld+json">
+{"datePublished":"2021-07-05T00:00:00+07:00","@type":"BlogPosting","dateModified":"2021-07-05T00:00:00+07:00","mainEntityOfPage":{"@type":"WebPage","@id":"/jekyll/updatel/2021/07/05/java-springboot-eureka-zuul.html"},"url":"/jekyll/updatel/2021/07/05/java-springboot-eureka-zuul.html","description":"In this post we will learn about EUREKA AND ZUUL server and the way to apply these servers into our microservices system.","headline":"Using Eureka And Zuul In Spring Boot Microservices","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="StepByStep" /></head><body>
+  <div class="container-flush">
+    <div class="row"><!-- navigation bar -->
+<div class="col-lg-12">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" role="banner"><a class="navbar-brand site-title" rel="author" href="/">StepByStep</a><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="nav navbar-nav"><li class="nav-item active">
+          <a class="nav-link" href="/about/">About</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/database/">Database</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/docker/">Docker</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/">Java</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/python/">Python</a>
+        </li></ul>
+    </div><!-- Html Elements for Search -->
+    <div id="search-container">
+      <input type="text" id="search-input" placeholder="search...">
+      <ul id="results-container"></ul>
+    </div>
+
+    <!-- Script pointing to search-script.js -->
+    <script src="/java-scripts/search-script.js" type="text/javascript"></script>
+
+    <!-- Configuration -->
+    <script>
+      SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('results-container'),
+        json: '/search.json'
+      })
+    </script>
+  </nav>
+</div></div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+  <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+    <header class="post-header">
+      <h1 class="post-title p-name" itemprop="name headline">Using Eureka And Zuul In Spring Boot Microservices</h1>
+      <p class="post-meta">
+        <time class="dt-published" datetime="2021-07-05T00:00:00+07:00" itemprop="datePublished">Jul 5, 2021
+        </time></p>
+    </header>
+  
+    <div class="post-content e-content" itemprop="articleBody">
+      <blockquote>
+  <p>In this post we will learn about <code class="language-plaintext highlighter-rouge">EUREKA</code> AND <code class="language-plaintext highlighter-rouge">ZUUL</code> server and the way to apply these servers into our microservices system.</p>
+</blockquote>
+
+<h2 id="what-is-the-eureka-server">WHAT IS THE EUREKA SERVER?</h2>
+
+<ul>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Eureka Server</code> is an application that holds the information about <strong>all client-service applications</strong>. Every Micro service will register into the <code class="language-plaintext highlighter-rouge">Eureka server</code> and <code class="language-plaintext highlighter-rouge">Eureka server</code> knows all the client applications running on each port and IP address. <code class="language-plaintext highlighter-rouge">Eureka Server</code> is also known as <code class="language-plaintext highlighter-rouge">Discovery Server</code>.</p>
+  </li>
+  <li>
+    <p><a href="https://www.tutorialspoint.com/spring_boot/spring_boot_eureka_server.htm">More information</a></p>
+  </li>
+</ul>
+
+<h2 id="what-is-the-zuul-api-gateway">WHAT IS THE ZUUL API GATEWAY?</h2>
+
+<ul>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Zuul Server</code> is a gateway application that handles all the requests and does the dynamic routing of microservice applications. The <code class="language-plaintext highlighter-rouge">Zuul Server</code> is also known as <code class="language-plaintext highlighter-rouge">Edge Server</code>.</p>
+  </li>
+  <li>
+    <p>For Example, <code class="language-plaintext highlighter-rouge">/api/user</code> is mapped to the <code class="language-plaintext highlighter-rouge">user service</code> and <code class="language-plaintext highlighter-rouge">/api/products</code> is mapped to the <code class="language-plaintext highlighter-rouge">product service</code> and <code class="language-plaintext highlighter-rouge">Zuul Server</code> dynamically routes the requests to the respective backend application.</p>
+  </li>
+  <li>
+    <p><a href="https://www.tutorialspoint.com/spring_boot/spring_boot_zuul_proxy_server_and_routing.htm">More information</a></p>
+  </li>
+</ul>
+
+<h2 id="eureka-server-example">EUREKA SERVER EXAMPLE</h2>
+
+<blockquote>
+  <h3 id="create-an-eureka-server">CREATE AN EUREKA SERVER</h3>
+</blockquote>
+
+<ul>
+  <li>Let’s create an spring boot project and name it <code class="language-plaintext highlighter-rouge">server</code>. Then we need to add some dependecies in <code class="language-plaintext highlighter-rouge">pom.xml</code> as below</li>
+</ul>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="nt">&lt;properties&gt;</span>
+   <span class="nt">&lt;java.version&gt;</span>1.8<span class="nt">&lt;/java.version&gt;</span>
+   <span class="nt">&lt;spring.cloud.version&gt;</span>Hoxton.SR10<span class="nt">&lt;/spring.cloud.version&gt;</span>
+<span class="nt">&lt;/properties&gt;</span>
+
+
+<span class="nt">&lt;dependencyManagement&gt;</span>
+   <span class="nt">&lt;dependencies&gt;</span>
+      <span class="nt">&lt;dependency&gt;</span>
+         <span class="nt">&lt;groupId&gt;</span>org.springframework.cloud<span class="nt">&lt;/groupId&gt;</span>
+         <span class="nt">&lt;artifactId&gt;</span>spring-cloud-dependencies<span class="nt">&lt;/artifactId&gt;</span>
+         <span class="nt">&lt;version&gt;</span>${spring-cloud.version}<span class="nt">&lt;/version&gt;</span>
+         <span class="nt">&lt;type&gt;</span>pom<span class="nt">&lt;/type&gt;</span>
+         <span class="nt">&lt;scope&gt;</span>import<span class="nt">&lt;/scope&gt;</span>
+      <span class="nt">&lt;/dependency&gt;</span>
+   <span class="nt">&lt;/dependencies&gt;</span>
+<span class="nt">&lt;/dependencyManagement&gt;</span>
+
+<span class="nt">&lt;dependencies&gt;</span>
+    <span class="nt">&lt;dependency&gt;</span>
+        <span class="nt">&lt;groupId&gt;</span>org.springframework.cloud<span class="nt">&lt;/groupId&gt;</span>
+        <span class="nt">&lt;artifactId&gt;</span>spring-cloud-starter-netflix-eureka-server<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>
+
+    <span class="c">&lt;!-- ...other dependencies --&gt;</span>
+<span class="nt">&lt;/dependencies&gt;</span>
+
+</code></pre></div></div>
+
+<ul>
+  <li>Then add annotation <code class="language-plaintext highlighter-rouge">@EnableEurekaServer</code> into the main class</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="kn">package</span> <span class="nn">com.eureka.server</span><span class="o">;</span>
+
+    <span class="kn">import</span> <span class="nn">org.springframework.boot.SpringApplication</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">org.springframework.boot.autoconfigure.SpringBootApplication</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">org.springframework.cloud.netflix.eureka.server.EnableEurekaServer</span><span class="o">;</span>
+
+    <span class="nd">@SpringBootApplication</span>
+    <span class="nd">@EnableEurekaServer</span>
+    <span class="kd">public</span> <span class="kd">class</span>  <span class="nc">ServerApplication</span> <span class="o">{</span>
+
+        <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">SpringApplication</span><span class="o">.</span><span class="na">run</span><span class="o">(</span><span class="nc">ServerApplication</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">args</span><span class="o">);</span>
+        <span class="o">}</span>
+
+    <span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>In <code class="language-plaintext highlighter-rouge">application.properties</code> file, add some configuration as below</li>
+</ul>
+
+<div class="language-properties highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    
+    <span class="c">#application name
+</span>    <span class="py">spring.application.name</span><span class="p">=</span><span class="s">eureka-server</span>
+    <span class="c">#server run at port 8761
+</span>    <span class="py">server.port</span><span class="p">=</span><span class="s">8761</span>
+    <span class="c">#self register is false
+</span>    <span class="py">eureka.client.register-with-eureka</span><span class="p">=</span><span class="s">false</span>
+    <span class="c">#self fetch registry is false
+</span>    <span class="py">eureka.client.fetch-registry</span><span class="p">=</span><span class="s">false</span>
+
+</code></pre></div></div>
+
+<ul>
+  <li>Then run the service and access to <code class="language-plaintext highlighter-rouge">http://localhost:8761</code> to check the eureka service has run successfully.</li>
+</ul>
+
+<p><a href="/assets/images/spring-boot-eureka-server.JPG"><img src="/assets/images/spring-boot-eureka-server.JPG" alt="Eureka server" title="Eureka server" /></a></p>
+
+<ul>
+  <li>Then you can check your service log and you can see the url as in the image below which will be used for client to register to eureka server (<code class="language-plaintext highlighter-rouge">http://localhost:8761/eureka/</code>)</li>
+</ul>
+
+<p><a href="/assets/images/spring-boot-eureka-server-console.JPG"><img src="/assets/images/spring-boot-eureka-server-console.JPG" alt="Eureka server Console" title="Eureka server Console" /></a></p>
+
+<blockquote>
+  <h3 id="config-eureka-client-to-connect-eureka-server">CONFIG EUREKA CLIENT TO CONNECT EUREKA SERVER</h3>
+</blockquote>
+
+<ul>
+  <li>So on your spring boot service client for example <code class="language-plaintext highlighter-rouge">bff service</code>. Let’s add some dependencies as below into <code class="language-plaintext highlighter-rouge">pom.xml</code> file</li>
+</ul>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;properties&gt;</span>
+    <span class="nt">&lt;java.version&gt;</span>1.8<span class="nt">&lt;/java.version&gt;</span>
+    <span class="nt">&lt;eureka.client.version&gt;</span>2.2.3.RELEASE<span class="nt">&lt;/eureka.client.version&gt;</span>
+<span class="nt">&lt;/properties&gt;</span>
+
+<span class="nt">&lt;dependencies&gt;</span>
+    <span class="nt">&lt;dependency&gt;</span>
+        <span class="nt">&lt;groupId&gt;</span>org.springframework.cloud<span class="nt">&lt;/groupId&gt;</span>
+        <span class="nt">&lt;artifactId&gt;</span>spring-cloud-starter-netflix-eureka-client<span class="nt">&lt;/artifactId&gt;</span>
+        <span class="nt">&lt;version&gt;</span>${eureka.client.version}<span class="nt">&lt;/version&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>
+
+    <span class="c">&lt;!-- ...other dependencies --&gt;</span>
+<span class="nt">&lt;/dependencies&gt;</span>
+
+</code></pre></div></div>
+<ul>
+  <li>then add annotation <code class="language-plaintext highlighter-rouge">@EnableDiscoveryClient</code> into main class</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="kn">package</span> <span class="nn">com.application.bff</span><span class="o">;</span>
+
+    <span class="kn">import</span> <span class="nn">org.springframework.boot.SpringApplication</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">org.springframework.boot.autoconfigure.SpringBootApplication</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">org.springframework.cloud.client.discovery.EnableDiscoveryClient</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">org.springframework.cloud.openfeign.EnableFeignClients</span><span class="o">;</span>
+
+
+    <span class="nd">@EnableFeignClients</span>
+    <span class="nd">@SpringBootApplication</span>
+    <span class="nd">@EnableDiscoveryClient</span>
+    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">BffApplication</span> <span class="o">{</span>
+        <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">SpringApplication</span><span class="o">.</span><span class="na">run</span><span class="o">(</span><span class="nc">BffApplication</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">args</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+</code></pre></div></div>
+<ul>
+  <li>Then add some configurations into <code class="language-plaintext highlighter-rouge">application.properties</code> file to connect to <code class="language-plaintext highlighter-rouge">eureka server</code>. The property <code class="language-plaintext highlighter-rouge">“eureka.client.serviceUrl.defaultZone”</code> will be <code class="language-plaintext highlighter-rouge">the url for register of eureka server</code>.</li>
+</ul>
+
+<div class="language-properties highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    <span class="c">#service run at port 9090
+</span>    <span class="py">server.port</span><span class="p">=</span><span class="s">9090</span>
+    <span class="c">#service name which will be showed on eureka server dashboard
+</span>    <span class="py">spring.application.name</span><span class="p">=</span><span class="s">application-bff-service</span>
+    <span class="c">#register this service to eureka server by url
+</span>    <span class="py">eureka.client.serviceUrl.defaultZone</span><span class="p">=</span><span class="s">http://localhost:8761/eureka/</span>
+
+</code></pre></div></div>
+
+<ul>
+  <li>Then recheck the eureka server dashboard and you can see client registered successfully.</li>
+</ul>
+
+<p><a href="/assets/images/spring-boot-eureka-register-successfully.JPG"><img src="/assets/images/spring-boot-eureka-register-successfully.JPG" alt="register eureka server successfully" title="register eureka server successfully" /></a></p>
+
+<h2 id="create-and-use-zuul-api-gateway-with-eureka-server">CREATE AND USE ZUUL API GATEWAY WITH EUREKA SERVER</h2>
+
+<blockquote>
+  <p>Note: We need to assign <code class="language-plaintext highlighter-rouge">ZUUL API GATEWAY service</code> to <code class="language-plaintext highlighter-rouge">EUREKA server</code> which will help us configure routing easily.</p>
+</blockquote>
+
+<ul>
+  <li>So our microservice system will contains services as below:
+    <ul>
+      <li>EUREKA-SERVER</li>
+      <li>BLOG-ADAPTER-SERVICE</li>
+      <li>APPLICATION-BFF-SERVICE</li>
+      <li>ZUUL-EDGE-SERVER</li>
+    </ul>
+  </li>
+  <li>Scenario: In this example we will have a request from postman to <code class="language-plaintext highlighter-rouge">ZUUL-EDGE-SERVER</code>, then the request will be navigated to <code class="language-plaintext highlighter-rouge">APPLICATION-BFF-SERVICE</code> in phase 1. Then in phase 2, the <code class="language-plaintext highlighter-rouge">APPLICATION-BFF-SERVICE</code> will call a request to <code class="language-plaintext highlighter-rouge">ZUUL-EDGE-SERVER</code> and the request will be navigated to <code class="language-plaintext highlighter-rouge">BLOG-ADAPTER-SERVICE</code>.</li>
+</ul>
+
+<p><a href="/assets/images/spring-boot-eureka-zuul-services-map.JPG"><img src="/assets/images/spring-boot-eureka-zuul-services-map.JPG" alt="Eureka-Zuul services map" title="Eureka-Zuul services map" /></a></p>
+
+<blockquote>
+  <h3 id="step-1-create-eureka-server">STEP 1: CREATE EUREKA SERVER</h3>
+</blockquote>
+
+<ul>
+  <li>Let’s create a spring boot project and name it as <code class="language-plaintext highlighter-rouge">zuul</code>. Then we need to add dependency into <code class="language-plaintext highlighter-rouge">pom.xml</code> as below</li>
+</ul>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="nt">&lt;dependency&gt;</span>
+   <span class="nt">&lt;groupId&gt;</span>org.springframework.cloud<span class="nt">&lt;/groupId&gt;</span>
+   <span class="nt">&lt;artifactId&gt;</span>spring-cloud-starter-netflix-zuul<span class="nt">&lt;/artifactId&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+
+</code></pre></div></div>
+
+<blockquote>
+  <h3 id="step-2-register-services-into-eureka-server">STEP 2: REGISTER SERVICES INTO EUREKA SERVER</h3>
+</blockquote>
+
+<ul>
+  <li>we need to register <code class="language-plaintext highlighter-rouge">BFF-SERVICE</code>, <code class="language-plaintext highlighter-rouge">ADAPTER-SERVICE</code> and <code class="language-plaintext highlighter-rouge">ZUUL-EDGE-SERVER</code> to <code class="language-plaintext highlighter-rouge">EUREKA-SERVER</code>. You can read the section EUREKA above to know how to register a service to EUREKA server.</li>
+</ul>
+
+<p><a href="/assets/images/spring-boot-eureka-server-2.JPG"><img src="/assets/images/spring-boot-eureka-server-2.JPG" alt="Eureka server dashboard" title="Eureka server dashboard" /></a></p>
+
+<blockquote>
+  <h3 id="step-3-configue-zuul-server">STEP 3: CONFIGUE ZUUL SERVER</h3>
+</blockquote>
+
+<ul>
+  <li>In <code class="language-plaintext highlighter-rouge">ZUUL-EDGE-SERVICE</code> we add annotation <code class="language-plaintext highlighter-rouge">@EnableZuulProxy</code> into the main class</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    <span class="kn">package</span> <span class="nn">com.gateway.zuul</span><span class="o">;</span>
+
+    <span class="kn">import</span> <span class="nn">org.springframework.boot.SpringApplication</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">org.springframework.boot.autoconfigure.SpringBootApplication</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">org.springframework.cloud.client.discovery.EnableDiscoveryClient</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">org.springframework.cloud.netflix.zuul.EnableZuulProxy</span><span class="o">;</span>
+
+    <span class="nd">@SpringBootApplication</span>
+    <span class="nd">@EnableDiscoveryClient</span>
+    <span class="nd">@EnableZuulProxy</span>
+    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">ZuulApplication</span> <span class="o">{</span>
+
+        <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">SpringApplication</span><span class="o">.</span><span class="na">run</span><span class="o">(</span><span class="nc">ZuulApplication</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">args</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+</code></pre></div></div>
+
+<ul>
+  <li>Then we add some configuration into the <code class="language-plaintext highlighter-rouge">application.properties</code> as below</li>
+</ul>
+
+<div class="language-properties highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    <span class="c">#server zuul run at port
+</span>    <span class="py">server.port</span><span class="p">=</span><span class="s">7070</span>
+    <span class="c">#application name of server zuul
+</span>    <span class="py">spring.application.name</span><span class="p">=</span><span class="s">zuul-edge-server</span>
+    <span class="c">#register zuul into eureka server by url
+</span>    <span class="py">eureka.client.serviceUrl.defaultZone</span><span class="p">=</span><span class="s">http://localhost:8761/eureka/</span>
+    <span class="py">management.endpoint.health.show-details</span><span class="p">=</span><span class="s">always</span>
+
+    <span class="c">#enable discovery services by application name
+</span>    <span class="py">spring.cloud.gateway.discovery.locator.enabled</span><span class="p">=</span><span class="s">true</span>
+    <span class="c">#enable using lower case application names for configuration 
+</span>    <span class="py">spring.cloud.gateway.discovery.locator.lowerCaseServiceId</span><span class="p">=</span><span class="s">true</span>
+
+    <span class="c">#phase 1: requests to zuul server with path begun with /edge
+</span>    <span class="py">zuul.routes.bff.path</span><span class="p">=</span><span class="s">/edge/**</span>
+    <span class="c">#phase 1: then the requests will be navigated to `application-bff-service`
+</span>    <span class="py">zuul.routes.bff.serviceId</span><span class="p">=</span><span class="s">application-bff-service</span>
+
+    <span class="c">#phase 2: requests to zuul server with path begun with /adapter/post/
+</span>    <span class="py">zuul.routes.adapter.path</span><span class="p">=</span><span class="s">/adapter/post/**</span>
+    <span class="c">#phase 2: then the requests will be navigated to `blog-adapter-service`
+</span>    <span class="py">zuul.routes.adapter.serviceId</span><span class="p">=</span><span class="s">blog-adapter-service</span>
+
+</code></pre></div></div>
+
+<p><a href="/assets/images/spring-boot-eureka-server-client-names.JPG"><img src="/assets/images/spring-boot-eureka-server-client-names.JPG" alt="Eureka client names" title="Eureka client names" /></a></p>
+
+<ul>
+  <li>Configuration explaination:
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">spring.cloud.gateway.discovery.locator.enabled=true</code> (enable discovery other services which assigned to eureka server)</li>
+      <li><code class="language-plaintext highlighter-rouge">spring.cloud.gateway.discovery.locator.lowerCaseServiceId=true</code> (use lower case for names of services that registered to eureka server)</li>
+      <li><code class="language-plaintext highlighter-rouge">zuul.routes.bff.path=/edge/**</code> (we define the path for routing of zuul, when request come to zuul with path /edge/** then Zuul will know which service should be navigated to)</li>
+      <li><code class="language-plaintext highlighter-rouge">zuul.routes.bff.serviceId=application-bff-service</code> (we define the service name (lower case on eureka server) that the request should be navigated to, it is application-bff-service).
+        <ul>
+          <li>Ex: If request is /edge/** then we will navigate the request to application-bff-service. So we will configure as below</li>
+          <li><code class="language-plaintext highlighter-rouge">zuul.routes.{routeName}.serviceId=/edge/**</code>  (we will set the routeName is <code class="language-plaintext highlighter-rouge">“bff”</code>)  zuul.routes.bff serviceId=/edge/**</li>
+          <li><code class="language-plaintext highlighter-rouge">zuul.routes.bff.serviceId=application-bff-service</code></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>we will do the same for defining the route to <code class="language-plaintext highlighter-rouge">BLOG-ADAPTER-SERVICE</code>
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">zuul.routes.adapter.path=/adapter/post/**</code></li>
+      <li><code class="language-plaintext highlighter-rouge">zuul.routes.adapter.serviceId=blog-adapter-service</code></li>
+    </ul>
+  </li>
+</ul>
+
+<blockquote>
+  <h3 id="step-4-configure-bff-service">STEP 4: CONFIGURE BFF SERVICE</h3>
+</blockquote>
+
+<ul>
+  <li>change configuration in BFF service, the configuration of BFF service will be as below.</li>
+</ul>
+
+<div class="language-properties highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    <span class="c">#server port of BFF-SERVICE
+</span>    <span class="py">server.port</span><span class="p">=</span><span class="s">9090</span>
+    <span class="c">#application name of BFF-SERVICE
+</span>    <span class="py">spring.application.name</span><span class="p">=</span><span class="s">application-bff-service</span>
+    <span class="c">#register BFF-SERVICE to EUREKA-SERVER by url
+</span>    <span class="py">eureka.client.serviceUrl.defaultZone</span><span class="p">=</span><span class="s">http://localhost:8761/eureka/</span>
+    <span class="py">management.endpoint.health.show-details</span><span class="p">=</span><span class="s">always</span>
+
+    <span class="c">#Call to ADAPTER-SERVICE api through ZUUL-SERVER
+</span>    <span class="py">adapter.service.url</span><span class="p">=</span><span class="s">http://localhost:7070/adapter/post</span>
+
+</code></pre></div></div>
+<ul>
+  <li>As you can see, we from <code class="language-plaintext highlighter-rouge">APPLICATION-BFF-SERVICE</code> we don’t call to <code class="language-plaintext highlighter-rouge">BLOG-ADAPTER-SERVICE</code> directly, we will call to <code class="language-plaintext highlighter-rouge">ZUUL-EDGE-SERVER</code> with the base path <code class="language-plaintext highlighter-rouge">“/adapter/post”</code> as we defined in Zuul server at step 2. Then the request will be navigated to <code class="language-plaintext highlighter-rouge">BLOG-ADAPTER-SERVICE</code>.</li>
+</ul>
+
+<blockquote>
+  <h3 id="step-5-testing">STEP 5: TESTING</h3>
+  <ul>
+    <li>use postman to test. We will call a request to zuul with base path is <code class="language-plaintext highlighter-rouge">/edge</code> and received the result as below.</li>
+  </ul>
+</blockquote>
+
+<p><a href="/assets/images/spring-boot-eureka-zuul-testing-result.JPG"><img src="/assets/images/spring-boot-eureka-zuul-testing-result.JPG" alt="Testing zuul eureka result" title="Testing zuul eureka result" /></a></p>
+
+<ul>
+  <li>Note: So using <code class="language-plaintext highlighter-rouge">zuul gateway</code> we will make our system become more secure because user people outside will not know <code class="language-plaintext highlighter-rouge">the real service addresses</code>. They are <code class="language-plaintext highlighter-rouge">all hidden behind the zuul gateway service</code>. Furthermore, when the <strong>ip</strong>, <strong>url</strong> or <strong>port</strong> of any service has changed we <strong>don’t need to update any configuration</strong>, <code class="language-plaintext highlighter-rouge">eureka and zuul</code> will help us <strong>detect and forward requests automatically</strong>.</li>
+</ul>
+
+    </div><a class="u-url" href="/jekyll/updatel/2021/07/05/java-springboot-eureka-zuul.html" hidden></a>
+  </article>
+  
+</div>
+
+
+    </div>
+  </div>
+</body><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">StepByStep</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-4">
+        <ul class="contact-list">
+          <li class="p-name">StepByStep</li><li><a class="u-email" href="mailto:minhducnguyen189@gmail.com">minhducnguyen189@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-4"><ul class="social-media-list"><li><a href="https://github.com/minhducnguyen189"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">minhducnguyen189</span></a></li><li><a href="https://www.twitter.com/jekyllrb"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">jekyllrb</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-4">
+        <p>Hi there! Let&#39;s explore some general knowleadges and briefly definitions  in programming. I hope that this website can help people saving time in learning, also give some motivations for those who have choice the developer path.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</html>
