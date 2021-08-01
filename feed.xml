@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2021-07-25T12:07:26+07:00</updated><id>/feed.xml</id><title type="html">StepByStep</title><subtitle>Hi there! Let's explore some general knowleadges and briefly definitions  in programming. I hope that this website can help people saving time in learning, also give some motivations for those who have choice the developer path.</subtitle><entry><title type="html">Spring Boot With Sonarqube</title><link href="/jekyll/update/2021/07/25/java-springboot-sonarqube.html" rel="alternate" type="text/html" title="Spring Boot With Sonarqube" /><published>2021-07-25T00:00:00+07:00</published><updated>2021-07-25T00:00:00+07:00</updated><id>/jekyll/update/2021/07/25/java-springboot-sonarqube</id><content type="html" xml:base="/jekyll/update/2021/07/25/java-springboot-sonarqube.html">&lt;blockquote&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2021-08-01T21:26:43+07:00</updated><id>/feed.xml</id><title type="html">StepByStep</title><subtitle>Hi there! Let's explore some general knowleadges and briefly definitions  in programming. I hope that this website can help people saving time in learning, also give some motivations for those who have choice the developer path.</subtitle><entry><title type="html">Spring Boot With Sonarqube</title><link href="/jekyll/update/2021/07/25/java-springboot-sonarqube.html" rel="alternate" type="text/html" title="Spring Boot With Sonarqube" /><published>2021-07-25T00:00:00+07:00</published><updated>2021-07-25T00:00:00+07:00</updated><id>/jekyll/update/2021/07/25/java-springboot-sonarqube</id><content type="html" xml:base="/jekyll/update/2021/07/25/java-springboot-sonarqube.html">&lt;blockquote&gt;
   &lt;p&gt;In this post we will learn how to add plugin sonarqube into our springboot project&lt;/p&gt;
 &lt;/blockquote&gt;
 
@@ -2403,71 +2403,98 @@ For example below, I can choose only apis which is started with &lt;code class=&
 &lt;h2 id=&quot;dependency-inversion-principle&quot;&gt;DEPENDENCY INVERSION PRINCIPLE&lt;/h2&gt;
 &lt;ul&gt;
   &lt;li&gt;The Dependency Inversion principle states that our classes should depend upon interfaces or abstract classes instead of concrete classes and functions.&lt;/li&gt;
-&lt;/ul&gt;</content><author><name></name></author><category term="jekyll" /><category term="update" /><summary type="html">The SOLID Principles are five principles of Object-Oriented class design. They are a set of rules and best practices to follow while designing a class structure.</summary></entry><entry><title type="html">Spring Framework And Basic Concepts</title><link href="/jekyll/update/2021/03/09/java-spring-basic-concepts.html" rel="alternate" type="text/html" title="Spring Framework And Basic Concepts" /><published>2021-03-09T08:00:00+07:00</published><updated>2021-03-09T08:00:00+07:00</updated><id>/jekyll/update/2021/03/09/java-spring-basic-concepts</id><content type="html" xml:base="/jekyll/update/2021/03/09/java-spring-basic-concepts.html">&lt;blockquote&gt;
-  &lt;p&gt;Spring is one of the most popular frameworks for Java enterprise edition. Developers use Spring for developing reliable and high-quality applications.&lt;/p&gt;
+&lt;/ul&gt;</content><author><name></name></author><category term="jekyll" /><category term="update" /><summary type="html">The SOLID Principles are five principles of Object-Oriented class design. They are a set of rules and best practices to follow while designing a class structure.</summary></entry><entry><title type="html">SpringBoot With Swagger</title><link href="/jekyll/update/2021/03/11/springboot-with-swagger.html" rel="alternate" type="text/html" title="SpringBoot With Swagger" /><published>2021-03-11T00:00:00+07:00</published><updated>2021-03-11T00:00:00+07:00</updated><id>/jekyll/update/2021/03/11/springboot-with-swagger</id><content type="html" xml:base="/jekyll/update/2021/03/11/springboot-with-swagger.html">&lt;blockquote&gt;
+  &lt;p&gt;In this post, we will learn about swagger generator to generate Apis and swagger UI in springboot service.&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;blockquote&gt;
-  &lt;p&gt;Spring was designed by Rob Johnson.&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;h2 id=&quot;what-is-the-swagger&quot;&gt;WHAT IS THE SWAGGER?&lt;/h2&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.journaldev.com/2888/spring-tutorial-spring-core-tutorial&quot;&gt;More information&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;spring-core-concepts&quot;&gt;SPRING CORE CONCEPTS&lt;/h2&gt;
-&lt;ul&gt;
   &lt;li&gt;
-    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Inversion of control&lt;/code&gt;: This is the principle of object-oriented programming, in which objects of the program do not depend on concrete implementations of other objects, but may have knowledge about their abstractions (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;interfaces&lt;/code&gt;) for later interaction.&lt;/p&gt;
+    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Swagger&lt;/code&gt; allows you to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;describe the structure of your APIs so that machines can read them&lt;/code&gt;. The ability of APIs to describe their own structure is the root of all awesomeness in Swagger. Why is it so great? Well, by reading your API’s structure, we can automatically build beautiful and interactive API documentation. We can also automatically generate client libraries for your API in many languages and explore other possibilities like automated testing. Swagger does this by asking your API to return a YAML or JSON that contains a detailed description of your entire API. This file is essentially a resource listing of your API which adheres to OpenAPI Specification.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Dependency Injection&lt;/code&gt;: is &lt;strong&gt;a composition of strutural design partterns&lt;/strong&gt;, in which each function of the application there is one, a conditionally independent object (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;service&lt;/code&gt;) that can have the need to use other objects (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dependencies&lt;/code&gt;) know to it by &lt;strong&gt;interfaces&lt;/strong&gt;. Dependencies are transferred (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;implemented&lt;/code&gt;) to the service &lt;strong&gt;at the time of it’s creation&lt;/strong&gt;. This is the siatuation where we introduce an element of one class into another. In practise, DI is implemented to the constructor or using setters. Libraries that implement this approach are also called &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Ioc containers&lt;/code&gt;.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Aspect Oriented Programming&lt;/code&gt;: a programming paradigm that allows to distinguish cross-through (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;functional&lt;/code&gt;) functionality in application. These functions, which spam multiple application nodes, are call &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cross-cutting concerns&lt;/code&gt; and these &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cross-cutting nodes&lt;/code&gt; are seperated from the immediate business logic of the application. In OOP, the key unit is the class, which in AOP, the key element is the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;aspect&lt;/code&gt;. DI helps to separate application classes into separate modules, and APO helps to create &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cross-cutting concerns&lt;/code&gt; from the objects they effect.&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&quot;https://swagger.io/docs/specification/2-0/what-is-swagger/&quot;&gt;More Information&lt;/a&gt;&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&quot;spring-ioc-container&quot;&gt;SPRING IOC CONTAINER&lt;/h2&gt;
+&lt;h2 id=&quot;dependencies-and-plugins&quot;&gt;DEPENDENCIES AND PLUGINS&lt;/h2&gt;
+
 &lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Spring IoC Container&lt;/code&gt; is the machanism to achieve &lt;strong&gt;loose-coupling&lt;/strong&gt; between Object dependencies. To achieve loose coupling and dynamic binding of the objects at runtime, objects dependencies. Spring IoC container is the program that injects dependencies into an object and make it ready for our use.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Spring IoC Container&lt;/code&gt; classes are part of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;org.springframework.bean&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;org.springframework.context&lt;/code&gt; packages.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;BeanFactory&lt;/code&gt; is the root interface of spring IoC container. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ApplicationContext&lt;/code&gt; is the child interface of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;BeanFactory&lt;/code&gt;.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Usually, if you are working with Spring MVC application and your application is configured to use Spring Framework, Spring IoC container gets initialized when the application starts and when a bean is requested, the dependencies are injected automatically.&lt;/p&gt;
-  &lt;/li&gt;
+  &lt;li&gt;You need to import some dependencies and plugins below into &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pom.xml&lt;/code&gt; of your spring boot project&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&quot;spring-bean&quot;&gt;SPRING BEAN&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Spring Bean&lt;/code&gt; is nothing special, any object in the Spring Framework that initialize through spring container is call &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Spring Bean&lt;/code&gt;. Any normal &lt;strong&gt;Java POJO class&lt;/strong&gt; (&lt;strong&gt;Plain Old Java Object&lt;/strong&gt;) can be a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Spring Bean&lt;/code&gt; if it is configured to be initialized via container by providing configuration metadata information.&lt;/li&gt;
-&lt;/ul&gt;
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- swagger --&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;io.swagger&lt;span class=&quot;nt&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;swagger-codegen&lt;span class=&quot;nt&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;${swagger.version}&lt;span class=&quot;nt&quot;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;io.springfox&lt;span class=&quot;nt&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;springfox-swagger2&lt;span class=&quot;nt&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;${springfox.version}&lt;span class=&quot;nt&quot;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;io.springfox&lt;span class=&quot;nt&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;springfox-swagger-ui&lt;span class=&quot;nt&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;${springfox.version}&lt;span class=&quot;nt&quot;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;com.fasterxml.jackson.datatype&lt;span class=&quot;nt&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;jackson-datatype-joda&lt;span class=&quot;nt&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
 
-&lt;h2 id=&quot;spring-bean-scopes&quot;&gt;SPRING BEAN SCOPES&lt;/h2&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;There are 5 scopes definded for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;spring beans&lt;/code&gt;:&lt;/p&gt;
-&lt;/blockquote&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;singleton&lt;/code&gt;: Only &lt;strong&gt;one instance&lt;/strong&gt; of the bean will be create for each container. This is the default scope of spring beans. While using this scope, make sure bean does not have shared instances variables otherwise it might lead to data insconsistency issues.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;prototype&lt;/code&gt;: a new instance will be created every time the bean is requested.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;request&lt;/code&gt;: This is the same as prototype scope, however it meant to be used for &lt;strong&gt;web application&lt;/strong&gt;. A new instance of the bean will be created for each HTTP request.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;session&lt;/code&gt;: A new bean will be created for each HTTP session by the container.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;global-session&lt;/code&gt;: This is used to create global session bean for Prolet applications.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;</content><author><name></name></author><category term="jekyll" /><category term="update" /><summary type="html">Spring is one of the most popular frameworks for Java enterprise edition. Developers use Spring for developing reliable and high-quality applications.</summary></entry></feed>
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;plugins&amp;gt;&lt;/span&gt;
+    ...
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;plugin&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;org.codehaus.mojo&lt;span class=&quot;nt&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;build-helper-maven-plugin&lt;span class=&quot;nt&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;1.9&lt;span class=&quot;nt&quot;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;executions&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;nt&quot;&gt;&amp;lt;execution&amp;gt;&lt;/span&gt;
+                    &lt;span class=&quot;nt&quot;&gt;&amp;lt;id&amp;gt;&lt;/span&gt;add-source&lt;span class=&quot;nt&quot;&gt;&amp;lt;/id&amp;gt;&lt;/span&gt;
+                    &lt;span class=&quot;nt&quot;&gt;&amp;lt;phase&amp;gt;&lt;/span&gt;generate-sources&lt;span class=&quot;nt&quot;&gt;&amp;lt;/phase&amp;gt;&lt;/span&gt;
+                    &lt;span class=&quot;nt&quot;&gt;&amp;lt;goals&amp;gt;&lt;/span&gt;
+                        &lt;span class=&quot;nt&quot;&gt;&amp;lt;goal&amp;gt;&lt;/span&gt;add-source&lt;span class=&quot;nt&quot;&gt;&amp;lt;/goal&amp;gt;&lt;/span&gt;
+                    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/goals&amp;gt;&lt;/span&gt;
+                    &lt;span class=&quot;nt&quot;&gt;&amp;lt;configuration&amp;gt;&lt;/span&gt;
+                        &lt;span class=&quot;nt&quot;&gt;&amp;lt;sources&amp;gt;&lt;/span&gt;
+                            &lt;span class=&quot;nt&quot;&gt;&amp;lt;source&amp;gt;&lt;/span&gt;${basedir}/target/generated-sources/src/main/java&lt;span class=&quot;nt&quot;&gt;&amp;lt;/source&amp;gt;&lt;/span&gt;
+                        &lt;span class=&quot;nt&quot;&gt;&amp;lt;/sources&amp;gt;&lt;/span&gt;
+                    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/configuration&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;nt&quot;&gt;&amp;lt;/execution&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;/executions&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;/plugin&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;plugin&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;io.swagger&lt;span class=&quot;nt&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;swagger-codegen-maven-plugin&lt;span class=&quot;nt&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;2.3.1&lt;span class=&quot;nt&quot;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;executions&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;nt&quot;&gt;&amp;lt;execution&amp;gt;&lt;/span&gt;
+                    &lt;span class=&quot;nt&quot;&gt;&amp;lt;id&amp;gt;&lt;/span&gt;swagger-code-generate&lt;span class=&quot;nt&quot;&gt;&amp;lt;/id&amp;gt;&lt;/span&gt;
+                    &lt;span class=&quot;nt&quot;&gt;&amp;lt;goals&amp;gt;&lt;/span&gt;
+                        &lt;span class=&quot;nt&quot;&gt;&amp;lt;goal&amp;gt;&lt;/span&gt;generate&lt;span class=&quot;nt&quot;&gt;&amp;lt;/goal&amp;gt;&lt;/span&gt;
+                    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/goals&amp;gt;&lt;/span&gt;
+                    &lt;span class=&quot;nt&quot;&gt;&amp;lt;configuration&amp;gt;&lt;/span&gt;
+                        &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- path to the swagger file `.yml` --&amp;gt;&lt;/span&gt;
+                        &lt;span class=&quot;nt&quot;&gt;&amp;lt;inputSpec&amp;gt;&lt;/span&gt;${project.basedir}/src/main/resources/swagger/swagger-input.yml
+                        &lt;span class=&quot;nt&quot;&gt;&amp;lt;/inputSpec&amp;gt;&lt;/span&gt;
+                        &lt;span class=&quot;nt&quot;&gt;&amp;lt;language&amp;gt;&lt;/span&gt;spring&lt;span class=&quot;nt&quot;&gt;&amp;lt;/language&amp;gt;&lt;/span&gt;
+                        &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- path to the configuration file --&amp;gt;&lt;/span&gt;
+                        &lt;span class=&quot;nt&quot;&gt;&amp;lt;configurationFile&amp;gt;&lt;/span&gt;
+                            ${project.basedir}/src/main/resources/swagger/service-config.json
+                        &lt;span class=&quot;nt&quot;&gt;&amp;lt;/configurationFile&amp;gt;&lt;/span&gt;
+                        &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- output directory, place contains generated classes --&amp;gt;&lt;/span&gt;
+                        &lt;span class=&quot;nt&quot;&gt;&amp;lt;output&amp;gt;&lt;/span&gt;${project.build.directory}&lt;span class=&quot;nt&quot;&gt;&amp;lt;/output&amp;gt;&lt;/span&gt;
+                        &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- path to the resource package that contain configuration templates --&amp;gt;&lt;/span&gt;
+                        &lt;span class=&quot;nt&quot;&gt;&amp;lt;templateDirectory&amp;gt;&lt;/span&gt;src/main/resources/swagger/templates&lt;span class=&quot;nt&quot;&gt;&amp;lt;/templateDirectory&amp;gt;&lt;/span&gt;
+                    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/configuration&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;nt&quot;&gt;&amp;lt;/execution&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;/executions&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;/plugin&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;/plugins&amp;gt;&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><category term="jekyll" /><category term="update" /><summary type="html">In this post, we will learn about swagger generator to generate Apis and swagger UI in springboot service.</summary></entry></feed>
