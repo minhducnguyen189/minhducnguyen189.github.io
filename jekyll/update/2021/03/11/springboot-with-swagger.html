@@ -30,7 +30,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="SpringBoot With Swagger" />
 <script type="application/ld+json">
-{"@type":"BlogPosting","headline":"SpringBoot With Swagger","dateModified":"2021-03-11T00:00:00+07:00","datePublished":"2021-03-11T00:00:00+07:00","mainEntityOfPage":{"@type":"WebPage","@id":"/jekyll/update/2021/03/11/springboot-with-swagger.html"},"url":"/jekyll/update/2021/03/11/springboot-with-swagger.html","description":"In this post, we will learn about swagger generator to generate Apis and swagger UI in springboot service.","@context":"https://schema.org"}</script>
+{"@type":"BlogPosting","headline":"SpringBoot With Swagger","dateModified":"2021-03-11T00:00:00+07:00","datePublished":"2021-03-11T00:00:00+07:00","url":"/jekyll/update/2021/03/11/springboot-with-swagger.html","mainEntityOfPage":{"@type":"WebPage","@id":"/jekyll/update/2021/03/11/springboot-with-swagger.html"},"description":"In this post, we will learn about swagger generator to generate Apis and swagger UI in springboot service.","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="StepByStep" /></head><body>
   <div class="container-flush">
@@ -107,6 +107,13 @@
 </ul>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    <span class="nt">&lt;properties&gt;</span>
+        ....
+		<span class="nt">&lt;swagger.version&gt;</span>2.3.1<span class="nt">&lt;/swagger.version&gt;</span>
+		<span class="nt">&lt;springfox.version&gt;</span>2.9.2<span class="nt">&lt;/springfox.version&gt;</span>
+        ....
+	<span class="nt">&lt;/properties&gt;</span>
+
     <span class="c">&lt;!-- swagger --&gt;</span>
     <span class="nt">&lt;dependency&gt;</span>
         <span class="nt">&lt;groupId&gt;</span>io.swagger<span class="nt">&lt;/groupId&gt;</span>
@@ -180,6 +187,492 @@
 	<span class="nt">&lt;/plugins&gt;</span>
 
 </code></pre></div></div>
+
+<h2 id="swagger-implementation-and-configuration">SWAGGER IMPLEMENTATION AND CONFIGURATION</h2>
+
+<ul>
+  <li>Now let create swagger package in the <code class="language-plaintext highlighter-rouge">resources</code> folder and create <code class="language-plaintext highlighter-rouge">swagger-input.yml</code> with your api definitions. You can use <a href="https://editor.swagger.io/">swagger editor</a> to write your api definitions easily. The example swagger yml will look like below.</li>
+</ul>
+
+<p><a href="/assets/images/spring-boot-swagger-resources.JPG"><img src="/assets/images/spring-boot-swagger-resources.JPG" alt="swagger resources" title="swagger resources" /></a></p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">#swagger-input.yml</span>
+
+    <span class="na">swagger</span><span class="pi">:</span> <span class="s2">"</span><span class="s">2.0"</span>
+    <span class="na">info</span><span class="pi">:</span>
+    <span class="na">title</span><span class="pi">:</span> <span class="s">Todo Application Service</span>
+    <span class="na">description</span><span class="pi">:</span> <span class="s">Todo Application Service for note your works</span>
+    <span class="na">termsOfService</span><span class="pi">:</span> <span class="s1">'</span><span class="s">http://swagger.io/terms/'</span>
+    <span class="na">contact</span><span class="pi">:</span>
+        <span class="na">email</span><span class="pi">:</span> <span class="s">apiteam@swagger.io</span>
+    <span class="na">license</span><span class="pi">:</span>
+        <span class="na">name</span><span class="pi">:</span> <span class="s">Apache </span><span class="m">2.0</span>
+        <span class="na">url</span><span class="pi">:</span> <span class="s1">'</span><span class="s">http://www.apache.org/licenses/LICENSE-2.0.html'</span>
+    <span class="na">version</span><span class="pi">:</span> <span class="s">1.0.0</span>
+    <span class="na">schemes</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s2">"</span><span class="s">https"</span>
+    <span class="pi">-</span> <span class="s2">"</span><span class="s">http"</span>
+    <span class="na">tags</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">notes</span>
+        <span class="s">description</span><span class="pi">:</span> <span class="s">Everything about notes</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">welcome</span>
+        <span class="s">description</span><span class="pi">:</span> <span class="s">Welcome page</span>
+    <span class="na">paths</span><span class="pi">:</span>
+    <span class="s">/v1/createUser</span><span class="pi">:</span>
+        <span class="na">post</span><span class="pi">:</span>
+        <span class="na">tags</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="s">users</span>
+        <span class="na">summary</span><span class="pi">:</span> <span class="s">create new user for login</span>
+        <span class="na">description</span><span class="pi">:</span> <span class="s">create new user for login</span>
+        <span class="na">operationId</span><span class="pi">:</span> <span class="s">createUser</span>
+        <span class="na">produces</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="s2">"</span><span class="s">application/text"</span>
+        <span class="na">parameters</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="na">in</span><span class="pi">:</span> <span class="s2">"</span><span class="s">query"</span>
+            <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">username"</span>
+            <span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">username"</span>
+            <span class="na">required</span><span class="pi">:</span> <span class="no">true</span>
+            <span class="na">type</span><span class="pi">:</span> <span class="s2">"</span><span class="s">string"</span>
+            <span class="pi">-</span> <span class="na">in</span><span class="pi">:</span> <span class="s2">"</span><span class="s">query"</span>
+            <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">password"</span>
+            <span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">password"</span>
+            <span class="na">required</span><span class="pi">:</span> <span class="no">true</span>
+            <span class="na">type</span><span class="pi">:</span> <span class="s2">"</span><span class="s">string"</span>
+        <span class="na">responses</span><span class="pi">:</span>
+            <span class="s1">'</span><span class="s">200'</span><span class="pi">:</span>
+            <span class="na">description</span><span class="pi">:</span> <span class="s">OK</span>
+            <span class="na">schema</span><span class="pi">:</span>
+                <span class="na">type</span><span class="pi">:</span> <span class="s">string</span>
+            <span class="s1">'</span><span class="s">400'</span><span class="pi">:</span>
+            <span class="na">description</span><span class="pi">:</span> <span class="s">Invalid input</span>
+            <span class="s1">'</span><span class="s">500'</span><span class="pi">:</span>
+            <span class="na">description</span><span class="pi">:</span> <span class="s">Internal server error</span>
+    <span class="s">/v1/authenticate</span><span class="pi">:</span>
+        <span class="na">post</span><span class="pi">:</span>
+        <span class="na">tags</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="s">authenticate</span>
+        <span class="na">summary</span><span class="pi">:</span> <span class="s">get jwt token</span>
+        <span class="na">description</span><span class="pi">:</span> <span class="s">get jwt token</span>
+        <span class="na">operationId</span><span class="pi">:</span> <span class="s">getToken</span>
+        <span class="na">produces</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="s2">"</span><span class="s">application/json"</span>
+        <span class="na">parameters</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="na">in</span><span class="pi">:</span> <span class="s2">"</span><span class="s">body"</span>
+            <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">authenticationRequest"</span>
+            <span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">authenticationRequest"</span>
+            <span class="na">required</span><span class="pi">:</span> <span class="no">true</span>
+            <span class="na">schema</span><span class="pi">:</span>
+                <span class="s">$ref</span><span class="pi">:</span> <span class="s1">'</span><span class="s">#/definitions/JwtTokenRequest'</span>
+        <span class="na">responses</span><span class="pi">:</span>
+            <span class="s1">'</span><span class="s">200'</span><span class="pi">:</span>
+            <span class="na">description</span><span class="pi">:</span> <span class="s">OK</span>
+            <span class="na">schema</span><span class="pi">:</span>
+                <span class="s">$ref</span><span class="pi">:</span> <span class="s1">'</span><span class="s">#/definitions/JwtTokenResponse'</span>
+            <span class="s1">'</span><span class="s">400'</span><span class="pi">:</span>
+            <span class="na">description</span><span class="pi">:</span> <span class="s">Invalid input</span>
+            <span class="s1">'</span><span class="s">500'</span><span class="pi">:</span>
+            <span class="na">description</span><span class="pi">:</span> <span class="s">Internal server error</span>
+    <span class="s">/v1/authenticate/refresh</span><span class="pi">:</span>
+        <span class="na">get</span><span class="pi">:</span>
+        <span class="na">tags</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="s">authenticate</span>
+        <span class="na">summary</span><span class="pi">:</span> <span class="s">refresh jwt token</span>
+        <span class="na">description</span><span class="pi">:</span> <span class="s">refresh jwt token</span>
+        <span class="na">operationId</span><span class="pi">:</span> <span class="s">refreshToken</span>
+        <span class="na">produces</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="s2">"</span><span class="s">application/json"</span>
+        <span class="na">parameters</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="na">in</span><span class="pi">:</span> <span class="s2">"</span><span class="s">header"</span>
+            <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">requestHeader"</span>
+            <span class="na">required</span><span class="pi">:</span> <span class="no">true</span>
+            <span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">header</span><span class="nv"> </span><span class="s">contain</span><span class="nv"> </span><span class="s">jwt</span><span class="nv"> </span><span class="s">token"</span>
+            <span class="na">type</span><span class="pi">:</span> <span class="s2">"</span><span class="s">string"</span>
+        <span class="na">responses</span><span class="pi">:</span>
+            <span class="s1">'</span><span class="s">200'</span><span class="pi">:</span>
+            <span class="na">description</span><span class="pi">:</span> <span class="s">OK</span>
+            <span class="na">schema</span><span class="pi">:</span>
+                <span class="s">$ref</span><span class="pi">:</span> <span class="s1">'</span><span class="s">#/definitions/JwtTokenResponse'</span>
+            <span class="s1">'</span><span class="s">400'</span><span class="pi">:</span>
+            <span class="na">description</span><span class="pi">:</span> <span class="s">Invalid input</span>
+            <span class="s1">'</span><span class="s">500'</span><span class="pi">:</span>
+            <span class="na">description</span><span class="pi">:</span> <span class="s">Internal server error</span>
+    <span class="s">/v1/welcome</span><span class="pi">:</span>
+        <span class="na">get</span><span class="pi">:</span>
+        <span class="na">tags</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="s">welcome</span>
+        <span class="na">summary</span><span class="pi">:</span> <span class="s">return a welcome message</span>
+        <span class="na">description</span><span class="pi">:</span> <span class="s">return a welcome message</span>
+        <span class="na">operationId</span><span class="pi">:</span> <span class="s">welcome</span>
+        <span class="na">produces</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="s2">"</span><span class="s">application/json"</span>
+        <span class="na">responses</span><span class="pi">:</span>
+            <span class="s1">'</span><span class="s">200'</span><span class="pi">:</span>
+            <span class="na">description</span><span class="pi">:</span> <span class="s">OK</span>
+            <span class="na">schema</span><span class="pi">:</span>
+                <span class="s">$ref</span><span class="pi">:</span> <span class="s1">'</span><span class="s">#/definitions/Welcome'</span>
+            <span class="s1">'</span><span class="s">400'</span><span class="pi">:</span>
+            <span class="na">description</span><span class="pi">:</span> <span class="s">Invalid input</span>
+            <span class="s1">'</span><span class="s">500'</span><span class="pi">:</span>
+            <span class="na">description</span><span class="pi">:</span> <span class="s">Internal server error</span>
+    <span class="s">/v1/welcome/{name}</span><span class="pi">:</span>
+        <span class="na">get</span><span class="pi">:</span>
+        <span class="na">tags</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="s">welcome</span>
+        <span class="na">summary</span><span class="pi">:</span> <span class="s">return a welcome message</span>
+        <span class="na">description</span><span class="pi">:</span> <span class="s">return a welcome message</span>
+        <span class="na">operationId</span><span class="pi">:</span> <span class="s">welcomeWithUsername</span>
+        <span class="na">produces</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="s2">"</span><span class="s">application/json"</span>
+        <span class="na">parameters</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="na">in</span><span class="pi">:</span> <span class="s2">"</span><span class="s">path"</span>
+            <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">name"</span>
+            <span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">name</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">user"</span>
+            <span class="na">required</span><span class="pi">:</span> <span class="no">true</span>
+            <span class="na">type</span><span class="pi">:</span> <span class="s2">"</span><span class="s">string"</span>
+        <span class="na">responses</span><span class="pi">:</span>
+            <span class="s1">'</span><span class="s">200'</span><span class="pi">:</span>
+            <span class="na">description</span><span class="pi">:</span> <span class="s">OK</span>
+            <span class="na">schema</span><span class="pi">:</span>
+                <span class="s">$ref</span><span class="pi">:</span> <span class="s1">'</span><span class="s">#/definitions/Welcome'</span>
+            <span class="s1">'</span><span class="s">400'</span><span class="pi">:</span>
+            <span class="na">description</span><span class="pi">:</span> <span class="s">Invalid input</span>
+            <span class="s1">'</span><span class="s">500'</span><span class="pi">:</span>
+            <span class="na">description</span><span class="pi">:</span> <span class="s">Internal server error</span>
+    <span class="s">/v1/users/{username}/todos</span><span class="pi">:</span>
+        <span class="na">post</span><span class="pi">:</span>
+        <span class="na">tags</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="s">notes</span>
+        <span class="na">summary</span><span class="pi">:</span> <span class="s">create a todo</span>
+        <span class="na">description</span><span class="pi">:</span> <span class="s">create a todo and save it into database</span>
+        <span class="na">operationId</span><span class="pi">:</span> <span class="s">createTodo</span>
+        <span class="na">consumes</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="s2">"</span><span class="s">application/json"</span>
+        <span class="na">produces</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="s2">"</span><span class="s">application/json"</span>
+        <span class="na">parameters</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="na">in</span><span class="pi">:</span> <span class="s2">"</span><span class="s">path"</span>
+            <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">username"</span>
+            <span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">name</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">user"</span>
+            <span class="na">required</span><span class="pi">:</span> <span class="no">true</span>
+            <span class="na">type</span><span class="pi">:</span> <span class="s2">"</span><span class="s">string"</span>
+            <span class="pi">-</span> <span class="na">in</span><span class="pi">:</span> <span class="s2">"</span><span class="s">body"</span>
+            <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">body"</span>
+            <span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">body</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">todo"</span>
+            <span class="na">required</span><span class="pi">:</span> <span class="no">true</span>
+            <span class="na">schema</span><span class="pi">:</span>
+                <span class="s">$ref</span><span class="pi">:</span> <span class="s1">'</span><span class="s">#/definitions/Todo'</span>
+        <span class="na">responses</span><span class="pi">:</span>
+            <span class="s1">'</span><span class="s">200'</span><span class="pi">:</span>
+            <span class="na">description</span><span class="pi">:</span> <span class="s">OK</span>
+            <span class="na">schema</span><span class="pi">:</span>
+                <span class="s">$ref</span><span class="pi">:</span> <span class="s1">'</span><span class="s">#/definitions/Todo'</span>
+            <span class="s1">'</span><span class="s">400'</span><span class="pi">:</span>
+            <span class="na">description</span><span class="pi">:</span> <span class="s">Invalid input</span>
+            <span class="s1">'</span><span class="s">500'</span><span class="pi">:</span>
+            <span class="na">description</span><span class="pi">:</span> <span class="s">Internal server error</span>
+        <span class="na">get</span><span class="pi">:</span>
+        <span class="na">tags</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="s">notes</span>
+        <span class="na">summary</span><span class="pi">:</span> <span class="s">get all todos following username</span>
+        <span class="na">description</span><span class="pi">:</span> <span class="s">get all todos following username</span>
+        <span class="na">operationId</span><span class="pi">:</span> <span class="s">getTodosByUsername</span>
+        <span class="na">produces</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="s2">"</span><span class="s">application/json"</span>
+        <span class="na">parameters</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="na">in</span><span class="pi">:</span> <span class="s2">"</span><span class="s">path"</span>
+            <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">username"</span>
+            <span class="na">required</span><span class="pi">:</span> <span class="no">true</span>
+            <span class="na">type</span><span class="pi">:</span> <span class="s2">"</span><span class="s">string"</span>
+            <span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">username"</span>
+        <span class="na">responses</span><span class="pi">:</span>
+            <span class="s1">'</span><span class="s">200'</span><span class="pi">:</span>
+            <span class="na">description</span><span class="pi">:</span> <span class="s">OK</span>
+            <span class="na">schema</span><span class="pi">:</span>
+                <span class="na">type</span><span class="pi">:</span> <span class="s">array</span>
+                <span class="na">items</span><span class="pi">:</span>
+                <span class="s">$ref</span><span class="pi">:</span> <span class="s1">'</span><span class="s">#/definitions/Todo'</span>
+            <span class="s1">'</span><span class="s">400'</span><span class="pi">:</span>
+            <span class="na">description</span><span class="pi">:</span> <span class="s">Invalid input</span>
+            <span class="s1">'</span><span class="s">500'</span><span class="pi">:</span>
+            <span class="na">description</span><span class="pi">:</span> <span class="s">Internal server error</span>
+    <span class="s">/v1/users/{username}/todos/{id}</span><span class="pi">:</span>
+        <span class="na">get</span><span class="pi">:</span>
+        <span class="na">tags</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="s">notes</span>
+        <span class="na">summary</span><span class="pi">:</span> <span class="s">get a todo</span>
+        <span class="na">description</span><span class="pi">:</span> <span class="s">get details of todo</span>
+        <span class="na">operationId</span><span class="pi">:</span> <span class="s">getTodoById</span>
+        <span class="na">produces</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="s2">"</span><span class="s">application/json"</span>
+        <span class="na">parameters</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="na">in</span><span class="pi">:</span> <span class="s2">"</span><span class="s">path"</span>
+            <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">username"</span>
+            <span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">name</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">user"</span>
+            <span class="na">required</span><span class="pi">:</span> <span class="no">true</span>
+            <span class="na">type</span><span class="pi">:</span> <span class="s2">"</span><span class="s">string"</span>
+            <span class="pi">-</span> <span class="na">in</span><span class="pi">:</span> <span class="s2">"</span><span class="s">path"</span>
+            <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">id"</span>
+            <span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">id</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">todo"</span>
+            <span class="na">required</span><span class="pi">:</span> <span class="no">true</span>
+            <span class="na">type</span><span class="pi">:</span> <span class="s2">"</span><span class="s">string"</span>
+        <span class="na">responses</span><span class="pi">:</span>
+            <span class="s1">'</span><span class="s">200'</span><span class="pi">:</span>
+            <span class="na">description</span><span class="pi">:</span> <span class="s">OK</span>
+            <span class="na">schema</span><span class="pi">:</span>
+                <span class="s">$ref</span><span class="pi">:</span> <span class="s1">'</span><span class="s">#/definitions/Todo'</span>
+            <span class="s1">'</span><span class="s">400'</span><span class="pi">:</span>
+            <span class="na">description</span><span class="pi">:</span> <span class="s">Invalid input</span>
+            <span class="s1">'</span><span class="s">500'</span><span class="pi">:</span>
+            <span class="na">description</span><span class="pi">:</span> <span class="s">Internal server error</span>
+        <span class="na">put</span><span class="pi">:</span>
+        <span class="na">tags</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="s">notes</span>
+        <span class="na">summary</span><span class="pi">:</span> <span class="s">edit a todo</span>
+        <span class="na">description</span><span class="pi">:</span> <span class="s">edit a todo with todoId</span>
+        <span class="na">operationId</span><span class="pi">:</span> <span class="s">saveTodoById</span>
+        <span class="na">consumes</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="s2">"</span><span class="s">application/json"</span>
+        <span class="na">produces</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="s2">"</span><span class="s">application/json"</span>
+        <span class="na">parameters</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="na">in</span><span class="pi">:</span> <span class="s2">"</span><span class="s">path"</span>
+            <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">username"</span>
+            <span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">name</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">user"</span>
+            <span class="na">required</span><span class="pi">:</span> <span class="no">true</span>
+            <span class="na">type</span><span class="pi">:</span> <span class="s2">"</span><span class="s">string"</span>
+            <span class="pi">-</span> <span class="na">in</span><span class="pi">:</span> <span class="s2">"</span><span class="s">path"</span>
+            <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">id"</span>
+            <span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">id</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">todo"</span>
+            <span class="na">required</span><span class="pi">:</span> <span class="no">true</span>
+            <span class="na">type</span><span class="pi">:</span> <span class="s2">"</span><span class="s">string"</span>
+            <span class="pi">-</span> <span class="na">in</span><span class="pi">:</span> <span class="s2">"</span><span class="s">body"</span>
+            <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">todo"</span>
+            <span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">body</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">todo"</span>
+            <span class="na">required</span><span class="pi">:</span> <span class="no">true</span>
+            <span class="na">schema</span><span class="pi">:</span>
+                <span class="s">$ref</span><span class="pi">:</span> <span class="s1">'</span><span class="s">#/definitions/Todo'</span>
+        <span class="na">responses</span><span class="pi">:</span>
+            <span class="s1">'</span><span class="s">200'</span><span class="pi">:</span>
+            <span class="na">description</span><span class="pi">:</span> <span class="s">OK</span>
+            <span class="na">schema</span><span class="pi">:</span>
+                <span class="na">type</span><span class="pi">:</span> <span class="s">boolean</span>
+            <span class="s1">'</span><span class="s">400'</span><span class="pi">:</span>
+            <span class="na">description</span><span class="pi">:</span> <span class="s">Invalid input</span>
+            <span class="s1">'</span><span class="s">500'</span><span class="pi">:</span>
+            <span class="na">description</span><span class="pi">:</span> <span class="s">Internal server error</span>
+        <span class="na">delete</span><span class="pi">:</span>
+        <span class="na">tags</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="s">notes</span>
+        <span class="na">summary</span><span class="pi">:</span> <span class="s">delete a todo</span>
+        <span class="na">description</span><span class="pi">:</span> <span class="s">delete a todo by todoId</span>
+        <span class="na">operationId</span><span class="pi">:</span> <span class="s">deleteTodoById</span>
+        <span class="na">parameters</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="na">in</span><span class="pi">:</span> <span class="s2">"</span><span class="s">path"</span>
+            <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">username"</span>
+            <span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">name</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">user"</span>
+            <span class="na">required</span><span class="pi">:</span> <span class="no">true</span>
+            <span class="na">type</span><span class="pi">:</span> <span class="s2">"</span><span class="s">string"</span>
+            <span class="pi">-</span> <span class="na">in</span><span class="pi">:</span> <span class="s2">"</span><span class="s">path"</span>
+            <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">id"</span>
+            <span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">id</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">todo"</span>
+            <span class="na">required</span><span class="pi">:</span> <span class="no">true</span>
+            <span class="na">type</span><span class="pi">:</span> <span class="s2">"</span><span class="s">string"</span>
+        <span class="na">responses</span><span class="pi">:</span>
+            <span class="s1">'</span><span class="s">200'</span><span class="pi">:</span>
+            <span class="na">description</span><span class="pi">:</span> <span class="s">OK</span>
+            <span class="na">schema</span><span class="pi">:</span>
+                <span class="na">type</span><span class="pi">:</span> <span class="s">boolean</span>
+            <span class="s1">'</span><span class="s">400'</span><span class="pi">:</span>
+            <span class="na">description</span><span class="pi">:</span> <span class="s">Invalid input</span>
+            <span class="s1">'</span><span class="s">500'</span><span class="pi">:</span>
+            <span class="na">description</span><span class="pi">:</span> <span class="s">Internal server error</span>
+    <span class="na">definitions</span><span class="pi">:</span>
+    <span class="na">Auth</span><span class="pi">:</span>
+        <span class="na">type</span><span class="pi">:</span> <span class="s">object</span>
+        <span class="na">properties</span><span class="pi">:</span>
+        <span class="na">message</span><span class="pi">:</span>
+            <span class="na">type</span><span class="pi">:</span> <span class="s">string</span>
+    <span class="na">Welcome</span><span class="pi">:</span>
+        <span class="na">type</span><span class="pi">:</span> <span class="s">object</span>
+        <span class="na">properties</span><span class="pi">:</span>
+        <span class="na">message</span><span class="pi">:</span>
+            <span class="na">type</span><span class="pi">:</span> <span class="s">string</span>
+    <span class="na">Todo</span><span class="pi">:</span>
+        <span class="na">type</span><span class="pi">:</span> <span class="s">object</span>
+        <span class="na">properties</span><span class="pi">:</span>
+        <span class="na">id</span><span class="pi">:</span>
+            <span class="na">type</span><span class="pi">:</span> <span class="s">string</span>
+        <span class="na">username</span><span class="pi">:</span>
+            <span class="na">type</span><span class="pi">:</span> <span class="s">string</span>
+        <span class="na">description</span><span class="pi">:</span>
+            <span class="na">type</span><span class="pi">:</span> <span class="s">string</span>
+        <span class="na">targetDate</span><span class="pi">:</span>
+            <span class="na">type</span><span class="pi">:</span> <span class="s">string</span>
+        <span class="na">isDone</span><span class="pi">:</span>
+            <span class="na">type</span><span class="pi">:</span> <span class="s">boolean</span>
+    <span class="na">JwtTokenRequest</span><span class="pi">:</span>
+        <span class="na">type</span><span class="pi">:</span> <span class="s">object</span>
+        <span class="na">properties</span><span class="pi">:</span>
+        <span class="na">username</span><span class="pi">:</span>
+            <span class="na">type</span><span class="pi">:</span> <span class="s">string</span>
+        <span class="na">password</span><span class="pi">:</span>
+            <span class="na">type</span><span class="pi">:</span> <span class="s">string</span>
+    <span class="na">JwtTokenResponse</span><span class="pi">:</span>
+        <span class="na">type</span><span class="pi">:</span> <span class="s">object</span>
+        <span class="na">properties</span><span class="pi">:</span>
+        <span class="na">token</span><span class="pi">:</span>
+            <span class="na">type</span><span class="pi">:</span> <span class="s">string</span>
+</code></pre></div></div>
+
+<ul>
+  <li>Next, you need to create a file <code class="language-plaintext highlighter-rouge">service-config.json</code> with some configuration as below</li>
+</ul>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+    </span><span class="err">#service-config.json</span><span class="w">
+
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"artifactId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"todos"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"basePackage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"com.example.todos"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"apiPackage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"com.example.todos.api"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"configPackage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"com.example.todos.api.config"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"modelPackage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"com.example.todos.api.model"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"delegatePattern"</span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"hideGenerationTimestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"useBeanValidation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"dateLibrary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"joda"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"sourceFolder"</span><span class="p">:</span><span class="w"> </span><span class="s2">"generated-sources/src/main/java"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+
+</span></code></pre></div></div>
+
+<h2 id="testing">TESTING</h2>
+
+<ul>
+  <li>Now, you will use command <code class="language-plaintext highlighter-rouge">mvn clean package</code> to build your project with swagger then you will see the generated source as in the image below</li>
+</ul>
+
+<p><a href="/assets/images/spring-boot-swagger-generated-srouce.JPG"><img src="/assets/images/spring-boot-swagger-generated-srouce.JPG" alt="swagger generated source" title="swagger generated source" /></a></p>
+
+<ul>
+  <li>Now, let create a <code class="language-plaintext highlighter-rouge">DelegateImpl</code> component and implement <code class="language-plaintext highlighter-rouge">V1ApiDelegate</code> from generated source, then add business code as the example below</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    <span class="kn">package</span> <span class="nn">com.example.todos.delegate</span><span class="o">;</span>
+
+    <span class="kn">import</span> <span class="nn">com.example.todos.api.V1ApiDelegate</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">com.example.todos.api.model.*</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">com.example.todos.services.AuthenticationService</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">com.example.todos.services.TodoService</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">com.example.todos.services.UserService</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">org.springframework.http.HttpStatus</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">org.springframework.http.ResponseEntity</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">org.springframework.stereotype.Component</span><span class="o">;</span>
+
+    <span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+
+    <span class="nd">@Component</span>
+    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">V1ApiDelegateImpl</span> <span class="kd">implements</span> <span class="nc">V1ApiDelegate</span><span class="o">{</span>
+
+        <span class="nd">@Autowired</span>
+        <span class="kd">private</span> <span class="nc">TodoService</span> <span class="n">todoService</span><span class="o">;</span>
+
+        <span class="nd">@Autowired</span>
+        <span class="kd">private</span> <span class="nc">UserService</span> <span class="n">userService</span><span class="o">;</span>
+
+        <span class="nd">@Autowired</span>
+        <span class="kd">private</span> <span class="nc">AuthenticationService</span> <span class="n">authenticationService</span><span class="o">;</span>
+
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">Todo</span><span class="o">&gt;</span> <span class="nf">createTodo</span><span class="o">(</span><span class="nc">String</span> <span class="n">username</span><span class="o">,</span> <span class="nc">Todo</span> <span class="n">body</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="k">new</span> <span class="nc">ResponseEntity</span><span class="o">&lt;&gt;(</span><span class="n">todoService</span><span class="o">.</span><span class="na">createTodo</span><span class="o">(</span><span class="n">username</span><span class="o">,</span> <span class="n">body</span><span class="o">),</span> <span class="nc">HttpStatus</span><span class="o">.</span><span class="na">OK</span><span class="o">);</span>
+        <span class="o">}</span>
+
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="nf">createUser</span><span class="o">(</span><span class="nc">String</span> <span class="n">username</span><span class="o">,</span> <span class="nc">String</span> <span class="n">password</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="nc">ResponseEntity</span><span class="o">.</span><span class="na">ok</span><span class="o">(</span><span class="n">userService</span><span class="o">.</span><span class="na">createUser</span><span class="o">(</span><span class="n">username</span><span class="o">,</span> <span class="n">password</span><span class="o">));</span>
+        <span class="o">}</span>
+
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">Boolean</span><span class="o">&gt;</span> <span class="nf">deleteTodoById</span><span class="o">(</span><span class="nc">String</span> <span class="n">username</span><span class="o">,</span> <span class="nc">String</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="k">new</span> <span class="nc">ResponseEntity</span><span class="o">&lt;&gt;(</span><span class="n">todoService</span><span class="o">.</span><span class="na">deleteTodo</span><span class="o">(</span><span class="n">username</span><span class="o">,</span> <span class="n">id</span><span class="o">),</span> <span class="nc">HttpStatus</span><span class="o">.</span><span class="na">OK</span><span class="o">);</span>
+        <span class="o">}</span>
+
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">Todo</span><span class="o">&gt;</span> <span class="nf">getTodoById</span><span class="o">(</span><span class="nc">String</span> <span class="n">username</span><span class="o">,</span> <span class="nc">String</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="k">new</span> <span class="nc">ResponseEntity</span><span class="o">&lt;&gt;(</span><span class="n">todoService</span><span class="o">.</span><span class="na">getTodoById</span><span class="o">(</span><span class="n">username</span><span class="o">,</span> <span class="n">id</span><span class="o">),</span> <span class="nc">HttpStatus</span><span class="o">.</span><span class="na">OK</span><span class="o">);</span>
+        <span class="o">}</span>
+
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">List</span><span class="o">&lt;</span><span class="nc">Todo</span><span class="o">&gt;&gt;</span> <span class="nf">getTodosByUsername</span><span class="o">(</span><span class="nc">String</span> <span class="n">username</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="k">new</span> <span class="nc">ResponseEntity</span><span class="o">&lt;&gt;(</span><span class="n">todoService</span><span class="o">.</span><span class="na">getTodosByUsername</span><span class="o">(</span><span class="n">username</span><span class="o">),</span> <span class="nc">HttpStatus</span><span class="o">.</span><span class="na">OK</span><span class="o">);</span>
+        <span class="o">}</span>
+
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">JwtTokenResponse</span><span class="o">&gt;</span> <span class="nf">getToken</span><span class="o">(</span><span class="nc">JwtTokenRequest</span> <span class="n">authenticationRequest</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="k">new</span> <span class="nc">ResponseEntity</span><span class="o">&lt;&gt;(</span><span class="n">authenticationService</span><span class="o">.</span><span class="na">getToken</span><span class="o">(</span><span class="n">authenticationRequest</span><span class="o">),</span> <span class="nc">HttpStatus</span><span class="o">.</span><span class="na">OK</span><span class="o">);</span>
+        <span class="o">}</span>
+
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">JwtTokenResponse</span><span class="o">&gt;</span> <span class="nf">refreshToken</span><span class="o">(</span><span class="nc">String</span> <span class="n">requestHeader</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">JwtTokenResponse</span> <span class="n">token</span> <span class="o">=</span> <span class="n">authenticationService</span><span class="o">.</span><span class="na">refreshToken</span><span class="o">(</span><span class="n">requestHeader</span><span class="o">);</span>
+            <span class="k">if</span><span class="o">(</span><span class="n">token</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">return</span> <span class="k">new</span> <span class="nc">ResponseEntity</span><span class="o">&lt;&gt;(</span><span class="n">token</span><span class="o">,</span> <span class="nc">HttpStatus</span><span class="o">.</span><span class="na">OK</span><span class="o">);</span>
+            <span class="o">}</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nf">RuntimeException</span><span class="o">(</span><span class="s">"Token can not be refeshed!"</span><span class="o">);</span>
+        <span class="o">}</span>
+
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">Boolean</span><span class="o">&gt;</span> <span class="nf">saveTodoById</span><span class="o">(</span><span class="nc">String</span> <span class="n">username</span><span class="o">,</span> <span class="nc">String</span> <span class="n">id</span><span class="o">,</span> <span class="nc">Todo</span> <span class="n">todo</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="k">new</span> <span class="nc">ResponseEntity</span><span class="o">&lt;&gt;(</span><span class="n">todoService</span><span class="o">.</span><span class="na">saveTodoById</span><span class="o">(</span><span class="n">username</span><span class="o">,</span> <span class="n">id</span><span class="o">,</span> <span class="n">todo</span><span class="o">),</span> <span class="nc">HttpStatus</span><span class="o">.</span><span class="na">OK</span><span class="o">);</span>
+        <span class="o">}</span>
+
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">Welcome</span><span class="o">&gt;</span> <span class="nf">welcomeWithUsername</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">Welcome</span> <span class="n">welcome</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Welcome</span><span class="o">();</span>
+            <span class="n">welcome</span><span class="o">.</span><span class="na">setMessage</span><span class="o">(</span><span class="s">"Hi "</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="s">", Welcome to my Todo site"</span><span class="o">);</span>
+            <span class="k">return</span> <span class="k">new</span> <span class="nc">ResponseEntity</span><span class="o">&lt;&gt;(</span><span class="n">welcome</span><span class="o">,</span> <span class="nc">HttpStatus</span><span class="o">.</span><span class="na">OK</span><span class="o">);</span>
+        <span class="o">}</span>
+
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">Welcome</span><span class="o">&gt;</span> <span class="nf">welcome</span><span class="o">()</span> <span class="o">{</span>
+            <span class="nc">Welcome</span> <span class="n">welcome</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Welcome</span><span class="o">();</span>
+            <span class="n">welcome</span><span class="o">.</span><span class="na">setMessage</span><span class="o">(</span><span class="s">"Welcome to my Todo site"</span><span class="o">);</span>
+            <span class="k">return</span> <span class="k">new</span> <span class="nc">ResponseEntity</span><span class="o">&lt;&gt;(</span><span class="n">welcome</span><span class="o">,</span> <span class="nc">HttpStatus</span><span class="o">.</span><span class="na">OK</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+</code></pre></div></div>
+
+<ul>
+  <li>Then try to run your project by <code class="language-plaintext highlighter-rouge">Swagger2SpringBoot</code> class which stay in your <code class="language-plaintext highlighter-rouge">generated-sources</code> folder. Then open browser and go to <code class="language-plaintext highlighter-rouge">localhost:8080</code> to check your swagger-ui.</li>
+</ul>
+
+<p><a href="/assets/images/spring-boot-swagger-ui.JPG"><img src="/assets/images/spring-boot-swagger-ui.JPG" alt="swagger-ui" title="swagger-ui" /></a></p>
+
+<h2 id="advances">ADVANCES</h2>
+
+<ul>
+  <li>
+    <p>Sometimes you can not control the generated classes as main class <code class="language-plaintext highlighter-rouge">Swagger2SpringBoot</code> or models <code class="language-plaintext highlighter-rouge">pojo</code> classes. So, there is a way which will help you to do that. Let’s create a <code class="language-plaintext highlighter-rouge">templates</code> package in your <code class="language-plaintext highlighter-rouge">resources</code> directory. Then add your configuration <code class="language-plaintext highlighter-rouge">mustaches</code> file there. Note the name of mustaches files have to be the same as in <a href="https://github.com/swagger-api/swagger-codegen/tree/master/modules/swagger-codegen/src/main/resources/JavaSpring">this repository</a>.</p>
+  </li>
+  <li>You can copy the content of the mustaches files as in the repo above and edit the content as the way you want.</li>
+  <li>For example, I want to add <code class="language-plaintext highlighter-rouge">@JsonIgnoreProperties</code> into every generated models. So I can do it as the image below.</li>
+</ul>
+
+<p><a href="/assets/images/spring-boot-swagger-pojo-template.JPG"><img src="/assets/images/spring-boot-swagger-pojo-template.JPG" alt="pojo mustache" title="pojo mustache" /></a></p>
+
+<ul>
+  <li>Then build your project again and check your generated models, you can see the annotation as below</li>
+</ul>
+
+<p><a href="/assets/images/spring-boot-swagger-mustache-pojo.JPG"><img src="/assets/images/spring-boot-swagger-mustache-pojo.JPG" alt="result mustache pojo" title="result mustache pojo" /></a></p>
+
+<ul>
+  <li>That’s all for this post! Good luck!</li>
+</ul>
 
     </div><a class="u-url" href="/jekyll/update/2021/03/11/springboot-with-swagger.html" hidden></a>
   </article>
