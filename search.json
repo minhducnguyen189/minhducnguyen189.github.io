@@ -98,8 +98,8 @@
   
     {
 
-      "title"    : "SpringBoot With Swagger",
-      "url"      : "/jekyll/update/2021/03/11/springboot-with-swagger.html",
+      "title"    : "SOLID Principles",
+      "url"      : "/jekyll/update/2021/03/11/solid-principles.html",
       "category" : "jekyll, update",
       "tags"     : "",
       "date"     : "2021-03-11 00:00:00 +0700",
@@ -110,8 +110,8 @@
   
     {
 
-      "title"    : "SOLID Principles",
-      "url"      : "/jekyll/update/2021/03/11/solid-principles.html",
+      "title"    : "SpringBoot With Swagger",
+      "url"      : "/jekyll/update/2021/03/11/java-springboot-with-swagger.html",
       "category" : "jekyll, update",
       "tags"     : "",
       "date"     : "2021-03-11 00:00:00 +0700",
@@ -250,6 +250,18 @@
     "category" : "jekyll, updatel",
     "tags"     : "",
     "date"     : "2021-07-04 12:00:00 +0700",
+    "discription" : ""
+
+  } 
+  ,
+  
+  {
+
+    "title"    : "Springboot Configurations For Databases",
+    "url"      : "/database-posts/2021-08-07-database-with-springboot-configuration.html",
+    "category" : "jekyll, updatel",
+    "tags"     : "",
+    "date"     : "2021-08-07 00:00:00 +0700",
     "discription" : ""
 
   } 
