@@ -181,9 +181,11 @@ table td { border: 1px solid #e8e8e8; }
 
 #search-container #search-input { width: 310px; height: 40px; border-radius: 5px; }
 
-#search-container #results-container { list-style-type: none; margin-left: 0px; width: 310px; z-index: 20; position: absolute; border-radius: 5px; background-color: #ecf0f1; }
+#search-container #results-container { list-style-type: none; margin-left: 0px; margin-top: 50px; width: 310px; z-index: 20; position: absolute; border-radius: 5px; background-color: #ecf0f1; }
 
 #search-container #results-container li { width: 100%; }
+
+#clear { position: absolute; border-radius: 5px; right: 0px; z-index: 2; border: none; height: 40px; cursor: pointer; color: white; background-color: #2a7ae2; }
 
 /** Syntax highlighting styles */
 .highlight { background: #fff; }

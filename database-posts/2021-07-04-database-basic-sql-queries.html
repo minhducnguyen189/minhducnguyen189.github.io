@@ -36,7 +36,7 @@
   <div class="container-flush">
     <div class="row"><!-- navigation bar -->
 <div class="col-lg-12">
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" role="banner"><a class="navbar-brand site-title" rel="author" href="/">StepByStep</a><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" role="banner"><a class="navbar-brand site-title" rel="author" href="/%20/">StepByStep</a><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
       aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -53,8 +53,9 @@
           <a class="nav-link" href="/python/">Python</a>
         </li></ul>
     </div><!-- Html Elements for Search -->
-    <div id="search-container">
+    <div id="search-container" class="btn-group">
       <input type="text" id="search-input" placeholder="search...">
+      <button id="clear">clear</button>
       <ul id="results-container"></ul>
     </div>
 
@@ -69,6 +70,17 @@
         json: '/search.json'
       })
     </script>
+
+    <!-- search clear -->
+    <script>
+      window.addEventListener('load', () => {
+          const button = document.querySelector('#clear');
+          button.addEventListener('click', () => {
+              document.querySelector('#search-input').value = "";
+              document.querySelector('#results-container').innerHTML = "";
+          });
+      }); 
+  </script>
   </nav>
 </div></div>
   </div>
