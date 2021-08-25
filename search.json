@@ -227,6 +227,18 @@
     "discription" : ""
 
   } 
+  ,
+  
+  {
+
+    "title"    : "Docker For Creating Jenkins Server",
+    "url"      : "/docker-posts/2021-08-21-docker-with-jenkins.html",
+    "category" : "jekyll, update",
+    "tags"     : "",
+    "date"     : "2021-08-21 08:15:47 +0700",
+    "discription" : ""
+
+  } 
   
    ,
   
