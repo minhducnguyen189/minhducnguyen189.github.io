@@ -154,6 +154,16 @@ table td { border: 1px solid #e8e8e8; }
 
 .post-link-database:hover > h3 { color: black; }
 
+.post-link-ci-cd { display: block; padding: 10px; padding-left: 20px; padding-right: 20px; border: 2px solid #6ab04c; border-radius: 20px; background-color: #6ab04c; width: 100%; font-size: 22.5px; }
+
+.post-link-ci-cd h3 { color: #ffffff; }
+
+.post-link-ci-cd:hover { text-decoration: none; background-color: #b2bec3; border: 2px solid #b2bec3; }
+
+.post-link-ci-cd:hover .post-meta { color: black; }
+
+.post-link-ci-cd:hover > h3 { color: black; }
+
 /** Posts */
 .post { margin-top: 40px; margin-bottom: 80px; }
 
