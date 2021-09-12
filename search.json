@@ -289,6 +289,18 @@
     "discription" : ""
 
   } 
+  ,
+  
+  {
+
+    "title"    : "Differencies Betweem JDBC And Hibernate In Java",
+    "url"      : "/database-posts/2021-09-11-database-JDBC-Hibernate-Java.html",
+    "category" : "jekyll, update",
+    "tags"     : "",
+    "date"     : "2021-09-11 00:00:00 +0700",
+    "discription" : ""
+
+  } 
   
   
 ]
