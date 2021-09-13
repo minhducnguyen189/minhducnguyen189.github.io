@@ -77,6 +77,8 @@ table th { background-color: #f0f0f0; border: 1px solid #dedede; border-bottom-c
 
 table td { border: 1px solid #e8e8e8; }
 
+.nav-link { font-size: 1.3em; }
+
 /** Site header */
 .site-title { font-size: 29.25px; font-weight: 300; line-height: 60.75px; letter-spacing: -1px; margin-bottom: 0; float: left; }
 
