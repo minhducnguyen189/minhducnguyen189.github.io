@@ -301,6 +301,18 @@
     "discription" : ""
 
   } 
+  ,
+  
+  {
+
+    "title"    : "Intermediate SQL Queries That You Should Know",
+    "url"      : "/database-posts/2021-09-15-database-intermediate-sql-queries.html",
+    "category" : "jekyll, update",
+    "tags"     : "",
+    "date"     : "2021-09-15 00:00:00 +0700",
+    "discription" : ""
+
+  } 
   
   
 ]
