@@ -313,6 +313,18 @@
     "discription" : ""
 
   } 
+  ,
+  
+  {
+
+    "title"    : "Data Science: R LANGUAGE PART 1",
+    "url"      : "/database-posts/2021-09-23-data-science-R-basic.html",
+    "category" : "jekyll, update",
+    "tags"     : "",
+    "date"     : "2021-09-15 00:00:00 +0700",
+    "discription" : ""
+
+  } 
   
   
 ]
