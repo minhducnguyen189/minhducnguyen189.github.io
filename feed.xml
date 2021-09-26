@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2021-09-26T09:04:20+07:00</updated><id>/feed.xml</id><title type="html">StepByStep</title><subtitle>Hi there! Let's explore some general knowleadges and briefly definitions  in programming. I hope that this website can help people saving time in learning, also give some motivations for those who have choice the developer path.</subtitle><entry><title type="html">Differencies Betweem JDBC And Hibernate In Java</title><link href="/jekyll/update/2021/09/11/java-springboot-JDBC-Hibernate-Java.html" rel="alternate" type="text/html" title="Differencies Betweem JDBC And Hibernate In Java" /><published>2021-09-11T00:00:00+07:00</published><updated>2021-09-11T00:00:00+07:00</updated><id>/jekyll/update/2021/09/11/java-springboot-JDBC-Hibernate-Java</id><content type="html" xml:base="/jekyll/update/2021/09/11/java-springboot-JDBC-Hibernate-Java.html">&lt;blockquote&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2021-09-26T09:29:42+07:00</updated><id>/feed.xml</id><title type="html">StepByStep</title><subtitle>Hi there! Let's explore some general knowleadges and briefly definitions  in programming. I hope that this website can help people saving time in learning, also give some motivations for those who have choice the developer path.</subtitle><entry><title type="html">Spring Security: SQL Injection</title><link href="/jekyll/update/2021/09/26/java-springboot-security-SQL-Injection.html" rel="alternate" type="text/html" title="Spring Security: SQL Injection" /><published>2021-09-26T00:00:00+07:00</published><updated>2021-09-26T00:00:00+07:00</updated><id>/jekyll/update/2021/09/26/java-springboot-security-SQL-Injection</id><content type="html" xml:base="/jekyll/update/2021/09/26/java-springboot-security-SQL-Injection.html"></content><author><name></name></author><category term="jekyll" /><category term="update" /><summary type="html"></summary></entry><entry><title type="html">Differencies Betweem JDBC And Hibernate In Java</title><link href="/jekyll/update/2021/09/11/java-springboot-JDBC-Hibernate-Java.html" rel="alternate" type="text/html" title="Differencies Betweem JDBC And Hibernate In Java" /><published>2021-09-11T00:00:00+07:00</published><updated>2021-09-11T00:00:00+07:00</updated><id>/jekyll/update/2021/09/11/java-springboot-JDBC-Hibernate-Java</id><content type="html" xml:base="/jekyll/update/2021/09/11/java-springboot-JDBC-Hibernate-Java.html">&lt;blockquote&gt;
   &lt;p&gt;In this post we will learn about some basic differences betweeen JDBC and Hibernate that we usually use in our project for interaction with relational Database&lt;/p&gt;
 &lt;/blockquote&gt;
 
@@ -2648,61 +2648,4 @@ For example below, I can choose only apis which is started with &lt;code class=&
 
 &lt;ul&gt;
   &lt;li&gt;So, That’s all for this post, Good luck!&lt;/li&gt;
-&lt;/ul&gt;</content><author><name></name></author><category term="jekyll" /><category term="update" /><summary type="html">In this post we will learn how to use Spring Data JPA to handle pagination and sorting Data.</summary></entry><entry><title type="html">Spring Boot And Basic Concepts</title><link href="/jekyll/update/2021/03/12/java-springboot-basic-concepts.html" rel="alternate" type="text/html" title="Spring Boot And Basic Concepts" /><published>2021-03-12T00:00:00+07:00</published><updated>2021-03-12T00:00:00+07:00</updated><id>/jekyll/update/2021/03/12/java-springboot-basic-concepts</id><content type="html" xml:base="/jekyll/update/2021/03/12/java-springboot-basic-concepts.html">&lt;blockquote&gt;
-  &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Spring Boot&lt;/code&gt; is a framework from “&lt;strong&gt;The Spring Team&lt;/strong&gt;” to ease the bootstrapping and development of new Spring applications. It provides default for code and annotation configuration to quick start new Spring projects within no time.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;It follows “&lt;strong&gt;Opinionated Defaults Configuration&lt;/strong&gt;” approach to avoid lots of boilerplate code and configuration to improve development, UnitTest and intergration test process.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;Springboot = SpringFramework + EmbeddedHttp servers (Tomcat, Jetty) - xml&lt;bean&gt; Configuration or @Configuration&lt;/bean&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://www.journaldev.com/7969/spring-boot-tutorial&quot;&gt;More information&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;key-components-of-spring-boot-framework&quot;&gt;KEY COMPONENTS OF SPRING BOOT FRAMEWORK&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;There are 4 major components&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;a href=&quot;/assets/images/springbootcomponents.png&quot;&gt;&lt;img src=&quot;/assets/images/springbootcomponents.png&quot; alt=&quot;spring boot components&quot; title=&quot;spring boot components&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;spring-boot-starter&quot;&gt;SPRING BOOT STARTER&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Spring boot starters&lt;/code&gt; is one of the major key features or components of &lt;strong&gt;Spring Boot Framework&lt;/strong&gt;. The main responsibility of Spring boot stater is to compine a group of common or related dependencies into single dependencies.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Major advantanges of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Spring boot Stater&lt;/code&gt;:
-    &lt;ul&gt;
-      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Spring boot stater&lt;/code&gt; reduces defining many dependencies simplify project build dependencies.&lt;/li&gt;
-      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Spring boot stater&lt;/code&gt; simplifies project build dependencies.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Ex: To develop a spring WebApplication with Tomcat webserver, we need to add some dependencies and below into Maven’s &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pom.xml&lt;/code&gt; file.
-    &lt;ul&gt;
-      &lt;li&gt;Spring core jar file.&lt;/li&gt;
-      &lt;li&gt;Spring web jar file.&lt;/li&gt;
-      &lt;li&gt;Spring web MVC jar file.&lt;/li&gt;
-      &lt;li&gt;Servlet jar file.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;So, if we add “&lt;strong&gt;spring-boot-stater-web&lt;/strong&gt;” jar file dependency to our build file, then spring boot framework will &lt;strong&gt;automatically download all required jars&lt;/strong&gt; and add to our project classpath.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;a href=&quot;/assets/images/spring-boot-starter-dependencies.png&quot;&gt;&lt;img src=&quot;/assets/images/spring-boot-starter-dependencies.png&quot; alt=&quot;spring-boot-starter-dependencies&quot; title=&quot;spring-boot-starter-dependencies&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;spring-boot-autoconfigurator&quot;&gt;SPRING BOOT AUTOCONFIGURATOR&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;To develop a Spring-based application requires a lot of configuration (Either XM configuration of Annotation Configuration). The solution to this problem is Spring Boot AutoConfigurator. The main responsibility of Spring Boot Autoconfiguratior is to reduce the Spring Configuration. If we develop spring applications in Spring Boot, then we don’t need to define single XML configuration and almost no or minimal annotation configuration. Spring Boot Autoconfigurator component will take care of providing these information.&lt;/li&gt;
-  &lt;li&gt;If we use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;@SpringBootApplication&lt;/code&gt; annotation at class level, then Spring Boot Autoconfigurator will automatically add all required annotations to Java Class ByteCode.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;@SpringBootApplication = @Configuration + @ComponentScan + @EnableAutoConfiguration.&lt;/p&gt;
-
-&lt;hr /&gt;</content><author><name></name></author><category term="jekyll" /><category term="update" /><summary type="html">Spring Boot is a framework from “The Spring Team” to ease the bootstrapping and development of new Spring applications. It provides default for code and annotation configuration to quick start new Spring projects within no time.</summary></entry></feed>
+&lt;/ul&gt;</content><author><name></name></author><category term="jekyll" /><category term="update" /><summary type="html">In this post we will learn how to use Spring Data JPA to handle pagination and sorting Data.</summary></entry></feed>

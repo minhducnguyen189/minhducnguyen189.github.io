@@ -2,6 +2,18 @@
   
     {
 
+      "title"    : "Spring Security: SQL Injection",
+      "url"      : "/jekyll/update/2021/09/26/java-springboot-security-SQL-Injection.html",
+      "category" : "jekyll, update",
+      "tags"     : "",
+      "date"     : "2021-09-26 00:00:00 +0700",
+      "discription" : ""
+
+    }
+    ,
+  
+    {
+
       "title"    : "Differencies Betweem JDBC And Hibernate In Java",
       "url"      : "/jekyll/update/2021/09/11/java-springboot-JDBC-Hibernate-Java.html",
       "category" : "jekyll, update",
@@ -321,7 +333,7 @@
     "url"      : "/database-posts/2021-09-23-data-science-R-basic.html",
     "category" : "jekyll, update",
     "tags"     : "",
-    "date"     : "2021-09-15 00:00:00 +0700",
+    "date"     : "2021-09-23 00:00:00 +0700",
     "discription" : ""
 
   } 
@@ -333,7 +345,7 @@
     "url"      : "/database-posts/2021-09-26-data-science-R-data-types.html",
     "category" : "jekyll, update",
     "tags"     : "",
-    "date"     : "2021-09-15 00:00:00 +0700",
+    "date"     : "2021-09-26 00:00:00 +0700",
     "discription" : ""
 
   } 
