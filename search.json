@@ -325,6 +325,18 @@
     "discription" : ""
 
   } 
+  ,
+  
+  {
+
+    "title"    : "Data Science: R DATA TYPES",
+    "url"      : "/database-posts/2021-09-26-data-science-R-data-types.html",
+    "category" : "jekyll, update",
+    "tags"     : "",
+    "date"     : "2021-09-15 00:00:00 +0700",
+    "discription" : ""
+
+  } 
   
   
 ]
