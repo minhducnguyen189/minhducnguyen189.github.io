@@ -14,6 +14,18 @@
   
     {
 
+      "title"    : "Gradle With Basic Concepts",
+      "url"      : "/jekyll/update/2021/09/18/java-springboot-gradle-basic-concepts.html",
+      "category" : "jekyll, update",
+      "tags"     : "",
+      "date"     : "2021-09-18 00:00:00 +0700",
+      "discription" : ""
+
+    }
+    ,
+  
+    {
+
       "title"    : "Differencies Betweem JDBC And Hibernate In Java",
       "url"      : "/jekyll/update/2021/09/11/java-springboot-JDBC-Hibernate-Java.html",
       "category" : "jekyll, update",
@@ -329,7 +341,7 @@
   
   {
 
-    "title"    : "Data Science: R LANGUAGE PART 1",
+    "title"    : "Data Science: R Language Basic",
     "url"      : "/database-posts/2021-09-23-data-science-R-basic.html",
     "category" : "jekyll, update",
     "tags"     : "",
@@ -341,8 +353,20 @@
   
   {
 
-    "title"    : "Data Science: R DATA TYPES",
+    "title"    : "Data Science: R Data Types",
     "url"      : "/database-posts/2021-09-26-data-science-R-data-types.html",
+    "category" : "jekyll, update",
+    "tags"     : "",
+    "date"     : "2021-09-26 00:00:00 +0700",
+    "discription" : ""
+
+  } 
+  ,
+  
+  {
+
+    "title"    : "Data Science: R Vector and Vector coercion",
+    "url"      : "/database-posts/2021-10-01-data-science-R-vector.html",
     "category" : "jekyll, update",
     "tags"     : "",
     "date"     : "2021-09-26 00:00:00 +0700",

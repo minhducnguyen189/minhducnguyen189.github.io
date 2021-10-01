@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- bootstrap library and JS, Jquery -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Gradle With Basic Concepts | StepByStep</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Gradle With Basic Concepts" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="WHAT IS GRADLE?" />
+<meta property="og:description" content="WHAT IS GRADLE?" />
+<link rel="canonical" href="/jekyll/update/2021/09/18/java-springboot-gradle-basic-concepts.html" />
+<meta property="og:url" content="/jekyll/update/2021/09/18/java-springboot-gradle-basic-concepts.html" />
+<meta property="og:site_name" content="StepByStep" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-09-18T00:00:00+07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Gradle With Basic Concepts" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","headline":"Gradle With Basic Concepts","dateModified":"2021-09-18T00:00:00+07:00","datePublished":"2021-09-18T00:00:00+07:00","mainEntityOfPage":{"@type":"WebPage","@id":"/jekyll/update/2021/09/18/java-springboot-gradle-basic-concepts.html"},"url":"/jekyll/update/2021/09/18/java-springboot-gradle-basic-concepts.html","description":"WHAT IS GRADLE?","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="StepByStep" /><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NZ8G5007GK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-NZ8G5007GK');
+</script></head><body>
+  <div class="container-flush">
+    <div class="row"><!-- navigation bar -->
+<div class="col-lg-12">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" role="banner"><a class="navbar-brand site-title" rel="author" href="/">StepByStep</a><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="nav navbar-nav"><li class="nav-item active">
+          <a class="nav-link" href="/about/">About</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/ci-cd/">CI-CD</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/database/">Database</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/docker/">Docker</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/">Java</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/python/">Python</a>
+        </li></ul>
+    </div><!-- Html Elements for Search -->
+    <div id="search-container" class="btn-group">
+      <input type="text" id="search-input" placeholder="search...">
+      <button id="clear">clear</button>
+      <ul id="results-container"></ul>
+    </div>
+
+    <!-- Script pointing to search-script.js -->
+    <script src="/java-scripts/search-script.js" type="text/javascript"></script>
+
+    <!-- Configuration -->
+    <script>
+      SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('results-container'),
+        json: '/search.json'
+      })
+    </script>
+
+    <!-- search clear -->
+    <script>
+      window.addEventListener('load', () => {
+          const button = document.querySelector('#clear');
+          button.addEventListener('click', () => {
+              document.querySelector('#search-input').value = "";
+              document.querySelector('#results-container').innerHTML = "";
+          });
+      }); 
+  </script>
+  </nav>
+</div></div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+  <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+    <header class="post-header">
+      <h1 class="post-title p-name" itemprop="name headline">Gradle With Basic Concepts</h1>
+      <p class="post-meta">
+        <time class="dt-published" datetime="2021-09-18T00:00:00+07:00" itemprop="datePublished">Sep 18, 2021
+        </time></p>
+    </header>
+  
+    <div class="post-content e-content" itemprop="articleBody">
+      <h2 id="what-is-gradle">WHAT IS GRADLE?</h2>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Gradle</code> is an <code class="language-plaintext highlighter-rouge">open-source build automation</code> tool that is designed to be flexible enough to build almost any type of software.</li>
+  <li><code class="language-plaintext highlighter-rouge">Build automation</code> is the process of automating the creation of a software build and the associated processes including: <code class="language-plaintext highlighter-rouge">compiling computer source code into binary code</code>, <code class="language-plaintext highlighter-rouge">packaging binary code</code>, and <code class="language-plaintext highlighter-rouge">running automated tests</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">Gradle</code> runs on the JVM and you <code class="language-plaintext highlighter-rouge">must have a Java Development Kit (JDK) installed</code> to use it.</li>
+  <li><a href="https://docs.gradle.org/current/userguide/what_is_gradle.html">More information</a></li>
+</ul>
+
+<h2 id="gradle-installation">GRADLE INSTALLATION</h2>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Gradle</code> runs on all major operating systems and requires only a <code class="language-plaintext highlighter-rouge">Java Development Kit version 8 or higher</code> to run. To check, run <code class="language-plaintext highlighter-rouge">java -version</code> on your <code class="language-plaintext highlighter-rouge">command prompt</code>.</li>
+  <li>Then you can go to <a href="https://gradle.org/releases/">gradle.org</a> to download the <code class="language-plaintext highlighter-rouge">binary-only</code> following the version that you want to use.</li>
+  <li>After the download is completed, you can extract it at any folder. Then go to <code class="language-plaintext highlighter-rouge">Control Panel</code> -&gt; <code class="language-plaintext highlighter-rouge">System and Security</code> -&gt; <code class="language-plaintext highlighter-rouge">System</code> -&gt; <code class="language-plaintext highlighter-rouge">Advanced system setting</code> -&gt; <code class="language-plaintext highlighter-rouge">Environment Variables</code>. Then create a <code class="language-plaintext highlighter-rouge">GRADLE_HOME</code> with value is the path to your gradle folder.</li>
+</ul>
+
+<p><a href="/assets/images/spring-boot-gradle-GRADLE_HOME.JPG"><img src="/assets/images/spring-boot-gradle-GRADLE_HOME.JPG" alt="Setting GRADLE_HOME" title="setting GRADLE_HOME" /></a></p>
+
+<ul>
+  <li>Then go to <code class="language-plaintext highlighter-rouge">Path</code> in <code class="language-plaintext highlighter-rouge">System Variables</code> –&gt; Choose <code class="language-plaintext highlighter-rouge">New</code> –&gt; <code class="language-plaintext highlighter-rouge">Browse</code> –&gt; go to the folder <code class="language-plaintext highlighter-rouge">bin</code> in your <code class="language-plaintext highlighter-rouge">gradle folder</code>.</li>
+</ul>
+
+<p><a href="/assets/images/spring-boot-gradle-path-setting.JPG"><img src="/assets/images/spring-boot-gradle-path-setting.JPG" alt="Setting Gradle Path Variable" title="Setting Gradle Path Variable" /></a></p>
+
+<ul>
+  <li>Finally, you can open <code class="language-plaintext highlighter-rouge">cmd</code> and use command <code class="language-plaintext highlighter-rouge">gradle --version</code> to check your gradle installation. You would see the result as below:</li>
+</ul>
+
+<pre><code class="language-cmd">
+C:\Users\bono_&gt;gradle --version
+
+------------------------------------------------------------
+Gradle 6.8.3
+------------------------------------------------------------
+
+Build time:   2021-02-22 16:13:28 UTC
+Revision:     9e26b4a9ebb910eaa1b8da8ff8575e514bc61c78
+
+Kotlin:       1.4.20
+Groovy:       2.5.12
+Ant:          Apache Ant(TM) version 1.10.9 compiled on September 27 2020
+JVM:          1.8.0_281 (Oracle Corporation 25.281-b09)
+OS:           Windows 10 10.0 amd64
+
+</code></pre>
+
+<h2 id="gradle-and-maven-comparison">GRADLE AND MAVEN COMPARISON</h2>
+
+<blockquote>
+  <p>Almost of us is familar with <code class="language-plaintext highlighter-rouge">Maven</code>, so I just put some main points about <code class="language-plaintext highlighter-rouge">Maven</code> there.</p>
+</blockquote>
+
+<ul>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Maven</code> is used for <code class="language-plaintext highlighter-rouge">project build automation using Java</code>. It helps you map out how a particular software is built, as well as its different dependencies. It uses <code class="language-plaintext highlighter-rouge">an XML file</code> to describe the project that you are building, the dependencies of the software with regards to third-party modules and parts, the build order, as well as the needed plugins. There are pre-defined targets for tasks such as packaging and compiling.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Maven</code> will download libraries and plugins from the different repositories and then puts them all in a cache on your local machine. While predominantly used for Java projects, you can use it for Scala, Ruby, and C#, as well as a host of other languages.</p>
+  </li>
+  <li>
+    <p>The following table describes the differences between the two tools:</p>
+  </li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>Basis</th>
+      <th>Gradle</th>
+      <th>Maven</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Based on</td>
+      <td>Gradle is based on developing domain-specific language projects.</td>
+      <td>Maven is based on developing pure Java language-based software.</td>
+    </tr>
+    <tr>
+      <td>Configuration</td>
+      <td>It uses a Groovy-based Domain-specific language(DSL) for creating project structure.</td>
+      <td>It uses Extensible Markup Language(XML) for creating project structure.</td>
+    </tr>
+    <tr>
+      <td>Focuses on</td>
+      <td>Developing applications by adding new features to them.</td>
+      <td>Developing applications in a given time limit.</td>
+    </tr>
+    <tr>
+      <td>Performance</td>
+      <td>It performs better than maven as it optimized for tracking only current running task.</td>
+      <td>It does not create local temporary files during software creation hence uses large time.</td>
+    </tr>
+    <tr>
+      <td>Java Compilation</td>
+      <td>It avoids compilation.</td>
+      <td>It is necessary to compile.</td>
+    </tr>
+    <tr>
+      <td>Usability</td>
+      <td>It is a new tool, which requires users to spend a lot of time to get used to it.</td>
+      <td>This tool is a known tool for many users and is easily available.</td>
+    </tr>
+    <tr>
+      <td>Customization</td>
+      <td>This tool is highly customizable as it supports a variety of IDE’s.</td>
+      <td>This tool serves a limited amount of developers and is not that customizable.</td>
+    </tr>
+    <tr>
+      <td>Languages supported</td>
+      <td>It supports software development in Java, C, C++, and Groovy.</td>
+      <td>It supports software development in Scala, C#, and Ruby.</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li><a href="https://www.geeksforgeeks.org/difference-between-gradle-and-maven/">More information</a></li>
+</ul>
+
+
+    </div><a class="u-url" href="/jekyll/update/2021/09/18/java-springboot-gradle-basic-concepts.html" hidden></a>
+  </article>
+  
+</div>
+
+
+    </div>
+  </div>
+</body><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">StepByStep</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-4">
+        <ul class="contact-list">
+          <li class="p-name">StepByStep</li><li><a class="u-email" href="mailto:minhducnguyen189@gmail.com">minhducnguyen189@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-4"><ul class="social-media-list"><li><a href="https://github.com/minhducnguyen189"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">minhducnguyen189</span></a></li><li><a href="https://www.twitter.com/jekyllrb"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">jekyllrb</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-4">
+        <p>Hi there! Let&#39;s explore some general knowleadges and briefly definitions  in programming. I hope that this website can help people saving time in learning, also give some motivations for those who have choice the developer path.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</html>
