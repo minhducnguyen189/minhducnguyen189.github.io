@@ -154,6 +154,93 @@ OS:           Windows 10 10.0 amd64
 
 </code></pre>
 
+<h2 id="some-gradle-commands">SOME GRADLE COMMANDS</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Gradle Commands</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">gradle check</code></td>
+      <td>Gradle will execute all checks (for plugins that we added Ex: checkstyle plugin) and tests in all subprojects, but we have to note that when we run this command <code class="language-plaintext highlighter-rouge">gradle test</code> will be executed first, if you want to run a specific test you can use <code class="language-plaintext highlighter-rouge">gradle :&lt;projectName&gt;:check</code>. Gradle will not show many logs except if there are some errors. This command is the same with <code class="language-plaintext highlighter-rouge">mvn verify</code> of <code class="language-plaintext highlighter-rouge">Maven</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">gradle test</code></td>
+      <td>Gradle will execute all unit tests in all subprojects. This command is the same with <code class="language-plaintext highlighter-rouge">mvn test</code> of <code class="language-plaintext highlighter-rouge">Maven</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">gradle :&lt;task name&gt;</code></td>
+      <td>Execute a task that defined in the <code class="language-plaintext highlighter-rouge">build.gradle</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">gradle :&lt;subproject&gt;:&lt;task Name&gt;</code></td>
+      <td>Execute a task that defined in the <code class="language-plaintext highlighter-rouge">build.gradle</code> of a <code class="language-plaintext highlighter-rouge">subProject</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">gradle assemble</code></td>
+      <td>This builds whatever is the appropriate package for the project, for example a JAR for Java libraries or a WAR for traditional Java webapps, this command is the same with <code class="language-plaintext highlighter-rouge">mvn package</code> of <code class="language-plaintext highlighter-rouge">Maven</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">gradle publishToMavenLocal</code></td>
+      <td>this command will crate a package and a depencency of your project into local repository of Maven like the command <code class="language-plaintext highlighter-rouge">mvn  install</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">gradle build</code></td>
+      <td>this command builds for the build task to designate assembling all outputs and running all checks.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">gradle run</code></td>
+      <td>It is common for applications to be run with the run task, which assembles the application and executes some script or binary.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">gradle clean</code></td>
+      <td>delete the contents of the build directory, this command is like <code class="language-plaintext highlighter-rouge">mvn clean</code> of <code class="language-plaintext highlighter-rouge">Maven</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">gradle tasks</code></td>
+      <td>gives you a list of the main tasks of the selected project</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">gradle bootRun</code></td>
+      <td>Runs project as a Spring Boot application.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">gradle &lt;action&gt; -Dorg.gradle.logging.level=debug</code></td>
+      <td>log out everything in the action</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">gradle -q projects</code></td>
+      <td>view the structure of project if project contains many subprojects</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>Some Gradle commands: <a href="https://docs.gradle.org/current/userguide/command_line_interface.html">more information</a></li>
+</ul>
+
+<h2 id="gradle-build-phases">GRADLE BUILD PHASES</h2>
+
+<ul>
+  <li>Gradle build phases:
+    <ul>
+      <li>
+        <p>Initialization: <code class="language-plaintext highlighter-rouge">settings.gradle</code> this file will loaded and readed first then the gradle will know to build single or multiple projects. <a href="https://docs.gradle.org/current/userguide/build_lifecycle.html#sec:initialization">more information</a>.</p>
+      </li>
+      <li>
+        <p>Configuration: In this step the build script (<strong>build.gradle</strong>) will be read and executed.</p>
+      </li>
+      <li>
+        <p>Execution: In this step, if tasks names exist in the build script then they will be executed.</p>
+      </li>
+    </ul>
+  </li>
+</ul>
+
 <h2 id="gradle-and-maven-comparison">GRADLE AND MAVEN COMPARISON</h2>
 
 <blockquote>
@@ -225,9 +312,52 @@ OS:           Windows 10 10.0 amd64
 </table>
 
 <ul>
-  <li><a href="https://www.geeksforgeeks.org/difference-between-gradle-and-maven/">More information</a></li>
+  <li>
+    <p><a href="https://www.geeksforgeeks.org/difference-between-gradle-and-maven/">More information</a></p>
+  </li>
+  <li>
+    <p>Some corresponding commands between <code class="language-plaintext highlighter-rouge">Maven</code> and <code class="language-plaintext highlighter-rouge">Gradle</code></p>
+  </li>
 </ul>
 
+<table>
+  <thead>
+    <tr>
+      <th>MAVEN</th>
+      <th>GRADLE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">compile</code></td>
+      <td>compile</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">provided</code></td>
+      <td>compileOnly, testCompileOnly (*)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">system</code></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">runtime</code></td>
+      <td>runtime</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">test</code></td>
+      <td>testCompile, testRuntime</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="create-a-sample-gradle-project-with-spring-boot">CREATE A SAMPLE GRADLE PROJECT WITH SPRING BOOT</h2>
+
+<ul>
+  <li>You can go to <a href="https://start.spring.io/">this page</a> to generate a gradle project with spring boot as the example in the image below.</li>
+</ul>
+
+<p><a href="/assets/images/spring-boot-with-gradle-project.JPG"><img src="/assets/images/spring-boot-with-gradle-project.JPG" alt="create example gradle project with spring boot" title="create example gradle project with spring boot" /></a></p>
 
     </div><a class="u-url" href="/jekyll/update/2021/09/18/java-springboot-gradle-basic-concepts.html" hidden></a>
   </article>
