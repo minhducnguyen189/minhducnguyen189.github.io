@@ -20,8 +20,8 @@
 <meta name="generator" content="Jekyll v4.2.0" />
 <meta property="og:title" content="Spring Security: SQL Injection" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Hi there! Let’s explore some general knowleadges and briefly definitions in programming. I hope that this website can help people saving time in learning, also give some motivations for those who have choice the developer path." />
-<meta property="og:description" content="Hi there! Let’s explore some general knowleadges and briefly definitions in programming. I hope that this website can help people saving time in learning, also give some motivations for those who have choice the developer path." />
+<meta name="description" content="WHAT IS THE SQL INJECTION?" />
+<meta property="og:description" content="WHAT IS THE SQL INJECTION?" />
 <link rel="canonical" href="/jekyll/update/2021/09/26/java-springboot-security-SQL-Injection.html" />
 <meta property="og:url" content="/jekyll/update/2021/09/26/java-springboot-security-SQL-Injection.html" />
 <meta property="og:site_name" content="StepByStep" />
@@ -30,7 +30,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Spring Security: SQL Injection" />
 <script type="application/ld+json">
-{"@type":"BlogPosting","headline":"Spring Security: SQL Injection","dateModified":"2021-09-26T00:00:00+07:00","datePublished":"2021-09-26T00:00:00+07:00","mainEntityOfPage":{"@type":"WebPage","@id":"/jekyll/update/2021/09/26/java-springboot-security-SQL-Injection.html"},"url":"/jekyll/update/2021/09/26/java-springboot-security-SQL-Injection.html","description":"Hi there! Let’s explore some general knowleadges and briefly definitions in programming. I hope that this website can help people saving time in learning, also give some motivations for those who have choice the developer path.","@context":"https://schema.org"}</script>
+{"@type":"BlogPosting","headline":"Spring Security: SQL Injection","dateModified":"2021-09-26T00:00:00+07:00","datePublished":"2021-09-26T00:00:00+07:00","mainEntityOfPage":{"@type":"WebPage","@id":"/jekyll/update/2021/09/26/java-springboot-security-SQL-Injection.html"},"url":"/jekyll/update/2021/09/26/java-springboot-security-SQL-Injection.html","description":"WHAT IS THE SQL INJECTION?","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="StepByStep" /><!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZ8G5007GK"></script>
@@ -107,7 +107,42 @@
     </header>
   
     <div class="post-content e-content" itemprop="articleBody">
-      
+      <h2 id="what-is-the-sql-injection">WHAT IS THE SQL INJECTION?</h2>
+
+<ul>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">SQL injection</code> is a web security vulnerability that allows an attacker to interfere with the queries that an application makes to its database. It generally allows an attacker to view data that they are not normally able to retrieve. This might include data belonging to other users, or any other data that the application itself is able to access. In many cases, an attacker can modify or delete this data, causing persistent changes to the application’s content or behavior.</p>
+  </li>
+  <li>
+    <p><a href="https://portswigger.net/web-security/sql-injection">More information</a></p>
+  </li>
+  <li>
+    <p>An injection attack can happen when we execute dynamic code based on user input. Dynamic code is code created on runtime based on user input, such as SQL statement with parameters. It’s like injecting a dangerous piece of string into input string, hence the name injection. Application might not know which string is dangerous, so the application will execute all the string, including dangerous one.</p>
+  </li>
+  <li>
+    <p>For example: we expect that the SQL will query for us the <code class="language-plaintext highlighter-rouge">name</code> of people following the <code class="language-plaintext highlighter-rouge">email</code>. If application is vulnerable, sql injection can inject this dangerous code.</p>
+  </li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="c1">--Expected</span>
+<span class="k">SELECT</span> <span class="n">name</span> <span class="k">FROM</span> <span class="n">people</span> <span class="k">WHERE</span> <span class="n">email</span> <span class="o">=</span> <span class="p">...</span>
+
+<span class="c1">--Injected</span>
+<span class="k">DROP</span> <span class="k">TABLE</span> <span class="n">users</span>
+
+<span class="c1">--So application will executed both</span>
+<span class="k">SELECT</span> <span class="n">name</span> <span class="k">FROM</span> <span class="n">people</span> <span class="k">WHERE</span> <span class="n">email</span> <span class="o">=</span><span class="p">...</span>
+<span class="k">DROP</span> <span class="k">TABLE</span> <span class="n">users</span>
+
+</code></pre></div></div>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">SQL injection</code> took place on user input, on API it can be many ways like <code class="language-plaintext highlighter-rouge">request parameters</code>, <code class="language-plaintext highlighter-rouge">path variables</code> or <code class="language-plaintext highlighter-rouge">request body</code>.</li>
+  <li>Api code is vulnerable for sql injection in database access part . If the code build dynamic statement by joining strings from user input then it will open the security hole.</li>
+  <li>We usually misunderstand that using framework is safe from SQL injection. For example, you are using <code class="language-plaintext highlighter-rouge">Spring JPA or Hibernate</code>, so you think that you are safe from SQL Injection. The answer is no, the framework helps us avoid create <code class="language-plaintext highlighter-rouge">hand codes SQL statements</code> but framework doesn’t prevent us to write vulnerable code. If you still use string join to build sql statements, framework will not validate it against SQL injection.</li>
+</ul>
+
 
     </div><a class="u-url" href="/jekyll/update/2021/09/26/java-springboot-security-SQL-Injection.html" hidden></a>
   </article>
