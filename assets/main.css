@@ -69,15 +69,15 @@ pre > code { border: 0; padding-right: 0; padding-left: 0; }
 .social-media-list li + li { padding-top: 5px; }
 
 /** Tables */
-table { margin-bottom: 30px; width: 100%; text-align: left; color: #4d6c8b; border-collapse: collapse; border: 1px solid #e8e8e8; }
+table { margin-bottom: 30px; width: 100%; text-align: left; color: #4d6c8b; border-collapse: collapse; border: 1px solid #535c68; }
 
-table tr:nth-child(even) { background-color: #f7f7f7; }
+table tr:nth-child(even) { background-color: #95a4b4; }
 
 table th, table td { padding: 10px 15px; }
 
-table th { background-color: #f0f0f0; border: 1px solid #dedede; border-bottom-color: #c9c9c9; }
+table th { background-color: #5e6d7d; border: 1px solid #4a525d; border-bottom-color: #c9c9c9; color: #dfe6e9; }
 
-table td { border: 1px solid #e8e8e8; }
+table td { border: 1px solid #535c68; }
 
 .nav-link { font-size: 1.3em; }
 
