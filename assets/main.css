@@ -79,6 +79,9 @@ table th { background-color: #5e6d7d; border: 1px solid #4a525d; border-bottom-c
 
 table td { border: 1px solid #535c68; }
 
+/** card post list */
+.card { border: none; }
+
 .nav-link { font-size: 1.3em; }
 
 /** Site header */
@@ -96,13 +99,13 @@ footer .container { margin-top: 40px; color: #dfe6e9; }
 
 .post-list-heading { margin-top: 20px; font-size: 31.5px; }
 
-.post-list { margin-left: 0; margin-top: 15px; list-style: none; display: flex; border-radius: 20px; }
+.post-list { margin-left: 0; margin-top: 15px; list-style: none; display: flex; border-radius: 15px; }
 
 .post-meta { font-size: 30px; color: #2a7ae2; }
 
 .post-meta-span { color: #ffffff; }
 
-.post-link { display: block; padding: 10px; padding-left: 20px; padding-right: 20px; border: 2px solid #718093; border-radius: 20px; background-color: #718093; width: 100%; font-size: 22.5px; }
+.post-link { display: block; padding: 10px; padding-left: 20px; padding-right: 20px; border: 2px solid #718093; border-radius: 15px; background-color: #718093; width: 100%; font-size: 22.5px; }
 
 .post-link h4 { color: #2f3640; }
 
@@ -112,7 +115,7 @@ footer .container { margin-top: 40px; color: #dfe6e9; }
 
 .post-link:hover > h4 { color: black; }
 
-.post-link-docker { display: block; padding: 10px; padding-left: 20px; padding-right: 20px; border: 2px solid #718093; border-radius: 20px; background-color: #718093; width: 100%; font-size: 22.5px; }
+.post-link-docker { display: block; padding: 10px; padding-left: 20px; padding-right: 20px; border: 2px solid #718093; border-radius: 15px; background-color: #718093; width: 100%; font-size: 22.5px; }
 
 .post-link-docker h4 { color: #2f3640; }
 
@@ -122,7 +125,7 @@ footer .container { margin-top: 40px; color: #dfe6e9; }
 
 .post-link-docker:hover > h4 { color: black; }
 
-.post-link-python { display: block; padding: 10px; padding-left: 20px; padding-right: 20px; border: 2px solid #718093; border-radius: 20px; background-color: #718093; width: 100%; font-size: 22.5px; }
+.post-link-python { display: block; padding: 10px; padding-left: 20px; padding-right: 20px; border: 2px solid #718093; border-radius: 15px; background-color: #718093; width: 100%; font-size: 22.5px; }
 
 .post-link-python h4 { color: #2f3640; }
 
@@ -132,7 +135,7 @@ footer .container { margin-top: 40px; color: #dfe6e9; }
 
 .post-link-python:hover > h4 { color: black; }
 
-.post-link-database { display: block; padding: 10px; padding-left: 20px; padding-right: 20px; border: 2px solid #718093; border-radius: 20px; background-color: #718093; width: 100%; font-size: 22.5px; }
+.post-link-database { display: block; padding: 10px; padding-left: 20px; padding-right: 20px; border: 2px solid #718093; border-radius: 15px; background-color: #718093; width: 100%; font-size: 22.5px; }
 
 .post-link-database h4 { color: #2f3640; }
 
@@ -142,7 +145,7 @@ footer .container { margin-top: 40px; color: #dfe6e9; }
 
 .post-link-database:hover > h4 { color: black; }
 
-.post-link-ci-cd { display: block; padding: 10px; padding-left: 20px; padding-right: 20px; border: 2px solid #718093; border-radius: 20px; background-color: #718093; width: 100%; font-size: 22.5px; }
+.post-link-ci-cd { display: block; padding: 10px; padding-left: 20px; padding-right: 20px; border: 2px solid #718093; border-radius: 15px; background-color: #718093; width: 100%; font-size: 22.5px; }
 
 .post-link-ci-cd h4 { color: #2f3640; }
 
