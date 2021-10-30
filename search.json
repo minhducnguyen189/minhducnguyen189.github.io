@@ -373,6 +373,30 @@
     "discription" : ""
 
   } 
+  ,
+  
+  {
+
+    "title"    : "Data Science: R Vector Arithme",
+    "url"      : "/database-posts/2021-10-29-data-science-R-vector-arithme.html",
+    "category" : "jekyll, update",
+    "tags"     : "",
+    "date"     : "2021-10-29 00:00:00 +0700",
+    "discription" : ""
+
+  } 
+  ,
+  
+  {
+
+    "title"    : "Data Science: R Indexing",
+    "url"      : "/database-posts/2021-10-30-data-science-R-indexing.html",
+    "category" : "jekyll, update",
+    "tags"     : "",
+    "date"     : "2021-10-30 00:00:00 +0700",
+    "discription" : ""
+
+  } 
   
   
 ]
