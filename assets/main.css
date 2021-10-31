@@ -79,6 +79,13 @@ table th { background-color: #5e6d7d; border: 1px solid #4a525d; border-bottom-c
 
 table td { border: 1px solid #535c68; }
 
+/** Table of Contents */
+#markdown-toc::before { content: "Table Of Contents"; font-weight: bold; }
+
+#markdown-toc ul { list-style: decimal; }
+
+#markdown-toc { border: 1px solid #aaa; padding: 1.5em; list-style: decimal; display: inline-block; }
+
 /** card post list */
 .card { border: none; }
 

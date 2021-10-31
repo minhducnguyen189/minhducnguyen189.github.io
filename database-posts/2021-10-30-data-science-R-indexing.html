@@ -21,8 +21,8 @@
 <meta property="og:title" content="Data Science: R Indexing" />
 <meta name="author" content="Duc Nguyen" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="INDEXING" />
-<meta property="og:description" content="INDEXING" />
+<meta name="description" content="Hi there! Let’s explore some general knowleadges and briefly definitions in programming. I hope that this website can help people saving time in learning, also give some motivations for those who have choice the developer path." />
+<meta property="og:description" content="Hi there! Let’s explore some general knowleadges and briefly definitions in programming. I hope that this website can help people saving time in learning, also give some motivations for those who have choice the developer path." />
 <link rel="canonical" href="/database-posts/2021-10-30-data-science-R-indexing.html" />
 <meta property="og:url" content="/database-posts/2021-10-30-data-science-R-indexing.html" />
 <meta property="og:site_name" content="StepByStep" />
@@ -31,7 +31,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Data Science: R Indexing" />
 <script type="application/ld+json">
-{"@type":"BlogPosting","url":"/database-posts/2021-10-30-data-science-R-indexing.html","dateModified":"2021-10-30T00:00:00+07:00","datePublished":"2021-10-30T00:00:00+07:00","headline":"Data Science: R Indexing","mainEntityOfPage":{"@type":"WebPage","@id":"/database-posts/2021-10-30-data-science-R-indexing.html"},"author":{"@type":"Person","name":"Duc Nguyen"},"description":"INDEXING","@context":"https://schema.org"}</script>
+{"@type":"BlogPosting","url":"/database-posts/2021-10-30-data-science-R-indexing.html","dateModified":"2021-10-30T00:00:00+07:00","datePublished":"2021-10-30T00:00:00+07:00","headline":"Data Science: R Indexing","mainEntityOfPage":{"@type":"WebPage","@id":"/database-posts/2021-10-30-data-science-R-indexing.html"},"author":{"@type":"Person","name":"Duc Nguyen"},"description":"Hi there! Let’s explore some general knowleadges and briefly definitions in programming. I hope that this website can help people saving time in learning, also give some motivations for those who have choice the developer path.","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="StepByStep" /><!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZ8G5007GK"></script>
@@ -108,7 +108,22 @@
     </header>
   
     <div class="post-content e-content" itemprop="articleBody">
-      <h2 id="indexing">INDEXING</h2>
+      <ul id="markdown-toc">
+  <li><a href="#indexing" id="markdown-toc-indexing">INDEXING</a>    <ul>
+      <li><a href="#logical-operators-in-r" id="markdown-toc-logical-operators-in-r">LOGICAL OPERATORS IN R</a></li>
+      <li><a href="#summary" id="markdown-toc-summary">SUMMARY</a></li>
+    </ul>
+  </li>
+  <li><a href="#indexing-functions" id="markdown-toc-indexing-functions">INDEXING FUNCTIONS</a>    <ul>
+      <li><a href="#which-function" id="markdown-toc-which-function">WHICH FUNCTION</a></li>
+      <li><a href="#match-function" id="markdown-toc-match-function">MATCH FUNCTION</a></li>
+      <li><a href="#in-operator" id="markdown-toc-in-operator">%IN% OPERATOR</a></li>
+      <li><a href="#summary-1" id="markdown-toc-summary-1">SUMMARY</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="indexing">INDEXING</h2>
 
 <ul>
   <li>In R, we can use <code class="language-plaintext highlighter-rouge">logical operators to index vectors</code>. For example if we compare a vector to single number, it actually performs the test for each entry. Let’s see the example below, we calculate the <code class="language-plaintext highlighter-rouge">murder_rate</code> then we find <code class="language-plaintext highlighter-rouge">murder_rate</code> which is below or equal 0.71. Then we will get entries with TRUE and FALSE  values.</li>
