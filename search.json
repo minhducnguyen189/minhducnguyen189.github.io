@@ -397,6 +397,66 @@
     "discription" : ""
 
   } 
+  ,
+  
+  {
+
+    "title"    : "Data Science: R Basic Data Wrangling",
+    "url"      : "/database-posts/2021-11-05-data-science-R-basic-daata-wrangling.html",
+    "category" : "jekyll, update",
+    "tags"     : "",
+    "date"     : "2021-11-05 00:00:00 +0700",
+    "discription" : ""
+
+  } 
+  ,
+  
+  {
+
+    "title"    : "Data Science: R Basic Plots",
+    "url"      : "/database-posts/2021-11-06-data-science-R-basic-plots.html",
+    "category" : "jekyll, update",
+    "tags"     : "",
+    "date"     : "2021-11-06 00:00:00 +0700",
+    "discription" : ""
+
+  } 
+  ,
+  
+  {
+
+    "title"    : "Data Science: R Programming Basics - Conditionals",
+    "url"      : "/database-posts/2021-11-06-data-science-R-programming-basics-conditionals.html",
+    "category" : "jekyll, update",
+    "tags"     : "",
+    "date"     : "2021-11-06 00:00:00 +0700",
+    "discription" : ""
+
+  } 
+  ,
+  
+  {
+
+    "title"    : "Data Science: R Programming Basics - Functions",
+    "url"      : "/database-posts/2021-11-07-data-science-R-programming-basics-functions.html",
+    "category" : "jekyll, update",
+    "tags"     : "",
+    "date"     : "2021-11-07 00:00:00 +0700",
+    "discription" : ""
+
+  } 
+  ,
+  
+  {
+
+    "title"    : "Data Science: R Programming Basics - For Loops",
+    "url"      : "/database-posts/2021-11-07-data-science-R-programming-basics-for-loops.html",
+    "category" : "jekyll, update",
+    "tags"     : "",
+    "date"     : "2021-11-07 09:00:00 +0700",
+    "discription" : ""
+
+  } 
   
   
 ]
