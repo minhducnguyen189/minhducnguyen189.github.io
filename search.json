@@ -2,6 +2,18 @@
   
     {
 
+      "title"    : "Setup Free Cloud Jfog Artifactory",
+      "url"      : "/jekyll/update/2021/10/08/jfog-repository-setup.html",
+      "category" : "jekyll, update",
+      "tags"     : "",
+      "date"     : "2021-10-08 00:00:00 +0700",
+      "discription" : ""
+
+    }
+    ,
+  
+    {
+
       "title"    : "Gradle With Basic Concepts",
       "url"      : "/jekyll/update/2021/09/18/java-springboot-gradle-basic-concepts.html",
       "category" : "jekyll, update",
