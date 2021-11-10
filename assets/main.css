@@ -162,6 +162,26 @@ footer .container { margin-top: 40px; color: #dfe6e9; }
 
 .post-link-ci-cd:hover > h4 { color: black; }
 
+.post-link-fe { display: block; padding: 10px; padding-left: 20px; padding-right: 20px; border: 2px solid #718093; border-radius: 15px; background-color: #718093; width: 100%; font-size: 22.5px; }
+
+.post-link-fe h4 { color: #2f3640; }
+
+.post-link-fe:hover { text-decoration: none; border: 2px solid #b2bec3; }
+
+.post-link-fe:hover .post-meta-span { color: #ffffff; }
+
+.post-link-fe:hover > h4 { color: black; }
+
+.post-link-others { display: block; padding: 10px; padding-left: 20px; padding-right: 20px; border: 2px solid #718093; border-radius: 15px; background-color: #718093; width: 100%; font-size: 22.5px; }
+
+.post-link-others h4 { color: #2f3640; }
+
+.post-link-others:hover { text-decoration: none; border: 2px solid #b2bec3; }
+
+.post-link-others:hover .post-meta-span { color: #ffffff; }
+
+.post-link-others:hover > h4 { color: black; }
+
 /** Posts */
 .post { margin-top: 40px; margin-bottom: 80px; }
 
