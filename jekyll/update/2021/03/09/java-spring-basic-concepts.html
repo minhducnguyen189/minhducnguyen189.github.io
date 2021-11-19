@@ -31,7 +31,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Spring Framework And Basic Concepts" />
 <script type="application/ld+json">
-{"@type":"BlogPosting","url":"/jekyll/update/2021/03/09/java-spring-basic-concepts.html","dateModified":"2021-03-09T08:00:00+07:00","datePublished":"2021-03-09T08:00:00+07:00","headline":"Spring Framework And Basic Concepts","mainEntityOfPage":{"@type":"WebPage","@id":"/jekyll/update/2021/03/09/java-spring-basic-concepts.html"},"author":{"@type":"Person","name":"Duc Nguyen"},"description":"Spring is one of the most popular frameworks for Java enterprise edition. Developers use Spring for developing reliable and high-quality applications. Spring was designed by Rob Johnson. SPRING CORE CONCEPTS SPRING IOC CONTAINER SPRING BEAN SPRING BEAN SCOPES More information SPRING CORE CONCEPTS Inversion of control: This is the principle of object-oriented programming, in which objects of the program do not depend on concrete implementations of other objects, but may have knowledge about their abstractions (interfaces) for later interaction. Dependency Injection: is a composition of strutural design partterns, in which each function of the application there is one, a conditionally independent object (service) that can have the need to use other objects (dependencies) know to it by interfaces. Dependencies are transferred (implemented) to the service at the time of it’s creation. This is the siatuation where we introduce an element of one class into another. In practise, DI is implemented to the constructor or using setters. Libraries that implement this approach are also called Ioc containers. Aspect Oriented Programming: a programming paradigm that allows to distinguish cross-through (functional) functionality in application. These functions, which spam multiple application nodes, are call cross-cutting concerns and these cross-cutting nodes are seperated from the immediate business logic of the application. In OOP, the key unit is the class, which in AOP, the key element is the aspect. DI helps to separate application classes into separate modules, and APO helps to create cross-cutting concerns from the objects they effect. SPRING IOC CONTAINER Spring IoC Container is the machanism to achieve loose-coupling between Object dependencies. To achieve loose coupling and dynamic binding of the objects at runtime, objects dependencies. Spring IoC container is the program that injects dependencies into an object and make it ready for our use. Spring IoC Container classes are part of org.springframework.bean and org.springframework.context packages. BeanFactory is the root interface of spring IoC container. ApplicationContext is the child interface of BeanFactory. Usually, if you are working with Spring MVC application and your application is configured to use Spring Framework, Spring IoC container gets initialized when the application starts and when a bean is requested, the dependencies are injected automatically. SPRING BEAN Spring Bean is nothing special, any object in the Spring Framework that initialize through spring container is call Spring Bean. Any normal Java POJO class (Plain Old Java Object) can be a Spring Bean if it is configured to be initialized via container by providing configuration metadata information. SPRING BEAN SCOPES There are 5 scopes definded for spring beans: singleton: Only one instance of the bean will be create for each container. This is the default scope of spring beans. While using this scope, make sure bean does not have shared instances variables otherwise it might lead to data insconsistency issues. prototype: a new instance will be created every time the bean is requested. request: This is the same as prototype scope, however it meant to be used for web application. A new instance of the bean will be created for each HTTP request. session: A new bean will be created for each HTTP session by the container. global-session: This is used to create global session bean for Prolet applications.","@context":"https://schema.org"}</script>
+{"@type":"BlogPosting","url":"/jekyll/update/2021/03/09/java-spring-basic-concepts.html","author":{"@type":"Person","name":"Duc Nguyen"},"headline":"Spring Framework And Basic Concepts","dateModified":"2021-03-09T08:00:00+07:00","datePublished":"2021-03-09T08:00:00+07:00","description":"Spring is one of the most popular frameworks for Java enterprise edition. Developers use Spring for developing reliable and high-quality applications. Spring was designed by Rob Johnson. SPRING CORE CONCEPTS SPRING IOC CONTAINER SPRING BEAN SPRING BEAN SCOPES More information SPRING CORE CONCEPTS Inversion of control: This is the principle of object-oriented programming, in which objects of the program do not depend on concrete implementations of other objects, but may have knowledge about their abstractions (interfaces) for later interaction. Dependency Injection: is a composition of strutural design partterns, in which each function of the application there is one, a conditionally independent object (service) that can have the need to use other objects (dependencies) know to it by interfaces. Dependencies are transferred (implemented) to the service at the time of it’s creation. This is the siatuation where we introduce an element of one class into another. In practise, DI is implemented to the constructor or using setters. Libraries that implement this approach are also called Ioc containers. Aspect Oriented Programming: a programming paradigm that allows to distinguish cross-through (functional) functionality in application. These functions, which spam multiple application nodes, are call cross-cutting concerns and these cross-cutting nodes are seperated from the immediate business logic of the application. In OOP, the key unit is the class, which in AOP, the key element is the aspect. DI helps to separate application classes into separate modules, and APO helps to create cross-cutting concerns from the objects they effect. SPRING IOC CONTAINER Spring IoC Container is the machanism to achieve loose-coupling between Object dependencies. To achieve loose coupling and dynamic binding of the objects at runtime, objects dependencies. Spring IoC container is the program that injects dependencies into an object and make it ready for our use. Spring IoC Container classes are part of org.springframework.bean and org.springframework.context packages. BeanFactory is the root interface of spring IoC container. ApplicationContext is the child interface of BeanFactory. Usually, if you are working with Spring MVC application and your application is configured to use Spring Framework, Spring IoC container gets initialized when the application starts and when a bean is requested, the dependencies are injected automatically. SPRING BEAN Spring Bean is nothing special, any object in the Spring Framework that initialize through spring container is call Spring Bean. Any normal Java POJO class (Plain Old Java Object) can be a Spring Bean if it is configured to be initialized via container by providing configuration metadata information. SPRING BEAN SCOPES There are 5 scopes definded for spring beans: singleton: Only one instance of the bean will be create for each container. This is the default scope of spring beans. While using this scope, make sure bean does not have shared instances variables otherwise it might lead to data insconsistency issues. prototype: a new instance will be created every time the bean is requested. request: This is the same as prototype scope, however it meant to be used for web application. A new instance of the bean will be created for each HTTP request. session: A new bean will be created for each HTTP session by the container. global-session: This is used to create global session bean for Prolet applications.","mainEntityOfPage":{"@type":"WebPage","@id":"/jekyll/update/2021/03/09/java-spring-basic-concepts.html"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="StepByStep" /><!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZ8G5007GK"></script>
@@ -45,29 +45,33 @@
   <div class="container-flush">
     <div class="row"><!-- navigation bar -->
 <div class="col-lg-12">
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" role="banner"><a class="navbar-brand site-title" rel="author" href="/">StepByStep</a><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" role="banner"><a class="navbar-brand site-title" rel="author" href="/">StepByStep</a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
       aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="nav navbar-nav"><li class="nav-item active">
-          <a class="nav-link" href="/about/">About</a>
-        </li><li class="nav-item active">
-          <a class="nav-link" href="/ci-cd/">CI-CD</a>
-        </li><li class="nav-item active">
-          <a class="nav-link" href="/data/">Data</a>
-        </li><li class="nav-item active">
-          <a class="nav-link" href="/docker/">Docker</a>
-        </li><li class="nav-item active">
-          <a class="nav-link" href="/fe/">FE</a>
+          <a class="nav-link" href="/about">About</a>
         </li><li class="nav-item active">
           <a class="nav-link" href="/">Java</a>
         </li><li class="nav-item active">
-          <a class="nav-link" href="/others/">Others</a>
+          <a class="nav-link" href="/docker">Docker</a>
         </li><li class="nav-item active">
-          <a class="nav-link" href="/python/">Python</a>
+          <a class="nav-link" href="/data">Data</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/ci-cd">CI-CD</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/python">Python</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/fe">FE</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/others">Others</a>
         </li></ul>
-    </div><!-- Html Elements for Search -->
+    </div>
+
+    <!-- Html Elements for Search -->
     <div id="search-container" class="btn-group">
       <input type="text" id="search-input" placeholder="search...">
       <button id="clear">clear</button>
@@ -89,13 +93,13 @@
     <!-- search clear -->
     <script>
       window.addEventListener('load', () => {
-          const button = document.querySelector('#clear');
-          button.addEventListener('click', () => {
-              document.querySelector('#search-input').value = "";
-              document.querySelector('#results-container').innerHTML = "";
-          });
-      }); 
-  </script>
+        const button = document.querySelector('#clear');
+        button.addEventListener('click', () => {
+          document.querySelector('#search-input').value = "";
+          document.querySelector('#results-container').innerHTML = "";
+        });
+      });
+    </script>
   </nav>
 </div></div>
   </div>

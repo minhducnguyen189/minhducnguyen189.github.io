@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- bootstrap library and JS, Jquery -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>@ConfigurationProperties to create Spring Bean | StepByStep</title>
+<meta name="generator" content="Jekyll v4.2.1" />
+<meta property="og:title" content="@ConfigurationProperties to create Spring Bean" />
+<meta name="author" content="Duc Nguyen" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Sometimes we need to load a lot of environment variables from application.properties or application.yml to our spring boot project for use and it is not good way if we use traditional way with @Value. Using @ConfigurationProperties with @Component Using @ConfigurationProperties With Other configuration ways BINDING OBJECTS WITH @ConfigurationProperties Using @ConfigurationProperties with @Component @ConfigurationProperties and Component will help us to convert environment variables to become a spring bean and we can use it everywhere in our project with @Autowired. This is the esiest way to config. Now, let’s see the example below For example we have an application.yml with some environment as below. As you can see the data has 3 attributes are name, amount and price, so we can imagine that there is an object data has 3 attributes. data: name: notebook amount: 500 price: 10.5 So the first thing we should do is create an object class with getter and setter as default. Then we add the annotation @ConfigurationProperties(prefix = &quot;data&quot;), The prefix of the properties that are valid to bind to object. Synonym for prefix, a valid prefix is defined by one or more words separated with dots (e.g. “company.customer.data”). package com.example.workflow.model; import org.springframework.boot.context.properties.ConfigurationProperties; import org.springframework.stereotype.Component; /** prefix = &quot;data&quot; it is mean this object is &quot;data&quot; in application.yaml And name, amount and price are 3 attributes in this object. @Component will make this object become an spring bean and we can use it everywhere with annotation @Autowired */ @Component @ConfigurationProperties(prefix = &quot;data&quot;) public class Data { private String name; private Integer amount; private double price; public String getName() { return name; } public void setName(String name) { this.name = name; } public Integer getAmount() { return amount; } public void setAmount(Integer amount) { this.amount = amount; } public double getPrice() { return price; } public void setPrice(double price) { this.price = price; } } Then we can use it everywhere by using annotation @Autowired @RestController public class GeneralController { @Autowired private Data data; @RequestMapping(method = RequestMethod.GET, path = &quot;/general/data&quot;, produces = MediaType.APPLICATION_JSON_VALUE) public ResponseEntity&lt;?&gt; getSampelDate() { return ResponseEntity.ok(data); } Using @ConfigurationProperties With Other configuration ways So there 2 more ways to make environment varialbes becomce spring bean with @ConfigurationProperties. The first way is using annotation @EnableConfigurationProperties(value = {Data.class}). We just put this annotation in our main class and put the array of classes that are using ConfigurationProperties. Let’s see the Example below We don’t use @Component anymore so our data class will look like this package com.example.workflow.model; import org.springframework.boot.context.properties.ConfigurationProperties; @ConfigurationProperties(prefix = &quot;data&quot;) public class Data { private String name; private Integer amount; private double price; public String getName() { return name; } public void setName(String name) { this.name = name; } public Integer getAmount() { return amount; } public void setAmount(Integer amount) { this.amount = amount; } public double getPrice() { return price; } public void setPrice(double price) { this.price = price; } } Then is the our main class package com.example.workflow; import com.example.workflow.model.Data; import org.springframework.boot.SpringApplication; import org.springframework.boot.autoconfigure.SpringBootApplication; import org.springframework.boot.context.properties.EnableConfigurationProperties; import org.springframework.cloud.openfeign.EnableFeignClients; /** @EnableConfigurationProperties(value = {Data.class}) value is the Data.class that we define above */ @SpringBootApplication @EnableFeignClients @EnableConfigurationProperties(value = {Data.class}) public class Application { public static void main(String... args) { SpringApplication.run(Application.class, args); } } The second way is like the way above with no annotation @Component in our Data.class but we will use the annotation @ConfigurationPropertiesScan(value = {&quot;com.example.workflow.model&quot;}) the value of this annotation is an array of path to the package that contains our Data.class. So if we have many classes using ConfigurationProperties we can use this way So our main class we look like as below package com.example.workflow; import org.springframework.boot.SpringApplication; import org.springframework.boot.autoconfigure.SpringBootApplication; import org.springframework.boot.context.properties.ConfigurationPropertiesScan; import org.springframework.cloud.openfeign.EnableFeignClients; /** &quot;com.example.workflow.model&quot; is the path to the package that contain Data.class which is using @ConfigurationProperties */ @SpringBootApplication @EnableFeignClients @ConfigurationPropertiesScan(value = {&quot;com.example.workflow.model&quot;}) public class Application { public static void main(String... args) { SpringApplication.run(Application.class, args); } } BINDING OBJECTS WITH @ConfigurationProperties We can make the Data.class contains another Object class by @ConfigurationProperties Let’s see the example below: As you can see the object shipper will be used in data. So how we can load them to become spring bean. data: name: notebook amount: 500 price: 10.5 shipper: $ref: &quot;#/shipper&quot; shipper: name: Duc age: 26 phone: &quot;0123456789&quot; First we need to define the object shipper with @ConfigurationProperties. We create a class name Shipper.java as below package com.example.workflow.model; import org.springframework.boot.context.properties.ConfigurationProperties; import org.springframework.stereotype.Component; @Component @ConfigurationProperties(prefix = &quot;shipper&quot;) public class Shipper { private String name; private Integer age; private String phone; public String getName() { return name; } public void setName(String name) { this.name = name; } public Integer getAge() { return age; } public void setAge(Integer age) { this.age = age; } public String getPhone() { return phone; } public void setPhone(String phone) { this.phone = phone; } } Then in Data.class we just need add it as an attribute but use the annotation Autowired above this attribute. Then create getter and setter as default. package com.example.workflow.model; import org.springframework.beans.factory.annotation.Autowired; import org.springframework.boot.context.properties.ConfigurationProperties; import org.springframework.stereotype.Component; @Component @ConfigurationProperties(prefix = &quot;data&quot;) public class Data { private String name; private Integer amount; private double price; @Autowired private Shipper shipper; public Shipper getShipper() { return shipper; } public void setShipper(Shipper shipper) { this.shipper = shipper; } public String getName() { return name; } public void setName(String name) { this.name = name; } public Integer getAmount() { return amount; } public void setAmount(Integer amount) { this.amount = amount; } public double getPrice() { return price; } public void setPrice(double price) { this.price = price; } } Finally we can use the Data.class everywhere with @Autowired and It contains the data of Shipper.class also. So that’s it. Goodbye and see you on another topic! Thanks!" />
+<meta property="og:description" content="Sometimes we need to load a lot of environment variables from application.properties or application.yml to our spring boot project for use and it is not good way if we use traditional way with @Value. Using @ConfigurationProperties with @Component Using @ConfigurationProperties With Other configuration ways BINDING OBJECTS WITH @ConfigurationProperties Using @ConfigurationProperties with @Component @ConfigurationProperties and Component will help us to convert environment variables to become a spring bean and we can use it everywhere in our project with @Autowired. This is the esiest way to config. Now, let’s see the example below For example we have an application.yml with some environment as below. As you can see the data has 3 attributes are name, amount and price, so we can imagine that there is an object data has 3 attributes. data: name: notebook amount: 500 price: 10.5 So the first thing we should do is create an object class with getter and setter as default. Then we add the annotation @ConfigurationProperties(prefix = &quot;data&quot;), The prefix of the properties that are valid to bind to object. Synonym for prefix, a valid prefix is defined by one or more words separated with dots (e.g. “company.customer.data”). package com.example.workflow.model; import org.springframework.boot.context.properties.ConfigurationProperties; import org.springframework.stereotype.Component; /** prefix = &quot;data&quot; it is mean this object is &quot;data&quot; in application.yaml And name, amount and price are 3 attributes in this object. @Component will make this object become an spring bean and we can use it everywhere with annotation @Autowired */ @Component @ConfigurationProperties(prefix = &quot;data&quot;) public class Data { private String name; private Integer amount; private double price; public String getName() { return name; } public void setName(String name) { this.name = name; } public Integer getAmount() { return amount; } public void setAmount(Integer amount) { this.amount = amount; } public double getPrice() { return price; } public void setPrice(double price) { this.price = price; } } Then we can use it everywhere by using annotation @Autowired @RestController public class GeneralController { @Autowired private Data data; @RequestMapping(method = RequestMethod.GET, path = &quot;/general/data&quot;, produces = MediaType.APPLICATION_JSON_VALUE) public ResponseEntity&lt;?&gt; getSampelDate() { return ResponseEntity.ok(data); } Using @ConfigurationProperties With Other configuration ways So there 2 more ways to make environment varialbes becomce spring bean with @ConfigurationProperties. The first way is using annotation @EnableConfigurationProperties(value = {Data.class}). We just put this annotation in our main class and put the array of classes that are using ConfigurationProperties. Let’s see the Example below We don’t use @Component anymore so our data class will look like this package com.example.workflow.model; import org.springframework.boot.context.properties.ConfigurationProperties; @ConfigurationProperties(prefix = &quot;data&quot;) public class Data { private String name; private Integer amount; private double price; public String getName() { return name; } public void setName(String name) { this.name = name; } public Integer getAmount() { return amount; } public void setAmount(Integer amount) { this.amount = amount; } public double getPrice() { return price; } public void setPrice(double price) { this.price = price; } } Then is the our main class package com.example.workflow; import com.example.workflow.model.Data; import org.springframework.boot.SpringApplication; import org.springframework.boot.autoconfigure.SpringBootApplication; import org.springframework.boot.context.properties.EnableConfigurationProperties; import org.springframework.cloud.openfeign.EnableFeignClients; /** @EnableConfigurationProperties(value = {Data.class}) value is the Data.class that we define above */ @SpringBootApplication @EnableFeignClients @EnableConfigurationProperties(value = {Data.class}) public class Application { public static void main(String... args) { SpringApplication.run(Application.class, args); } } The second way is like the way above with no annotation @Component in our Data.class but we will use the annotation @ConfigurationPropertiesScan(value = {&quot;com.example.workflow.model&quot;}) the value of this annotation is an array of path to the package that contains our Data.class. So if we have many classes using ConfigurationProperties we can use this way So our main class we look like as below package com.example.workflow; import org.springframework.boot.SpringApplication; import org.springframework.boot.autoconfigure.SpringBootApplication; import org.springframework.boot.context.properties.ConfigurationPropertiesScan; import org.springframework.cloud.openfeign.EnableFeignClients; /** &quot;com.example.workflow.model&quot; is the path to the package that contain Data.class which is using @ConfigurationProperties */ @SpringBootApplication @EnableFeignClients @ConfigurationPropertiesScan(value = {&quot;com.example.workflow.model&quot;}) public class Application { public static void main(String... args) { SpringApplication.run(Application.class, args); } } BINDING OBJECTS WITH @ConfigurationProperties We can make the Data.class contains another Object class by @ConfigurationProperties Let’s see the example below: As you can see the object shipper will be used in data. So how we can load them to become spring bean. data: name: notebook amount: 500 price: 10.5 shipper: $ref: &quot;#/shipper&quot; shipper: name: Duc age: 26 phone: &quot;0123456789&quot; First we need to define the object shipper with @ConfigurationProperties. We create a class name Shipper.java as below package com.example.workflow.model; import org.springframework.boot.context.properties.ConfigurationProperties; import org.springframework.stereotype.Component; @Component @ConfigurationProperties(prefix = &quot;shipper&quot;) public class Shipper { private String name; private Integer age; private String phone; public String getName() { return name; } public void setName(String name) { this.name = name; } public Integer getAge() { return age; } public void setAge(Integer age) { this.age = age; } public String getPhone() { return phone; } public void setPhone(String phone) { this.phone = phone; } } Then in Data.class we just need add it as an attribute but use the annotation Autowired above this attribute. Then create getter and setter as default. package com.example.workflow.model; import org.springframework.beans.factory.annotation.Autowired; import org.springframework.boot.context.properties.ConfigurationProperties; import org.springframework.stereotype.Component; @Component @ConfigurationProperties(prefix = &quot;data&quot;) public class Data { private String name; private Integer amount; private double price; @Autowired private Shipper shipper; public Shipper getShipper() { return shipper; } public void setShipper(Shipper shipper) { this.shipper = shipper; } public String getName() { return name; } public void setName(String name) { this.name = name; } public Integer getAmount() { return amount; } public void setAmount(Integer amount) { this.amount = amount; } public double getPrice() { return price; } public void setPrice(double price) { this.price = price; } } Finally we can use the Data.class everywhere with @Autowired and It contains the data of Shipper.class also. So that’s it. Goodbye and see you on another topic! Thanks!" />
+<link rel="canonical" href="/jekyll/update/2021/07/01/java-springboot-configuration-properties.html" />
+<meta property="og:url" content="/jekyll/update/2021/07/01/java-springboot-configuration-properties.html" />
+<meta property="og:site_name" content="StepByStep" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-07-01T00:00:00+07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="@ConfigurationProperties to create Spring Bean" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","url":"/jekyll/update/2021/07/01/java-springboot-configuration-properties.html","author":{"@type":"Person","name":"Duc Nguyen"},"headline":"@ConfigurationProperties to create Spring Bean","dateModified":"2021-07-01T00:00:00+07:00","datePublished":"2021-07-01T00:00:00+07:00","description":"Sometimes we need to load a lot of environment variables from application.properties or application.yml to our spring boot project for use and it is not good way if we use traditional way with @Value. Using @ConfigurationProperties with @Component Using @ConfigurationProperties With Other configuration ways BINDING OBJECTS WITH @ConfigurationProperties Using @ConfigurationProperties with @Component @ConfigurationProperties and Component will help us to convert environment variables to become a spring bean and we can use it everywhere in our project with @Autowired. This is the esiest way to config. Now, let’s see the example below For example we have an application.yml with some environment as below. As you can see the data has 3 attributes are name, amount and price, so we can imagine that there is an object data has 3 attributes. data: name: notebook amount: 500 price: 10.5 So the first thing we should do is create an object class with getter and setter as default. Then we add the annotation @ConfigurationProperties(prefix = &quot;data&quot;), The prefix of the properties that are valid to bind to object. Synonym for prefix, a valid prefix is defined by one or more words separated with dots (e.g. “company.customer.data”). package com.example.workflow.model; import org.springframework.boot.context.properties.ConfigurationProperties; import org.springframework.stereotype.Component; /** prefix = &quot;data&quot; it is mean this object is &quot;data&quot; in application.yaml And name, amount and price are 3 attributes in this object. @Component will make this object become an spring bean and we can use it everywhere with annotation @Autowired */ @Component @ConfigurationProperties(prefix = &quot;data&quot;) public class Data { private String name; private Integer amount; private double price; public String getName() { return name; } public void setName(String name) { this.name = name; } public Integer getAmount() { return amount; } public void setAmount(Integer amount) { this.amount = amount; } public double getPrice() { return price; } public void setPrice(double price) { this.price = price; } } Then we can use it everywhere by using annotation @Autowired @RestController public class GeneralController { @Autowired private Data data; @RequestMapping(method = RequestMethod.GET, path = &quot;/general/data&quot;, produces = MediaType.APPLICATION_JSON_VALUE) public ResponseEntity&lt;?&gt; getSampelDate() { return ResponseEntity.ok(data); } Using @ConfigurationProperties With Other configuration ways So there 2 more ways to make environment varialbes becomce spring bean with @ConfigurationProperties. The first way is using annotation @EnableConfigurationProperties(value = {Data.class}). We just put this annotation in our main class and put the array of classes that are using ConfigurationProperties. Let’s see the Example below We don’t use @Component anymore so our data class will look like this package com.example.workflow.model; import org.springframework.boot.context.properties.ConfigurationProperties; @ConfigurationProperties(prefix = &quot;data&quot;) public class Data { private String name; private Integer amount; private double price; public String getName() { return name; } public void setName(String name) { this.name = name; } public Integer getAmount() { return amount; } public void setAmount(Integer amount) { this.amount = amount; } public double getPrice() { return price; } public void setPrice(double price) { this.price = price; } } Then is the our main class package com.example.workflow; import com.example.workflow.model.Data; import org.springframework.boot.SpringApplication; import org.springframework.boot.autoconfigure.SpringBootApplication; import org.springframework.boot.context.properties.EnableConfigurationProperties; import org.springframework.cloud.openfeign.EnableFeignClients; /** @EnableConfigurationProperties(value = {Data.class}) value is the Data.class that we define above */ @SpringBootApplication @EnableFeignClients @EnableConfigurationProperties(value = {Data.class}) public class Application { public static void main(String... args) { SpringApplication.run(Application.class, args); } } The second way is like the way above with no annotation @Component in our Data.class but we will use the annotation @ConfigurationPropertiesScan(value = {&quot;com.example.workflow.model&quot;}) the value of this annotation is an array of path to the package that contains our Data.class. So if we have many classes using ConfigurationProperties we can use this way So our main class we look like as below package com.example.workflow; import org.springframework.boot.SpringApplication; import org.springframework.boot.autoconfigure.SpringBootApplication; import org.springframework.boot.context.properties.ConfigurationPropertiesScan; import org.springframework.cloud.openfeign.EnableFeignClients; /** &quot;com.example.workflow.model&quot; is the path to the package that contain Data.class which is using @ConfigurationProperties */ @SpringBootApplication @EnableFeignClients @ConfigurationPropertiesScan(value = {&quot;com.example.workflow.model&quot;}) public class Application { public static void main(String... args) { SpringApplication.run(Application.class, args); } } BINDING OBJECTS WITH @ConfigurationProperties We can make the Data.class contains another Object class by @ConfigurationProperties Let’s see the example below: As you can see the object shipper will be used in data. So how we can load them to become spring bean. data: name: notebook amount: 500 price: 10.5 shipper: $ref: &quot;#/shipper&quot; shipper: name: Duc age: 26 phone: &quot;0123456789&quot; First we need to define the object shipper with @ConfigurationProperties. We create a class name Shipper.java as below package com.example.workflow.model; import org.springframework.boot.context.properties.ConfigurationProperties; import org.springframework.stereotype.Component; @Component @ConfigurationProperties(prefix = &quot;shipper&quot;) public class Shipper { private String name; private Integer age; private String phone; public String getName() { return name; } public void setName(String name) { this.name = name; } public Integer getAge() { return age; } public void setAge(Integer age) { this.age = age; } public String getPhone() { return phone; } public void setPhone(String phone) { this.phone = phone; } } Then in Data.class we just need add it as an attribute but use the annotation Autowired above this attribute. Then create getter and setter as default. package com.example.workflow.model; import org.springframework.beans.factory.annotation.Autowired; import org.springframework.boot.context.properties.ConfigurationProperties; import org.springframework.stereotype.Component; @Component @ConfigurationProperties(prefix = &quot;data&quot;) public class Data { private String name; private Integer amount; private double price; @Autowired private Shipper shipper; public Shipper getShipper() { return shipper; } public void setShipper(Shipper shipper) { this.shipper = shipper; } public String getName() { return name; } public void setName(String name) { this.name = name; } public Integer getAmount() { return amount; } public void setAmount(Integer amount) { this.amount = amount; } public double getPrice() { return price; } public void setPrice(double price) { this.price = price; } } Finally we can use the Data.class everywhere with @Autowired and It contains the data of Shipper.class also. So that’s it. Goodbye and see you on another topic! Thanks!","mainEntityOfPage":{"@type":"WebPage","@id":"/jekyll/update/2021/07/01/java-springboot-configuration-properties.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="StepByStep" /><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NZ8G5007GK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-NZ8G5007GK');
+</script></head><body>
+  <div class="container-flush">
+    <div class="row"><!-- navigation bar -->
+<div class="col-lg-12">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" role="banner"><a class="navbar-brand site-title" rel="author" href="/">StepByStep</a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="nav navbar-nav"><li class="nav-item active">
+          <a class="nav-link" href="/about">About</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/">Java</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/docker">Docker</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/data">Data</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/ci-cd">CI-CD</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/python">Python</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/fe">FE</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/others">Others</a>
+        </li></ul>
+    </div>
+
+    <!-- Html Elements for Search -->
+    <div id="search-container" class="btn-group">
+      <input type="text" id="search-input" placeholder="search...">
+      <button id="clear">clear</button>
+      <ul id="results-container"></ul>
+    </div>
+
+    <!-- Script pointing to search-script.js -->
+    <script src="/java-scripts/search-script.js" type="text/javascript"></script>
+
+    <!-- Configuration -->
+    <script>
+      SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('results-container'),
+        json: '/search.json'
+      })
+    </script>
+
+    <!-- search clear -->
+    <script>
+      window.addEventListener('load', () => {
+        const button = document.querySelector('#clear');
+        button.addEventListener('click', () => {
+          document.querySelector('#search-input').value = "";
+          document.querySelector('#results-container').innerHTML = "";
+        });
+      });
+    </script>
+  </nav>
+</div></div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+  <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+    <header class="post-header">
+      <h1 class="post-title p-name" itemprop="name headline">@ConfigurationProperties to create Spring Bean</h1>
+      <p class="post-meta">
+        <time class="dt-published" datetime="2021-07-01T00:00:00+07:00" itemprop="datePublished">Jul 1, 2021
+        </time></p>
+    </header>
+  
+    <div class="post-content e-content" itemprop="articleBody">
+      <blockquote>
+  <p>Sometimes we need to load a lot of environment variables from <strong>application.properties</strong> or <strong>application.yml</strong> to our spring boot project for use and it is not good way if we use traditional way with @Value.</p>
+</blockquote>
+
+<ul id="markdown-toc">
+  <li><a href="#using-configurationproperties-with-component" id="markdown-toc-using-configurationproperties-with-component">Using @ConfigurationProperties with @Component</a></li>
+  <li><a href="#using-configurationproperties-with-other-configuration-ways" id="markdown-toc-using-configurationproperties-with-other-configuration-ways">Using @ConfigurationProperties With Other configuration ways</a></li>
+  <li><a href="#binding-objects-with-configurationproperties" id="markdown-toc-binding-objects-with-configurationproperties">BINDING OBJECTS WITH @ConfigurationProperties</a></li>
+</ul>
+
+<h2 id="using-configurationproperties-with-component">Using @ConfigurationProperties with @Component</h2>
+
+<ul>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">@ConfigurationProperties</code> and <code class="language-plaintext highlighter-rouge">Component</code> will help us to convert environment variables to become a spring bean and we can use it everywhere in our project with <code class="language-plaintext highlighter-rouge">@Autowired</code>. This is the esiest way to config. Now, let’s see the example below</p>
+  </li>
+  <li>
+    <p>For example we have an <strong>application.yml</strong> with some environment as below. As you can see the <strong>data</strong> has 3 attributes are <strong>name</strong>, <strong>amount</strong> and <strong>price</strong>, so we can imagine that there is an object data has 3 attributes.</p>
+  </li>
+</ul>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="na">data</span><span class="pi">:</span>
+        <span class="na">name</span><span class="pi">:</span> <span class="s">notebook</span>
+        <span class="na">amount</span><span class="pi">:</span> <span class="m">500</span>
+        <span class="na">price</span><span class="pi">:</span> <span class="m">10.5</span>
+</code></pre></div></div>
+
+<ul>
+  <li>So the first thing we should do is create an object class with <strong>getter</strong> and <strong>setter</strong> as default. Then we add the annotation <code class="language-plaintext highlighter-rouge">@ConfigurationProperties(prefix = "data")</code>, The prefix of the properties that are valid to bind to object. Synonym for prefix, a valid prefix is defined by one or more words separated with dots (e.g. <strong>“company.customer.data”</strong>).</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="kn">package</span> <span class="nn">com.example.workflow.model</span><span class="o">;</span>
+
+    <span class="kn">import</span> <span class="nn">org.springframework.boot.context.properties.ConfigurationProperties</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">org.springframework.stereotype.Component</span><span class="o">;</span>
+
+    <span class="cm">/**
+        prefix = "data" it is mean this object is "data" in application.yaml
+        And name, amount and price are 3 attributes in this object.
+        @Component will make this object become an spring bean and we can use it everywhere with annotation @Autowired
+    */</span>
+
+    <span class="nd">@Component</span>
+    <span class="nd">@ConfigurationProperties</span><span class="o">(</span><span class="n">prefix</span> <span class="o">=</span> <span class="s">"data"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Data</span> <span class="o">{</span>
+
+        <span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+        <span class="kd">private</span> <span class="nc">Integer</span> <span class="n">amount</span><span class="o">;</span>
+        <span class="kd">private</span> <span class="kt">double</span> <span class="n">price</span><span class="o">;</span>
+        
+
+        <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">name</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="kd">public</span> <span class="nc">Integer</span> <span class="nf">getAmount</span><span class="o">()</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">amount</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setAmount</span><span class="o">(</span><span class="nc">Integer</span> <span class="n">amount</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">amount</span> <span class="o">=</span> <span class="n">amount</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="kd">public</span> <span class="kt">double</span> <span class="nf">getPrice</span><span class="o">()</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">price</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setPrice</span><span class="o">(</span><span class="kt">double</span> <span class="n">price</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">price</span> <span class="o">=</span> <span class="n">price</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+</code></pre></div></div>
+
+<ul>
+  <li>Then we can use it everywhere by using annotation <code class="language-plaintext highlighter-rouge">@Autowired</code></li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@RestController</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">GeneralController</span> <span class="o">{</span>
+
+
+    <span class="nd">@Autowired</span>
+    <span class="kd">private</span> <span class="nc">Data</span> <span class="n">data</span><span class="o">;</span>
+
+
+    <span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">method</span> <span class="o">=</span> <span class="nc">RequestMethod</span><span class="o">.</span><span class="na">GET</span><span class="o">,</span> <span class="n">path</span> <span class="o">=</span> <span class="s">"/general/data"</span><span class="o">,</span>
+            <span class="n">produces</span> <span class="o">=</span> <span class="nc">MediaType</span><span class="o">.</span><span class="na">APPLICATION_JSON_VALUE</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="nc">ResponseEntity</span><span class="o">&lt;?&gt;</span> <span class="n">getSampelDate</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="nc">ResponseEntity</span><span class="o">.</span><span class="na">ok</span><span class="o">(</span><span class="n">data</span><span class="o">);</span>
+    <span class="o">}</span>
+
+</code></pre></div></div>
+
+<h2 id="using-configurationproperties-with-other-configuration-ways">Using @ConfigurationProperties With Other configuration ways</h2>
+
+<ul>
+  <li>
+    <p>So there 2 more ways to make environment varialbes becomce spring bean with <code class="language-plaintext highlighter-rouge">@ConfigurationProperties</code>.</p>
+  </li>
+  <li>
+    <p>The first way is using annotation <code class="language-plaintext highlighter-rouge">@EnableConfigurationProperties(value = {Data.class})</code>. We just put this annotation in our <code class="language-plaintext highlighter-rouge">main</code> class and put the array of classes that are using <code class="language-plaintext highlighter-rouge">ConfigurationProperties</code>. Let’s see the Example below</p>
+  </li>
+  <li>
+    <p>We don’t use <code class="language-plaintext highlighter-rouge">@Component</code> anymore so our data class will look like this</p>
+  </li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="kn">package</span> <span class="nn">com.example.workflow.model</span><span class="o">;</span>
+
+    <span class="kn">import</span> <span class="nn">org.springframework.boot.context.properties.ConfigurationProperties</span><span class="o">;</span>
+
+    <span class="nd">@ConfigurationProperties</span><span class="o">(</span><span class="n">prefix</span> <span class="o">=</span> <span class="s">"data"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Data</span> <span class="o">{</span>
+
+        <span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+        <span class="kd">private</span> <span class="nc">Integer</span> <span class="n">amount</span><span class="o">;</span>
+        <span class="kd">private</span> <span class="kt">double</span> <span class="n">price</span><span class="o">;</span>
+        
+
+        <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">name</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="kd">public</span> <span class="nc">Integer</span> <span class="nf">getAmount</span><span class="o">()</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">amount</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setAmount</span><span class="o">(</span><span class="nc">Integer</span> <span class="n">amount</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">amount</span> <span class="o">=</span> <span class="n">amount</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="kd">public</span> <span class="kt">double</span> <span class="nf">getPrice</span><span class="o">()</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">price</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setPrice</span><span class="o">(</span><span class="kt">double</span> <span class="n">price</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">price</span> <span class="o">=</span> <span class="n">price</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+</code></pre></div></div>
+<ul>
+  <li>Then is the our main class</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kn">package</span> <span class="nn">com.example.workflow</span><span class="o">;</span>
+
+    <span class="kn">import</span> <span class="nn">com.example.workflow.model.Data</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">org.springframework.boot.SpringApplication</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">org.springframework.boot.autoconfigure.SpringBootApplication</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">org.springframework.boot.context.properties.EnableConfigurationProperties</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">org.springframework.cloud.openfeign.EnableFeignClients</span><span class="o">;</span>
+
+    <span class="cm">/**
+       @EnableConfigurationProperties(value = {Data.class})
+       value is the Data.class that we define above 
+    */</span>
+
+    <span class="nd">@SpringBootApplication</span>
+    <span class="nd">@EnableFeignClients</span>
+    <span class="nd">@EnableConfigurationProperties</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="o">{</span><span class="nc">Data</span><span class="o">.</span><span class="na">class</span><span class="o">})</span>
+    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Application</span> <span class="o">{</span>
+
+        <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">...</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">SpringApplication</span><span class="o">.</span><span class="na">run</span><span class="o">(</span><span class="nc">Application</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">args</span><span class="o">);</span>
+        <span class="o">}</span>
+
+    <span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>The second way is like the way above with <strong>no annotation @Component</strong> in our <strong>Data.class</strong> but we will use the annotation <code class="language-plaintext highlighter-rouge">@ConfigurationPropertiesScan(value = {"com.example.workflow.model"})</code> the value of this annotation is an array of path to the <code class="language-plaintext highlighter-rouge">package</code> that contains our <code class="language-plaintext highlighter-rouge">Data.class</code>. So if we have <strong>many classes using <code class="language-plaintext highlighter-rouge">ConfigurationProperties</code></strong> we can use this way</p>
+  </li>
+  <li>
+    <p>So our main class we look like as below</p>
+  </li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="kn">package</span> <span class="nn">com.example.workflow</span><span class="o">;</span>
+
+    <span class="kn">import</span> <span class="nn">org.springframework.boot.SpringApplication</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">org.springframework.boot.autoconfigure.SpringBootApplication</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">org.springframework.boot.context.properties.ConfigurationPropertiesScan</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">org.springframework.cloud.openfeign.EnableFeignClients</span><span class="o">;</span>
+
+    <span class="cm">/**
+        "com.example.workflow.model" is the path to the package that
+        contain Data.class which is using @ConfigurationProperties
+    */</span>
+
+    <span class="nd">@SpringBootApplication</span>
+    <span class="nd">@EnableFeignClients</span>
+    <span class="nd">@ConfigurationPropertiesScan</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="o">{</span><span class="s">"com.example.workflow.model"</span><span class="o">})</span>
+    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Application</span> <span class="o">{</span>
+
+        <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">...</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">SpringApplication</span><span class="o">.</span><span class="na">run</span><span class="o">(</span><span class="nc">Application</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">args</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+</code></pre></div></div>
+
+<h2 id="binding-objects-with-configurationproperties">BINDING OBJECTS WITH @ConfigurationProperties</h2>
+<ul>
+  <li>
+    <p>We can make the <code class="language-plaintext highlighter-rouge">Data.class</code> contains another Object class by <code class="language-plaintext highlighter-rouge">@ConfigurationProperties</code></p>
+  </li>
+  <li>
+    <p>Let’s see the example below: As you can see the object <code class="language-plaintext highlighter-rouge">shipper</code> will be used in <code class="language-plaintext highlighter-rouge">data</code>. So how we can load them to become spring bean.</p>
+  </li>
+</ul>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">data</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">notebook</span>
+  <span class="na">amount</span><span class="pi">:</span> <span class="m">500</span>
+  <span class="na">price</span><span class="pi">:</span> <span class="m">10.5</span>
+  <span class="na">shipper</span><span class="pi">:</span>
+    <span class="na">$ref</span><span class="pi">:</span> <span class="s2">"</span><span class="s">#/shipper"</span>
+
+<span class="na">shipper</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">Duc</span>
+  <span class="na">age</span><span class="pi">:</span> <span class="m">26</span>
+  <span class="na">phone</span><span class="pi">:</span> <span class="s2">"</span><span class="s">0123456789"</span>
+
+</code></pre></div></div>
+
+<ul>
+  <li>First we need to define the object <code class="language-plaintext highlighter-rouge">shipper</code> with <code class="language-plaintext highlighter-rouge">@ConfigurationProperties</code>. We create a class name <code class="language-plaintext highlighter-rouge">Shipper.java</code> as below</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="kn">package</span> <span class="nn">com.example.workflow.model</span><span class="o">;</span>
+
+    <span class="kn">import</span> <span class="nn">org.springframework.boot.context.properties.ConfigurationProperties</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">org.springframework.stereotype.Component</span><span class="o">;</span>
+
+    <span class="nd">@Component</span>
+    <span class="nd">@ConfigurationProperties</span><span class="o">(</span><span class="n">prefix</span> <span class="o">=</span> <span class="s">"shipper"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Shipper</span> <span class="o">{</span>
+        <span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+        <span class="kd">private</span> <span class="nc">Integer</span> <span class="n">age</span><span class="o">;</span>
+        <span class="kd">private</span> <span class="nc">String</span> <span class="n">phone</span><span class="o">;</span>
+
+
+        <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">name</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="kd">public</span> <span class="nc">Integer</span> <span class="nf">getAge</span><span class="o">()</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">age</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setAge</span><span class="o">(</span><span class="nc">Integer</span> <span class="n">age</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">age</span> <span class="o">=</span> <span class="n">age</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getPhone</span><span class="o">()</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">phone</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setPhone</span><span class="o">(</span><span class="nc">String</span> <span class="n">phone</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">phone</span> <span class="o">=</span> <span class="n">phone</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>Then in <code class="language-plaintext highlighter-rouge">Data.class</code> we just need add it as an attribute but use the annotation <code class="language-plaintext highlighter-rouge">Autowired</code> above this attribute. Then create <strong>getter</strong> and <strong>setter</strong> as default.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="kn">package</span> <span class="nn">com.example.workflow.model</span><span class="o">;</span>
+
+    <span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">org.springframework.boot.context.properties.ConfigurationProperties</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">org.springframework.stereotype.Component</span><span class="o">;</span>
+
+    <span class="nd">@Component</span>
+    <span class="nd">@ConfigurationProperties</span><span class="o">(</span><span class="n">prefix</span> <span class="o">=</span> <span class="s">"data"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Data</span> <span class="o">{</span>
+
+        <span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+        <span class="kd">private</span> <span class="nc">Integer</span> <span class="n">amount</span><span class="o">;</span>
+        <span class="kd">private</span> <span class="kt">double</span> <span class="n">price</span><span class="o">;</span>
+
+        <span class="nd">@Autowired</span>
+        <span class="kd">private</span> <span class="nc">Shipper</span> <span class="n">shipper</span><span class="o">;</span>
+
+        <span class="kd">public</span> <span class="nc">Shipper</span> <span class="nf">getShipper</span><span class="o">()</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">shipper</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setShipper</span><span class="o">(</span><span class="nc">Shipper</span> <span class="n">shipper</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">shipper</span> <span class="o">=</span> <span class="n">shipper</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">name</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="kd">public</span> <span class="nc">Integer</span> <span class="nf">getAmount</span><span class="o">()</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">amount</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setAmount</span><span class="o">(</span><span class="nc">Integer</span> <span class="n">amount</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">amount</span> <span class="o">=</span> <span class="n">amount</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="kd">public</span> <span class="kt">double</span> <span class="nf">getPrice</span><span class="o">()</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">price</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setPrice</span><span class="o">(</span><span class="kt">double</span> <span class="n">price</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">price</span> <span class="o">=</span> <span class="n">price</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>Finally we can use the <code class="language-plaintext highlighter-rouge">Data.class</code> everywhere with <code class="language-plaintext highlighter-rouge">@Autowired</code> and It contains the data of <code class="language-plaintext highlighter-rouge">Shipper.class</code> also.</p>
+  </li>
+  <li>
+    <p>So that’s it. Goodbye and see you on another topic! Thanks!</p>
+  </li>
+</ul>
+
+    </div><a class="u-url" href="/jekyll/update/2021/07/01/java-springboot-configuration-properties.html" hidden></a>
+  </article>
+  
+</div>
+
+
+    </div>
+  </div>
+  <script src="https://unpkg.com/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js"></script>
+  <script>addBackToTop()</script>
+</body>
+<footer><footer class="site-footer h-card">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <h2 class="footer-heading">StepByStep</h2>
+        <div>
+          <div>
+            <ul>
+              <li>Duc Nguyen</li><li><a class="u-email" href="mailto:minhducnguyen189@gmail.com">minhducnguyen189@gmail.com</a></li><li>&copy; 2021 Duc Nguyen. Powered by <a href="https://jekyllrb.com/">Jekyll</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <data class="u-url" href="/%20/"></data>
+        <div><ul class="social-media-list"><li><a href="https://github.com/minhducnguyen189"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">minhducnguyen189</span></a></li><li><a href="https://www.linkedin.com/in/duc-nguyen-03109b141"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#linkedin"></use></svg> <span class="username">duc-nguyen-03109b141</span></a></li></ul>
+</div>
+      </div>
+      <div class="col-md-4">
+        
+      </div>
+    </div>
+
+    <div class="row">
+      <p>Hi there! Let&#39;s explore some general knowleadges and briefly definitions  in programming. I hope that this website can help people saving time in learning, also give some motivations for those who have choice the developer path.</p>
+    </div>
+</footer></footer>
+</html>

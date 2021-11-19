@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- bootstrap library and JS, Jquery -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Data Science: R Basic Data Wrangling | StepByStep</title>
+<meta name="generator" content="Jekyll v4.2.1" />
+<meta property="og:title" content="Data Science: R Basic Data Wrangling" />
+<meta name="author" content="Duc Nguyen" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="You can learn full course in this link" />
+<meta property="og:description" content="You can learn full course in this link" />
+<link rel="canonical" href="/jekyll/update/2021/11/05/data-science-R-basic-daata-wrangling.html" />
+<meta property="og:url" content="/jekyll/update/2021/11/05/data-science-R-basic-daata-wrangling.html" />
+<meta property="og:site_name" content="StepByStep" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-11-05T00:00:00+07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Data Science: R Basic Data Wrangling" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","url":"/jekyll/update/2021/11/05/data-science-R-basic-daata-wrangling.html","author":{"@type":"Person","name":"Duc Nguyen"},"headline":"Data Science: R Basic Data Wrangling","dateModified":"2021-11-05T00:00:00+07:00","datePublished":"2021-11-05T00:00:00+07:00","description":"You can learn full course in this link","mainEntityOfPage":{"@type":"WebPage","@id":"/jekyll/update/2021/11/05/data-science-R-basic-daata-wrangling.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="StepByStep" /><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NZ8G5007GK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-NZ8G5007GK');
+</script></head><body>
+  <div class="container-flush">
+    <div class="row"><!-- navigation bar -->
+<div class="col-lg-12">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" role="banner"><a class="navbar-brand site-title" rel="author" href="/">StepByStep</a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="nav navbar-nav"><li class="nav-item active">
+          <a class="nav-link" href="/about">About</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/">Java</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/docker">Docker</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/data">Data</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/ci-cd">CI-CD</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/python">Python</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/fe">FE</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/others">Others</a>
+        </li></ul>
+    </div>
+
+    <!-- Html Elements for Search -->
+    <div id="search-container" class="btn-group">
+      <input type="text" id="search-input" placeholder="search...">
+      <button id="clear">clear</button>
+      <ul id="results-container"></ul>
+    </div>
+
+    <!-- Script pointing to search-script.js -->
+    <script src="/java-scripts/search-script.js" type="text/javascript"></script>
+
+    <!-- Configuration -->
+    <script>
+      SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('results-container'),
+        json: '/search.json'
+      })
+    </script>
+
+    <!-- search clear -->
+    <script>
+      window.addEventListener('load', () => {
+        const button = document.querySelector('#clear');
+        button.addEventListener('click', () => {
+          document.querySelector('#search-input').value = "";
+          document.querySelector('#results-container').innerHTML = "";
+        });
+      });
+    </script>
+  </nav>
+</div></div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+  <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+    <header class="post-header">
+      <h1 class="post-title p-name" itemprop="name headline">Data Science: R Basic Data Wrangling</h1>
+      <p class="post-meta">
+        <time class="dt-published" datetime="2021-11-05T00:00:00+07:00" itemprop="datePublished">Nov 5, 2021
+        </time></p>
+    </header>
+  
+    <div class="post-content e-content" itemprop="articleBody">
+      <blockquote>
+  <p>You can learn full course in <a href="https://learning.edx.org/course/course-v1:HarvardX+PH125.1x+2T2021/home">this link</a></p>
+</blockquote>
+
+<ul id="markdown-toc">
+  <li><a href="#dplyr-package" id="markdown-toc-dplyr-package">DPLYR PACKAGE</a>    <ul>
+      <li><a href="#mutate-function" id="markdown-toc-mutate-function">MUTATE FUNCTION</a></li>
+      <li><a href="#filter-function" id="markdown-toc-filter-function">FILTER FUNCTION</a></li>
+      <li><a href="#select-function" id="markdown-toc-select-function">SELECT FUNCTION</a></li>
+      <li><a href="#pipe-operator" id="markdown-toc-pipe-operator">PIPE OPERATOR</a></li>
+      <li><a href="#summary" id="markdown-toc-summary">SUMMARY</a></li>
+    </ul>
+  </li>
+  <li><a href="#creating-data-frames" id="markdown-toc-creating-data-frames">CREATING DATA FRAMES</a>    <ul>
+      <li><a href="#summary-1" id="markdown-toc-summary-1">SUMMARY</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="dplyr-package">DPLYR PACKAGE</h2>
+
+<ul>
+  <li>we will introduce the <code class="language-plaintext highlighter-rouge">dplyr package</code>, which provides intuitive functionality for working with tables. We will cover the <code class="language-plaintext highlighter-rouge">dplyr package</code> in much more depth. Once you <code class="language-plaintext highlighter-rouge">install dplyr</code>, you can load it using <code class="language-plaintext highlighter-rouge">library(dplyr)</code> as below.</li>
+</ul>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="o">&gt;</span><span class="w"> </span><span class="n">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span><span class="w">
+
+</span><span class="n">Attaching</span><span class="w"> </span><span class="n">package</span><span class="o">:</span><span class="w"> </span><span class="err">‘</span><span class="n">dplyr</span><span class="err">’</span><span class="w">
+
+</span><span class="n">The</span><span class="w"> </span><span class="n">following</span><span class="w"> </span><span class="n">objects</span><span class="w"> </span><span class="n">are</span><span class="w"> </span><span class="n">masked</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="err">‘</span><span class="n">package</span><span class="o">:</span><span class="n">stats</span><span class="err">’</span><span class="o">:</span><span class="w">
+
+    </span><span class="n">filter</span><span class="p">,</span><span class="w"> </span><span class="n">lag</span><span class="w">
+
+</span><span class="n">The</span><span class="w"> </span><span class="n">following</span><span class="w"> </span><span class="n">objects</span><span class="w"> </span><span class="n">are</span><span class="w"> </span><span class="n">masked</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="err">‘</span><span class="n">package</span><span class="o">:</span><span class="n">base</span><span class="err">’</span><span class="o">:</span><span class="w">
+
+    </span><span class="n">intersect</span><span class="p">,</span><span class="w"> </span><span class="n">setdiff</span><span class="p">,</span><span class="w"> </span><span class="n">setequal</span><span class="p">,</span><span class="w"> </span><span class="n">union</span><span class="w">
+
+</span></code></pre></div></div>
+
+<ul>
+  <li>This package introduces functions that perform the most common operations in data manipulation and uses names for these functions that are relatively easy to remember.</li>
+  <li>To change the data table by adding a new column or changing an existing one, we use <code class="language-plaintext highlighter-rouge">mutate</code>.</li>
+  <li>To filter the data by subsetting rows, we use the <code class="language-plaintext highlighter-rouge">function filter</code>.</li>
+  <li>To subset the data by selecting specific columns, we use <code class="language-plaintext highlighter-rouge">select</code>.</li>
+  <li>We can also perform a series of operations. For example, select this– and then filter that– by sending the results of one function to another function using what is called the <code class="language-plaintext highlighter-rouge">pipe operator: %&gt;%</code>.</li>
+</ul>
+
+<h3 id="mutate-function">MUTATE FUNCTION</h3>
+
+<ul>
+  <li>For example, If we want to add a new column name <code class="language-plaintext highlighter-rouge">rate</code> into <code class="language-plaintext highlighter-rouge">murders</code> table, we can use <code class="language-plaintext highlighter-rouge">mutate(murders,rate=total/populication*100000)</code> as the example below.</li>
+</ul>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="o">&gt;</span><span class="w"> </span><span class="n">murders</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">mutate</span><span class="p">(</span><span class="n">murders</span><span class="p">,</span><span class="w"> </span><span class="n">rate</span><span class="o">=</span><span class="n">total</span><span class="o">/</span><span class="n">population</span><span class="o">*</span><span class="m">100000</span><span class="p">)</span><span class="w">
+</span><span class="o">&gt;</span><span class="w"> </span><span class="n">head</span><span class="p">(</span><span class="n">murders</span><span class="p">)</span><span class="w">
+       </span><span class="n">state</span><span class="w"> </span><span class="n">abb</span><span class="w"> </span><span class="n">region</span><span class="w"> </span><span class="n">population</span><span class="w"> </span><span class="n">total</span><span class="w">     </span><span class="n">rate</span><span class="w">
+</span><span class="m">1</span><span class="w">    </span><span class="n">Alabama</span><span class="w">  </span><span class="n">AL</span><span class="w">  </span><span class="n">South</span><span class="w">    </span><span class="m">4779736</span><span class="w">   </span><span class="m">135</span><span class="w"> </span><span class="m">2.824424</span><span class="w">
+</span><span class="m">2</span><span class="w">     </span><span class="n">Alaska</span><span class="w">  </span><span class="n">AK</span><span class="w">   </span><span class="n">West</span><span class="w">     </span><span class="m">710231</span><span class="w">    </span><span class="m">19</span><span class="w"> </span><span class="m">2.675186</span><span class="w">
+</span><span class="m">3</span><span class="w">    </span><span class="n">Arizona</span><span class="w">  </span><span class="n">AZ</span><span class="w">   </span><span class="n">West</span><span class="w">    </span><span class="m">6392017</span><span class="w">   </span><span class="m">232</span><span class="w"> </span><span class="m">3.629527</span><span class="w">
+</span><span class="m">4</span><span class="w">   </span><span class="n">Arkansas</span><span class="w">  </span><span class="n">AR</span><span class="w">  </span><span class="n">South</span><span class="w">    </span><span class="m">2915918</span><span class="w">    </span><span class="m">93</span><span class="w"> </span><span class="m">3.189390</span><span class="w">
+</span><span class="m">5</span><span class="w"> </span><span class="n">California</span><span class="w">  </span><span class="n">CA</span><span class="w">   </span><span class="n">West</span><span class="w">   </span><span class="m">37253956</span><span class="w">  </span><span class="m">1257</span><span class="w"> </span><span class="m">3.374138</span><span class="w">
+</span><span class="m">6</span><span class="w">   </span><span class="n">Colorado</span><span class="w">  </span><span class="n">CO</span><span class="w">   </span><span class="n">West</span><span class="w">    </span><span class="m">5029196</span><span class="w">    </span><span class="m">65</span><span class="w"> </span><span class="m">1.292453</span><span class="w">
+
+</span></code></pre></div></div>
+
+<h3 id="filter-function">FILTER FUNCTION</h3>
+
+<ul>
+  <li>Now let’s learn about the <code class="language-plaintext highlighter-rouge">filter function</code>. Suppose that we want to filter the data table to only show
+the entries for which the murder rate is lower than 0.71. To do this, you use the filter function, which
+takes the data table as the first argument and the conditional statement as the next.</li>
+</ul>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="o">&gt;</span><span class="w"> </span><span class="n">filter</span><span class="p">(</span><span class="n">murders</span><span class="p">,</span><span class="n">rate</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="m">0.71</span><span class="p">)</span><span class="w">
+          </span><span class="n">state</span><span class="w"> </span><span class="n">abb</span><span class="w">        </span><span class="n">region</span><span class="w"> </span><span class="n">population</span><span class="w"> </span><span class="n">total</span><span class="w">      </span><span class="n">rate</span><span class="w">
+</span><span class="m">1</span><span class="w">        </span><span class="n">Hawaii</span><span class="w">  </span><span class="n">HI</span><span class="w">          </span><span class="n">West</span><span class="w">    </span><span class="m">1360301</span><span class="w">     </span><span class="m">7</span><span class="w"> </span><span class="m">0.5145920</span><span class="w">
+</span><span class="m">2</span><span class="w">          </span><span class="n">Iowa</span><span class="w">  </span><span class="n">IA</span><span class="w"> </span><span class="n">North</span><span class="w"> </span><span class="n">Central</span><span class="w">    </span><span class="m">3046355</span><span class="w">    </span><span class="m">21</span><span class="w"> </span><span class="m">0.6893484</span><span class="w">
+</span><span class="m">3</span><span class="w"> </span><span class="n">New</span><span class="w"> </span><span class="n">Hampshire</span><span class="w">  </span><span class="n">NH</span><span class="w">     </span><span class="n">Northeast</span><span class="w">    </span><span class="m">1316470</span><span class="w">     </span><span class="m">5</span><span class="w"> </span><span class="m">0.3798036</span><span class="w">
+</span><span class="m">4</span><span class="w">  </span><span class="n">North</span><span class="w"> </span><span class="n">Dakota</span><span class="w">  </span><span class="n">ND</span><span class="w"> </span><span class="n">North</span><span class="w"> </span><span class="n">Central</span><span class="w">     </span><span class="m">672591</span><span class="w">     </span><span class="m">4</span><span class="w"> </span><span class="m">0.5947151</span><span class="w">
+</span><span class="m">5</span><span class="w">       </span><span class="n">Vermont</span><span class="w">  </span><span class="n">VT</span><span class="w">     </span><span class="n">Northeast</span><span class="w">     </span><span class="m">625741</span><span class="w">     </span><span class="m">2</span><span class="w"> </span><span class="m">0.3196211</span><span class="w">
+
+</span></code></pre></div></div>
+
+<h3 id="select-function">SELECT FUNCTION</h3>
+
+<ul>
+  <li>Now let’s learn about the <code class="language-plaintext highlighter-rouge">select function</code>. Although our data table only has six columns, some data tables include hundreds. So it’s often useful to <code class="language-plaintext highlighter-rouge">select</code> just the columns that you want to work with.</li>
+  <li>For example, we defined a new object, new_table. And it’s the murders data table, but only three columns of it, state, region, and rate. Once we define this new object, then we filter it for the states that have a rate of less than 0.71.</li>
+</ul>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="o">&gt;</span><span class="w"> </span><span class="n">new_table</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">select</span><span class="p">(</span><span class="n">murders</span><span class="p">,</span><span class="n">state</span><span class="p">,</span><span class="n">region</span><span class="p">,</span><span class="n">rate</span><span class="p">)</span><span class="w">
+</span><span class="o">&gt;</span><span class="w"> </span><span class="n">filter</span><span class="p">(</span><span class="n">new_table</span><span class="p">,</span><span class="n">rate</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="m">0.71</span><span class="p">)</span><span class="w">
+          </span><span class="n">state</span><span class="w">        </span><span class="n">region</span><span class="w">      </span><span class="n">rate</span><span class="w">
+</span><span class="m">1</span><span class="w">        </span><span class="n">Hawaii</span><span class="w">          </span><span class="n">West</span><span class="w"> </span><span class="m">0.5145920</span><span class="w">
+</span><span class="m">2</span><span class="w">          </span><span class="n">Iowa</span><span class="w"> </span><span class="n">North</span><span class="w"> </span><span class="n">Central</span><span class="w"> </span><span class="m">0.6893484</span><span class="w">
+</span><span class="m">3</span><span class="w"> </span><span class="n">New</span><span class="w"> </span><span class="n">Hampshire</span><span class="w">     </span><span class="n">Northeast</span><span class="w"> </span><span class="m">0.3798036</span><span class="w">
+</span><span class="m">4</span><span class="w">  </span><span class="n">North</span><span class="w"> </span><span class="n">Dakota</span><span class="w"> </span><span class="n">North</span><span class="w"> </span><span class="n">Central</span><span class="w"> </span><span class="m">0.5947151</span><span class="w">
+</span><span class="m">5</span><span class="w">       </span><span class="n">Vermont</span><span class="w">     </span><span class="n">Northeast</span><span class="w"> </span><span class="m">0.3196211</span><span class="w">
+
+</span></code></pre></div></div>
+
+<h3 id="pipe-operator">PIPE OPERATOR</h3>
+
+<ul>
+  <li>We can write code that looks more like our description of what we want to do, take the original data, select some columns, and then filter some rows. For such operations, we can use the pipe.</li>
+</ul>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="o">&gt;</span><span class="w"> </span><span class="n">murders</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">select</span><span class="p">(</span><span class="n">state</span><span class="p">,</span><span class="n">region</span><span class="p">,</span><span class="n">rate</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">filter</span><span class="p">(</span><span class="n">rate</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="m">0.71</span><span class="p">)</span><span class="w">
+          </span><span class="n">state</span><span class="w">        </span><span class="n">region</span><span class="w">      </span><span class="n">rate</span><span class="w">
+</span><span class="m">1</span><span class="w">        </span><span class="n">Hawaii</span><span class="w">          </span><span class="n">West</span><span class="w"> </span><span class="m">0.5145920</span><span class="w">
+</span><span class="m">2</span><span class="w">          </span><span class="n">Iowa</span><span class="w"> </span><span class="n">North</span><span class="w"> </span><span class="n">Central</span><span class="w"> </span><span class="m">0.6893484</span><span class="w">
+</span><span class="m">3</span><span class="w"> </span><span class="n">New</span><span class="w"> </span><span class="n">Hampshire</span><span class="w">     </span><span class="n">Northeast</span><span class="w"> </span><span class="m">0.3798036</span><span class="w">
+</span><span class="m">4</span><span class="w">  </span><span class="n">North</span><span class="w"> </span><span class="n">Dakota</span><span class="w"> </span><span class="n">North</span><span class="w"> </span><span class="n">Central</span><span class="w"> </span><span class="m">0.5947151</span><span class="w">
+</span><span class="m">5</span><span class="w">       </span><span class="n">Vermont</span><span class="w">     </span><span class="n">Northeast</span><span class="w"> </span><span class="m">0.3196211</span><span class="w">
+
+</span></code></pre></div></div>
+
+<ul>
+  <li>Know that when using the pipe, we no longer need to specify the required arguments.</li>
+</ul>
+
+<h3 id="summary">SUMMARY</h3>
+
+<ul>
+  <li>To change a data table by adding a new column, or changing an existing one, we use the <code class="language-plaintext highlighter-rouge">mutate() function</code>.</li>
+  <li>To filter the data by subsetting rows, we use the <code class="language-plaintext highlighter-rouge">function filter()</code>.</li>
+  <li>To subset the data by selecting specific columns, we use the <code class="language-plaintext highlighter-rouge">select() function</code>.</li>
+  <li>We can perform a series of operations by sending the results of one function to another function using the pipe operator, <code class="language-plaintext highlighter-rouge">%&gt;%</code>.</li>
+</ul>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="c1"># installing and loading the dplyr package</span><span class="w">
+</span><span class="n">install.packages</span><span class="p">(</span><span class="s2">"dplyr"</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># adding a column with mutate</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">dslabs</span><span class="p">)</span><span class="w">
+</span><span class="n">data</span><span class="p">(</span><span class="s2">"murders"</span><span class="p">)</span><span class="w">
+</span><span class="n">murders</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">mutate</span><span class="p">(</span><span class="n">murders</span><span class="p">,</span><span class="w"> </span><span class="n">rate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">total</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">population</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">100000</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># subsetting with filter</span><span class="w">
+</span><span class="n">filter</span><span class="p">(</span><span class="n">murders</span><span class="p">,</span><span class="w"> </span><span class="n">rate</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="m">0.71</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># selecting columns with select</span><span class="w">
+</span><span class="n">new_table</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">select</span><span class="p">(</span><span class="n">murders</span><span class="p">,</span><span class="w"> </span><span class="n">state</span><span class="p">,</span><span class="w"> </span><span class="n">region</span><span class="p">,</span><span class="w"> </span><span class="n">rate</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># using the pipe</span><span class="w">
+</span><span class="n">murders</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">select</span><span class="p">(</span><span class="n">state</span><span class="p">,</span><span class="w"> </span><span class="n">region</span><span class="p">,</span><span class="w"> </span><span class="n">rate</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">filter</span><span class="p">(</span><span class="n">rate</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="m">0.71</span><span class="p">)</span><span class="w">
+
+</span></code></pre></div></div>
+
+<h2 id="creating-data-frames">CREATING DATA FRAMES</h2>
+
+<ul>
+  <li>For many of the analyses we perform with <code class="language-plaintext highlighter-rouge">dplyr</code> we will find it necessary to create data frames in R. You can do this using the <code class="language-plaintext highlighter-rouge">data.frame function</code>.</li>
+  <li>Let’s see the example below.</li>
+</ul>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="o">&gt;</span><span class="w"> </span><span class="n">grades</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">data.frame</span><span class="p">(</span><span class="n">names</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s2">"John"</span><span class="p">,</span><span class="s2">"Juan"</span><span class="p">,</span><span class="s2">"Jean"</span><span class="p">,</span><span class="s2">"Yao"</span><span class="p">),</span><span class="w"> </span><span class="n">exam_1</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">95</span><span class="p">,</span><span class="m">80</span><span class="p">,</span><span class="m">90</span><span class="p">,</span><span class="m">85</span><span class="p">),</span><span class="n">exam_2</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">90</span><span class="p">,</span><span class="m">85</span><span class="p">,</span><span class="m">85</span><span class="p">,</span><span class="m">90</span><span class="p">))</span><span class="w">
+</span><span class="o">&gt;</span><span class="w"> </span><span class="n">grades</span><span class="w">
+  </span><span class="n">names</span><span class="w"> </span><span class="n">exam_1</span><span class="w"> </span><span class="n">exam_2</span><span class="w">
+</span><span class="m">1</span><span class="w">  </span><span class="n">John</span><span class="w">     </span><span class="m">95</span><span class="w">     </span><span class="m">90</span><span class="w">
+</span><span class="m">2</span><span class="w">  </span><span class="n">Juan</span><span class="w">     </span><span class="m">80</span><span class="w">     </span><span class="m">85</span><span class="w">
+</span><span class="m">3</span><span class="w">  </span><span class="n">Jean</span><span class="w">     </span><span class="m">90</span><span class="w">     </span><span class="m">85</span><span class="w">
+</span><span class="m">4</span><span class="w">   </span><span class="n">Yao</span><span class="w">     </span><span class="m">85</span><span class="w">     </span><span class="m">90</span><span class="w">
+</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">class</span><span class="p">(</span><span class="n">grades</span><span class="o">$</span><span class="n">names</span><span class="p">)</span><span class="w">
+</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="s2">"factor"</span><span class="w">
+
+</span></code></pre></div></div>
+
+<ul>
+  <li>Be warned, by default, <code class="language-plaintext highlighter-rouge">data.frame</code> turns <strong>characters into factors</strong>. To avoid this, we use the rather cumbersome argument <code class="language-plaintext highlighter-rouge">stringsAsFactors = FALSE</code> in the following way.</li>
+</ul>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="o">&gt;</span><span class="w"> </span><span class="n">grades</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">data.frame</span><span class="p">(</span><span class="n">names</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s2">"John"</span><span class="p">,</span><span class="s2">"Juan"</span><span class="p">,</span><span class="s2">"Jean"</span><span class="p">,</span><span class="s2">"Yao"</span><span class="p">),</span><span class="w"> </span><span class="n">exam_1</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">95</span><span class="p">,</span><span class="m">80</span><span class="p">,</span><span class="m">90</span><span class="p">,</span><span class="m">85</span><span class="p">),</span><span class="n">exam_2</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">90</span><span class="p">,</span><span class="m">85</span><span class="p">,</span><span class="m">85</span><span class="p">,</span><span class="m">90</span><span class="p">),</span><span class="w"> </span><span class="n">stringsAsFactors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w">
+</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">class</span><span class="p">(</span><span class="n">grades</span><span class="o">$</span><span class="n">names</span><span class="p">)</span><span class="w">
+</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="s2">"character"</span><span class="w">
+
+</span></code></pre></div></div>
+<ul>
+  <li>Note: If you are using <code class="language-plaintext highlighter-rouge">R version 4.0 and above"</code>. So by default <code class="language-plaintext highlighter-rouge">data.frame</code> does not turn <strong>characters into factors</strong> and you don’t need to config <code class="language-plaintext highlighter-rouge">stringsAsFactors = FALSE</code>.</li>
+</ul>
+
+<h3 id="summary-1">SUMMARY</h3>
+
+<ul>
+  <li>We can use the <code class="language-plaintext highlighter-rouge">data.frame()</code> function to create data frames.</li>
+  <li>Formerly, the <code class="language-plaintext highlighter-rouge">data.frame()</code> function turned characters into factors by default. To avoid this, we could utilize the stringsAsFactors argument and set it equal to false. As of <code class="language-plaintext highlighter-rouge">R 4.0</code>, it is <code class="language-plaintext highlighter-rouge">no longer necessary to include the stringsAsFactors argument</code>, because R no longer turns characters into factors by default.</li>
+</ul>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="c1"># creating a data frame with stringAsFactors = FALSE</span><span class="w">
+</span><span class="n">grades</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">data.frame</span><span class="p">(</span><span class="n">names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"John"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Juan"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Jean"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Yao"</span><span class="p">),</span><span class="w"> 
+                     </span><span class="n">exam_1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">95</span><span class="p">,</span><span class="w"> </span><span class="m">80</span><span class="p">,</span><span class="w"> </span><span class="m">90</span><span class="p">,</span><span class="w"> </span><span class="m">85</span><span class="p">),</span><span class="w"> 
+                     </span><span class="n">exam_2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">90</span><span class="p">,</span><span class="w"> </span><span class="m">85</span><span class="p">,</span><span class="w"> </span><span class="m">85</span><span class="p">,</span><span class="w"> </span><span class="m">90</span><span class="p">),</span><span class="w">
+                     </span><span class="n">stringsAsFactors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w">
+
+</span></code></pre></div></div>
+
+    </div><a class="u-url" href="/jekyll/update/2021/11/05/data-science-R-basic-daata-wrangling.html" hidden></a>
+  </article>
+  
+</div>
+
+
+    </div>
+  </div>
+  <script src="https://unpkg.com/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js"></script>
+  <script>addBackToTop()</script>
+</body>
+<footer><footer class="site-footer h-card">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <h2 class="footer-heading">StepByStep</h2>
+        <div>
+          <div>
+            <ul>
+              <li>Duc Nguyen</li><li><a class="u-email" href="mailto:minhducnguyen189@gmail.com">minhducnguyen189@gmail.com</a></li><li>&copy; 2021 Duc Nguyen. Powered by <a href="https://jekyllrb.com/">Jekyll</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <data class="u-url" href="/%20/"></data>
+        <div><ul class="social-media-list"><li><a href="https://github.com/minhducnguyen189"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">minhducnguyen189</span></a></li><li><a href="https://www.linkedin.com/in/duc-nguyen-03109b141"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#linkedin"></use></svg> <span class="username">duc-nguyen-03109b141</span></a></li></ul>
+</div>
+      </div>
+      <div class="col-md-4">
+        
+      </div>
+    </div>
+
+    <div class="row">
+      <p>Hi there! Let&#39;s explore some general knowleadges and briefly definitions  in programming. I hope that this website can help people saving time in learning, also give some motivations for those who have choice the developer path.</p>
+    </div>
+</footer></footer>
+</html>

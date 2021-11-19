@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- bootstrap library and JS, Jquery -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Jenkins With Building SpringBoot | StepByStep</title>
+<meta name="generator" content="Jekyll v4.2.1" />
+<meta property="og:title" content="Jenkins With Building SpringBoot" />
+<meta name="author" content="Duc Nguyen" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="In this post we will learn how to configure Jenkins to build SpringBoot project from Github repository. If you don’t know how to install Jenkins to can view the post below. Docker For Creating Jenkins Server JENKINS CONFIGURATIONS CREATE PIPELINE ON JENKINS CREATE JENKINSFILE IN YOUR REPOSITORY JENKINS CONFIGURATIONS After Jenkins is installed and set up successfully, So you need to go Manage Jenkins -&gt; Global Tool Configuration as the image below Then you scroll down to find the tag Maven. You should put a Name then choose Install automatically and then choose the Version of Maven that you want to install. Next you scroll to tag JDK and you do some steps as: Put a Name -&gt; choose Install automatically -&gt; choose Version and click I agree to the Java SE Development Kit License Agreement. Finally, you scroll to tag Git and put a Name -&gt; set Path to Git executable as /usr/bin/git -&gt; choose Install automatically. Click button Save CREATE PIPELINE ON JENKINS Now, we will try to create a pipeline on Jenkins for building SpringBoot project. Firstly, you go to Dashboard and click New Item. Then you set a Name -&gt; choose Multibranch Pipeline -&gt; click Ok Next, in tag Branch Sources, you put some information about your GitHub Repository and Branch that you want Jenkins clones and builds. Note: you can set multi branches for Jenkins Build. Next, You scroll down and config Build Configuration and Scan Multibranch Pipeline Triggers as the image below. Note that Script Path is the path to Jenkinsfile in your GitHub repository(your source code on GitHub). For Scan Multibranch Pipeline Triggers choose Periodically if not otherwise run and Interval as 1 minute. Interval means when your repository has changed so the pipeline will be triggered automatically after 1 minute. Finally click Save CREATE JENKINSFILE IN YOUR REPOSITORY So let craete a folder in the root of your repository name jenkins and a file name build.Jenkinsfile as you defined in the Jenkins Pipeline In the file build.Jenkinsfile. Let’s add scripts as below pipeline { // choose any node to build your springboot project agent any tools { // using maven that you defined in Jenkins Configuration maven &#39;Maven 3.8.2&#39; // using JDK that you defined in Jenkins Configuration jdk &#39;JDK8&#39; } stages { // create stage named Build stage(&#39;Build&#39;) { steps { sh &#39;printenv&#39; sh &#39;ls -la&#39; // script to build springboot project without run unittest sh &#39;mvn clean install -DskipTests&#39; } } } } Now, let’s commit and push your code changes to your respository and check the Jenkins Pipeline, You can see It’s built successfully So, That’s it. Thanks and Good luck!" />
+<meta property="og:description" content="In this post we will learn how to configure Jenkins to build SpringBoot project from Github repository. If you don’t know how to install Jenkins to can view the post below. Docker For Creating Jenkins Server JENKINS CONFIGURATIONS CREATE PIPELINE ON JENKINS CREATE JENKINSFILE IN YOUR REPOSITORY JENKINS CONFIGURATIONS After Jenkins is installed and set up successfully, So you need to go Manage Jenkins -&gt; Global Tool Configuration as the image below Then you scroll down to find the tag Maven. You should put a Name then choose Install automatically and then choose the Version of Maven that you want to install. Next you scroll to tag JDK and you do some steps as: Put a Name -&gt; choose Install automatically -&gt; choose Version and click I agree to the Java SE Development Kit License Agreement. Finally, you scroll to tag Git and put a Name -&gt; set Path to Git executable as /usr/bin/git -&gt; choose Install automatically. Click button Save CREATE PIPELINE ON JENKINS Now, we will try to create a pipeline on Jenkins for building SpringBoot project. Firstly, you go to Dashboard and click New Item. Then you set a Name -&gt; choose Multibranch Pipeline -&gt; click Ok Next, in tag Branch Sources, you put some information about your GitHub Repository and Branch that you want Jenkins clones and builds. Note: you can set multi branches for Jenkins Build. Next, You scroll down and config Build Configuration and Scan Multibranch Pipeline Triggers as the image below. Note that Script Path is the path to Jenkinsfile in your GitHub repository(your source code on GitHub). For Scan Multibranch Pipeline Triggers choose Periodically if not otherwise run and Interval as 1 minute. Interval means when your repository has changed so the pipeline will be triggered automatically after 1 minute. Finally click Save CREATE JENKINSFILE IN YOUR REPOSITORY So let craete a folder in the root of your repository name jenkins and a file name build.Jenkinsfile as you defined in the Jenkins Pipeline In the file build.Jenkinsfile. Let’s add scripts as below pipeline { // choose any node to build your springboot project agent any tools { // using maven that you defined in Jenkins Configuration maven &#39;Maven 3.8.2&#39; // using JDK that you defined in Jenkins Configuration jdk &#39;JDK8&#39; } stages { // create stage named Build stage(&#39;Build&#39;) { steps { sh &#39;printenv&#39; sh &#39;ls -la&#39; // script to build springboot project without run unittest sh &#39;mvn clean install -DskipTests&#39; } } } } Now, let’s commit and push your code changes to your respository and check the Jenkins Pipeline, You can see It’s built successfully So, That’s it. Thanks and Good luck!" />
+<link rel="canonical" href="/jekyll/update/2021/08/27/ci-cd-jenkins-springboot-basic.html" />
+<meta property="og:url" content="/jekyll/update/2021/08/27/ci-cd-jenkins-springboot-basic.html" />
+<meta property="og:site_name" content="StepByStep" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-08-27T12:00:00+07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Jenkins With Building SpringBoot" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","url":"/jekyll/update/2021/08/27/ci-cd-jenkins-springboot-basic.html","author":{"@type":"Person","name":"Duc Nguyen"},"headline":"Jenkins With Building SpringBoot","dateModified":"2021-08-27T12:00:00+07:00","datePublished":"2021-08-27T12:00:00+07:00","description":"In this post we will learn how to configure Jenkins to build SpringBoot project from Github repository. If you don’t know how to install Jenkins to can view the post below. Docker For Creating Jenkins Server JENKINS CONFIGURATIONS CREATE PIPELINE ON JENKINS CREATE JENKINSFILE IN YOUR REPOSITORY JENKINS CONFIGURATIONS After Jenkins is installed and set up successfully, So you need to go Manage Jenkins -&gt; Global Tool Configuration as the image below Then you scroll down to find the tag Maven. You should put a Name then choose Install automatically and then choose the Version of Maven that you want to install. Next you scroll to tag JDK and you do some steps as: Put a Name -&gt; choose Install automatically -&gt; choose Version and click I agree to the Java SE Development Kit License Agreement. Finally, you scroll to tag Git and put a Name -&gt; set Path to Git executable as /usr/bin/git -&gt; choose Install automatically. Click button Save CREATE PIPELINE ON JENKINS Now, we will try to create a pipeline on Jenkins for building SpringBoot project. Firstly, you go to Dashboard and click New Item. Then you set a Name -&gt; choose Multibranch Pipeline -&gt; click Ok Next, in tag Branch Sources, you put some information about your GitHub Repository and Branch that you want Jenkins clones and builds. Note: you can set multi branches for Jenkins Build. Next, You scroll down and config Build Configuration and Scan Multibranch Pipeline Triggers as the image below. Note that Script Path is the path to Jenkinsfile in your GitHub repository(your source code on GitHub). For Scan Multibranch Pipeline Triggers choose Periodically if not otherwise run and Interval as 1 minute. Interval means when your repository has changed so the pipeline will be triggered automatically after 1 minute. Finally click Save CREATE JENKINSFILE IN YOUR REPOSITORY So let craete a folder in the root of your repository name jenkins and a file name build.Jenkinsfile as you defined in the Jenkins Pipeline In the file build.Jenkinsfile. Let’s add scripts as below pipeline { // choose any node to build your springboot project agent any tools { // using maven that you defined in Jenkins Configuration maven &#39;Maven 3.8.2&#39; // using JDK that you defined in Jenkins Configuration jdk &#39;JDK8&#39; } stages { // create stage named Build stage(&#39;Build&#39;) { steps { sh &#39;printenv&#39; sh &#39;ls -la&#39; // script to build springboot project without run unittest sh &#39;mvn clean install -DskipTests&#39; } } } } Now, let’s commit and push your code changes to your respository and check the Jenkins Pipeline, You can see It’s built successfully So, That’s it. Thanks and Good luck!","mainEntityOfPage":{"@type":"WebPage","@id":"/jekyll/update/2021/08/27/ci-cd-jenkins-springboot-basic.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="StepByStep" /><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NZ8G5007GK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-NZ8G5007GK');
+</script></head><body>
+  <div class="container-flush">
+    <div class="row"><!-- navigation bar -->
+<div class="col-lg-12">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" role="banner"><a class="navbar-brand site-title" rel="author" href="/">StepByStep</a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="nav navbar-nav"><li class="nav-item active">
+          <a class="nav-link" href="/about">About</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/">Java</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/docker">Docker</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/data">Data</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/ci-cd">CI-CD</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/python">Python</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/fe">FE</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/others">Others</a>
+        </li></ul>
+    </div>
+
+    <!-- Html Elements for Search -->
+    <div id="search-container" class="btn-group">
+      <input type="text" id="search-input" placeholder="search...">
+      <button id="clear">clear</button>
+      <ul id="results-container"></ul>
+    </div>
+
+    <!-- Script pointing to search-script.js -->
+    <script src="/java-scripts/search-script.js" type="text/javascript"></script>
+
+    <!-- Configuration -->
+    <script>
+      SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('results-container'),
+        json: '/search.json'
+      })
+    </script>
+
+    <!-- search clear -->
+    <script>
+      window.addEventListener('load', () => {
+        const button = document.querySelector('#clear');
+        button.addEventListener('click', () => {
+          document.querySelector('#search-input').value = "";
+          document.querySelector('#results-container').innerHTML = "";
+        });
+      });
+    </script>
+  </nav>
+</div></div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+  <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+    <header class="post-header">
+      <h1 class="post-title p-name" itemprop="name headline">Jenkins With Building SpringBoot</h1>
+      <p class="post-meta">
+        <time class="dt-published" datetime="2021-08-27T12:00:00+07:00" itemprop="datePublished">Aug 27, 2021
+        </time></p>
+    </header>
+  
+    <div class="post-content e-content" itemprop="articleBody">
+      <blockquote>
+  <p>In this post we will learn how to configure Jenkins to build SpringBoot project from Github repository.
+If you don’t know how to install Jenkins to can view the post below.</p>
+  <ul>
+    <li><a href="/docker-posts/2021-08-21-docker-with-jenkins.html">Docker For Creating Jenkins Server</a></li>
+  </ul>
+</blockquote>
+
+<ul id="markdown-toc">
+  <li><a href="#jenkins-configurations" id="markdown-toc-jenkins-configurations">JENKINS CONFIGURATIONS</a></li>
+  <li><a href="#create-pipeline-on-jenkins" id="markdown-toc-create-pipeline-on-jenkins">CREATE PIPELINE ON JENKINS</a></li>
+  <li><a href="#create-jenkinsfile-in-your-repository" id="markdown-toc-create-jenkinsfile-in-your-repository">CREATE JENKINSFILE IN YOUR REPOSITORY</a></li>
+</ul>
+
+<h2 id="jenkins-configurations">JENKINS CONFIGURATIONS</h2>
+
+<ul>
+  <li>After Jenkins is installed and set up successfully, So you need to go <code class="language-plaintext highlighter-rouge">Manage Jenkins</code> -&gt; <code class="language-plaintext highlighter-rouge">Global Tool Configuration</code> as the image below</li>
+</ul>
+
+<p><a href="/assets/images/cicd/Jenkins-Global-Tool-Configuration.JPG"><img src="/assets/images/cicd/Jenkins-Global-Tool-Configuration.JPG" alt="choose Jenkins-Global-Tool-Configuration" title="choose Jenkins-Global-Tool-Configuration" /></a></p>
+
+<ul>
+  <li>Then you scroll down to find the tag <code class="language-plaintext highlighter-rouge">Maven</code>. You should put a <code class="language-plaintext highlighter-rouge">Name</code> then choose <code class="language-plaintext highlighter-rouge">Install automatically</code> and then choose the <code class="language-plaintext highlighter-rouge">Version</code> of <strong>Maven</strong> that you want to install.</li>
+</ul>
+
+<p><a href="/assets/images/cicd/Jenkins-Maven-Configuration.JPG"><img src="/assets/images/cicd/Jenkins-Maven-Configuration.JPG" alt="Jenkins With Maven Configuration" title="Jenkins With Maven Configuration" /></a></p>
+
+<ul>
+  <li>Next you scroll to tag <code class="language-plaintext highlighter-rouge">JDK</code> and you do some steps as: Put a <code class="language-plaintext highlighter-rouge">Name</code> -&gt; choose <code class="language-plaintext highlighter-rouge">Install automatically</code> -&gt; choose <code class="language-plaintext highlighter-rouge">Version</code> and click <code class="language-plaintext highlighter-rouge">I agree to the Java SE Development Kit License Agreement</code>.</li>
+</ul>
+
+<p><a href="/assets/images/cicd/Jenkins-JDK-Configuration.JPG"><img src="/assets/images/cicd/Jenkins-JDK-Configuration.JPG" alt="Jenkins With JDK Configuration" title="Jenkins With JDK Configuration" /></a></p>
+
+<ul>
+  <li>Finally, you scroll to tag <code class="language-plaintext highlighter-rouge">Git</code> and put a <code class="language-plaintext highlighter-rouge">Name</code> -&gt; set <code class="language-plaintext highlighter-rouge">Path to Git executable</code> as <code class="language-plaintext highlighter-rouge">/usr/bin/git</code> -&gt; choose <code class="language-plaintext highlighter-rouge">Install automatically</code>. Click button <code class="language-plaintext highlighter-rouge">Save</code></li>
+</ul>
+
+<p><a href="/assets/images/cicd\Jenkins-Git-Configuration.JPG"><img src="/assets/images/cicd/Jenkins-Git-Configuration.JPG" alt="Jenkins With Git Configuration" title="Jenkins With Git Configuration" /></a></p>
+
+<h2 id="create-pipeline-on-jenkins">CREATE PIPELINE ON JENKINS</h2>
+
+<ul>
+  <li>Now, we will try to create a pipeline on Jenkins for building SpringBoot project. Firstly, you go to <code class="language-plaintext highlighter-rouge">Dashboard</code> and click <code class="language-plaintext highlighter-rouge">New Item</code>.</li>
+  <li>Then you set a <code class="language-plaintext highlighter-rouge">Name</code> -&gt; choose <code class="language-plaintext highlighter-rouge">Multibranch Pipeline</code> -&gt; click <code class="language-plaintext highlighter-rouge">Ok</code></li>
+</ul>
+
+<p><a href="/assets/images/cicd\Jenkins-Pipeline-Creation.JPG"><img src="/assets/images/cicd/Jenkins-Pipeline-Creation.JPG" alt="Jenkins With Pipeline Creation" title="Jenkins With Pipeline Creation" /></a></p>
+
+<ul>
+  <li>Next, in tag <code class="language-plaintext highlighter-rouge">Branch Sources</code>, you put some information about your <code class="language-plaintext highlighter-rouge">GitHub Repository</code> and <code class="language-plaintext highlighter-rouge">Branch</code> that you want Jenkins clones and builds.</li>
+  <li>Note: you can set multi <code class="language-plaintext highlighter-rouge">branches</code> for Jenkins Build.</li>
+</ul>
+
+<p><a href="/assets/images/cicd/Jenkins-Pipeline-Creation.JPG"><img src="/assets/images/cicd/Jenkins-BranchSource-Configuration.JPG" alt="Jenkins With BranchSource Configuration" title="Jenkins With BranchSource Configuration" /></a></p>
+
+<ul>
+  <li>Next, You scroll down and config <code class="language-plaintext highlighter-rouge">Build Configuration</code> and <code class="language-plaintext highlighter-rouge">Scan Multibranch Pipeline Triggers</code> as the image below.</li>
+  <li>Note that <code class="language-plaintext highlighter-rouge">Script Path</code> is the <code class="language-plaintext highlighter-rouge">path</code> to <code class="language-plaintext highlighter-rouge">Jenkinsfile</code> in your GitHub repository(your source code on GitHub).</li>
+  <li>For <code class="language-plaintext highlighter-rouge">Scan Multibranch Pipeline Triggers</code> choose <code class="language-plaintext highlighter-rouge">Periodically if not otherwise run</code> and <code class="language-plaintext highlighter-rouge">Interval</code> as <code class="language-plaintext highlighter-rouge">1 minute</code>. <code class="language-plaintext highlighter-rouge">Interval</code> means when your repository has changed so the pipeline will be triggered automatically after 1 minute.</li>
+  <li>Finally click <code class="language-plaintext highlighter-rouge">Save</code></li>
+</ul>
+
+<p><a href="/assets/images/cicd/Jenkins-Build-Configuration.JPG"><img src="/assets/images/cicd/Jenkins-Build-Configuration.JPG" alt="Jenkins With Build Configuration" title="Jenkins With Build Configuration" /></a></p>
+
+<h2 id="create-jenkinsfile-in-your-repository">CREATE JENKINSFILE IN YOUR REPOSITORY</h2>
+
+<ul>
+  <li>So let craete a folder in the root of your repository name <code class="language-plaintext highlighter-rouge">jenkins</code> and a file name <code class="language-plaintext highlighter-rouge">build.Jenkinsfile</code> as you defined in the <code class="language-plaintext highlighter-rouge">Jenkins Pipeline</code></li>
+</ul>
+
+<p><a href="/assets/images/cicd/Jenkins-Jenkinsfile-Repository.JPG"><img src="/assets/images/cicd/Jenkins-Jenkinsfile-Repository.JPG" alt="Jenkins With Build Configuration" title="Jenkinsfile in repository" /></a></p>
+
+<ul>
+  <li>In the file <code class="language-plaintext highlighter-rouge">build.Jenkinsfile</code>. Let’s add scripts as below</li>
+</ul>
+
+<div class="language-groovy highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    <span class="n">pipeline</span> <span class="o">{</span>
+        <span class="c1">// choose any node to build your springboot project</span>
+        <span class="n">agent</span> <span class="n">any</span>
+        <span class="n">tools</span> <span class="o">{</span>
+            <span class="c1">// using maven that you defined in Jenkins Configuration</span>
+            <span class="n">maven</span> <span class="s1">'Maven 3.8.2'</span>
+
+            <span class="c1">// using JDK that you defined in Jenkins Configuration</span>
+            <span class="n">jdk</span> <span class="s1">'JDK8'</span>
+        <span class="o">}</span>
+        <span class="n">stages</span> <span class="o">{</span>
+
+            <span class="c1">// create stage named Build</span>
+            <span class="n">stage</span><span class="o">(</span><span class="s1">'Build'</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">steps</span> <span class="o">{</span>
+                    <span class="n">sh</span> <span class="s1">'printenv'</span>
+                    <span class="n">sh</span> <span class="s1">'ls -la'</span>
+
+                    <span class="c1">// script to build springboot project without run unittest</span>
+                    <span class="n">sh</span> <span class="s1">'mvn clean install -DskipTests'</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+</code></pre></div></div>
+
+<ul>
+  <li>Now, let’s commit and push your code changes to your respository and check the Jenkins Pipeline, You can see It’s built successfully</li>
+</ul>
+
+<p><a href="/assets/images/cicd/Jenkins-Pipeline.JPG"><img src="/assets/images/cicd/Jenkins-Pipeline.JPG" alt="Jenkins Pipeline" title="Jenkins Pipeline" /></a></p>
+
+<p><a href="/assets/images/cicd/Jenkins-Build-Success.JPG"><img src="/assets/images/cicd/Jenkins-Build-Success.JPG" alt="Jenkins Build Success" title="Jenkins Build Success" /></a></p>
+
+<ul>
+  <li>So, That’s it. Thanks and Good luck!</li>
+</ul>
+
+    </div><a class="u-url" href="/jekyll/update/2021/08/27/ci-cd-jenkins-springboot-basic.html" hidden></a>
+  </article>
+  
+</div>
+
+
+    </div>
+  </div>
+  <script src="https://unpkg.com/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js"></script>
+  <script>addBackToTop()</script>
+</body>
+<footer><footer class="site-footer h-card">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <h2 class="footer-heading">StepByStep</h2>
+        <div>
+          <div>
+            <ul>
+              <li>Duc Nguyen</li><li><a class="u-email" href="mailto:minhducnguyen189@gmail.com">minhducnguyen189@gmail.com</a></li><li>&copy; 2021 Duc Nguyen. Powered by <a href="https://jekyllrb.com/">Jekyll</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <data class="u-url" href="/%20/"></data>
+        <div><ul class="social-media-list"><li><a href="https://github.com/minhducnguyen189"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">minhducnguyen189</span></a></li><li><a href="https://www.linkedin.com/in/duc-nguyen-03109b141"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#linkedin"></use></svg> <span class="username">duc-nguyen-03109b141</span></a></li></ul>
+</div>
+      </div>
+      <div class="col-md-4">
+        
+      </div>
+    </div>
+
+    <div class="row">
+      <p>Hi there! Let&#39;s explore some general knowleadges and briefly definitions  in programming. I hope that this website can help people saving time in learning, also give some motivations for those who have choice the developer path.</p>
+    </div>
+</footer></footer>
+</html>

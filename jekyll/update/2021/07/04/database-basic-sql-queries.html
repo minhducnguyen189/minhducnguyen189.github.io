@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- bootstrap library and JS, Jquery -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Basic SQL Queries That You Should Know | StepByStep</title>
+<meta name="generator" content="Jekyll v4.2.1" />
+<meta property="og:title" content="Basic SQL Queries That You Should Know" />
+<meta name="author" content="Duc Nguyen" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="In this topic we will learn about basic SQL queries in relational database. WHAT IS THE SQL? SETUP ENVIRONMENT BASIC SQL QUERIES QUERY WITH CUSTOM COLUMN AND LIMIT RECORDS QUERY WITH CONDITIONS QUERY WITH LIKE QUERY WITH ORDER QUERY WITH PAGINATION QUERY WITH JOIN TABLES WHAT IS THE SQL? SQL is Structured Query Language, which is a computer language for storing, manipulating and retrieving data stored in a relational database. SQL is the standard language for Relational Database System. All the Relational Database Management Systems (RDMS) like MySQL, MS Access, Oracle, Sybase, Informix, Postgres and SQL Server use SQL as their standard database language. More Information SETUP ENVIRONMENT In this example we will MySQL database, this database is very common and many people usually use it. First you should download MySQL Installer on mysql page. If you don’t know how to install MySQL by MySQL Installer you can view the instruction here. After the installation you should install MySQL Workbench on mysql page or DBeaver following DBeaver page. These are database tools which will support you very much to interact with database. So we need some sample data and you can find it in this website by click Download MySQL Sample Data. Then import/execute your downloaded SQL Sample Data by MySQL Workbench or DBeaver So this is the relatation ship between tables in your SQL Sample Data BASIC SQL QUERIES To pratise and executes sample queries you can use MySQL WorkBench or DBeaver tools. QUERY WITH CUSTOM COLUMN AND LIMIT RECORDS -- Get customerName and phone from customer table with 20 records SELECT customerName, phone FROM customers LIMIT 20 -- Get some columns with additional columns is -- `postalCodeEdited` with values is added 100 and limit 20 records SELECT customerName, addressLine1, postalCode, postalCode + 100 AS postalCodeEdited FROM customers LIMIT 20 -- Get all columns with additional columns is -- `postalCodeEdited` with values is added 100 and limit 30 records SELECT *, postalCode + 100 AS &#39;postalCodeEdited&#39; FROM customers ORDER BY customerName LIMIT 30 -- Get all columns which is not `country` column, limit 30 records SELECT DISTINCT country FROM customers ORDER BY country LIMIT 30 -- Get columns productName, buyPrice and new_buyPrice with values = buyPrice * 1.1 SELECT productName, buyPrice, buyPrice * 1.1 AS &#39;new_buyPrice&#39; FROM products QUERY WITH CONDITIONS -- Get all customers with creditLimit &gt; 100000 SELECT * FROM customers WHERE creditLimit &gt; 100000 -- Get all order with orderDate &gt; &#39;2005-01-01&#39; SELECT * FROM order s WHERE orderDate &gt; &#39;2005-01-01&#39; SELECT * FROM orders WHERE orderDate &gt; &#39;2005-01-01&#39; AND customerNumber &gt; 400 AND (orders.status = &#39;On Hold&#39; OR orders.status = &#39;Disputed&#39;) -- Get all orders with statuses in list: [&#39;On Hold&#39;, &#39;Disputed&#39;] SELECT * FROM orders WHERE orders.status IN (&#39;On Hold&#39;, &#39;Disputed&#39;) -- Get all orders BETWEEN 200 AND 400 SELECT * FROM orders WHERE customerNumber BETWEEN 200 AND 400 -- Get all orders BETWEEN &#39;2005-01-01&#39; AND &#39;2005-04-30&#39; SELECT * FROM orders WHERE orderDate BETWEEN &#39;2005-01-01&#39; AND &#39;2005-04-30&#39; QUERY WITH LIKE -- Get all customers with customerName begin with `Au...` SELECT * FROM customers WHERE customerName LIKE &#39;Au%&#39; -- Get all customers with contactLastName has last character &#39;y&#39; SELECT * FROM customers WHERE contactLastName LIKE &#39;____y&#39; -- Get all customers with contactLastName doesn&#39;t have last character &#39;y&#39; SELECT * FROM customers WHERE contactLastName NOT LIKE &#39;____y&#39; -- Get all customers with customerName that is not begin with `Au` SELECT * FROM customers WHERE customerName REGEXP &#39;^Au&#39; -- Get all customers with customerName end with SELECT * FROM customers WHERE customerName REGEXP &#39;Co$|^Au&#39; -- Get all customers with customerName contain [a-h] and end with `e`. SELECT * FROM customers WHERE customerName REGEXP &#39;[a-h]e&#39; QUERY WITH ORDER -- Get all customers with state is not null SELECT * FROM customers WHERE state IS NOT NULL -- Get all customers with state is null SELECT * FROM customers WHERE state IS NULL -- Get all customers with contactFirstName is desc SELECT * FROM customers ORDER BY contactFirstName DESC -- Get city, contactFirstName with ordered by city , contactFirstName SELECT city, contactFirstName FROM customers ORDER BY city , contactFirstName -- try to avoid this use SELECT city, contactFirstName, 10 AS points FROM customers ORDER BY 1 , 2 SELECT city, contactFirstName FROM customers WHERE city LIKE &#39;a%&#39; ORDER BY city, contactFirstName QUERY WITH PAGINATION -- get 2 continuos records (record 5 and record 6), ignone 4 frist records SELECT * FROM customers LIMIT 4, 2 QUERY WITH JOIN TABLES SELECT orders.customerNumber, orders.orderNumber, customers.customerNumber AS &#39;id_of_customer_table&#39; FROM orders JOIN customers ON orders.customerNumber = customers.customerNumber -- column that contain in two table had to use &quot;o.customerName&quot; SELECT o.customerNumber, o.orderNumber, c.customerNumber AS &#39;id_of_customer_table&#39; FROM orders o JOIN customers c ON o.customerNumber = c.customerNumber -- join table from 2 different database SELECT * FROM customers c JOIN secondclassicmodels.orders o ON c.customerNumber = o.customerNumber -- join table from 2 different database USE classicmodels; SELECT * FROM secondclassicmodels.customers c JOIN orders o ON o.customerNumber = c.customerNumber SELECT c.customerNumber, phone, amount, p.customerNumber AS &#39;payment&#39; FROM customers c JOIN payments p ON c.customerNumber = p.customerNumber -- Join multiple tables together SELECT customerName, c.customerNumber, o.customerNumber AS &#39;orders_customer_numb&#39;, o.orderNumber comments, productCode, quantityOrdered FROM customers c JOIN orders o ON c.customerNumber = o.customerNumber JOIN orderdetails od ON o.orderNumber = od.orderNumber SELECT * FROM orderdetails ord JOIN products prd ON prd.productCode = ord.productCode JOIN orders o ON o.orderNumber = ord.orderNumber -- Implpicit Join Syntax SELECT * FROM orderdetails ord, orders o WHERE ord.orderNumber = o.orderNumber OUTER JOIN, we will you left join or right join -- for left join, all the customer from left table (customer) will be return whether the join condition is true or not -- for right join, all the order from right table (orders) will be return whether the join condition is true or not SELECT c.customerNumber, c.customerName, o.orderNumber FROM customers c LEFT JOIN orders o ON c.customerNumber = o.customerNumber ORDER BY c.customerNumber -- description, we will get all the customer whether contains order or not -- then we will get all the order whether contains orderdetails or not SELECT c.customerNumber, c.customerName, o.orderNumber, d.productCode FROM customers c LEFT JOIN orders o ON c.customerNumber = o.customerNumber LEFT JOIN orderdetails d ON o.orderNumber = d.orderNumber ORDER BY c.customerNumber" />
+<meta property="og:description" content="In this topic we will learn about basic SQL queries in relational database. WHAT IS THE SQL? SETUP ENVIRONMENT BASIC SQL QUERIES QUERY WITH CUSTOM COLUMN AND LIMIT RECORDS QUERY WITH CONDITIONS QUERY WITH LIKE QUERY WITH ORDER QUERY WITH PAGINATION QUERY WITH JOIN TABLES WHAT IS THE SQL? SQL is Structured Query Language, which is a computer language for storing, manipulating and retrieving data stored in a relational database. SQL is the standard language for Relational Database System. All the Relational Database Management Systems (RDMS) like MySQL, MS Access, Oracle, Sybase, Informix, Postgres and SQL Server use SQL as their standard database language. More Information SETUP ENVIRONMENT In this example we will MySQL database, this database is very common and many people usually use it. First you should download MySQL Installer on mysql page. If you don’t know how to install MySQL by MySQL Installer you can view the instruction here. After the installation you should install MySQL Workbench on mysql page or DBeaver following DBeaver page. These are database tools which will support you very much to interact with database. So we need some sample data and you can find it in this website by click Download MySQL Sample Data. Then import/execute your downloaded SQL Sample Data by MySQL Workbench or DBeaver So this is the relatation ship between tables in your SQL Sample Data BASIC SQL QUERIES To pratise and executes sample queries you can use MySQL WorkBench or DBeaver tools. QUERY WITH CUSTOM COLUMN AND LIMIT RECORDS -- Get customerName and phone from customer table with 20 records SELECT customerName, phone FROM customers LIMIT 20 -- Get some columns with additional columns is -- `postalCodeEdited` with values is added 100 and limit 20 records SELECT customerName, addressLine1, postalCode, postalCode + 100 AS postalCodeEdited FROM customers LIMIT 20 -- Get all columns with additional columns is -- `postalCodeEdited` with values is added 100 and limit 30 records SELECT *, postalCode + 100 AS &#39;postalCodeEdited&#39; FROM customers ORDER BY customerName LIMIT 30 -- Get all columns which is not `country` column, limit 30 records SELECT DISTINCT country FROM customers ORDER BY country LIMIT 30 -- Get columns productName, buyPrice and new_buyPrice with values = buyPrice * 1.1 SELECT productName, buyPrice, buyPrice * 1.1 AS &#39;new_buyPrice&#39; FROM products QUERY WITH CONDITIONS -- Get all customers with creditLimit &gt; 100000 SELECT * FROM customers WHERE creditLimit &gt; 100000 -- Get all order with orderDate &gt; &#39;2005-01-01&#39; SELECT * FROM order s WHERE orderDate &gt; &#39;2005-01-01&#39; SELECT * FROM orders WHERE orderDate &gt; &#39;2005-01-01&#39; AND customerNumber &gt; 400 AND (orders.status = &#39;On Hold&#39; OR orders.status = &#39;Disputed&#39;) -- Get all orders with statuses in list: [&#39;On Hold&#39;, &#39;Disputed&#39;] SELECT * FROM orders WHERE orders.status IN (&#39;On Hold&#39;, &#39;Disputed&#39;) -- Get all orders BETWEEN 200 AND 400 SELECT * FROM orders WHERE customerNumber BETWEEN 200 AND 400 -- Get all orders BETWEEN &#39;2005-01-01&#39; AND &#39;2005-04-30&#39; SELECT * FROM orders WHERE orderDate BETWEEN &#39;2005-01-01&#39; AND &#39;2005-04-30&#39; QUERY WITH LIKE -- Get all customers with customerName begin with `Au...` SELECT * FROM customers WHERE customerName LIKE &#39;Au%&#39; -- Get all customers with contactLastName has last character &#39;y&#39; SELECT * FROM customers WHERE contactLastName LIKE &#39;____y&#39; -- Get all customers with contactLastName doesn&#39;t have last character &#39;y&#39; SELECT * FROM customers WHERE contactLastName NOT LIKE &#39;____y&#39; -- Get all customers with customerName that is not begin with `Au` SELECT * FROM customers WHERE customerName REGEXP &#39;^Au&#39; -- Get all customers with customerName end with SELECT * FROM customers WHERE customerName REGEXP &#39;Co$|^Au&#39; -- Get all customers with customerName contain [a-h] and end with `e`. SELECT * FROM customers WHERE customerName REGEXP &#39;[a-h]e&#39; QUERY WITH ORDER -- Get all customers with state is not null SELECT * FROM customers WHERE state IS NOT NULL -- Get all customers with state is null SELECT * FROM customers WHERE state IS NULL -- Get all customers with contactFirstName is desc SELECT * FROM customers ORDER BY contactFirstName DESC -- Get city, contactFirstName with ordered by city , contactFirstName SELECT city, contactFirstName FROM customers ORDER BY city , contactFirstName -- try to avoid this use SELECT city, contactFirstName, 10 AS points FROM customers ORDER BY 1 , 2 SELECT city, contactFirstName FROM customers WHERE city LIKE &#39;a%&#39; ORDER BY city, contactFirstName QUERY WITH PAGINATION -- get 2 continuos records (record 5 and record 6), ignone 4 frist records SELECT * FROM customers LIMIT 4, 2 QUERY WITH JOIN TABLES SELECT orders.customerNumber, orders.orderNumber, customers.customerNumber AS &#39;id_of_customer_table&#39; FROM orders JOIN customers ON orders.customerNumber = customers.customerNumber -- column that contain in two table had to use &quot;o.customerName&quot; SELECT o.customerNumber, o.orderNumber, c.customerNumber AS &#39;id_of_customer_table&#39; FROM orders o JOIN customers c ON o.customerNumber = c.customerNumber -- join table from 2 different database SELECT * FROM customers c JOIN secondclassicmodels.orders o ON c.customerNumber = o.customerNumber -- join table from 2 different database USE classicmodels; SELECT * FROM secondclassicmodels.customers c JOIN orders o ON o.customerNumber = c.customerNumber SELECT c.customerNumber, phone, amount, p.customerNumber AS &#39;payment&#39; FROM customers c JOIN payments p ON c.customerNumber = p.customerNumber -- Join multiple tables together SELECT customerName, c.customerNumber, o.customerNumber AS &#39;orders_customer_numb&#39;, o.orderNumber comments, productCode, quantityOrdered FROM customers c JOIN orders o ON c.customerNumber = o.customerNumber JOIN orderdetails od ON o.orderNumber = od.orderNumber SELECT * FROM orderdetails ord JOIN products prd ON prd.productCode = ord.productCode JOIN orders o ON o.orderNumber = ord.orderNumber -- Implpicit Join Syntax SELECT * FROM orderdetails ord, orders o WHERE ord.orderNumber = o.orderNumber OUTER JOIN, we will you left join or right join -- for left join, all the customer from left table (customer) will be return whether the join condition is true or not -- for right join, all the order from right table (orders) will be return whether the join condition is true or not SELECT c.customerNumber, c.customerName, o.orderNumber FROM customers c LEFT JOIN orders o ON c.customerNumber = o.customerNumber ORDER BY c.customerNumber -- description, we will get all the customer whether contains order or not -- then we will get all the order whether contains orderdetails or not SELECT c.customerNumber, c.customerName, o.orderNumber, d.productCode FROM customers c LEFT JOIN orders o ON c.customerNumber = o.customerNumber LEFT JOIN orderdetails d ON o.orderNumber = d.orderNumber ORDER BY c.customerNumber" />
+<link rel="canonical" href="/jekyll/update/2021/07/04/database-basic-sql-queries.html" />
+<meta property="og:url" content="/jekyll/update/2021/07/04/database-basic-sql-queries.html" />
+<meta property="og:site_name" content="StepByStep" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-07-04T12:00:00+07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Basic SQL Queries That You Should Know" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","url":"/jekyll/update/2021/07/04/database-basic-sql-queries.html","author":{"@type":"Person","name":"Duc Nguyen"},"headline":"Basic SQL Queries That You Should Know","dateModified":"2021-07-04T12:00:00+07:00","datePublished":"2021-07-04T12:00:00+07:00","description":"In this topic we will learn about basic SQL queries in relational database. WHAT IS THE SQL? SETUP ENVIRONMENT BASIC SQL QUERIES QUERY WITH CUSTOM COLUMN AND LIMIT RECORDS QUERY WITH CONDITIONS QUERY WITH LIKE QUERY WITH ORDER QUERY WITH PAGINATION QUERY WITH JOIN TABLES WHAT IS THE SQL? SQL is Structured Query Language, which is a computer language for storing, manipulating and retrieving data stored in a relational database. SQL is the standard language for Relational Database System. All the Relational Database Management Systems (RDMS) like MySQL, MS Access, Oracle, Sybase, Informix, Postgres and SQL Server use SQL as their standard database language. More Information SETUP ENVIRONMENT In this example we will MySQL database, this database is very common and many people usually use it. First you should download MySQL Installer on mysql page. If you don’t know how to install MySQL by MySQL Installer you can view the instruction here. After the installation you should install MySQL Workbench on mysql page or DBeaver following DBeaver page. These are database tools which will support you very much to interact with database. So we need some sample data and you can find it in this website by click Download MySQL Sample Data. Then import/execute your downloaded SQL Sample Data by MySQL Workbench or DBeaver So this is the relatation ship between tables in your SQL Sample Data BASIC SQL QUERIES To pratise and executes sample queries you can use MySQL WorkBench or DBeaver tools. QUERY WITH CUSTOM COLUMN AND LIMIT RECORDS -- Get customerName and phone from customer table with 20 records SELECT customerName, phone FROM customers LIMIT 20 -- Get some columns with additional columns is -- `postalCodeEdited` with values is added 100 and limit 20 records SELECT customerName, addressLine1, postalCode, postalCode + 100 AS postalCodeEdited FROM customers LIMIT 20 -- Get all columns with additional columns is -- `postalCodeEdited` with values is added 100 and limit 30 records SELECT *, postalCode + 100 AS &#39;postalCodeEdited&#39; FROM customers ORDER BY customerName LIMIT 30 -- Get all columns which is not `country` column, limit 30 records SELECT DISTINCT country FROM customers ORDER BY country LIMIT 30 -- Get columns productName, buyPrice and new_buyPrice with values = buyPrice * 1.1 SELECT productName, buyPrice, buyPrice * 1.1 AS &#39;new_buyPrice&#39; FROM products QUERY WITH CONDITIONS -- Get all customers with creditLimit &gt; 100000 SELECT * FROM customers WHERE creditLimit &gt; 100000 -- Get all order with orderDate &gt; &#39;2005-01-01&#39; SELECT * FROM order s WHERE orderDate &gt; &#39;2005-01-01&#39; SELECT * FROM orders WHERE orderDate &gt; &#39;2005-01-01&#39; AND customerNumber &gt; 400 AND (orders.status = &#39;On Hold&#39; OR orders.status = &#39;Disputed&#39;) -- Get all orders with statuses in list: [&#39;On Hold&#39;, &#39;Disputed&#39;] SELECT * FROM orders WHERE orders.status IN (&#39;On Hold&#39;, &#39;Disputed&#39;) -- Get all orders BETWEEN 200 AND 400 SELECT * FROM orders WHERE customerNumber BETWEEN 200 AND 400 -- Get all orders BETWEEN &#39;2005-01-01&#39; AND &#39;2005-04-30&#39; SELECT * FROM orders WHERE orderDate BETWEEN &#39;2005-01-01&#39; AND &#39;2005-04-30&#39; QUERY WITH LIKE -- Get all customers with customerName begin with `Au...` SELECT * FROM customers WHERE customerName LIKE &#39;Au%&#39; -- Get all customers with contactLastName has last character &#39;y&#39; SELECT * FROM customers WHERE contactLastName LIKE &#39;____y&#39; -- Get all customers with contactLastName doesn&#39;t have last character &#39;y&#39; SELECT * FROM customers WHERE contactLastName NOT LIKE &#39;____y&#39; -- Get all customers with customerName that is not begin with `Au` SELECT * FROM customers WHERE customerName REGEXP &#39;^Au&#39; -- Get all customers with customerName end with SELECT * FROM customers WHERE customerName REGEXP &#39;Co$|^Au&#39; -- Get all customers with customerName contain [a-h] and end with `e`. SELECT * FROM customers WHERE customerName REGEXP &#39;[a-h]e&#39; QUERY WITH ORDER -- Get all customers with state is not null SELECT * FROM customers WHERE state IS NOT NULL -- Get all customers with state is null SELECT * FROM customers WHERE state IS NULL -- Get all customers with contactFirstName is desc SELECT * FROM customers ORDER BY contactFirstName DESC -- Get city, contactFirstName with ordered by city , contactFirstName SELECT city, contactFirstName FROM customers ORDER BY city , contactFirstName -- try to avoid this use SELECT city, contactFirstName, 10 AS points FROM customers ORDER BY 1 , 2 SELECT city, contactFirstName FROM customers WHERE city LIKE &#39;a%&#39; ORDER BY city, contactFirstName QUERY WITH PAGINATION -- get 2 continuos records (record 5 and record 6), ignone 4 frist records SELECT * FROM customers LIMIT 4, 2 QUERY WITH JOIN TABLES SELECT orders.customerNumber, orders.orderNumber, customers.customerNumber AS &#39;id_of_customer_table&#39; FROM orders JOIN customers ON orders.customerNumber = customers.customerNumber -- column that contain in two table had to use &quot;o.customerName&quot; SELECT o.customerNumber, o.orderNumber, c.customerNumber AS &#39;id_of_customer_table&#39; FROM orders o JOIN customers c ON o.customerNumber = c.customerNumber -- join table from 2 different database SELECT * FROM customers c JOIN secondclassicmodels.orders o ON c.customerNumber = o.customerNumber -- join table from 2 different database USE classicmodels; SELECT * FROM secondclassicmodels.customers c JOIN orders o ON o.customerNumber = c.customerNumber SELECT c.customerNumber, phone, amount, p.customerNumber AS &#39;payment&#39; FROM customers c JOIN payments p ON c.customerNumber = p.customerNumber -- Join multiple tables together SELECT customerName, c.customerNumber, o.customerNumber AS &#39;orders_customer_numb&#39;, o.orderNumber comments, productCode, quantityOrdered FROM customers c JOIN orders o ON c.customerNumber = o.customerNumber JOIN orderdetails od ON o.orderNumber = od.orderNumber SELECT * FROM orderdetails ord JOIN products prd ON prd.productCode = ord.productCode JOIN orders o ON o.orderNumber = ord.orderNumber -- Implpicit Join Syntax SELECT * FROM orderdetails ord, orders o WHERE ord.orderNumber = o.orderNumber OUTER JOIN, we will you left join or right join -- for left join, all the customer from left table (customer) will be return whether the join condition is true or not -- for right join, all the order from right table (orders) will be return whether the join condition is true or not SELECT c.customerNumber, c.customerName, o.orderNumber FROM customers c LEFT JOIN orders o ON c.customerNumber = o.customerNumber ORDER BY c.customerNumber -- description, we will get all the customer whether contains order or not -- then we will get all the order whether contains orderdetails or not SELECT c.customerNumber, c.customerName, o.orderNumber, d.productCode FROM customers c LEFT JOIN orders o ON c.customerNumber = o.customerNumber LEFT JOIN orderdetails d ON o.orderNumber = d.orderNumber ORDER BY c.customerNumber","mainEntityOfPage":{"@type":"WebPage","@id":"/jekyll/update/2021/07/04/database-basic-sql-queries.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="StepByStep" /><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NZ8G5007GK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-NZ8G5007GK');
+</script></head><body>
+  <div class="container-flush">
+    <div class="row"><!-- navigation bar -->
+<div class="col-lg-12">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" role="banner"><a class="navbar-brand site-title" rel="author" href="/">StepByStep</a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="nav navbar-nav"><li class="nav-item active">
+          <a class="nav-link" href="/about">About</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/">Java</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/docker">Docker</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/data">Data</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/ci-cd">CI-CD</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/python">Python</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/fe">FE</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/others">Others</a>
+        </li></ul>
+    </div>
+
+    <!-- Html Elements for Search -->
+    <div id="search-container" class="btn-group">
+      <input type="text" id="search-input" placeholder="search...">
+      <button id="clear">clear</button>
+      <ul id="results-container"></ul>
+    </div>
+
+    <!-- Script pointing to search-script.js -->
+    <script src="/java-scripts/search-script.js" type="text/javascript"></script>
+
+    <!-- Configuration -->
+    <script>
+      SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('results-container'),
+        json: '/search.json'
+      })
+    </script>
+
+    <!-- search clear -->
+    <script>
+      window.addEventListener('load', () => {
+        const button = document.querySelector('#clear');
+        button.addEventListener('click', () => {
+          document.querySelector('#search-input').value = "";
+          document.querySelector('#results-container').innerHTML = "";
+        });
+      });
+    </script>
+  </nav>
+</div></div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+  <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+    <header class="post-header">
+      <h1 class="post-title p-name" itemprop="name headline">Basic SQL Queries That You Should Know</h1>
+      <p class="post-meta">
+        <time class="dt-published" datetime="2021-07-04T12:00:00+07:00" itemprop="datePublished">Jul 4, 2021
+        </time></p>
+    </header>
+  
+    <div class="post-content e-content" itemprop="articleBody">
+      <blockquote>
+  <p>In this topic we will learn about basic SQL queries in relational database.</p>
+</blockquote>
+
+<ul id="markdown-toc">
+  <li><a href="#what-is-the-sql" id="markdown-toc-what-is-the-sql">WHAT IS THE SQL?</a></li>
+  <li><a href="#setup-environment" id="markdown-toc-setup-environment">SETUP ENVIRONMENT</a></li>
+  <li><a href="#basic-sql-queries" id="markdown-toc-basic-sql-queries">BASIC SQL QUERIES</a>    <ul>
+      <li><a href="#query-with-custom-column-and-limit-records" id="markdown-toc-query-with-custom-column-and-limit-records">QUERY WITH CUSTOM COLUMN AND LIMIT RECORDS</a></li>
+      <li><a href="#query-with-conditions" id="markdown-toc-query-with-conditions">QUERY WITH CONDITIONS</a></li>
+      <li><a href="#query-with-like" id="markdown-toc-query-with-like">QUERY WITH LIKE</a></li>
+      <li><a href="#query-with-order" id="markdown-toc-query-with-order">QUERY WITH ORDER</a></li>
+      <li><a href="#query-with-pagination" id="markdown-toc-query-with-pagination">QUERY WITH PAGINATION</a></li>
+      <li><a href="#query-with-join-tables" id="markdown-toc-query-with-join-tables">QUERY WITH JOIN TABLES</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="what-is-the-sql">WHAT IS THE SQL?</h2>
+
+<ul>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">SQL</code> is <code class="language-plaintext highlighter-rouge">Structured Query Language</code>, which is a computer language for <strong>storing, manipulating and retrieving data</strong> stored in a <code class="language-plaintext highlighter-rouge">relational database</code>.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">SQL</code> is the standard language for Relational Database System. All the Relational Database Management Systems (RDMS) like MySQL, MS Access, Oracle, Sybase, Informix, Postgres and SQL Server use SQL as their standard database language.</p>
+  </li>
+  <li>
+    <p><a href="https://www.tutorialspoint.com/sql/sql-overview.htm">More Information</a></p>
+  </li>
+</ul>
+
+<h2 id="setup-environment">SETUP ENVIRONMENT</h2>
+
+<ul>
+  <li>
+    <p>In this example we will <code class="language-plaintext highlighter-rouge">MySQL</code> database, this database is very common and many people usually use it.</p>
+  </li>
+  <li>
+    <p>First you should download <code class="language-plaintext highlighter-rouge">MySQL Installer</code> on <a href="https://dev.mysql.com/downloads/mysql/">mysql page</a>. If you don’t know how to install MySQL by <code class="language-plaintext highlighter-rouge">MySQL Installer</code> you can view <a href="https://www.sqlshack.com/how-to-install-mysql-database-server-8-0-19-on-windows-10/">the instruction here</a>.</p>
+  </li>
+  <li>
+    <p>After the installation you should install <code class="language-plaintext highlighter-rouge">MySQL Workbench</code> on <a href="https://dev.mysql.com/downloads/workbench/">mysql page</a> or <code class="language-plaintext highlighter-rouge">DBeaver</code> following <a href="https://dbeaver.io/">DBeaver page</a>. These are database tools which will support you very much to interact with database.</p>
+  </li>
+  <li>
+    <p>So we need some sample data and you can find it <a href="https://www.mysqltutorial.org/mysql-sample-database.aspx">in this website</a> by click <code class="language-plaintext highlighter-rouge">Download MySQL Sample Data</code>.</p>
+  </li>
+  <li>
+    <p>Then import/execute your downloaded <code class="language-plaintext highlighter-rouge">SQL Sample Data</code> by <code class="language-plaintext highlighter-rouge">MySQL Workbench</code> or <code class="language-plaintext highlighter-rouge">DBeaver</code></p>
+  </li>
+  <li>
+    <p>So this is the relatation ship between tables in your <code class="language-plaintext highlighter-rouge">SQL Sample Data</code></p>
+  </li>
+</ul>
+
+<p><a href="/assets/images/database/mysql-sample-database-diagram.JPG"><img src="/assets/images/database/mysql-sample-database-diagram.JPG" alt="A sample relationship of tables" title="A sample relationship of tables" /></a></p>
+
+<h2 id="basic-sql-queries">BASIC SQL QUERIES</h2>
+
+<ul>
+  <li>To pratise and executes sample queries you can use <code class="language-plaintext highlighter-rouge">MySQL WorkBench</code> or <code class="language-plaintext highlighter-rouge">DBeaver</code> tools.</li>
+</ul>
+
+<blockquote>
+  <h3 id="query-with-custom-column-and-limit-records">QUERY WITH CUSTOM COLUMN AND LIMIT RECORDS</h3>
+</blockquote>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="c1">-- Get customerName and phone from customer table with 20 records</span>
+<span class="k">SELECT</span> <span class="n">customerName</span><span class="p">,</span> <span class="n">phone</span> <span class="k">FROM</span> <span class="n">customers</span> <span class="k">LIMIT</span> <span class="mi">20</span>
+
+<span class="c1">-- Get some columns with additional columns is </span>
+<span class="c1">-- `postalCodeEdited` with values is added 100 and limit 20 records</span>
+<span class="k">SELECT</span> <span class="n">customerName</span><span class="p">,</span> <span class="n">addressLine1</span><span class="p">,</span> <span class="n">postalCode</span><span class="p">,</span> <span class="n">postalCode</span> <span class="o">+</span> <span class="mi">100</span> <span class="k">AS</span> <span class="n">postalCodeEdited</span>
+<span class="k">FROM</span> <span class="n">customers</span> 
+<span class="k">LIMIT</span> <span class="mi">20</span>
+
+<span class="c1">-- Get all columns with additional columns is </span>
+<span class="c1">-- `postalCodeEdited` with values is added 100 and limit 30 records</span>
+<span class="k">SELECT</span> <span class="o">*</span><span class="p">,</span> <span class="n">postalCode</span> <span class="o">+</span> <span class="mi">100</span> <span class="k">AS</span> <span class="s1">'postalCodeEdited'</span>
+<span class="k">FROM</span> <span class="n">customers</span> 
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">customerName</span>
+<span class="k">LIMIT</span> <span class="mi">30</span>
+
+<span class="c1">-- Get all columns which is not `country` column, limit 30 records</span>
+<span class="k">SELECT</span> <span class="k">DISTINCT</span> <span class="n">country</span>
+<span class="k">FROM</span> <span class="n">customers</span> 
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">country</span>
+<span class="k">LIMIT</span> <span class="mi">30</span>
+
+<span class="c1">-- Get columns productName, buyPrice and new_buyPrice with values = buyPrice * 1.1</span>
+<span class="k">SELECT</span> <span class="n">productName</span><span class="p">,</span> <span class="n">buyPrice</span><span class="p">,</span> <span class="n">buyPrice</span> <span class="o">*</span> <span class="mi">1</span><span class="p">.</span><span class="mi">1</span> <span class="k">AS</span> <span class="s1">'new_buyPrice'</span>
+<span class="k">FROM</span> <span class="n">products</span>
+
+</code></pre></div></div>
+
+<blockquote>
+  <h3 id="query-with-conditions">QUERY WITH CONDITIONS</h3>
+</blockquote>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">-- Get all customers with creditLimit &gt; 100000</span>
+<span class="k">SELECT</span> <span class="o">*</span>
+<span class="k">FROM</span> <span class="n">customers</span>
+<span class="k">WHERE</span> <span class="n">creditLimit</span> <span class="o">&gt;</span> <span class="mi">100000</span>
+
+<span class="c1">-- Get all order with orderDate &gt; '2005-01-01' </span>
+<span class="k">SELECT</span> <span class="o">*</span>
+<span class="k">FROM</span> <span class="k">order</span> <span class="n">s</span>
+<span class="k">WHERE</span> <span class="n">orderDate</span> <span class="o">&gt;</span> <span class="s1">'2005-01-01'</span> 
+
+<span class="k">SELECT</span> <span class="o">*</span>
+<span class="k">FROM</span> <span class="n">orders</span>
+<span class="k">WHERE</span> <span class="n">orderDate</span> <span class="o">&gt;</span> <span class="s1">'2005-01-01'</span> <span class="k">AND</span> <span class="n">customerNumber</span> <span class="o">&gt;</span> <span class="mi">400</span>  <span class="k">AND</span> <span class="p">(</span><span class="n">orders</span><span class="p">.</span><span class="n">status</span> <span class="o">=</span> <span class="s1">'On Hold'</span> <span class="k">OR</span> <span class="n">orders</span><span class="p">.</span><span class="n">status</span> <span class="o">=</span> <span class="s1">'Disputed'</span><span class="p">)</span>
+
+<span class="c1">-- Get all orders with statuses in list: ['On Hold', 'Disputed']</span>
+<span class="k">SELECT</span> <span class="o">*</span>
+<span class="k">FROM</span> <span class="n">orders</span>
+<span class="k">WHERE</span> <span class="n">orders</span><span class="p">.</span><span class="n">status</span>  <span class="k">IN</span> <span class="p">(</span><span class="s1">'On Hold'</span><span class="p">,</span> <span class="s1">'Disputed'</span><span class="p">)</span>
+
+<span class="c1">-- Get all orders BETWEEN 200 AND 400</span>
+<span class="k">SELECT</span> <span class="o">*</span>
+<span class="k">FROM</span> <span class="n">orders</span>
+<span class="k">WHERE</span> <span class="n">customerNumber</span> <span class="k">BETWEEN</span> <span class="mi">200</span> <span class="k">AND</span> <span class="mi">400</span>
+
+<span class="c1">-- Get all orders BETWEEN '2005-01-01' AND '2005-04-30'</span>
+<span class="k">SELECT</span> <span class="o">*</span>
+<span class="k">FROM</span> <span class="n">orders</span>
+<span class="k">WHERE</span> <span class="n">orderDate</span> <span class="k">BETWEEN</span> <span class="s1">'2005-01-01'</span> <span class="k">AND</span> <span class="s1">'2005-04-30'</span>
+
+</code></pre></div></div>
+
+<blockquote>
+  <h3 id="query-with-like">QUERY WITH LIKE</h3>
+</blockquote>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="c1">-- Get all customers with customerName begin with `Au...`</span>
+<span class="k">SELECT</span> <span class="o">*</span>
+<span class="k">FROM</span> <span class="n">customers</span>
+<span class="k">WHERE</span> <span class="n">customerName</span> <span class="k">LIKE</span> <span class="s1">'Au%'</span>
+
+<span class="c1">-- Get all customers with contactLastName has last character 'y'</span>
+<span class="k">SELECT</span> <span class="o">*</span>
+<span class="k">FROM</span> <span class="n">customers</span>
+<span class="k">WHERE</span> <span class="n">contactLastName</span> <span class="k">LIKE</span> <span class="s1">'____y'</span>
+
+<span class="c1">-- Get all customers with contactLastName doesn't have last character 'y'</span>
+<span class="k">SELECT</span> <span class="o">*</span>
+<span class="k">FROM</span> <span class="n">customers</span>
+<span class="k">WHERE</span> <span class="n">contactLastName</span> <span class="k">NOT</span> <span class="k">LIKE</span> <span class="s1">'____y'</span>
+
+<span class="c1">-- Get all customers with customerName that is not begin with `Au`</span>
+<span class="k">SELECT</span> <span class="o">*</span>
+<span class="k">FROM</span> <span class="n">customers</span>
+<span class="k">WHERE</span> <span class="n">customerName</span> <span class="n">REGEXP</span> <span class="s1">'^Au'</span>
+
+<span class="c1">-- Get all customers with customerName end with </span>
+<span class="k">SELECT</span> <span class="o">*</span>
+<span class="k">FROM</span> <span class="n">customers</span>
+<span class="k">WHERE</span> <span class="n">customerName</span> <span class="n">REGEXP</span> <span class="s1">'Co$|^Au'</span>
+
+<span class="c1">-- Get all customers with customerName contain [a-h] and end with `e`.</span>
+<span class="k">SELECT</span> <span class="o">*</span>
+<span class="k">FROM</span> <span class="n">customers</span>
+<span class="k">WHERE</span> <span class="n">customerName</span> <span class="n">REGEXP</span> <span class="s1">'[a-h]e'</span>
+
+</code></pre></div></div>
+
+<blockquote>
+  <h3 id="query-with-order">QUERY WITH ORDER</h3>
+</blockquote>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="c1">-- Get all customers with state is not null</span>
+<span class="k">SELECT</span> <span class="o">*</span>
+<span class="k">FROM</span> <span class="n">customers</span>
+<span class="k">WHERE</span> <span class="k">state</span> <span class="k">IS</span> <span class="k">NOT</span> <span class="k">NULL</span>
+
+<span class="c1">-- Get all customers with state is null</span>
+<span class="k">SELECT</span> <span class="o">*</span>
+<span class="k">FROM</span> <span class="n">customers</span>
+<span class="k">WHERE</span> <span class="k">state</span> <span class="k">IS</span> <span class="k">NULL</span>
+
+<span class="c1">-- Get all customers with contactFirstName is desc</span>
+<span class="k">SELECT</span> <span class="o">*</span>
+<span class="k">FROM</span> <span class="n">customers</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">contactFirstName</span> <span class="k">DESC</span>
+
+<span class="c1">-- Get city, contactFirstName with ordered by city , contactFirstName</span>
+<span class="k">SELECT</span> <span class="n">city</span><span class="p">,</span> <span class="n">contactFirstName</span>
+<span class="k">FROM</span> <span class="n">customers</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">city</span> <span class="p">,</span> <span class="n">contactFirstName</span>
+
+<span class="c1">-- try to avoid this use</span>
+<span class="k">SELECT</span> <span class="n">city</span><span class="p">,</span> <span class="n">contactFirstName</span><span class="p">,</span> <span class="mi">10</span> <span class="k">AS</span> <span class="n">points</span>
+<span class="k">FROM</span> <span class="n">customers</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="mi">1</span> <span class="p">,</span> <span class="mi">2</span>
+
+<span class="k">SELECT</span> <span class="n">city</span><span class="p">,</span> <span class="n">contactFirstName</span>
+<span class="k">FROM</span> <span class="n">customers</span>
+<span class="k">WHERE</span> <span class="n">city</span> <span class="k">LIKE</span> <span class="s1">'a%'</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">city</span><span class="p">,</span> <span class="n">contactFirstName</span>
+
+</code></pre></div></div>
+
+<blockquote>
+  <h3 id="query-with-pagination">QUERY WITH PAGINATION</h3>
+</blockquote>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="c1">-- get 2 continuos records (record 5 and record 6), ignone 4 frist records </span>
+<span class="k">SELECT</span> <span class="o">*</span>
+<span class="k">FROM</span> <span class="n">customers</span>
+<span class="k">LIMIT</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span>
+
+</code></pre></div></div>
+
+<blockquote>
+  <h3 id="query-with-join-tables">QUERY WITH JOIN TABLES</h3>
+</blockquote>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">orders</span><span class="p">.</span><span class="n">customerNumber</span><span class="p">,</span> <span class="n">orders</span><span class="p">.</span><span class="n">orderNumber</span><span class="p">,</span> <span class="n">customers</span><span class="p">.</span><span class="n">customerNumber</span> <span class="k">AS</span> <span class="s1">'id_of_customer_table'</span>
+<span class="k">FROM</span> <span class="n">orders</span>
+<span class="k">JOIN</span> <span class="n">customers</span> 
+	<span class="k">ON</span> <span class="n">orders</span><span class="p">.</span><span class="n">customerNumber</span> <span class="o">=</span> <span class="n">customers</span><span class="p">.</span><span class="n">customerNumber</span>
+
+<span class="c1">-- column that contain in two table had to use "o.customerName"</span>
+<span class="k">SELECT</span> <span class="n">o</span><span class="p">.</span><span class="n">customerNumber</span><span class="p">,</span> <span class="n">o</span><span class="p">.</span><span class="n">orderNumber</span><span class="p">,</span> <span class="k">c</span><span class="p">.</span><span class="n">customerNumber</span> <span class="k">AS</span> <span class="s1">'id_of_customer_table'</span>
+<span class="k">FROM</span> <span class="n">orders</span> <span class="n">o</span>
+<span class="k">JOIN</span> <span class="n">customers</span> <span class="k">c</span>
+	<span class="k">ON</span> <span class="n">o</span><span class="p">.</span><span class="n">customerNumber</span> <span class="o">=</span> <span class="k">c</span><span class="p">.</span><span class="n">customerNumber</span>
+
+
+
+<span class="c1">-- join table from 2 different database</span>
+<span class="k">SELECT</span> <span class="o">*</span>
+<span class="k">FROM</span> <span class="n">customers</span> <span class="k">c</span>
+<span class="k">JOIN</span> <span class="n">secondclassicmodels</span><span class="p">.</span><span class="n">orders</span> <span class="n">o</span>
+<span class="k">ON</span> <span class="k">c</span><span class="p">.</span><span class="n">customerNumber</span> <span class="o">=</span> <span class="n">o</span><span class="p">.</span><span class="n">customerNumber</span>
+
+<span class="c1">-- join table from 2 different database</span>
+<span class="n">USE</span> <span class="n">classicmodels</span><span class="p">;</span>
+<span class="k">SELECT</span> <span class="o">*</span>
+<span class="k">FROM</span> <span class="n">secondclassicmodels</span><span class="p">.</span><span class="n">customers</span> <span class="k">c</span>
+<span class="k">JOIN</span> <span class="n">orders</span> <span class="n">o</span>
+<span class="k">ON</span> <span class="n">o</span><span class="p">.</span><span class="n">customerNumber</span> <span class="o">=</span> <span class="k">c</span><span class="p">.</span><span class="n">customerNumber</span>
+    
+<span class="k">SELECT</span> <span class="k">c</span><span class="p">.</span><span class="n">customerNumber</span><span class="p">,</span> <span class="n">phone</span><span class="p">,</span> <span class="n">amount</span><span class="p">,</span> <span class="n">p</span><span class="p">.</span><span class="n">customerNumber</span> <span class="k">AS</span> <span class="s1">'payment'</span>
+<span class="k">FROM</span> <span class="n">customers</span> <span class="k">c</span>
+<span class="k">JOIN</span> <span class="n">payments</span> <span class="n">p</span>
+<span class="k">ON</span> <span class="k">c</span><span class="p">.</span><span class="n">customerNumber</span> <span class="o">=</span> <span class="n">p</span><span class="p">.</span><span class="n">customerNumber</span>
+
+<span class="c1">-- Join multiple tables together</span>
+<span class="k">SELECT</span> <span class="n">customerName</span><span class="p">,</span> 
+		<span class="k">c</span><span class="p">.</span><span class="n">customerNumber</span><span class="p">,</span> 
+		<span class="n">o</span><span class="p">.</span><span class="n">customerNumber</span> <span class="k">AS</span> <span class="s1">'orders_customer_numb'</span><span class="p">,</span>
+		<span class="n">o</span><span class="p">.</span><span class="n">orderNumber</span> 
+		<span class="n">comments</span><span class="p">,</span> 
+		<span class="n">productCode</span><span class="p">,</span>
+		<span class="n">quantityOrdered</span>
+<span class="k">FROM</span> <span class="n">customers</span> <span class="k">c</span>
+<span class="k">JOIN</span> <span class="n">orders</span> <span class="n">o</span>
+	<span class="k">ON</span> <span class="k">c</span><span class="p">.</span><span class="n">customerNumber</span> <span class="o">=</span> <span class="n">o</span><span class="p">.</span><span class="n">customerNumber</span>
+<span class="k">JOIN</span> <span class="n">orderdetails</span> <span class="n">od</span>
+	<span class="k">ON</span> <span class="n">o</span><span class="p">.</span><span class="n">orderNumber</span> <span class="o">=</span> <span class="n">od</span><span class="p">.</span><span class="n">orderNumber</span>	
+
+<span class="k">SELECT</span> <span class="o">*</span> 
+<span class="k">FROM</span> <span class="n">orderdetails</span> <span class="n">ord</span>
+<span class="k">JOIN</span> <span class="n">products</span> <span class="n">prd</span>
+<span class="k">ON</span> <span class="n">prd</span><span class="p">.</span><span class="n">productCode</span> <span class="o">=</span> <span class="n">ord</span><span class="p">.</span><span class="n">productCode</span>
+<span class="k">JOIN</span> <span class="n">orders</span> <span class="n">o</span>
+<span class="k">ON</span> <span class="n">o</span><span class="p">.</span><span class="n">orderNumber</span> <span class="o">=</span> <span class="n">ord</span><span class="p">.</span><span class="n">orderNumber</span>
+
+<span class="c1">-- Implpicit Join Syntax</span>
+<span class="k">SELECT</span> <span class="o">*</span> 
+<span class="k">FROM</span> <span class="n">orderdetails</span> <span class="n">ord</span><span class="p">,</span> <span class="n">orders</span> <span class="n">o</span>
+<span class="k">WHERE</span> <span class="n">ord</span><span class="p">.</span><span class="n">orderNumber</span> <span class="o">=</span> <span class="n">o</span><span class="p">.</span><span class="n">orderNumber</span>
+
+<span class="k">OUTER</span> <span class="k">JOIN</span><span class="p">,</span> <span class="n">we</span> <span class="n">will</span> <span class="n">you</span> <span class="k">left</span> <span class="k">join</span> <span class="k">or</span> <span class="k">right</span> <span class="k">join</span>
+<span class="c1">-- for left join, all the customer from left table (customer) will be return whether the join condition is true or not</span>
+<span class="c1">-- for right join, all the order from right table (orders) will be return whether the join condition is true or not</span>
+
+<span class="k">SELECT</span>
+	<span class="k">c</span><span class="p">.</span><span class="n">customerNumber</span><span class="p">,</span>
+    <span class="k">c</span><span class="p">.</span><span class="n">customerName</span><span class="p">,</span>
+    <span class="n">o</span><span class="p">.</span><span class="n">orderNumber</span>
+<span class="k">FROM</span> <span class="n">customers</span> <span class="k">c</span>
+<span class="k">LEFT</span> <span class="k">JOIN</span> <span class="n">orders</span> <span class="n">o</span>
+	<span class="k">ON</span> <span class="k">c</span><span class="p">.</span><span class="n">customerNumber</span> <span class="o">=</span> <span class="n">o</span><span class="p">.</span><span class="n">customerNumber</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="k">c</span><span class="p">.</span><span class="n">customerNumber</span>
+
+
+<span class="c1">-- description, we will get all the customer whether contains order or not</span>
+<span class="c1">-- then we will get all the order whether contains orderdetails or not    </span>
+<span class="k">SELECT</span>
+	<span class="k">c</span><span class="p">.</span><span class="n">customerNumber</span><span class="p">,</span>
+    <span class="k">c</span><span class="p">.</span><span class="n">customerName</span><span class="p">,</span>
+    <span class="n">o</span><span class="p">.</span><span class="n">orderNumber</span><span class="p">,</span>
+    <span class="n">d</span><span class="p">.</span><span class="n">productCode</span>
+<span class="k">FROM</span> <span class="n">customers</span> <span class="k">c</span>
+<span class="k">LEFT</span> <span class="k">JOIN</span> <span class="n">orders</span> <span class="n">o</span>
+	<span class="k">ON</span> <span class="k">c</span><span class="p">.</span><span class="n">customerNumber</span> <span class="o">=</span> <span class="n">o</span><span class="p">.</span><span class="n">customerNumber</span>
+<span class="k">LEFT</span> <span class="k">JOIN</span> <span class="n">orderdetails</span> <span class="n">d</span>
+	<span class="k">ON</span> <span class="n">o</span><span class="p">.</span><span class="n">orderNumber</span> <span class="o">=</span> <span class="n">d</span><span class="p">.</span><span class="n">orderNumber</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="k">c</span><span class="p">.</span><span class="n">customerNumber</span>
+    
+</code></pre></div></div>
+
+
+    </div><a class="u-url" href="/jekyll/update/2021/07/04/database-basic-sql-queries.html" hidden></a>
+  </article>
+  
+</div>
+
+
+    </div>
+  </div>
+  <script src="https://unpkg.com/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js"></script>
+  <script>addBackToTop()</script>
+</body>
+<footer><footer class="site-footer h-card">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <h2 class="footer-heading">StepByStep</h2>
+        <div>
+          <div>
+            <ul>
+              <li>Duc Nguyen</li><li><a class="u-email" href="mailto:minhducnguyen189@gmail.com">minhducnguyen189@gmail.com</a></li><li>&copy; 2021 Duc Nguyen. Powered by <a href="https://jekyllrb.com/">Jekyll</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <data class="u-url" href="/%20/"></data>
+        <div><ul class="social-media-list"><li><a href="https://github.com/minhducnguyen189"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">minhducnguyen189</span></a></li><li><a href="https://www.linkedin.com/in/duc-nguyen-03109b141"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#linkedin"></use></svg> <span class="username">duc-nguyen-03109b141</span></a></li></ul>
+</div>
+      </div>
+      <div class="col-md-4">
+        
+      </div>
+    </div>
+
+    <div class="row">
+      <p>Hi there! Let&#39;s explore some general knowleadges and briefly definitions  in programming. I hope that this website can help people saving time in learning, also give some motivations for those who have choice the developer path.</p>
+    </div>
+</footer></footer>
+</html>

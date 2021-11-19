@@ -6,7 +6,7 @@ body, h1, h2, h3, h4, h5, h6, p, blockquote, pre, hr, dl, dd, ol, ul, figure { m
 /** Basic styling */
 body { font: 400 18px/1.5 ubuntu-regular; color: #2c3e50; background-color: #bdc3c7; -webkit-text-size-adjust: 100%; -webkit-font-feature-settings: "kern" 1; -moz-font-feature-settings: "kern" 1; -o-font-feature-settings: "kern" 1; font-feature-settings: "kern" 1; font-kerning: normal; display: flex; min-height: 100vh; flex-direction: column; }
 
-body .main-page-content { min-height: 100vh; margin-bottom: 50px; }
+body .main-page-content { min-height: 100vh; }
 
 /** Set `margin-bottom` to maintain vertical rhythm */
 h1, h2, h3, h4, h5, h6, p, blockquote, pre, ul, ol, dl, figure, .highlight { margin-bottom: 15px; }
@@ -100,6 +100,8 @@ table td { border: 1px solid #535c68; }
 footer { bottom: 0; background-color: #2f3640; }
 
 footer .container { margin-top: 40px; color: #dfe6e9; }
+
+footer .container a { color: #43a047; }
 
 /** Page content */
 .page-heading { font-size: 36px; }
@@ -205,15 +207,23 @@ footer .container { margin-top: 40px; color: #dfe6e9; }
 
 @media screen and (max-width: 800px) { .post-content h4 { font-size: 20.25px; } }
 
-#search-container { margin-right: 75px; border-radius: 5px; background-color: #bdc3c7; }
+#search-container { margin-right: 75px; border-radius: 5px; background-color: #2c3e50; }
 
 #search-container #search-input { width: 310px; height: 40px; border-radius: 5px; }
 
-#search-container #results-container { list-style-type: none; margin-left: 0px; margin-top: 50px; width: 310px; z-index: 20; position: absolute; border-radius: 5px; background-color: #bdc3c7; }
+#search-container #results-container { list-style-type: none; margin-left: 0px; margin-top: 50px; width: 310px; z-index: 20; position: absolute; border-radius: 5px; background-color: #2c3e50; }
 
 #search-container #results-container li { width: 100%; }
 
+#search-container #results-container li a { color: #43a047; }
+
 #clear { position: absolute; border-radius: 5px; right: 0px; z-index: 2; border: none; height: 40px; cursor: pointer; color: white; background-color: #2a7ae2; }
+
+.pagination { margin: auto; margin-bottom: 30px; text-align: center; background-color: #2c3e50; color: #ffffff; }
+
+.pagination a, .pagination em, .pagination span { border: 2px solid #2c3e50; border-radius: 8px; padding: 5px; padding-left: 10px; padding-right: 10px; text-decoration: none; font-size: 20px; }
+
+.pagination a:hover { color: #43a047; }
 
 /** Syntax highlighting styles */
 .highlight { background: #fff; }

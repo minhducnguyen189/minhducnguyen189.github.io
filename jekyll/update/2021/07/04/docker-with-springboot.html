@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- bootstrap library and JS, Jquery -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Docker With Spring Boot Project | StepByStep</title>
+<meta name="generator" content="Jekyll v4.2.1" />
+<meta property="og:title" content="Docker With Spring Boot Project" />
+<meta name="author" content="Duc Nguyen" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="In this topic we will learn how to create a docker file and a docker-compose to run spring boot application CREATE A DOCKER FILE FROM SPRING BOOT PROJECT CREATE A DOCKER-COMPOSE FROM A SPRING BOOT PROJECT CREATE A DOCKER FILE FROM SPRING BOOT PROJECT The first thing you need to do is make sure that your jar file in /target folder after you build your spring boot project with mvn clean package can run locally by command java -jar &lt;jar name&gt;.jar. If you can not run your jar you can try adding this configuration into your pom.xml. Then build your project and execute the command again. &lt;plugin&gt; &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt; &lt;version&gt;2.4.3&lt;/version&gt; &lt;configuration&gt; &lt;mainClass&gt;com.example.workflow.Application&lt;/mainClass&gt; &lt;/configuration&gt; &lt;executions&gt; &lt;execution&gt; &lt;goals&gt; &lt;goal&gt;repackage&lt;/goal&gt; &lt;/goals&gt; &lt;/execution&gt; &lt;/executions&gt; &lt;/plugin&gt; The second step is you need to create a file named Dockerfile in your spring boot project which is located at the same level with pom.xml as the image below In the Dockerfile we will add some scripts as below: #get docker image with openjdk 8 installed FROM openjdk:8-jdk-alpine #expose port 8080 to real machine EXPOSE 8080 #some information for docker image LABEL owner=&quot;duc&quot; LABEL maintainer=&quot;minhducnguyen189@gmail.com&quot; LABEL description=&quot;test image my project&quot; #copy the jar file in target folder into docker image COPY target/my-project-1.0.0-SNAPSHOT.jar my-project-1.0.0-SNAPSHOT.jar #run command java to run jar package when docker image is run ENTRYPOINT [&quot;java&quot;,&quot;-jar&quot;,&quot;/my-project-1.0.0-SNAPSHOT.jar&quot;] you can view more docker script in this link docker file script Commands Description FROM Sets the base image for subsequent LABEL Adds metadata to an image EXPOSE Informs container runtime that the container listens on the specified network ports at runtime COPY Copy new files or directories into the filesystem of the container ENTRYPOINT Allows you to configure a container that will run as an executable Then you can run the command below to build docker image run command docker build . --tag myproject to build a docker image with name myproject user docker images to check your image was build successfully Finally you can run command docker run -it -p8080:8080 myproject to run a docker cotainer with 8080 is mapped out side to real machine. CREATE A DOCKER-COMPOSE FROM A SPRING BOOT PROJECT First we need to create a new application-build.yml in our spring boot project, we will use this file for building docker image only and it will not impact to the current application.yml. the application-build.yml will look like this spring: datasource: driverClassName: com.mysql.jdbc.Driver url: jdbc:mysql://my-project-db:3306/camunda?useSSL=false #This is the primary DB username: root password: root second-datasource: driverClassName: com.mysql.jdbc.Driver url: jdbc:mysql://my-project-db:3306/mydb?useSSL=false #This is the secondary DB username: root password: root jpa: hibernate.ddl-auto: update hibernate.dialect: org.hibernate.dialect.MySQL5Dialect generate-ddl: true show-sql: true as you can see we have to change the database url from localhost to my-project-db (This is the container name of mysql that we use in docker-compose.yml). The second step is update Dockerfile as the following #get docker image with openjdk 8 installed FROM openjdk:8-jdk-alpine #expose port 8080 to real machine EXPOSE 8080 #some information for docker image LABEL owner=&quot;duc&quot; LABEL maintainer=&quot;minhducnguyen189@gmail.com&quot; LABEL description=&quot;test image my project&quot; #copy the jar file in target folder into docker image COPY target/my-project-1.0.0-SNAPSHOT.jar my-project-1.0.0-SNAPSHOT.jar #run command java to run jar package when docker image is run with # profile is application-build.yml ENTRYPOINT [&quot;java&quot;,&quot;-jar&quot;, &quot;-Dspring.profiles.active=build&quot;, &quot;/my-project-1.0.0-SNAPSHOT.jar&quot;] After that you need to use command docker rmi myproject -f to delete the image myproject if you build myproject image in the CREATE A DOCKER FILE FROM SPRING BOOT PROJECT before. In third step, we will create a docker-compose.yml file in the same level of pom.xml docker-compose.yml which contain 2 services db which is loaded from the mysql image of dockerhub and myproject which is loaded from the local image which is build on step above. version: &#39;3.1&#39; services: # this is the mysql service db: image: mysql #image mysql which is pulled from the dockerhub command: --default-authentication-plugin=mysql_native_password restart: always #always restart the container if there are any error container_name: my-project-db #name for the db container environment: MYSQL_ROOT_PASSWORD: root #root passowrd of mysql MYSQL_PASSWORD: root #password of database camunda MYSQL_DATABASE: camunda #create database camunda volumes: #sync data mysql to folder datadirs - datadirs:/var/lib/mysql #sync this file sql to container to create 2 databases camunda and mydb when the mysql container is started up - ./init-db.sql:/docker-entrypoint-initdb.d/init-db.sql ports: - 3306:3306 #nat port from container to real machine # this is the myproject service myproject: image: myproject #image of myproject which is build from the Dockerfile in the step above container_name: my-project #name for myproject container depends_on: #db service should be run successfully before myproject service is run - db ports: - 8080:8080 restart: always volumes: datadirs: We should note that because we use 2 databases in the example so we have to load a script for creating 2 databases. We create a file init-db.sql in the same level with docker-compose.yml and this file will be loaded into the mysql docker container when it is started and it contains this sql scripts. #init-db.sql CREATE DATABASE IF NOT EXISTS camunda; CREATE DATABASE IF NOT EXISTS mydb; We should create folder datadirs in the same level with pom.xml too, to sync data of mysql when we use the docker-compose after it is started successfully. Now, you can use command docker-compose up to start your docker-compose and check your application throw port 8080." />
+<meta property="og:description" content="In this topic we will learn how to create a docker file and a docker-compose to run spring boot application CREATE A DOCKER FILE FROM SPRING BOOT PROJECT CREATE A DOCKER-COMPOSE FROM A SPRING BOOT PROJECT CREATE A DOCKER FILE FROM SPRING BOOT PROJECT The first thing you need to do is make sure that your jar file in /target folder after you build your spring boot project with mvn clean package can run locally by command java -jar &lt;jar name&gt;.jar. If you can not run your jar you can try adding this configuration into your pom.xml. Then build your project and execute the command again. &lt;plugin&gt; &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt; &lt;version&gt;2.4.3&lt;/version&gt; &lt;configuration&gt; &lt;mainClass&gt;com.example.workflow.Application&lt;/mainClass&gt; &lt;/configuration&gt; &lt;executions&gt; &lt;execution&gt; &lt;goals&gt; &lt;goal&gt;repackage&lt;/goal&gt; &lt;/goals&gt; &lt;/execution&gt; &lt;/executions&gt; &lt;/plugin&gt; The second step is you need to create a file named Dockerfile in your spring boot project which is located at the same level with pom.xml as the image below In the Dockerfile we will add some scripts as below: #get docker image with openjdk 8 installed FROM openjdk:8-jdk-alpine #expose port 8080 to real machine EXPOSE 8080 #some information for docker image LABEL owner=&quot;duc&quot; LABEL maintainer=&quot;minhducnguyen189@gmail.com&quot; LABEL description=&quot;test image my project&quot; #copy the jar file in target folder into docker image COPY target/my-project-1.0.0-SNAPSHOT.jar my-project-1.0.0-SNAPSHOT.jar #run command java to run jar package when docker image is run ENTRYPOINT [&quot;java&quot;,&quot;-jar&quot;,&quot;/my-project-1.0.0-SNAPSHOT.jar&quot;] you can view more docker script in this link docker file script Commands Description FROM Sets the base image for subsequent LABEL Adds metadata to an image EXPOSE Informs container runtime that the container listens on the specified network ports at runtime COPY Copy new files or directories into the filesystem of the container ENTRYPOINT Allows you to configure a container that will run as an executable Then you can run the command below to build docker image run command docker build . --tag myproject to build a docker image with name myproject user docker images to check your image was build successfully Finally you can run command docker run -it -p8080:8080 myproject to run a docker cotainer with 8080 is mapped out side to real machine. CREATE A DOCKER-COMPOSE FROM A SPRING BOOT PROJECT First we need to create a new application-build.yml in our spring boot project, we will use this file for building docker image only and it will not impact to the current application.yml. the application-build.yml will look like this spring: datasource: driverClassName: com.mysql.jdbc.Driver url: jdbc:mysql://my-project-db:3306/camunda?useSSL=false #This is the primary DB username: root password: root second-datasource: driverClassName: com.mysql.jdbc.Driver url: jdbc:mysql://my-project-db:3306/mydb?useSSL=false #This is the secondary DB username: root password: root jpa: hibernate.ddl-auto: update hibernate.dialect: org.hibernate.dialect.MySQL5Dialect generate-ddl: true show-sql: true as you can see we have to change the database url from localhost to my-project-db (This is the container name of mysql that we use in docker-compose.yml). The second step is update Dockerfile as the following #get docker image with openjdk 8 installed FROM openjdk:8-jdk-alpine #expose port 8080 to real machine EXPOSE 8080 #some information for docker image LABEL owner=&quot;duc&quot; LABEL maintainer=&quot;minhducnguyen189@gmail.com&quot; LABEL description=&quot;test image my project&quot; #copy the jar file in target folder into docker image COPY target/my-project-1.0.0-SNAPSHOT.jar my-project-1.0.0-SNAPSHOT.jar #run command java to run jar package when docker image is run with # profile is application-build.yml ENTRYPOINT [&quot;java&quot;,&quot;-jar&quot;, &quot;-Dspring.profiles.active=build&quot;, &quot;/my-project-1.0.0-SNAPSHOT.jar&quot;] After that you need to use command docker rmi myproject -f to delete the image myproject if you build myproject image in the CREATE A DOCKER FILE FROM SPRING BOOT PROJECT before. In third step, we will create a docker-compose.yml file in the same level of pom.xml docker-compose.yml which contain 2 services db which is loaded from the mysql image of dockerhub and myproject which is loaded from the local image which is build on step above. version: &#39;3.1&#39; services: # this is the mysql service db: image: mysql #image mysql which is pulled from the dockerhub command: --default-authentication-plugin=mysql_native_password restart: always #always restart the container if there are any error container_name: my-project-db #name for the db container environment: MYSQL_ROOT_PASSWORD: root #root passowrd of mysql MYSQL_PASSWORD: root #password of database camunda MYSQL_DATABASE: camunda #create database camunda volumes: #sync data mysql to folder datadirs - datadirs:/var/lib/mysql #sync this file sql to container to create 2 databases camunda and mydb when the mysql container is started up - ./init-db.sql:/docker-entrypoint-initdb.d/init-db.sql ports: - 3306:3306 #nat port from container to real machine # this is the myproject service myproject: image: myproject #image of myproject which is build from the Dockerfile in the step above container_name: my-project #name for myproject container depends_on: #db service should be run successfully before myproject service is run - db ports: - 8080:8080 restart: always volumes: datadirs: We should note that because we use 2 databases in the example so we have to load a script for creating 2 databases. We create a file init-db.sql in the same level with docker-compose.yml and this file will be loaded into the mysql docker container when it is started and it contains this sql scripts. #init-db.sql CREATE DATABASE IF NOT EXISTS camunda; CREATE DATABASE IF NOT EXISTS mydb; We should create folder datadirs in the same level with pom.xml too, to sync data of mysql when we use the docker-compose after it is started successfully. Now, you can use command docker-compose up to start your docker-compose and check your application throw port 8080." />
+<link rel="canonical" href="/jekyll/update/2021/07/04/docker-with-springboot.html" />
+<meta property="og:url" content="/jekyll/update/2021/07/04/docker-with-springboot.html" />
+<meta property="og:site_name" content="StepByStep" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-07-04T08:15:47+07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Docker With Spring Boot Project" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","url":"/jekyll/update/2021/07/04/docker-with-springboot.html","author":{"@type":"Person","name":"Duc Nguyen"},"headline":"Docker With Spring Boot Project","dateModified":"2021-07-04T08:15:47+07:00","datePublished":"2021-07-04T08:15:47+07:00","description":"In this topic we will learn how to create a docker file and a docker-compose to run spring boot application CREATE A DOCKER FILE FROM SPRING BOOT PROJECT CREATE A DOCKER-COMPOSE FROM A SPRING BOOT PROJECT CREATE A DOCKER FILE FROM SPRING BOOT PROJECT The first thing you need to do is make sure that your jar file in /target folder after you build your spring boot project with mvn clean package can run locally by command java -jar &lt;jar name&gt;.jar. If you can not run your jar you can try adding this configuration into your pom.xml. Then build your project and execute the command again. &lt;plugin&gt; &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt; &lt;version&gt;2.4.3&lt;/version&gt; &lt;configuration&gt; &lt;mainClass&gt;com.example.workflow.Application&lt;/mainClass&gt; &lt;/configuration&gt; &lt;executions&gt; &lt;execution&gt; &lt;goals&gt; &lt;goal&gt;repackage&lt;/goal&gt; &lt;/goals&gt; &lt;/execution&gt; &lt;/executions&gt; &lt;/plugin&gt; The second step is you need to create a file named Dockerfile in your spring boot project which is located at the same level with pom.xml as the image below In the Dockerfile we will add some scripts as below: #get docker image with openjdk 8 installed FROM openjdk:8-jdk-alpine #expose port 8080 to real machine EXPOSE 8080 #some information for docker image LABEL owner=&quot;duc&quot; LABEL maintainer=&quot;minhducnguyen189@gmail.com&quot; LABEL description=&quot;test image my project&quot; #copy the jar file in target folder into docker image COPY target/my-project-1.0.0-SNAPSHOT.jar my-project-1.0.0-SNAPSHOT.jar #run command java to run jar package when docker image is run ENTRYPOINT [&quot;java&quot;,&quot;-jar&quot;,&quot;/my-project-1.0.0-SNAPSHOT.jar&quot;] you can view more docker script in this link docker file script Commands Description FROM Sets the base image for subsequent LABEL Adds metadata to an image EXPOSE Informs container runtime that the container listens on the specified network ports at runtime COPY Copy new files or directories into the filesystem of the container ENTRYPOINT Allows you to configure a container that will run as an executable Then you can run the command below to build docker image run command docker build . --tag myproject to build a docker image with name myproject user docker images to check your image was build successfully Finally you can run command docker run -it -p8080:8080 myproject to run a docker cotainer with 8080 is mapped out side to real machine. CREATE A DOCKER-COMPOSE FROM A SPRING BOOT PROJECT First we need to create a new application-build.yml in our spring boot project, we will use this file for building docker image only and it will not impact to the current application.yml. the application-build.yml will look like this spring: datasource: driverClassName: com.mysql.jdbc.Driver url: jdbc:mysql://my-project-db:3306/camunda?useSSL=false #This is the primary DB username: root password: root second-datasource: driverClassName: com.mysql.jdbc.Driver url: jdbc:mysql://my-project-db:3306/mydb?useSSL=false #This is the secondary DB username: root password: root jpa: hibernate.ddl-auto: update hibernate.dialect: org.hibernate.dialect.MySQL5Dialect generate-ddl: true show-sql: true as you can see we have to change the database url from localhost to my-project-db (This is the container name of mysql that we use in docker-compose.yml). The second step is update Dockerfile as the following #get docker image with openjdk 8 installed FROM openjdk:8-jdk-alpine #expose port 8080 to real machine EXPOSE 8080 #some information for docker image LABEL owner=&quot;duc&quot; LABEL maintainer=&quot;minhducnguyen189@gmail.com&quot; LABEL description=&quot;test image my project&quot; #copy the jar file in target folder into docker image COPY target/my-project-1.0.0-SNAPSHOT.jar my-project-1.0.0-SNAPSHOT.jar #run command java to run jar package when docker image is run with # profile is application-build.yml ENTRYPOINT [&quot;java&quot;,&quot;-jar&quot;, &quot;-Dspring.profiles.active=build&quot;, &quot;/my-project-1.0.0-SNAPSHOT.jar&quot;] After that you need to use command docker rmi myproject -f to delete the image myproject if you build myproject image in the CREATE A DOCKER FILE FROM SPRING BOOT PROJECT before. In third step, we will create a docker-compose.yml file in the same level of pom.xml docker-compose.yml which contain 2 services db which is loaded from the mysql image of dockerhub and myproject which is loaded from the local image which is build on step above. version: &#39;3.1&#39; services: # this is the mysql service db: image: mysql #image mysql which is pulled from the dockerhub command: --default-authentication-plugin=mysql_native_password restart: always #always restart the container if there are any error container_name: my-project-db #name for the db container environment: MYSQL_ROOT_PASSWORD: root #root passowrd of mysql MYSQL_PASSWORD: root #password of database camunda MYSQL_DATABASE: camunda #create database camunda volumes: #sync data mysql to folder datadirs - datadirs:/var/lib/mysql #sync this file sql to container to create 2 databases camunda and mydb when the mysql container is started up - ./init-db.sql:/docker-entrypoint-initdb.d/init-db.sql ports: - 3306:3306 #nat port from container to real machine # this is the myproject service myproject: image: myproject #image of myproject which is build from the Dockerfile in the step above container_name: my-project #name for myproject container depends_on: #db service should be run successfully before myproject service is run - db ports: - 8080:8080 restart: always volumes: datadirs: We should note that because we use 2 databases in the example so we have to load a script for creating 2 databases. We create a file init-db.sql in the same level with docker-compose.yml and this file will be loaded into the mysql docker container when it is started and it contains this sql scripts. #init-db.sql CREATE DATABASE IF NOT EXISTS camunda; CREATE DATABASE IF NOT EXISTS mydb; We should create folder datadirs in the same level with pom.xml too, to sync data of mysql when we use the docker-compose after it is started successfully. Now, you can use command docker-compose up to start your docker-compose and check your application throw port 8080.","mainEntityOfPage":{"@type":"WebPage","@id":"/jekyll/update/2021/07/04/docker-with-springboot.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="StepByStep" /><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NZ8G5007GK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-NZ8G5007GK');
+</script></head><body>
+  <div class="container-flush">
+    <div class="row"><!-- navigation bar -->
+<div class="col-lg-12">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" role="banner"><a class="navbar-brand site-title" rel="author" href="/">StepByStep</a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="nav navbar-nav"><li class="nav-item active">
+          <a class="nav-link" href="/about">About</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/">Java</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/docker">Docker</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/data">Data</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/ci-cd">CI-CD</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/python">Python</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/fe">FE</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/others">Others</a>
+        </li></ul>
+    </div>
+
+    <!-- Html Elements for Search -->
+    <div id="search-container" class="btn-group">
+      <input type="text" id="search-input" placeholder="search...">
+      <button id="clear">clear</button>
+      <ul id="results-container"></ul>
+    </div>
+
+    <!-- Script pointing to search-script.js -->
+    <script src="/java-scripts/search-script.js" type="text/javascript"></script>
+
+    <!-- Configuration -->
+    <script>
+      SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('results-container'),
+        json: '/search.json'
+      })
+    </script>
+
+    <!-- search clear -->
+    <script>
+      window.addEventListener('load', () => {
+        const button = document.querySelector('#clear');
+        button.addEventListener('click', () => {
+          document.querySelector('#search-input').value = "";
+          document.querySelector('#results-container').innerHTML = "";
+        });
+      });
+    </script>
+  </nav>
+</div></div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+  <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+    <header class="post-header">
+      <h1 class="post-title p-name" itemprop="name headline">Docker With Spring Boot Project</h1>
+      <p class="post-meta">
+        <time class="dt-published" datetime="2021-07-04T08:15:47+07:00" itemprop="datePublished">Jul 4, 2021
+        </time></p>
+    </header>
+  
+    <div class="post-content e-content" itemprop="articleBody">
+      <blockquote>
+  <p>In this topic we will learn how to create a docker file and a docker-compose to run spring boot application</p>
+</blockquote>
+
+<ul id="markdown-toc">
+  <li><a href="#create-a-docker-file-from-spring-boot-project" id="markdown-toc-create-a-docker-file-from-spring-boot-project">CREATE A DOCKER FILE FROM SPRING BOOT PROJECT</a></li>
+  <li><a href="#create-a-docker-compose-from-a-spring-boot-project" id="markdown-toc-create-a-docker-compose-from-a-spring-boot-project">CREATE A DOCKER-COMPOSE FROM A SPRING BOOT PROJECT</a></li>
+</ul>
+
+<h2 id="create-a-docker-file-from-spring-boot-project">CREATE A DOCKER FILE FROM SPRING BOOT PROJECT</h2>
+
+<ul>
+  <li>
+    <p>The first thing you need to do is make sure that your <strong>jar</strong> file in <strong>/target</strong> folder after you build your spring boot project with <code class="language-plaintext highlighter-rouge">mvn clean package</code> can run locally by command <code class="language-plaintext highlighter-rouge">java -jar &lt;jar name&gt;.jar</code>.</p>
+  </li>
+  <li>
+    <p>If you can not run your jar you can try adding this configuration into your <code class="language-plaintext highlighter-rouge">pom.xml</code>. Then build your project and execute the command again.</p>
+  </li>
+</ul>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nt">&lt;plugin&gt;</span>
+        <span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+        <span class="nt">&lt;artifactId&gt;</span>spring-boot-maven-plugin<span class="nt">&lt;/artifactId&gt;</span>
+        <span class="nt">&lt;version&gt;</span>2.4.3<span class="nt">&lt;/version&gt;</span>
+        <span class="nt">&lt;configuration&gt;</span>
+            <span class="nt">&lt;mainClass&gt;</span>com.example.workflow.Application<span class="nt">&lt;/mainClass&gt;</span>
+        <span class="nt">&lt;/configuration&gt;</span>
+        <span class="nt">&lt;executions&gt;</span>
+            <span class="nt">&lt;execution&gt;</span>
+                <span class="nt">&lt;goals&gt;</span>
+                    <span class="nt">&lt;goal&gt;</span>repackage<span class="nt">&lt;/goal&gt;</span>
+                <span class="nt">&lt;/goals&gt;</span>
+            <span class="nt">&lt;/execution&gt;</span>
+        <span class="nt">&lt;/executions&gt;</span>
+    <span class="nt">&lt;/plugin&gt;</span>
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>The second step is you need to create a file named <code class="language-plaintext highlighter-rouge">Dockerfile</code> in your spring boot project which is located at the same level with <code class="language-plaintext highlighter-rouge">pom.xml</code> as the image below</p>
+
+    <p><a href="/assets/images/docker/docker-Dockerfile-location.JPG"><img src="/assets/images/docker/docker-Dockerfile-location.JPG" alt="Dockerfile location" title="Dockerfile location" /></a></p>
+  </li>
+  <li>
+    <p>In the <code class="language-plaintext highlighter-rouge">Dockerfile</code> we will add some scripts as below:</p>
+
+    <div class="language-Dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+ <span class="c">#get docker image with openjdk 8 installed</span>
+ FROM openjdk:8-jdk-alpine
+
+ <span class="c">#expose port 8080 to real machine</span>
+ EXPOSE 8080
+
+ <span class="c">#some information for docker image</span>
+ LABEL owner="duc"
+ LABEL maintainer="minhducnguyen189@gmail.com"
+ LABEL description="test image my project"
+
+ #copy the jar file in target folder into docker image
+ COPY target/my-project-1.0.0-SNAPSHOT.jar my-project-1.0.0-SNAPSHOT.jar
+
+ <span class="c">#run command java to run jar package when docker image is run</span>
+ ENTRYPOINT ["java","-jar","/my-project-1.0.0-SNAPSHOT.jar"]
+
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>you can view more docker script in this link <a href="https://design.jboss.org/redhatdeveloper/marketing/docker_cheatsheet/cheatsheet/images/docker_cheatsheet_r3v2.pdf">docker file script</a></p>
+  </li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>Commands</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">FROM</code></td>
+      <td>Sets the base image for subsequent</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">LABEL</code></td>
+      <td>Adds metadata to an image</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">EXPOSE</code></td>
+      <td>Informs container runtime that the container listens on the specified network ports at runtime</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">COPY</code></td>
+      <td>Copy new files or directories into the filesystem of the container</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ENTRYPOINT</code></td>
+      <td>Allows you to configure a container that will run as an executable</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>Then you can run the command below to build <strong>docker image</strong>
+    <ul>
+      <li>
+        <p>run command <code class="language-plaintext highlighter-rouge">docker build . --tag myproject</code> to build a docker image with name <code class="language-plaintext highlighter-rouge">myproject</code></p>
+      </li>
+      <li>
+        <p>user <code class="language-plaintext highlighter-rouge">docker images</code> to check your image was build successfully
+  <a href="/assets/images/docker/docker-docker-image-build-successfully.JPG"><img src="/assets/images/docker/docker-docker-image-build-successfully.JPG" alt="Docker image built successfully" title="Docker image built successfully" /></a></p>
+      </li>
+    </ul>
+  </li>
+  <li>Finally you can run command <code class="language-plaintext highlighter-rouge">docker run -it -p8080:8080 myproject</code> to run a docker cotainer with 8080 is mapped out side to real machine.</li>
+</ul>
+
+<h2 id="create-a-docker-compose-from-a-spring-boot-project">CREATE A DOCKER-COMPOSE FROM A SPRING BOOT PROJECT</h2>
+
+<ul>
+  <li><strong>First</strong> we need to create a new <code class="language-plaintext highlighter-rouge">application-build.yml</code> in our spring boot project, we will use this file for building docker image only and it will not impact to the current <code class="language-plaintext highlighter-rouge">application.yml</code>.
+    <ul>
+      <li>the <code class="language-plaintext highlighter-rouge">application-build.yml</code> will look like this</li>
+    </ul>
+
+    <div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="na">spring</span><span class="pi">:</span>
+      <span class="na">datasource</span><span class="pi">:</span>
+          <span class="na">driverClassName</span><span class="pi">:</span> <span class="s">com.mysql.jdbc.Driver</span>
+          <span class="na">url</span><span class="pi">:</span> <span class="s">jdbc:mysql://my-project-db:3306/camunda?useSSL=false</span>  <span class="c1">#This is the primary DB</span>
+          <span class="na">username</span><span class="pi">:</span> <span class="s">root</span>
+          <span class="na">password</span><span class="pi">:</span> <span class="s">root</span>
+      <span class="na">second-datasource</span><span class="pi">:</span>
+          <span class="na">driverClassName</span><span class="pi">:</span> <span class="s">com.mysql.jdbc.Driver</span>
+          <span class="na">url</span><span class="pi">:</span> <span class="s">jdbc:mysql://my-project-db:3306/mydb?useSSL=false</span>  <span class="c1">#This is the secondary DB</span>
+          <span class="na">username</span><span class="pi">:</span> <span class="s">root</span>
+          <span class="na">password</span><span class="pi">:</span> <span class="s">root</span>
+      <span class="na">jpa</span><span class="pi">:</span>
+          <span class="na">hibernate.ddl-auto</span><span class="pi">:</span> <span class="s">update</span>
+          <span class="na">hibernate.dialect</span><span class="pi">:</span> <span class="s">org.hibernate.dialect.MySQL5Dialect</span>
+          <span class="na">generate-ddl</span><span class="pi">:</span> <span class="no">true</span>
+          <span class="na">show-sql</span><span class="pi">:</span> <span class="no">true</span>
+</code></pre></div>    </div>
+    <ul>
+      <li>as you can see we have to change the <code class="language-plaintext highlighter-rouge">database url</code> from <code class="language-plaintext highlighter-rouge">localhost</code> to <code class="language-plaintext highlighter-rouge">my-project-db</code> (This is the container name of mysql that we use in docker-compose.yml).</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>The second step</strong> is update <code class="language-plaintext highlighter-rouge">Dockerfile</code> as the following</p>
+
+    <div class="language-Dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c">#get docker image with openjdk 8 installed</span>
+  FROM openjdk:8-jdk-alpine
+
+  <span class="c">#expose port 8080 to real machine</span>
+  EXPOSE 8080
+
+  <span class="c">#some information for docker image</span>
+  LABEL owner="duc"
+  LABEL maintainer="minhducnguyen189@gmail.com"
+  LABEL description="test image my project"
+
+  #copy the jar file in target folder into docker image
+  COPY target/my-project-1.0.0-SNAPSHOT.jar my-project-1.0.0-SNAPSHOT.jar
+
+  <span class="c">#run command java to run jar package when docker image is run with</span>
+  <span class="c"># profile is application-build.yml</span>
+  ENTRYPOINT ["java","-jar", "-Dspring.profiles.active=build", "/my-project-1.0.0-SNAPSHOT.jar"]
+
+</code></pre></div>    </div>
+    <ul>
+      <li>After that you need to use command <code class="language-plaintext highlighter-rouge">docker rmi myproject -f</code> to delete the image <code class="language-plaintext highlighter-rouge">myproject</code> if you build <code class="language-plaintext highlighter-rouge">myproject</code> image in the <code class="language-plaintext highlighter-rouge">CREATE A DOCKER FILE FROM SPRING BOOT PROJECT</code> before.</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>In third step</strong>, we will create a <code class="language-plaintext highlighter-rouge">docker-compose.yml</code> file in the same level of <code class="language-plaintext highlighter-rouge">pom.xml</code></p>
+
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">docker-compose.yml</code> which contain 2 services <code class="language-plaintext highlighter-rouge">db</code> which is loaded from the <code class="language-plaintext highlighter-rouge">mysql</code> image of <strong>dockerhub</strong> and <code class="language-plaintext highlighter-rouge">myproject</code> which is loaded from the <strong>local image</strong> which is build on step above.</li>
+    </ul>
+
+    <div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+  <span class="na">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">3.1'</span>
+
+  <span class="na">services</span><span class="pi">:</span>
+  <span class="c1"># this is the mysql service</span>
+  <span class="na">db</span><span class="pi">:</span>
+      <span class="na">image</span><span class="pi">:</span> <span class="s">mysql</span>    <span class="c1">#image mysql which is pulled from the dockerhub</span>
+      <span class="na">command</span><span class="pi">:</span> <span class="s">--default-authentication-plugin=mysql_native_password</span>
+      <span class="na">restart</span><span class="pi">:</span> <span class="s">always</span>   <span class="c1">#always restart the container if there are any error</span>
+      <span class="na">container_name</span><span class="pi">:</span> <span class="s">my-project-db</span>  <span class="c1">#name for the db container</span>
+      <span class="na">environment</span><span class="pi">:</span>
+          <span class="na">MYSQL_ROOT_PASSWORD</span><span class="pi">:</span> <span class="s">root</span>   <span class="c1">#root passowrd of mysql</span>
+          <span class="na">MYSQL_PASSWORD</span><span class="pi">:</span> <span class="s">root</span>        <span class="c1">#password of database camunda</span>
+          <span class="na">MYSQL_DATABASE</span><span class="pi">:</span> <span class="s">camunda</span>     <span class="c1">#create database camunda</span>
+      <span class="na">volumes</span><span class="pi">:</span>
+          <span class="c1">#sync data mysql to folder datadirs</span>
+          <span class="pi">-</span> <span class="s">datadirs:/var/lib/mysql</span>
+          <span class="c1">#sync this file sql to container to create 2 databases camunda and mydb when the mysql container is started up</span>
+          <span class="pi">-</span> <span class="s">./init-db.sql:/docker-entrypoint-initdb.d/init-db.sql</span>
+      <span class="na">ports</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">3306:3306</span>     <span class="c1">#nat port from container to real machine</span>
+
+  <span class="c1"># this is the myproject service</span>
+  <span class="na">myproject</span><span class="pi">:</span>
+      <span class="na">image</span><span class="pi">:</span> <span class="s">myproject</span>    <span class="c1">#image of myproject which is build from the Dockerfile in the step above</span>
+      <span class="na">container_name</span><span class="pi">:</span> <span class="s">my-project</span>   <span class="c1">#name for myproject container</span>
+      <span class="na">depends_on</span><span class="pi">:</span>         <span class="c1">#db service should be run successfully before myproject service is run</span>
+      <span class="pi">-</span> <span class="s">db</span>
+      <span class="na">ports</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">8080:8080</span>
+      <span class="na">restart</span><span class="pi">:</span> <span class="s">always</span>
+
+  <span class="na">volumes</span><span class="pi">:</span>
+      <span class="na">datadirs</span><span class="pi">:</span>
+
+</code></pre></div>    </div>
+
+    <ul>
+      <li>We should note that because we use 2 databases in the example so we have to load a script for creating 2 databases. We create a file <code class="language-plaintext highlighter-rouge">init-db.sql</code> in the same level with <code class="language-plaintext highlighter-rouge">docker-compose.yml</code> and this file will be loaded into the mysql docker container when it is started and it contains this sql scripts.</li>
+    </ul>
+
+    <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+      <span class="o">#</span><span class="n">init</span><span class="o">-</span><span class="n">db</span><span class="p">.</span><span class="k">sql</span>
+
+      <span class="k">CREATE</span> <span class="k">DATABASE</span> <span class="n">IF</span> <span class="k">NOT</span> <span class="k">EXISTS</span> <span class="n">camunda</span><span class="p">;</span>
+      <span class="k">CREATE</span> <span class="k">DATABASE</span> <span class="n">IF</span> <span class="k">NOT</span> <span class="k">EXISTS</span> <span class="n">mydb</span><span class="p">;</span>
+</code></pre></div>    </div>
+
+    <ul>
+      <li>
+        <p>We should create folder <code class="language-plaintext highlighter-rouge">datadirs</code> in the same level with <code class="language-plaintext highlighter-rouge">pom.xml</code> too, to sync data of mysql when we use the docker-compose after it is started successfully.</p>
+
+        <p><a href="/assets/images/docker/docker-springboot-project-structure.JPG"><img src="/assets/images/docker/docker-springboot-project-structure.JPG" alt="Spring boot project structure" title="Spring boot project structure" /></a></p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Now, you can use command <code class="language-plaintext highlighter-rouge">docker-compose up</code> to start your docker-compose and check your application throw port 8080.</p>
+
+    <p><a href="assets/images/docker/docker-docker-compose-start-up-result.JPG"><img src="/assets/images/docker/docker-docker-compose-start-up-result.JPG" alt="Docker compose start up successfully" title="Docker compose start up successfully" /></a></p>
+  </li>
+</ul>
+
+    </div><a class="u-url" href="/jekyll/update/2021/07/04/docker-with-springboot.html" hidden></a>
+  </article>
+  
+</div>
+
+
+    </div>
+  </div>
+  <script src="https://unpkg.com/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js"></script>
+  <script>addBackToTop()</script>
+</body>
+<footer><footer class="site-footer h-card">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <h2 class="footer-heading">StepByStep</h2>
+        <div>
+          <div>
+            <ul>
+              <li>Duc Nguyen</li><li><a class="u-email" href="mailto:minhducnguyen189@gmail.com">minhducnguyen189@gmail.com</a></li><li>&copy; 2021 Duc Nguyen. Powered by <a href="https://jekyllrb.com/">Jekyll</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <data class="u-url" href="/%20/"></data>
+        <div><ul class="social-media-list"><li><a href="https://github.com/minhducnguyen189"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">minhducnguyen189</span></a></li><li><a href="https://www.linkedin.com/in/duc-nguyen-03109b141"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#linkedin"></use></svg> <span class="username">duc-nguyen-03109b141</span></a></li></ul>
+</div>
+      </div>
+      <div class="col-md-4">
+        
+      </div>
+    </div>
+
+    <div class="row">
+      <p>Hi there! Let&#39;s explore some general knowleadges and briefly definitions  in programming. I hope that this website can help people saving time in learning, also give some motivations for those who have choice the developer path.</p>
+    </div>
+</footer></footer>
+</html>
