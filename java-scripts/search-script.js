@@ -159,7 +159,7 @@
                     return 0
                 },
                 noResultsText: "No results found",
-                limit: 10,
+                limit: 15,
                 fuzzy: !1,
                 debounceTime: null,
                 exclude: []

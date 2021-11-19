@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- bootstrap library and JS, Jquery -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Gradle With Basic Concepts | StepByStep</title>
+<meta name="generator" content="Jekyll v4.2.1" />
+<meta property="og:title" content="Gradle With Basic Concepts" />
+<meta name="author" content="Duc Nguyen" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="WHAT IS GRADLE? GRADLE INSTALLATION SOME GRADLE COMMANDS GRADLE BUILD PHASES GRADLE AND MAVEN COMPARISON CREATE A SAMPLE GRADLE PROJECT WITH SPRING BOOT WHAT IS GRADLE? Gradle is an open-source build automation tool that is designed to be flexible enough to build almost any type of software. Build automation is the process of automating the creation of a software build and the associated processes including: compiling computer source code into binary code, packaging binary code, and running automated tests. Gradle runs on the JVM and you must have a Java Development Kit (JDK) installed to use it. More information GRADLE INSTALLATION Gradle runs on all major operating systems and requires only a Java Development Kit version 8 or higher to run. To check, run java -version on your command prompt. Then you can go to gradle.org to download the binary-only following the version that you want to use. After the download is completed, you can extract it at any folder. Then go to Control Panel -&gt; System and Security -&gt; System -&gt; Advanced system setting -&gt; Environment Variables. Then create a GRADLE_HOME with value is the path to your gradle folder. Then go to Path in System Variables –&gt; Choose New –&gt; Browse –&gt; go to the folder bin in your gradle folder. Finally, you can open cmd and use command gradle --version to check your gradle installation. You would see the result as below: C:\Users\bono_&gt;gradle --version ------------------------------------------------------------ Gradle 6.8.3 ------------------------------------------------------------ Build time: 2021-02-22 16:13:28 UTC Revision: 9e26b4a9ebb910eaa1b8da8ff8575e514bc61c78 Kotlin: 1.4.20 Groovy: 2.5.12 Ant: Apache Ant(TM) version 1.10.9 compiled on September 27 2020 JVM: 1.8.0_281 (Oracle Corporation 25.281-b09) OS: Windows 10 10.0 amd64 SOME GRADLE COMMANDS Gradle Commands Description gradle check Gradle will execute all checks (for plugins that we added Ex: checkstyle plugin) and tests in all subprojects, but we have to note that when we run this command gradle test will be executed first, if you want to run a specific test you can use gradle :&lt;projectName&gt;:check. Gradle will not show many logs except if there are some errors. This command is the same with mvn verify of Maven gradle test Gradle will execute all unit tests in all subprojects. This command is the same with mvn test of Maven. gradle :&lt;task name&gt; Execute a task that defined in the build.gradle. gradle :&lt;subproject&gt;:&lt;task Name&gt; Execute a task that defined in the build.gradle of a subProject. gradle assemble This builds whatever is the appropriate package for the project, for example a JAR for Java libraries or a WAR for traditional Java webapps, this command is the same with mvn package of Maven. gradle publishToMavenLocal this command will crate a package and a depencency of your project into local repository of Maven like the command mvn install. gradle build this command builds for the build task to designate assembling all outputs and running all checks. gradle run It is common for applications to be run with the run task, which assembles the application and executes some script or binary. gradle clean delete the contents of the build directory, this command is like mvn clean of Maven gradle tasks gives you a list of the main tasks of the selected project gradle bootRun Runs project as a Spring Boot application. gradle &lt;action&gt; -Dorg.gradle.logging.level=debug log out everything in the action gradle -q projects view the structure of project if project contains many subprojects Some Gradle commands: more information GRADLE BUILD PHASES Gradle build phases: Initialization: settings.gradle this file will loaded and readed first then the gradle will know to build single or multiple projects. more information. Configuration: In this step the build script (build.gradle) will be read and executed. Execution: In this step, if tasks names exist in the build script then they will be executed. GRADLE AND MAVEN COMPARISON Almost of us is familar with Maven, so I just put some main points about Maven there. Maven is used for project build automation using Java. It helps you map out how a particular software is built, as well as its different dependencies. It uses an XML file to describe the project that you are building, the dependencies of the software with regards to third-party modules and parts, the build order, as well as the needed plugins. There are pre-defined targets for tasks such as packaging and compiling. Maven will download libraries and plugins from the different repositories and then puts them all in a cache on your local machine. While predominantly used for Java projects, you can use it for Scala, Ruby, and C#, as well as a host of other languages. The following table describes the differences between the two tools: Basis Gradle Maven Based on Gradle is based on developing domain-specific language projects. Maven is based on developing pure Java language-based software. Configuration It uses a Groovy-based Domain-specific language(DSL) for creating project structure. It uses Extensible Markup Language(XML) for creating project structure. Focuses on Developing applications by adding new features to them. Developing applications in a given time limit. Performance It performs better than maven as it optimized for tracking only current running task. It does not create local temporary files during software creation hence uses large time. Java Compilation It avoids compilation. It is necessary to compile. Usability It is a new tool, which requires users to spend a lot of time to get used to it. This tool is a known tool for many users and is easily available. Customization This tool is highly customizable as it supports a variety of IDE’s. This tool serves a limited amount of developers and is not that customizable. Languages supported It supports software development in Java, C, C++, and Groovy. It supports software development in Scala, C#, and Ruby. More information Some corresponding commands between Maven and Gradle MAVEN GRADLE compile compile provided compileOnly, testCompileOnly (*) system   runtime runtime test testCompile, testRuntime CREATE A SAMPLE GRADLE PROJECT WITH SPRING BOOT You can go to this page to generate a gradle project with spring boot as the example in the image below." />
+<meta property="og:description" content="WHAT IS GRADLE? GRADLE INSTALLATION SOME GRADLE COMMANDS GRADLE BUILD PHASES GRADLE AND MAVEN COMPARISON CREATE A SAMPLE GRADLE PROJECT WITH SPRING BOOT WHAT IS GRADLE? Gradle is an open-source build automation tool that is designed to be flexible enough to build almost any type of software. Build automation is the process of automating the creation of a software build and the associated processes including: compiling computer source code into binary code, packaging binary code, and running automated tests. Gradle runs on the JVM and you must have a Java Development Kit (JDK) installed to use it. More information GRADLE INSTALLATION Gradle runs on all major operating systems and requires only a Java Development Kit version 8 or higher to run. To check, run java -version on your command prompt. Then you can go to gradle.org to download the binary-only following the version that you want to use. After the download is completed, you can extract it at any folder. Then go to Control Panel -&gt; System and Security -&gt; System -&gt; Advanced system setting -&gt; Environment Variables. Then create a GRADLE_HOME with value is the path to your gradle folder. Then go to Path in System Variables –&gt; Choose New –&gt; Browse –&gt; go to the folder bin in your gradle folder. Finally, you can open cmd and use command gradle --version to check your gradle installation. You would see the result as below: C:\Users\bono_&gt;gradle --version ------------------------------------------------------------ Gradle 6.8.3 ------------------------------------------------------------ Build time: 2021-02-22 16:13:28 UTC Revision: 9e26b4a9ebb910eaa1b8da8ff8575e514bc61c78 Kotlin: 1.4.20 Groovy: 2.5.12 Ant: Apache Ant(TM) version 1.10.9 compiled on September 27 2020 JVM: 1.8.0_281 (Oracle Corporation 25.281-b09) OS: Windows 10 10.0 amd64 SOME GRADLE COMMANDS Gradle Commands Description gradle check Gradle will execute all checks (for plugins that we added Ex: checkstyle plugin) and tests in all subprojects, but we have to note that when we run this command gradle test will be executed first, if you want to run a specific test you can use gradle :&lt;projectName&gt;:check. Gradle will not show many logs except if there are some errors. This command is the same with mvn verify of Maven gradle test Gradle will execute all unit tests in all subprojects. This command is the same with mvn test of Maven. gradle :&lt;task name&gt; Execute a task that defined in the build.gradle. gradle :&lt;subproject&gt;:&lt;task Name&gt; Execute a task that defined in the build.gradle of a subProject. gradle assemble This builds whatever is the appropriate package for the project, for example a JAR for Java libraries or a WAR for traditional Java webapps, this command is the same with mvn package of Maven. gradle publishToMavenLocal this command will crate a package and a depencency of your project into local repository of Maven like the command mvn install. gradle build this command builds for the build task to designate assembling all outputs and running all checks. gradle run It is common for applications to be run with the run task, which assembles the application and executes some script or binary. gradle clean delete the contents of the build directory, this command is like mvn clean of Maven gradle tasks gives you a list of the main tasks of the selected project gradle bootRun Runs project as a Spring Boot application. gradle &lt;action&gt; -Dorg.gradle.logging.level=debug log out everything in the action gradle -q projects view the structure of project if project contains many subprojects Some Gradle commands: more information GRADLE BUILD PHASES Gradle build phases: Initialization: settings.gradle this file will loaded and readed first then the gradle will know to build single or multiple projects. more information. Configuration: In this step the build script (build.gradle) will be read and executed. Execution: In this step, if tasks names exist in the build script then they will be executed. GRADLE AND MAVEN COMPARISON Almost of us is familar with Maven, so I just put some main points about Maven there. Maven is used for project build automation using Java. It helps you map out how a particular software is built, as well as its different dependencies. It uses an XML file to describe the project that you are building, the dependencies of the software with regards to third-party modules and parts, the build order, as well as the needed plugins. There are pre-defined targets for tasks such as packaging and compiling. Maven will download libraries and plugins from the different repositories and then puts them all in a cache on your local machine. While predominantly used for Java projects, you can use it for Scala, Ruby, and C#, as well as a host of other languages. The following table describes the differences between the two tools: Basis Gradle Maven Based on Gradle is based on developing domain-specific language projects. Maven is based on developing pure Java language-based software. Configuration It uses a Groovy-based Domain-specific language(DSL) for creating project structure. It uses Extensible Markup Language(XML) for creating project structure. Focuses on Developing applications by adding new features to them. Developing applications in a given time limit. Performance It performs better than maven as it optimized for tracking only current running task. It does not create local temporary files during software creation hence uses large time. Java Compilation It avoids compilation. It is necessary to compile. Usability It is a new tool, which requires users to spend a lot of time to get used to it. This tool is a known tool for many users and is easily available. Customization This tool is highly customizable as it supports a variety of IDE’s. This tool serves a limited amount of developers and is not that customizable. Languages supported It supports software development in Java, C, C++, and Groovy. It supports software development in Scala, C#, and Ruby. More information Some corresponding commands between Maven and Gradle MAVEN GRADLE compile compile provided compileOnly, testCompileOnly (*) system   runtime runtime test testCompile, testRuntime CREATE A SAMPLE GRADLE PROJECT WITH SPRING BOOT You can go to this page to generate a gradle project with spring boot as the example in the image below." />
+<link rel="canonical" href="/java/2021/09/18/java-springboot-gradle-basic-concepts.html" />
+<meta property="og:url" content="/java/2021/09/18/java-springboot-gradle-basic-concepts.html" />
+<meta property="og:site_name" content="StepByStep" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-09-18T00:00:00+07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Gradle With Basic Concepts" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","url":"/java/2021/09/18/java-springboot-gradle-basic-concepts.html","author":{"@type":"Person","name":"Duc Nguyen"},"headline":"Gradle With Basic Concepts","dateModified":"2021-09-18T00:00:00+07:00","datePublished":"2021-09-18T00:00:00+07:00","description":"WHAT IS GRADLE? GRADLE INSTALLATION SOME GRADLE COMMANDS GRADLE BUILD PHASES GRADLE AND MAVEN COMPARISON CREATE A SAMPLE GRADLE PROJECT WITH SPRING BOOT WHAT IS GRADLE? Gradle is an open-source build automation tool that is designed to be flexible enough to build almost any type of software. Build automation is the process of automating the creation of a software build and the associated processes including: compiling computer source code into binary code, packaging binary code, and running automated tests. Gradle runs on the JVM and you must have a Java Development Kit (JDK) installed to use it. More information GRADLE INSTALLATION Gradle runs on all major operating systems and requires only a Java Development Kit version 8 or higher to run. To check, run java -version on your command prompt. Then you can go to gradle.org to download the binary-only following the version that you want to use. After the download is completed, you can extract it at any folder. Then go to Control Panel -&gt; System and Security -&gt; System -&gt; Advanced system setting -&gt; Environment Variables. Then create a GRADLE_HOME with value is the path to your gradle folder. Then go to Path in System Variables –&gt; Choose New –&gt; Browse –&gt; go to the folder bin in your gradle folder. Finally, you can open cmd and use command gradle --version to check your gradle installation. You would see the result as below: C:\\Users\\bono_&gt;gradle --version ------------------------------------------------------------ Gradle 6.8.3 ------------------------------------------------------------ Build time: 2021-02-22 16:13:28 UTC Revision: 9e26b4a9ebb910eaa1b8da8ff8575e514bc61c78 Kotlin: 1.4.20 Groovy: 2.5.12 Ant: Apache Ant(TM) version 1.10.9 compiled on September 27 2020 JVM: 1.8.0_281 (Oracle Corporation 25.281-b09) OS: Windows 10 10.0 amd64 SOME GRADLE COMMANDS Gradle Commands Description gradle check Gradle will execute all checks (for plugins that we added Ex: checkstyle plugin) and tests in all subprojects, but we have to note that when we run this command gradle test will be executed first, if you want to run a specific test you can use gradle :&lt;projectName&gt;:check. Gradle will not show many logs except if there are some errors. This command is the same with mvn verify of Maven gradle test Gradle will execute all unit tests in all subprojects. This command is the same with mvn test of Maven. gradle :&lt;task name&gt; Execute a task that defined in the build.gradle. gradle :&lt;subproject&gt;:&lt;task Name&gt; Execute a task that defined in the build.gradle of a subProject. gradle assemble This builds whatever is the appropriate package for the project, for example a JAR for Java libraries or a WAR for traditional Java webapps, this command is the same with mvn package of Maven. gradle publishToMavenLocal this command will crate a package and a depencency of your project into local repository of Maven like the command mvn install. gradle build this command builds for the build task to designate assembling all outputs and running all checks. gradle run It is common for applications to be run with the run task, which assembles the application and executes some script or binary. gradle clean delete the contents of the build directory, this command is like mvn clean of Maven gradle tasks gives you a list of the main tasks of the selected project gradle bootRun Runs project as a Spring Boot application. gradle &lt;action&gt; -Dorg.gradle.logging.level=debug log out everything in the action gradle -q projects view the structure of project if project contains many subprojects Some Gradle commands: more information GRADLE BUILD PHASES Gradle build phases: Initialization: settings.gradle this file will loaded and readed first then the gradle will know to build single or multiple projects. more information. Configuration: In this step the build script (build.gradle) will be read and executed. Execution: In this step, if tasks names exist in the build script then they will be executed. GRADLE AND MAVEN COMPARISON Almost of us is familar with Maven, so I just put some main points about Maven there. Maven is used for project build automation using Java. It helps you map out how a particular software is built, as well as its different dependencies. It uses an XML file to describe the project that you are building, the dependencies of the software with regards to third-party modules and parts, the build order, as well as the needed plugins. There are pre-defined targets for tasks such as packaging and compiling. Maven will download libraries and plugins from the different repositories and then puts them all in a cache on your local machine. While predominantly used for Java projects, you can use it for Scala, Ruby, and C#, as well as a host of other languages. The following table describes the differences between the two tools: Basis Gradle Maven Based on Gradle is based on developing domain-specific language projects. Maven is based on developing pure Java language-based software. Configuration It uses a Groovy-based Domain-specific language(DSL) for creating project structure. It uses Extensible Markup Language(XML) for creating project structure. Focuses on Developing applications by adding new features to them. Developing applications in a given time limit. Performance It performs better than maven as it optimized for tracking only current running task. It does not create local temporary files during software creation hence uses large time. Java Compilation It avoids compilation. It is necessary to compile. Usability It is a new tool, which requires users to spend a lot of time to get used to it. This tool is a known tool for many users and is easily available. Customization This tool is highly customizable as it supports a variety of IDE’s. This tool serves a limited amount of developers and is not that customizable. Languages supported It supports software development in Java, C, C++, and Groovy. It supports software development in Scala, C#, and Ruby. More information Some corresponding commands between Maven and Gradle MAVEN GRADLE compile compile provided compileOnly, testCompileOnly (*) system   runtime runtime test testCompile, testRuntime CREATE A SAMPLE GRADLE PROJECT WITH SPRING BOOT You can go to this page to generate a gradle project with spring boot as the example in the image below.","mainEntityOfPage":{"@type":"WebPage","@id":"/java/2021/09/18/java-springboot-gradle-basic-concepts.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="StepByStep" /><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NZ8G5007GK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-NZ8G5007GK');
+</script></head><body>
+  <div class="container-flush">
+    <div class="row"><!-- navigation bar -->
+<div class="col-lg-12">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" role="banner"><a class="navbar-brand site-title" rel="author" href="/">StepByStep</a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="nav navbar-nav"><li class="nav-item active">
+          <a class="nav-link" href="/about">About</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/">Java</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/docker">Docker</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/data">Data</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/ci-cd">CI-CD</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/python">Python</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/fe">FE</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/others">Others</a>
+        </li></ul>
+    </div>
+
+    <!-- Html Elements for Search -->
+    <div id="search-container" class="btn-group">
+      <input type="text" id="search-input" placeholder="search...">
+      <button id="clear">clear</button>
+      <ul id="results-container"></ul>
+    </div>
+
+    <!-- Script pointing to search-script.js -->
+    <script src="/java-scripts/search-script.js" type="text/javascript"></script>
+
+    <!-- Configuration -->
+    <script>
+      SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('results-container'),
+        json: '/search.json'
+      })
+    </script>
+
+    <!-- search clear -->
+    <script>
+      window.addEventListener('load', () => {
+        const button = document.querySelector('#clear');
+        button.addEventListener('click', () => {
+          document.querySelector('#search-input').value = "";
+          document.querySelector('#results-container').innerHTML = "";
+        });
+      });
+    </script>
+  </nav>
+</div></div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+  <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+    <header class="post-header">
+      <h1 class="post-title p-name" itemprop="name headline">Gradle With Basic Concepts</h1>
+      <p class="post-meta">
+        <time class="dt-published" datetime="2021-09-18T00:00:00+07:00" itemprop="datePublished">Sep 18, 2021
+        </time></p>
+    </header>
+  
+    <div class="post-content e-content" itemprop="articleBody">
+      <ul id="markdown-toc">
+  <li><a href="#what-is-gradle" id="markdown-toc-what-is-gradle">WHAT IS GRADLE?</a></li>
+  <li><a href="#gradle-installation" id="markdown-toc-gradle-installation">GRADLE INSTALLATION</a></li>
+  <li><a href="#some-gradle-commands" id="markdown-toc-some-gradle-commands">SOME GRADLE COMMANDS</a></li>
+  <li><a href="#gradle-build-phases" id="markdown-toc-gradle-build-phases">GRADLE BUILD PHASES</a></li>
+  <li><a href="#gradle-and-maven-comparison" id="markdown-toc-gradle-and-maven-comparison">GRADLE AND MAVEN COMPARISON</a></li>
+  <li><a href="#create-a-sample-gradle-project-with-spring-boot" id="markdown-toc-create-a-sample-gradle-project-with-spring-boot">CREATE A SAMPLE GRADLE PROJECT WITH SPRING BOOT</a></li>
+</ul>
+
+<h2 id="what-is-gradle">WHAT IS GRADLE?</h2>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Gradle</code> is an <code class="language-plaintext highlighter-rouge">open-source build automation</code> tool that is designed to be flexible enough to build almost any type of software.</li>
+  <li><code class="language-plaintext highlighter-rouge">Build automation</code> is the process of automating the creation of a software build and the associated processes including: <code class="language-plaintext highlighter-rouge">compiling computer source code into binary code</code>, <code class="language-plaintext highlighter-rouge">packaging binary code</code>, and <code class="language-plaintext highlighter-rouge">running automated tests</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">Gradle</code> runs on the JVM and you <code class="language-plaintext highlighter-rouge">must have a Java Development Kit (JDK) installed</code> to use it.</li>
+  <li><a href="https://docs.gradle.org/current/userguide/what_is_gradle.html">More information</a></li>
+</ul>
+
+<h2 id="gradle-installation">GRADLE INSTALLATION</h2>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Gradle</code> runs on all major operating systems and requires only a <code class="language-plaintext highlighter-rouge">Java Development Kit version 8 or higher</code> to run. To check, run <code class="language-plaintext highlighter-rouge">java -version</code> on your <code class="language-plaintext highlighter-rouge">command prompt</code>.</li>
+  <li>Then you can go to <a href="https://gradle.org/releases/">gradle.org</a> to download the <code class="language-plaintext highlighter-rouge">binary-only</code> following the version that you want to use.</li>
+  <li>After the download is completed, you can extract it at any folder. Then go to <code class="language-plaintext highlighter-rouge">Control Panel</code> -&gt; <code class="language-plaintext highlighter-rouge">System and Security</code> -&gt; <code class="language-plaintext highlighter-rouge">System</code> -&gt; <code class="language-plaintext highlighter-rouge">Advanced system setting</code> -&gt; <code class="language-plaintext highlighter-rouge">Environment Variables</code>. Then create a <code class="language-plaintext highlighter-rouge">GRADLE_HOME</code> with value is the path to your gradle folder.</li>
+</ul>
+
+<p><a href="/assets/images/spring-boot-gradle-GRADLE_HOME.JPG"><img src="/assets/images/spring-boot-gradle-GRADLE_HOME.JPG" alt="Setting GRADLE_HOME" title="setting GRADLE_HOME" /></a></p>
+
+<ul>
+  <li>Then go to <code class="language-plaintext highlighter-rouge">Path</code> in <code class="language-plaintext highlighter-rouge">System Variables</code> –&gt; Choose <code class="language-plaintext highlighter-rouge">New</code> –&gt; <code class="language-plaintext highlighter-rouge">Browse</code> –&gt; go to the folder <code class="language-plaintext highlighter-rouge">bin</code> in your <code class="language-plaintext highlighter-rouge">gradle folder</code>.</li>
+</ul>
+
+<p><a href="/assets/images/spring-boot-gradle-path-setting.JPG"><img src="/assets/images/spring-boot-gradle-path-setting.JPG" alt="Setting Gradle Path Variable" title="Setting Gradle Path Variable" /></a></p>
+
+<ul>
+  <li>Finally, you can open <code class="language-plaintext highlighter-rouge">cmd</code> and use command <code class="language-plaintext highlighter-rouge">gradle --version</code> to check your gradle installation. You would see the result as below:</li>
+</ul>
+
+<pre><code class="language-cmd">
+C:\Users\bono_&gt;gradle --version
+
+------------------------------------------------------------
+Gradle 6.8.3
+------------------------------------------------------------
+
+Build time:   2021-02-22 16:13:28 UTC
+Revision:     9e26b4a9ebb910eaa1b8da8ff8575e514bc61c78
+
+Kotlin:       1.4.20
+Groovy:       2.5.12
+Ant:          Apache Ant(TM) version 1.10.9 compiled on September 27 2020
+JVM:          1.8.0_281 (Oracle Corporation 25.281-b09)
+OS:           Windows 10 10.0 amd64
+
+</code></pre>
+
+<h2 id="some-gradle-commands">SOME GRADLE COMMANDS</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Gradle Commands</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">gradle check</code></td>
+      <td>Gradle will execute all checks (for plugins that we added Ex: checkstyle plugin) and tests in all subprojects, but we have to note that when we run this command <code class="language-plaintext highlighter-rouge">gradle test</code> will be executed first, if you want to run a specific test you can use <code class="language-plaintext highlighter-rouge">gradle :&lt;projectName&gt;:check</code>. Gradle will not show many logs except if there are some errors. This command is the same with <code class="language-plaintext highlighter-rouge">mvn verify</code> of <code class="language-plaintext highlighter-rouge">Maven</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">gradle test</code></td>
+      <td>Gradle will execute all unit tests in all subprojects. This command is the same with <code class="language-plaintext highlighter-rouge">mvn test</code> of <code class="language-plaintext highlighter-rouge">Maven</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">gradle :&lt;task name&gt;</code></td>
+      <td>Execute a task that defined in the <code class="language-plaintext highlighter-rouge">build.gradle</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">gradle :&lt;subproject&gt;:&lt;task Name&gt;</code></td>
+      <td>Execute a task that defined in the <code class="language-plaintext highlighter-rouge">build.gradle</code> of a <code class="language-plaintext highlighter-rouge">subProject</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">gradle assemble</code></td>
+      <td>This builds whatever is the appropriate package for the project, for example a JAR for Java libraries or a WAR for traditional Java webapps, this command is the same with <code class="language-plaintext highlighter-rouge">mvn package</code> of <code class="language-plaintext highlighter-rouge">Maven</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">gradle publishToMavenLocal</code></td>
+      <td>this command will crate a package and a depencency of your project into local repository of Maven like the command <code class="language-plaintext highlighter-rouge">mvn  install</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">gradle build</code></td>
+      <td>this command builds for the build task to designate assembling all outputs and running all checks.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">gradle run</code></td>
+      <td>It is common for applications to be run with the run task, which assembles the application and executes some script or binary.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">gradle clean</code></td>
+      <td>delete the contents of the build directory, this command is like <code class="language-plaintext highlighter-rouge">mvn clean</code> of <code class="language-plaintext highlighter-rouge">Maven</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">gradle tasks</code></td>
+      <td>gives you a list of the main tasks of the selected project</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">gradle bootRun</code></td>
+      <td>Runs project as a Spring Boot application.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">gradle &lt;action&gt; -Dorg.gradle.logging.level=debug</code></td>
+      <td>log out everything in the action</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">gradle -q projects</code></td>
+      <td>view the structure of project if project contains many subprojects</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>Some Gradle commands: <a href="https://docs.gradle.org/current/userguide/command_line_interface.html">more information</a></li>
+</ul>
+
+<h2 id="gradle-build-phases">GRADLE BUILD PHASES</h2>
+
+<ul>
+  <li>Gradle build phases:
+    <ul>
+      <li>
+        <p>Initialization: <code class="language-plaintext highlighter-rouge">settings.gradle</code> this file will loaded and readed first then the gradle will know to build single or multiple projects. <a href="https://docs.gradle.org/current/userguide/build_lifecycle.html#sec:initialization">more information</a>.</p>
+      </li>
+      <li>
+        <p>Configuration: In this step the build script (<strong>build.gradle</strong>) will be read and executed.</p>
+      </li>
+      <li>
+        <p>Execution: In this step, if tasks names exist in the build script then they will be executed.</p>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="gradle-and-maven-comparison">GRADLE AND MAVEN COMPARISON</h2>
+
+<blockquote>
+  <p>Almost of us is familar with <code class="language-plaintext highlighter-rouge">Maven</code>, so I just put some main points about <code class="language-plaintext highlighter-rouge">Maven</code> there.</p>
+</blockquote>
+
+<ul>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Maven</code> is used for <code class="language-plaintext highlighter-rouge">project build automation using Java</code>. It helps you map out how a particular software is built, as well as its different dependencies. It uses <code class="language-plaintext highlighter-rouge">an XML file</code> to describe the project that you are building, the dependencies of the software with regards to third-party modules and parts, the build order, as well as the needed plugins. There are pre-defined targets for tasks such as packaging and compiling.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Maven</code> will download libraries and plugins from the different repositories and then puts them all in a cache on your local machine. While predominantly used for Java projects, you can use it for Scala, Ruby, and C#, as well as a host of other languages.</p>
+  </li>
+  <li>
+    <p>The following table describes the differences between the two tools:</p>
+  </li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>Basis</th>
+      <th>Gradle</th>
+      <th>Maven</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Based on</td>
+      <td>Gradle is based on developing domain-specific language projects.</td>
+      <td>Maven is based on developing pure Java language-based software.</td>
+    </tr>
+    <tr>
+      <td>Configuration</td>
+      <td>It uses a Groovy-based Domain-specific language(DSL) for creating project structure.</td>
+      <td>It uses Extensible Markup Language(XML) for creating project structure.</td>
+    </tr>
+    <tr>
+      <td>Focuses on</td>
+      <td>Developing applications by adding new features to them.</td>
+      <td>Developing applications in a given time limit.</td>
+    </tr>
+    <tr>
+      <td>Performance</td>
+      <td>It performs better than maven as it optimized for tracking only current running task.</td>
+      <td>It does not create local temporary files during software creation hence uses large time.</td>
+    </tr>
+    <tr>
+      <td>Java Compilation</td>
+      <td>It avoids compilation.</td>
+      <td>It is necessary to compile.</td>
+    </tr>
+    <tr>
+      <td>Usability</td>
+      <td>It is a new tool, which requires users to spend a lot of time to get used to it.</td>
+      <td>This tool is a known tool for many users and is easily available.</td>
+    </tr>
+    <tr>
+      <td>Customization</td>
+      <td>This tool is highly customizable as it supports a variety of IDE’s.</td>
+      <td>This tool serves a limited amount of developers and is not that customizable.</td>
+    </tr>
+    <tr>
+      <td>Languages supported</td>
+      <td>It supports software development in Java, C, C++, and Groovy.</td>
+      <td>It supports software development in Scala, C#, and Ruby.</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>
+    <p><a href="https://www.geeksforgeeks.org/difference-between-gradle-and-maven/">More information</a></p>
+  </li>
+  <li>
+    <p>Some corresponding commands between <code class="language-plaintext highlighter-rouge">Maven</code> and <code class="language-plaintext highlighter-rouge">Gradle</code></p>
+  </li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>MAVEN</th>
+      <th>GRADLE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">compile</code></td>
+      <td>compile</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">provided</code></td>
+      <td>compileOnly, testCompileOnly (*)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">system</code></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">runtime</code></td>
+      <td>runtime</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">test</code></td>
+      <td>testCompile, testRuntime</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="create-a-sample-gradle-project-with-spring-boot">CREATE A SAMPLE GRADLE PROJECT WITH SPRING BOOT</h2>
+
+<ul>
+  <li>You can go to <a href="https://start.spring.io/">this page</a> to generate a gradle project with spring boot as the example in the image below.</li>
+</ul>
+
+<p><a href="/assets/images/spring-boot-with-gradle-project.JPG"><img src="/assets/images/spring-boot-with-gradle-project.JPG" alt="create example gradle project with spring boot" title="create example gradle project with spring boot" /></a></p>
+
+    </div><a class="u-url" href="/java/2021/09/18/java-springboot-gradle-basic-concepts.html" hidden></a>
+  </article>
+  
+</div>
+
+
+    </div>
+  </div>
+  <script src="https://unpkg.com/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js"></script>
+  <script>addBackToTop()</script>
+</body>
+<footer><footer class="site-footer h-card">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <h2 class="footer-heading">StepByStep</h2>
+        <div>
+          <div>
+            <ul>
+              <li>Duc Nguyen</li><li><a class="u-email" href="mailto:minhducnguyen189@gmail.com">minhducnguyen189@gmail.com</a></li><li>&copy; 2021 Duc Nguyen. Powered by <a href="https://jekyllrb.com/">Jekyll</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <data class="u-url" href="/%20/"></data>
+        <div><ul class="social-media-list"><li><a href="https://github.com/minhducnguyen189"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">minhducnguyen189</span></a></li><li><a href="https://www.linkedin.com/in/duc-nguyen-03109b141"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#linkedin"></use></svg> <span class="username">duc-nguyen-03109b141</span></a></li></ul>
+</div>
+      </div>
+      <div class="col-md-4">
+        
+      </div>
+    </div>
+
+    <div class="row">
+      <p>Hi there! Let&#39;s explore some general knowleadges and briefly definitions  in programming. I hope that this website can help people saving time in learning, also give some motivations for those who have choice the developer path.</p>
+    </div>
+</footer></footer>
+</html>

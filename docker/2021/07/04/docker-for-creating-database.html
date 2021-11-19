@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- bootstrap library and JS, Jquery -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Docker For Creating Databases | StepByStep</title>
+<meta name="generator" content="Jekyll v4.2.1" />
+<meta property="og:title" content="Docker For Creating Databases" />
+<meta name="author" content="Duc Nguyen" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="As you know installing databases in our computers is taking many time and they are also complicated. So In this topic I will instroduce ways to create database by using Docker which will help you save more time. We will use docker-compose to create database containers MYSQL WITH DOCKER ORACLE WITH DOCKER STEP 1: Prepare Environment STEP 2: Execute The Build Script STEP 3: Create A Docker Compose File And Test Docker Image POSTGRESQL WITH DOCKER MONGODB WITH DOCKER MYSQL WITH DOCKER Let’s create a folder with anyname you like as mysql docker and in this folder we will create a folder name mysql-data and a file docker-compose.yml and put scripts as belows: version: &#39;3.7&#39; services: mysql_db_container: # using latest image mysql from dockerHub image: mysql:latest # container name: check by command: docker container ls container_name: mysql_container command: --default-authentication-plugin=mysql_native_password # default username is root environment: MYSQL_ROOT_PASSWORD: password MYSQL_DATABASE: sys # map port between real machine and container ports: - 3306:3306 # map data between real machine and container # which will help us avoid lost data when container is down volumes: - ./mysql-data:/var/lib/mysql:rw volumes: mysql-data: Save the docker-compose.yml and open terminal and use commands docker-compose up -d to start the container and docker-compose down to stop the container. After your mysql DB has started you can use these conection information to connect to your DB Field Name Value USERNAME root PASSWORD defined in docker-compose file: password PORT defined docker-compose file, default 3306 HOST localhost ORACLE WITH DOCKER We don’t have many oracle database image on DockerHub so you can use my oracle image on my dockerhub by command docker pull minhducnguyen189/oracle-xe-18-4:latest. Or you will create an docker image for yourself to use. STEP 1: Prepare Environment You should clone this repo here Then you need access oracle page to download the installation file. Note, you have to download the file used for Linux x64 If you are using Windows, you should install Git and use Git Bash to execute the script. STEP 2: Execute The Build Script Let’s copy your oracle database installation file into the source repo of step 1 following this path docker-images\OracleDatabase\SingleInstance\dockerfiles\&lt;your oracle database xe version&gt;\ Now let go to this path of source repo docker-images\OracleDatabase\SingleInstance\dockerfiles. Then open the Git Bash and execute the build script with command below ./buildContainerImage.sh -v 18.4.0 -t &lt;oracle image name (Ex: oracle-xe)&gt; -x -i Ex: ./buildContainerImage.sh -v 18.4.0 -t oracle-xe -x -i You can view more configuration here Note that when the console show the message below, you need to wait for 5 minutes or more. So, let’s patient. #8 215.0 #8 215.0 Complete! #8 215.2 Loaded plugins: ovl When you see this message in the console. So everything has done! #8 1174.5 Complete! #8 DONE 1179.2s #9 exporting to image #9 sha256:e8c613e07b0b7ff33893b694f7759a10d42e180f2b4dc349fb57dc6b71dcab00 #9 exporting layers #9 exporting layers 129.3s done #9 writing image sha256:14716a3a18ce456d8ae8062ca43ebb5ea180fad97a4dfef830a164be5c70d363 0.0s done #9 naming to docker.io/library/oracle-xe #9 naming to docker.io/library/oracle-xe 0.0s done #9 DONE 129.4s Then you can open terminal and use command docker images to check your oracle image has created or not STEP 3: Create A Docker Compose File And Test Docker Image Let’s create a folder with anyname you like as oracle docker and in this folder we will create 2 folders name oradata and setup. Then we create a file docker-compose.yml and put scripts as belows: version: &#39;3.7&#39; services: database: # oracle database image from DockerHub image: oracle-xe # container name container_name: oracle_database environment: # Oracle password for SYS, SYSTEM and PDBADMIN accounts ORACLE_PWD: password volumes: # mapping data of container to real machine - ./oradata:/opt/oracle/oradata # mapping db scripts to container if we have - ./startup:/opt/oracle/scripts/startup ports: - 1521:1521 volumes: oradata: startup: Then use command docker-compose up to start your container. You should note the the first time starting DB will make many time. After your orcal DB has started, you can use these conection information to connect to your DB Field Name Value DATABASE (Service Name) XEPDB1 USERNAME sys PASSWORD defined docker-compose file, default password) PORT defined docker-compose file, default 1521 HOST localhost ROLE SYSDBA to access the container you can use this command docker exec -it oracle_database /bin/bash POSTGRESQL WITH DOCKER Let’s create a folder with anyname you like as postgres docker and in this folder we will create a folder name data and a file docker-compose.yml and put scripts as belows: version: &#39;3.7&#39; services: db: image: postgres container_name: postgres_database restart: always environment: POSTGRES_USER: user POSTGRES_PASSWORD: password volumes: - ./data:/var/lib/postgresql/data ports: - 5432:5432 volumes: data: After your prosgres database has started you can use these conection information to connect to your DB Field Name Value USERNAME user PASSWORD defined in docker-compose file: password PORT defined docker-compose file, default 27017 HOST localhost MONGODB WITH DOCKER Let’s create a folder with anyname you like as mongo docker and in this folder we will create a folder name data and a file docker-compose.yml and put scripts as belows: version: &#39;3.7&#39; services: mongo: # use mongo image from dockerhub image: mongo # restart if service is failed restart: always container_name: mongodb environment: MONGO_INITDB_ROOT_USERNAME: root MONGO_INITDB_ROOT_PASSWORD: example ports: - 27017:27017 # sync data from container to real machine volumes: - ./data:/data/db mongo-express: # use image from dockerhub image: mongo-express container_name: mongo-express environment: ME_CONFIG_MONGODB_ADMINUSERNAME: root ME_CONFIG_MONGODB_ADMINPASSWORD: example ME_CONFIG_MONGODB_SERVER: mongodb # restart if service is failed restart: always depends_on: - mongo ports: - 8081:8081 volumes: data: After your mongodb has started you can use these conection information to connect to your DB Field Name Value USERNAME root PASSWORD defined in docker-compose file: example PORT defined docker-compose file, default 27017 HOST localhost Note that: everytime you start you container, it will create an anonymous volume. So you should delete it after you shut down your container by command docker volume rm &lt;volume name&gt; -f." />
+<meta property="og:description" content="As you know installing databases in our computers is taking many time and they are also complicated. So In this topic I will instroduce ways to create database by using Docker which will help you save more time. We will use docker-compose to create database containers MYSQL WITH DOCKER ORACLE WITH DOCKER STEP 1: Prepare Environment STEP 2: Execute The Build Script STEP 3: Create A Docker Compose File And Test Docker Image POSTGRESQL WITH DOCKER MONGODB WITH DOCKER MYSQL WITH DOCKER Let’s create a folder with anyname you like as mysql docker and in this folder we will create a folder name mysql-data and a file docker-compose.yml and put scripts as belows: version: &#39;3.7&#39; services: mysql_db_container: # using latest image mysql from dockerHub image: mysql:latest # container name: check by command: docker container ls container_name: mysql_container command: --default-authentication-plugin=mysql_native_password # default username is root environment: MYSQL_ROOT_PASSWORD: password MYSQL_DATABASE: sys # map port between real machine and container ports: - 3306:3306 # map data between real machine and container # which will help us avoid lost data when container is down volumes: - ./mysql-data:/var/lib/mysql:rw volumes: mysql-data: Save the docker-compose.yml and open terminal and use commands docker-compose up -d to start the container and docker-compose down to stop the container. After your mysql DB has started you can use these conection information to connect to your DB Field Name Value USERNAME root PASSWORD defined in docker-compose file: password PORT defined docker-compose file, default 3306 HOST localhost ORACLE WITH DOCKER We don’t have many oracle database image on DockerHub so you can use my oracle image on my dockerhub by command docker pull minhducnguyen189/oracle-xe-18-4:latest. Or you will create an docker image for yourself to use. STEP 1: Prepare Environment You should clone this repo here Then you need access oracle page to download the installation file. Note, you have to download the file used for Linux x64 If you are using Windows, you should install Git and use Git Bash to execute the script. STEP 2: Execute The Build Script Let’s copy your oracle database installation file into the source repo of step 1 following this path docker-images\OracleDatabase\SingleInstance\dockerfiles\&lt;your oracle database xe version&gt;\ Now let go to this path of source repo docker-images\OracleDatabase\SingleInstance\dockerfiles. Then open the Git Bash and execute the build script with command below ./buildContainerImage.sh -v 18.4.0 -t &lt;oracle image name (Ex: oracle-xe)&gt; -x -i Ex: ./buildContainerImage.sh -v 18.4.0 -t oracle-xe -x -i You can view more configuration here Note that when the console show the message below, you need to wait for 5 minutes or more. So, let’s patient. #8 215.0 #8 215.0 Complete! #8 215.2 Loaded plugins: ovl When you see this message in the console. So everything has done! #8 1174.5 Complete! #8 DONE 1179.2s #9 exporting to image #9 sha256:e8c613e07b0b7ff33893b694f7759a10d42e180f2b4dc349fb57dc6b71dcab00 #9 exporting layers #9 exporting layers 129.3s done #9 writing image sha256:14716a3a18ce456d8ae8062ca43ebb5ea180fad97a4dfef830a164be5c70d363 0.0s done #9 naming to docker.io/library/oracle-xe #9 naming to docker.io/library/oracle-xe 0.0s done #9 DONE 129.4s Then you can open terminal and use command docker images to check your oracle image has created or not STEP 3: Create A Docker Compose File And Test Docker Image Let’s create a folder with anyname you like as oracle docker and in this folder we will create 2 folders name oradata and setup. Then we create a file docker-compose.yml and put scripts as belows: version: &#39;3.7&#39; services: database: # oracle database image from DockerHub image: oracle-xe # container name container_name: oracle_database environment: # Oracle password for SYS, SYSTEM and PDBADMIN accounts ORACLE_PWD: password volumes: # mapping data of container to real machine - ./oradata:/opt/oracle/oradata # mapping db scripts to container if we have - ./startup:/opt/oracle/scripts/startup ports: - 1521:1521 volumes: oradata: startup: Then use command docker-compose up to start your container. You should note the the first time starting DB will make many time. After your orcal DB has started, you can use these conection information to connect to your DB Field Name Value DATABASE (Service Name) XEPDB1 USERNAME sys PASSWORD defined docker-compose file, default password) PORT defined docker-compose file, default 1521 HOST localhost ROLE SYSDBA to access the container you can use this command docker exec -it oracle_database /bin/bash POSTGRESQL WITH DOCKER Let’s create a folder with anyname you like as postgres docker and in this folder we will create a folder name data and a file docker-compose.yml and put scripts as belows: version: &#39;3.7&#39; services: db: image: postgres container_name: postgres_database restart: always environment: POSTGRES_USER: user POSTGRES_PASSWORD: password volumes: - ./data:/var/lib/postgresql/data ports: - 5432:5432 volumes: data: After your prosgres database has started you can use these conection information to connect to your DB Field Name Value USERNAME user PASSWORD defined in docker-compose file: password PORT defined docker-compose file, default 27017 HOST localhost MONGODB WITH DOCKER Let’s create a folder with anyname you like as mongo docker and in this folder we will create a folder name data and a file docker-compose.yml and put scripts as belows: version: &#39;3.7&#39; services: mongo: # use mongo image from dockerhub image: mongo # restart if service is failed restart: always container_name: mongodb environment: MONGO_INITDB_ROOT_USERNAME: root MONGO_INITDB_ROOT_PASSWORD: example ports: - 27017:27017 # sync data from container to real machine volumes: - ./data:/data/db mongo-express: # use image from dockerhub image: mongo-express container_name: mongo-express environment: ME_CONFIG_MONGODB_ADMINUSERNAME: root ME_CONFIG_MONGODB_ADMINPASSWORD: example ME_CONFIG_MONGODB_SERVER: mongodb # restart if service is failed restart: always depends_on: - mongo ports: - 8081:8081 volumes: data: After your mongodb has started you can use these conection information to connect to your DB Field Name Value USERNAME root PASSWORD defined in docker-compose file: example PORT defined docker-compose file, default 27017 HOST localhost Note that: everytime you start you container, it will create an anonymous volume. So you should delete it after you shut down your container by command docker volume rm &lt;volume name&gt; -f." />
+<link rel="canonical" href="/docker/2021/07/04/docker-for-creating-database.html" />
+<meta property="og:url" content="/docker/2021/07/04/docker-for-creating-database.html" />
+<meta property="og:site_name" content="StepByStep" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-07-04T08:15:47+07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Docker For Creating Databases" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","url":"/docker/2021/07/04/docker-for-creating-database.html","author":{"@type":"Person","name":"Duc Nguyen"},"headline":"Docker For Creating Databases","dateModified":"2021-07-04T08:15:47+07:00","datePublished":"2021-07-04T08:15:47+07:00","description":"As you know installing databases in our computers is taking many time and they are also complicated. So In this topic I will instroduce ways to create database by using Docker which will help you save more time. We will use docker-compose to create database containers MYSQL WITH DOCKER ORACLE WITH DOCKER STEP 1: Prepare Environment STEP 2: Execute The Build Script STEP 3: Create A Docker Compose File And Test Docker Image POSTGRESQL WITH DOCKER MONGODB WITH DOCKER MYSQL WITH DOCKER Let’s create a folder with anyname you like as mysql docker and in this folder we will create a folder name mysql-data and a file docker-compose.yml and put scripts as belows: version: &#39;3.7&#39; services: mysql_db_container: # using latest image mysql from dockerHub image: mysql:latest # container name: check by command: docker container ls container_name: mysql_container command: --default-authentication-plugin=mysql_native_password # default username is root environment: MYSQL_ROOT_PASSWORD: password MYSQL_DATABASE: sys # map port between real machine and container ports: - 3306:3306 # map data between real machine and container # which will help us avoid lost data when container is down volumes: - ./mysql-data:/var/lib/mysql:rw volumes: mysql-data: Save the docker-compose.yml and open terminal and use commands docker-compose up -d to start the container and docker-compose down to stop the container. After your mysql DB has started you can use these conection information to connect to your DB Field Name Value USERNAME root PASSWORD defined in docker-compose file: password PORT defined docker-compose file, default 3306 HOST localhost ORACLE WITH DOCKER We don’t have many oracle database image on DockerHub so you can use my oracle image on my dockerhub by command docker pull minhducnguyen189/oracle-xe-18-4:latest. Or you will create an docker image for yourself to use. STEP 1: Prepare Environment You should clone this repo here Then you need access oracle page to download the installation file. Note, you have to download the file used for Linux x64 If you are using Windows, you should install Git and use Git Bash to execute the script. STEP 2: Execute The Build Script Let’s copy your oracle database installation file into the source repo of step 1 following this path docker-images\\OracleDatabase\\SingleInstance\\dockerfiles\\&lt;your oracle database xe version&gt;\\ Now let go to this path of source repo docker-images\\OracleDatabase\\SingleInstance\\dockerfiles. Then open the Git Bash and execute the build script with command below ./buildContainerImage.sh -v 18.4.0 -t &lt;oracle image name (Ex: oracle-xe)&gt; -x -i Ex: ./buildContainerImage.sh -v 18.4.0 -t oracle-xe -x -i You can view more configuration here Note that when the console show the message below, you need to wait for 5 minutes or more. So, let’s patient. #8 215.0 #8 215.0 Complete! #8 215.2 Loaded plugins: ovl When you see this message in the console. So everything has done! #8 1174.5 Complete! #8 DONE 1179.2s #9 exporting to image #9 sha256:e8c613e07b0b7ff33893b694f7759a10d42e180f2b4dc349fb57dc6b71dcab00 #9 exporting layers #9 exporting layers 129.3s done #9 writing image sha256:14716a3a18ce456d8ae8062ca43ebb5ea180fad97a4dfef830a164be5c70d363 0.0s done #9 naming to docker.io/library/oracle-xe #9 naming to docker.io/library/oracle-xe 0.0s done #9 DONE 129.4s Then you can open terminal and use command docker images to check your oracle image has created or not STEP 3: Create A Docker Compose File And Test Docker Image Let’s create a folder with anyname you like as oracle docker and in this folder we will create 2 folders name oradata and setup. Then we create a file docker-compose.yml and put scripts as belows: version: &#39;3.7&#39; services: database: # oracle database image from DockerHub image: oracle-xe # container name container_name: oracle_database environment: # Oracle password for SYS, SYSTEM and PDBADMIN accounts ORACLE_PWD: password volumes: # mapping data of container to real machine - ./oradata:/opt/oracle/oradata # mapping db scripts to container if we have - ./startup:/opt/oracle/scripts/startup ports: - 1521:1521 volumes: oradata: startup: Then use command docker-compose up to start your container. You should note the the first time starting DB will make many time. After your orcal DB has started, you can use these conection information to connect to your DB Field Name Value DATABASE (Service Name) XEPDB1 USERNAME sys PASSWORD defined docker-compose file, default password) PORT defined docker-compose file, default 1521 HOST localhost ROLE SYSDBA to access the container you can use this command docker exec -it oracle_database /bin/bash POSTGRESQL WITH DOCKER Let’s create a folder with anyname you like as postgres docker and in this folder we will create a folder name data and a file docker-compose.yml and put scripts as belows: version: &#39;3.7&#39; services: db: image: postgres container_name: postgres_database restart: always environment: POSTGRES_USER: user POSTGRES_PASSWORD: password volumes: - ./data:/var/lib/postgresql/data ports: - 5432:5432 volumes: data: After your prosgres database has started you can use these conection information to connect to your DB Field Name Value USERNAME user PASSWORD defined in docker-compose file: password PORT defined docker-compose file, default 27017 HOST localhost MONGODB WITH DOCKER Let’s create a folder with anyname you like as mongo docker and in this folder we will create a folder name data and a file docker-compose.yml and put scripts as belows: version: &#39;3.7&#39; services: mongo: # use mongo image from dockerhub image: mongo # restart if service is failed restart: always container_name: mongodb environment: MONGO_INITDB_ROOT_USERNAME: root MONGO_INITDB_ROOT_PASSWORD: example ports: - 27017:27017 # sync data from container to real machine volumes: - ./data:/data/db mongo-express: # use image from dockerhub image: mongo-express container_name: mongo-express environment: ME_CONFIG_MONGODB_ADMINUSERNAME: root ME_CONFIG_MONGODB_ADMINPASSWORD: example ME_CONFIG_MONGODB_SERVER: mongodb # restart if service is failed restart: always depends_on: - mongo ports: - 8081:8081 volumes: data: After your mongodb has started you can use these conection information to connect to your DB Field Name Value USERNAME root PASSWORD defined in docker-compose file: example PORT defined docker-compose file, default 27017 HOST localhost Note that: everytime you start you container, it will create an anonymous volume. So you should delete it after you shut down your container by command docker volume rm &lt;volume name&gt; -f.","mainEntityOfPage":{"@type":"WebPage","@id":"/docker/2021/07/04/docker-for-creating-database.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="StepByStep" /><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NZ8G5007GK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-NZ8G5007GK');
+</script></head><body>
+  <div class="container-flush">
+    <div class="row"><!-- navigation bar -->
+<div class="col-lg-12">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" role="banner"><a class="navbar-brand site-title" rel="author" href="/">StepByStep</a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="nav navbar-nav"><li class="nav-item active">
+          <a class="nav-link" href="/about">About</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/">Java</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/docker">Docker</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/data">Data</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/ci-cd">CI-CD</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/python">Python</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/fe">FE</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/others">Others</a>
+        </li></ul>
+    </div>
+
+    <!-- Html Elements for Search -->
+    <div id="search-container" class="btn-group">
+      <input type="text" id="search-input" placeholder="search...">
+      <button id="clear">clear</button>
+      <ul id="results-container"></ul>
+    </div>
+
+    <!-- Script pointing to search-script.js -->
+    <script src="/java-scripts/search-script.js" type="text/javascript"></script>
+
+    <!-- Configuration -->
+    <script>
+      SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('results-container'),
+        json: '/search.json'
+      })
+    </script>
+
+    <!-- search clear -->
+    <script>
+      window.addEventListener('load', () => {
+        const button = document.querySelector('#clear');
+        button.addEventListener('click', () => {
+          document.querySelector('#search-input').value = "";
+          document.querySelector('#results-container').innerHTML = "";
+        });
+      });
+    </script>
+  </nav>
+</div></div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+  <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+    <header class="post-header">
+      <h1 class="post-title p-name" itemprop="name headline">Docker For Creating Databases</h1>
+      <p class="post-meta">
+        <time class="dt-published" datetime="2021-07-04T08:15:47+07:00" itemprop="datePublished">Jul 4, 2021
+        </time></p>
+    </header>
+  
+    <div class="post-content e-content" itemprop="articleBody">
+      <blockquote>
+  <p>As you know installing databases in our computers is taking many time and they are also complicated. So In this topic I will instroduce ways to create database by using Docker which will help you save more time.</p>
+</blockquote>
+
+<blockquote>
+  <p>We will use docker-compose to create database containers</p>
+</blockquote>
+
+<ul id="markdown-toc">
+  <li><a href="#mysql-with-docker" id="markdown-toc-mysql-with-docker">MYSQL WITH DOCKER</a></li>
+  <li><a href="#oracle-with-docker" id="markdown-toc-oracle-with-docker">ORACLE WITH DOCKER</a>    <ul>
+      <li><a href="#step-1-prepare-environment" id="markdown-toc-step-1-prepare-environment">STEP 1: Prepare Environment</a></li>
+      <li><a href="#step-2-execute-the-build-script" id="markdown-toc-step-2-execute-the-build-script">STEP 2: Execute The Build Script</a></li>
+      <li><a href="#step-3-create-a-docker-compose-file-and-test-docker-image" id="markdown-toc-step-3-create-a-docker-compose-file-and-test-docker-image">STEP 3: Create A Docker Compose File And Test Docker Image</a></li>
+    </ul>
+  </li>
+  <li><a href="#postgresql-with-docker" id="markdown-toc-postgresql-with-docker">POSTGRESQL WITH DOCKER</a></li>
+  <li><a href="#mongodb-with-docker" id="markdown-toc-mongodb-with-docker">MONGODB WITH DOCKER</a></li>
+</ul>
+
+<h2 id="mysql-with-docker">MYSQL WITH DOCKER</h2>
+
+<ul>
+  <li>Let’s create a folder with anyname you like as <code class="language-plaintext highlighter-rouge">mysql docker</code> and in this folder we will create a folder name <code class="language-plaintext highlighter-rouge">mysql-data</code> and a file <code class="language-plaintext highlighter-rouge">docker-compose.yml</code> and put scripts as belows:</li>
+</ul>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="na">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">3.7'</span>
+
+    <span class="na">services</span><span class="pi">:</span>
+        <span class="na">mysql_db_container</span><span class="pi">:</span>
+            <span class="c1"># using latest image mysql from dockerHub</span>
+            <span class="na">image</span><span class="pi">:</span> <span class="s">mysql:latest</span>
+            <span class="c1"># container name: check by command: docker container ls</span>
+            <span class="na">container_name</span><span class="pi">:</span> <span class="s">mysql_container</span>
+            <span class="na">command</span><span class="pi">:</span> <span class="s">--default-authentication-plugin=mysql_native_password</span>
+            <span class="c1"># default username is root</span>
+            <span class="na">environment</span><span class="pi">:</span>
+                <span class="na">MYSQL_ROOT_PASSWORD</span><span class="pi">:</span> <span class="s">password</span>
+                <span class="na">MYSQL_DATABASE</span><span class="pi">:</span> <span class="s">sys</span>
+            <span class="c1"># map port between real machine and container    </span>
+            <span class="na">ports</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="s">3306:3306</span>
+            <span class="c1"># map data between real machine and container</span>
+            <span class="c1"># which will help us avoid lost data when container is down</span>
+            <span class="na">volumes</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="s">./mysql-data:/var/lib/mysql:rw</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+        <span class="na">mysql-data</span><span class="pi">:</span>
+</code></pre></div></div>
+<ul>
+  <li>
+    <p>Save the <code class="language-plaintext highlighter-rouge">docker-compose.yml</code> and open terminal and use commands <code class="language-plaintext highlighter-rouge">docker-compose up -d</code> to start the container and <code class="language-plaintext highlighter-rouge">docker-compose down</code> to stop the container.</p>
+  </li>
+  <li>
+    <p>After your mysql DB has started you can use these conection information to connect to your DB</p>
+  </li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>Field Name</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>USERNAME</td>
+      <td>root</td>
+    </tr>
+    <tr>
+      <td>PASSWORD</td>
+      <td>defined in docker-compose file: <code class="language-plaintext highlighter-rouge">password</code></td>
+    </tr>
+    <tr>
+      <td>PORT</td>
+      <td>defined docker-compose file, default <code class="language-plaintext highlighter-rouge">3306</code></td>
+    </tr>
+    <tr>
+      <td>HOST</td>
+      <td>localhost</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="oracle-with-docker">ORACLE WITH DOCKER</h2>
+
+<ul>
+  <li>We don’t have many oracle database image on <code class="language-plaintext highlighter-rouge">DockerHub</code> so you can use my oracle image on my dockerhub by command <code class="language-plaintext highlighter-rouge">docker pull minhducnguyen189/oracle-xe-18-4:latest</code>. Or you will create an docker image for yourself to use.</li>
+</ul>
+
+<blockquote>
+  <h3 id="step-1-prepare-environment">STEP 1: Prepare Environment</h3>
+</blockquote>
+
+<ul>
+  <li>You should clone this repo <a href="https://github.com/oracle/docker-images">here</a></li>
+  <li>
+    <p>Then you need access <a href="https://www.oracle.com/database/technologies/xe-downloads.html">oracle page</a> to download the installation file. Note, you have to download the file used for Linux x64</p>
+  </li>
+  <li>If you are using Windows, you should install <code class="language-plaintext highlighter-rouge">Git</code> and use <code class="language-plaintext highlighter-rouge">Git Bash</code> to execute the script.</li>
+</ul>
+
+<blockquote>
+  <h3 id="step-2-execute-the-build-script">STEP 2: Execute The Build Script</h3>
+</blockquote>
+
+<ul>
+  <li>Let’s copy your <code class="language-plaintext highlighter-rouge">oracle database installation file</code> into the source repo of step 1 following this path <code class="language-plaintext highlighter-rouge">docker-images\OracleDatabase\SingleInstance\dockerfiles\&lt;your oracle database xe version&gt;\</code></li>
+</ul>
+
+<p><a href="/assets/images/database/oracle-build-image.JPG"><img src="/assets/images/database/oracle-build-image.JPG" alt="place of oracle database installation file" title="place of oracle database installation file" /></a></p>
+
+<ul>
+  <li>
+    <p>Now let go to this path of source repo <code class="language-plaintext highlighter-rouge">docker-images\OracleDatabase\SingleInstance\dockerfiles</code>. Then open the <code class="language-plaintext highlighter-rouge">Git Bash</code> and execute the build script with command below</p>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">./buildContainerImage.sh -v 18.4.0 -t &lt;oracle image name (Ex: oracle-xe)&gt; -x -i</code></li>
+  <li>
+    <p>Ex: <code class="language-plaintext highlighter-rouge">./buildContainerImage.sh -v 18.4.0 -t oracle-xe -x -i</code></p>
+  </li>
+  <li>
+    <p>You can view <a href="https://github.com/oracle/docker-images/blob/main/OracleDatabase/SingleInstance/README.md">more configuration here</a></p>
+  </li>
+  <li>Note that when the console show the message below, you need to wait for 5 minutes or more. So, let’s patient.</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c">#8 215.0</span>
+  <span class="c">#8 215.0 Complete!</span>
+  <span class="c">#8 215.2 Loaded plugins: ovl</span>
+</code></pre></div></div>
+
+<ul>
+  <li>When you see this message in the console. So everything has done!</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c">#8 1174.5 Complete!</span>
+  <span class="c">#8 DONE 1179.2s</span>
+
+  <span class="c">#9 exporting to image</span>
+  <span class="c">#9 sha256:e8c613e07b0b7ff33893b694f7759a10d42e180f2b4dc349fb57dc6b71dcab00</span>
+  <span class="c">#9 exporting layers</span>
+  <span class="c">#9 exporting layers 129.3s done</span>
+  <span class="c">#9 writing image sha256:14716a3a18ce456d8ae8062ca43ebb5ea180fad97a4dfef830a164be5c70d363 0.0s done</span>
+  <span class="c">#9 naming to docker.io/library/oracle-xe</span>
+  <span class="c">#9 naming to docker.io/library/oracle-xe 0.0s done</span>
+  <span class="c">#9 DONE 129.4s</span>
+</code></pre></div></div>
+<ul>
+  <li>Then you can open terminal and use command <code class="language-plaintext highlighter-rouge">docker images</code> to check your oracle image has created or not</li>
+</ul>
+
+<p><a href="/assets/images/database/oracle-check-docker-images.JPG"><img src="/assets/images/database/oracle-check-docker-images.JPG" alt="check oracle database image" title="check oracle database image" /></a></p>
+
+<blockquote>
+  <h3 id="step-3-create-a-docker-compose-file-and-test-docker-image">STEP 3: Create A Docker Compose File And Test Docker Image</h3>
+</blockquote>
+
+<ul>
+  <li>Let’s create a folder with anyname you like as <code class="language-plaintext highlighter-rouge">oracle docker</code> and in this folder we will create 2 folders name <code class="language-plaintext highlighter-rouge">oradata</code> and <code class="language-plaintext highlighter-rouge">setup</code>. Then we create a file <code class="language-plaintext highlighter-rouge">docker-compose.yml</code> and put scripts as belows:</li>
+</ul>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">3.7'</span>
+
+<span class="na">services</span><span class="pi">:</span>
+  <span class="na">database</span><span class="pi">:</span>
+    <span class="c1"># oracle database image from DockerHub</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">oracle-xe</span>
+    <span class="c1"># container name</span>
+    <span class="na">container_name</span><span class="pi">:</span> <span class="s">oracle_database</span>
+    <span class="na">environment</span><span class="pi">:</span>
+      <span class="c1"># Oracle password for SYS, SYSTEM and PDBADMIN accounts</span>
+      <span class="na">ORACLE_PWD</span><span class="pi">:</span> <span class="s">password</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="c1"># mapping data of container to real machine</span>
+      <span class="pi">-</span> <span class="s">./oradata:/opt/oracle/oradata</span>
+      <span class="c1"># mapping db scripts to container if we have</span>
+      <span class="pi">-</span> <span class="s">./startup:/opt/oracle/scripts/startup</span>
+    <span class="na">ports</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">1521:1521</span>
+
+<span class="na">volumes</span><span class="pi">:</span>
+  <span class="na">oradata</span><span class="pi">:</span>
+  <span class="na">startup</span><span class="pi">:</span>
+</code></pre></div></div>
+<ul>
+  <li>
+    <p>Then use command <code class="language-plaintext highlighter-rouge">docker-compose up</code> to start your container.</p>
+  </li>
+  <li>
+    <p>You should note the the first time starting DB will make many time. After your orcal DB has started, you can use these conection information to connect to your DB</p>
+  </li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>Field Name</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>DATABASE (Service Name)</td>
+      <td>XEPDB1</td>
+    </tr>
+    <tr>
+      <td>USERNAME</td>
+      <td>sys</td>
+    </tr>
+    <tr>
+      <td>PASSWORD</td>
+      <td>defined docker-compose file, default <code class="language-plaintext highlighter-rouge">password</code>)</td>
+    </tr>
+    <tr>
+      <td>PORT</td>
+      <td>defined docker-compose file, default <code class="language-plaintext highlighter-rouge">1521</code></td>
+    </tr>
+    <tr>
+      <td>HOST</td>
+      <td>localhost</td>
+    </tr>
+    <tr>
+      <td>ROLE</td>
+      <td>SYSDBA</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>to access the container you can use this command</li>
+  <li><code class="language-plaintext highlighter-rouge">docker exec -it oracle_database /bin/bash</code></li>
+</ul>
+
+<h2 id="postgresql-with-docker">POSTGRESQL WITH DOCKER</h2>
+
+<ul>
+  <li>Let’s create a folder with anyname you like as <code class="language-plaintext highlighter-rouge">postgres docker</code> and in this folder we will create a folder name <code class="language-plaintext highlighter-rouge">data</code> and a file <code class="language-plaintext highlighter-rouge">docker-compose.yml</code> and put scripts as belows:</li>
+</ul>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">3.7'</span>
+
+<span class="na">services</span><span class="pi">:</span>
+
+  <span class="na">db</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">postgres</span>
+    <span class="na">container_name</span><span class="pi">:</span> <span class="s">postgres_database</span>
+    <span class="na">restart</span><span class="pi">:</span> <span class="s">always</span>
+    <span class="na">environment</span><span class="pi">:</span>
+      <span class="na">POSTGRES_USER</span><span class="pi">:</span> <span class="s">user</span>
+      <span class="na">POSTGRES_PASSWORD</span><span class="pi">:</span> <span class="s">password</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">./data:/var/lib/postgresql/data</span>
+    <span class="na">ports</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">5432:5432</span>
+
+<span class="na">volumes</span><span class="pi">:</span>
+  <span class="na">data</span><span class="pi">:</span>
+
+</code></pre></div></div>
+<ul>
+  <li>After your <code class="language-plaintext highlighter-rouge">prosgres database</code> has started you can use these conection information to connect to your DB</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>Field Name</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>USERNAME</td>
+      <td>user</td>
+    </tr>
+    <tr>
+      <td>PASSWORD</td>
+      <td>defined in docker-compose file: <code class="language-plaintext highlighter-rouge">password</code></td>
+    </tr>
+    <tr>
+      <td>PORT</td>
+      <td>defined docker-compose file, default <code class="language-plaintext highlighter-rouge">27017</code></td>
+    </tr>
+    <tr>
+      <td>HOST</td>
+      <td>localhost</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="mongodb-with-docker">MONGODB WITH DOCKER</h2>
+
+<ul>
+  <li>Let’s create a folder with anyname you like as <code class="language-plaintext highlighter-rouge">mongo docker</code> and in this folder we will create a folder name <code class="language-plaintext highlighter-rouge">data</code> and a file <code class="language-plaintext highlighter-rouge">docker-compose.yml</code> and put scripts as belows:</li>
+</ul>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="na">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">3.7'</span>
+
+<span class="na">services</span><span class="pi">:</span>
+
+  <span class="na">mongo</span><span class="pi">:</span>
+    <span class="c1"># use mongo image from dockerhub</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">mongo</span>
+    <span class="c1"># restart if service is failed</span>
+    <span class="na">restart</span><span class="pi">:</span> <span class="s">always</span>
+    <span class="na">container_name</span><span class="pi">:</span> <span class="s">mongodb</span>
+    <span class="na">environment</span><span class="pi">:</span>
+      <span class="na">MONGO_INITDB_ROOT_USERNAME</span><span class="pi">:</span> <span class="s">root</span>
+      <span class="na">MONGO_INITDB_ROOT_PASSWORD</span><span class="pi">:</span> <span class="s">example</span>
+    <span class="na">ports</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">27017:27017</span>
+    <span class="c1"># sync data from container to real machine</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">./data:/data/db</span>
+  
+  <span class="na">mongo-express</span><span class="pi">:</span>
+    <span class="c1"># use image from dockerhub</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">mongo-express</span>
+    <span class="na">container_name</span><span class="pi">:</span> <span class="s">mongo-express</span>
+    <span class="na">environment</span><span class="pi">:</span>
+      <span class="na">ME_CONFIG_MONGODB_ADMINUSERNAME</span><span class="pi">:</span> <span class="s">root</span>
+      <span class="na">ME_CONFIG_MONGODB_ADMINPASSWORD</span><span class="pi">:</span> <span class="s">example</span>
+      <span class="na">ME_CONFIG_MONGODB_SERVER</span><span class="pi">:</span> <span class="s">mongodb</span>
+    <span class="c1"># restart if service is failed</span>
+    <span class="na">restart</span><span class="pi">:</span> <span class="s">always</span>
+    <span class="na">depends_on</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">mongo</span>
+    <span class="na">ports</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">8081:8081</span>
+
+<span class="na">volumes</span><span class="pi">:</span>
+  <span class="na">data</span><span class="pi">:</span>
+
+</code></pre></div></div>
+
+<ul>
+  <li>After your mongodb has started you can use these conection information to connect to your DB</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>Field Name</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>USERNAME</td>
+      <td>root</td>
+    </tr>
+    <tr>
+      <td>PASSWORD</td>
+      <td>defined in docker-compose file: <code class="language-plaintext highlighter-rouge">example</code></td>
+    </tr>
+    <tr>
+      <td>PORT</td>
+      <td>defined docker-compose file, default <code class="language-plaintext highlighter-rouge">27017</code></td>
+    </tr>
+    <tr>
+      <td>HOST</td>
+      <td>localhost</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>Note that: everytime you start you container, it will create an anonymous volume. So you should delete it after you shut down your container by command <code class="language-plaintext highlighter-rouge">docker volume rm &lt;volume name&gt; -f</code>.</p>
+</blockquote>
+
+    </div><a class="u-url" href="/docker/2021/07/04/docker-for-creating-database.html" hidden></a>
+  </article>
+  
+</div>
+
+
+    </div>
+  </div>
+  <script src="https://unpkg.com/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js"></script>
+  <script>addBackToTop()</script>
+</body>
+<footer><footer class="site-footer h-card">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <h2 class="footer-heading">StepByStep</h2>
+        <div>
+          <div>
+            <ul>
+              <li>Duc Nguyen</li><li><a class="u-email" href="mailto:minhducnguyen189@gmail.com">minhducnguyen189@gmail.com</a></li><li>&copy; 2021 Duc Nguyen. Powered by <a href="https://jekyllrb.com/">Jekyll</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <data class="u-url" href="/%20/"></data>
+        <div><ul class="social-media-list"><li><a href="https://github.com/minhducnguyen189"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">minhducnguyen189</span></a></li><li><a href="https://www.linkedin.com/in/duc-nguyen-03109b141"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#linkedin"></use></svg> <span class="username">duc-nguyen-03109b141</span></a></li></ul>
+</div>
+      </div>
+      <div class="col-md-4">
+        
+      </div>
+    </div>
+
+    <div class="row">
+      <p>Hi there! Let&#39;s explore some general knowleadges and briefly definitions  in programming. I hope that this website can help people saving time in learning, also give some motivations for those who have choice the developer path.</p>
+    </div>
+</footer></footer>
+</html>

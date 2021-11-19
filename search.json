@@ -3,9 +3,9 @@
     {
 
       "title"    : "Data Science: R Programming Basics - For Loops",
-      "url"      : "/jekyll/update/2021/11/07/data-science-R-programming-basics-for-loops.html",
-      "category" : "jekyll, update",
-      "tags"     : "",
+      "url"      : "/data/2021/11/07/data-science-R-programming-basics-for-loops.html",
+      "category" : "data",
+      "tags"     : "data science, R",
       "date"     : "2021-11-07 09:00:00 +0700",
       "discription" : ""
 
@@ -15,9 +15,9 @@
     {
 
       "title"    : "Data Science: R Programming Basics - Functions",
-      "url"      : "/jekyll/update/2021/11/07/data-science-R-programming-basics-functions.html",
-      "category" : "jekyll, update",
-      "tags"     : "",
+      "url"      : "/data/2021/11/07/data-science-R-programming-basics-functions.html",
+      "category" : "data",
+      "tags"     : "data science, R",
       "date"     : "2021-11-07 00:00:00 +0700",
       "discription" : ""
 
@@ -27,9 +27,9 @@
     {
 
       "title"    : "Data Science: R Programming Basics - Conditionals",
-      "url"      : "/jekyll/update/2021/11/06/data-science-R-programming-basics-conditionals.html",
-      "category" : "jekyll, update",
-      "tags"     : "",
+      "url"      : "/data/2021/11/06/data-science-R-programming-basics-conditionals.html",
+      "category" : "data",
+      "tags"     : "data science, R",
       "date"     : "2021-11-06 00:00:00 +0700",
       "discription" : ""
 
@@ -39,9 +39,9 @@
     {
 
       "title"    : "Data Science: R Basic Plots",
-      "url"      : "/jekyll/update/2021/11/06/data-science-R-basic-plots.html",
-      "category" : "jekyll, update",
-      "tags"     : "",
+      "url"      : "/data/2021/11/06/data-science-R-basic-plots.html",
+      "category" : "data",
+      "tags"     : "data science, R",
       "date"     : "2021-11-06 00:00:00 +0700",
       "discription" : ""
 
@@ -51,9 +51,9 @@
     {
 
       "title"    : "Data Science: R Basic Data Wrangling",
-      "url"      : "/jekyll/update/2021/11/05/data-science-R-basic-daata-wrangling.html",
-      "category" : "jekyll, update",
-      "tags"     : "",
+      "url"      : "/data/2021/11/05/data-science-R-basic-daata-wrangling.html",
+      "category" : "data",
+      "tags"     : "data science, R",
       "date"     : "2021-11-05 00:00:00 +0700",
       "discription" : ""
 
@@ -63,9 +63,9 @@
     {
 
       "title"    : "Data Science: R Indexing",
-      "url"      : "/jekyll/update/2021/10/30/data-science-R-indexing.html",
-      "category" : "jekyll, update",
-      "tags"     : "",
+      "url"      : "/data/2021/10/30/data-science-R-indexing.html",
+      "category" : "data",
+      "tags"     : "data science, R",
       "date"     : "2021-10-30 00:00:00 +0700",
       "discription" : ""
 
@@ -75,9 +75,9 @@
     {
 
       "title"    : "Data Science: R Vector Arithme",
-      "url"      : "/jekyll/update/2021/10/29/data-science-R-vector-arithme.html",
-      "category" : "jekyll, update",
-      "tags"     : "",
+      "url"      : "/data/2021/10/29/data-science-R-vector-arithme.html",
+      "category" : "data",
+      "tags"     : "data science, R",
       "date"     : "2021-10-29 00:00:00 +0700",
       "discription" : ""
 
@@ -87,9 +87,9 @@
     {
 
       "title"    : "Setup Free Cloud Jfog Artifactory",
-      "url"      : "/jekyll/update/2021/10/08/jfog-repository-setup.html",
-      "category" : "jekyll, update",
-      "tags"     : "",
+      "url"      : "/java/2021/10/08/jfog-repository-setup.html",
+      "category" : "java",
+      "tags"     : "Java, Maven, Library",
       "date"     : "2021-10-08 00:00:00 +0700",
       "discription" : ""
 
@@ -99,9 +99,9 @@
     {
 
       "title"    : "Data Science: R Sorting",
-      "url"      : "/jekyll/update/2021/09/26/data-science-R-sorting.html",
-      "category" : "jekyll, update",
-      "tags"     : "",
+      "url"      : "/data/2021/09/26/data-science-R-sorting.html",
+      "category" : "data",
+      "tags"     : "data science, R",
       "date"     : "2021-09-26 00:00:00 +0700",
       "discription" : ""
 
@@ -111,9 +111,9 @@
     {
 
       "title"    : "Data Science: R Vector and Vector coercion",
-      "url"      : "/jekyll/update/2021/09/26/data-science-R-vector.html",
-      "category" : "jekyll, update",
-      "tags"     : "",
+      "url"      : "/data/2021/09/26/data-science-R-vector.html",
+      "category" : "data",
+      "tags"     : "data science, R",
       "date"     : "2021-09-26 00:00:00 +0700",
       "discription" : ""
 
@@ -123,9 +123,9 @@
     {
 
       "title"    : "Data Science: R Data Types",
-      "url"      : "/jekyll/update/2021/09/26/data-science-R-data-types.html",
-      "category" : "jekyll, update",
-      "tags"     : "",
+      "url"      : "/data/2021/09/26/data-science-R-data-types.html",
+      "category" : "data",
+      "tags"     : "data science, R",
       "date"     : "2021-09-26 00:00:00 +0700",
       "discription" : ""
 
@@ -135,9 +135,9 @@
     {
 
       "title"    : "Data Science: R Language Basic",
-      "url"      : "/jekyll/update/2021/09/23/data-science-R-basic.html",
-      "category" : "jekyll, update",
-      "tags"     : "",
+      "url"      : "/data/2021/09/23/data-science-R-basic.html",
+      "category" : "data",
+      "tags"     : "data science, R",
       "date"     : "2021-09-23 00:00:00 +0700",
       "discription" : ""
 
@@ -147,9 +147,9 @@
     {
 
       "title"    : "Gradle With Basic Concepts",
-      "url"      : "/jekyll/update/2021/09/18/java-springboot-gradle-basic-concepts.html",
-      "category" : "jekyll, update",
-      "tags"     : "",
+      "url"      : "/java/2021/09/18/java-springboot-gradle-basic-concepts.html",
+      "category" : "java",
+      "tags"     : "Java, SpringBoot, Gradle",
       "date"     : "2021-09-18 00:00:00 +0700",
       "discription" : ""
 
@@ -159,9 +159,9 @@
     {
 
       "title"    : "Intermediate SQL Queries That You Should Know",
-      "url"      : "/jekyll/update/2021/09/15/database-intermediate-sql-queries.html",
-      "category" : "jekyll, update",
-      "tags"     : "",
+      "url"      : "/data/2021/09/15/database-intermediate-sql-queries.html",
+      "category" : "data",
+      "tags"     : "Database, SQL",
       "date"     : "2021-09-15 00:00:00 +0700",
       "discription" : ""
 
@@ -171,9 +171,9 @@
     {
 
       "title"    : "Differencies Betweem JDBC And Hibernate In Java",
-      "url"      : "/jekyll/update/2021/09/11/java-springboot-JDBC-Hibernate-Java.html",
-      "category" : "jekyll, update",
-      "tags"     : "",
+      "url"      : "/java/2021/09/11/java-springboot-JDBC-Hibernate-Java.html",
+      "category" : "java",
+      "tags"     : "Database, Jpa, Jdbc",
       "date"     : "2021-09-11 00:00:00 +0700",
       "discription" : ""
 
@@ -183,9 +183,9 @@
     {
 
       "title"    : "Jenkins With Sonarqube Plugin For Building SpringBoot",
-      "url"      : "/jekyll/update/2021/08/27/ci-cd-jenkins-sonarqube-springboot.html",
-      "category" : "jekyll, update",
-      "tags"     : "",
+      "url"      : "/ci-cd/2021/08/27/ci-cd-jenkins-sonarqube-springboot.html",
+      "category" : "ci-cd",
+      "tags"     : "Jenkins, SpringBoot, Sonarqube",
       "date"     : "2021-08-27 12:00:00 +0700",
       "discription" : ""
 
@@ -195,9 +195,9 @@
     {
 
       "title"    : "Jenkins With Building SpringBoot",
-      "url"      : "/jekyll/update/2021/08/27/ci-cd-jenkins-springboot-basic.html",
-      "category" : "jekyll, update",
-      "tags"     : "",
+      "url"      : "/ci-cd/2021/08/27/ci-cd-jenkins-springboot-basic.html",
+      "category" : "ci-cd",
+      "tags"     : "Jenkins, SpringBoot",
       "date"     : "2021-08-27 12:00:00 +0700",
       "discription" : ""
 
@@ -207,9 +207,9 @@
     {
 
       "title"    : "Docker For Creating Jenkins Server",
-      "url"      : "/jekyll/update/2021/08/21/docker-with-jenkins.html",
-      "category" : "jekyll, update",
-      "tags"     : "",
+      "url"      : "/docker/2021/08/21/docker-with-jenkins.html",
+      "category" : "docker",
+      "tags"     : "Docker, Jenkins",
       "date"     : "2021-08-21 08:15:47 +0700",
       "discription" : ""
 
@@ -219,9 +219,9 @@
     {
 
       "title"    : "Springboot Configurations For Databases",
-      "url"      : "/jekyll/update/2021/08/07/database-with-springboot-configuration.html",
-      "category" : "jekyll, update",
-      "tags"     : "",
+      "url"      : "/data/2021/08/07/database-with-springboot-configuration.html",
+      "category" : "data",
+      "tags"     : "Database, SQL, SpringBoot",
       "date"     : "2021-08-07 00:00:00 +0700",
       "discription" : ""
 
@@ -231,9 +231,9 @@
     {
 
       "title"    : "Spring Boot With Sonarqube",
-      "url"      : "/jekyll/update/2021/07/25/java-springboot-sonarqube.html",
-      "category" : "jekyll, update",
-      "tags"     : "",
+      "url"      : "/java/2021/07/25/java-springboot-sonarqube.html",
+      "category" : "java",
+      "tags"     : "Java, SpringBoot, Sonarqube",
       "date"     : "2021-07-25 00:00:00 +0700",
       "discription" : ""
 
@@ -243,9 +243,9 @@
     {
 
       "title"    : "Docker For Creating SonarQube Server",
-      "url"      : "/jekyll/update/2021/07/21/docker-with-sonarqube.html",
-      "category" : "jekyll, update",
-      "tags"     : "",
+      "url"      : "/docker/2021/07/21/docker-with-sonarqube.html",
+      "category" : "docker",
+      "tags"     : "Docker, Sonarqube",
       "date"     : "2021-07-21 08:15:47 +0700",
       "discription" : ""
 
@@ -255,9 +255,9 @@
     {
 
       "title"    : "Spring Boot With FeignClient",
-      "url"      : "/jekyll/update/2021/07/15/java-springboot-feign-client.html",
-      "category" : "jekyll, update",
-      "tags"     : "",
+      "url"      : "/java/2021/07/15/java-springboot-feign-client.html",
+      "category" : "java",
+      "tags"     : "Java, SpringBoot",
       "date"     : "2021-07-15 00:00:00 +0700",
       "discription" : ""
 
@@ -267,9 +267,9 @@
     {
 
       "title"    : "Using Eureka And Zuul In Spring Boot Microservices",
-      "url"      : "/jekyll/update/2021/07/05/java-springboot-eureka-zuul.html",
-      "category" : "jekyll, update",
-      "tags"     : "",
+      "url"      : "/java/2021/07/05/java-springboot-eureka-zuul.html",
+      "category" : "java",
+      "tags"     : "Java, SpringBoot",
       "date"     : "2021-07-05 00:00:00 +0700",
       "discription" : ""
 
@@ -279,9 +279,9 @@
     {
 
       "title"    : "Basic SQL Queries That You Should Know",
-      "url"      : "/jekyll/update/2021/07/04/database-basic-sql-queries.html",
-      "category" : "jekyll, update",
-      "tags"     : "",
+      "url"      : "/data/2021/07/04/database-basic-sql-queries.html",
+      "category" : "data",
+      "tags"     : "database, sql",
       "date"     : "2021-07-04 12:00:00 +0700",
       "discription" : ""
 
@@ -291,9 +291,9 @@
     {
 
       "title"    : "Docker For Creating Databases",
-      "url"      : "/jekyll/update/2021/07/04/docker-for-creating-database.html",
-      "category" : "jekyll, update",
-      "tags"     : "",
+      "url"      : "/docker/2021/07/04/docker-for-creating-database.html",
+      "category" : "docker",
+      "tags"     : "Docker, Database",
       "date"     : "2021-07-04 08:15:47 +0700",
       "discription" : ""
 
@@ -303,9 +303,9 @@
     {
 
       "title"    : "Docker With Spring Boot Project",
-      "url"      : "/jekyll/update/2021/07/04/docker-with-springboot.html",
-      "category" : "jekyll, update",
-      "tags"     : "",
+      "url"      : "/docker/2021/07/04/docker-with-springboot.html",
+      "category" : "docker",
+      "tags"     : "Docker, SpringBoot",
       "date"     : "2021-07-04 08:15:47 +0700",
       "discription" : ""
 
@@ -315,9 +315,9 @@
     {
 
       "title"    : "General Knowledges about Database",
-      "url"      : "/jekyll/update/2021/07/04/database-general.html",
-      "category" : "jekyll, update",
-      "tags"     : "",
+      "url"      : "/data/2021/07/04/database-general.html",
+      "category" : "data",
+      "tags"     : "database, sql",
       "date"     : "2021-07-04 00:00:00 +0700",
       "discription" : ""
 
@@ -327,9 +327,9 @@
     {
 
       "title"    : "@ConfigurationProperties to create Spring Bean",
-      "url"      : "/jekyll/update/2021/07/01/java-springboot-configuration-properties.html",
-      "category" : "jekyll, update",
-      "tags"     : "",
+      "url"      : "/java/2021/07/01/java-springboot-configuration-properties.html",
+      "category" : "java",
+      "tags"     : "Java, SpringBoot",
       "date"     : "2021-07-01 00:00:00 +0700",
       "discription" : ""
 
@@ -339,9 +339,9 @@
     {
 
       "title"    : "General Knowledges About Docker",
-      "url"      : "/jekyll/update/2021/06/26/docker-general.html",
-      "category" : "jekyll, update",
-      "tags"     : "",
+      "url"      : "/docker/2021/06/26/docker-general.html",
+      "category" : "docker",
+      "tags"     : "Docker",
       "date"     : "2021-06-26 20:15:47 +0700",
       "discription" : ""
 
@@ -351,9 +351,9 @@
     {
 
       "title"    : "Generate Swagger UI from Controller in Spring Boot",
-      "url"      : "/jekyll/update/2021/06/20/java-springboot-swaggerui-by-controller.html",
-      "category" : "jekyll, update",
-      "tags"     : "",
+      "url"      : "/java/2021/06/20/java-springboot-swaggerui-by-controller.html",
+      "category" : "java",
+      "tags"     : "Java, SpringBoot",
       "date"     : "2021-06-20 00:00:00 +0700",
       "discription" : ""
 
@@ -363,9 +363,9 @@
     {
 
       "title"    : "Connect to WebService(SOAP) by Spring Cloud Feign",
-      "url"      : "/jekyll/update/2021/06/17/java-springboot-connect-SOAP-with-FeignClient.html",
-      "category" : "jekyll, update",
-      "tags"     : "",
+      "url"      : "/java/2021/06/17/java-springboot-connect-SOAP-with-FeignClient.html",
+      "category" : "java",
+      "tags"     : "SpringBoot, Java",
       "date"     : "2021-06-17 00:00:00 +0700",
       "discription" : ""
 
@@ -375,9 +375,9 @@
     {
 
       "title"    : "Spring boot with Multiple Datasources",
-      "url"      : "/jekyll/update/2021/06/06/java-springboot-multi-datasource.html",
-      "category" : "jekyll, update",
-      "tags"     : "",
+      "url"      : "/java/2021/06/06/java-springboot-multi-datasource.html",
+      "category" : "java",
+      "tags"     : "Database, Jpa, SpringBoot",
       "date"     : "2021-06-06 00:00:00 +0700",
       "discription" : ""
 
@@ -386,10 +386,10 @@
   
     {
 
-      "title"    : "Pagination With JPA In String Boot",
-      "url"      : "/jekyll/update/2021/04/03/java-springboot-pagination-with-jpa.html",
-      "category" : "jekyll, update",
-      "tags"     : "",
+      "title"    : "Pagination With JPA In Spring Boot",
+      "url"      : "/java/2021/04/03/java-springboot-pagination-with-jpa.html",
+      "category" : "java",
+      "tags"     : "Database, Jpa, SpringBoot",
       "date"     : "2021-04-03 00:00:00 +0700",
       "discription" : ""
 
@@ -399,9 +399,9 @@
     {
 
       "title"    : "Spring Boot And Basic Concepts",
-      "url"      : "/jekyll/update/2021/03/12/java-springboot-basic-concepts.html",
-      "category" : "jekyll, update",
-      "tags"     : "",
+      "url"      : "/java/2021/03/12/java-springboot-basic-concepts.html",
+      "category" : "java",
+      "tags"     : "SpringBoot, Java",
       "date"     : "2021-03-12 00:00:00 +0700",
       "discription" : ""
 
@@ -411,9 +411,9 @@
     {
 
       "title"    : "SOLID Principles",
-      "url"      : "/jekyll/update/2021/03/11/solid-principles.html",
-      "category" : "jekyll, update",
-      "tags"     : "",
+      "url"      : "/java/2021/03/11/solid-principles.html",
+      "category" : "java",
+      "tags"     : "Java",
       "date"     : "2021-03-11 00:00:00 +0700",
       "discription" : ""
 
@@ -423,9 +423,9 @@
     {
 
       "title"    : "SpringBoot With Swagger",
-      "url"      : "/jekyll/update/2021/03/11/java-springboot-with-swagger.html",
-      "category" : "jekyll, update",
-      "tags"     : "",
+      "url"      : "/java/2021/03/11/java-springboot-with-swagger.html",
+      "category" : "java",
+      "tags"     : "SpringBoot, Java",
       "date"     : "2021-03-11 00:00:00 +0700",
       "discription" : ""
 
@@ -435,9 +435,9 @@
     {
 
       "title"    : "Spring Framework And Basic Concepts",
-      "url"      : "/jekyll/update/2021/03/09/java-spring-basic-concepts.html",
-      "category" : "jekyll, update",
-      "tags"     : "",
+      "url"      : "/java/2021/03/09/java-spring-basic-concepts.html",
+      "category" : "java",
+      "tags"     : "Spring, Java",
       "date"     : "2021-03-09 08:00:00 +0700",
       "discription" : ""
 
@@ -447,9 +447,9 @@
     {
 
       "title"    : "Python Basic",
-      "url"      : "/jekyll/update/2021/02/19/python-basic.html",
-      "category" : "jekyll, update",
-      "tags"     : "",
+      "url"      : "/python/2021/02/19/python-basic.html",
+      "category" : "python",
+      "tags"     : "Python",
       "date"     : "2021-02-19 12:00:00 +0700",
       "discription" : ""
 
@@ -459,9 +459,9 @@
     {
 
       "title"    : "Lambda Expression in Java 8",
-      "url"      : "/jekyll/update/2021/02/10/java-lambda-expression.html",
-      "category" : "jekyll, update",
-      "tags"     : "",
+      "url"      : "/java/2021/02/10/java-lambda-expression.html",
+      "category" : "java",
+      "tags"     : "Java",
       "date"     : "2021-02-10 10:15:47 +0700",
       "discription" : ""
 
@@ -471,9 +471,9 @@
     {
 
       "title"    : "General Knowledges About Java Part 2",
-      "url"      : "/jekyll/update/2021/02/08/java-general-part2.html",
-      "category" : "jekyll, update",
-      "tags"     : "",
+      "url"      : "/java/2021/02/08/java-general-part2.html",
+      "category" : "java",
+      "tags"     : "Java",
       "date"     : "2021-02-08 10:15:47 +0700",
       "discription" : ""
 
@@ -483,9 +483,9 @@
     {
 
       "title"    : "General Knowledges About Java Part 1",
-      "url"      : "/jekyll/update/2021/02/01/java-general-part1.html",
-      "category" : "jekyll, update",
-      "tags"     : "",
+      "url"      : "/java/2021/02/01/java-general-part1.html",
+      "category" : "java",
+      "tags"     : "Java",
       "date"     : "2021-02-01 20:15:47 +0700",
       "discription" : ""
 

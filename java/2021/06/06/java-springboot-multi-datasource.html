@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- bootstrap library and JS, Jquery -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Spring boot with Multiple Datasources | StepByStep</title>
+<meta name="generator" content="Jekyll v4.2.1" />
+<meta property="og:title" content="Spring boot with Multiple Datasources" />
+<meta name="author" content="Duc Nguyen" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="In some special cases, sometimes we have to connect to multi databases to handle the business logic. In this post I will show you step by step configuration for spring boot service. STEP 1: ADD DEPENDENIES IN POM.XML STEP 2: PROJECT STRUCTURE OVERVIEW STEP 3: APPLICATION.YAML STEP 4: CREATE AND CONFIG CONFIGURATION FILE FOR PRIMARY SCHEMA STEP 5: CREATE AND CONFIG CONFIGURATION FILE FOR SECONDARY SCHEMA STEP 6: CREATE AND CONFIG CONFIGURATION FILE FOR TRANSACTION CHAIN STEP 7: DECLARE ENTITY IN USING WITH MULTI DATASOURCE STEP 8: USING TRANSACTION OF PRIMARY AND SECONDARY DATASOURCE IN SERVICE CLASS STEP 9: TESTING STEP 1: ADD DEPENDENIES IN POM.XML I’m using MySQL database so I need to add 2 dependencies are mysql-connector-java and spring-boot-starter-data-jpa &lt;dependency&gt; &lt;groupId&gt;mysql&lt;/groupId&gt; &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt; &lt;/dependency&gt; &lt;dependency&gt; &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; &lt;artifactId&gt;spring-boot-starter-data-jpa&lt;/artifactId&gt; &lt;/dependency&gt; STEP 2: PROJECT STRUCTURE OVERVIEW As you can see in the picture above. We have two packages, one is camunda package which contains all repositories and entities for the primary datasource. The second one is the secondary package which contains all repositories and entities for the secondary datasource. Then we also have configurations package which contains all datasource configuration. STEP 3: APPLICATION.YAML to connect to two database schemas we need to add some configuration in the application.yaml as below: spring: datasource: driverClassName: com.mysql.jdbc.Driver url: jdbc:mysql://localhost:3306/camunda?useSSL=false #This is the primary DB connection url username: root password: password second-datasource: driverClassName: com.mysql.jdbc.Driver url: jdbc:mysql://localhost:3306/mydb?useSSL=false #This is the secondary DB connection url username: root password: password jpa: hibernate.ddl-auto: update hibernate.dialect: org.hibernate.dialect.MySQL5Dialect generate-ddl: true show-sql: true STEP 4: CREATE AND CONFIG CONFIGURATION FILE FOR PRIMARY SCHEMA To config for primary schema we need to create a configuration file named PrimarySchemaConfiguration.java in the package configurations The configuration for the primary datasource is showed as below: package com.example.workflow.configurations; import org.springframework.beans.factory.annotation.Autowired; import org.springframework.context.annotation.Bean; import org.springframework.context.annotation.Configuration; import org.springframework.context.annotation.Primary; import org.springframework.core.env.Environment; import org.springframework.data.jpa.repository.config.EnableJpaRepositories; import org.springframework.jdbc.datasource.DriverManagerDataSource; import org.springframework.orm.jpa.JpaTransactionManager; import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean; import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter; import org.springframework.transaction.PlatformTransactionManager; import javax.sql.DataSource; import java.util.HashMap; import java.util.Objects; @Configuration /** use this anotation to define the base package repository for primary data source, the EntityFactory and the transactionManager **/ @EnableJpaRepositories(basePackages = &quot;com.example.workflow.camunda.repository&quot;, entityManagerFactoryRef = &quot;primaryEntityManager&quot;, transactionManagerRef = &quot;primaryTransactionManager&quot;) public class PrimarySchemaConfiguration { @Autowired private Environment env; @Bean(name = &quot;primaryDataSource&quot;) @Primary public DataSource primaryDataSourceConfiguration() { DriverManagerDataSource dataSource = new DriverManagerDataSource(); dataSource.setDriverClassName(Objects.requireNonNull(env.getProperty(&quot;spring.datasource.driverClassName&quot;))); dataSource.setUrl(env.getProperty(&quot;spring.datasource.url&quot;)); dataSource.setUsername(env.getProperty(&quot;spring.datasource.username&quot;)); dataSource.setPassword(env.getProperty(&quot;spring.datasource.password&quot;)); return dataSource; } @Bean(name = &quot;primaryEntityManager&quot;) @Primary public LocalContainerEntityManagerFactoryBean primaryEntityManager() { LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean(); em.setDataSource(primaryDataSourceConfiguration()); /** this is the package url which contains entities of primary datasource **/ em.setPackagesToScan(&quot;com.example.workflow.camunda.entity&quot;); HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter(); em.setJpaVendorAdapter(vendorAdapter); HashMap&lt;String, Object&gt; properties = new HashMap&lt;String, Object&gt;(); properties.put(&quot;hibernate.hbm2ddl.auto&quot;, env.getProperty(&quot;spring.jpa.hibernate.ddl-auto&quot;)); properties.put(&quot;hibernate.dialect&quot;, env.getProperty(&quot;spring.jpa.hibernate.hibernate.dialect&quot;)); em.setJpaPropertyMap(properties); return em; } @Bean(name = &quot;primaryTransactionManager&quot;) @Primary public PlatformTransactionManager primaryTransactionManager() { JpaTransactionManager jpaTransactionManager = new JpaTransactionManager(); jpaTransactionManager.setEntityManagerFactory(primaryEntityManager().getObject()); return jpaTransactionManager; } } STEP 5: CREATE AND CONFIG CONFIGURATION FILE FOR SECONDARY SCHEMA To config for secondary schema we need to create a configuration file named secondaryDataSourceConfiguration.java in the package configurations The configuration for the secondary datasource is showed as below: package com.example.workflow.configurations; import org.springframework.beans.factory.annotation.Autowired; import org.springframework.context.annotation.Bean; import org.springframework.context.annotation.Configuration; import org.springframework.core.env.Environment; import org.springframework.data.jpa.repository.config.EnableJpaRepositories; import org.springframework.jdbc.datasource.DriverManagerDataSource; import org.springframework.orm.jpa.JpaTransactionManager; import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean; import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter; import org.springframework.transaction.PlatformTransactionManager; import javax.sql.DataSource; import java.util.HashMap; import java.util.Objects; @Configuration /** use this anotation to define the base package repository for secondary data source, the EntityFactory and the transactionManager **/ @EnableJpaRepositories(basePackages = &quot;com.example.workflow.secondary.repository&quot;, entityManagerFactoryRef = &quot;secondaryEntityManager&quot;, transactionManagerRef = &quot;secondaryTransactionManager&quot;) public class SecondarySchemaConfiguration { @Autowired private Environment env; @Bean(name = &quot;secondaryDataSource&quot;) public DataSource secondaryDataSourceConfiguration() { DriverManagerDataSource dataSource = new DriverManagerDataSource(); dataSource.setDriverClassName(Objects.requireNonNull(env.getProperty(&quot;spring.second-datasource.driverClassName&quot;))); dataSource.setUrl(env.getProperty(&quot;spring.second-datasource.url&quot;)); dataSource.setUsername(env.getProperty(&quot;spring.second-datasource.username&quot;)); dataSource.setPassword(env.getProperty(&quot;spring.second-datasource.password&quot;)); return dataSource; } @Bean(name = &quot;secondaryEntityManager&quot;) public LocalContainerEntityManagerFactoryBean secondaryEntityManager() { LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean(); em.setDataSource(secondaryDataSourceConfiguration()); /** this is the package which contains entities of primary datasource **/ em.setPackagesToScan(&quot;com.example.workflow.secondary.entity&quot;); HibernateJpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter(); em.setJpaVendorAdapter(jpaVendorAdapter); HashMap&lt;String, Object&gt; properties = new HashMap&lt;&gt;(); properties.put(&quot;hibernate.hbm2ddl.auto&quot;, env.getProperty(&quot;spring.jpa.hibernate.ddl-auto&quot;)); properties.put(&quot;hibernate.dialect&quot;, env.getProperty(&quot;spring.jpa.hibernate.hibernate.dialect&quot;)); em.setJpaPropertyMap(properties); return em; } @Bean(name = &quot;secondaryTransactionManager&quot;) public PlatformTransactionManager secondaryTransactionManager() { JpaTransactionManager transactionManager = new JpaTransactionManager(); transactionManager.setEntityManagerFactory(secondaryEntityManager().getObject()); return transactionManager; } } STEP 6: CREATE AND CONFIG CONFIGURATION FILE FOR TRANSACTION CHAIN Sometime we will work with two/multiple databases in a single request, and if we have an error in any transaction of two schema while executing. We will need to revert all data which are saved in one of two databases. Thus we need to configure the transaction chain to handle this issue. Assume that we save a data into DB A successfully then we continous saving data to DB B. Unfortunally, saving data to DB B is failed and we want to revert the data which is saved into DB A. We need to create a configuration file named TransactionChainConfiguration.java in configurations package. The contents of file are showed as below: package com.example.workflow.configurations; import org.springframework.beans.factory.annotation.Qualifier; import org.springframework.context.annotation.Bean; import org.springframework.context.annotation.Configuration; import org.springframework.data.transaction.ChainedTransactionManager; import org.springframework.transaction.PlatformTransactionManager; @Configuration public class TransactionChainConfiguration { /** we will create ChainedTransactionManager by two PlatformTransactionManager which are `primaryTransactionManager` and `secondaryTransactionManager` because we want to revert transaction if one of them happens issue in saving data. **/ @Bean(name = &quot;chainedTransactionManager&quot;) public ChainedTransactionManager transactionChainConfiguration( @Qualifier(&quot;primaryTransactionManager&quot;) PlatformTransactionManager primaryTransaction, @Qualifier(&quot;secondaryTransactionManager&quot;) PlatformTransactionManager secondaryTransaction) { return new ChainedTransactionManager(primaryTransaction, secondaryTransaction); } } STEP 7: DECLARE ENTITY IN USING WITH MULTI DATASOURCE for delaration entities, please look at the examples belows: @Entity /** This entity is used for primary DB with the schema = &quot;camunda&quot; **/ @Table(schema = &quot;camunda&quot;, name = &quot;new_table&quot;) public class NewTableEntity { @Id private String id; @Column(name = &quot;createdDate&quot;) private String createdDate; @Column(name = &quot;title&quot;) private String title; @Column(name = &quot;content&quot;) private String content; ........... @Entity /** This entity is used for secondary DB with the schema = &quot;mydb&quot; **/ @Table(schema = &quot;mydb&quot;, name = &quot;new_table&quot;) public class NewTableEntity { @Id private String id; @Column(name = &quot;createdDate&quot;) private String createdDate; @Column(name = &quot;title&quot;) private String title; @Column(name = &quot;content&quot;) private String content; ........... STEP 8: USING TRANSACTION OF PRIMARY AND SECONDARY DATASOURCE IN SERVICE CLASS To use Transactional for primary or secondary DB when we need to get/update data we need to declare which Transactional (belong to which DB) that we want to use. Let’s see the example below We will create a service class named GeneralService. Then we Autowired two repositories, one for primary datasource and one for secondary datasource. package com.example.workflow.service; import com.example.workflow.camunda.entity.NewTableEntity; import com.example.workflow.camunda.repository.CamundaNewTableRepository; import com.example.workflow.model.NewTable; import com.example.workflow.secondary.repository.MyNewTableRepository; import org.camunda.bpm.engine.HistoryService; import org.camunda.bpm.engine.history.HistoricTaskInstance; import org.camunda.bpm.engine.history.HistoricVariableInstance; import org.springframework.beans.factory.annotation.Autowired; import org.springframework.stereotype.Service; import org.springframework.transaction.annotation.EnableTransactionManagement; import org.springframework.transaction.annotation.Transactional; import org.springframework.transaction.interceptor.TransactionAspectSupport; import java.util.*; @Service /** use @EnableTransactionManagement to enable using Transactional Management **/ @EnableTransactionManagement public class GeneralService { @Autowired private CamundaNewTableRepository camundaNewTableRepository; @Autowired private MyNewTableRepository myNewTableRepository; @Autowired private HistoryService historyService; /** use @Transactional with value (bean name of primaryTransactionManager) so the Jpa will know which transaction that we want to use. **/ @Transactional(value = &quot;primaryTransactionManager&quot;) public String saveDataToCamundaNewTable(NewTable newTable) { NewTableEntity entity = new NewTableEntity(); String id = UUID.randomUUID().toString(); entity.setId(id); entity.setCreatedDate(new Date().toString()); entity.setTitle(newTable.getTitle()); entity.setContent(newTable.getContent()); camundaNewTableRepository.save(entity); return id; } /** use @Transactional with value (bean name of secondaryTransactionManager) so the Jpa will know which transaction that we want to use. **/ @Transactional(value = &quot;secondaryTransactionManager&quot;) public String saveDataToMyDB(NewTable newTable) { com.example.workflow.secondary.entity.NewTableEntity entity = new com.example.workflow.secondary.entity.NewTableEntity(); String id = UUID.randomUUID().toString(); entity.setId(id); entity.setCreatedDate(new Date().toString()); entity.setTitle(newTable.getTitle()); entity.setContent(newTable.getContent()); myNewTableRepository.save(entity); return id; } /** use @Transactional with value (bean name of chainedTransactionManager) so the Jpa will know which transaction that we want to use. If saving data to secondary is failed, so the data which is saved in primary DB will be reverted. **/ @Transactional(value = &quot;chainedTransactionManager&quot;) public List&lt;String&gt; saveDataToAllDB(NewTable newTable) { String camundaId = saveDataToCamundaNewTable(newTable); String myDBId = saveDataToMyDB(newTable); /** this comment function is used for revert all data in DB when this function is executed successfully **/ // TransactionAspectSupport.currentTransactionStatus().setRollbackOnly(); return Arrays.asList(camundaId, myDBId); } } STEP 9: TESTING After saving data into two databases, we can go to primary and secondary database to check the data as the images below: ." />
+<meta property="og:description" content="In some special cases, sometimes we have to connect to multi databases to handle the business logic. In this post I will show you step by step configuration for spring boot service. STEP 1: ADD DEPENDENIES IN POM.XML STEP 2: PROJECT STRUCTURE OVERVIEW STEP 3: APPLICATION.YAML STEP 4: CREATE AND CONFIG CONFIGURATION FILE FOR PRIMARY SCHEMA STEP 5: CREATE AND CONFIG CONFIGURATION FILE FOR SECONDARY SCHEMA STEP 6: CREATE AND CONFIG CONFIGURATION FILE FOR TRANSACTION CHAIN STEP 7: DECLARE ENTITY IN USING WITH MULTI DATASOURCE STEP 8: USING TRANSACTION OF PRIMARY AND SECONDARY DATASOURCE IN SERVICE CLASS STEP 9: TESTING STEP 1: ADD DEPENDENIES IN POM.XML I’m using MySQL database so I need to add 2 dependencies are mysql-connector-java and spring-boot-starter-data-jpa &lt;dependency&gt; &lt;groupId&gt;mysql&lt;/groupId&gt; &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt; &lt;/dependency&gt; &lt;dependency&gt; &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; &lt;artifactId&gt;spring-boot-starter-data-jpa&lt;/artifactId&gt; &lt;/dependency&gt; STEP 2: PROJECT STRUCTURE OVERVIEW As you can see in the picture above. We have two packages, one is camunda package which contains all repositories and entities for the primary datasource. The second one is the secondary package which contains all repositories and entities for the secondary datasource. Then we also have configurations package which contains all datasource configuration. STEP 3: APPLICATION.YAML to connect to two database schemas we need to add some configuration in the application.yaml as below: spring: datasource: driverClassName: com.mysql.jdbc.Driver url: jdbc:mysql://localhost:3306/camunda?useSSL=false #This is the primary DB connection url username: root password: password second-datasource: driverClassName: com.mysql.jdbc.Driver url: jdbc:mysql://localhost:3306/mydb?useSSL=false #This is the secondary DB connection url username: root password: password jpa: hibernate.ddl-auto: update hibernate.dialect: org.hibernate.dialect.MySQL5Dialect generate-ddl: true show-sql: true STEP 4: CREATE AND CONFIG CONFIGURATION FILE FOR PRIMARY SCHEMA To config for primary schema we need to create a configuration file named PrimarySchemaConfiguration.java in the package configurations The configuration for the primary datasource is showed as below: package com.example.workflow.configurations; import org.springframework.beans.factory.annotation.Autowired; import org.springframework.context.annotation.Bean; import org.springframework.context.annotation.Configuration; import org.springframework.context.annotation.Primary; import org.springframework.core.env.Environment; import org.springframework.data.jpa.repository.config.EnableJpaRepositories; import org.springframework.jdbc.datasource.DriverManagerDataSource; import org.springframework.orm.jpa.JpaTransactionManager; import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean; import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter; import org.springframework.transaction.PlatformTransactionManager; import javax.sql.DataSource; import java.util.HashMap; import java.util.Objects; @Configuration /** use this anotation to define the base package repository for primary data source, the EntityFactory and the transactionManager **/ @EnableJpaRepositories(basePackages = &quot;com.example.workflow.camunda.repository&quot;, entityManagerFactoryRef = &quot;primaryEntityManager&quot;, transactionManagerRef = &quot;primaryTransactionManager&quot;) public class PrimarySchemaConfiguration { @Autowired private Environment env; @Bean(name = &quot;primaryDataSource&quot;) @Primary public DataSource primaryDataSourceConfiguration() { DriverManagerDataSource dataSource = new DriverManagerDataSource(); dataSource.setDriverClassName(Objects.requireNonNull(env.getProperty(&quot;spring.datasource.driverClassName&quot;))); dataSource.setUrl(env.getProperty(&quot;spring.datasource.url&quot;)); dataSource.setUsername(env.getProperty(&quot;spring.datasource.username&quot;)); dataSource.setPassword(env.getProperty(&quot;spring.datasource.password&quot;)); return dataSource; } @Bean(name = &quot;primaryEntityManager&quot;) @Primary public LocalContainerEntityManagerFactoryBean primaryEntityManager() { LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean(); em.setDataSource(primaryDataSourceConfiguration()); /** this is the package url which contains entities of primary datasource **/ em.setPackagesToScan(&quot;com.example.workflow.camunda.entity&quot;); HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter(); em.setJpaVendorAdapter(vendorAdapter); HashMap&lt;String, Object&gt; properties = new HashMap&lt;String, Object&gt;(); properties.put(&quot;hibernate.hbm2ddl.auto&quot;, env.getProperty(&quot;spring.jpa.hibernate.ddl-auto&quot;)); properties.put(&quot;hibernate.dialect&quot;, env.getProperty(&quot;spring.jpa.hibernate.hibernate.dialect&quot;)); em.setJpaPropertyMap(properties); return em; } @Bean(name = &quot;primaryTransactionManager&quot;) @Primary public PlatformTransactionManager primaryTransactionManager() { JpaTransactionManager jpaTransactionManager = new JpaTransactionManager(); jpaTransactionManager.setEntityManagerFactory(primaryEntityManager().getObject()); return jpaTransactionManager; } } STEP 5: CREATE AND CONFIG CONFIGURATION FILE FOR SECONDARY SCHEMA To config for secondary schema we need to create a configuration file named secondaryDataSourceConfiguration.java in the package configurations The configuration for the secondary datasource is showed as below: package com.example.workflow.configurations; import org.springframework.beans.factory.annotation.Autowired; import org.springframework.context.annotation.Bean; import org.springframework.context.annotation.Configuration; import org.springframework.core.env.Environment; import org.springframework.data.jpa.repository.config.EnableJpaRepositories; import org.springframework.jdbc.datasource.DriverManagerDataSource; import org.springframework.orm.jpa.JpaTransactionManager; import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean; import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter; import org.springframework.transaction.PlatformTransactionManager; import javax.sql.DataSource; import java.util.HashMap; import java.util.Objects; @Configuration /** use this anotation to define the base package repository for secondary data source, the EntityFactory and the transactionManager **/ @EnableJpaRepositories(basePackages = &quot;com.example.workflow.secondary.repository&quot;, entityManagerFactoryRef = &quot;secondaryEntityManager&quot;, transactionManagerRef = &quot;secondaryTransactionManager&quot;) public class SecondarySchemaConfiguration { @Autowired private Environment env; @Bean(name = &quot;secondaryDataSource&quot;) public DataSource secondaryDataSourceConfiguration() { DriverManagerDataSource dataSource = new DriverManagerDataSource(); dataSource.setDriverClassName(Objects.requireNonNull(env.getProperty(&quot;spring.second-datasource.driverClassName&quot;))); dataSource.setUrl(env.getProperty(&quot;spring.second-datasource.url&quot;)); dataSource.setUsername(env.getProperty(&quot;spring.second-datasource.username&quot;)); dataSource.setPassword(env.getProperty(&quot;spring.second-datasource.password&quot;)); return dataSource; } @Bean(name = &quot;secondaryEntityManager&quot;) public LocalContainerEntityManagerFactoryBean secondaryEntityManager() { LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean(); em.setDataSource(secondaryDataSourceConfiguration()); /** this is the package which contains entities of primary datasource **/ em.setPackagesToScan(&quot;com.example.workflow.secondary.entity&quot;); HibernateJpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter(); em.setJpaVendorAdapter(jpaVendorAdapter); HashMap&lt;String, Object&gt; properties = new HashMap&lt;&gt;(); properties.put(&quot;hibernate.hbm2ddl.auto&quot;, env.getProperty(&quot;spring.jpa.hibernate.ddl-auto&quot;)); properties.put(&quot;hibernate.dialect&quot;, env.getProperty(&quot;spring.jpa.hibernate.hibernate.dialect&quot;)); em.setJpaPropertyMap(properties); return em; } @Bean(name = &quot;secondaryTransactionManager&quot;) public PlatformTransactionManager secondaryTransactionManager() { JpaTransactionManager transactionManager = new JpaTransactionManager(); transactionManager.setEntityManagerFactory(secondaryEntityManager().getObject()); return transactionManager; } } STEP 6: CREATE AND CONFIG CONFIGURATION FILE FOR TRANSACTION CHAIN Sometime we will work with two/multiple databases in a single request, and if we have an error in any transaction of two schema while executing. We will need to revert all data which are saved in one of two databases. Thus we need to configure the transaction chain to handle this issue. Assume that we save a data into DB A successfully then we continous saving data to DB B. Unfortunally, saving data to DB B is failed and we want to revert the data which is saved into DB A. We need to create a configuration file named TransactionChainConfiguration.java in configurations package. The contents of file are showed as below: package com.example.workflow.configurations; import org.springframework.beans.factory.annotation.Qualifier; import org.springframework.context.annotation.Bean; import org.springframework.context.annotation.Configuration; import org.springframework.data.transaction.ChainedTransactionManager; import org.springframework.transaction.PlatformTransactionManager; @Configuration public class TransactionChainConfiguration { /** we will create ChainedTransactionManager by two PlatformTransactionManager which are `primaryTransactionManager` and `secondaryTransactionManager` because we want to revert transaction if one of them happens issue in saving data. **/ @Bean(name = &quot;chainedTransactionManager&quot;) public ChainedTransactionManager transactionChainConfiguration( @Qualifier(&quot;primaryTransactionManager&quot;) PlatformTransactionManager primaryTransaction, @Qualifier(&quot;secondaryTransactionManager&quot;) PlatformTransactionManager secondaryTransaction) { return new ChainedTransactionManager(primaryTransaction, secondaryTransaction); } } STEP 7: DECLARE ENTITY IN USING WITH MULTI DATASOURCE for delaration entities, please look at the examples belows: @Entity /** This entity is used for primary DB with the schema = &quot;camunda&quot; **/ @Table(schema = &quot;camunda&quot;, name = &quot;new_table&quot;) public class NewTableEntity { @Id private String id; @Column(name = &quot;createdDate&quot;) private String createdDate; @Column(name = &quot;title&quot;) private String title; @Column(name = &quot;content&quot;) private String content; ........... @Entity /** This entity is used for secondary DB with the schema = &quot;mydb&quot; **/ @Table(schema = &quot;mydb&quot;, name = &quot;new_table&quot;) public class NewTableEntity { @Id private String id; @Column(name = &quot;createdDate&quot;) private String createdDate; @Column(name = &quot;title&quot;) private String title; @Column(name = &quot;content&quot;) private String content; ........... STEP 8: USING TRANSACTION OF PRIMARY AND SECONDARY DATASOURCE IN SERVICE CLASS To use Transactional for primary or secondary DB when we need to get/update data we need to declare which Transactional (belong to which DB) that we want to use. Let’s see the example below We will create a service class named GeneralService. Then we Autowired two repositories, one for primary datasource and one for secondary datasource. package com.example.workflow.service; import com.example.workflow.camunda.entity.NewTableEntity; import com.example.workflow.camunda.repository.CamundaNewTableRepository; import com.example.workflow.model.NewTable; import com.example.workflow.secondary.repository.MyNewTableRepository; import org.camunda.bpm.engine.HistoryService; import org.camunda.bpm.engine.history.HistoricTaskInstance; import org.camunda.bpm.engine.history.HistoricVariableInstance; import org.springframework.beans.factory.annotation.Autowired; import org.springframework.stereotype.Service; import org.springframework.transaction.annotation.EnableTransactionManagement; import org.springframework.transaction.annotation.Transactional; import org.springframework.transaction.interceptor.TransactionAspectSupport; import java.util.*; @Service /** use @EnableTransactionManagement to enable using Transactional Management **/ @EnableTransactionManagement public class GeneralService { @Autowired private CamundaNewTableRepository camundaNewTableRepository; @Autowired private MyNewTableRepository myNewTableRepository; @Autowired private HistoryService historyService; /** use @Transactional with value (bean name of primaryTransactionManager) so the Jpa will know which transaction that we want to use. **/ @Transactional(value = &quot;primaryTransactionManager&quot;) public String saveDataToCamundaNewTable(NewTable newTable) { NewTableEntity entity = new NewTableEntity(); String id = UUID.randomUUID().toString(); entity.setId(id); entity.setCreatedDate(new Date().toString()); entity.setTitle(newTable.getTitle()); entity.setContent(newTable.getContent()); camundaNewTableRepository.save(entity); return id; } /** use @Transactional with value (bean name of secondaryTransactionManager) so the Jpa will know which transaction that we want to use. **/ @Transactional(value = &quot;secondaryTransactionManager&quot;) public String saveDataToMyDB(NewTable newTable) { com.example.workflow.secondary.entity.NewTableEntity entity = new com.example.workflow.secondary.entity.NewTableEntity(); String id = UUID.randomUUID().toString(); entity.setId(id); entity.setCreatedDate(new Date().toString()); entity.setTitle(newTable.getTitle()); entity.setContent(newTable.getContent()); myNewTableRepository.save(entity); return id; } /** use @Transactional with value (bean name of chainedTransactionManager) so the Jpa will know which transaction that we want to use. If saving data to secondary is failed, so the data which is saved in primary DB will be reverted. **/ @Transactional(value = &quot;chainedTransactionManager&quot;) public List&lt;String&gt; saveDataToAllDB(NewTable newTable) { String camundaId = saveDataToCamundaNewTable(newTable); String myDBId = saveDataToMyDB(newTable); /** this comment function is used for revert all data in DB when this function is executed successfully **/ // TransactionAspectSupport.currentTransactionStatus().setRollbackOnly(); return Arrays.asList(camundaId, myDBId); } } STEP 9: TESTING After saving data into two databases, we can go to primary and secondary database to check the data as the images below: ." />
+<link rel="canonical" href="/java/2021/06/06/java-springboot-multi-datasource.html" />
+<meta property="og:url" content="/java/2021/06/06/java-springboot-multi-datasource.html" />
+<meta property="og:site_name" content="StepByStep" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-06-06T00:00:00+07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Spring boot with Multiple Datasources" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","url":"/java/2021/06/06/java-springboot-multi-datasource.html","author":{"@type":"Person","name":"Duc Nguyen"},"headline":"Spring boot with Multiple Datasources","dateModified":"2021-06-06T00:00:00+07:00","datePublished":"2021-06-06T00:00:00+07:00","description":"In some special cases, sometimes we have to connect to multi databases to handle the business logic. In this post I will show you step by step configuration for spring boot service. STEP 1: ADD DEPENDENIES IN POM.XML STEP 2: PROJECT STRUCTURE OVERVIEW STEP 3: APPLICATION.YAML STEP 4: CREATE AND CONFIG CONFIGURATION FILE FOR PRIMARY SCHEMA STEP 5: CREATE AND CONFIG CONFIGURATION FILE FOR SECONDARY SCHEMA STEP 6: CREATE AND CONFIG CONFIGURATION FILE FOR TRANSACTION CHAIN STEP 7: DECLARE ENTITY IN USING WITH MULTI DATASOURCE STEP 8: USING TRANSACTION OF PRIMARY AND SECONDARY DATASOURCE IN SERVICE CLASS STEP 9: TESTING STEP 1: ADD DEPENDENIES IN POM.XML I’m using MySQL database so I need to add 2 dependencies are mysql-connector-java and spring-boot-starter-data-jpa &lt;dependency&gt; &lt;groupId&gt;mysql&lt;/groupId&gt; &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt; &lt;/dependency&gt; &lt;dependency&gt; &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; &lt;artifactId&gt;spring-boot-starter-data-jpa&lt;/artifactId&gt; &lt;/dependency&gt; STEP 2: PROJECT STRUCTURE OVERVIEW As you can see in the picture above. We have two packages, one is camunda package which contains all repositories and entities for the primary datasource. The second one is the secondary package which contains all repositories and entities for the secondary datasource. Then we also have configurations package which contains all datasource configuration. STEP 3: APPLICATION.YAML to connect to two database schemas we need to add some configuration in the application.yaml as below: spring: datasource: driverClassName: com.mysql.jdbc.Driver url: jdbc:mysql://localhost:3306/camunda?useSSL=false #This is the primary DB connection url username: root password: password second-datasource: driverClassName: com.mysql.jdbc.Driver url: jdbc:mysql://localhost:3306/mydb?useSSL=false #This is the secondary DB connection url username: root password: password jpa: hibernate.ddl-auto: update hibernate.dialect: org.hibernate.dialect.MySQL5Dialect generate-ddl: true show-sql: true STEP 4: CREATE AND CONFIG CONFIGURATION FILE FOR PRIMARY SCHEMA To config for primary schema we need to create a configuration file named PrimarySchemaConfiguration.java in the package configurations The configuration for the primary datasource is showed as below: package com.example.workflow.configurations; import org.springframework.beans.factory.annotation.Autowired; import org.springframework.context.annotation.Bean; import org.springframework.context.annotation.Configuration; import org.springframework.context.annotation.Primary; import org.springframework.core.env.Environment; import org.springframework.data.jpa.repository.config.EnableJpaRepositories; import org.springframework.jdbc.datasource.DriverManagerDataSource; import org.springframework.orm.jpa.JpaTransactionManager; import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean; import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter; import org.springframework.transaction.PlatformTransactionManager; import javax.sql.DataSource; import java.util.HashMap; import java.util.Objects; @Configuration /** use this anotation to define the base package repository for primary data source, the EntityFactory and the transactionManager **/ @EnableJpaRepositories(basePackages = &quot;com.example.workflow.camunda.repository&quot;, entityManagerFactoryRef = &quot;primaryEntityManager&quot;, transactionManagerRef = &quot;primaryTransactionManager&quot;) public class PrimarySchemaConfiguration { @Autowired private Environment env; @Bean(name = &quot;primaryDataSource&quot;) @Primary public DataSource primaryDataSourceConfiguration() { DriverManagerDataSource dataSource = new DriverManagerDataSource(); dataSource.setDriverClassName(Objects.requireNonNull(env.getProperty(&quot;spring.datasource.driverClassName&quot;))); dataSource.setUrl(env.getProperty(&quot;spring.datasource.url&quot;)); dataSource.setUsername(env.getProperty(&quot;spring.datasource.username&quot;)); dataSource.setPassword(env.getProperty(&quot;spring.datasource.password&quot;)); return dataSource; } @Bean(name = &quot;primaryEntityManager&quot;) @Primary public LocalContainerEntityManagerFactoryBean primaryEntityManager() { LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean(); em.setDataSource(primaryDataSourceConfiguration()); /** this is the package url which contains entities of primary datasource **/ em.setPackagesToScan(&quot;com.example.workflow.camunda.entity&quot;); HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter(); em.setJpaVendorAdapter(vendorAdapter); HashMap&lt;String, Object&gt; properties = new HashMap&lt;String, Object&gt;(); properties.put(&quot;hibernate.hbm2ddl.auto&quot;, env.getProperty(&quot;spring.jpa.hibernate.ddl-auto&quot;)); properties.put(&quot;hibernate.dialect&quot;, env.getProperty(&quot;spring.jpa.hibernate.hibernate.dialect&quot;)); em.setJpaPropertyMap(properties); return em; } @Bean(name = &quot;primaryTransactionManager&quot;) @Primary public PlatformTransactionManager primaryTransactionManager() { JpaTransactionManager jpaTransactionManager = new JpaTransactionManager(); jpaTransactionManager.setEntityManagerFactory(primaryEntityManager().getObject()); return jpaTransactionManager; } } STEP 5: CREATE AND CONFIG CONFIGURATION FILE FOR SECONDARY SCHEMA To config for secondary schema we need to create a configuration file named secondaryDataSourceConfiguration.java in the package configurations The configuration for the secondary datasource is showed as below: package com.example.workflow.configurations; import org.springframework.beans.factory.annotation.Autowired; import org.springframework.context.annotation.Bean; import org.springframework.context.annotation.Configuration; import org.springframework.core.env.Environment; import org.springframework.data.jpa.repository.config.EnableJpaRepositories; import org.springframework.jdbc.datasource.DriverManagerDataSource; import org.springframework.orm.jpa.JpaTransactionManager; import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean; import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter; import org.springframework.transaction.PlatformTransactionManager; import javax.sql.DataSource; import java.util.HashMap; import java.util.Objects; @Configuration /** use this anotation to define the base package repository for secondary data source, the EntityFactory and the transactionManager **/ @EnableJpaRepositories(basePackages = &quot;com.example.workflow.secondary.repository&quot;, entityManagerFactoryRef = &quot;secondaryEntityManager&quot;, transactionManagerRef = &quot;secondaryTransactionManager&quot;) public class SecondarySchemaConfiguration { @Autowired private Environment env; @Bean(name = &quot;secondaryDataSource&quot;) public DataSource secondaryDataSourceConfiguration() { DriverManagerDataSource dataSource = new DriverManagerDataSource(); dataSource.setDriverClassName(Objects.requireNonNull(env.getProperty(&quot;spring.second-datasource.driverClassName&quot;))); dataSource.setUrl(env.getProperty(&quot;spring.second-datasource.url&quot;)); dataSource.setUsername(env.getProperty(&quot;spring.second-datasource.username&quot;)); dataSource.setPassword(env.getProperty(&quot;spring.second-datasource.password&quot;)); return dataSource; } @Bean(name = &quot;secondaryEntityManager&quot;) public LocalContainerEntityManagerFactoryBean secondaryEntityManager() { LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean(); em.setDataSource(secondaryDataSourceConfiguration()); /** this is the package which contains entities of primary datasource **/ em.setPackagesToScan(&quot;com.example.workflow.secondary.entity&quot;); HibernateJpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter(); em.setJpaVendorAdapter(jpaVendorAdapter); HashMap&lt;String, Object&gt; properties = new HashMap&lt;&gt;(); properties.put(&quot;hibernate.hbm2ddl.auto&quot;, env.getProperty(&quot;spring.jpa.hibernate.ddl-auto&quot;)); properties.put(&quot;hibernate.dialect&quot;, env.getProperty(&quot;spring.jpa.hibernate.hibernate.dialect&quot;)); em.setJpaPropertyMap(properties); return em; } @Bean(name = &quot;secondaryTransactionManager&quot;) public PlatformTransactionManager secondaryTransactionManager() { JpaTransactionManager transactionManager = new JpaTransactionManager(); transactionManager.setEntityManagerFactory(secondaryEntityManager().getObject()); return transactionManager; } } STEP 6: CREATE AND CONFIG CONFIGURATION FILE FOR TRANSACTION CHAIN Sometime we will work with two/multiple databases in a single request, and if we have an error in any transaction of two schema while executing. We will need to revert all data which are saved in one of two databases. Thus we need to configure the transaction chain to handle this issue. Assume that we save a data into DB A successfully then we continous saving data to DB B. Unfortunally, saving data to DB B is failed and we want to revert the data which is saved into DB A. We need to create a configuration file named TransactionChainConfiguration.java in configurations package. The contents of file are showed as below: package com.example.workflow.configurations; import org.springframework.beans.factory.annotation.Qualifier; import org.springframework.context.annotation.Bean; import org.springframework.context.annotation.Configuration; import org.springframework.data.transaction.ChainedTransactionManager; import org.springframework.transaction.PlatformTransactionManager; @Configuration public class TransactionChainConfiguration { /** we will create ChainedTransactionManager by two PlatformTransactionManager which are `primaryTransactionManager` and `secondaryTransactionManager` because we want to revert transaction if one of them happens issue in saving data. **/ @Bean(name = &quot;chainedTransactionManager&quot;) public ChainedTransactionManager transactionChainConfiguration( @Qualifier(&quot;primaryTransactionManager&quot;) PlatformTransactionManager primaryTransaction, @Qualifier(&quot;secondaryTransactionManager&quot;) PlatformTransactionManager secondaryTransaction) { return new ChainedTransactionManager(primaryTransaction, secondaryTransaction); } } STEP 7: DECLARE ENTITY IN USING WITH MULTI DATASOURCE for delaration entities, please look at the examples belows: @Entity /** This entity is used for primary DB with the schema = &quot;camunda&quot; **/ @Table(schema = &quot;camunda&quot;, name = &quot;new_table&quot;) public class NewTableEntity { @Id private String id; @Column(name = &quot;createdDate&quot;) private String createdDate; @Column(name = &quot;title&quot;) private String title; @Column(name = &quot;content&quot;) private String content; ........... @Entity /** This entity is used for secondary DB with the schema = &quot;mydb&quot; **/ @Table(schema = &quot;mydb&quot;, name = &quot;new_table&quot;) public class NewTableEntity { @Id private String id; @Column(name = &quot;createdDate&quot;) private String createdDate; @Column(name = &quot;title&quot;) private String title; @Column(name = &quot;content&quot;) private String content; ........... STEP 8: USING TRANSACTION OF PRIMARY AND SECONDARY DATASOURCE IN SERVICE CLASS To use Transactional for primary or secondary DB when we need to get/update data we need to declare which Transactional (belong to which DB) that we want to use. Let’s see the example below We will create a service class named GeneralService. Then we Autowired two repositories, one for primary datasource and one for secondary datasource. package com.example.workflow.service; import com.example.workflow.camunda.entity.NewTableEntity; import com.example.workflow.camunda.repository.CamundaNewTableRepository; import com.example.workflow.model.NewTable; import com.example.workflow.secondary.repository.MyNewTableRepository; import org.camunda.bpm.engine.HistoryService; import org.camunda.bpm.engine.history.HistoricTaskInstance; import org.camunda.bpm.engine.history.HistoricVariableInstance; import org.springframework.beans.factory.annotation.Autowired; import org.springframework.stereotype.Service; import org.springframework.transaction.annotation.EnableTransactionManagement; import org.springframework.transaction.annotation.Transactional; import org.springframework.transaction.interceptor.TransactionAspectSupport; import java.util.*; @Service /** use @EnableTransactionManagement to enable using Transactional Management **/ @EnableTransactionManagement public class GeneralService { @Autowired private CamundaNewTableRepository camundaNewTableRepository; @Autowired private MyNewTableRepository myNewTableRepository; @Autowired private HistoryService historyService; /** use @Transactional with value (bean name of primaryTransactionManager) so the Jpa will know which transaction that we want to use. **/ @Transactional(value = &quot;primaryTransactionManager&quot;) public String saveDataToCamundaNewTable(NewTable newTable) { NewTableEntity entity = new NewTableEntity(); String id = UUID.randomUUID().toString(); entity.setId(id); entity.setCreatedDate(new Date().toString()); entity.setTitle(newTable.getTitle()); entity.setContent(newTable.getContent()); camundaNewTableRepository.save(entity); return id; } /** use @Transactional with value (bean name of secondaryTransactionManager) so the Jpa will know which transaction that we want to use. **/ @Transactional(value = &quot;secondaryTransactionManager&quot;) public String saveDataToMyDB(NewTable newTable) { com.example.workflow.secondary.entity.NewTableEntity entity = new com.example.workflow.secondary.entity.NewTableEntity(); String id = UUID.randomUUID().toString(); entity.setId(id); entity.setCreatedDate(new Date().toString()); entity.setTitle(newTable.getTitle()); entity.setContent(newTable.getContent()); myNewTableRepository.save(entity); return id; } /** use @Transactional with value (bean name of chainedTransactionManager) so the Jpa will know which transaction that we want to use. If saving data to secondary is failed, so the data which is saved in primary DB will be reverted. **/ @Transactional(value = &quot;chainedTransactionManager&quot;) public List&lt;String&gt; saveDataToAllDB(NewTable newTable) { String camundaId = saveDataToCamundaNewTable(newTable); String myDBId = saveDataToMyDB(newTable); /** this comment function is used for revert all data in DB when this function is executed successfully **/ // TransactionAspectSupport.currentTransactionStatus().setRollbackOnly(); return Arrays.asList(camundaId, myDBId); } } STEP 9: TESTING After saving data into two databases, we can go to primary and secondary database to check the data as the images below: .","mainEntityOfPage":{"@type":"WebPage","@id":"/java/2021/06/06/java-springboot-multi-datasource.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="StepByStep" /><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NZ8G5007GK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-NZ8G5007GK');
+</script></head><body>
+  <div class="container-flush">
+    <div class="row"><!-- navigation bar -->
+<div class="col-lg-12">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" role="banner"><a class="navbar-brand site-title" rel="author" href="/">StepByStep</a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="nav navbar-nav"><li class="nav-item active">
+          <a class="nav-link" href="/about">About</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/">Java</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/docker">Docker</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/data">Data</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/ci-cd">CI-CD</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/python">Python</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/fe">FE</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/others">Others</a>
+        </li></ul>
+    </div>
+
+    <!-- Html Elements for Search -->
+    <div id="search-container" class="btn-group">
+      <input type="text" id="search-input" placeholder="search...">
+      <button id="clear">clear</button>
+      <ul id="results-container"></ul>
+    </div>
+
+    <!-- Script pointing to search-script.js -->
+    <script src="/java-scripts/search-script.js" type="text/javascript"></script>
+
+    <!-- Configuration -->
+    <script>
+      SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('results-container'),
+        json: '/search.json'
+      })
+    </script>
+
+    <!-- search clear -->
+    <script>
+      window.addEventListener('load', () => {
+        const button = document.querySelector('#clear');
+        button.addEventListener('click', () => {
+          document.querySelector('#search-input').value = "";
+          document.querySelector('#results-container').innerHTML = "";
+        });
+      });
+    </script>
+  </nav>
+</div></div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+  <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+    <header class="post-header">
+      <h1 class="post-title p-name" itemprop="name headline">Spring boot with Multiple Datasources</h1>
+      <p class="post-meta">
+        <time class="dt-published" datetime="2021-06-06T00:00:00+07:00" itemprop="datePublished">Jun 6, 2021
+        </time></p>
+    </header>
+  
+    <div class="post-content e-content" itemprop="articleBody">
+      <blockquote>
+  <p>In some special cases, sometimes we have to connect to multi databases to handle the business logic. In this post I will show you step by step configuration for spring boot service.</p>
+</blockquote>
+
+<ul id="markdown-toc">
+  <li><a href="#step-1-add-dependenies-in-pomxml" id="markdown-toc-step-1-add-dependenies-in-pomxml">STEP 1: ADD DEPENDENIES IN POM.XML</a></li>
+  <li><a href="#step-2-project-structure-overview" id="markdown-toc-step-2-project-structure-overview">STEP 2: PROJECT STRUCTURE OVERVIEW</a></li>
+  <li><a href="#step-3-applicationyaml" id="markdown-toc-step-3-applicationyaml">STEP 3: APPLICATION.YAML</a></li>
+  <li><a href="#step-4-create-and-config-configuration-file-for-primary-schema" id="markdown-toc-step-4-create-and-config-configuration-file-for-primary-schema">STEP 4: CREATE AND CONFIG CONFIGURATION FILE FOR PRIMARY SCHEMA</a></li>
+  <li><a href="#step-5-create-and-config-configuration-file-for-secondary-schema" id="markdown-toc-step-5-create-and-config-configuration-file-for-secondary-schema">STEP 5: CREATE AND CONFIG CONFIGURATION FILE FOR SECONDARY SCHEMA</a></li>
+  <li><a href="#step-6-create-and-config-configuration-file-for-transaction-chain" id="markdown-toc-step-6-create-and-config-configuration-file-for-transaction-chain">STEP 6: CREATE AND CONFIG CONFIGURATION FILE FOR TRANSACTION CHAIN</a></li>
+  <li><a href="#step-7-declare-entity-in-using-with-multi-datasource" id="markdown-toc-step-7-declare-entity-in-using-with-multi-datasource">STEP 7: DECLARE ENTITY IN USING WITH MULTI DATASOURCE</a></li>
+  <li><a href="#step-8-using-transaction-of-primary-and-secondary-datasource-in-service-class" id="markdown-toc-step-8-using-transaction-of-primary-and-secondary-datasource-in-service-class">STEP 8: USING TRANSACTION OF PRIMARY AND SECONDARY DATASOURCE IN SERVICE CLASS</a></li>
+  <li><a href="#step-9-testing" id="markdown-toc-step-9-testing">STEP 9: TESTING</a></li>
+</ul>
+
+<h2 id="step-1-add-dependenies-in-pomxml">STEP 1: ADD DEPENDENIES IN POM.XML</h2>
+
+<ul>
+  <li>I’m using MySQL database so I need to add 2 dependencies are <code class="language-plaintext highlighter-rouge">mysql-connector-java</code> and <code class="language-plaintext highlighter-rouge">spring-boot-starter-data-jpa</code></li>
+</ul>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nt">&lt;dependency&gt;</span>
+      <span class="nt">&lt;groupId&gt;</span>mysql<span class="nt">&lt;/groupId&gt;</span>
+      <span class="nt">&lt;artifactId&gt;</span>mysql-connector-java<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>
+
+    <span class="nt">&lt;dependency&gt;</span>
+      <span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+      <span class="nt">&lt;artifactId&gt;</span>spring-boot-starter-data-jpa<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>
+
+</code></pre></div></div>
+
+<h2 id="step-2-project-structure-overview">STEP 2: PROJECT STRUCTURE OVERVIEW</h2>
+
+<p><a href="/assets/images/spring-boot-multi-datasource-project-structure.JPG"><img src="/assets/images/spring-boot-multi-datasource-project-structure.JPG" alt="Project structure overview" title="Project structure overview" /></a></p>
+
+<ul>
+  <li>
+    <p>As you can see in the picture above. We have two <code class="language-plaintext highlighter-rouge">packages</code>, one is <code class="language-plaintext highlighter-rouge">camunda package</code> which contains all <strong>repositories</strong> and <strong>entities</strong> for the <code class="language-plaintext highlighter-rouge">primary</code> datasource. The second one is the <code class="language-plaintext highlighter-rouge">secondary package</code> which contains all <strong>repositories</strong> and <strong>entities</strong> for the <code class="language-plaintext highlighter-rouge">secondary</code> datasource.</p>
+  </li>
+  <li>
+    <p>Then we also have <code class="language-plaintext highlighter-rouge">configurations package</code> which contains all <strong>datasource configuration</strong>.</p>
+  </li>
+</ul>
+
+<h2 id="step-3-applicationyaml">STEP 3: APPLICATION.YAML</h2>
+
+<ul>
+  <li>to connect to two database schemas we need to add some configuration in the <code class="language-plaintext highlighter-rouge">application.yaml</code> as below:</li>
+</ul>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="na">spring</span><span class="pi">:</span>
+    <span class="na">datasource</span><span class="pi">:</span>
+      <span class="na">driverClassName</span><span class="pi">:</span> <span class="s">com.mysql.jdbc.Driver</span>
+      <span class="na">url</span><span class="pi">:</span> <span class="s">jdbc:mysql://localhost:3306/camunda?useSSL=false</span>  <span class="c1">#This is the primary DB connection url</span>
+      <span class="na">username</span><span class="pi">:</span> <span class="s">root</span>
+      <span class="na">password</span><span class="pi">:</span> <span class="s">password</span>
+    <span class="na">second-datasource</span><span class="pi">:</span>
+      <span class="na">driverClassName</span><span class="pi">:</span> <span class="s">com.mysql.jdbc.Driver</span>
+      <span class="na">url</span><span class="pi">:</span> <span class="s">jdbc:mysql://localhost:3306/mydb?useSSL=false</span>  <span class="c1">#This is the secondary DB connection url</span>
+      <span class="na">username</span><span class="pi">:</span> <span class="s">root</span>
+      <span class="na">password</span><span class="pi">:</span> <span class="s">password</span>
+    <span class="na">jpa</span><span class="pi">:</span>
+      <span class="na">hibernate.ddl-auto</span><span class="pi">:</span> <span class="s">update</span>
+      <span class="na">hibernate.dialect</span><span class="pi">:</span> <span class="s">org.hibernate.dialect.MySQL5Dialect</span>
+      <span class="na">generate-ddl</span><span class="pi">:</span> <span class="no">true</span>
+      <span class="na">show-sql</span><span class="pi">:</span> <span class="no">true</span>
+</code></pre></div></div>
+
+<h2 id="step-4-create-and-config-configuration-file-for-primary-schema">STEP 4: CREATE AND CONFIG CONFIGURATION FILE FOR PRIMARY SCHEMA</h2>
+
+<ul>
+  <li>To config for <code class="language-plaintext highlighter-rouge">primary schema</code> we need to create a configuration file named <code class="language-plaintext highlighter-rouge">PrimarySchemaConfiguration.java</code> in the package <code class="language-plaintext highlighter-rouge">configurations</code></li>
+  <li>The configuration for the <code class="language-plaintext highlighter-rouge">primary datasource</code> is showed as below:</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kn">package</span> <span class="nn">com.example.workflow.configurations</span><span class="o">;</span>
+
+  <span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="o">;</span>
+  <span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Bean</span><span class="o">;</span>
+  <span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Configuration</span><span class="o">;</span>
+  <span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Primary</span><span class="o">;</span>
+  <span class="kn">import</span> <span class="nn">org.springframework.core.env.Environment</span><span class="o">;</span>
+  <span class="kn">import</span> <span class="nn">org.springframework.data.jpa.repository.config.EnableJpaRepositories</span><span class="o">;</span>
+  <span class="kn">import</span> <span class="nn">org.springframework.jdbc.datasource.DriverManagerDataSource</span><span class="o">;</span>
+  <span class="kn">import</span> <span class="nn">org.springframework.orm.jpa.JpaTransactionManager</span><span class="o">;</span>
+  <span class="kn">import</span> <span class="nn">org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean</span><span class="o">;</span>
+  <span class="kn">import</span> <span class="nn">org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter</span><span class="o">;</span>
+  <span class="kn">import</span> <span class="nn">org.springframework.transaction.PlatformTransactionManager</span><span class="o">;</span>
+
+  <span class="kn">import</span> <span class="nn">javax.sql.DataSource</span><span class="o">;</span>
+  <span class="kn">import</span> <span class="nn">java.util.HashMap</span><span class="o">;</span>
+  <span class="kn">import</span> <span class="nn">java.util.Objects</span><span class="o">;</span>
+
+  <span class="nd">@Configuration</span>
+   <span class="cm">/**
+        use this anotation to define the base package repository for primary data source,
+        the EntityFactory and the transactionManager
+    **/</span>
+  <span class="nd">@EnableJpaRepositories</span><span class="o">(</span><span class="n">basePackages</span> <span class="o">=</span> <span class="s">"com.example.workflow.camunda.repository"</span><span class="o">,</span>
+  <span class="n">entityManagerFactoryRef</span> <span class="o">=</span> <span class="s">"primaryEntityManager"</span><span class="o">,</span>
+  <span class="n">transactionManagerRef</span> <span class="o">=</span> <span class="s">"primaryTransactionManager"</span><span class="o">)</span>
+  <span class="kd">public</span> <span class="kd">class</span> <span class="nc">PrimarySchemaConfiguration</span> <span class="o">{</span>
+
+
+      <span class="nd">@Autowired</span>
+      <span class="kd">private</span> <span class="nc">Environment</span> <span class="n">env</span><span class="o">;</span>
+
+
+      <span class="nd">@Bean</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"primaryDataSource"</span><span class="o">)</span>
+      <span class="nd">@Primary</span>
+      <span class="kd">public</span> <span class="nc">DataSource</span> <span class="nf">primaryDataSourceConfiguration</span><span class="o">()</span> <span class="o">{</span>
+          <span class="nc">DriverManagerDataSource</span> <span class="n">dataSource</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">DriverManagerDataSource</span><span class="o">();</span>
+          <span class="n">dataSource</span><span class="o">.</span><span class="na">setDriverClassName</span><span class="o">(</span><span class="nc">Objects</span><span class="o">.</span><span class="na">requireNonNull</span><span class="o">(</span><span class="n">env</span><span class="o">.</span><span class="na">getProperty</span><span class="o">(</span><span class="s">"spring.datasource.driverClassName"</span><span class="o">)));</span>
+          <span class="n">dataSource</span><span class="o">.</span><span class="na">setUrl</span><span class="o">(</span><span class="n">env</span><span class="o">.</span><span class="na">getProperty</span><span class="o">(</span><span class="s">"spring.datasource.url"</span><span class="o">));</span>
+          <span class="n">dataSource</span><span class="o">.</span><span class="na">setUsername</span><span class="o">(</span><span class="n">env</span><span class="o">.</span><span class="na">getProperty</span><span class="o">(</span><span class="s">"spring.datasource.username"</span><span class="o">));</span>
+          <span class="n">dataSource</span><span class="o">.</span><span class="na">setPassword</span><span class="o">(</span><span class="n">env</span><span class="o">.</span><span class="na">getProperty</span><span class="o">(</span><span class="s">"spring.datasource.password"</span><span class="o">));</span>
+          <span class="k">return</span> <span class="n">dataSource</span><span class="o">;</span>
+      <span class="o">}</span>
+
+
+      <span class="nd">@Bean</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"primaryEntityManager"</span><span class="o">)</span>
+      <span class="nd">@Primary</span>
+      <span class="kd">public</span> <span class="nc">LocalContainerEntityManagerFactoryBean</span> <span class="nf">primaryEntityManager</span><span class="o">()</span> <span class="o">{</span>
+          <span class="nc">LocalContainerEntityManagerFactoryBean</span> <span class="n">em</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LocalContainerEntityManagerFactoryBean</span><span class="o">();</span>
+          <span class="n">em</span><span class="o">.</span><span class="na">setDataSource</span><span class="o">(</span><span class="n">primaryDataSourceConfiguration</span><span class="o">());</span>
+          <span class="cm">/**
+            this is the package url which contains entities of primary datasource
+          **/</span>
+          <span class="n">em</span><span class="o">.</span><span class="na">setPackagesToScan</span><span class="o">(</span><span class="s">"com.example.workflow.camunda.entity"</span><span class="o">);</span>
+
+          <span class="nc">HibernateJpaVendorAdapter</span> <span class="n">vendorAdapter</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HibernateJpaVendorAdapter</span><span class="o">();</span>
+          <span class="n">em</span><span class="o">.</span><span class="na">setJpaVendorAdapter</span><span class="o">(</span><span class="n">vendorAdapter</span><span class="o">);</span>
+          <span class="nc">HashMap</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Object</span><span class="o">&gt;</span> <span class="n">properties</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashMap</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Object</span><span class="o">&gt;();</span>
+          <span class="n">properties</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"hibernate.hbm2ddl.auto"</span><span class="o">,</span> <span class="n">env</span><span class="o">.</span><span class="na">getProperty</span><span class="o">(</span><span class="s">"spring.jpa.hibernate.ddl-auto"</span><span class="o">));</span>
+          <span class="n">properties</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"hibernate.dialect"</span><span class="o">,</span> <span class="n">env</span><span class="o">.</span><span class="na">getProperty</span><span class="o">(</span><span class="s">"spring.jpa.hibernate.hibernate.dialect"</span><span class="o">));</span>
+          <span class="n">em</span><span class="o">.</span><span class="na">setJpaPropertyMap</span><span class="o">(</span><span class="n">properties</span><span class="o">);</span>
+          <span class="k">return</span> <span class="n">em</span><span class="o">;</span>
+      <span class="o">}</span>
+
+      <span class="nd">@Bean</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"primaryTransactionManager"</span><span class="o">)</span>
+      <span class="nd">@Primary</span>
+      <span class="kd">public</span> <span class="nc">PlatformTransactionManager</span> <span class="nf">primaryTransactionManager</span><span class="o">()</span> <span class="o">{</span>
+          <span class="nc">JpaTransactionManager</span> <span class="n">jpaTransactionManager</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">JpaTransactionManager</span><span class="o">();</span>
+          <span class="n">jpaTransactionManager</span><span class="o">.</span><span class="na">setEntityManagerFactory</span><span class="o">(</span><span class="n">primaryEntityManager</span><span class="o">().</span><span class="na">getObject</span><span class="o">());</span>
+          <span class="k">return</span> <span class="n">jpaTransactionManager</span><span class="o">;</span>
+      <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="step-5-create-and-config-configuration-file-for-secondary-schema">STEP 5: CREATE AND CONFIG CONFIGURATION FILE FOR SECONDARY SCHEMA</h2>
+
+<ul>
+  <li>To config for <code class="language-plaintext highlighter-rouge">secondary schema</code> we need to create a configuration file named <code class="language-plaintext highlighter-rouge">secondaryDataSourceConfiguration.java</code> in the package <code class="language-plaintext highlighter-rouge">configurations</code></li>
+  <li>The configuration for the <code class="language-plaintext highlighter-rouge">secondary datasource</code> is showed as below:</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kn">package</span> <span class="nn">com.example.workflow.configurations</span><span class="o">;</span>
+
+  <span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="o">;</span>
+  <span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Bean</span><span class="o">;</span>
+  <span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Configuration</span><span class="o">;</span>
+  <span class="kn">import</span> <span class="nn">org.springframework.core.env.Environment</span><span class="o">;</span>
+  <span class="kn">import</span> <span class="nn">org.springframework.data.jpa.repository.config.EnableJpaRepositories</span><span class="o">;</span>
+  <span class="kn">import</span> <span class="nn">org.springframework.jdbc.datasource.DriverManagerDataSource</span><span class="o">;</span>
+  <span class="kn">import</span> <span class="nn">org.springframework.orm.jpa.JpaTransactionManager</span><span class="o">;</span>
+  <span class="kn">import</span> <span class="nn">org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean</span><span class="o">;</span>
+  <span class="kn">import</span> <span class="nn">org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter</span><span class="o">;</span>
+  <span class="kn">import</span> <span class="nn">org.springframework.transaction.PlatformTransactionManager</span><span class="o">;</span>
+
+  <span class="kn">import</span> <span class="nn">javax.sql.DataSource</span><span class="o">;</span>
+  <span class="kn">import</span> <span class="nn">java.util.HashMap</span><span class="o">;</span>
+  <span class="kn">import</span> <span class="nn">java.util.Objects</span><span class="o">;</span>
+
+  <span class="nd">@Configuration</span>
+        <span class="cm">/**
+          use this anotation to define the base package repository for secondary data source,
+          the EntityFactory and the transactionManager
+        **/</span>
+  <span class="nd">@EnableJpaRepositories</span><span class="o">(</span><span class="n">basePackages</span> <span class="o">=</span> <span class="s">"com.example.workflow.secondary.repository"</span><span class="o">,</span>
+  <span class="n">entityManagerFactoryRef</span> <span class="o">=</span> <span class="s">"secondaryEntityManager"</span><span class="o">,</span>
+  <span class="n">transactionManagerRef</span> <span class="o">=</span> <span class="s">"secondaryTransactionManager"</span><span class="o">)</span>
+  <span class="kd">public</span> <span class="kd">class</span> <span class="nc">SecondarySchemaConfiguration</span> <span class="o">{</span>
+
+      <span class="nd">@Autowired</span>
+      <span class="kd">private</span> <span class="nc">Environment</span> <span class="n">env</span><span class="o">;</span>
+
+      <span class="nd">@Bean</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"secondaryDataSource"</span><span class="o">)</span>
+      <span class="kd">public</span> <span class="nc">DataSource</span> <span class="nf">secondaryDataSourceConfiguration</span><span class="o">()</span> <span class="o">{</span>
+          <span class="nc">DriverManagerDataSource</span> <span class="n">dataSource</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">DriverManagerDataSource</span><span class="o">();</span>
+          <span class="n">dataSource</span><span class="o">.</span><span class="na">setDriverClassName</span><span class="o">(</span><span class="nc">Objects</span><span class="o">.</span><span class="na">requireNonNull</span><span class="o">(</span><span class="n">env</span><span class="o">.</span><span class="na">getProperty</span><span class="o">(</span><span class="s">"spring.second-datasource.driverClassName"</span><span class="o">)));</span>
+          <span class="n">dataSource</span><span class="o">.</span><span class="na">setUrl</span><span class="o">(</span><span class="n">env</span><span class="o">.</span><span class="na">getProperty</span><span class="o">(</span><span class="s">"spring.second-datasource.url"</span><span class="o">));</span>
+          <span class="n">dataSource</span><span class="o">.</span><span class="na">setUsername</span><span class="o">(</span><span class="n">env</span><span class="o">.</span><span class="na">getProperty</span><span class="o">(</span><span class="s">"spring.second-datasource.username"</span><span class="o">));</span>
+          <span class="n">dataSource</span><span class="o">.</span><span class="na">setPassword</span><span class="o">(</span><span class="n">env</span><span class="o">.</span><span class="na">getProperty</span><span class="o">(</span><span class="s">"spring.second-datasource.password"</span><span class="o">));</span>
+          <span class="k">return</span> <span class="n">dataSource</span><span class="o">;</span>
+      <span class="o">}</span>
+
+      <span class="nd">@Bean</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"secondaryEntityManager"</span><span class="o">)</span>
+      <span class="kd">public</span> <span class="nc">LocalContainerEntityManagerFactoryBean</span> <span class="nf">secondaryEntityManager</span><span class="o">()</span> <span class="o">{</span>
+          <span class="nc">LocalContainerEntityManagerFactoryBean</span> <span class="n">em</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LocalContainerEntityManagerFactoryBean</span><span class="o">();</span>
+          <span class="n">em</span><span class="o">.</span><span class="na">setDataSource</span><span class="o">(</span><span class="n">secondaryDataSourceConfiguration</span><span class="o">());</span>
+           <span class="cm">/**
+              this is the package which contains entities of primary datasource
+            **/</span>
+          <span class="n">em</span><span class="o">.</span><span class="na">setPackagesToScan</span><span class="o">(</span><span class="s">"com.example.workflow.secondary.entity"</span><span class="o">);</span>
+          <span class="nc">HibernateJpaVendorAdapter</span> <span class="n">jpaVendorAdapter</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HibernateJpaVendorAdapter</span><span class="o">();</span>
+          <span class="n">em</span><span class="o">.</span><span class="na">setJpaVendorAdapter</span><span class="o">(</span><span class="n">jpaVendorAdapter</span><span class="o">);</span>
+          <span class="nc">HashMap</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Object</span><span class="o">&gt;</span> <span class="n">properties</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashMap</span><span class="o">&lt;&gt;();</span>
+          <span class="n">properties</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"hibernate.hbm2ddl.auto"</span><span class="o">,</span> <span class="n">env</span><span class="o">.</span><span class="na">getProperty</span><span class="o">(</span><span class="s">"spring.jpa.hibernate.ddl-auto"</span><span class="o">));</span>
+          <span class="n">properties</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"hibernate.dialect"</span><span class="o">,</span> <span class="n">env</span><span class="o">.</span><span class="na">getProperty</span><span class="o">(</span><span class="s">"spring.jpa.hibernate.hibernate.dialect"</span><span class="o">));</span>
+          <span class="n">em</span><span class="o">.</span><span class="na">setJpaPropertyMap</span><span class="o">(</span><span class="n">properties</span><span class="o">);</span>
+          <span class="k">return</span> <span class="n">em</span><span class="o">;</span>
+      <span class="o">}</span>
+
+      <span class="nd">@Bean</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"secondaryTransactionManager"</span><span class="o">)</span>
+      <span class="kd">public</span> <span class="nc">PlatformTransactionManager</span> <span class="nf">secondaryTransactionManager</span><span class="o">()</span> <span class="o">{</span>
+          <span class="nc">JpaTransactionManager</span> <span class="n">transactionManager</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">JpaTransactionManager</span><span class="o">();</span>
+          <span class="n">transactionManager</span><span class="o">.</span><span class="na">setEntityManagerFactory</span><span class="o">(</span><span class="n">secondaryEntityManager</span><span class="o">().</span><span class="na">getObject</span><span class="o">());</span>
+          <span class="k">return</span> <span class="n">transactionManager</span><span class="o">;</span>
+      <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="step-6-create-and-config-configuration-file-for-transaction-chain">STEP 6: CREATE AND CONFIG CONFIGURATION FILE FOR TRANSACTION CHAIN</h2>
+
+<ul>
+  <li>
+    <p>Sometime we will work with two/multiple databases in <strong>a single request</strong>, and if we have an error in any transaction of two schema while executing. We will <strong>need to revert all data which are saved in one of two databases</strong>. Thus we need to configure the <code class="language-plaintext highlighter-rouge">transaction chain</code> to handle this issue.</p>
+  </li>
+  <li>
+    <p>Assume that we save a data into <strong>DB A successfully</strong> then we continous saving data to <strong>DB B</strong>. Unfortunally, <strong>saving data to DB B is failed</strong> and we want to <strong>revert the data which is saved into DB A</strong>.</p>
+  </li>
+  <li>
+    <p>We need to create a configuration file named <code class="language-plaintext highlighter-rouge">TransactionChainConfiguration.java</code> in <code class="language-plaintext highlighter-rouge">configurations package</code>. The contents of file are showed as below:</p>
+  </li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kn">package</span> <span class="nn">com.example.workflow.configurations</span><span class="o">;</span>
+
+  <span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Qualifier</span><span class="o">;</span>
+  <span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Bean</span><span class="o">;</span>
+  <span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Configuration</span><span class="o">;</span>
+  <span class="kn">import</span> <span class="nn">org.springframework.data.transaction.ChainedTransactionManager</span><span class="o">;</span>
+  <span class="kn">import</span> <span class="nn">org.springframework.transaction.PlatformTransactionManager</span><span class="o">;</span>
+
+
+  <span class="nd">@Configuration</span>
+  <span class="kd">public</span> <span class="kd">class</span> <span class="nc">TransactionChainConfiguration</span> <span class="o">{</span>
+
+      <span class="cm">/**
+          we will create ChainedTransactionManager by two PlatformTransactionManager
+          which are `primaryTransactionManager` and `secondaryTransactionManager`
+          because we want to revert transaction if one of them happens issue in saving data.
+      **/</span>
+
+      <span class="nd">@Bean</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"chainedTransactionManager"</span><span class="o">)</span>
+      <span class="kd">public</span> <span class="nc">ChainedTransactionManager</span> <span class="nf">transactionChainConfiguration</span><span class="o">(</span>
+              <span class="nd">@Qualifier</span><span class="o">(</span><span class="s">"primaryTransactionManager"</span><span class="o">)</span> <span class="nc">PlatformTransactionManager</span> <span class="n">primaryTransaction</span><span class="o">,</span>
+              <span class="nd">@Qualifier</span><span class="o">(</span><span class="s">"secondaryTransactionManager"</span><span class="o">)</span> <span class="nc">PlatformTransactionManager</span> <span class="n">secondaryTransaction</span><span class="o">)</span> <span class="o">{</span>
+          <span class="k">return</span> <span class="k">new</span> <span class="nf">ChainedTransactionManager</span><span class="o">(</span><span class="n">primaryTransaction</span><span class="o">,</span> <span class="n">secondaryTransaction</span><span class="o">);</span>
+      <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="step-7-declare-entity-in-using-with-multi-datasource">STEP 7: DECLARE ENTITY IN USING WITH MULTI DATASOURCE</h2>
+
+<ul>
+  <li>for delaration entities, please look at the examples belows:</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nd">@Entity</span>
+  <span class="cm">/**
+      This entity is used for primary DB with the schema = "camunda"
+  **/</span>
+  <span class="nd">@Table</span><span class="o">(</span><span class="n">schema</span> <span class="o">=</span> <span class="s">"camunda"</span><span class="o">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s">"new_table"</span><span class="o">)</span>
+  <span class="kd">public</span> <span class="kd">class</span> <span class="nc">NewTableEntity</span> <span class="o">{</span>
+
+      <span class="nd">@Id</span>
+      <span class="kd">private</span> <span class="nc">String</span> <span class="n">id</span><span class="o">;</span>
+
+      <span class="nd">@Column</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"createdDate"</span><span class="o">)</span>
+      <span class="kd">private</span> <span class="nc">String</span> <span class="n">createdDate</span><span class="o">;</span>
+
+      <span class="nd">@Column</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"title"</span><span class="o">)</span>
+      <span class="kd">private</span> <span class="nc">String</span> <span class="n">title</span><span class="o">;</span>
+
+      <span class="nd">@Column</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"content"</span><span class="o">)</span>
+      <span class="kd">private</span> <span class="nc">String</span> <span class="n">content</span><span class="o">;</span>
+
+      <span class="o">...........</span>
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+  <span class="nd">@Entity</span>
+  <span class="cm">/**
+      This entity is used for secondary DB with the schema = "mydb"
+  **/</span>
+  <span class="nd">@Table</span><span class="o">(</span><span class="n">schema</span> <span class="o">=</span> <span class="s">"mydb"</span><span class="o">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s">"new_table"</span><span class="o">)</span>
+  <span class="kd">public</span> <span class="kd">class</span> <span class="nc">NewTableEntity</span> <span class="o">{</span>
+
+    <span class="nd">@Id</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">id</span><span class="o">;</span>
+
+    <span class="nd">@Column</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"createdDate"</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">createdDate</span><span class="o">;</span>
+
+    <span class="nd">@Column</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"title"</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">title</span><span class="o">;</span>
+
+    <span class="nd">@Column</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"content"</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">content</span><span class="o">;</span>
+
+      <span class="o">...........</span>
+</code></pre></div></div>
+
+<h2 id="step-8-using-transaction-of-primary-and-secondary-datasource-in-service-class">STEP 8: USING TRANSACTION OF PRIMARY AND SECONDARY DATASOURCE IN SERVICE CLASS</h2>
+
+<ul>
+  <li>
+    <p>To use <code class="language-plaintext highlighter-rouge">Transactional</code> for primary or secondary DB when we need to get/update data we need to declare which <code class="language-plaintext highlighter-rouge">Transactional (belong to which DB)</code> that we want to use. Let’s see the example below</p>
+  </li>
+  <li>
+    <p>We will create a service class named <code class="language-plaintext highlighter-rouge">GeneralService</code>. Then we <strong>Autowired</strong> two <strong>repositories</strong>, one for <code class="language-plaintext highlighter-rouge">primary datasource</code> and one for <code class="language-plaintext highlighter-rouge">secondary datasource</code>.</p>
+  </li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+  <span class="kn">package</span> <span class="nn">com.example.workflow.service</span><span class="o">;</span>
+
+  <span class="kn">import</span> <span class="nn">com.example.workflow.camunda.entity.NewTableEntity</span><span class="o">;</span>
+  <span class="kn">import</span> <span class="nn">com.example.workflow.camunda.repository.CamundaNewTableRepository</span><span class="o">;</span>
+  <span class="kn">import</span> <span class="nn">com.example.workflow.model.NewTable</span><span class="o">;</span>
+  <span class="kn">import</span> <span class="nn">com.example.workflow.secondary.repository.MyNewTableRepository</span><span class="o">;</span>
+  <span class="kn">import</span> <span class="nn">org.camunda.bpm.engine.HistoryService</span><span class="o">;</span>
+  <span class="kn">import</span> <span class="nn">org.camunda.bpm.engine.history.HistoricTaskInstance</span><span class="o">;</span>
+  <span class="kn">import</span> <span class="nn">org.camunda.bpm.engine.history.HistoricVariableInstance</span><span class="o">;</span>
+  <span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="o">;</span>
+  <span class="kn">import</span> <span class="nn">org.springframework.stereotype.Service</span><span class="o">;</span>
+  <span class="kn">import</span> <span class="nn">org.springframework.transaction.annotation.EnableTransactionManagement</span><span class="o">;</span>
+  <span class="kn">import</span> <span class="nn">org.springframework.transaction.annotation.Transactional</span><span class="o">;</span>
+  <span class="kn">import</span> <span class="nn">org.springframework.transaction.interceptor.TransactionAspectSupport</span><span class="o">;</span>
+
+
+  <span class="kn">import</span> <span class="nn">java.util.*</span><span class="o">;</span>
+
+  <span class="nd">@Service</span>
+  <span class="cm">/**
+    use  @EnableTransactionManagement to enable using Transactional Management
+  **/</span>
+  <span class="nd">@EnableTransactionManagement</span>
+  <span class="kd">public</span> <span class="kd">class</span> <span class="nc">GeneralService</span> <span class="o">{</span>
+
+
+      <span class="nd">@Autowired</span>
+      <span class="kd">private</span> <span class="nc">CamundaNewTableRepository</span> <span class="n">camundaNewTableRepository</span><span class="o">;</span>
+
+      <span class="nd">@Autowired</span>
+      <span class="kd">private</span> <span class="nc">MyNewTableRepository</span> <span class="n">myNewTableRepository</span><span class="o">;</span>
+
+      <span class="nd">@Autowired</span>
+      <span class="kd">private</span> <span class="nc">HistoryService</span> <span class="n">historyService</span><span class="o">;</span>
+
+      <span class="cm">/**
+          use @Transactional with value (bean name of primaryTransactionManager)
+          so the Jpa will know which transaction that we want to use.
+      **/</span>
+      <span class="nd">@Transactional</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">"primaryTransactionManager"</span><span class="o">)</span>
+      <span class="kd">public</span> <span class="nc">String</span> <span class="nf">saveDataToCamundaNewTable</span><span class="o">(</span><span class="nc">NewTable</span> <span class="n">newTable</span><span class="o">)</span> <span class="o">{</span>
+          <span class="nc">NewTableEntity</span> <span class="n">entity</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">NewTableEntity</span><span class="o">();</span>
+          <span class="nc">String</span> <span class="n">id</span> <span class="o">=</span> <span class="no">UUID</span><span class="o">.</span><span class="na">randomUUID</span><span class="o">().</span><span class="na">toString</span><span class="o">();</span>
+          <span class="n">entity</span><span class="o">.</span><span class="na">setId</span><span class="o">(</span><span class="n">id</span><span class="o">);</span>
+          <span class="n">entity</span><span class="o">.</span><span class="na">setCreatedDate</span><span class="o">(</span><span class="k">new</span> <span class="nc">Date</span><span class="o">().</span><span class="na">toString</span><span class="o">());</span>
+          <span class="n">entity</span><span class="o">.</span><span class="na">setTitle</span><span class="o">(</span><span class="n">newTable</span><span class="o">.</span><span class="na">getTitle</span><span class="o">());</span>
+          <span class="n">entity</span><span class="o">.</span><span class="na">setContent</span><span class="o">(</span><span class="n">newTable</span><span class="o">.</span><span class="na">getContent</span><span class="o">());</span>
+          <span class="n">camundaNewTableRepository</span><span class="o">.</span><span class="na">save</span><span class="o">(</span><span class="n">entity</span><span class="o">);</span>
+          <span class="k">return</span> <span class="n">id</span><span class="o">;</span>
+      <span class="o">}</span>
+
+      <span class="cm">/**
+        use @Transactional with value (bean name of secondaryTransactionManager)
+        so the Jpa will know which transaction that we want to use.
+      **/</span>
+      <span class="nd">@Transactional</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">"secondaryTransactionManager"</span><span class="o">)</span>
+      <span class="kd">public</span> <span class="nc">String</span> <span class="nf">saveDataToMyDB</span><span class="o">(</span><span class="nc">NewTable</span> <span class="n">newTable</span><span class="o">)</span> <span class="o">{</span>
+          <span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">workflow</span><span class="o">.</span><span class="na">secondary</span><span class="o">.</span><span class="na">entity</span><span class="o">.</span><span class="na">NewTableEntity</span> <span class="n">entity</span> <span class="o">=</span> <span class="k">new</span> <span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">workflow</span><span class="o">.</span><span class="na">secondary</span><span class="o">.</span><span class="na">entity</span><span class="o">.</span><span class="na">NewTableEntity</span><span class="o">();</span>
+          <span class="nc">String</span> <span class="n">id</span> <span class="o">=</span> <span class="no">UUID</span><span class="o">.</span><span class="na">randomUUID</span><span class="o">().</span><span class="na">toString</span><span class="o">();</span>
+          <span class="n">entity</span><span class="o">.</span><span class="na">setId</span><span class="o">(</span><span class="n">id</span><span class="o">);</span>
+          <span class="n">entity</span><span class="o">.</span><span class="na">setCreatedDate</span><span class="o">(</span><span class="k">new</span> <span class="nc">Date</span><span class="o">().</span><span class="na">toString</span><span class="o">());</span>
+          <span class="n">entity</span><span class="o">.</span><span class="na">setTitle</span><span class="o">(</span><span class="n">newTable</span><span class="o">.</span><span class="na">getTitle</span><span class="o">());</span>
+          <span class="n">entity</span><span class="o">.</span><span class="na">setContent</span><span class="o">(</span><span class="n">newTable</span><span class="o">.</span><span class="na">getContent</span><span class="o">());</span>
+          <span class="n">myNewTableRepository</span><span class="o">.</span><span class="na">save</span><span class="o">(</span><span class="n">entity</span><span class="o">);</span>
+          <span class="k">return</span> <span class="n">id</span><span class="o">;</span>
+      <span class="o">}</span>
+
+      <span class="cm">/**
+        use @Transactional with value (bean name of chainedTransactionManager)
+        so the Jpa will know which transaction that we want to use.
+        If saving data to secondary is failed, so the data
+        which is saved in primary DB will be reverted.
+      **/</span>
+      <span class="nd">@Transactional</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">"chainedTransactionManager"</span><span class="o">)</span>
+      <span class="kd">public</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="nf">saveDataToAllDB</span><span class="o">(</span><span class="nc">NewTable</span> <span class="n">newTable</span><span class="o">)</span> <span class="o">{</span>
+          <span class="nc">String</span> <span class="n">camundaId</span> <span class="o">=</span> <span class="n">saveDataToCamundaNewTable</span><span class="o">(</span><span class="n">newTable</span><span class="o">);</span>
+          <span class="nc">String</span> <span class="n">myDBId</span> <span class="o">=</span> <span class="n">saveDataToMyDB</span><span class="o">(</span><span class="n">newTable</span><span class="o">);</span>
+        <span class="cm">/**
+          this comment function is used for revert all data in DB
+          when this function is executed successfully
+        **/</span>
+        <span class="c1">// TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();</span>
+
+          <span class="k">return</span> <span class="nc">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="n">camundaId</span><span class="o">,</span> <span class="n">myDBId</span><span class="o">);</span>
+      <span class="o">}</span>
+  <span class="o">}</span>
+
+</code></pre></div></div>
+
+<h2 id="step-9-testing">STEP 9: TESTING</h2>
+
+<ul>
+  <li>After saving data into two databases, we can go to primary and secondary database to check the data as the images below:</li>
+</ul>
+
+<p><a href="/assets/images/spring-boot-multi-datasource-project-primary-db-table.JPG"><img src="/assets/images/spring-boot-multi-datasource-project-primary-db-table.JPG" alt="&quot;Data in primary database (camunda schema)&quot;" title="Data in primary database (camunda schema)" /></a></p>
+
+<p><a href="/assets/images/spring-boot-multi-datasource-project-secondary-db-table.JPG"><img src="/assets/images/spring-boot-multi-datasource-project-secondary-db-table.JPG" alt="&quot;Data in secondary database (mydb schema)&quot;" title="Data in secondary database (mydb schema)" /></a>.</p>
+
+    </div><a class="u-url" href="/java/2021/06/06/java-springboot-multi-datasource.html" hidden></a>
+  </article>
+  
+</div>
+
+
+    </div>
+  </div>
+  <script src="https://unpkg.com/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js"></script>
+  <script>addBackToTop()</script>
+</body>
+<footer><footer class="site-footer h-card">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <h2 class="footer-heading">StepByStep</h2>
+        <div>
+          <div>
+            <ul>
+              <li>Duc Nguyen</li><li><a class="u-email" href="mailto:minhducnguyen189@gmail.com">minhducnguyen189@gmail.com</a></li><li>&copy; 2021 Duc Nguyen. Powered by <a href="https://jekyllrb.com/">Jekyll</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <data class="u-url" href="/%20/"></data>
+        <div><ul class="social-media-list"><li><a href="https://github.com/minhducnguyen189"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">minhducnguyen189</span></a></li><li><a href="https://www.linkedin.com/in/duc-nguyen-03109b141"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#linkedin"></use></svg> <span class="username">duc-nguyen-03109b141</span></a></li></ul>
+</div>
+      </div>
+      <div class="col-md-4">
+        
+      </div>
+    </div>
+
+    <div class="row">
+      <p>Hi there! Let&#39;s explore some general knowleadges and briefly definitions  in programming. I hope that this website can help people saving time in learning, also give some motivations for those who have choice the developer path.</p>
+    </div>
+</footer></footer>
+</html>

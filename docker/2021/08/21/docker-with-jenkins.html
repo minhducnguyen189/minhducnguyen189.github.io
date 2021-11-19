@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- bootstrap library and JS, Jquery -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Docker For Creating Jenkins Server | StepByStep</title>
+<meta name="generator" content="Jekyll v4.2.1" />
+<meta property="og:title" content="Docker For Creating Jenkins Server" />
+<meta name="author" content="Duc Nguyen" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="In this post we will create a Jenkins Server from docker-compose yaml file of Docker WHAT IS THE JENKINS? CREATE JENKINS SERVER FROM DOCKER TESTING WHAT IS THE JENKINS? Jenkins is a self-contained, open source automation server which can be used to automate all sorts of tasks related to building, testing, and delivering or deploying software. Jenkins can be installed through native system packages, Docker, or even run standalone by any machine with a Java Runtime Environment (JRE) installed. More information CREATE JENKINS SERVER FROM DOCKER Let’s create a docker-compose.yml then add some scripts as below version: &#39;3.7&#39; services: jenkins: #using image from DockerHub image: jenkins/jenkins #enable privileged mode privileged: true #privileged mode with root user user: root ports: - 8081:8080 - 50000:50000 container_name: jenkins volumes: - ./jenkins:/var/jenkins_home - ./docker:/usr/local/bin/docker volumes: jenkins: docker: You can see we config the docker-compose with privileged mode. So what is the privileged mode? Docker privileged mode grants a Docker container root capabilities to all devices on the host system. Running a container in privileged mode gives it the capabilities of its host machine. More information. Then we create 2 folders named jenkins and docker to sync the data from docker to our real machine. TESTING Now, Let use docker-compose up to start the server. Then you can go to localhost:8081 to access Jenkins and setup username/password and some plugins. Note: When server is started up for the first time, you can get the credential in the log of jenkins container." />
+<meta property="og:description" content="In this post we will create a Jenkins Server from docker-compose yaml file of Docker WHAT IS THE JENKINS? CREATE JENKINS SERVER FROM DOCKER TESTING WHAT IS THE JENKINS? Jenkins is a self-contained, open source automation server which can be used to automate all sorts of tasks related to building, testing, and delivering or deploying software. Jenkins can be installed through native system packages, Docker, or even run standalone by any machine with a Java Runtime Environment (JRE) installed. More information CREATE JENKINS SERVER FROM DOCKER Let’s create a docker-compose.yml then add some scripts as below version: &#39;3.7&#39; services: jenkins: #using image from DockerHub image: jenkins/jenkins #enable privileged mode privileged: true #privileged mode with root user user: root ports: - 8081:8080 - 50000:50000 container_name: jenkins volumes: - ./jenkins:/var/jenkins_home - ./docker:/usr/local/bin/docker volumes: jenkins: docker: You can see we config the docker-compose with privileged mode. So what is the privileged mode? Docker privileged mode grants a Docker container root capabilities to all devices on the host system. Running a container in privileged mode gives it the capabilities of its host machine. More information. Then we create 2 folders named jenkins and docker to sync the data from docker to our real machine. TESTING Now, Let use docker-compose up to start the server. Then you can go to localhost:8081 to access Jenkins and setup username/password and some plugins. Note: When server is started up for the first time, you can get the credential in the log of jenkins container." />
+<link rel="canonical" href="/docker/2021/08/21/docker-with-jenkins.html" />
+<meta property="og:url" content="/docker/2021/08/21/docker-with-jenkins.html" />
+<meta property="og:site_name" content="StepByStep" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-08-21T08:15:47+07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Docker For Creating Jenkins Server" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","url":"/docker/2021/08/21/docker-with-jenkins.html","author":{"@type":"Person","name":"Duc Nguyen"},"headline":"Docker For Creating Jenkins Server","dateModified":"2021-08-21T08:15:47+07:00","datePublished":"2021-08-21T08:15:47+07:00","description":"In this post we will create a Jenkins Server from docker-compose yaml file of Docker WHAT IS THE JENKINS? CREATE JENKINS SERVER FROM DOCKER TESTING WHAT IS THE JENKINS? Jenkins is a self-contained, open source automation server which can be used to automate all sorts of tasks related to building, testing, and delivering or deploying software. Jenkins can be installed through native system packages, Docker, or even run standalone by any machine with a Java Runtime Environment (JRE) installed. More information CREATE JENKINS SERVER FROM DOCKER Let’s create a docker-compose.yml then add some scripts as below version: &#39;3.7&#39; services: jenkins: #using image from DockerHub image: jenkins/jenkins #enable privileged mode privileged: true #privileged mode with root user user: root ports: - 8081:8080 - 50000:50000 container_name: jenkins volumes: - ./jenkins:/var/jenkins_home - ./docker:/usr/local/bin/docker volumes: jenkins: docker: You can see we config the docker-compose with privileged mode. So what is the privileged mode? Docker privileged mode grants a Docker container root capabilities to all devices on the host system. Running a container in privileged mode gives it the capabilities of its host machine. More information. Then we create 2 folders named jenkins and docker to sync the data from docker to our real machine. TESTING Now, Let use docker-compose up to start the server. Then you can go to localhost:8081 to access Jenkins and setup username/password and some plugins. Note: When server is started up for the first time, you can get the credential in the log of jenkins container.","mainEntityOfPage":{"@type":"WebPage","@id":"/docker/2021/08/21/docker-with-jenkins.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="StepByStep" /><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NZ8G5007GK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-NZ8G5007GK');
+</script></head><body>
+  <div class="container-flush">
+    <div class="row"><!-- navigation bar -->
+<div class="col-lg-12">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" role="banner"><a class="navbar-brand site-title" rel="author" href="/">StepByStep</a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="nav navbar-nav"><li class="nav-item active">
+          <a class="nav-link" href="/about">About</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/">Java</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/docker">Docker</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/data">Data</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/ci-cd">CI-CD</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/python">Python</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/fe">FE</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/others">Others</a>
+        </li></ul>
+    </div>
+
+    <!-- Html Elements for Search -->
+    <div id="search-container" class="btn-group">
+      <input type="text" id="search-input" placeholder="search...">
+      <button id="clear">clear</button>
+      <ul id="results-container"></ul>
+    </div>
+
+    <!-- Script pointing to search-script.js -->
+    <script src="/java-scripts/search-script.js" type="text/javascript"></script>
+
+    <!-- Configuration -->
+    <script>
+      SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('results-container'),
+        json: '/search.json'
+      })
+    </script>
+
+    <!-- search clear -->
+    <script>
+      window.addEventListener('load', () => {
+        const button = document.querySelector('#clear');
+        button.addEventListener('click', () => {
+          document.querySelector('#search-input').value = "";
+          document.querySelector('#results-container').innerHTML = "";
+        });
+      });
+    </script>
+  </nav>
+</div></div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+  <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+    <header class="post-header">
+      <h1 class="post-title p-name" itemprop="name headline">Docker For Creating Jenkins Server</h1>
+      <p class="post-meta">
+        <time class="dt-published" datetime="2021-08-21T08:15:47+07:00" itemprop="datePublished">Aug 21, 2021
+        </time></p>
+    </header>
+  
+    <div class="post-content e-content" itemprop="articleBody">
+      <blockquote>
+  <p>In this post we will create a Jenkins Server from docker-compose yaml file of Docker</p>
+</blockquote>
+
+<ul id="markdown-toc">
+  <li><a href="#what-is-the-jenkins" id="markdown-toc-what-is-the-jenkins">WHAT IS THE JENKINS?</a></li>
+  <li><a href="#create-jenkins-server-from-docker" id="markdown-toc-create-jenkins-server-from-docker">CREATE JENKINS SERVER FROM DOCKER</a></li>
+  <li><a href="#testing" id="markdown-toc-testing">TESTING</a></li>
+</ul>
+
+<h2 id="what-is-the-jenkins">WHAT IS THE JENKINS?</h2>
+
+<ul>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Jenkins</code> is a self-contained, open source automation server which can be used to automate all sorts of tasks related to building, testing, and delivering or deploying software.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Jenkins</code> can be installed through native system packages, Docker, or even run standalone by any machine with a Java Runtime Environment (JRE) installed.</p>
+  </li>
+  <li>
+    <p><a href="https://www.jenkins.io/doc/">More information</a></p>
+  </li>
+</ul>
+
+<h2 id="create-jenkins-server-from-docker">CREATE JENKINS SERVER FROM DOCKER</h2>
+
+<ul>
+  <li>Let’s create a <code class="language-plaintext highlighter-rouge">docker-compose.yml</code> then add some scripts as below</li>
+</ul>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+  <span class="na">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">3.7'</span>
+
+  <span class="na">services</span><span class="pi">:</span>
+    <span class="na">jenkins</span><span class="pi">:</span>
+      <span class="c1">#using image from DockerHub</span>
+      <span class="na">image</span><span class="pi">:</span> <span class="s">jenkins/jenkins</span>
+      <span class="c1">#enable privileged mode</span>
+      <span class="na">privileged</span><span class="pi">:</span> <span class="no">true</span>
+      <span class="c1">#privileged mode with root user</span>
+      <span class="na">user</span><span class="pi">:</span> <span class="s">root</span>
+      <span class="na">ports</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="s">8081:8080</span>
+        <span class="pi">-</span> <span class="s">50000:50000</span>
+      <span class="na">container_name</span><span class="pi">:</span> <span class="s">jenkins</span>
+      <span class="na">volumes</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="s">./jenkins:/var/jenkins_home</span>
+        <span class="pi">-</span> <span class="s">./docker:/usr/local/bin/docker</span>
+
+  <span class="na">volumes</span><span class="pi">:</span>
+    <span class="na">jenkins</span><span class="pi">:</span>
+    <span class="na">docker</span><span class="pi">:</span>
+
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>You can see we config the <code class="language-plaintext highlighter-rouge">docker-compose</code> with <code class="language-plaintext highlighter-rouge">privileged</code> mode. So what is the <code class="language-plaintext highlighter-rouge">privileged</code> mode?</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Docker privileged mode</code> grants a Docker container <strong>root capabilities to all devices on the host system</strong>. Running a container in <code class="language-plaintext highlighter-rouge">privileged mode</code> gives it the capabilities of its host machine. <a href="https://phoenixnap.com/kb/docker-privileged">More information</a>.</p>
+  </li>
+</ul>
+
+<p><a href="/assets/images/docker/Privileged-Mode-Docker-Container.png"><img src="/assets/images/docker/Privileged-Mode-Docker-Container.png" alt="Privileged Mode Container" title="Privileged Mode Container" /></a></p>
+
+<ul>
+  <li>Then we create 2 folders named <code class="language-plaintext highlighter-rouge">jenkins</code> and <code class="language-plaintext highlighter-rouge">docker</code> to sync the data from docker to our real machine.</li>
+</ul>
+
+<p><a href="/assets/images/docker/docker-jenkins-volumes.JPG"><img src="/assets/images/docker/docker-jenkins-volumes.JPG" alt="Jenkins Volumes" title="jenkins volumes" /></a></p>
+
+<h2 id="testing">TESTING</h2>
+
+<ul>
+  <li>Now, Let use <code class="language-plaintext highlighter-rouge">docker-compose up</code> to start the server. Then you can go to <code class="language-plaintext highlighter-rouge">localhost:8081</code> to access Jenkins and setup username/password and some plugins.</li>
+</ul>
+
+<p><a href="/assets/images/docker/docker-jenkins-dashboard.JPG"><img src="/assets/images/docker/docker-jenkins-dashboard.JPG" alt="Jenkins Dashboard" title="Jenkins Dashboard" /></a></p>
+
+<ul>
+  <li>Note: When server is started up for the first time, you can get the credential in the log of jenkins container.</li>
+</ul>
+
+    </div><a class="u-url" href="/docker/2021/08/21/docker-with-jenkins.html" hidden></a>
+  </article>
+  
+</div>
+
+
+    </div>
+  </div>
+  <script src="https://unpkg.com/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js"></script>
+  <script>addBackToTop()</script>
+</body>
+<footer><footer class="site-footer h-card">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <h2 class="footer-heading">StepByStep</h2>
+        <div>
+          <div>
+            <ul>
+              <li>Duc Nguyen</li><li><a class="u-email" href="mailto:minhducnguyen189@gmail.com">minhducnguyen189@gmail.com</a></li><li>&copy; 2021 Duc Nguyen. Powered by <a href="https://jekyllrb.com/">Jekyll</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <data class="u-url" href="/%20/"></data>
+        <div><ul class="social-media-list"><li><a href="https://github.com/minhducnguyen189"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">minhducnguyen189</span></a></li><li><a href="https://www.linkedin.com/in/duc-nguyen-03109b141"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#linkedin"></use></svg> <span class="username">duc-nguyen-03109b141</span></a></li></ul>
+</div>
+      </div>
+      <div class="col-md-4">
+        
+      </div>
+    </div>
+
+    <div class="row">
+      <p>Hi there! Let&#39;s explore some general knowleadges and briefly definitions  in programming. I hope that this website can help people saving time in learning, also give some motivations for those who have choice the developer path.</p>
+    </div>
+</footer></footer>
+</html>
