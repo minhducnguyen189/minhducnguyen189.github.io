@@ -101,7 +101,7 @@ footer { bottom: 0; background-color: #2f3640; }
 
 footer .container { margin-top: 40px; color: #dfe6e9; }
 
-footer .container a { color: #43a047; }
+footer .container a { color: #159957; }
 
 /** Page content */
 .page-heading { font-size: 36px; }
@@ -207,17 +207,19 @@ footer .container a { color: #43a047; }
 
 @media screen and (max-width: 800px) { .post-content h4 { font-size: 20.25px; } }
 
-#search-container { margin-right: 75px; border-radius: 5px; background-color: #2c3e50; }
+.post-content a { color: #159957; }
+
+#search-container { margin-right: 75px; border-radius: 5px; background-color: #2f3640; }
 
 #search-container #search-input { width: 310px; height: 40px; border-radius: 5px; }
 
-#search-container #results-container { list-style-type: none; margin-left: 0px; margin-top: 50px; width: 310px; z-index: 20; position: absolute; border-radius: 5px; background-color: #2c3e50; }
+#search-container #results-container { list-style-type: none; margin-left: 0px; margin-top: 50px; width: 310px; z-index: 20; position: absolute; border-radius: 5px; background-color: #2f3640; }
 
 #search-container #results-container li { width: 100%; }
 
-#search-container #results-container li a { color: #43a047; }
+#search-container #results-container li a { color: #159957; }
 
-#clear { position: absolute; border-radius: 5px; right: 0px; z-index: 2; border: none; height: 40px; cursor: pointer; color: white; background-color: #2a7ae2; }
+#clear { position: absolute; border-radius: 5px; right: 0px; z-index: 2; border: none; height: 40px; cursor: pointer; color: white; background-color: #159957; }
 
 .pagination { margin: auto; margin-bottom: 30px; text-align: center; background-color: #2c3e50; color: #ffffff; }
 
