@@ -8,6 +8,12 @@ body { font: 400 18px/1.5 ubuntu-regular; color: #2c3e50; background-color: #bdc
 
 body .main-page-content { min-height: 100vh; }
 
+body .not-found { min-height: 100vh; }
+
+body .not-found .not-found-contents { text-align: center; }
+
+body .not-found .not-found-contents h1 { margin: 30px 0; font-size: 4em; line-height: 1; letter-spacing: -1px; }
+
 /** Set `margin-bottom` to maintain vertical rhythm */
 h1, h2, h3, h4, h5, h6, p, blockquote, pre, ul, ol, dl, figure, .highlight { margin-bottom: 15px; }
 
