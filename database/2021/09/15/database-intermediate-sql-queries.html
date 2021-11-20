@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- bootstrap library and JS, Jquery -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Intermediate SQL Queries That You Should Know | StepByStep</title>
+<meta name="generator" content="Jekyll v4.2.1" />
+<meta property="og:title" content="Intermediate SQL Queries That You Should Know" />
+<meta name="author" content="Duc Nguyen" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="In this post we will learn about intermediate(quite easy) queries that you should know PREPARE YOUR DATABASE WORKER TABLE BONUS TABLE TITLE TABLE PRATICE WITH QUERIES Get total salary for workers who have bonuses Get 3 Highest Salaries From Workers Get Workers with Max Salary Get Total Salary Following Department Get Workers Who have highest Salary In Every Department PREPARE YOUR DATABASE I will use MySql Database to make examples. If you don’t know how to create MySql Database Server you can view this post. Then you can use DBeaver or MySQL Workbench run creation script as below. More information CREATE DATABASE ORG; SHOW DATABASES; USE ORG; CREATE TABLE Worker ( WORKER_ID INT NOT NULL PRIMARY KEY AUTO_INCREMENT, FIRST_NAME CHAR(25), LAST_NAME CHAR(25), SALARY INT(15), JOINING_DATE DATETIME, DEPARTMENT CHAR(25) ); INSERT INTO Worker (WORKER_ID, FIRST_NAME, LAST_NAME, SALARY, JOINING_DATE, DEPARTMENT) VALUES (001, &#39;Monika&#39;, &#39;Arora&#39;, 100000, &#39;14-02-20 09.00.00&#39;, &#39;HR&#39;), (002, &#39;Niharika&#39;, &#39;Verma&#39;, 80000, &#39;14-06-11 09.00.00&#39;, &#39;Admin&#39;), (003, &#39;Vishal&#39;, &#39;Singhal&#39;, 300000, &#39;14-02-20 09.00.00&#39;, &#39;HR&#39;), (004, &#39;Amitabh&#39;, &#39;Singh&#39;, 500000, &#39;14-02-20 09.00.00&#39;, &#39;Admin&#39;), (005, &#39;Vivek&#39;, &#39;Bhati&#39;, 500000, &#39;14-06-11 09.00.00&#39;, &#39;Admin&#39;), (006, &#39;Vipul&#39;, &#39;Diwan&#39;, 200000, &#39;14-06-11 09.00.00&#39;, &#39;Account&#39;), (007, &#39;Satish&#39;, &#39;Kumar&#39;, 75000, &#39;14-01-20 09.00.00&#39;, &#39;Account&#39;), (008, &#39;Geetika&#39;, &#39;Chauhan&#39;, 90000, &#39;14-04-11 09.00.00&#39;, &#39;Admin&#39;); CREATE TABLE Bonus ( WORKER_REF_ID INT, BONUS_AMOUNT INT(10), BONUS_DATE DATETIME, FOREIGN KEY (WORKER_REF_ID) REFERENCES Worker(WORKER_ID) ON DELETE CASCADE ); INSERT INTO Bonus (WORKER_REF_ID, BONUS_AMOUNT, BONUS_DATE) VALUES (001, 5000, &#39;16-02-20&#39;), (002, 3000, &#39;16-06-11&#39;), (003, 4000, &#39;16-02-20&#39;), (001, 4500, &#39;16-02-20&#39;), (002, 3500, &#39;16-06-11&#39;); CREATE TABLE Title ( WORKER_REF_ID INT, WORKER_TITLE CHAR(25), AFFECTED_FROM DATETIME, FOREIGN KEY (WORKER_REF_ID) REFERENCES Worker(WORKER_ID) ON DELETE CASCADE ); INSERT INTO Title (WORKER_REF_ID, WORKER_TITLE, AFFECTED_FROM) VALUES (001, &#39;Manager&#39;, &#39;2016-02-20 00:00:00&#39;), (002, &#39;Executive&#39;, &#39;2016-06-11 00:00:00&#39;), (008, &#39;Executive&#39;, &#39;2016-06-11 00:00:00&#39;), (005, &#39;Manager&#39;, &#39;2016-06-11 00:00:00&#39;), (004, &#39;Asst. Manager&#39;, &#39;2016-06-11 00:00:00&#39;), (007, &#39;Executive&#39;, &#39;2016-06-11 00:00:00&#39;), (006, &#39;Lead&#39;, &#39;2016-06-11 00:00:00&#39;), (003, &#39;Lead&#39;, &#39;2016-06-11 00:00:00&#39;); So we will have 3 tables and they will look like below: WORKER TABLE WORKER_ID FIRST_NAME LAST_NAME SALARY JOINING_DATE DEPARTMENT 001 Monika Arora 100000 2014-02-20 09:00:00 HR 002 Niharika Verma 80000 2014-06-11 09:00:00 Admin 003 Vishal Singhal 300000 2014-02-20 09:00:00 HR 004 Amitabh Singh 500000 2014-02-20 09:00:00 Admin 005 Vivek Bhati 500000 2014-06-11 09:00:00 Admin 006 Vipul Diwan 200000 2014-06-11 09:00:00 Account 007 Satish Kumar 75000 2014-01-20 09:00:00 Account 008 Geetika Chauhan 90000 2014-04-11 09:00:00 Admin BONUS TABLE WORKER_REF_ID BONUS_DATE BONUS_AMOUNT 1 2016-02-20 00:00:00 5000 2 2016-06-11 00:00:00 3000 3 2016-02-20 00:00:00 4000 1 2016-02-20 00:00:00 4500 2 2016-06-11 00:00:00 3500 TITLE TABLE WORKER_REF_ID WORKER_TITLE AFFECTED_FROM 1 Manager 2016-02-20 00:00:00 2 Executive 2016-06-11 00:00:00 8 Executive 2016-06-11 00:00:00 5 Manager 2016-06-11 00:00:00 4 Asst. Manager 2016-06-11 00:00:00 7 Executive 2016-06-11 00:00:00 6 Lead 2016-06-11 00:00:00 3 Lead 2016-06-11 00:00:00 This is the relationship of sample tables PRATICE WITH QUERIES Get total salary for workers who have bonuses First, we will try to get salary with bonus for workers, Then we will have a table returned as below SELECT w.WORKER_ID , w.FIRST_NAME , w.LAST_NAME , w.SALARY + b.BONUS_AMOUNT As &quot;total Salary&quot; FROM worker w join Bonus b WHERE w.WORKER_ID = b.WORKER_REF_ID; WORKER_ID FIRST_NAME LAST_NAME total Salary 1 Monika Arora 104500 1 Monika Arora 105000 2 Niharika Verma 83500 2 Niharika Verma 83000 3 Vishal Singhal 304000 Secondly, we will try to get total bonus following WORKER_REF_ID in bonus table SELECT b.WORKER_REF_ID , sum(b.BONUS_AMOUNT) as BONUS_AMOUNT from Bonus b group by b.WORKER_REF_ID; WORKER_REF_ID BONUS_AMOUNT 1 9500 2 6500 3 4000 Finally, from 2 tables above we will compile them by the query below. Then you can see the final result. SELECT w.WORKER_ID , w.FIRST_NAME , w.LAST_NAME , w.SALARY + b.BONUS_AMOUNT AS &quot;total Salary&quot; FROM worker w JOIN (SELECT b.WORKER_REF_ID , sum(b.BONUS_AMOUNT) AS BONUS_AMOUNT FROM Bonus b GROUP BY b.WORKER_REF_ID) AS b ON w.WORKER_ID = b.WORKER_REF_ID; WORKER_ID FIRST_NAME LAST_NAME total Salary 1 Monika Arora 109500 2 Niharika Verma 86500 3 Vishal Singhal 304000 Get 3 Highest Salaries From Workers SELECT distinct Salary from worker a WHERE 3 &gt;= (SELECT count(distinct Salary) from worker b WHERE a.Salary &lt;= b.Salary) order by a.Salary desc; Salary 500000 300000 200000 Get Workers with Max Salary SELECT FIRST_NAME, SALARY from worker WHERE SALARY=(SELECT max(SALARY) from worker); FIRST_NAME SALARY Amitabh 500000 Vivek 500000 Get Total Salary Following Department SELECT DEPARTMENT, sum(Salary) as &quot;Total Salary&quot; from worker group by DEPARTMENT; DEPARTMENT Total Salary HR 400000 Admin 1170000 Account 275000 Get Workers Who have highest Salary In Every Department Firstly, we will try to get Max Salary following Department SELECT max(Salary) as &quot;MaxSalary&quot;,DEPARTMENT from worker group by DEPARTMENT MaxSalary DEPARTMENT 300000 HR 500000 Admin 200000 Account Then, we will join the table above with the Worker table to find workers who have highest Salary in every Department SELECT t.DEPARTMENT,t.FIRST_NAME,t.Salary from(SELECT max(Salary) as &quot;MaxSalary&quot;,DEPARTMENT from worker group by DEPARTMENT) as TempNew Inner Join worker t on TempNew.DEPARTMENT=t.DEPARTMENT and TempNew.MaxSalary=t.Salary; DEPARTMENT FIRST_NAME Salary HR Vishal 300000 Admin Amitabh 500000 Admin Vivek 500000 Account Vipul 200000 SELECT * FROM worker WHERE WORKER_ID &lt;=5 UNION SELECT * FROM (SELECT * FROM worker W order by W.WORKER_ID DESC) AS W1 WHERE W1.WORKER_ID &lt;=5; //TODO" />
+<meta property="og:description" content="In this post we will learn about intermediate(quite easy) queries that you should know PREPARE YOUR DATABASE WORKER TABLE BONUS TABLE TITLE TABLE PRATICE WITH QUERIES Get total salary for workers who have bonuses Get 3 Highest Salaries From Workers Get Workers with Max Salary Get Total Salary Following Department Get Workers Who have highest Salary In Every Department PREPARE YOUR DATABASE I will use MySql Database to make examples. If you don’t know how to create MySql Database Server you can view this post. Then you can use DBeaver or MySQL Workbench run creation script as below. More information CREATE DATABASE ORG; SHOW DATABASES; USE ORG; CREATE TABLE Worker ( WORKER_ID INT NOT NULL PRIMARY KEY AUTO_INCREMENT, FIRST_NAME CHAR(25), LAST_NAME CHAR(25), SALARY INT(15), JOINING_DATE DATETIME, DEPARTMENT CHAR(25) ); INSERT INTO Worker (WORKER_ID, FIRST_NAME, LAST_NAME, SALARY, JOINING_DATE, DEPARTMENT) VALUES (001, &#39;Monika&#39;, &#39;Arora&#39;, 100000, &#39;14-02-20 09.00.00&#39;, &#39;HR&#39;), (002, &#39;Niharika&#39;, &#39;Verma&#39;, 80000, &#39;14-06-11 09.00.00&#39;, &#39;Admin&#39;), (003, &#39;Vishal&#39;, &#39;Singhal&#39;, 300000, &#39;14-02-20 09.00.00&#39;, &#39;HR&#39;), (004, &#39;Amitabh&#39;, &#39;Singh&#39;, 500000, &#39;14-02-20 09.00.00&#39;, &#39;Admin&#39;), (005, &#39;Vivek&#39;, &#39;Bhati&#39;, 500000, &#39;14-06-11 09.00.00&#39;, &#39;Admin&#39;), (006, &#39;Vipul&#39;, &#39;Diwan&#39;, 200000, &#39;14-06-11 09.00.00&#39;, &#39;Account&#39;), (007, &#39;Satish&#39;, &#39;Kumar&#39;, 75000, &#39;14-01-20 09.00.00&#39;, &#39;Account&#39;), (008, &#39;Geetika&#39;, &#39;Chauhan&#39;, 90000, &#39;14-04-11 09.00.00&#39;, &#39;Admin&#39;); CREATE TABLE Bonus ( WORKER_REF_ID INT, BONUS_AMOUNT INT(10), BONUS_DATE DATETIME, FOREIGN KEY (WORKER_REF_ID) REFERENCES Worker(WORKER_ID) ON DELETE CASCADE ); INSERT INTO Bonus (WORKER_REF_ID, BONUS_AMOUNT, BONUS_DATE) VALUES (001, 5000, &#39;16-02-20&#39;), (002, 3000, &#39;16-06-11&#39;), (003, 4000, &#39;16-02-20&#39;), (001, 4500, &#39;16-02-20&#39;), (002, 3500, &#39;16-06-11&#39;); CREATE TABLE Title ( WORKER_REF_ID INT, WORKER_TITLE CHAR(25), AFFECTED_FROM DATETIME, FOREIGN KEY (WORKER_REF_ID) REFERENCES Worker(WORKER_ID) ON DELETE CASCADE ); INSERT INTO Title (WORKER_REF_ID, WORKER_TITLE, AFFECTED_FROM) VALUES (001, &#39;Manager&#39;, &#39;2016-02-20 00:00:00&#39;), (002, &#39;Executive&#39;, &#39;2016-06-11 00:00:00&#39;), (008, &#39;Executive&#39;, &#39;2016-06-11 00:00:00&#39;), (005, &#39;Manager&#39;, &#39;2016-06-11 00:00:00&#39;), (004, &#39;Asst. Manager&#39;, &#39;2016-06-11 00:00:00&#39;), (007, &#39;Executive&#39;, &#39;2016-06-11 00:00:00&#39;), (006, &#39;Lead&#39;, &#39;2016-06-11 00:00:00&#39;), (003, &#39;Lead&#39;, &#39;2016-06-11 00:00:00&#39;); So we will have 3 tables and they will look like below: WORKER TABLE WORKER_ID FIRST_NAME LAST_NAME SALARY JOINING_DATE DEPARTMENT 001 Monika Arora 100000 2014-02-20 09:00:00 HR 002 Niharika Verma 80000 2014-06-11 09:00:00 Admin 003 Vishal Singhal 300000 2014-02-20 09:00:00 HR 004 Amitabh Singh 500000 2014-02-20 09:00:00 Admin 005 Vivek Bhati 500000 2014-06-11 09:00:00 Admin 006 Vipul Diwan 200000 2014-06-11 09:00:00 Account 007 Satish Kumar 75000 2014-01-20 09:00:00 Account 008 Geetika Chauhan 90000 2014-04-11 09:00:00 Admin BONUS TABLE WORKER_REF_ID BONUS_DATE BONUS_AMOUNT 1 2016-02-20 00:00:00 5000 2 2016-06-11 00:00:00 3000 3 2016-02-20 00:00:00 4000 1 2016-02-20 00:00:00 4500 2 2016-06-11 00:00:00 3500 TITLE TABLE WORKER_REF_ID WORKER_TITLE AFFECTED_FROM 1 Manager 2016-02-20 00:00:00 2 Executive 2016-06-11 00:00:00 8 Executive 2016-06-11 00:00:00 5 Manager 2016-06-11 00:00:00 4 Asst. Manager 2016-06-11 00:00:00 7 Executive 2016-06-11 00:00:00 6 Lead 2016-06-11 00:00:00 3 Lead 2016-06-11 00:00:00 This is the relationship of sample tables PRATICE WITH QUERIES Get total salary for workers who have bonuses First, we will try to get salary with bonus for workers, Then we will have a table returned as below SELECT w.WORKER_ID , w.FIRST_NAME , w.LAST_NAME , w.SALARY + b.BONUS_AMOUNT As &quot;total Salary&quot; FROM worker w join Bonus b WHERE w.WORKER_ID = b.WORKER_REF_ID; WORKER_ID FIRST_NAME LAST_NAME total Salary 1 Monika Arora 104500 1 Monika Arora 105000 2 Niharika Verma 83500 2 Niharika Verma 83000 3 Vishal Singhal 304000 Secondly, we will try to get total bonus following WORKER_REF_ID in bonus table SELECT b.WORKER_REF_ID , sum(b.BONUS_AMOUNT) as BONUS_AMOUNT from Bonus b group by b.WORKER_REF_ID; WORKER_REF_ID BONUS_AMOUNT 1 9500 2 6500 3 4000 Finally, from 2 tables above we will compile them by the query below. Then you can see the final result. SELECT w.WORKER_ID , w.FIRST_NAME , w.LAST_NAME , w.SALARY + b.BONUS_AMOUNT AS &quot;total Salary&quot; FROM worker w JOIN (SELECT b.WORKER_REF_ID , sum(b.BONUS_AMOUNT) AS BONUS_AMOUNT FROM Bonus b GROUP BY b.WORKER_REF_ID) AS b ON w.WORKER_ID = b.WORKER_REF_ID; WORKER_ID FIRST_NAME LAST_NAME total Salary 1 Monika Arora 109500 2 Niharika Verma 86500 3 Vishal Singhal 304000 Get 3 Highest Salaries From Workers SELECT distinct Salary from worker a WHERE 3 &gt;= (SELECT count(distinct Salary) from worker b WHERE a.Salary &lt;= b.Salary) order by a.Salary desc; Salary 500000 300000 200000 Get Workers with Max Salary SELECT FIRST_NAME, SALARY from worker WHERE SALARY=(SELECT max(SALARY) from worker); FIRST_NAME SALARY Amitabh 500000 Vivek 500000 Get Total Salary Following Department SELECT DEPARTMENT, sum(Salary) as &quot;Total Salary&quot; from worker group by DEPARTMENT; DEPARTMENT Total Salary HR 400000 Admin 1170000 Account 275000 Get Workers Who have highest Salary In Every Department Firstly, we will try to get Max Salary following Department SELECT max(Salary) as &quot;MaxSalary&quot;,DEPARTMENT from worker group by DEPARTMENT MaxSalary DEPARTMENT 300000 HR 500000 Admin 200000 Account Then, we will join the table above with the Worker table to find workers who have highest Salary in every Department SELECT t.DEPARTMENT,t.FIRST_NAME,t.Salary from(SELECT max(Salary) as &quot;MaxSalary&quot;,DEPARTMENT from worker group by DEPARTMENT) as TempNew Inner Join worker t on TempNew.DEPARTMENT=t.DEPARTMENT and TempNew.MaxSalary=t.Salary; DEPARTMENT FIRST_NAME Salary HR Vishal 300000 Admin Amitabh 500000 Admin Vivek 500000 Account Vipul 200000 SELECT * FROM worker WHERE WORKER_ID &lt;=5 UNION SELECT * FROM (SELECT * FROM worker W order by W.WORKER_ID DESC) AS W1 WHERE W1.WORKER_ID &lt;=5; //TODO" />
+<link rel="canonical" href="/database/2021/09/15/database-intermediate-sql-queries.html" />
+<meta property="og:url" content="/database/2021/09/15/database-intermediate-sql-queries.html" />
+<meta property="og:site_name" content="StepByStep" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-09-15T00:00:00+07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Intermediate SQL Queries That You Should Know" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","url":"/database/2021/09/15/database-intermediate-sql-queries.html","author":{"@type":"Person","name":"Duc Nguyen"},"headline":"Intermediate SQL Queries That You Should Know","dateModified":"2021-09-15T00:00:00+07:00","datePublished":"2021-09-15T00:00:00+07:00","description":"In this post we will learn about intermediate(quite easy) queries that you should know PREPARE YOUR DATABASE WORKER TABLE BONUS TABLE TITLE TABLE PRATICE WITH QUERIES Get total salary for workers who have bonuses Get 3 Highest Salaries From Workers Get Workers with Max Salary Get Total Salary Following Department Get Workers Who have highest Salary In Every Department PREPARE YOUR DATABASE I will use MySql Database to make examples. If you don’t know how to create MySql Database Server you can view this post. Then you can use DBeaver or MySQL Workbench run creation script as below. More information CREATE DATABASE ORG; SHOW DATABASES; USE ORG; CREATE TABLE Worker ( WORKER_ID INT NOT NULL PRIMARY KEY AUTO_INCREMENT, FIRST_NAME CHAR(25), LAST_NAME CHAR(25), SALARY INT(15), JOINING_DATE DATETIME, DEPARTMENT CHAR(25) ); INSERT INTO Worker (WORKER_ID, FIRST_NAME, LAST_NAME, SALARY, JOINING_DATE, DEPARTMENT) VALUES (001, &#39;Monika&#39;, &#39;Arora&#39;, 100000, &#39;14-02-20 09.00.00&#39;, &#39;HR&#39;), (002, &#39;Niharika&#39;, &#39;Verma&#39;, 80000, &#39;14-06-11 09.00.00&#39;, &#39;Admin&#39;), (003, &#39;Vishal&#39;, &#39;Singhal&#39;, 300000, &#39;14-02-20 09.00.00&#39;, &#39;HR&#39;), (004, &#39;Amitabh&#39;, &#39;Singh&#39;, 500000, &#39;14-02-20 09.00.00&#39;, &#39;Admin&#39;), (005, &#39;Vivek&#39;, &#39;Bhati&#39;, 500000, &#39;14-06-11 09.00.00&#39;, &#39;Admin&#39;), (006, &#39;Vipul&#39;, &#39;Diwan&#39;, 200000, &#39;14-06-11 09.00.00&#39;, &#39;Account&#39;), (007, &#39;Satish&#39;, &#39;Kumar&#39;, 75000, &#39;14-01-20 09.00.00&#39;, &#39;Account&#39;), (008, &#39;Geetika&#39;, &#39;Chauhan&#39;, 90000, &#39;14-04-11 09.00.00&#39;, &#39;Admin&#39;); CREATE TABLE Bonus ( WORKER_REF_ID INT, BONUS_AMOUNT INT(10), BONUS_DATE DATETIME, FOREIGN KEY (WORKER_REF_ID) REFERENCES Worker(WORKER_ID) ON DELETE CASCADE ); INSERT INTO Bonus (WORKER_REF_ID, BONUS_AMOUNT, BONUS_DATE) VALUES (001, 5000, &#39;16-02-20&#39;), (002, 3000, &#39;16-06-11&#39;), (003, 4000, &#39;16-02-20&#39;), (001, 4500, &#39;16-02-20&#39;), (002, 3500, &#39;16-06-11&#39;); CREATE TABLE Title ( WORKER_REF_ID INT, WORKER_TITLE CHAR(25), AFFECTED_FROM DATETIME, FOREIGN KEY (WORKER_REF_ID) REFERENCES Worker(WORKER_ID) ON DELETE CASCADE ); INSERT INTO Title (WORKER_REF_ID, WORKER_TITLE, AFFECTED_FROM) VALUES (001, &#39;Manager&#39;, &#39;2016-02-20 00:00:00&#39;), (002, &#39;Executive&#39;, &#39;2016-06-11 00:00:00&#39;), (008, &#39;Executive&#39;, &#39;2016-06-11 00:00:00&#39;), (005, &#39;Manager&#39;, &#39;2016-06-11 00:00:00&#39;), (004, &#39;Asst. Manager&#39;, &#39;2016-06-11 00:00:00&#39;), (007, &#39;Executive&#39;, &#39;2016-06-11 00:00:00&#39;), (006, &#39;Lead&#39;, &#39;2016-06-11 00:00:00&#39;), (003, &#39;Lead&#39;, &#39;2016-06-11 00:00:00&#39;); So we will have 3 tables and they will look like below: WORKER TABLE WORKER_ID FIRST_NAME LAST_NAME SALARY JOINING_DATE DEPARTMENT 001 Monika Arora 100000 2014-02-20 09:00:00 HR 002 Niharika Verma 80000 2014-06-11 09:00:00 Admin 003 Vishal Singhal 300000 2014-02-20 09:00:00 HR 004 Amitabh Singh 500000 2014-02-20 09:00:00 Admin 005 Vivek Bhati 500000 2014-06-11 09:00:00 Admin 006 Vipul Diwan 200000 2014-06-11 09:00:00 Account 007 Satish Kumar 75000 2014-01-20 09:00:00 Account 008 Geetika Chauhan 90000 2014-04-11 09:00:00 Admin BONUS TABLE WORKER_REF_ID BONUS_DATE BONUS_AMOUNT 1 2016-02-20 00:00:00 5000 2 2016-06-11 00:00:00 3000 3 2016-02-20 00:00:00 4000 1 2016-02-20 00:00:00 4500 2 2016-06-11 00:00:00 3500 TITLE TABLE WORKER_REF_ID WORKER_TITLE AFFECTED_FROM 1 Manager 2016-02-20 00:00:00 2 Executive 2016-06-11 00:00:00 8 Executive 2016-06-11 00:00:00 5 Manager 2016-06-11 00:00:00 4 Asst. Manager 2016-06-11 00:00:00 7 Executive 2016-06-11 00:00:00 6 Lead 2016-06-11 00:00:00 3 Lead 2016-06-11 00:00:00 This is the relationship of sample tables PRATICE WITH QUERIES Get total salary for workers who have bonuses First, we will try to get salary with bonus for workers, Then we will have a table returned as below SELECT w.WORKER_ID , w.FIRST_NAME , w.LAST_NAME , w.SALARY + b.BONUS_AMOUNT As &quot;total Salary&quot; FROM worker w join Bonus b WHERE w.WORKER_ID = b.WORKER_REF_ID; WORKER_ID FIRST_NAME LAST_NAME total Salary 1 Monika Arora 104500 1 Monika Arora 105000 2 Niharika Verma 83500 2 Niharika Verma 83000 3 Vishal Singhal 304000 Secondly, we will try to get total bonus following WORKER_REF_ID in bonus table SELECT b.WORKER_REF_ID , sum(b.BONUS_AMOUNT) as BONUS_AMOUNT from Bonus b group by b.WORKER_REF_ID; WORKER_REF_ID BONUS_AMOUNT 1 9500 2 6500 3 4000 Finally, from 2 tables above we will compile them by the query below. Then you can see the final result. SELECT w.WORKER_ID , w.FIRST_NAME , w.LAST_NAME , w.SALARY + b.BONUS_AMOUNT AS &quot;total Salary&quot; FROM worker w JOIN (SELECT b.WORKER_REF_ID , sum(b.BONUS_AMOUNT) AS BONUS_AMOUNT FROM Bonus b GROUP BY b.WORKER_REF_ID) AS b ON w.WORKER_ID = b.WORKER_REF_ID; WORKER_ID FIRST_NAME LAST_NAME total Salary 1 Monika Arora 109500 2 Niharika Verma 86500 3 Vishal Singhal 304000 Get 3 Highest Salaries From Workers SELECT distinct Salary from worker a WHERE 3 &gt;= (SELECT count(distinct Salary) from worker b WHERE a.Salary &lt;= b.Salary) order by a.Salary desc; Salary 500000 300000 200000 Get Workers with Max Salary SELECT FIRST_NAME, SALARY from worker WHERE SALARY=(SELECT max(SALARY) from worker); FIRST_NAME SALARY Amitabh 500000 Vivek 500000 Get Total Salary Following Department SELECT DEPARTMENT, sum(Salary) as &quot;Total Salary&quot; from worker group by DEPARTMENT; DEPARTMENT Total Salary HR 400000 Admin 1170000 Account 275000 Get Workers Who have highest Salary In Every Department Firstly, we will try to get Max Salary following Department SELECT max(Salary) as &quot;MaxSalary&quot;,DEPARTMENT from worker group by DEPARTMENT MaxSalary DEPARTMENT 300000 HR 500000 Admin 200000 Account Then, we will join the table above with the Worker table to find workers who have highest Salary in every Department SELECT t.DEPARTMENT,t.FIRST_NAME,t.Salary from(SELECT max(Salary) as &quot;MaxSalary&quot;,DEPARTMENT from worker group by DEPARTMENT) as TempNew Inner Join worker t on TempNew.DEPARTMENT=t.DEPARTMENT and TempNew.MaxSalary=t.Salary; DEPARTMENT FIRST_NAME Salary HR Vishal 300000 Admin Amitabh 500000 Admin Vivek 500000 Account Vipul 200000 SELECT * FROM worker WHERE WORKER_ID &lt;=5 UNION SELECT * FROM (SELECT * FROM worker W order by W.WORKER_ID DESC) AS W1 WHERE W1.WORKER_ID &lt;=5; //TODO","mainEntityOfPage":{"@type":"WebPage","@id":"/database/2021/09/15/database-intermediate-sql-queries.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="StepByStep" /><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NZ8G5007GK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-NZ8G5007GK');
+</script></head><body>
+  <div class="container-flush">
+    <div class="row"><!-- navigation bar -->
+<div class="col-lg-12">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" role="banner"><a class="navbar-brand site-title" rel="author" href="/">StepByStep</a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="nav navbar-nav"><li class="nav-item active">
+          <a class="nav-link" href="/about">About</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/">Java</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/docker">Docker</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/database">Database</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/data-science">Data-Science</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/ci-cd">CI-CD</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/python">Python</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/fe">FE</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/others">Others</a>
+        </li></ul>
+    </div>
+
+    <!-- Html Elements for Search -->
+    <div id="search-container" class="btn-group">
+      <input type="text" id="search-input" placeholder="search...">
+      <button id="clear">clear</button>
+      <ul id="results-container"></ul>
+    </div>
+
+    <!-- Script pointing to search-script.js -->
+    <script src="/java-scripts/search-script.js" type="text/javascript"></script>
+
+    <!-- Configuration -->
+    <script>
+      SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('results-container'),
+        json: '/search.json'
+      })
+    </script>
+
+    <!-- search clear -->
+    <script>
+      window.addEventListener('load', () => {
+        const button = document.querySelector('#clear');
+        button.addEventListener('click', () => {
+          document.querySelector('#search-input').value = "";
+          document.querySelector('#results-container').innerHTML = "";
+        });
+      });
+    </script>
+  </nav>
+</div></div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+  <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+    <header class="post-header">
+      <h1 class="post-title p-name" itemprop="name headline">Intermediate SQL Queries That You Should Know</h1>
+      <p class="post-meta">
+        <time class="dt-published" datetime="2021-09-15T00:00:00+07:00" itemprop="datePublished">Sep 15, 2021
+        </time></p>
+    </header>
+  
+    <div class="post-content e-content" itemprop="articleBody">
+      <blockquote>
+  <p>In this post we will learn about intermediate(quite easy) queries that you should know</p>
+</blockquote>
+
+<ul id="markdown-toc">
+  <li><a href="#prepare-your-database" id="markdown-toc-prepare-your-database">PREPARE YOUR DATABASE</a>    <ul>
+      <li><a href="#worker-table" id="markdown-toc-worker-table">WORKER TABLE</a></li>
+      <li><a href="#bonus-table" id="markdown-toc-bonus-table">BONUS TABLE</a></li>
+      <li><a href="#title-table" id="markdown-toc-title-table">TITLE TABLE</a></li>
+    </ul>
+  </li>
+  <li><a href="#pratice-with-queries" id="markdown-toc-pratice-with-queries">PRATICE WITH QUERIES</a>    <ul>
+      <li><a href="#get-total-salary-for-workers-who-have-bonuses" id="markdown-toc-get-total-salary-for-workers-who-have-bonuses">Get total salary for workers who have bonuses</a></li>
+      <li><a href="#get-3-highest-salaries-from-workers" id="markdown-toc-get-3-highest-salaries-from-workers">Get 3 Highest Salaries From Workers</a></li>
+      <li><a href="#get-workers-with-max-salary" id="markdown-toc-get-workers-with-max-salary">Get Workers with Max Salary</a></li>
+      <li><a href="#get-total-salary-following-department" id="markdown-toc-get-total-salary-following-department">Get Total Salary Following Department</a></li>
+      <li><a href="#get-workers-who-have-highest-salary-in-every-department" id="markdown-toc-get-workers-who-have-highest-salary-in-every-department">Get Workers Who have highest Salary In Every Department</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="prepare-your-database">PREPARE YOUR DATABASE</h2>
+
+<ul>
+  <li>
+    <p>I will use MySql Database to make examples. If you don’t know how to create MySql Database Server you can view <a href="/docker-posts/2021-07-08-docker-for-creating-database.html">this post</a>.</p>
+  </li>
+  <li>
+    <p>Then you can use <code class="language-plaintext highlighter-rouge">DBeaver</code> or <code class="language-plaintext highlighter-rouge">MySQL Workbench</code> run creation script as below. <a href="https://www.techbeamers.com/sql-query-questions-answers-for-practice/">More information</a></p>
+  </li>
+</ul>
+
+<p><a href="/assets/images/database/mysql-sample-database-diagram-2.JPG"><img src="/assets/images/database/mysql-sample-database-diagram-2.JPG" alt="sample database relationship diagram" title="sample database relationship diagram" /></a></p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    <span class="k">CREATE</span> <span class="k">DATABASE</span> <span class="n">ORG</span><span class="p">;</span>
+    <span class="k">SHOW</span> <span class="n">DATABASES</span><span class="p">;</span>
+    <span class="n">USE</span> <span class="n">ORG</span><span class="p">;</span>
+
+    <span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">Worker</span> <span class="p">(</span>
+        <span class="n">WORKER_ID</span> <span class="nb">INT</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="n">AUTO_INCREMENT</span><span class="p">,</span>
+        <span class="n">FIRST_NAME</span> <span class="nb">CHAR</span><span class="p">(</span><span class="mi">25</span><span class="p">),</span>
+        <span class="n">LAST_NAME</span> <span class="nb">CHAR</span><span class="p">(</span><span class="mi">25</span><span class="p">),</span>
+        <span class="n">SALARY</span> <span class="nb">INT</span><span class="p">(</span><span class="mi">15</span><span class="p">),</span>
+        <span class="n">JOINING_DATE</span> <span class="nb">DATETIME</span><span class="p">,</span>
+        <span class="n">DEPARTMENT</span> <span class="nb">CHAR</span><span class="p">(</span><span class="mi">25</span><span class="p">)</span>
+    <span class="p">);</span>
+
+    <span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">Worker</span>
+        <span class="p">(</span><span class="n">WORKER_ID</span><span class="p">,</span> <span class="n">FIRST_NAME</span><span class="p">,</span> <span class="n">LAST_NAME</span><span class="p">,</span> <span class="n">SALARY</span><span class="p">,</span> <span class="n">JOINING_DATE</span><span class="p">,</span> <span class="n">DEPARTMENT</span><span class="p">)</span> <span class="k">VALUES</span>
+            <span class="p">(</span><span class="mi">001</span><span class="p">,</span> <span class="s1">'Monika'</span><span class="p">,</span> <span class="s1">'Arora'</span><span class="p">,</span> <span class="mi">100000</span><span class="p">,</span> <span class="s1">'14-02-20 09.00.00'</span><span class="p">,</span> <span class="s1">'HR'</span><span class="p">),</span>
+            <span class="p">(</span><span class="mi">002</span><span class="p">,</span> <span class="s1">'Niharika'</span><span class="p">,</span> <span class="s1">'Verma'</span><span class="p">,</span> <span class="mi">80000</span><span class="p">,</span> <span class="s1">'14-06-11 09.00.00'</span><span class="p">,</span> <span class="s1">'Admin'</span><span class="p">),</span>
+            <span class="p">(</span><span class="mi">003</span><span class="p">,</span> <span class="s1">'Vishal'</span><span class="p">,</span> <span class="s1">'Singhal'</span><span class="p">,</span> <span class="mi">300000</span><span class="p">,</span> <span class="s1">'14-02-20 09.00.00'</span><span class="p">,</span> <span class="s1">'HR'</span><span class="p">),</span>
+            <span class="p">(</span><span class="mi">004</span><span class="p">,</span> <span class="s1">'Amitabh'</span><span class="p">,</span> <span class="s1">'Singh'</span><span class="p">,</span> <span class="mi">500000</span><span class="p">,</span> <span class="s1">'14-02-20 09.00.00'</span><span class="p">,</span> <span class="s1">'Admin'</span><span class="p">),</span>
+            <span class="p">(</span><span class="mi">005</span><span class="p">,</span> <span class="s1">'Vivek'</span><span class="p">,</span> <span class="s1">'Bhati'</span><span class="p">,</span> <span class="mi">500000</span><span class="p">,</span> <span class="s1">'14-06-11 09.00.00'</span><span class="p">,</span> <span class="s1">'Admin'</span><span class="p">),</span>
+            <span class="p">(</span><span class="mi">006</span><span class="p">,</span> <span class="s1">'Vipul'</span><span class="p">,</span> <span class="s1">'Diwan'</span><span class="p">,</span> <span class="mi">200000</span><span class="p">,</span> <span class="s1">'14-06-11 09.00.00'</span><span class="p">,</span> <span class="s1">'Account'</span><span class="p">),</span>
+            <span class="p">(</span><span class="mi">007</span><span class="p">,</span> <span class="s1">'Satish'</span><span class="p">,</span> <span class="s1">'Kumar'</span><span class="p">,</span> <span class="mi">75000</span><span class="p">,</span> <span class="s1">'14-01-20 09.00.00'</span><span class="p">,</span> <span class="s1">'Account'</span><span class="p">),</span>
+            <span class="p">(</span><span class="mi">008</span><span class="p">,</span> <span class="s1">'Geetika'</span><span class="p">,</span> <span class="s1">'Chauhan'</span><span class="p">,</span> <span class="mi">90000</span><span class="p">,</span> <span class="s1">'14-04-11 09.00.00'</span><span class="p">,</span> <span class="s1">'Admin'</span><span class="p">);</span>
+
+    <span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">Bonus</span> <span class="p">(</span>
+        <span class="n">WORKER_REF_ID</span> <span class="nb">INT</span><span class="p">,</span>
+        <span class="n">BONUS_AMOUNT</span> <span class="nb">INT</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span>
+        <span class="n">BONUS_DATE</span> <span class="nb">DATETIME</span><span class="p">,</span>
+        <span class="k">FOREIGN</span> <span class="k">KEY</span> <span class="p">(</span><span class="n">WORKER_REF_ID</span><span class="p">)</span>
+            <span class="k">REFERENCES</span> <span class="n">Worker</span><span class="p">(</span><span class="n">WORKER_ID</span><span class="p">)</span>
+            <span class="k">ON</span> <span class="k">DELETE</span> <span class="k">CASCADE</span>
+    <span class="p">);</span>
+
+    <span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">Bonus</span>
+        <span class="p">(</span><span class="n">WORKER_REF_ID</span><span class="p">,</span> <span class="n">BONUS_AMOUNT</span><span class="p">,</span> <span class="n">BONUS_DATE</span><span class="p">)</span> <span class="k">VALUES</span>
+            <span class="p">(</span><span class="mi">001</span><span class="p">,</span> <span class="mi">5000</span><span class="p">,</span> <span class="s1">'16-02-20'</span><span class="p">),</span>
+            <span class="p">(</span><span class="mi">002</span><span class="p">,</span> <span class="mi">3000</span><span class="p">,</span> <span class="s1">'16-06-11'</span><span class="p">),</span>
+            <span class="p">(</span><span class="mi">003</span><span class="p">,</span> <span class="mi">4000</span><span class="p">,</span> <span class="s1">'16-02-20'</span><span class="p">),</span>
+            <span class="p">(</span><span class="mi">001</span><span class="p">,</span> <span class="mi">4500</span><span class="p">,</span> <span class="s1">'16-02-20'</span><span class="p">),</span>
+            <span class="p">(</span><span class="mi">002</span><span class="p">,</span> <span class="mi">3500</span><span class="p">,</span> <span class="s1">'16-06-11'</span><span class="p">);</span>
+
+    <span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">Title</span> <span class="p">(</span>
+        <span class="n">WORKER_REF_ID</span> <span class="nb">INT</span><span class="p">,</span>
+        <span class="n">WORKER_TITLE</span> <span class="nb">CHAR</span><span class="p">(</span><span class="mi">25</span><span class="p">),</span>
+        <span class="n">AFFECTED_FROM</span> <span class="nb">DATETIME</span><span class="p">,</span>
+        <span class="k">FOREIGN</span> <span class="k">KEY</span> <span class="p">(</span><span class="n">WORKER_REF_ID</span><span class="p">)</span>
+            <span class="k">REFERENCES</span> <span class="n">Worker</span><span class="p">(</span><span class="n">WORKER_ID</span><span class="p">)</span>
+            <span class="k">ON</span> <span class="k">DELETE</span> <span class="k">CASCADE</span>
+    <span class="p">);</span>
+
+    <span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">Title</span>
+        <span class="p">(</span><span class="n">WORKER_REF_ID</span><span class="p">,</span> <span class="n">WORKER_TITLE</span><span class="p">,</span> <span class="n">AFFECTED_FROM</span><span class="p">)</span> <span class="k">VALUES</span>
+    <span class="p">(</span><span class="mi">001</span><span class="p">,</span> <span class="s1">'Manager'</span><span class="p">,</span> <span class="s1">'2016-02-20 00:00:00'</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">002</span><span class="p">,</span> <span class="s1">'Executive'</span><span class="p">,</span> <span class="s1">'2016-06-11 00:00:00'</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">008</span><span class="p">,</span> <span class="s1">'Executive'</span><span class="p">,</span> <span class="s1">'2016-06-11 00:00:00'</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">005</span><span class="p">,</span> <span class="s1">'Manager'</span><span class="p">,</span> <span class="s1">'2016-06-11 00:00:00'</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">004</span><span class="p">,</span> <span class="s1">'Asst. Manager'</span><span class="p">,</span> <span class="s1">'2016-06-11 00:00:00'</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">007</span><span class="p">,</span> <span class="s1">'Executive'</span><span class="p">,</span> <span class="s1">'2016-06-11 00:00:00'</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">006</span><span class="p">,</span> <span class="s1">'Lead'</span><span class="p">,</span> <span class="s1">'2016-06-11 00:00:00'</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">003</span><span class="p">,</span> <span class="s1">'Lead'</span><span class="p">,</span> <span class="s1">'2016-06-11 00:00:00'</span><span class="p">);</span>
+
+</code></pre></div></div>
+
+<ul>
+  <li>So we will have 3 tables and they will look like below:</li>
+</ul>
+
+<blockquote>
+  <h3 id="worker-table">WORKER TABLE</h3>
+</blockquote>
+
+<table>
+  <thead>
+    <tr>
+      <th>WORKER_ID</th>
+      <th>FIRST_NAME</th>
+      <th>LAST_NAME	SALARY</th>
+      <th>JOINING_DATE</th>
+      <th>DEPARTMENT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>001</td>
+      <td>Monika Arora</td>
+      <td>100000</td>
+      <td>2014-02-20 09:00:00</td>
+      <td>HR</td>
+    </tr>
+    <tr>
+      <td>002</td>
+      <td>Niharika Verma</td>
+      <td>80000</td>
+      <td>2014-06-11 09:00:00</td>
+      <td>Admin</td>
+    </tr>
+    <tr>
+      <td>003</td>
+      <td>Vishal Singhal</td>
+      <td>300000</td>
+      <td>2014-02-20 09:00:00</td>
+      <td>HR</td>
+    </tr>
+    <tr>
+      <td>004</td>
+      <td>Amitabh	Singh</td>
+      <td>500000</td>
+      <td>2014-02-20 09:00:00</td>
+      <td>Admin</td>
+    </tr>
+    <tr>
+      <td>005</td>
+      <td>Vivek	Bhati</td>
+      <td>500000</td>
+      <td>2014-06-11 09:00:00</td>
+      <td>Admin</td>
+    </tr>
+    <tr>
+      <td>006</td>
+      <td>Vipul	Diwan</td>
+      <td>200000</td>
+      <td>2014-06-11 09:00:00</td>
+      <td>Account</td>
+    </tr>
+    <tr>
+      <td>007</td>
+      <td>Satish	Kumar</td>
+      <td>75000</td>
+      <td>2014-01-20 09:00:00</td>
+      <td>Account</td>
+    </tr>
+    <tr>
+      <td>008</td>
+      <td>Geetika	Chauhan</td>
+      <td>90000</td>
+      <td>2014-04-11 09:00:00</td>
+      <td>Admin</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <h3 id="bonus-table">BONUS TABLE</h3>
+</blockquote>
+
+<table>
+  <thead>
+    <tr>
+      <th>WORKER_REF_ID</th>
+      <th>BONUS_DATE</th>
+      <th>BONUS_AMOUNT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>2016-02-20 00:00:00</td>
+      <td>5000</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>2016-06-11 00:00:00</td>
+      <td>3000</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>2016-02-20 00:00:00</td>
+      <td>4000</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>2016-02-20 00:00:00</td>
+      <td>4500</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>2016-06-11 00:00:00</td>
+      <td>3500</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <h3 id="title-table">TITLE TABLE</h3>
+</blockquote>
+
+<table>
+  <thead>
+    <tr>
+      <th>WORKER_REF_ID</th>
+      <th>WORKER_TITLE</th>
+      <th>AFFECTED_FROM</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>Manager</td>
+      <td>2016-02-20 00:00:00</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>Executive</td>
+      <td>2016-06-11 00:00:00</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>Executive</td>
+      <td>2016-06-11 00:00:00</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>Manager</td>
+      <td>2016-06-11 00:00:00</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>Asst. Manager</td>
+      <td>2016-06-11 00:00:00</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>Executive</td>
+      <td>2016-06-11 00:00:00</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>Lead</td>
+      <td>2016-06-11 00:00:00</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>Lead</td>
+      <td>2016-06-11 00:00:00</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>This is the relationship of sample tables</li>
+</ul>
+
+<h2 id="pratice-with-queries">PRATICE WITH QUERIES</h2>
+
+<blockquote>
+  <h3 id="get-total-salary-for-workers-who-have-bonuses">Get total salary for workers who have bonuses</h3>
+</blockquote>
+
+<ul>
+  <li>First, we will try to get salary with bonus for workers, Then we will have a table returned as below</li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="k">SELECT</span> <span class="n">w</span><span class="p">.</span><span class="n">WORKER_ID</span> <span class="p">,</span> <span class="n">w</span><span class="p">.</span><span class="n">FIRST_NAME</span> <span class="p">,</span> <span class="n">w</span><span class="p">.</span><span class="n">LAST_NAME</span> <span class="p">,</span> <span class="n">w</span><span class="p">.</span><span class="n">SALARY</span> <span class="o">+</span> <span class="n">b</span><span class="p">.</span><span class="n">BONUS_AMOUNT</span> <span class="k">As</span> <span class="nv">"total Salary"</span> <span class="k">FROM</span> <span class="n">worker</span> <span class="n">w</span> <span class="k">join</span> <span class="n">Bonus</span> <span class="n">b</span> <span class="k">WHERE</span> <span class="n">w</span><span class="p">.</span><span class="n">WORKER_ID</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">WORKER_REF_ID</span><span class="p">;</span>
+
+</code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th>WORKER_ID</th>
+      <th>FIRST_NAME</th>
+      <th>LAST_NAME</th>
+      <th>total Salary</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>Monika</td>
+      <td>Arora</td>
+      <td>104500</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>Monika</td>
+      <td>Arora</td>
+      <td>105000</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>Niharika</td>
+      <td>Verma</td>
+      <td>83500</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>Niharika</td>
+      <td>Verma</td>
+      <td>83000</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>Vishal</td>
+      <td>Singhal</td>
+      <td>304000</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>Secondly, we will try to get total bonus following <code class="language-plaintext highlighter-rouge">WORKER_REF_ID</code> in <code class="language-plaintext highlighter-rouge">bonus</code> table</li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="k">SELECT</span> <span class="n">b</span><span class="p">.</span><span class="n">WORKER_REF_ID</span> <span class="p">,</span> <span class="k">sum</span><span class="p">(</span><span class="n">b</span><span class="p">.</span><span class="n">BONUS_AMOUNT</span><span class="p">)</span>  <span class="k">as</span> <span class="n">BONUS_AMOUNT</span> <span class="k">from</span> <span class="n">Bonus</span> <span class="n">b</span> <span class="k">group</span> <span class="k">by</span> <span class="n">b</span><span class="p">.</span><span class="n">WORKER_REF_ID</span><span class="p">;</span>
+
+</code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th>WORKER_REF_ID</th>
+      <th>BONUS_AMOUNT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>9500</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>6500</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>4000</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>Finally, from 2 tables above we will compile them by the query below. Then you can see the final result.</li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="k">SELECT</span> <span class="n">w</span><span class="p">.</span><span class="n">WORKER_ID</span> <span class="p">,</span> <span class="n">w</span><span class="p">.</span><span class="n">FIRST_NAME</span> <span class="p">,</span> <span class="n">w</span><span class="p">.</span><span class="n">LAST_NAME</span> <span class="p">,</span> <span class="n">w</span><span class="p">.</span><span class="n">SALARY</span> <span class="o">+</span> <span class="n">b</span><span class="p">.</span><span class="n">BONUS_AMOUNT</span> <span class="k">AS</span> <span class="nv">"total Salary"</span>
+<span class="k">FROM</span> <span class="n">worker</span> <span class="n">w</span> <span class="k">JOIN</span> <span class="p">(</span><span class="k">SELECT</span> <span class="n">b</span><span class="p">.</span><span class="n">WORKER_REF_ID</span> <span class="p">,</span> <span class="k">sum</span><span class="p">(</span><span class="n">b</span><span class="p">.</span><span class="n">BONUS_AMOUNT</span><span class="p">)</span> <span class="k">AS</span> <span class="n">BONUS_AMOUNT</span>
+<span class="k">FROM</span> <span class="n">Bonus</span> <span class="n">b</span> <span class="k">GROUP</span> <span class="k">BY</span> <span class="n">b</span><span class="p">.</span><span class="n">WORKER_REF_ID</span><span class="p">)</span> <span class="k">AS</span> <span class="n">b</span> <span class="k">ON</span> <span class="n">w</span><span class="p">.</span><span class="n">WORKER_ID</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">WORKER_REF_ID</span><span class="p">;</span>
+
+</code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th>WORKER_ID</th>
+      <th>FIRST_NAME</th>
+      <th>LAST_NAME</th>
+      <th>total Salary</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>Monika</td>
+      <td>Arora</td>
+      <td>109500</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>Niharika</td>
+      <td>Verma</td>
+      <td>86500</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>Vishal</td>
+      <td>Singhal</td>
+      <td>304000</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <h3 id="get-3-highest-salaries-from-workers">Get 3 Highest Salaries From Workers</h3>
+</blockquote>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="k">SELECT</span> <span class="k">distinct</span> <span class="n">Salary</span>
+<span class="k">from</span> <span class="n">worker</span> <span class="n">a</span>
+<span class="k">WHERE</span> <span class="mi">3</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="k">SELECT</span> <span class="k">count</span><span class="p">(</span><span class="k">distinct</span> <span class="n">Salary</span><span class="p">)</span> <span class="k">from</span> <span class="n">worker</span> <span class="n">b</span> <span class="k">WHERE</span> <span class="n">a</span><span class="p">.</span><span class="n">Salary</span> <span class="o">&lt;=</span> <span class="n">b</span><span class="p">.</span><span class="n">Salary</span><span class="p">)</span> <span class="k">order</span> <span class="k">by</span> <span class="n">a</span><span class="p">.</span><span class="n">Salary</span> <span class="k">desc</span><span class="p">;</span>
+
+</code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Salary</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>500000</td>
+    </tr>
+    <tr>
+      <td>300000</td>
+    </tr>
+    <tr>
+      <td>200000</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <h3 id="get-workers-with-max-salary">Get Workers with Max Salary</h3>
+</blockquote>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="k">SELECT</span> <span class="n">FIRST_NAME</span><span class="p">,</span> <span class="n">SALARY</span> <span class="k">from</span> <span class="n">worker</span> <span class="k">WHERE</span> <span class="n">SALARY</span><span class="o">=</span><span class="p">(</span><span class="k">SELECT</span> <span class="k">max</span><span class="p">(</span><span class="n">SALARY</span><span class="p">)</span> <span class="k">from</span> <span class="n">worker</span><span class="p">);</span>
+
+</code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th>FIRST_NAME</th>
+      <th>SALARY</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Amitabh</td>
+      <td>500000</td>
+    </tr>
+    <tr>
+      <td>Vivek</td>
+      <td>500000</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <h3 id="get-total-salary-following-department">Get Total Salary Following Department</h3>
+</blockquote>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="k">SELECT</span> <span class="n">DEPARTMENT</span><span class="p">,</span> <span class="k">sum</span><span class="p">(</span><span class="n">Salary</span><span class="p">)</span> <span class="k">as</span> <span class="nv">"Total Salary"</span> <span class="k">from</span> <span class="n">worker</span> <span class="k">group</span> <span class="k">by</span> <span class="n">DEPARTMENT</span><span class="p">;</span>
+
+</code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th>DEPARTMENT</th>
+      <th>Total Salary</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>HR</td>
+      <td>400000</td>
+    </tr>
+    <tr>
+      <td>Admin</td>
+      <td>1170000</td>
+    </tr>
+    <tr>
+      <td>Account</td>
+      <td>275000</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <h3 id="get-workers-who-have-highest-salary-in-every-department">Get Workers Who have highest Salary In Every Department</h3>
+</blockquote>
+
+<ul>
+  <li>Firstly, we will try to get Max Salary following Department</li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="k">SELECT</span> <span class="k">max</span><span class="p">(</span><span class="n">Salary</span><span class="p">)</span> <span class="k">as</span> <span class="nv">"MaxSalary"</span><span class="p">,</span><span class="n">DEPARTMENT</span> <span class="k">from</span> <span class="n">worker</span> <span class="k">group</span> <span class="k">by</span> <span class="n">DEPARTMENT</span>
+
+</code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th>MaxSalary</th>
+      <th>DEPARTMENT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>300000</td>
+      <td>HR</td>
+    </tr>
+    <tr>
+      <td>500000</td>
+      <td>Admin</td>
+    </tr>
+    <tr>
+      <td>200000</td>
+      <td>Account</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>Then, we will join the table above with the Worker table to find workers who have highest Salary in every Department</li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="k">SELECT</span> <span class="n">t</span><span class="p">.</span><span class="n">DEPARTMENT</span><span class="p">,</span><span class="n">t</span><span class="p">.</span><span class="n">FIRST_NAME</span><span class="p">,</span><span class="n">t</span><span class="p">.</span><span class="n">Salary</span> <span class="k">from</span><span class="p">(</span><span class="k">SELECT</span> <span class="k">max</span><span class="p">(</span><span class="n">Salary</span><span class="p">)</span> <span class="k">as</span> <span class="nv">"MaxSalary"</span><span class="p">,</span><span class="n">DEPARTMENT</span> <span class="k">from</span> <span class="n">worker</span> <span class="k">group</span> <span class="k">by</span> <span class="n">DEPARTMENT</span><span class="p">)</span> <span class="k">as</span> <span class="n">TempNew</span>
+<span class="k">Inner</span> <span class="k">Join</span> <span class="n">worker</span> <span class="n">t</span> <span class="k">on</span> <span class="n">TempNew</span><span class="p">.</span><span class="n">DEPARTMENT</span><span class="o">=</span><span class="n">t</span><span class="p">.</span><span class="n">DEPARTMENT</span>
+<span class="k">and</span> <span class="n">TempNew</span><span class="p">.</span><span class="n">MaxSalary</span><span class="o">=</span><span class="n">t</span><span class="p">.</span><span class="n">Salary</span><span class="p">;</span>
+
+</code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th>DEPARTMENT</th>
+      <th>FIRST_NAME</th>
+      <th>Salary</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>HR</td>
+      <td>Vishal</td>
+      <td>300000</td>
+    </tr>
+    <tr>
+      <td>Admin</td>
+      <td>Amitabh</td>
+      <td>500000</td>
+    </tr>
+    <tr>
+      <td>Admin</td>
+      <td>Vivek</td>
+      <td>500000</td>
+    </tr>
+    <tr>
+      <td>Account</td>
+      <td>Vipul</td>
+      <td>200000</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">worker</span> <span class="k">WHERE</span> <span class="n">WORKER_ID</span> <span class="o">&lt;=</span><span class="mi">5</span>
+<span class="k">UNION</span>
+<span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="p">(</span><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">worker</span> <span class="n">W</span> <span class="k">order</span> <span class="k">by</span> <span class="n">W</span><span class="p">.</span><span class="n">WORKER_ID</span> <span class="k">DESC</span><span class="p">)</span> <span class="k">AS</span> <span class="n">W1</span> <span class="k">WHERE</span> <span class="n">W1</span><span class="p">.</span><span class="n">WORKER_ID</span> <span class="o">&lt;=</span><span class="mi">5</span><span class="p">;</span>
+
+</code></pre></div></div>
+
+<p>//TODO</p>
+
+    </div><a class="u-url" href="/database/2021/09/15/database-intermediate-sql-queries.html" hidden></a>
+  </article>
+  
+</div>
+
+
+    </div>
+  </div>
+  <script src="https://unpkg.com/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js"></script>
+  <script>addBackToTop()</script>
+</body>
+<footer><footer class="site-footer h-card">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <h2 class="footer-heading">StepByStep</h2>
+        <div>
+          <div>
+            <ul>
+              <li>Duc Nguyen</li><li><a class="u-email" href="mailto:minhducnguyen189@gmail.com">minhducnguyen189@gmail.com</a></li><li>&copy; 2021 Duc Nguyen. Powered by <a href="https://jekyllrb.com/">Jekyll</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <data class="u-url" href="/%20/"></data>
+        <div><ul class="social-media-list"><li><a href="https://github.com/minhducnguyen189"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">minhducnguyen189</span></a></li><li><a href="https://www.linkedin.com/in/duc-nguyen-03109b141"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#linkedin"></use></svg> <span class="username">duc-nguyen-03109b141</span></a></li></ul>
+</div>
+      </div>
+      <div class="col-md-4">
+        
+      </div>
+    </div>
+
+    <div class="row">
+      <p>Hi there! Let&#39;s explore some general knowleadges and briefly definitions in programming. I hope that this website can help people saving time in learning, also give some motivations for those who have choice the developer path.</p>
+    </div>
+</footer></footer>
+</html>

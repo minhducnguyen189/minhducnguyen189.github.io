@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- bootstrap library and JS, Jquery -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Data-Science | StepByStep</title>
+<meta name="generator" content="Jekyll v4.2.1" />
+<meta property="og:title" content="Data-Science" />
+<meta name="author" content="Duc Nguyen" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Hi there! Let’s explore some general knowleadges and briefly definitions in programming. I hope that this website can help people saving time in learning, also give some motivations for those who have choice the developer path." />
+<meta property="og:description" content="Hi there! Let’s explore some general knowleadges and briefly definitions in programming. I hope that this website can help people saving time in learning, also give some motivations for those who have choice the developer path." />
+<link rel="canonical" href="/data-science/" />
+<meta property="og:url" content="/data-science/" />
+<meta property="og:site_name" content="StepByStep" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Data-Science" />
+<script type="application/ld+json">
+{"@type":"WebPage","url":"/data-science/","author":{"@type":"Person","name":"Duc Nguyen"},"headline":"Data-Science","description":"Hi there! Let’s explore some general knowleadges and briefly definitions in programming. I hope that this website can help people saving time in learning, also give some motivations for those who have choice the developer path.","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="StepByStep" /><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NZ8G5007GK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-NZ8G5007GK');
+</script></head><body>
+  <div class="container-flush">
+    <div class="row"><!-- navigation bar -->
+<div class="col-lg-12">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" role="banner"><a class="navbar-brand site-title" rel="author" href="/">StepByStep</a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="nav navbar-nav"><li class="nav-item active">
+          <a class="nav-link" href="/about">About</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/">Java</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/docker">Docker</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/database">Database</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/data-science">Data-Science</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/ci-cd">CI-CD</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/python">Python</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/fe">FE</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/others">Others</a>
+        </li></ul>
+    </div>
+
+    <!-- Html Elements for Search -->
+    <div id="search-container" class="btn-group">
+      <input type="text" id="search-input" placeholder="search...">
+      <button id="clear">clear</button>
+      <ul id="results-container"></ul>
+    </div>
+
+    <!-- Script pointing to search-script.js -->
+    <script src="/java-scripts/search-script.js" type="text/javascript"></script>
+
+    <!-- Configuration -->
+    <script>
+      SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('results-container'),
+        json: '/search.json'
+      })
+    </script>
+
+    <!-- search clear -->
+    <script>
+      window.addEventListener('load', () => {
+        const button = document.querySelector('#clear');
+        button.addEventListener('click', () => {
+          document.querySelector('#search-input').value = "";
+          document.querySelector('#results-container').innerHTML = "";
+        });
+      });
+    </script>
+  </nav>
+</div></div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 main-page-content"><div class="row">
+    <div class="col-md-12">
+      <h2 class="post-list-heading">Data-Science</h2>
+    </div>
+  </div>
+
+  <div class="row"><div class="col-sm-4">
+      <div class="card post-list">
+
+        <a class="post-link-data-science" href="/data-science/2021/11/07/data-science-R-programming-basics-for-loops.html"><span class="post-meta-span">Nov 7, 2021</span>
+          <h4>
+            Data Science: R Programming Basics - For Loops
+          </h4></a>
+      </div>
+    </div><div class="col-sm-4">
+      <div class="card post-list">
+
+        <a class="post-link-data-science" href="/data-science/2021/11/07/data-science-R-programming-basics-functions.html"><span class="post-meta-span">Nov 7, 2021</span>
+          <h4>
+            Data Science: R Programming Basics - Functions
+          </h4></a>
+      </div>
+    </div><div class="col-sm-4">
+      <div class="card post-list">
+
+        <a class="post-link-data-science" href="/data-science/2021/11/06/data-science-R-programming-basics-conditionals.html"><span class="post-meta-span">Nov 6, 2021</span>
+          <h4>
+            Data Science: R Programming Basics - Conditionals
+          </h4></a>
+      </div>
+    </div><div class="col-sm-4">
+      <div class="card post-list">
+
+        <a class="post-link-data-science" href="/data-science/2021/11/06/data-science-R-basic-plots.html"><span class="post-meta-span">Nov 6, 2021</span>
+          <h4>
+            Data Science: R Basic Plots
+          </h4></a>
+      </div>
+    </div><div class="col-sm-4">
+      <div class="card post-list">
+
+        <a class="post-link-data-science" href="/data-science/2021/11/05/data-science-R-basic-daata-wrangling.html"><span class="post-meta-span">Nov 5, 2021</span>
+          <h4>
+            Data Science: R Basic Data Wrangling
+          </h4></a>
+      </div>
+    </div><div class="col-sm-4">
+      <div class="card post-list">
+
+        <a class="post-link-data-science" href="/data-science/2021/10/30/data-science-R-indexing.html"><span class="post-meta-span">Oct 30, 2021</span>
+          <h4>
+            Data Science: R Indexing
+          </h4></a>
+      </div>
+    </div><div class="col-sm-4">
+      <div class="card post-list">
+
+        <a class="post-link-data-science" href="/data-science/2021/10/29/data-science-R-vector-arithme.html"><span class="post-meta-span">Oct 29, 2021</span>
+          <h4>
+            Data Science: R Vector Arithme
+          </h4></a>
+      </div>
+    </div><div class="col-sm-4">
+      <div class="card post-list">
+
+        <a class="post-link-data-science" href="/data-science/2021/09/26/data-science-R-sorting.html"><span class="post-meta-span">Sep 26, 2021</span>
+          <h4>
+            Data Science: R Sorting
+          </h4></a>
+      </div>
+    </div><div class="col-sm-4">
+      <div class="card post-list">
+
+        <a class="post-link-data-science" href="/data-science/2021/09/26/data-science-R-vector.html"><span class="post-meta-span">Sep 26, 2021</span>
+          <h4>
+            Data Science: R Vector and Vector coercion
+          </h4></a>
+      </div>
+    </div><div class="col-sm-4">
+      <div class="card post-list">
+
+        <a class="post-link-data-science" href="/data-science/2021/09/26/data-science-R-data-types.html"><span class="post-meta-span">Sep 26, 2021</span>
+          <h4>
+            Data Science: R Data Types
+          </h4></a>
+      </div>
+    </div><div class="col-sm-4">
+      <div class="card post-list">
+
+        <a class="post-link-data-science" href="/data-science/2021/09/23/data-science-R-basic.html"><span class="post-meta-span">Sep 23, 2021</span>
+          <h4>
+            Data Science: R Language Basic
+          </h4></a>
+      </div>
+    </div></div></div>
+
+
+
+    </div>
+  </div>
+  <script src="https://unpkg.com/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js"></script>
+  <script>addBackToTop()</script>
+</body>
+<footer><footer class="site-footer h-card">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <h2 class="footer-heading">StepByStep</h2>
+        <div>
+          <div>
+            <ul>
+              <li>Duc Nguyen</li><li><a class="u-email" href="mailto:minhducnguyen189@gmail.com">minhducnguyen189@gmail.com</a></li><li>&copy; 2021 Duc Nguyen. Powered by <a href="https://jekyllrb.com/">Jekyll</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <data class="u-url" href="/%20/"></data>
+        <div><ul class="social-media-list"><li><a href="https://github.com/minhducnguyen189"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">minhducnguyen189</span></a></li><li><a href="https://www.linkedin.com/in/duc-nguyen-03109b141"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#linkedin"></use></svg> <span class="username">duc-nguyen-03109b141</span></a></li></ul>
+</div>
+      </div>
+      <div class="col-md-4">
+        
+      </div>
+    </div>
+
+    <div class="row">
+      <p>Hi there! Let&#39;s explore some general knowleadges and briefly definitions in programming. I hope that this website can help people saving time in learning, also give some motivations for those who have choice the developer path.</p>
+    </div>
+</footer></footer>
+</html>

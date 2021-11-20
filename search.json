@@ -3,8 +3,8 @@
     {
 
       "title"    : "Data Science: R Programming Basics - For Loops",
-      "url"      : "/data/2021/11/07/data-science-R-programming-basics-for-loops.html",
-      "category" : "data",
+      "url"      : "/data-science/2021/11/07/data-science-R-programming-basics-for-loops.html",
+      "category" : "data-science",
       "tags"     : "data science, R",
       "date"     : "2021-11-07 09:00:00 +0700",
       "discription" : ""
@@ -15,8 +15,8 @@
     {
 
       "title"    : "Data Science: R Programming Basics - Functions",
-      "url"      : "/data/2021/11/07/data-science-R-programming-basics-functions.html",
-      "category" : "data",
+      "url"      : "/data-science/2021/11/07/data-science-R-programming-basics-functions.html",
+      "category" : "data-science",
       "tags"     : "data science, R",
       "date"     : "2021-11-07 00:00:00 +0700",
       "discription" : ""
@@ -27,8 +27,8 @@
     {
 
       "title"    : "Data Science: R Programming Basics - Conditionals",
-      "url"      : "/data/2021/11/06/data-science-R-programming-basics-conditionals.html",
-      "category" : "data",
+      "url"      : "/data-science/2021/11/06/data-science-R-programming-basics-conditionals.html",
+      "category" : "data-science",
       "tags"     : "data science, R",
       "date"     : "2021-11-06 00:00:00 +0700",
       "discription" : ""
@@ -39,8 +39,8 @@
     {
 
       "title"    : "Data Science: R Basic Plots",
-      "url"      : "/data/2021/11/06/data-science-R-basic-plots.html",
-      "category" : "data",
+      "url"      : "/data-science/2021/11/06/data-science-R-basic-plots.html",
+      "category" : "data-science",
       "tags"     : "data science, R",
       "date"     : "2021-11-06 00:00:00 +0700",
       "discription" : ""
@@ -51,8 +51,8 @@
     {
 
       "title"    : "Data Science: R Basic Data Wrangling",
-      "url"      : "/data/2021/11/05/data-science-R-basic-daata-wrangling.html",
-      "category" : "data",
+      "url"      : "/data-science/2021/11/05/data-science-R-basic-daata-wrangling.html",
+      "category" : "data-science",
       "tags"     : "data science, R",
       "date"     : "2021-11-05 00:00:00 +0700",
       "discription" : ""
@@ -63,8 +63,8 @@
     {
 
       "title"    : "Data Science: R Indexing",
-      "url"      : "/data/2021/10/30/data-science-R-indexing.html",
-      "category" : "data",
+      "url"      : "/data-science/2021/10/30/data-science-R-indexing.html",
+      "category" : "data-science",
       "tags"     : "data science, R",
       "date"     : "2021-10-30 00:00:00 +0700",
       "discription" : ""
@@ -75,8 +75,8 @@
     {
 
       "title"    : "Data Science: R Vector Arithme",
-      "url"      : "/data/2021/10/29/data-science-R-vector-arithme.html",
-      "category" : "data",
+      "url"      : "/data-science/2021/10/29/data-science-R-vector-arithme.html",
+      "category" : "data-science",
       "tags"     : "data science, R",
       "date"     : "2021-10-29 00:00:00 +0700",
       "discription" : ""
@@ -99,8 +99,8 @@
     {
 
       "title"    : "Data Science: R Sorting",
-      "url"      : "/data/2021/09/26/data-science-R-sorting.html",
-      "category" : "data",
+      "url"      : "/data-science/2021/09/26/data-science-R-sorting.html",
+      "category" : "data-science",
       "tags"     : "data science, R",
       "date"     : "2021-09-26 00:00:00 +0700",
       "discription" : ""
@@ -111,8 +111,8 @@
     {
 
       "title"    : "Data Science: R Vector and Vector coercion",
-      "url"      : "/data/2021/09/26/data-science-R-vector.html",
-      "category" : "data",
+      "url"      : "/data-science/2021/09/26/data-science-R-vector.html",
+      "category" : "data-science",
       "tags"     : "data science, R",
       "date"     : "2021-09-26 00:00:00 +0700",
       "discription" : ""
@@ -123,8 +123,8 @@
     {
 
       "title"    : "Data Science: R Data Types",
-      "url"      : "/data/2021/09/26/data-science-R-data-types.html",
-      "category" : "data",
+      "url"      : "/data-science/2021/09/26/data-science-R-data-types.html",
+      "category" : "data-science",
       "tags"     : "data science, R",
       "date"     : "2021-09-26 00:00:00 +0700",
       "discription" : ""
@@ -135,8 +135,8 @@
     {
 
       "title"    : "Data Science: R Language Basic",
-      "url"      : "/data/2021/09/23/data-science-R-basic.html",
-      "category" : "data",
+      "url"      : "/data-science/2021/09/23/data-science-R-basic.html",
+      "category" : "data-science",
       "tags"     : "data science, R",
       "date"     : "2021-09-23 00:00:00 +0700",
       "discription" : ""
@@ -159,8 +159,8 @@
     {
 
       "title"    : "Intermediate SQL Queries That You Should Know",
-      "url"      : "/data/2021/09/15/database-intermediate-sql-queries.html",
-      "category" : "data",
+      "url"      : "/database/2021/09/15/database-intermediate-sql-queries.html",
+      "category" : "database",
       "tags"     : "Database, SQL",
       "date"     : "2021-09-15 00:00:00 +0700",
       "discription" : ""
@@ -219,8 +219,8 @@
     {
 
       "title"    : "Springboot Configurations For Databases",
-      "url"      : "/data/2021/08/07/database-with-springboot-configuration.html",
-      "category" : "data",
+      "url"      : "/database/2021/08/07/database-with-springboot-configuration.html",
+      "category" : "database",
       "tags"     : "Database, SQL, SpringBoot",
       "date"     : "2021-08-07 00:00:00 +0700",
       "discription" : ""
@@ -279,8 +279,8 @@
     {
 
       "title"    : "Basic SQL Queries That You Should Know",
-      "url"      : "/data/2021/07/04/database-basic-sql-queries.html",
-      "category" : "data",
+      "url"      : "/database/2021/07/04/database-basic-sql-queries.html",
+      "category" : "database",
       "tags"     : "database, sql",
       "date"     : "2021-07-04 12:00:00 +0700",
       "discription" : ""
@@ -315,8 +315,8 @@
     {
 
       "title"    : "General Knowledges about Database",
-      "url"      : "/data/2021/07/04/database-general.html",
-      "category" : "data",
+      "url"      : "/database/2021/07/04/database-general.html",
+      "category" : "database",
       "tags"     : "database, sql",
       "date"     : "2021-07-04 00:00:00 +0700",
       "discription" : ""

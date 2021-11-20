@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- bootstrap library and JS, Jquery -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Data Science: R Data Types | StepByStep</title>
+<meta name="generator" content="Jekyll v4.2.1" />
+<meta property="og:title" content="Data Science: R Data Types" />
+<meta name="author" content="Duc Nguyen" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="You can learn full course in this link CLASS DATA FRAMES OBJECTS ACCESS DATA IN OBJECT VECTORS CHARACTER VECTORS LOGICAL VECTORS FACTOR CLASS The function “class” helps us determine the type of an object. For example, if I define a as 2 and I look at its class, We will see it’s a numeric. a &lt;- 5 class(a) &quot;numberic&quot; class(ls) &quot;function&quot; DATA FRAMES The most common way of storing data sets in R is with data frames. Conceptually, we can think of data frames as tables. Rows represent observations, and different variables are represented by different columns. you can access example data by loading dslabs library. For exanoke you can load the murders data set by command data(&quot;murders&quot;). library(dslabs) data(&quot;murders&quot;) OBJECTS So we know our data is stored in the object murders. But what is this object? How can we find out more about this object? The function str is useful for this. str stands for structure, and it shows us the structure of an object. &gt; str(murders) &#39;data.frame&#39;: 51 obs. of 5 variables: $ state : chr &quot;Alabama&quot; &quot;Alaska&quot; &quot;Arizona&quot; &quot;Arkansas&quot; ... $ abb : chr &quot;AL&quot; &quot;AK&quot; &quot;AZ&quot; &quot;AR&quot; ... $ region : Factor w/ 4 levels &quot;Northeast&quot;,&quot;South&quot;,..: 2 4 4 2 4 4 1 2 2 2 ... $ population: num 4779736 710231 6392017 2915918 37253956 ... $ total : num 135 19 232 93 1257 ... If you want to show some data you can use function head(&lt;objectName&gt;). So you will see 6 lines of data in your console. head(murders) state abb region population total 1 Alabama AL South 4779736 135 2 Alaska AK West 710231 19 3 Arizona AZ West 6392017 232 4 Arkansas AR South 2915918 93 5 California CA West 37253956 1257 6 Colorado CO West 5029196 65 ACCESS DATA IN OBJECT For our analysis, we will need to access the different variables represented by columns. To access these variables, we use the dollar sign symbol $ . It’s called the accessor. For exmaple, we want to access the population in object murders we can use the command murders$population. The population is the name of column in object murders. &gt;murders$population [1] 4779736 710231 6392017 2915918 37253956 [6] 5029196 3574097 897934 601723 19687653 [11] 9920000 1360301 1567582 12830632 6483802 [16] 3046355 2853118 4339367 4533372 1328361 [21] 5773552 6547629 9883640 5303925 2967297 [26] 5988927 989415 1826341 2700551 1316470 [31] 8791894 2059179 19378102 9535483 672591 [36] 11536504 3751351 3831074 12702379 1052567 [41] 4625364 814180 6346105 25145561 2763885 [46] 625741 8001024 6724540 1852994 5686986 [51] 563626 if you don’t remember all names of column in an object you can use the function names(&lt;objectName&gt;) to list out all the name of column in object. &gt; names(murders) [1] &quot;state&quot; &quot;abb&quot; &quot;region&quot; &quot;population&quot; [5] &quot;total&quot; VECTORS When you get all data of a column by name so we received a list of data in the column, we call them are vectors. A single data is technically a vector. The function lenghth will help you count how many vectors you are. &gt; pop &lt;- murders$population &gt; length(pop) [1] 51 CHARACTER VECTORS We can store characters in R as well. Because variables also use character strings, we’re going to use quotes (&quot;&quot;) to distinguish between variable names and character strings. LOGICAL VECTORS Logical vectors are another type of vector. We don’t have those in this particular data frame, but we need to mention them. These must be either true or false. So we can create a logical vector by, for example, assigning 3 == 2 z &lt;- 3 == 2 &gt; z [1] FALSE FACTOR Factors are useful for storing what is called categorical data. The regions are categorical. There is only four categories. Each state is in one of these four. We can see the four levels in this particular factor using the function levels. &gt; levels(murders$region) [1] &quot;Northeast&quot; &quot;South&quot; &quot;North Central&quot; [4] &quot;West&quot; Turns out that saving categorical data this way is more memory efficient. So in R, in the background, we store integers. We store the levels as integers. Technically, integers are smaller memory-wise than characters. So this is what makes it more efficient." />
+<meta property="og:description" content="You can learn full course in this link CLASS DATA FRAMES OBJECTS ACCESS DATA IN OBJECT VECTORS CHARACTER VECTORS LOGICAL VECTORS FACTOR CLASS The function “class” helps us determine the type of an object. For example, if I define a as 2 and I look at its class, We will see it’s a numeric. a &lt;- 5 class(a) &quot;numberic&quot; class(ls) &quot;function&quot; DATA FRAMES The most common way of storing data sets in R is with data frames. Conceptually, we can think of data frames as tables. Rows represent observations, and different variables are represented by different columns. you can access example data by loading dslabs library. For exanoke you can load the murders data set by command data(&quot;murders&quot;). library(dslabs) data(&quot;murders&quot;) OBJECTS So we know our data is stored in the object murders. But what is this object? How can we find out more about this object? The function str is useful for this. str stands for structure, and it shows us the structure of an object. &gt; str(murders) &#39;data.frame&#39;: 51 obs. of 5 variables: $ state : chr &quot;Alabama&quot; &quot;Alaska&quot; &quot;Arizona&quot; &quot;Arkansas&quot; ... $ abb : chr &quot;AL&quot; &quot;AK&quot; &quot;AZ&quot; &quot;AR&quot; ... $ region : Factor w/ 4 levels &quot;Northeast&quot;,&quot;South&quot;,..: 2 4 4 2 4 4 1 2 2 2 ... $ population: num 4779736 710231 6392017 2915918 37253956 ... $ total : num 135 19 232 93 1257 ... If you want to show some data you can use function head(&lt;objectName&gt;). So you will see 6 lines of data in your console. head(murders) state abb region population total 1 Alabama AL South 4779736 135 2 Alaska AK West 710231 19 3 Arizona AZ West 6392017 232 4 Arkansas AR South 2915918 93 5 California CA West 37253956 1257 6 Colorado CO West 5029196 65 ACCESS DATA IN OBJECT For our analysis, we will need to access the different variables represented by columns. To access these variables, we use the dollar sign symbol $ . It’s called the accessor. For exmaple, we want to access the population in object murders we can use the command murders$population. The population is the name of column in object murders. &gt;murders$population [1] 4779736 710231 6392017 2915918 37253956 [6] 5029196 3574097 897934 601723 19687653 [11] 9920000 1360301 1567582 12830632 6483802 [16] 3046355 2853118 4339367 4533372 1328361 [21] 5773552 6547629 9883640 5303925 2967297 [26] 5988927 989415 1826341 2700551 1316470 [31] 8791894 2059179 19378102 9535483 672591 [36] 11536504 3751351 3831074 12702379 1052567 [41] 4625364 814180 6346105 25145561 2763885 [46] 625741 8001024 6724540 1852994 5686986 [51] 563626 if you don’t remember all names of column in an object you can use the function names(&lt;objectName&gt;) to list out all the name of column in object. &gt; names(murders) [1] &quot;state&quot; &quot;abb&quot; &quot;region&quot; &quot;population&quot; [5] &quot;total&quot; VECTORS When you get all data of a column by name so we received a list of data in the column, we call them are vectors. A single data is technically a vector. The function lenghth will help you count how many vectors you are. &gt; pop &lt;- murders$population &gt; length(pop) [1] 51 CHARACTER VECTORS We can store characters in R as well. Because variables also use character strings, we’re going to use quotes (&quot;&quot;) to distinguish between variable names and character strings. LOGICAL VECTORS Logical vectors are another type of vector. We don’t have those in this particular data frame, but we need to mention them. These must be either true or false. So we can create a logical vector by, for example, assigning 3 == 2 z &lt;- 3 == 2 &gt; z [1] FALSE FACTOR Factors are useful for storing what is called categorical data. The regions are categorical. There is only four categories. Each state is in one of these four. We can see the four levels in this particular factor using the function levels. &gt; levels(murders$region) [1] &quot;Northeast&quot; &quot;South&quot; &quot;North Central&quot; [4] &quot;West&quot; Turns out that saving categorical data this way is more memory efficient. So in R, in the background, we store integers. We store the levels as integers. Technically, integers are smaller memory-wise than characters. So this is what makes it more efficient." />
+<link rel="canonical" href="/data-science/2021/09/26/data-science-R-data-types.html" />
+<meta property="og:url" content="/data-science/2021/09/26/data-science-R-data-types.html" />
+<meta property="og:site_name" content="StepByStep" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-09-26T00:00:00+07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Data Science: R Data Types" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","url":"/data-science/2021/09/26/data-science-R-data-types.html","author":{"@type":"Person","name":"Duc Nguyen"},"headline":"Data Science: R Data Types","dateModified":"2021-09-26T00:00:00+07:00","datePublished":"2021-09-26T00:00:00+07:00","description":"You can learn full course in this link CLASS DATA FRAMES OBJECTS ACCESS DATA IN OBJECT VECTORS CHARACTER VECTORS LOGICAL VECTORS FACTOR CLASS The function “class” helps us determine the type of an object. For example, if I define a as 2 and I look at its class, We will see it’s a numeric. a &lt;- 5 class(a) &quot;numberic&quot; class(ls) &quot;function&quot; DATA FRAMES The most common way of storing data sets in R is with data frames. Conceptually, we can think of data frames as tables. Rows represent observations, and different variables are represented by different columns. you can access example data by loading dslabs library. For exanoke you can load the murders data set by command data(&quot;murders&quot;). library(dslabs) data(&quot;murders&quot;) OBJECTS So we know our data is stored in the object murders. But what is this object? How can we find out more about this object? The function str is useful for this. str stands for structure, and it shows us the structure of an object. &gt; str(murders) &#39;data.frame&#39;: 51 obs. of 5 variables: $ state : chr &quot;Alabama&quot; &quot;Alaska&quot; &quot;Arizona&quot; &quot;Arkansas&quot; ... $ abb : chr &quot;AL&quot; &quot;AK&quot; &quot;AZ&quot; &quot;AR&quot; ... $ region : Factor w/ 4 levels &quot;Northeast&quot;,&quot;South&quot;,..: 2 4 4 2 4 4 1 2 2 2 ... $ population: num 4779736 710231 6392017 2915918 37253956 ... $ total : num 135 19 232 93 1257 ... If you want to show some data you can use function head(&lt;objectName&gt;). So you will see 6 lines of data in your console. head(murders) state abb region population total 1 Alabama AL South 4779736 135 2 Alaska AK West 710231 19 3 Arizona AZ West 6392017 232 4 Arkansas AR South 2915918 93 5 California CA West 37253956 1257 6 Colorado CO West 5029196 65 ACCESS DATA IN OBJECT For our analysis, we will need to access the different variables represented by columns. To access these variables, we use the dollar sign symbol $ . It’s called the accessor. For exmaple, we want to access the population in object murders we can use the command murders$population. The population is the name of column in object murders. &gt;murders$population [1] 4779736 710231 6392017 2915918 37253956 [6] 5029196 3574097 897934 601723 19687653 [11] 9920000 1360301 1567582 12830632 6483802 [16] 3046355 2853118 4339367 4533372 1328361 [21] 5773552 6547629 9883640 5303925 2967297 [26] 5988927 989415 1826341 2700551 1316470 [31] 8791894 2059179 19378102 9535483 672591 [36] 11536504 3751351 3831074 12702379 1052567 [41] 4625364 814180 6346105 25145561 2763885 [46] 625741 8001024 6724540 1852994 5686986 [51] 563626 if you don’t remember all names of column in an object you can use the function names(&lt;objectName&gt;) to list out all the name of column in object. &gt; names(murders) [1] &quot;state&quot; &quot;abb&quot; &quot;region&quot; &quot;population&quot; [5] &quot;total&quot; VECTORS When you get all data of a column by name so we received a list of data in the column, we call them are vectors. A single data is technically a vector. The function lenghth will help you count how many vectors you are. &gt; pop &lt;- murders$population &gt; length(pop) [1] 51 CHARACTER VECTORS We can store characters in R as well. Because variables also use character strings, we’re going to use quotes (&quot;&quot;) to distinguish between variable names and character strings. LOGICAL VECTORS Logical vectors are another type of vector. We don’t have those in this particular data frame, but we need to mention them. These must be either true or false. So we can create a logical vector by, for example, assigning 3 == 2 z &lt;- 3 == 2 &gt; z [1] FALSE FACTOR Factors are useful for storing what is called categorical data. The regions are categorical. There is only four categories. Each state is in one of these four. We can see the four levels in this particular factor using the function levels. &gt; levels(murders$region) [1] &quot;Northeast&quot; &quot;South&quot; &quot;North Central&quot; [4] &quot;West&quot; Turns out that saving categorical data this way is more memory efficient. So in R, in the background, we store integers. We store the levels as integers. Technically, integers are smaller memory-wise than characters. So this is what makes it more efficient.","mainEntityOfPage":{"@type":"WebPage","@id":"/data-science/2021/09/26/data-science-R-data-types.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="StepByStep" /><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NZ8G5007GK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-NZ8G5007GK');
+</script></head><body>
+  <div class="container-flush">
+    <div class="row"><!-- navigation bar -->
+<div class="col-lg-12">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" role="banner"><a class="navbar-brand site-title" rel="author" href="/">StepByStep</a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="nav navbar-nav"><li class="nav-item active">
+          <a class="nav-link" href="/about">About</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/">Java</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/docker">Docker</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/database">Database</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/data-science">Data-Science</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/ci-cd">CI-CD</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/python">Python</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/fe">FE</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/others">Others</a>
+        </li></ul>
+    </div>
+
+    <!-- Html Elements for Search -->
+    <div id="search-container" class="btn-group">
+      <input type="text" id="search-input" placeholder="search...">
+      <button id="clear">clear</button>
+      <ul id="results-container"></ul>
+    </div>
+
+    <!-- Script pointing to search-script.js -->
+    <script src="/java-scripts/search-script.js" type="text/javascript"></script>
+
+    <!-- Configuration -->
+    <script>
+      SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('results-container'),
+        json: '/search.json'
+      })
+    </script>
+
+    <!-- search clear -->
+    <script>
+      window.addEventListener('load', () => {
+        const button = document.querySelector('#clear');
+        button.addEventListener('click', () => {
+          document.querySelector('#search-input').value = "";
+          document.querySelector('#results-container').innerHTML = "";
+        });
+      });
+    </script>
+  </nav>
+</div></div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+  <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+    <header class="post-header">
+      <h1 class="post-title p-name" itemprop="name headline">Data Science: R Data Types</h1>
+      <p class="post-meta">
+        <time class="dt-published" datetime="2021-09-26T00:00:00+07:00" itemprop="datePublished">Sep 26, 2021
+        </time></p>
+    </header>
+  
+    <div class="post-content e-content" itemprop="articleBody">
+      <blockquote>
+  <p>You can learn full course in <a href="https://learning.edx.org/course/course-v1:HarvardX+PH125.1x+2T2021/home">this link</a></p>
+</blockquote>
+
+<ul id="markdown-toc">
+  <li><a href="#class" id="markdown-toc-class">CLASS</a></li>
+  <li><a href="#data-frames" id="markdown-toc-data-frames">DATA FRAMES</a></li>
+  <li><a href="#objects" id="markdown-toc-objects">OBJECTS</a></li>
+  <li><a href="#access-data-in-object" id="markdown-toc-access-data-in-object">ACCESS DATA IN OBJECT</a></li>
+  <li><a href="#vectors" id="markdown-toc-vectors">VECTORS</a></li>
+  <li><a href="#character-vectors" id="markdown-toc-character-vectors">CHARACTER VECTORS</a></li>
+  <li><a href="#logical-vectors" id="markdown-toc-logical-vectors">LOGICAL VECTORS</a></li>
+  <li><a href="#factor" id="markdown-toc-factor">FACTOR</a></li>
+</ul>
+
+<h2 id="class">CLASS</h2>
+
+<ul>
+  <li>The function “class” helps us determine the type of an object. For example, if I define a as 2 and I look at its class, We will see it’s a numeric.</li>
+</ul>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="n">a</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">5</span><span class="w">
+</span><span class="nf">class</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w">
+</span><span class="s2">"numberic"</span><span class="w">
+
+</span><span class="nf">class</span><span class="p">(</span><span class="n">ls</span><span class="p">)</span><span class="w">
+</span><span class="s2">"function"</span><span class="w">
+
+</span></code></pre></div></div>
+
+<h2 id="data-frames">DATA FRAMES</h2>
+
+<ul>
+  <li>The most common way of storing data sets in R is with <code class="language-plaintext highlighter-rouge">data frames</code>.</li>
+  <li>
+    <p>Conceptually, we can think of <code class="language-plaintext highlighter-rouge">data frames as tables</code>. <code class="language-plaintext highlighter-rouge">Rows represent observations</code>, and <code class="language-plaintext highlighter-rouge">different variables are represented by different columns</code>.</p>
+  </li>
+  <li>you can access example data by loading <code class="language-plaintext highlighter-rouge">dslabs library</code>. For exanoke you can load the murders data set by command <code class="language-plaintext highlighter-rouge">data("murders")</code>.</li>
+</ul>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">dslabs</span><span class="p">)</span><span class="w">
+</span><span class="n">data</span><span class="p">(</span><span class="s2">"murders"</span><span class="p">)</span><span class="w">
+
+</span></code></pre></div></div>
+
+<h2 id="objects">OBJECTS</h2>
+
+<ul>
+  <li>So we know our data is stored in the object murders. But what is this object? How can we find out more about this object? The function <code class="language-plaintext highlighter-rouge">str</code> is useful for this. str stands for structure, and it shows us the structure of an object.</li>
+</ul>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="o">&gt;</span><span class="w"> </span><span class="n">str</span><span class="p">(</span><span class="n">murders</span><span class="p">)</span><span class="w">
+</span><span class="s1">'data.frame'</span><span class="o">:</span><span class="w">	</span><span class="m">51</span><span class="w"> </span><span class="n">obs.</span><span class="w"> </span><span class="n">of</span><span class="w">  </span><span class="m">5</span><span class="w"> </span><span class="n">variables</span><span class="o">:</span><span class="w">
+ </span><span class="o">$</span><span class="w"> </span><span class="n">state</span><span class="w">     </span><span class="o">:</span><span class="w"> </span><span class="n">chr</span><span class="w">  </span><span class="s2">"Alabama"</span><span class="w"> </span><span class="s2">"Alaska"</span><span class="w"> </span><span class="s2">"Arizona"</span><span class="w"> </span><span class="s2">"Arkansas"</span><span class="w"> </span><span class="n">...</span><span class="w">
+ </span><span class="o">$</span><span class="w"> </span><span class="n">abb</span><span class="w">       </span><span class="o">:</span><span class="w"> </span><span class="n">chr</span><span class="w">  </span><span class="s2">"AL"</span><span class="w"> </span><span class="s2">"AK"</span><span class="w"> </span><span class="s2">"AZ"</span><span class="w"> </span><span class="s2">"AR"</span><span class="w"> </span><span class="n">...</span><span class="w">
+ </span><span class="o">$</span><span class="w"> </span><span class="n">region</span><span class="w">    </span><span class="o">:</span><span class="w"> </span><span class="n">Factor</span><span class="w"> </span><span class="n">w</span><span class="o">/</span><span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="n">levels</span><span class="w"> </span><span class="s2">"Northeast"</span><span class="p">,</span><span class="s2">"South"</span><span class="p">,</span><span class="n">..</span><span class="o">:</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="n">...</span><span class="w">
+ </span><span class="o">$</span><span class="w"> </span><span class="n">population</span><span class="o">:</span><span class="w"> </span><span class="n">num</span><span class="w">  </span><span class="m">4779736</span><span class="w"> </span><span class="m">710231</span><span class="w"> </span><span class="m">6392017</span><span class="w"> </span><span class="m">2915918</span><span class="w"> </span><span class="m">37253956</span><span class="w"> </span><span class="n">...</span><span class="w">
+ </span><span class="o">$</span><span class="w"> </span><span class="n">total</span><span class="w">     </span><span class="o">:</span><span class="w"> </span><span class="n">num</span><span class="w">  </span><span class="m">135</span><span class="w"> </span><span class="m">19</span><span class="w"> </span><span class="m">232</span><span class="w"> </span><span class="m">93</span><span class="w"> </span><span class="m">1257</span><span class="w"> </span><span class="n">...</span><span class="w">
+
+</span></code></pre></div></div>
+
+<ul>
+  <li>If you want to show some data you can use function <code class="language-plaintext highlighter-rouge">head(&lt;objectName&gt;)</code>. So you will see 6 lines of data in your console.</li>
+</ul>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="n">head</span><span class="p">(</span><span class="n">murders</span><span class="p">)</span><span class="w">
+      </span><span class="n">state</span><span class="w"> </span><span class="n">abb</span><span class="w"> </span><span class="n">region</span><span class="w"> </span><span class="n">population</span><span class="w"> </span><span class="n">total</span><span class="w">
+</span><span class="m">1</span><span class="w">    </span><span class="n">Alabama</span><span class="w">  </span><span class="n">AL</span><span class="w">  </span><span class="n">South</span><span class="w">    </span><span class="m">4779736</span><span class="w">   </span><span class="m">135</span><span class="w">
+</span><span class="m">2</span><span class="w">     </span><span class="n">Alaska</span><span class="w">  </span><span class="n">AK</span><span class="w">   </span><span class="n">West</span><span class="w">     </span><span class="m">710231</span><span class="w">    </span><span class="m">19</span><span class="w">
+</span><span class="m">3</span><span class="w">    </span><span class="n">Arizona</span><span class="w">  </span><span class="n">AZ</span><span class="w">   </span><span class="n">West</span><span class="w">    </span><span class="m">6392017</span><span class="w">   </span><span class="m">232</span><span class="w">
+</span><span class="m">4</span><span class="w">   </span><span class="n">Arkansas</span><span class="w">  </span><span class="n">AR</span><span class="w">  </span><span class="n">South</span><span class="w">    </span><span class="m">2915918</span><span class="w">    </span><span class="m">93</span><span class="w">
+</span><span class="m">5</span><span class="w"> </span><span class="n">California</span><span class="w">  </span><span class="n">CA</span><span class="w">   </span><span class="n">West</span><span class="w">   </span><span class="m">37253956</span><span class="w">  </span><span class="m">1257</span><span class="w">
+</span><span class="m">6</span><span class="w">   </span><span class="n">Colorado</span><span class="w">  </span><span class="n">CO</span><span class="w">   </span><span class="n">West</span><span class="w">    </span><span class="m">5029196</span><span class="w">    </span><span class="m">65</span><span class="w">
+
+</span></code></pre></div></div>
+
+<h2 id="access-data-in-object">ACCESS DATA IN OBJECT</h2>
+
+<ul>
+  <li>For our analysis, we will need to access the different variables represented by columns. To access these variables, we use the <code class="language-plaintext highlighter-rouge">dollar sign symbol $</code> . It’s called <code class="language-plaintext highlighter-rouge">the accessor</code>. For exmaple, we want to access the population in object <code class="language-plaintext highlighter-rouge">murders</code> we can use the command <code class="language-plaintext highlighter-rouge">murders$population</code>. The <code class="language-plaintext highlighter-rouge">population</code> is the name of column in object <code class="language-plaintext highlighter-rouge">murders</code>.</li>
+</ul>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="o">&gt;</span><span class="n">murders</span><span class="o">$</span><span class="n">population</span><span class="w">
+ </span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="w">  </span><span class="m">4779736</span><span class="w">   </span><span class="m">710231</span><span class="w">  </span><span class="m">6392017</span><span class="w">  </span><span class="m">2915918</span><span class="w"> </span><span class="m">37253956</span><span class="w">
+ </span><span class="p">[</span><span class="m">6</span><span class="p">]</span><span class="w">  </span><span class="m">5029196</span><span class="w">  </span><span class="m">3574097</span><span class="w">   </span><span class="m">897934</span><span class="w">   </span><span class="m">601723</span><span class="w"> </span><span class="m">19687653</span><span class="w">
+</span><span class="p">[</span><span class="m">11</span><span class="p">]</span><span class="w">  </span><span class="m">9920000</span><span class="w">  </span><span class="m">1360301</span><span class="w">  </span><span class="m">1567582</span><span class="w"> </span><span class="m">12830632</span><span class="w">  </span><span class="m">6483802</span><span class="w">
+</span><span class="p">[</span><span class="m">16</span><span class="p">]</span><span class="w">  </span><span class="m">3046355</span><span class="w">  </span><span class="m">2853118</span><span class="w">  </span><span class="m">4339367</span><span class="w">  </span><span class="m">4533372</span><span class="w">  </span><span class="m">1328361</span><span class="w">
+</span><span class="p">[</span><span class="m">21</span><span class="p">]</span><span class="w">  </span><span class="m">5773552</span><span class="w">  </span><span class="m">6547629</span><span class="w">  </span><span class="m">9883640</span><span class="w">  </span><span class="m">5303925</span><span class="w">  </span><span class="m">2967297</span><span class="w">
+</span><span class="p">[</span><span class="m">26</span><span class="p">]</span><span class="w">  </span><span class="m">5988927</span><span class="w">   </span><span class="m">989415</span><span class="w">  </span><span class="m">1826341</span><span class="w">  </span><span class="m">2700551</span><span class="w">  </span><span class="m">1316470</span><span class="w">
+</span><span class="p">[</span><span class="m">31</span><span class="p">]</span><span class="w">  </span><span class="m">8791894</span><span class="w">  </span><span class="m">2059179</span><span class="w"> </span><span class="m">19378102</span><span class="w">  </span><span class="m">9535483</span><span class="w">   </span><span class="m">672591</span><span class="w">
+</span><span class="p">[</span><span class="m">36</span><span class="p">]</span><span class="w"> </span><span class="m">11536504</span><span class="w">  </span><span class="m">3751351</span><span class="w">  </span><span class="m">3831074</span><span class="w"> </span><span class="m">12702379</span><span class="w">  </span><span class="m">1052567</span><span class="w">
+</span><span class="p">[</span><span class="m">41</span><span class="p">]</span><span class="w">  </span><span class="m">4625364</span><span class="w">   </span><span class="m">814180</span><span class="w">  </span><span class="m">6346105</span><span class="w"> </span><span class="m">25145561</span><span class="w">  </span><span class="m">2763885</span><span class="w">
+</span><span class="p">[</span><span class="m">46</span><span class="p">]</span><span class="w">   </span><span class="m">625741</span><span class="w">  </span><span class="m">8001024</span><span class="w">  </span><span class="m">6724540</span><span class="w">  </span><span class="m">1852994</span><span class="w">  </span><span class="m">5686986</span><span class="w">
+</span><span class="p">[</span><span class="m">51</span><span class="p">]</span><span class="w">   </span><span class="m">563626</span><span class="w">
+
+</span></code></pre></div></div>
+
+<ul>
+  <li>if you don’t remember all names of column in an object you can use the function <code class="language-plaintext highlighter-rouge">names(&lt;objectName&gt;)</code> to list out all the name of column in object.</li>
+</ul>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">names</span><span class="p">(</span><span class="n">murders</span><span class="p">)</span><span class="w">
+</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="s2">"state"</span><span class="w">      </span><span class="s2">"abb"</span><span class="w">        </span><span class="s2">"region"</span><span class="w">     </span><span class="s2">"population"</span><span class="w">
+</span><span class="p">[</span><span class="m">5</span><span class="p">]</span><span class="w"> </span><span class="s2">"total"</span><span class="w">
+
+</span></code></pre></div></div>
+
+<h2 id="vectors">VECTORS</h2>
+
+<ul>
+  <li>When you get all data of a column by name so we received a list of data in the column, we call them are <code class="language-plaintext highlighter-rouge">vectors</code>. A single data is technically <code class="language-plaintext highlighter-rouge">a vector</code>. The function <code class="language-plaintext highlighter-rouge">lenghth</code> will help you count how many <code class="language-plaintext highlighter-rouge">vectors</code> you are.</li>
+</ul>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="o">&gt;</span><span class="w"> </span><span class="n">pop</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">murders</span><span class="o">$</span><span class="n">population</span><span class="w">
+</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">pop</span><span class="p">)</span><span class="w">
+</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="m">51</span><span class="w">
+
+</span></code></pre></div></div>
+
+<h2 id="character-vectors">CHARACTER VECTORS</h2>
+
+<ul>
+  <li>We can store <code class="language-plaintext highlighter-rouge">characters</code> in R as well. Because <code class="language-plaintext highlighter-rouge">variables</code> also use <code class="language-plaintext highlighter-rouge">character strings</code>,
+we’re going to use <code class="language-plaintext highlighter-rouge">quotes ("")</code> to distinguish between variable names and character strings.</li>
+</ul>
+
+<h2 id="logical-vectors">LOGICAL VECTORS</h2>
+
+<ul>
+  <li>Logical vectors are another type of vector. We don’t have those in this particular data frame, but we need to mention them. These must be either true or false. So we can create a logical vector by, for example, assigning 3 == 2</li>
+</ul>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="n">z</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">2</span><span class="w">
+</span><span class="o">&gt;</span><span class="w"> </span><span class="n">z</span><span class="w">
+</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="kc">FALSE</span><span class="w">
+
+</span></code></pre></div></div>
+
+<h2 id="factor">FACTOR</h2>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Factors</code> are useful for storing what is called <code class="language-plaintext highlighter-rouge">categorical data</code>. The <code class="language-plaintext highlighter-rouge">regions are categorical</code>. There is only <code class="language-plaintext highlighter-rouge">four categories</code>. Each state is in one of these four. We can see the four levels in this particular factor using the function <code class="language-plaintext highlighter-rouge">levels</code>.</li>
+</ul>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="o">&gt;</span><span class="w"> </span><span class="n">levels</span><span class="p">(</span><span class="n">murders</span><span class="o">$</span><span class="n">region</span><span class="p">)</span><span class="w">
+</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="s2">"Northeast"</span><span class="w">     </span><span class="s2">"South"</span><span class="w">         </span><span class="s2">"North Central"</span><span class="w">
+</span><span class="p">[</span><span class="m">4</span><span class="p">]</span><span class="w"> </span><span class="s2">"West"</span><span class="w">
+
+</span></code></pre></div></div>
+
+<ul>
+  <li>Turns out that saving categorical data this way is more memory efficient. So in R, in the background, we store integers. We store the levels as integers. Technically, integers are smaller memory-wise than characters. So this is what makes it more efficient.</li>
+</ul>
+
+    </div><a class="u-url" href="/data-science/2021/09/26/data-science-R-data-types.html" hidden></a>
+  </article>
+  
+</div>
+
+
+    </div>
+  </div>
+  <script src="https://unpkg.com/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js"></script>
+  <script>addBackToTop()</script>
+</body>
+<footer><footer class="site-footer h-card">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <h2 class="footer-heading">StepByStep</h2>
+        <div>
+          <div>
+            <ul>
+              <li>Duc Nguyen</li><li><a class="u-email" href="mailto:minhducnguyen189@gmail.com">minhducnguyen189@gmail.com</a></li><li>&copy; 2021 Duc Nguyen. Powered by <a href="https://jekyllrb.com/">Jekyll</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <data class="u-url" href="/%20/"></data>
+        <div><ul class="social-media-list"><li><a href="https://github.com/minhducnguyen189"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">minhducnguyen189</span></a></li><li><a href="https://www.linkedin.com/in/duc-nguyen-03109b141"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#linkedin"></use></svg> <span class="username">duc-nguyen-03109b141</span></a></li></ul>
+</div>
+      </div>
+      <div class="col-md-4">
+        
+      </div>
+    </div>
+
+    <div class="row">
+      <p>Hi there! Let&#39;s explore some general knowleadges and briefly definitions in programming. I hope that this website can help people saving time in learning, also give some motivations for those who have choice the developer path.</p>
+    </div>
+</footer></footer>
+</html>

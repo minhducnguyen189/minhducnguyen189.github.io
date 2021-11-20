@@ -190,6 +190,16 @@ footer .container a { color: #159957; }
 
 .post-link-others:hover > h4 { color: black; }
 
+.post-link-data-science { display: block; padding: 10px; padding-left: 20px; padding-right: 20px; border: 2px solid #718093; border-radius: 15px; background-color: #718093; width: 100%; font-size: 22.5px; }
+
+.post-link-data-science h4 { color: #2f3640; }
+
+.post-link-data-science:hover { text-decoration: none; border: 2px solid #b2bec3; }
+
+.post-link-data-science:hover .post-meta-span { color: #ffffff; }
+
+.post-link-data-science:hover > h4 { color: black; }
+
 /** Posts */
 .post { margin-top: 40px; margin-bottom: 80px; }
 

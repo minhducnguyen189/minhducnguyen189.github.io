@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- bootstrap library and JS, Jquery -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Data Science: R Sorting | StepByStep</title>
+<meta name="generator" content="Jekyll v4.2.1" />
+<meta property="og:title" content="Data Science: R Sorting" />
+<meta name="author" content="Duc Nguyen" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="You can learn full course in this link SORT ORDER MAX AND WHICH.MAX MIN AND WHICH.MIN RANK SUMMARY SORT To sort vector in R we use function sort(). The function sort, sorts a vector in increasing order. For example, we want to sort the population and total in murders table. # This is the murders table &gt; library(dslabs) &gt; data(&quot;murders&quot;) &gt; force(murders) state abb region population total 1 Alabama AL South 4779736 135 2 Alaska AK West 710231 19 3 Arizona AZ West 6392017 232 4 Arkansas AR South 2915918 93 5 California CA West 37253956 1257 6 Colorado CO West 5029196 65 7 Connecticut CT Northeast 3574097 97 8 Delaware DE South 897934 38 9 District of Columbia DC South 601723 99 10 Florida FL South 19687653 669 11 Georgia GA South 9920000 376 12 Hawaii HI West 1360301 7 13 Idaho ID West 1567582 12 14 Illinois IL North Central 12830632 364 15 Indiana IN North Central 6483802 142 16 Iowa IA North Central 3046355 21 17 Kansas KS North Central 2853118 63 18 Kentucky KY South 4339367 116 19 Louisiana LA South 4533372 351 20 Maine ME Northeast 1328361 11 21 Maryland MD South 5773552 293 22 Massachusetts MA Northeast 6547629 118 23 Michigan MI North Central 9883640 413 24 Minnesota MN North Central 5303925 53 25 Mississippi MS South 2967297 120 26 Missouri MO North Central 5988927 321 27 Montana MT West 989415 12 28 Nebraska NE North Central 1826341 32 29 Nevada NV West 2700551 84 30 New Hampshire NH Northeast 1316470 5 31 New Jersey NJ Northeast 8791894 246 32 New Mexico NM West 2059179 67 33 New York NY Northeast 19378102 517 34 North Carolina NC South 9535483 286 35 North Dakota ND North Central 672591 4 36 Ohio OH North Central 11536504 310 37 Oklahoma OK South 3751351 111 38 Oregon OR West 3831074 36 39 Pennsylvania PA Northeast 12702379 457 40 Rhode Island RI Northeast 1052567 16 41 South Carolina SC South 4625364 207 42 South Dakota SD North Central 814180 8 43 Tennessee TN South 6346105 219 44 Texas TX South 25145561 805 45 Utah UT West 2763885 22 46 Vermont VT Northeast 625741 2 47 Virginia VA South 8001024 250 48 Washington WA West 6724540 93 49 West Virginia WV South 1852994 27 50 Wisconsin WI North Central 5686986 97 51 Wyoming WY West 563626 5 &gt; sort(murders$population) [1] 563626 601723 625741 672591 710231 814180 897934 989415 1052567 [10] 1316470 1328361 1360301 1567582 1826341 1852994 2059179 2700551 2763885 [19] 2853118 2915918 2967297 3046355 3574097 3751351 3831074 4339367 4533372 [28] 4625364 4779736 5029196 5303925 5686986 5773552 5988927 6346105 6392017 [37] 6483802 6547629 6724540 8001024 8791894 9535483 9883640 9920000 11536504 [46] 12702379 12830632 19378102 19687653 25145561 37253956 &gt; sort(murders$total) [1] 2 4 5 5 7 8 11 12 12 16 19 21 22 27 32 36 38 [18] 53 63 65 67 84 93 93 97 97 99 111 116 118 120 135 142 207 [35] 219 232 246 250 286 293 310 321 351 364 376 413 457 517 669 805 1257 ORDER the function order() takes a vector and returns the indices that sorts that vector. For example &gt; x &lt;- c(31, 4, 15, 92, 65) &gt; x [1] 31 4 15 92 65 &gt; sort(x) [1] 4 15 31 65 92 &gt; index &lt;- order(x) &gt; x[index] [1] 4 15 31 65 92 Rather than sort the vector, the function order gives us back the index that if used to index the vector, will sort it. In the example below, as you can see, we can sort the murders$abb following the index of murders$total &gt; x [1] 31 4 15 92 65 &gt; order(x) [1] 2 3 1 5 4 &gt; index &lt;- order(murders$total) &gt; murders$abb[index] [1] &quot;VT&quot; &quot;ND&quot; &quot;NH&quot; &quot;WY&quot; &quot;HI&quot; &quot;SD&quot; &quot;ME&quot; &quot;ID&quot; &quot;MT&quot; &quot;RI&quot; &quot;AK&quot; &quot;IA&quot; &quot;UT&quot; &quot;WV&quot; &quot;NE&quot; &quot;OR&quot; &quot;DE&quot; [18] &quot;MN&quot; &quot;KS&quot; &quot;CO&quot; &quot;NM&quot; &quot;NV&quot; &quot;AR&quot; &quot;WA&quot; &quot;CT&quot; &quot;WI&quot; &quot;DC&quot; &quot;OK&quot; &quot;KY&quot; &quot;MA&quot; &quot;MS&quot; &quot;AL&quot; &quot;IN&quot; &quot;SC&quot; [35] &quot;TN&quot; &quot;AZ&quot; &quot;NJ&quot; &quot;VA&quot; &quot;NC&quot; &quot;MD&quot; &quot;OH&quot; &quot;MO&quot; &quot;LA&quot; &quot;IL&quot; &quot;GA&quot; &quot;MI&quot; &quot;PA&quot; &quot;NY&quot; &quot;FL&quot; &quot;TX&quot; &quot;CA&quot; MAX AND WHICH.MAX If we want to get the max value of a column we can use function max(). For example &gt; max(murders$total) [1] 1257 The function which.max() gives us the index where this max number resides. For example, If we want to find the state with highest total murders we can do as below. &gt; i_max &lt;- which.max(murders$total) &gt; i_max [1] 5 &gt; murders$state[i_max] [1] &quot;California&quot; MIN AND WHICH.MIN If we want to get the min value of a column we can use function min(). For example: &gt; min(murders$total) [1] 2 The function which.min() gives us the index where this min number resides. For example, If we want to find the state with lowest total murders we can do as below. &gt; i_min &lt;- which.min(murders$total) &gt; i_min [1] 46 &gt; murders$state[i_min] [1] &quot;Vermont&quot; RANK Then function rank() give you a vector with the rank of first entry, ... last entry. For example &gt; x &lt;- c(31, 4, 15, 92, 65) &gt; x [1] 31 4 15 92 65 &gt; rank(x) [1] 3 1 2 5 4 SUMMARY The function sort() sorts a vector in increasing order. The function order() produces the indices needed to obtain the sorted vector, e.g. a result of 2 3 1 5 4 means the sorted vector will be produced by listing the 2nd, 3rd, 1st, 5th, and then 4th item of the original vector. The function rank() gives us the ranks of the items in the original vector. The function max() returns the largest value, while which.max() returns the index of the largest value. The functions min() and which.min() work similarly for minimum values. library(dslabs) data(murders) sort(murders$total) x &lt;- c(31, 4, 15, 92, 65) x sort(x) # puts elements in order index &lt;- order(x) # returns index that will put x in order x[index] # rearranging by this index puts elements in order order(x) murders$state[1:10] murders$abb[1:10] index &lt;- order(murders$total) murders$abb[index] # order abbreviations by total murders max(murders$total) # highest number of total murders i_max &lt;- which.max(murders$total) # index with highest number of murders murders$state[i_max] # state name with highest number of total murders x &lt;- c(31, 4, 15, 92, 65) x rank(x) # returns ranks (smallest to largest) index original sort order rank 1 31 4 2 3 2 4 15 3 1 3 15 31 1 2 4 92 65 5 5 5 65 92 4 4" />
+<meta property="og:description" content="You can learn full course in this link SORT ORDER MAX AND WHICH.MAX MIN AND WHICH.MIN RANK SUMMARY SORT To sort vector in R we use function sort(). The function sort, sorts a vector in increasing order. For example, we want to sort the population and total in murders table. # This is the murders table &gt; library(dslabs) &gt; data(&quot;murders&quot;) &gt; force(murders) state abb region population total 1 Alabama AL South 4779736 135 2 Alaska AK West 710231 19 3 Arizona AZ West 6392017 232 4 Arkansas AR South 2915918 93 5 California CA West 37253956 1257 6 Colorado CO West 5029196 65 7 Connecticut CT Northeast 3574097 97 8 Delaware DE South 897934 38 9 District of Columbia DC South 601723 99 10 Florida FL South 19687653 669 11 Georgia GA South 9920000 376 12 Hawaii HI West 1360301 7 13 Idaho ID West 1567582 12 14 Illinois IL North Central 12830632 364 15 Indiana IN North Central 6483802 142 16 Iowa IA North Central 3046355 21 17 Kansas KS North Central 2853118 63 18 Kentucky KY South 4339367 116 19 Louisiana LA South 4533372 351 20 Maine ME Northeast 1328361 11 21 Maryland MD South 5773552 293 22 Massachusetts MA Northeast 6547629 118 23 Michigan MI North Central 9883640 413 24 Minnesota MN North Central 5303925 53 25 Mississippi MS South 2967297 120 26 Missouri MO North Central 5988927 321 27 Montana MT West 989415 12 28 Nebraska NE North Central 1826341 32 29 Nevada NV West 2700551 84 30 New Hampshire NH Northeast 1316470 5 31 New Jersey NJ Northeast 8791894 246 32 New Mexico NM West 2059179 67 33 New York NY Northeast 19378102 517 34 North Carolina NC South 9535483 286 35 North Dakota ND North Central 672591 4 36 Ohio OH North Central 11536504 310 37 Oklahoma OK South 3751351 111 38 Oregon OR West 3831074 36 39 Pennsylvania PA Northeast 12702379 457 40 Rhode Island RI Northeast 1052567 16 41 South Carolina SC South 4625364 207 42 South Dakota SD North Central 814180 8 43 Tennessee TN South 6346105 219 44 Texas TX South 25145561 805 45 Utah UT West 2763885 22 46 Vermont VT Northeast 625741 2 47 Virginia VA South 8001024 250 48 Washington WA West 6724540 93 49 West Virginia WV South 1852994 27 50 Wisconsin WI North Central 5686986 97 51 Wyoming WY West 563626 5 &gt; sort(murders$population) [1] 563626 601723 625741 672591 710231 814180 897934 989415 1052567 [10] 1316470 1328361 1360301 1567582 1826341 1852994 2059179 2700551 2763885 [19] 2853118 2915918 2967297 3046355 3574097 3751351 3831074 4339367 4533372 [28] 4625364 4779736 5029196 5303925 5686986 5773552 5988927 6346105 6392017 [37] 6483802 6547629 6724540 8001024 8791894 9535483 9883640 9920000 11536504 [46] 12702379 12830632 19378102 19687653 25145561 37253956 &gt; sort(murders$total) [1] 2 4 5 5 7 8 11 12 12 16 19 21 22 27 32 36 38 [18] 53 63 65 67 84 93 93 97 97 99 111 116 118 120 135 142 207 [35] 219 232 246 250 286 293 310 321 351 364 376 413 457 517 669 805 1257 ORDER the function order() takes a vector and returns the indices that sorts that vector. For example &gt; x &lt;- c(31, 4, 15, 92, 65) &gt; x [1] 31 4 15 92 65 &gt; sort(x) [1] 4 15 31 65 92 &gt; index &lt;- order(x) &gt; x[index] [1] 4 15 31 65 92 Rather than sort the vector, the function order gives us back the index that if used to index the vector, will sort it. In the example below, as you can see, we can sort the murders$abb following the index of murders$total &gt; x [1] 31 4 15 92 65 &gt; order(x) [1] 2 3 1 5 4 &gt; index &lt;- order(murders$total) &gt; murders$abb[index] [1] &quot;VT&quot; &quot;ND&quot; &quot;NH&quot; &quot;WY&quot; &quot;HI&quot; &quot;SD&quot; &quot;ME&quot; &quot;ID&quot; &quot;MT&quot; &quot;RI&quot; &quot;AK&quot; &quot;IA&quot; &quot;UT&quot; &quot;WV&quot; &quot;NE&quot; &quot;OR&quot; &quot;DE&quot; [18] &quot;MN&quot; &quot;KS&quot; &quot;CO&quot; &quot;NM&quot; &quot;NV&quot; &quot;AR&quot; &quot;WA&quot; &quot;CT&quot; &quot;WI&quot; &quot;DC&quot; &quot;OK&quot; &quot;KY&quot; &quot;MA&quot; &quot;MS&quot; &quot;AL&quot; &quot;IN&quot; &quot;SC&quot; [35] &quot;TN&quot; &quot;AZ&quot; &quot;NJ&quot; &quot;VA&quot; &quot;NC&quot; &quot;MD&quot; &quot;OH&quot; &quot;MO&quot; &quot;LA&quot; &quot;IL&quot; &quot;GA&quot; &quot;MI&quot; &quot;PA&quot; &quot;NY&quot; &quot;FL&quot; &quot;TX&quot; &quot;CA&quot; MAX AND WHICH.MAX If we want to get the max value of a column we can use function max(). For example &gt; max(murders$total) [1] 1257 The function which.max() gives us the index where this max number resides. For example, If we want to find the state with highest total murders we can do as below. &gt; i_max &lt;- which.max(murders$total) &gt; i_max [1] 5 &gt; murders$state[i_max] [1] &quot;California&quot; MIN AND WHICH.MIN If we want to get the min value of a column we can use function min(). For example: &gt; min(murders$total) [1] 2 The function which.min() gives us the index where this min number resides. For example, If we want to find the state with lowest total murders we can do as below. &gt; i_min &lt;- which.min(murders$total) &gt; i_min [1] 46 &gt; murders$state[i_min] [1] &quot;Vermont&quot; RANK Then function rank() give you a vector with the rank of first entry, ... last entry. For example &gt; x &lt;- c(31, 4, 15, 92, 65) &gt; x [1] 31 4 15 92 65 &gt; rank(x) [1] 3 1 2 5 4 SUMMARY The function sort() sorts a vector in increasing order. The function order() produces the indices needed to obtain the sorted vector, e.g. a result of 2 3 1 5 4 means the sorted vector will be produced by listing the 2nd, 3rd, 1st, 5th, and then 4th item of the original vector. The function rank() gives us the ranks of the items in the original vector. The function max() returns the largest value, while which.max() returns the index of the largest value. The functions min() and which.min() work similarly for minimum values. library(dslabs) data(murders) sort(murders$total) x &lt;- c(31, 4, 15, 92, 65) x sort(x) # puts elements in order index &lt;- order(x) # returns index that will put x in order x[index] # rearranging by this index puts elements in order order(x) murders$state[1:10] murders$abb[1:10] index &lt;- order(murders$total) murders$abb[index] # order abbreviations by total murders max(murders$total) # highest number of total murders i_max &lt;- which.max(murders$total) # index with highest number of murders murders$state[i_max] # state name with highest number of total murders x &lt;- c(31, 4, 15, 92, 65) x rank(x) # returns ranks (smallest to largest) index original sort order rank 1 31 4 2 3 2 4 15 3 1 3 15 31 1 2 4 92 65 5 5 5 65 92 4 4" />
+<link rel="canonical" href="/data-science/2021/09/26/data-science-R-sorting.html" />
+<meta property="og:url" content="/data-science/2021/09/26/data-science-R-sorting.html" />
+<meta property="og:site_name" content="StepByStep" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-09-26T00:00:00+07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Data Science: R Sorting" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","url":"/data-science/2021/09/26/data-science-R-sorting.html","author":{"@type":"Person","name":"Duc Nguyen"},"headline":"Data Science: R Sorting","dateModified":"2021-09-26T00:00:00+07:00","datePublished":"2021-09-26T00:00:00+07:00","description":"You can learn full course in this link SORT ORDER MAX AND WHICH.MAX MIN AND WHICH.MIN RANK SUMMARY SORT To sort vector in R we use function sort(). The function sort, sorts a vector in increasing order. For example, we want to sort the population and total in murders table. # This is the murders table &gt; library(dslabs) &gt; data(&quot;murders&quot;) &gt; force(murders) state abb region population total 1 Alabama AL South 4779736 135 2 Alaska AK West 710231 19 3 Arizona AZ West 6392017 232 4 Arkansas AR South 2915918 93 5 California CA West 37253956 1257 6 Colorado CO West 5029196 65 7 Connecticut CT Northeast 3574097 97 8 Delaware DE South 897934 38 9 District of Columbia DC South 601723 99 10 Florida FL South 19687653 669 11 Georgia GA South 9920000 376 12 Hawaii HI West 1360301 7 13 Idaho ID West 1567582 12 14 Illinois IL North Central 12830632 364 15 Indiana IN North Central 6483802 142 16 Iowa IA North Central 3046355 21 17 Kansas KS North Central 2853118 63 18 Kentucky KY South 4339367 116 19 Louisiana LA South 4533372 351 20 Maine ME Northeast 1328361 11 21 Maryland MD South 5773552 293 22 Massachusetts MA Northeast 6547629 118 23 Michigan MI North Central 9883640 413 24 Minnesota MN North Central 5303925 53 25 Mississippi MS South 2967297 120 26 Missouri MO North Central 5988927 321 27 Montana MT West 989415 12 28 Nebraska NE North Central 1826341 32 29 Nevada NV West 2700551 84 30 New Hampshire NH Northeast 1316470 5 31 New Jersey NJ Northeast 8791894 246 32 New Mexico NM West 2059179 67 33 New York NY Northeast 19378102 517 34 North Carolina NC South 9535483 286 35 North Dakota ND North Central 672591 4 36 Ohio OH North Central 11536504 310 37 Oklahoma OK South 3751351 111 38 Oregon OR West 3831074 36 39 Pennsylvania PA Northeast 12702379 457 40 Rhode Island RI Northeast 1052567 16 41 South Carolina SC South 4625364 207 42 South Dakota SD North Central 814180 8 43 Tennessee TN South 6346105 219 44 Texas TX South 25145561 805 45 Utah UT West 2763885 22 46 Vermont VT Northeast 625741 2 47 Virginia VA South 8001024 250 48 Washington WA West 6724540 93 49 West Virginia WV South 1852994 27 50 Wisconsin WI North Central 5686986 97 51 Wyoming WY West 563626 5 &gt; sort(murders$population) [1] 563626 601723 625741 672591 710231 814180 897934 989415 1052567 [10] 1316470 1328361 1360301 1567582 1826341 1852994 2059179 2700551 2763885 [19] 2853118 2915918 2967297 3046355 3574097 3751351 3831074 4339367 4533372 [28] 4625364 4779736 5029196 5303925 5686986 5773552 5988927 6346105 6392017 [37] 6483802 6547629 6724540 8001024 8791894 9535483 9883640 9920000 11536504 [46] 12702379 12830632 19378102 19687653 25145561 37253956 &gt; sort(murders$total) [1] 2 4 5 5 7 8 11 12 12 16 19 21 22 27 32 36 38 [18] 53 63 65 67 84 93 93 97 97 99 111 116 118 120 135 142 207 [35] 219 232 246 250 286 293 310 321 351 364 376 413 457 517 669 805 1257 ORDER the function order() takes a vector and returns the indices that sorts that vector. For example &gt; x &lt;- c(31, 4, 15, 92, 65) &gt; x [1] 31 4 15 92 65 &gt; sort(x) [1] 4 15 31 65 92 &gt; index &lt;- order(x) &gt; x[index] [1] 4 15 31 65 92 Rather than sort the vector, the function order gives us back the index that if used to index the vector, will sort it. In the example below, as you can see, we can sort the murders$abb following the index of murders$total &gt; x [1] 31 4 15 92 65 &gt; order(x) [1] 2 3 1 5 4 &gt; index &lt;- order(murders$total) &gt; murders$abb[index] [1] &quot;VT&quot; &quot;ND&quot; &quot;NH&quot; &quot;WY&quot; &quot;HI&quot; &quot;SD&quot; &quot;ME&quot; &quot;ID&quot; &quot;MT&quot; &quot;RI&quot; &quot;AK&quot; &quot;IA&quot; &quot;UT&quot; &quot;WV&quot; &quot;NE&quot; &quot;OR&quot; &quot;DE&quot; [18] &quot;MN&quot; &quot;KS&quot; &quot;CO&quot; &quot;NM&quot; &quot;NV&quot; &quot;AR&quot; &quot;WA&quot; &quot;CT&quot; &quot;WI&quot; &quot;DC&quot; &quot;OK&quot; &quot;KY&quot; &quot;MA&quot; &quot;MS&quot; &quot;AL&quot; &quot;IN&quot; &quot;SC&quot; [35] &quot;TN&quot; &quot;AZ&quot; &quot;NJ&quot; &quot;VA&quot; &quot;NC&quot; &quot;MD&quot; &quot;OH&quot; &quot;MO&quot; &quot;LA&quot; &quot;IL&quot; &quot;GA&quot; &quot;MI&quot; &quot;PA&quot; &quot;NY&quot; &quot;FL&quot; &quot;TX&quot; &quot;CA&quot; MAX AND WHICH.MAX If we want to get the max value of a column we can use function max(). For example &gt; max(murders$total) [1] 1257 The function which.max() gives us the index where this max number resides. For example, If we want to find the state with highest total murders we can do as below. &gt; i_max &lt;- which.max(murders$total) &gt; i_max [1] 5 &gt; murders$state[i_max] [1] &quot;California&quot; MIN AND WHICH.MIN If we want to get the min value of a column we can use function min(). For example: &gt; min(murders$total) [1] 2 The function which.min() gives us the index where this min number resides. For example, If we want to find the state with lowest total murders we can do as below. &gt; i_min &lt;- which.min(murders$total) &gt; i_min [1] 46 &gt; murders$state[i_min] [1] &quot;Vermont&quot; RANK Then function rank() give you a vector with the rank of first entry, ... last entry. For example &gt; x &lt;- c(31, 4, 15, 92, 65) &gt; x [1] 31 4 15 92 65 &gt; rank(x) [1] 3 1 2 5 4 SUMMARY The function sort() sorts a vector in increasing order. The function order() produces the indices needed to obtain the sorted vector, e.g. a result of 2 3 1 5 4 means the sorted vector will be produced by listing the 2nd, 3rd, 1st, 5th, and then 4th item of the original vector. The function rank() gives us the ranks of the items in the original vector. The function max() returns the largest value, while which.max() returns the index of the largest value. The functions min() and which.min() work similarly for minimum values. library(dslabs) data(murders) sort(murders$total) x &lt;- c(31, 4, 15, 92, 65) x sort(x) # puts elements in order index &lt;- order(x) # returns index that will put x in order x[index] # rearranging by this index puts elements in order order(x) murders$state[1:10] murders$abb[1:10] index &lt;- order(murders$total) murders$abb[index] # order abbreviations by total murders max(murders$total) # highest number of total murders i_max &lt;- which.max(murders$total) # index with highest number of murders murders$state[i_max] # state name with highest number of total murders x &lt;- c(31, 4, 15, 92, 65) x rank(x) # returns ranks (smallest to largest) index original sort order rank 1 31 4 2 3 2 4 15 3 1 3 15 31 1 2 4 92 65 5 5 5 65 92 4 4","mainEntityOfPage":{"@type":"WebPage","@id":"/data-science/2021/09/26/data-science-R-sorting.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="StepByStep" /><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NZ8G5007GK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-NZ8G5007GK');
+</script></head><body>
+  <div class="container-flush">
+    <div class="row"><!-- navigation bar -->
+<div class="col-lg-12">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" role="banner"><a class="navbar-brand site-title" rel="author" href="/">StepByStep</a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="nav navbar-nav"><li class="nav-item active">
+          <a class="nav-link" href="/about">About</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/">Java</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/docker">Docker</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/database">Database</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/data-science">Data-Science</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/ci-cd">CI-CD</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/python">Python</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/fe">FE</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/others">Others</a>
+        </li></ul>
+    </div>
+
+    <!-- Html Elements for Search -->
+    <div id="search-container" class="btn-group">
+      <input type="text" id="search-input" placeholder="search...">
+      <button id="clear">clear</button>
+      <ul id="results-container"></ul>
+    </div>
+
+    <!-- Script pointing to search-script.js -->
+    <script src="/java-scripts/search-script.js" type="text/javascript"></script>
+
+    <!-- Configuration -->
+    <script>
+      SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('results-container'),
+        json: '/search.json'
+      })
+    </script>
+
+    <!-- search clear -->
+    <script>
+      window.addEventListener('load', () => {
+        const button = document.querySelector('#clear');
+        button.addEventListener('click', () => {
+          document.querySelector('#search-input').value = "";
+          document.querySelector('#results-container').innerHTML = "";
+        });
+      });
+    </script>
+  </nav>
+</div></div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+  <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+    <header class="post-header">
+      <h1 class="post-title p-name" itemprop="name headline">Data Science: R Sorting</h1>
+      <p class="post-meta">
+        <time class="dt-published" datetime="2021-09-26T00:00:00+07:00" itemprop="datePublished">Sep 26, 2021
+        </time></p>
+    </header>
+  
+    <div class="post-content e-content" itemprop="articleBody">
+      <blockquote>
+  <p>You can learn full course in <a href="https://learning.edx.org/course/course-v1:HarvardX+PH125.1x+2T2021/home">this link</a></p>
+</blockquote>
+
+<ul id="markdown-toc">
+  <li><a href="#sort" id="markdown-toc-sort">SORT</a></li>
+  <li><a href="#order" id="markdown-toc-order">ORDER</a></li>
+  <li><a href="#max-and-whichmax" id="markdown-toc-max-and-whichmax">MAX AND WHICH.MAX</a></li>
+  <li><a href="#min-and-whichmin" id="markdown-toc-min-and-whichmin">MIN AND WHICH.MIN</a></li>
+  <li><a href="#rank" id="markdown-toc-rank">RANK</a></li>
+  <li><a href="#summary" id="markdown-toc-summary">SUMMARY</a></li>
+</ul>
+
+<h2 id="sort">SORT</h2>
+
+<ul>
+  <li>To sort vector in R we use <code class="language-plaintext highlighter-rouge">function sort()</code>. The <code class="language-plaintext highlighter-rouge">function sort</code>, sorts a vector in <strong>increasing order</strong>. For example, we want to sort the <strong>population</strong> and <strong>total</strong> in <strong>murders table</strong>.</li>
+</ul>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="c1"># This is the murders table</span><span class="w">
+
+</span><span class="o">&gt;</span><span class="w"> </span><span class="n">library</span><span class="p">(</span><span class="n">dslabs</span><span class="p">)</span><span class="w">
+</span><span class="o">&gt;</span><span class="w"> </span><span class="n">data</span><span class="p">(</span><span class="s2">"murders"</span><span class="p">)</span><span class="w">
+</span><span class="o">&gt;</span><span class="w"> </span><span class="n">force</span><span class="p">(</span><span class="n">murders</span><span class="p">)</span><span class="w">
+                  </span><span class="n">state</span><span class="w"> </span><span class="n">abb</span><span class="w">        </span><span class="n">region</span><span class="w"> </span><span class="n">population</span><span class="w"> </span><span class="n">total</span><span class="w">
+</span><span class="m">1</span><span class="w">               </span><span class="n">Alabama</span><span class="w">  </span><span class="n">AL</span><span class="w">         </span><span class="n">South</span><span class="w">    </span><span class="m">4779736</span><span class="w">   </span><span class="m">135</span><span class="w">
+</span><span class="m">2</span><span class="w">                </span><span class="n">Alaska</span><span class="w">  </span><span class="n">AK</span><span class="w">          </span><span class="n">West</span><span class="w">     </span><span class="m">710231</span><span class="w">    </span><span class="m">19</span><span class="w">
+</span><span class="m">3</span><span class="w">               </span><span class="n">Arizona</span><span class="w">  </span><span class="n">AZ</span><span class="w">          </span><span class="n">West</span><span class="w">    </span><span class="m">6392017</span><span class="w">   </span><span class="m">232</span><span class="w">
+</span><span class="m">4</span><span class="w">              </span><span class="n">Arkansas</span><span class="w">  </span><span class="n">AR</span><span class="w">         </span><span class="n">South</span><span class="w">    </span><span class="m">2915918</span><span class="w">    </span><span class="m">93</span><span class="w">
+</span><span class="m">5</span><span class="w">            </span><span class="n">California</span><span class="w">  </span><span class="n">CA</span><span class="w">          </span><span class="n">West</span><span class="w">   </span><span class="m">37253956</span><span class="w">  </span><span class="m">1257</span><span class="w">
+</span><span class="m">6</span><span class="w">              </span><span class="n">Colorado</span><span class="w">  </span><span class="n">CO</span><span class="w">          </span><span class="n">West</span><span class="w">    </span><span class="m">5029196</span><span class="w">    </span><span class="m">65</span><span class="w">
+</span><span class="m">7</span><span class="w">           </span><span class="n">Connecticut</span><span class="w">  </span><span class="n">CT</span><span class="w">     </span><span class="n">Northeast</span><span class="w">    </span><span class="m">3574097</span><span class="w">    </span><span class="m">97</span><span class="w">
+</span><span class="m">8</span><span class="w">              </span><span class="n">Delaware</span><span class="w">  </span><span class="n">DE</span><span class="w">         </span><span class="n">South</span><span class="w">     </span><span class="m">897934</span><span class="w">    </span><span class="m">38</span><span class="w">
+</span><span class="m">9</span><span class="w">  </span><span class="n">District</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">Columbia</span><span class="w">  </span><span class="n">DC</span><span class="w">         </span><span class="n">South</span><span class="w">     </span><span class="m">601723</span><span class="w">    </span><span class="m">99</span><span class="w">
+</span><span class="m">10</span><span class="w">              </span><span class="n">Florida</span><span class="w">  </span><span class="n">FL</span><span class="w">         </span><span class="n">South</span><span class="w">   </span><span class="m">19687653</span><span class="w">   </span><span class="m">669</span><span class="w">
+</span><span class="m">11</span><span class="w">              </span><span class="n">Georgia</span><span class="w">  </span><span class="n">GA</span><span class="w">         </span><span class="n">South</span><span class="w">    </span><span class="m">9920000</span><span class="w">   </span><span class="m">376</span><span class="w">
+</span><span class="m">12</span><span class="w">               </span><span class="n">Hawaii</span><span class="w">  </span><span class="n">HI</span><span class="w">          </span><span class="n">West</span><span class="w">    </span><span class="m">1360301</span><span class="w">     </span><span class="m">7</span><span class="w">
+</span><span class="m">13</span><span class="w">                </span><span class="n">Idaho</span><span class="w">  </span><span class="n">ID</span><span class="w">          </span><span class="n">West</span><span class="w">    </span><span class="m">1567582</span><span class="w">    </span><span class="m">12</span><span class="w">
+</span><span class="m">14</span><span class="w">             </span><span class="n">Illinois</span><span class="w">  </span><span class="n">IL</span><span class="w"> </span><span class="n">North</span><span class="w"> </span><span class="n">Central</span><span class="w">   </span><span class="m">12830632</span><span class="w">   </span><span class="m">364</span><span class="w">
+</span><span class="m">15</span><span class="w">              </span><span class="n">Indiana</span><span class="w">  </span><span class="n">IN</span><span class="w"> </span><span class="n">North</span><span class="w"> </span><span class="n">Central</span><span class="w">    </span><span class="m">6483802</span><span class="w">   </span><span class="m">142</span><span class="w">
+</span><span class="m">16</span><span class="w">                 </span><span class="n">Iowa</span><span class="w">  </span><span class="n">IA</span><span class="w"> </span><span class="n">North</span><span class="w"> </span><span class="n">Central</span><span class="w">    </span><span class="m">3046355</span><span class="w">    </span><span class="m">21</span><span class="w">
+</span><span class="m">17</span><span class="w">               </span><span class="n">Kansas</span><span class="w">  </span><span class="n">KS</span><span class="w"> </span><span class="n">North</span><span class="w"> </span><span class="n">Central</span><span class="w">    </span><span class="m">2853118</span><span class="w">    </span><span class="m">63</span><span class="w">
+</span><span class="m">18</span><span class="w">             </span><span class="n">Kentucky</span><span class="w">  </span><span class="n">KY</span><span class="w">         </span><span class="n">South</span><span class="w">    </span><span class="m">4339367</span><span class="w">   </span><span class="m">116</span><span class="w">
+</span><span class="m">19</span><span class="w">            </span><span class="n">Louisiana</span><span class="w">  </span><span class="n">LA</span><span class="w">         </span><span class="n">South</span><span class="w">    </span><span class="m">4533372</span><span class="w">   </span><span class="m">351</span><span class="w">
+</span><span class="m">20</span><span class="w">                </span><span class="n">Maine</span><span class="w">  </span><span class="n">ME</span><span class="w">     </span><span class="n">Northeast</span><span class="w">    </span><span class="m">1328361</span><span class="w">    </span><span class="m">11</span><span class="w">
+</span><span class="m">21</span><span class="w">             </span><span class="n">Maryland</span><span class="w">  </span><span class="n">MD</span><span class="w">         </span><span class="n">South</span><span class="w">    </span><span class="m">5773552</span><span class="w">   </span><span class="m">293</span><span class="w">
+</span><span class="m">22</span><span class="w">        </span><span class="n">Massachusetts</span><span class="w">  </span><span class="n">MA</span><span class="w">     </span><span class="n">Northeast</span><span class="w">    </span><span class="m">6547629</span><span class="w">   </span><span class="m">118</span><span class="w">
+</span><span class="m">23</span><span class="w">             </span><span class="n">Michigan</span><span class="w">  </span><span class="n">MI</span><span class="w"> </span><span class="n">North</span><span class="w"> </span><span class="n">Central</span><span class="w">    </span><span class="m">9883640</span><span class="w">   </span><span class="m">413</span><span class="w">
+</span><span class="m">24</span><span class="w">            </span><span class="n">Minnesota</span><span class="w">  </span><span class="n">MN</span><span class="w"> </span><span class="n">North</span><span class="w"> </span><span class="n">Central</span><span class="w">    </span><span class="m">5303925</span><span class="w">    </span><span class="m">53</span><span class="w">
+</span><span class="m">25</span><span class="w">          </span><span class="n">Mississippi</span><span class="w">  </span><span class="n">MS</span><span class="w">         </span><span class="n">South</span><span class="w">    </span><span class="m">2967297</span><span class="w">   </span><span class="m">120</span><span class="w">
+</span><span class="m">26</span><span class="w">             </span><span class="n">Missouri</span><span class="w">  </span><span class="n">MO</span><span class="w"> </span><span class="n">North</span><span class="w"> </span><span class="n">Central</span><span class="w">    </span><span class="m">5988927</span><span class="w">   </span><span class="m">321</span><span class="w">
+</span><span class="m">27</span><span class="w">              </span><span class="n">Montana</span><span class="w">  </span><span class="n">MT</span><span class="w">          </span><span class="n">West</span><span class="w">     </span><span class="m">989415</span><span class="w">    </span><span class="m">12</span><span class="w">
+</span><span class="m">28</span><span class="w">             </span><span class="n">Nebraska</span><span class="w">  </span><span class="n">NE</span><span class="w"> </span><span class="n">North</span><span class="w"> </span><span class="n">Central</span><span class="w">    </span><span class="m">1826341</span><span class="w">    </span><span class="m">32</span><span class="w">
+</span><span class="m">29</span><span class="w">               </span><span class="n">Nevada</span><span class="w">  </span><span class="n">NV</span><span class="w">          </span><span class="n">West</span><span class="w">    </span><span class="m">2700551</span><span class="w">    </span><span class="m">84</span><span class="w">
+</span><span class="m">30</span><span class="w">        </span><span class="n">New</span><span class="w"> </span><span class="n">Hampshire</span><span class="w">  </span><span class="n">NH</span><span class="w">     </span><span class="n">Northeast</span><span class="w">    </span><span class="m">1316470</span><span class="w">     </span><span class="m">5</span><span class="w">
+</span><span class="m">31</span><span class="w">           </span><span class="n">New</span><span class="w"> </span><span class="n">Jersey</span><span class="w">  </span><span class="n">NJ</span><span class="w">     </span><span class="n">Northeast</span><span class="w">    </span><span class="m">8791894</span><span class="w">   </span><span class="m">246</span><span class="w">
+</span><span class="m">32</span><span class="w">           </span><span class="n">New</span><span class="w"> </span><span class="n">Mexico</span><span class="w">  </span><span class="n">NM</span><span class="w">          </span><span class="n">West</span><span class="w">    </span><span class="m">2059179</span><span class="w">    </span><span class="m">67</span><span class="w">
+</span><span class="m">33</span><span class="w">             </span><span class="n">New</span><span class="w"> </span><span class="n">York</span><span class="w">  </span><span class="n">NY</span><span class="w">     </span><span class="n">Northeast</span><span class="w">   </span><span class="m">19378102</span><span class="w">   </span><span class="m">517</span><span class="w">
+</span><span class="m">34</span><span class="w">       </span><span class="n">North</span><span class="w"> </span><span class="n">Carolina</span><span class="w">  </span><span class="n">NC</span><span class="w">         </span><span class="n">South</span><span class="w">    </span><span class="m">9535483</span><span class="w">   </span><span class="m">286</span><span class="w">
+</span><span class="m">35</span><span class="w">         </span><span class="n">North</span><span class="w"> </span><span class="n">Dakota</span><span class="w">  </span><span class="n">ND</span><span class="w"> </span><span class="n">North</span><span class="w"> </span><span class="n">Central</span><span class="w">     </span><span class="m">672591</span><span class="w">     </span><span class="m">4</span><span class="w">
+</span><span class="m">36</span><span class="w">                 </span><span class="n">Ohio</span><span class="w">  </span><span class="n">OH</span><span class="w"> </span><span class="n">North</span><span class="w"> </span><span class="n">Central</span><span class="w">   </span><span class="m">11536504</span><span class="w">   </span><span class="m">310</span><span class="w">
+</span><span class="m">37</span><span class="w">             </span><span class="n">Oklahoma</span><span class="w">  </span><span class="n">OK</span><span class="w">         </span><span class="n">South</span><span class="w">    </span><span class="m">3751351</span><span class="w">   </span><span class="m">111</span><span class="w">
+</span><span class="m">38</span><span class="w">               </span><span class="n">Oregon</span><span class="w">  </span><span class="n">OR</span><span class="w">          </span><span class="n">West</span><span class="w">    </span><span class="m">3831074</span><span class="w">    </span><span class="m">36</span><span class="w">
+</span><span class="m">39</span><span class="w">         </span><span class="n">Pennsylvania</span><span class="w">  </span><span class="n">PA</span><span class="w">     </span><span class="n">Northeast</span><span class="w">   </span><span class="m">12702379</span><span class="w">   </span><span class="m">457</span><span class="w">
+</span><span class="m">40</span><span class="w">         </span><span class="n">Rhode</span><span class="w"> </span><span class="n">Island</span><span class="w">  </span><span class="n">RI</span><span class="w">     </span><span class="n">Northeast</span><span class="w">    </span><span class="m">1052567</span><span class="w">    </span><span class="m">16</span><span class="w">
+</span><span class="m">41</span><span class="w">       </span><span class="n">South</span><span class="w"> </span><span class="n">Carolina</span><span class="w">  </span><span class="n">SC</span><span class="w">         </span><span class="n">South</span><span class="w">    </span><span class="m">4625364</span><span class="w">   </span><span class="m">207</span><span class="w">
+</span><span class="m">42</span><span class="w">         </span><span class="n">South</span><span class="w"> </span><span class="n">Dakota</span><span class="w">  </span><span class="n">SD</span><span class="w"> </span><span class="n">North</span><span class="w"> </span><span class="n">Central</span><span class="w">     </span><span class="m">814180</span><span class="w">     </span><span class="m">8</span><span class="w">
+</span><span class="m">43</span><span class="w">            </span><span class="n">Tennessee</span><span class="w">  </span><span class="n">TN</span><span class="w">         </span><span class="n">South</span><span class="w">    </span><span class="m">6346105</span><span class="w">   </span><span class="m">219</span><span class="w">
+</span><span class="m">44</span><span class="w">                </span><span class="n">Texas</span><span class="w">  </span><span class="n">TX</span><span class="w">         </span><span class="n">South</span><span class="w">   </span><span class="m">25145561</span><span class="w">   </span><span class="m">805</span><span class="w">
+</span><span class="m">45</span><span class="w">                 </span><span class="n">Utah</span><span class="w">  </span><span class="n">UT</span><span class="w">          </span><span class="n">West</span><span class="w">    </span><span class="m">2763885</span><span class="w">    </span><span class="m">22</span><span class="w">
+</span><span class="m">46</span><span class="w">              </span><span class="n">Vermont</span><span class="w">  </span><span class="n">VT</span><span class="w">     </span><span class="n">Northeast</span><span class="w">     </span><span class="m">625741</span><span class="w">     </span><span class="m">2</span><span class="w">
+</span><span class="m">47</span><span class="w">             </span><span class="n">Virginia</span><span class="w">  </span><span class="n">VA</span><span class="w">         </span><span class="n">South</span><span class="w">    </span><span class="m">8001024</span><span class="w">   </span><span class="m">250</span><span class="w">
+</span><span class="m">48</span><span class="w">           </span><span class="n">Washington</span><span class="w">  </span><span class="n">WA</span><span class="w">          </span><span class="n">West</span><span class="w">    </span><span class="m">6724540</span><span class="w">    </span><span class="m">93</span><span class="w">
+</span><span class="m">49</span><span class="w">        </span><span class="n">West</span><span class="w"> </span><span class="n">Virginia</span><span class="w">  </span><span class="n">WV</span><span class="w">         </span><span class="n">South</span><span class="w">    </span><span class="m">1852994</span><span class="w">    </span><span class="m">27</span><span class="w">
+</span><span class="m">50</span><span class="w">            </span><span class="n">Wisconsin</span><span class="w">  </span><span class="n">WI</span><span class="w"> </span><span class="n">North</span><span class="w"> </span><span class="n">Central</span><span class="w">    </span><span class="m">5686986</span><span class="w">    </span><span class="m">97</span><span class="w">
+</span><span class="m">51</span><span class="w">              </span><span class="n">Wyoming</span><span class="w">  </span><span class="n">WY</span><span class="w">          </span><span class="n">West</span><span class="w">     </span><span class="m">563626</span><span class="w">     </span><span class="m">5</span><span class="w">
+
+</span><span class="o">&gt;</span><span class="w"> </span><span class="n">sort</span><span class="p">(</span><span class="n">murders</span><span class="o">$</span><span class="n">population</span><span class="p">)</span><span class="w">
+ </span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="w">   </span><span class="m">563626</span><span class="w">   </span><span class="m">601723</span><span class="w">   </span><span class="m">625741</span><span class="w">   </span><span class="m">672591</span><span class="w">   </span><span class="m">710231</span><span class="w">   </span><span class="m">814180</span><span class="w">   </span><span class="m">897934</span><span class="w">   </span><span class="m">989415</span><span class="w">  </span><span class="m">1052567</span><span class="w">
+</span><span class="p">[</span><span class="m">10</span><span class="p">]</span><span class="w">  </span><span class="m">1316470</span><span class="w">  </span><span class="m">1328361</span><span class="w">  </span><span class="m">1360301</span><span class="w">  </span><span class="m">1567582</span><span class="w">  </span><span class="m">1826341</span><span class="w">  </span><span class="m">1852994</span><span class="w">  </span><span class="m">2059179</span><span class="w">  </span><span class="m">2700551</span><span class="w">  </span><span class="m">2763885</span><span class="w">
+</span><span class="p">[</span><span class="m">19</span><span class="p">]</span><span class="w">  </span><span class="m">2853118</span><span class="w">  </span><span class="m">2915918</span><span class="w">  </span><span class="m">2967297</span><span class="w">  </span><span class="m">3046355</span><span class="w">  </span><span class="m">3574097</span><span class="w">  </span><span class="m">3751351</span><span class="w">  </span><span class="m">3831074</span><span class="w">  </span><span class="m">4339367</span><span class="w">  </span><span class="m">4533372</span><span class="w">
+</span><span class="p">[</span><span class="m">28</span><span class="p">]</span><span class="w">  </span><span class="m">4625364</span><span class="w">  </span><span class="m">4779736</span><span class="w">  </span><span class="m">5029196</span><span class="w">  </span><span class="m">5303925</span><span class="w">  </span><span class="m">5686986</span><span class="w">  </span><span class="m">5773552</span><span class="w">  </span><span class="m">5988927</span><span class="w">  </span><span class="m">6346105</span><span class="w">  </span><span class="m">6392017</span><span class="w">
+</span><span class="p">[</span><span class="m">37</span><span class="p">]</span><span class="w">  </span><span class="m">6483802</span><span class="w">  </span><span class="m">6547629</span><span class="w">  </span><span class="m">6724540</span><span class="w">  </span><span class="m">8001024</span><span class="w">  </span><span class="m">8791894</span><span class="w">  </span><span class="m">9535483</span><span class="w">  </span><span class="m">9883640</span><span class="w">  </span><span class="m">9920000</span><span class="w"> </span><span class="m">11536504</span><span class="w">
+</span><span class="p">[</span><span class="m">46</span><span class="p">]</span><span class="w"> </span><span class="m">12702379</span><span class="w"> </span><span class="m">12830632</span><span class="w"> </span><span class="m">19378102</span><span class="w"> </span><span class="m">19687653</span><span class="w"> </span><span class="m">25145561</span><span class="w"> </span><span class="m">37253956</span><span class="w">
+
+</span><span class="o">&gt;</span><span class="w"> </span><span class="n">sort</span><span class="p">(</span><span class="n">murders</span><span class="o">$</span><span class="n">total</span><span class="p">)</span><span class="w">
+ </span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="w">    </span><span class="m">2</span><span class="w">    </span><span class="m">4</span><span class="w">    </span><span class="m">5</span><span class="w">    </span><span class="m">5</span><span class="w">    </span><span class="m">7</span><span class="w">    </span><span class="m">8</span><span class="w">   </span><span class="m">11</span><span class="w">   </span><span class="m">12</span><span class="w">   </span><span class="m">12</span><span class="w">   </span><span class="m">16</span><span class="w">   </span><span class="m">19</span><span class="w">   </span><span class="m">21</span><span class="w">   </span><span class="m">22</span><span class="w">   </span><span class="m">27</span><span class="w">   </span><span class="m">32</span><span class="w">   </span><span class="m">36</span><span class="w">   </span><span class="m">38</span><span class="w">
+</span><span class="p">[</span><span class="m">18</span><span class="p">]</span><span class="w">   </span><span class="m">53</span><span class="w">   </span><span class="m">63</span><span class="w">   </span><span class="m">65</span><span class="w">   </span><span class="m">67</span><span class="w">   </span><span class="m">84</span><span class="w">   </span><span class="m">93</span><span class="w">   </span><span class="m">93</span><span class="w">   </span><span class="m">97</span><span class="w">   </span><span class="m">97</span><span class="w">   </span><span class="m">99</span><span class="w">  </span><span class="m">111</span><span class="w">  </span><span class="m">116</span><span class="w">  </span><span class="m">118</span><span class="w">  </span><span class="m">120</span><span class="w">  </span><span class="m">135</span><span class="w">  </span><span class="m">142</span><span class="w">  </span><span class="m">207</span><span class="w">
+</span><span class="p">[</span><span class="m">35</span><span class="p">]</span><span class="w">  </span><span class="m">219</span><span class="w">  </span><span class="m">232</span><span class="w">  </span><span class="m">246</span><span class="w">  </span><span class="m">250</span><span class="w">  </span><span class="m">286</span><span class="w">  </span><span class="m">293</span><span class="w">  </span><span class="m">310</span><span class="w">  </span><span class="m">321</span><span class="w">  </span><span class="m">351</span><span class="w">  </span><span class="m">364</span><span class="w">  </span><span class="m">376</span><span class="w">  </span><span class="m">413</span><span class="w">  </span><span class="m">457</span><span class="w">  </span><span class="m">517</span><span class="w">  </span><span class="m">669</span><span class="w">  </span><span class="m">805</span><span class="w"> </span><span class="m">1257</span><span class="w">
+
+</span></code></pre></div></div>
+
+<h2 id="order">ORDER</h2>
+
+<ul>
+  <li>the <code class="language-plaintext highlighter-rouge">function order()</code> takes a vector and returns <strong>the indices that sorts that vector</strong>. For example</li>
+</ul>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="o">&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">31</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="m">15</span><span class="p">,</span><span class="w"> </span><span class="m">92</span><span class="p">,</span><span class="w"> </span><span class="m">65</span><span class="p">)</span><span class="w">
+</span><span class="o">&gt;</span><span class="w"> </span><span class="n">x</span><span class="w">
+</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="m">31</span><span class="w">  </span><span class="m">4</span><span class="w"> </span><span class="m">15</span><span class="w"> </span><span class="m">92</span><span class="w"> </span><span class="m">65</span><span class="w">
+</span><span class="o">&gt;</span><span class="w"> </span><span class="n">sort</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w">
+</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="w">  </span><span class="m">4</span><span class="w"> </span><span class="m">15</span><span class="w"> </span><span class="m">31</span><span class="w"> </span><span class="m">65</span><span class="w"> </span><span class="m">92</span><span class="w">
+</span><span class="o">&gt;</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">order</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w">
+</span><span class="o">&gt;</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="w">
+</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="w">  </span><span class="m">4</span><span class="w"> </span><span class="m">15</span><span class="w"> </span><span class="m">31</span><span class="w"> </span><span class="m">65</span><span class="w"> </span><span class="m">92</span><span class="w">
+
+</span></code></pre></div></div>
+<ul>
+  <li>Rather than sort the vector, the <code class="language-plaintext highlighter-rouge">function order</code> gives us back <code class="language-plaintext highlighter-rouge">the index</code> that if used to index the vector, will sort it. In the example below, as you can see, we can sort the <strong>murders$abb</strong> following the index of <strong>murders$total</strong></li>
+</ul>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="o">&gt;</span><span class="w"> </span><span class="n">x</span><span class="w">
+</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="m">31</span><span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="m">15</span><span class="w"> </span><span class="m">92</span><span class="w"> </span><span class="m">65</span><span class="w">
+</span><span class="o">&gt;</span><span class="w"> </span><span class="n">order</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w">
+</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="m">4</span><span class="w">
+</span><span class="o">&gt;</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">order</span><span class="p">(</span><span class="n">murders</span><span class="o">$</span><span class="n">total</span><span class="p">)</span><span class="w">
+</span><span class="o">&gt;</span><span class="w"> </span><span class="n">murders</span><span class="o">$</span><span class="n">abb</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="w">
+ </span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="s2">"VT"</span><span class="w"> </span><span class="s2">"ND"</span><span class="w"> </span><span class="s2">"NH"</span><span class="w"> </span><span class="s2">"WY"</span><span class="w"> </span><span class="s2">"HI"</span><span class="w"> </span><span class="s2">"SD"</span><span class="w"> </span><span class="s2">"ME"</span><span class="w"> </span><span class="s2">"ID"</span><span class="w"> </span><span class="s2">"MT"</span><span class="w"> </span><span class="s2">"RI"</span><span class="w"> </span><span class="s2">"AK"</span><span class="w"> </span><span class="s2">"IA"</span><span class="w"> </span><span class="s2">"UT"</span><span class="w"> </span><span class="s2">"WV"</span><span class="w"> </span><span class="s2">"NE"</span><span class="w"> </span><span class="s2">"OR"</span><span class="w"> </span><span class="s2">"DE"</span><span class="w">
+</span><span class="p">[</span><span class="m">18</span><span class="p">]</span><span class="w"> </span><span class="s2">"MN"</span><span class="w"> </span><span class="s2">"KS"</span><span class="w"> </span><span class="s2">"CO"</span><span class="w"> </span><span class="s2">"NM"</span><span class="w"> </span><span class="s2">"NV"</span><span class="w"> </span><span class="s2">"AR"</span><span class="w"> </span><span class="s2">"WA"</span><span class="w"> </span><span class="s2">"CT"</span><span class="w"> </span><span class="s2">"WI"</span><span class="w"> </span><span class="s2">"DC"</span><span class="w"> </span><span class="s2">"OK"</span><span class="w"> </span><span class="s2">"KY"</span><span class="w"> </span><span class="s2">"MA"</span><span class="w"> </span><span class="s2">"MS"</span><span class="w"> </span><span class="s2">"AL"</span><span class="w"> </span><span class="s2">"IN"</span><span class="w"> </span><span class="s2">"SC"</span><span class="w">
+</span><span class="p">[</span><span class="m">35</span><span class="p">]</span><span class="w"> </span><span class="s2">"TN"</span><span class="w"> </span><span class="s2">"AZ"</span><span class="w"> </span><span class="s2">"NJ"</span><span class="w"> </span><span class="s2">"VA"</span><span class="w"> </span><span class="s2">"NC"</span><span class="w"> </span><span class="s2">"MD"</span><span class="w"> </span><span class="s2">"OH"</span><span class="w"> </span><span class="s2">"MO"</span><span class="w"> </span><span class="s2">"LA"</span><span class="w"> </span><span class="s2">"IL"</span><span class="w"> </span><span class="s2">"GA"</span><span class="w"> </span><span class="s2">"MI"</span><span class="w"> </span><span class="s2">"PA"</span><span class="w"> </span><span class="s2">"NY"</span><span class="w"> </span><span class="s2">"FL"</span><span class="w"> </span><span class="s2">"TX"</span><span class="w"> </span><span class="s2">"CA"</span><span class="w">
+
+</span></code></pre></div></div>
+
+<h2 id="max-and-whichmax">MAX AND WHICH.MAX</h2>
+
+<ul>
+  <li>If we want to get the max value of a column we can use <code class="language-plaintext highlighter-rouge">function max()</code>. For example</li>
+</ul>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">max</span><span class="p">(</span><span class="n">murders</span><span class="o">$</span><span class="n">total</span><span class="p">)</span><span class="w">
+</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="m">1257</span><span class="w">
+
+</span></code></pre></div></div>
+
+<ul>
+  <li>The function <code class="language-plaintext highlighter-rouge">which.max()</code> gives us the index where this max number resides. For example, If we want to find the state with highest total murders we can do as below.</li>
+</ul>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="o">&gt;</span><span class="w"> </span><span class="n">i_max</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">which.max</span><span class="p">(</span><span class="n">murders</span><span class="o">$</span><span class="n">total</span><span class="p">)</span><span class="w">
+</span><span class="o">&gt;</span><span class="w"> </span><span class="n">i_max</span><span class="w">
+</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="m">5</span><span class="w">
+</span><span class="o">&gt;</span><span class="w"> </span><span class="n">murders</span><span class="o">$</span><span class="n">state</span><span class="p">[</span><span class="n">i_max</span><span class="p">]</span><span class="w">
+</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="s2">"California"</span><span class="w">
+
+</span></code></pre></div></div>
+
+<h2 id="min-and-whichmin">MIN AND WHICH.MIN</h2>
+
+<ul>
+  <li>If we want to get the min value of a column we can use <code class="language-plaintext highlighter-rouge">function min()</code>. For example:</li>
+</ul>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">min</span><span class="p">(</span><span class="n">murders</span><span class="o">$</span><span class="n">total</span><span class="p">)</span><span class="w">
+</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="m">2</span><span class="w">
+
+</span></code></pre></div></div>
+
+<ul>
+  <li>The function <code class="language-plaintext highlighter-rouge">which.min()</code> gives us the index where this min number resides. For example, If we want to find the state with lowest total murders we can do as below.</li>
+</ul>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="o">&gt;</span><span class="w"> </span><span class="n">i_min</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">which.min</span><span class="p">(</span><span class="n">murders</span><span class="o">$</span><span class="n">total</span><span class="p">)</span><span class="w">
+</span><span class="o">&gt;</span><span class="w"> </span><span class="n">i_min</span><span class="w">
+</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="m">46</span><span class="w">
+</span><span class="o">&gt;</span><span class="w"> </span><span class="n">murders</span><span class="o">$</span><span class="n">state</span><span class="p">[</span><span class="n">i_min</span><span class="p">]</span><span class="w">
+</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="s2">"Vermont"</span><span class="w">
+
+</span></code></pre></div></div>
+
+<h2 id="rank">RANK</h2>
+
+<ul>
+  <li>Then <code class="language-plaintext highlighter-rouge">function rank()</code> give you a vector with the rank of <code class="language-plaintext highlighter-rouge">first entry, ... last entry</code>. For example</li>
+</ul>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="o">&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">31</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="m">15</span><span class="p">,</span><span class="w"> </span><span class="m">92</span><span class="p">,</span><span class="w"> </span><span class="m">65</span><span class="p">)</span><span class="w">
+</span><span class="o">&gt;</span><span class="w"> </span><span class="n">x</span><span class="w">
+</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="m">31</span><span class="w">  </span><span class="m">4</span><span class="w"> </span><span class="m">15</span><span class="w"> </span><span class="m">92</span><span class="w"> </span><span class="m">65</span><span class="w">
+</span><span class="o">&gt;</span><span class="w"> </span><span class="n">rank</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w">
+</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="m">4</span><span class="w">
+
+</span></code></pre></div></div>
+
+<h2 id="summary">SUMMARY</h2>
+
+<ul>
+  <li>The <code class="language-plaintext highlighter-rouge">function sort()</code> sorts a vector in <strong>increasing order</strong>.</li>
+  <li>The <code class="language-plaintext highlighter-rouge">function order()</code> produces the indices needed to obtain the sorted vector, e.g. a result of  2 3 1 5 4 means the sorted vector will be produced by listing the 2nd, 3rd, 1st, 5th, and then 4th item of the original vector.</li>
+  <li>The <code class="language-plaintext highlighter-rouge">function rank()</code> gives us the ranks of the items in the original vector.</li>
+  <li>The <code class="language-plaintext highlighter-rouge">function max()</code> returns the largest value, while <code class="language-plaintext highlighter-rouge">which.max()</code> returns the index of the largest value. The functions <code class="language-plaintext highlighter-rouge">min()</code> and <code class="language-plaintext highlighter-rouge">which.min()</code> work similarly for minimum values.</li>
+</ul>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">dslabs</span><span class="p">)</span><span class="w">
+</span><span class="n">data</span><span class="p">(</span><span class="n">murders</span><span class="p">)</span><span class="w">
+</span><span class="n">sort</span><span class="p">(</span><span class="n">murders</span><span class="o">$</span><span class="n">total</span><span class="p">)</span><span class="w">
+
+</span><span class="n">x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">31</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="m">15</span><span class="p">,</span><span class="w"> </span><span class="m">92</span><span class="p">,</span><span class="w"> </span><span class="m">65</span><span class="p">)</span><span class="w">
+</span><span class="n">x</span><span class="w">
+</span><span class="n">sort</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w">    </span><span class="c1"># puts elements in order</span><span class="w">
+
+</span><span class="n">index</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">order</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w">    </span><span class="c1"># returns index that will put x in order</span><span class="w">
+</span><span class="n">x</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="w">    </span><span class="c1"># rearranging by this index puts elements in order</span><span class="w">
+</span><span class="n">order</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w">
+
+</span><span class="n">murders</span><span class="o">$</span><span class="n">state</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">]</span><span class="w">
+</span><span class="n">murders</span><span class="o">$</span><span class="n">abb</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">]</span><span class="w">
+
+</span><span class="n">index</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">order</span><span class="p">(</span><span class="n">murders</span><span class="o">$</span><span class="n">total</span><span class="p">)</span><span class="w">
+</span><span class="n">murders</span><span class="o">$</span><span class="n">abb</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="w">    </span><span class="c1"># order abbreviations by total murders</span><span class="w">
+
+</span><span class="nf">max</span><span class="p">(</span><span class="n">murders</span><span class="o">$</span><span class="n">total</span><span class="p">)</span><span class="w">    </span><span class="c1"># highest number of total murders</span><span class="w">
+</span><span class="n">i_max</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">which.max</span><span class="p">(</span><span class="n">murders</span><span class="o">$</span><span class="n">total</span><span class="p">)</span><span class="w">    </span><span class="c1"># index with highest number of murders</span><span class="w">
+</span><span class="n">murders</span><span class="o">$</span><span class="n">state</span><span class="p">[</span><span class="n">i_max</span><span class="p">]</span><span class="w">    </span><span class="c1"># state name with highest number of total murders</span><span class="w">
+
+</span><span class="n">x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">31</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="m">15</span><span class="p">,</span><span class="w"> </span><span class="m">92</span><span class="p">,</span><span class="w"> </span><span class="m">65</span><span class="p">)</span><span class="w">
+</span><span class="n">x</span><span class="w">
+</span><span class="n">rank</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w">    </span><span class="c1"># returns ranks (smallest to largest)</span><span class="w">
+
+</span></code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th>index</th>
+      <th>original</th>
+      <th>sort</th>
+      <th>order</th>
+      <th>rank</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>31</td>
+      <td>4</td>
+      <td>2</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>4</td>
+      <td>15</td>
+      <td>3</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>15</td>
+      <td>31</td>
+      <td>1</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>92</td>
+      <td>65</td>
+      <td>5</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>65</td>
+      <td>92</td>
+      <td>4</td>
+      <td>4</td>
+    </tr>
+  </tbody>
+</table>
+
+    </div><a class="u-url" href="/data-science/2021/09/26/data-science-R-sorting.html" hidden></a>
+  </article>
+  
+</div>
+
+
+    </div>
+  </div>
+  <script src="https://unpkg.com/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js"></script>
+  <script>addBackToTop()</script>
+</body>
+<footer><footer class="site-footer h-card">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <h2 class="footer-heading">StepByStep</h2>
+        <div>
+          <div>
+            <ul>
+              <li>Duc Nguyen</li><li><a class="u-email" href="mailto:minhducnguyen189@gmail.com">minhducnguyen189@gmail.com</a></li><li>&copy; 2021 Duc Nguyen. Powered by <a href="https://jekyllrb.com/">Jekyll</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <data class="u-url" href="/%20/"></data>
+        <div><ul class="social-media-list"><li><a href="https://github.com/minhducnguyen189"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">minhducnguyen189</span></a></li><li><a href="https://www.linkedin.com/in/duc-nguyen-03109b141"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#linkedin"></use></svg> <span class="username">duc-nguyen-03109b141</span></a></li></ul>
+</div>
+      </div>
+      <div class="col-md-4">
+        
+      </div>
+    </div>
+
+    <div class="row">
+      <p>Hi there! Let&#39;s explore some general knowleadges and briefly definitions in programming. I hope that this website can help people saving time in learning, also give some motivations for those who have choice the developer path.</p>
+    </div>
+</footer></footer>
+</html>

@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- bootstrap library and JS, Jquery -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Data Science: R Language Basic | StepByStep</title>
+<meta name="generator" content="Jekyll v4.2.1" />
+<meta property="og:title" content="Data Science: R Language Basic" />
+<meta name="author" content="Duc Nguyen" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="In this post, you will learn about basic concepts in R language. You can learn full course in this link SETUP ENVIRONMENT INSTALL R INSTALL R STUDIO USING R IN R STUDIO R AND WHAT YOU SHOULD KNOW INSTALL LIBRARY RUN YOUR FIRST SCRIPT R OBJECTS (VARIABLES) R FUNCTIONS R VARIABLE NAMES R SCRIPTS R COMMENTS KEY POINTS IN R WITH FUNCTIONS AND DATA TYPES SETUP ENVIRONMENT INSTALL R You can download R installer following this link After the download has been successfully, you can install as default on window. INSTALL R STUDIO You can download R Studio following this link After the download has been successfully, you can install as default on window. USING R IN R STUDIO After open the R Studio, you can use Ctrl + Shift + n to create new R script file. You can go to Help –&gt; Cheat Sheets to view more information R AND WHAT YOU SHOULD KNOW R is not a programming language, It was not created by software engineers for software development. Instead, it was developed by statisticians and data analysts as an interactive environment for data analysis. R is free and open source, meaning that you can look at the code. It runs across all major platforms –Windows, Mac OS, Unix, Linux. INSTALL LIBRARY To install library you can use command #install dslabs library install.packages(&quot;dslabs&quot;) #install tidyverse library install.packages(&quot;tidyverse&quot;) #you can use this command to download 2 packages install.packages(c(&quot;tidyverse&quot;, &quot;dslabs&quot;)) In R Studio you can install packages by access tools -&gt; Install Packages -&gt; enter the library packages that you want to install. This way is very helpful when you don’t remember the name of the package. If you want to check what packages that you installed you can use this command #you will see a list of packages that you installed install.packages() To load the library into our R session for using, you can use command #using dslabs library library(dslabs) RUN YOUR FIRST SCRIPT Let’s add some scripts as below library(tidyverse) library(dslabs) data(murders) murders %&gt;% ggplot(aes(population, total, label = abb, color = region)) + geom_label() Then use Ctrl + shift + Enter to execute your file script If you want to run line by line in your file script you can use Ctrl + Enter Note: The code contains a pipe (i.e. %&gt;%) and the ggplot() function. Pipes are from the tidyverse package and are covered in a later section of the course, but ggplot() is not covered in R Basics. You do not need to be able to be able to use pipes or ggplot() at this point. R OBJECTS (VARIABLES) To create R variables, we use the syntax as below a &lt;- 1 b &lt;- 4 c &lt;- 1 print(a) ======== #we will see the result 1 4 1 The varialbes will be saved into the workspace, so to check how many variables that you created, you can use the command as below: ls() ======= #then you can see &quot;a&quot; &quot;b&quot; &quot;c&quot; If you are using R Studio you can see your variables in the tag Environment Now, with these variables you can use the formular to find x in the example below. Ex: x^2 + 4x + 1 = 0 (-b + sqrt(b^2 - 4*a*c))/(2*a) ======== # result x1 = -0.2679492 x2 = -3.732051 R FUNCTIONS R includes several predefined functions. We’ve already shown the install.packages, library, and ls functions. we have some functions in R like: exp() log() #we can use function in function log(exp(1)) If you want to know how to use a function, you can function help(&quot;&lt;functionName&gt;&quot;). For example: help(&quot;exp&quot;) help(&quot;log&quot;) You should note that, some function requires arguments or optional arguments. If you don’t know which arguments are optional or required you can use the function args(&lt;functionName&gt;) args(log) ============ #result function (x, base = exp(1)) NULL Functions are not the only pre-built objects in R. There are also data sets that are included for users to practice and test out functions. To view the list of data set you can use function data() data() ============= # you can see the result as below Data sets in package ‘datasets’: AirPassengers Monthly Airline Passenger Numbers 1949-1960 BJsales Sales Data with Leading Indicator BJsales.lead (BJsales) Sales Data with Leading Indicator BOD Biochemical Oxygen Demand CO2 Carbon Dioxide Uptake in Grass Plants ChickWeight Weight versus age of chicks on different diets DNase Elisa assay of DNase EuStockMarkets Daily Closing Prices of Major European Stock Indices, 1991-1998 Formaldehyde Determination of Formaldehyde HairEyeColor Hair and Eye Color of Statistics Students Harman23.cor Harman Example 2.3 Harman74.cor Harman Example 7.4 Indometh Pharmacokinetics of Indomethacin InsectSprays Effectiveness of Insect Sprays JohnsonJohnson Quarterly Earnings per Johnson &amp; Johnson Share LakeHuron Level of Lake Huron 1875-1972 LifeCycleSavings Intercountry Life-Cycle Savings Data Loblolly Growth of Loblolly pine trees Nile Flow of the River Nile Orange Growth of Orange Trees OrchardSprays Potency of Orchard Sprays PlantGrowth Results from an Experiment on Plant Growth Puromycin Reaction Velocity of an Enzymatic Reaction Seatbelts Road Casualties in Great Britain 1969-84 Theoph Pharmacokinetics of Theophylline Titanic Survival of passengers on the Titanic ToothGrowth The Effect of Vitamin C on Tooth Growth in Guinea Pigs UCBAdmissions Student Admissions at UC Berkeley UKDriverDeaths Road Casualties in Great Britain 1969-84 UKgas UK Quarterly Gas Consumption USAccDeaths Accidental Deaths in the US 1973-1978 USArrests Violent Crime Rates by US State USJudgeRatings Lawyers&#39; Ratings of State Judges in the US Superior Court USPersonalExpenditure Personal Expenditure Data UScitiesD Distances Between European Cities and Between US Cities VADeaths Death Rates in Virginia (1940) WWWusage Internet Usage per Minute WorldPhones The World&#39;s Telephones ability.cov Ability and Intelligence Tests airmiles Passenger Miles on Commercial US Airlines, 1937-1960 airquality New York Air Quality Measurements anscombe Anscombe&#39;s Quartet of &#39;Identical&#39; Simple Linear Regressions attenu The Joyner-Boore Attenuation Data attitude The Chatterjee-Price Attitude Data austres Quarterly Time Series of the Number of Australian Residents beaver1 (beavers) Body Temperature Series of Two Beavers beaver2 (beavers) Body Temperature Series of Two Beavers cars Speed and Stopping Distances of Cars chickwts Chicken Weights by Feed Type co2 Mauna Loa Atmospheric CO2 Concentration crimtab Student&#39;s 3000 Criminals Data discoveries Yearly Numbers of Important Discoveries esoph Smoking, Alcohol and (O)esophageal Cancer euro Conversion Rates of Euro Currencies euro.cross (euro) Conversion Rates of Euro Currencies eurodist Distances Between European Cities and Between US Cities faithful Old Faithful Geyser Data fdeaths (UKLungDeaths) Monthly Deaths from Lung Diseases in the UK freeny Freeny&#39;s Revenue Data freeny.x (freeny) Freeny&#39;s Revenue Data freeny.y (freeny) Freeny&#39;s Revenue Data infert Infertility after Spontaneous and Induced Abortion iris Edgar Anderson&#39;s Iris Data iris3 Edgar Anderson&#39;s Iris Data islands Areas of the World&#39;s Major Landmasses ldeaths (UKLungDeaths) Monthly Deaths from Lung Diseases in the UK lh Luteinizing Hormone in Blood Samples longley Longley&#39;s Economic Regression Data lynx Annual Canadian Lynx trappings 1821-1934 mdeaths (UKLungDeaths) Monthly Deaths from Lung Diseases in the UK morley Michelson Speed of Light Data mtcars Motor Trend Car Road Tests nhtemp Average Yearly Temperatures in New Haven nottem Average Monthly Temperatures at Nottingham, 1920-1939 npk Classical N, P, K Factorial Experiment occupationalStatus Occupational Status of Fathers and their Sons precip Annual Precipitation in US Cities presidents Quarterly Approval Ratings of US Presidents pressure Vapor Pressure of Mercury as a Function of Temperature quakes Locations of Earthquakes off Fiji randu Random Numbers from Congruential Generator RANDU rivers Lengths of Major North American Rivers rock Measurements on Petroleum Rock Samples sleep Student&#39;s Sleep Data stack.loss (stackloss) Brownlee&#39;s Stack Loss Plant Data stack.x (stackloss) Brownlee&#39;s Stack Loss Plant Data stackloss Brownlee&#39;s Stack Loss Plant Data state.abb (state) US State Facts and Figures state.area (state) US State Facts and Figures state.center (state) US State Facts and Figures state.division (state) US State Facts and Figures state.name (state) US State Facts and Figures state.region (state) US State Facts and Figures state.x77 (state) US State Facts and Figures sunspot.month Monthly Sunspot Data, from 1749 to &quot;Present&quot; sunspot.year Yearly Sunspot Data, 1700-1988 sunspots Monthly Sunspot Numbers, 1749-1983 swiss Swiss Fertility and Socioeconomic Indicators (1888) Data treering Yearly Treering Data, -6000-1979 trees Diameter, Height and Volume for Black Cherry Trees uspop Populations Recorded by the US Census volcano Topographic Information on Auckland&#39;s Maunga Whau Volcano warpbreaks The Number of Breaks in Yarn during Weaving women Average Heights and Weights for American Women Use ‘data(package = .packages(all.available = TRUE))’ to list the data sets in all *available* packages. Then if you want to view the details of data set, you can use the data set name CO2 ============= #then you can see this data set as Plant Type Treatment conc uptake 1 Qn1 Quebec nonchilled 95 16.0 2 Qn1 Quebec nonchilled 175 30.4 3 Qn1 Quebec nonchilled 250 34.8 4 Qn1 Quebec nonchilled 350 37.2 5 Qn1 Quebec nonchilled 500 35.3 6 Qn1 Quebec nonchilled 675 39.2 7 Qn1 Quebec nonchilled 1000 39.7 8 Qn2 Quebec nonchilled 95 13.6 9 Qn2 Quebec nonchilled 175 27.3 10 Qn2 Quebec nonchilled 250 37.1 11 Qn2 Quebec nonchilled 350 41.8 12 Qn2 Quebec nonchilled 500 40.6 13 Qn2 Quebec nonchilled 675 41.4 14 Qn2 Quebec nonchilled 1000 44.3 15 Qn3 Quebec nonchilled 95 16.2 16 Qn3 Quebec nonchilled 175 32.4 17 Qn3 Quebec nonchilled 250 40.3 18 Qn3 Quebec nonchilled 350 42.1 19 Qn3 Quebec nonchilled 500 42.9 20 Qn3 Quebec nonchilled 675 43.9 21 Qn3 Quebec nonchilled 1000 45.5 22 Qc1 Quebec chilled 95 14.2 23 Qc1 Quebec chilled 175 24.1 24 Qc1 Quebec chilled 250 30.3 25 Qc1 Quebec chilled 350 34.6 26 Qc1 Quebec chilled 500 32.5 27 Qc1 Quebec chilled 675 35.4 28 Qc1 Quebec chilled 1000 38.7 29 Qc2 Quebec chilled 95 9.3 30 Qc2 Quebec chilled 175 27.3 31 Qc2 Quebec chilled 250 35.0 32 Qc2 Quebec chilled 350 38.8 33 Qc2 Quebec chilled 500 38.6 34 Qc2 Quebec chilled 675 37.5 35 Qc2 Quebec chilled 1000 42.4 36 Qc3 Quebec chilled 95 15.1 37 Qc3 Quebec chilled 175 21.0 38 Qc3 Quebec chilled 250 38.1 39 Qc3 Quebec chilled 350 34.0 40 Qc3 Quebec chilled 500 38.9 41 Qc3 Quebec chilled 675 39.6 42 Qc3 Quebec chilled 1000 41.4 43 Mn1 Mississippi nonchilled 95 10.6 44 Mn1 Mississippi nonchilled 175 19.2 45 Mn1 Mississippi nonchilled 250 26.2 46 Mn1 Mississippi nonchilled 350 30.0 47 Mn1 Mississippi nonchilled 500 30.9 48 Mn1 Mississippi nonchilled 675 32.4 49 Mn1 Mississippi nonchilled 1000 35.5 50 Mn2 Mississippi nonchilled 95 12.0 51 Mn2 Mississippi nonchilled 175 22.0 52 Mn2 Mississippi nonchilled 250 30.6 53 Mn2 Mississippi nonchilled 350 31.8 54 Mn2 Mississippi nonchilled 500 32.4 55 Mn2 Mississippi nonchilled 675 31.1 56 Mn2 Mississippi nonchilled 1000 31.5 57 Mn3 Mississippi nonchilled 95 11.3 58 Mn3 Mississippi nonchilled 175 19.4 59 Mn3 Mississippi nonchilled 250 25.8 60 Mn3 Mississippi nonchilled 350 27.9 61 Mn3 Mississippi nonchilled 500 28.5 62 Mn3 Mississippi nonchilled 675 28.1 63 Mn3 Mississippi nonchilled 1000 27.8 64 Mc1 Mississippi chilled 95 10.5 65 Mc1 Mississippi chilled 175 14.9 66 Mc1 Mississippi chilled 250 18.1 67 Mc1 Mississippi chilled 350 18.9 68 Mc1 Mississippi chilled 500 19.5 69 Mc1 Mississippi chilled 675 22.2 70 Mc1 Mississippi chilled 1000 21.9 71 Mc2 Mississippi chilled 95 7.7 72 Mc2 Mississippi chilled 175 11.4 73 Mc2 Mississippi chilled 250 12.3 74 Mc2 Mississippi chilled 350 13.0 75 Mc2 Mississippi chilled 500 12.5 76 Mc2 Mississippi chilled 675 13.7 77 Mc2 Mississippi chilled 1000 14.4 78 Mc3 Mississippi chilled 95 10.6 79 Mc3 Mississippi chilled 175 18.0 80 Mc3 Mississippi chilled 250 17.9 81 Mc3 Mississippi chilled 350 17.9 82 Mc3 Mississippi chilled 500 17.9 83 Mc3 Mississippi chilled 675 18.9 84 Mc3 Mississippi chilled 1000 19.9 R VARIABLE NAMES You want to choose variable names that make your code readable. You want to choose variable names that will later be clear to you what you meant to do in your code. Now there are some rules in R. Some basic rules are that they have to start with a letter, and they can&#39;t contain spaces. If you have a long name you can replace space with _ R SCRIPTS When you write formulars by scripts, let’s save it and you can reuse it everytime with input variables that you defined in your scripts. R COMMENTS If you want to use comments in your scripts, you can use # or ## in the head of lines. #this is the sample comments KEY POINTS IN R WITH FUNCTIONS AND DATA TYPES In general, to evaluate a function we need to use parentheses. If we type a function without parenthesis, R shows us the code for the function. Most functions also require an argument, that is, something to be written inside the parenthesis. To access help files, we may use the help function, help(function_name), or write the question mark followed by the function name, ?function_name. The help file shows you the arguments the function is expecting, some of which are required and some are optional. If an argument is optional, a default value is assigned with the equal sign. The args() function also shows the arguments a function needs. To specify arguments, we use the equals sign. If no argument name is used, R assumes you’re entering arguments in the order shown in the help file. Creating and saving a script makes code much easier to execute. To make your code more readable, use intuitive variable names and include comments (using the “#” symbol) to remind yourself why you wrote a particular line of code." />
+<meta property="og:description" content="In this post, you will learn about basic concepts in R language. You can learn full course in this link SETUP ENVIRONMENT INSTALL R INSTALL R STUDIO USING R IN R STUDIO R AND WHAT YOU SHOULD KNOW INSTALL LIBRARY RUN YOUR FIRST SCRIPT R OBJECTS (VARIABLES) R FUNCTIONS R VARIABLE NAMES R SCRIPTS R COMMENTS KEY POINTS IN R WITH FUNCTIONS AND DATA TYPES SETUP ENVIRONMENT INSTALL R You can download R installer following this link After the download has been successfully, you can install as default on window. INSTALL R STUDIO You can download R Studio following this link After the download has been successfully, you can install as default on window. USING R IN R STUDIO After open the R Studio, you can use Ctrl + Shift + n to create new R script file. You can go to Help –&gt; Cheat Sheets to view more information R AND WHAT YOU SHOULD KNOW R is not a programming language, It was not created by software engineers for software development. Instead, it was developed by statisticians and data analysts as an interactive environment for data analysis. R is free and open source, meaning that you can look at the code. It runs across all major platforms –Windows, Mac OS, Unix, Linux. INSTALL LIBRARY To install library you can use command #install dslabs library install.packages(&quot;dslabs&quot;) #install tidyverse library install.packages(&quot;tidyverse&quot;) #you can use this command to download 2 packages install.packages(c(&quot;tidyverse&quot;, &quot;dslabs&quot;)) In R Studio you can install packages by access tools -&gt; Install Packages -&gt; enter the library packages that you want to install. This way is very helpful when you don’t remember the name of the package. If you want to check what packages that you installed you can use this command #you will see a list of packages that you installed install.packages() To load the library into our R session for using, you can use command #using dslabs library library(dslabs) RUN YOUR FIRST SCRIPT Let’s add some scripts as below library(tidyverse) library(dslabs) data(murders) murders %&gt;% ggplot(aes(population, total, label = abb, color = region)) + geom_label() Then use Ctrl + shift + Enter to execute your file script If you want to run line by line in your file script you can use Ctrl + Enter Note: The code contains a pipe (i.e. %&gt;%) and the ggplot() function. Pipes are from the tidyverse package and are covered in a later section of the course, but ggplot() is not covered in R Basics. You do not need to be able to be able to use pipes or ggplot() at this point. R OBJECTS (VARIABLES) To create R variables, we use the syntax as below a &lt;- 1 b &lt;- 4 c &lt;- 1 print(a) ======== #we will see the result 1 4 1 The varialbes will be saved into the workspace, so to check how many variables that you created, you can use the command as below: ls() ======= #then you can see &quot;a&quot; &quot;b&quot; &quot;c&quot; If you are using R Studio you can see your variables in the tag Environment Now, with these variables you can use the formular to find x in the example below. Ex: x^2 + 4x + 1 = 0 (-b + sqrt(b^2 - 4*a*c))/(2*a) ======== # result x1 = -0.2679492 x2 = -3.732051 R FUNCTIONS R includes several predefined functions. We’ve already shown the install.packages, library, and ls functions. we have some functions in R like: exp() log() #we can use function in function log(exp(1)) If you want to know how to use a function, you can function help(&quot;&lt;functionName&gt;&quot;). For example: help(&quot;exp&quot;) help(&quot;log&quot;) You should note that, some function requires arguments or optional arguments. If you don’t know which arguments are optional or required you can use the function args(&lt;functionName&gt;) args(log) ============ #result function (x, base = exp(1)) NULL Functions are not the only pre-built objects in R. There are also data sets that are included for users to practice and test out functions. To view the list of data set you can use function data() data() ============= # you can see the result as below Data sets in package ‘datasets’: AirPassengers Monthly Airline Passenger Numbers 1949-1960 BJsales Sales Data with Leading Indicator BJsales.lead (BJsales) Sales Data with Leading Indicator BOD Biochemical Oxygen Demand CO2 Carbon Dioxide Uptake in Grass Plants ChickWeight Weight versus age of chicks on different diets DNase Elisa assay of DNase EuStockMarkets Daily Closing Prices of Major European Stock Indices, 1991-1998 Formaldehyde Determination of Formaldehyde HairEyeColor Hair and Eye Color of Statistics Students Harman23.cor Harman Example 2.3 Harman74.cor Harman Example 7.4 Indometh Pharmacokinetics of Indomethacin InsectSprays Effectiveness of Insect Sprays JohnsonJohnson Quarterly Earnings per Johnson &amp; Johnson Share LakeHuron Level of Lake Huron 1875-1972 LifeCycleSavings Intercountry Life-Cycle Savings Data Loblolly Growth of Loblolly pine trees Nile Flow of the River Nile Orange Growth of Orange Trees OrchardSprays Potency of Orchard Sprays PlantGrowth Results from an Experiment on Plant Growth Puromycin Reaction Velocity of an Enzymatic Reaction Seatbelts Road Casualties in Great Britain 1969-84 Theoph Pharmacokinetics of Theophylline Titanic Survival of passengers on the Titanic ToothGrowth The Effect of Vitamin C on Tooth Growth in Guinea Pigs UCBAdmissions Student Admissions at UC Berkeley UKDriverDeaths Road Casualties in Great Britain 1969-84 UKgas UK Quarterly Gas Consumption USAccDeaths Accidental Deaths in the US 1973-1978 USArrests Violent Crime Rates by US State USJudgeRatings Lawyers&#39; Ratings of State Judges in the US Superior Court USPersonalExpenditure Personal Expenditure Data UScitiesD Distances Between European Cities and Between US Cities VADeaths Death Rates in Virginia (1940) WWWusage Internet Usage per Minute WorldPhones The World&#39;s Telephones ability.cov Ability and Intelligence Tests airmiles Passenger Miles on Commercial US Airlines, 1937-1960 airquality New York Air Quality Measurements anscombe Anscombe&#39;s Quartet of &#39;Identical&#39; Simple Linear Regressions attenu The Joyner-Boore Attenuation Data attitude The Chatterjee-Price Attitude Data austres Quarterly Time Series of the Number of Australian Residents beaver1 (beavers) Body Temperature Series of Two Beavers beaver2 (beavers) Body Temperature Series of Two Beavers cars Speed and Stopping Distances of Cars chickwts Chicken Weights by Feed Type co2 Mauna Loa Atmospheric CO2 Concentration crimtab Student&#39;s 3000 Criminals Data discoveries Yearly Numbers of Important Discoveries esoph Smoking, Alcohol and (O)esophageal Cancer euro Conversion Rates of Euro Currencies euro.cross (euro) Conversion Rates of Euro Currencies eurodist Distances Between European Cities and Between US Cities faithful Old Faithful Geyser Data fdeaths (UKLungDeaths) Monthly Deaths from Lung Diseases in the UK freeny Freeny&#39;s Revenue Data freeny.x (freeny) Freeny&#39;s Revenue Data freeny.y (freeny) Freeny&#39;s Revenue Data infert Infertility after Spontaneous and Induced Abortion iris Edgar Anderson&#39;s Iris Data iris3 Edgar Anderson&#39;s Iris Data islands Areas of the World&#39;s Major Landmasses ldeaths (UKLungDeaths) Monthly Deaths from Lung Diseases in the UK lh Luteinizing Hormone in Blood Samples longley Longley&#39;s Economic Regression Data lynx Annual Canadian Lynx trappings 1821-1934 mdeaths (UKLungDeaths) Monthly Deaths from Lung Diseases in the UK morley Michelson Speed of Light Data mtcars Motor Trend Car Road Tests nhtemp Average Yearly Temperatures in New Haven nottem Average Monthly Temperatures at Nottingham, 1920-1939 npk Classical N, P, K Factorial Experiment occupationalStatus Occupational Status of Fathers and their Sons precip Annual Precipitation in US Cities presidents Quarterly Approval Ratings of US Presidents pressure Vapor Pressure of Mercury as a Function of Temperature quakes Locations of Earthquakes off Fiji randu Random Numbers from Congruential Generator RANDU rivers Lengths of Major North American Rivers rock Measurements on Petroleum Rock Samples sleep Student&#39;s Sleep Data stack.loss (stackloss) Brownlee&#39;s Stack Loss Plant Data stack.x (stackloss) Brownlee&#39;s Stack Loss Plant Data stackloss Brownlee&#39;s Stack Loss Plant Data state.abb (state) US State Facts and Figures state.area (state) US State Facts and Figures state.center (state) US State Facts and Figures state.division (state) US State Facts and Figures state.name (state) US State Facts and Figures state.region (state) US State Facts and Figures state.x77 (state) US State Facts and Figures sunspot.month Monthly Sunspot Data, from 1749 to &quot;Present&quot; sunspot.year Yearly Sunspot Data, 1700-1988 sunspots Monthly Sunspot Numbers, 1749-1983 swiss Swiss Fertility and Socioeconomic Indicators (1888) Data treering Yearly Treering Data, -6000-1979 trees Diameter, Height and Volume for Black Cherry Trees uspop Populations Recorded by the US Census volcano Topographic Information on Auckland&#39;s Maunga Whau Volcano warpbreaks The Number of Breaks in Yarn during Weaving women Average Heights and Weights for American Women Use ‘data(package = .packages(all.available = TRUE))’ to list the data sets in all *available* packages. Then if you want to view the details of data set, you can use the data set name CO2 ============= #then you can see this data set as Plant Type Treatment conc uptake 1 Qn1 Quebec nonchilled 95 16.0 2 Qn1 Quebec nonchilled 175 30.4 3 Qn1 Quebec nonchilled 250 34.8 4 Qn1 Quebec nonchilled 350 37.2 5 Qn1 Quebec nonchilled 500 35.3 6 Qn1 Quebec nonchilled 675 39.2 7 Qn1 Quebec nonchilled 1000 39.7 8 Qn2 Quebec nonchilled 95 13.6 9 Qn2 Quebec nonchilled 175 27.3 10 Qn2 Quebec nonchilled 250 37.1 11 Qn2 Quebec nonchilled 350 41.8 12 Qn2 Quebec nonchilled 500 40.6 13 Qn2 Quebec nonchilled 675 41.4 14 Qn2 Quebec nonchilled 1000 44.3 15 Qn3 Quebec nonchilled 95 16.2 16 Qn3 Quebec nonchilled 175 32.4 17 Qn3 Quebec nonchilled 250 40.3 18 Qn3 Quebec nonchilled 350 42.1 19 Qn3 Quebec nonchilled 500 42.9 20 Qn3 Quebec nonchilled 675 43.9 21 Qn3 Quebec nonchilled 1000 45.5 22 Qc1 Quebec chilled 95 14.2 23 Qc1 Quebec chilled 175 24.1 24 Qc1 Quebec chilled 250 30.3 25 Qc1 Quebec chilled 350 34.6 26 Qc1 Quebec chilled 500 32.5 27 Qc1 Quebec chilled 675 35.4 28 Qc1 Quebec chilled 1000 38.7 29 Qc2 Quebec chilled 95 9.3 30 Qc2 Quebec chilled 175 27.3 31 Qc2 Quebec chilled 250 35.0 32 Qc2 Quebec chilled 350 38.8 33 Qc2 Quebec chilled 500 38.6 34 Qc2 Quebec chilled 675 37.5 35 Qc2 Quebec chilled 1000 42.4 36 Qc3 Quebec chilled 95 15.1 37 Qc3 Quebec chilled 175 21.0 38 Qc3 Quebec chilled 250 38.1 39 Qc3 Quebec chilled 350 34.0 40 Qc3 Quebec chilled 500 38.9 41 Qc3 Quebec chilled 675 39.6 42 Qc3 Quebec chilled 1000 41.4 43 Mn1 Mississippi nonchilled 95 10.6 44 Mn1 Mississippi nonchilled 175 19.2 45 Mn1 Mississippi nonchilled 250 26.2 46 Mn1 Mississippi nonchilled 350 30.0 47 Mn1 Mississippi nonchilled 500 30.9 48 Mn1 Mississippi nonchilled 675 32.4 49 Mn1 Mississippi nonchilled 1000 35.5 50 Mn2 Mississippi nonchilled 95 12.0 51 Mn2 Mississippi nonchilled 175 22.0 52 Mn2 Mississippi nonchilled 250 30.6 53 Mn2 Mississippi nonchilled 350 31.8 54 Mn2 Mississippi nonchilled 500 32.4 55 Mn2 Mississippi nonchilled 675 31.1 56 Mn2 Mississippi nonchilled 1000 31.5 57 Mn3 Mississippi nonchilled 95 11.3 58 Mn3 Mississippi nonchilled 175 19.4 59 Mn3 Mississippi nonchilled 250 25.8 60 Mn3 Mississippi nonchilled 350 27.9 61 Mn3 Mississippi nonchilled 500 28.5 62 Mn3 Mississippi nonchilled 675 28.1 63 Mn3 Mississippi nonchilled 1000 27.8 64 Mc1 Mississippi chilled 95 10.5 65 Mc1 Mississippi chilled 175 14.9 66 Mc1 Mississippi chilled 250 18.1 67 Mc1 Mississippi chilled 350 18.9 68 Mc1 Mississippi chilled 500 19.5 69 Mc1 Mississippi chilled 675 22.2 70 Mc1 Mississippi chilled 1000 21.9 71 Mc2 Mississippi chilled 95 7.7 72 Mc2 Mississippi chilled 175 11.4 73 Mc2 Mississippi chilled 250 12.3 74 Mc2 Mississippi chilled 350 13.0 75 Mc2 Mississippi chilled 500 12.5 76 Mc2 Mississippi chilled 675 13.7 77 Mc2 Mississippi chilled 1000 14.4 78 Mc3 Mississippi chilled 95 10.6 79 Mc3 Mississippi chilled 175 18.0 80 Mc3 Mississippi chilled 250 17.9 81 Mc3 Mississippi chilled 350 17.9 82 Mc3 Mississippi chilled 500 17.9 83 Mc3 Mississippi chilled 675 18.9 84 Mc3 Mississippi chilled 1000 19.9 R VARIABLE NAMES You want to choose variable names that make your code readable. You want to choose variable names that will later be clear to you what you meant to do in your code. Now there are some rules in R. Some basic rules are that they have to start with a letter, and they can&#39;t contain spaces. If you have a long name you can replace space with _ R SCRIPTS When you write formulars by scripts, let’s save it and you can reuse it everytime with input variables that you defined in your scripts. R COMMENTS If you want to use comments in your scripts, you can use # or ## in the head of lines. #this is the sample comments KEY POINTS IN R WITH FUNCTIONS AND DATA TYPES In general, to evaluate a function we need to use parentheses. If we type a function without parenthesis, R shows us the code for the function. Most functions also require an argument, that is, something to be written inside the parenthesis. To access help files, we may use the help function, help(function_name), or write the question mark followed by the function name, ?function_name. The help file shows you the arguments the function is expecting, some of which are required and some are optional. If an argument is optional, a default value is assigned with the equal sign. The args() function also shows the arguments a function needs. To specify arguments, we use the equals sign. If no argument name is used, R assumes you’re entering arguments in the order shown in the help file. Creating and saving a script makes code much easier to execute. To make your code more readable, use intuitive variable names and include comments (using the “#” symbol) to remind yourself why you wrote a particular line of code." />
+<link rel="canonical" href="/data-science/2021/09/23/data-science-R-basic.html" />
+<meta property="og:url" content="/data-science/2021/09/23/data-science-R-basic.html" />
+<meta property="og:site_name" content="StepByStep" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-09-23T00:00:00+07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Data Science: R Language Basic" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","url":"/data-science/2021/09/23/data-science-R-basic.html","author":{"@type":"Person","name":"Duc Nguyen"},"headline":"Data Science: R Language Basic","dateModified":"2021-09-23T00:00:00+07:00","datePublished":"2021-09-23T00:00:00+07:00","description":"In this post, you will learn about basic concepts in R language. You can learn full course in this link SETUP ENVIRONMENT INSTALL R INSTALL R STUDIO USING R IN R STUDIO R AND WHAT YOU SHOULD KNOW INSTALL LIBRARY RUN YOUR FIRST SCRIPT R OBJECTS (VARIABLES) R FUNCTIONS R VARIABLE NAMES R SCRIPTS R COMMENTS KEY POINTS IN R WITH FUNCTIONS AND DATA TYPES SETUP ENVIRONMENT INSTALL R You can download R installer following this link After the download has been successfully, you can install as default on window. INSTALL R STUDIO You can download R Studio following this link After the download has been successfully, you can install as default on window. USING R IN R STUDIO After open the R Studio, you can use Ctrl + Shift + n to create new R script file. You can go to Help –&gt; Cheat Sheets to view more information R AND WHAT YOU SHOULD KNOW R is not a programming language, It was not created by software engineers for software development. Instead, it was developed by statisticians and data analysts as an interactive environment for data analysis. R is free and open source, meaning that you can look at the code. It runs across all major platforms –Windows, Mac OS, Unix, Linux. INSTALL LIBRARY To install library you can use command #install dslabs library install.packages(&quot;dslabs&quot;) #install tidyverse library install.packages(&quot;tidyverse&quot;) #you can use this command to download 2 packages install.packages(c(&quot;tidyverse&quot;, &quot;dslabs&quot;)) In R Studio you can install packages by access tools -&gt; Install Packages -&gt; enter the library packages that you want to install. This way is very helpful when you don’t remember the name of the package. If you want to check what packages that you installed you can use this command #you will see a list of packages that you installed install.packages() To load the library into our R session for using, you can use command #using dslabs library library(dslabs) RUN YOUR FIRST SCRIPT Let’s add some scripts as below library(tidyverse) library(dslabs) data(murders) murders %&gt;% ggplot(aes(population, total, label = abb, color = region)) + geom_label() Then use Ctrl + shift + Enter to execute your file script If you want to run line by line in your file script you can use Ctrl + Enter Note: The code contains a pipe (i.e. %&gt;%) and the ggplot() function. Pipes are from the tidyverse package and are covered in a later section of the course, but ggplot() is not covered in R Basics. You do not need to be able to be able to use pipes or ggplot() at this point. R OBJECTS (VARIABLES) To create R variables, we use the syntax as below a &lt;- 1 b &lt;- 4 c &lt;- 1 print(a) ======== #we will see the result 1 4 1 The varialbes will be saved into the workspace, so to check how many variables that you created, you can use the command as below: ls() ======= #then you can see &quot;a&quot; &quot;b&quot; &quot;c&quot; If you are using R Studio you can see your variables in the tag Environment Now, with these variables you can use the formular to find x in the example below. Ex: x^2 + 4x + 1 = 0 (-b + sqrt(b^2 - 4*a*c))/(2*a) ======== # result x1 = -0.2679492 x2 = -3.732051 R FUNCTIONS R includes several predefined functions. We’ve already shown the install.packages, library, and ls functions. we have some functions in R like: exp() log() #we can use function in function log(exp(1)) If you want to know how to use a function, you can function help(&quot;&lt;functionName&gt;&quot;). For example: help(&quot;exp&quot;) help(&quot;log&quot;) You should note that, some function requires arguments or optional arguments. If you don’t know which arguments are optional or required you can use the function args(&lt;functionName&gt;) args(log) ============ #result function (x, base = exp(1)) NULL Functions are not the only pre-built objects in R. There are also data sets that are included for users to practice and test out functions. To view the list of data set you can use function data() data() ============= # you can see the result as below Data sets in package ‘datasets’: AirPassengers Monthly Airline Passenger Numbers 1949-1960 BJsales Sales Data with Leading Indicator BJsales.lead (BJsales) Sales Data with Leading Indicator BOD Biochemical Oxygen Demand CO2 Carbon Dioxide Uptake in Grass Plants ChickWeight Weight versus age of chicks on different diets DNase Elisa assay of DNase EuStockMarkets Daily Closing Prices of Major European Stock Indices, 1991-1998 Formaldehyde Determination of Formaldehyde HairEyeColor Hair and Eye Color of Statistics Students Harman23.cor Harman Example 2.3 Harman74.cor Harman Example 7.4 Indometh Pharmacokinetics of Indomethacin InsectSprays Effectiveness of Insect Sprays JohnsonJohnson Quarterly Earnings per Johnson &amp; Johnson Share LakeHuron Level of Lake Huron 1875-1972 LifeCycleSavings Intercountry Life-Cycle Savings Data Loblolly Growth of Loblolly pine trees Nile Flow of the River Nile Orange Growth of Orange Trees OrchardSprays Potency of Orchard Sprays PlantGrowth Results from an Experiment on Plant Growth Puromycin Reaction Velocity of an Enzymatic Reaction Seatbelts Road Casualties in Great Britain 1969-84 Theoph Pharmacokinetics of Theophylline Titanic Survival of passengers on the Titanic ToothGrowth The Effect of Vitamin C on Tooth Growth in Guinea Pigs UCBAdmissions Student Admissions at UC Berkeley UKDriverDeaths Road Casualties in Great Britain 1969-84 UKgas UK Quarterly Gas Consumption USAccDeaths Accidental Deaths in the US 1973-1978 USArrests Violent Crime Rates by US State USJudgeRatings Lawyers&#39; Ratings of State Judges in the US Superior Court USPersonalExpenditure Personal Expenditure Data UScitiesD Distances Between European Cities and Between US Cities VADeaths Death Rates in Virginia (1940) WWWusage Internet Usage per Minute WorldPhones The World&#39;s Telephones ability.cov Ability and Intelligence Tests airmiles Passenger Miles on Commercial US Airlines, 1937-1960 airquality New York Air Quality Measurements anscombe Anscombe&#39;s Quartet of &#39;Identical&#39; Simple Linear Regressions attenu The Joyner-Boore Attenuation Data attitude The Chatterjee-Price Attitude Data austres Quarterly Time Series of the Number of Australian Residents beaver1 (beavers) Body Temperature Series of Two Beavers beaver2 (beavers) Body Temperature Series of Two Beavers cars Speed and Stopping Distances of Cars chickwts Chicken Weights by Feed Type co2 Mauna Loa Atmospheric CO2 Concentration crimtab Student&#39;s 3000 Criminals Data discoveries Yearly Numbers of Important Discoveries esoph Smoking, Alcohol and (O)esophageal Cancer euro Conversion Rates of Euro Currencies euro.cross (euro) Conversion Rates of Euro Currencies eurodist Distances Between European Cities and Between US Cities faithful Old Faithful Geyser Data fdeaths (UKLungDeaths) Monthly Deaths from Lung Diseases in the UK freeny Freeny&#39;s Revenue Data freeny.x (freeny) Freeny&#39;s Revenue Data freeny.y (freeny) Freeny&#39;s Revenue Data infert Infertility after Spontaneous and Induced Abortion iris Edgar Anderson&#39;s Iris Data iris3 Edgar Anderson&#39;s Iris Data islands Areas of the World&#39;s Major Landmasses ldeaths (UKLungDeaths) Monthly Deaths from Lung Diseases in the UK lh Luteinizing Hormone in Blood Samples longley Longley&#39;s Economic Regression Data lynx Annual Canadian Lynx trappings 1821-1934 mdeaths (UKLungDeaths) Monthly Deaths from Lung Diseases in the UK morley Michelson Speed of Light Data mtcars Motor Trend Car Road Tests nhtemp Average Yearly Temperatures in New Haven nottem Average Monthly Temperatures at Nottingham, 1920-1939 npk Classical N, P, K Factorial Experiment occupationalStatus Occupational Status of Fathers and their Sons precip Annual Precipitation in US Cities presidents Quarterly Approval Ratings of US Presidents pressure Vapor Pressure of Mercury as a Function of Temperature quakes Locations of Earthquakes off Fiji randu Random Numbers from Congruential Generator RANDU rivers Lengths of Major North American Rivers rock Measurements on Petroleum Rock Samples sleep Student&#39;s Sleep Data stack.loss (stackloss) Brownlee&#39;s Stack Loss Plant Data stack.x (stackloss) Brownlee&#39;s Stack Loss Plant Data stackloss Brownlee&#39;s Stack Loss Plant Data state.abb (state) US State Facts and Figures state.area (state) US State Facts and Figures state.center (state) US State Facts and Figures state.division (state) US State Facts and Figures state.name (state) US State Facts and Figures state.region (state) US State Facts and Figures state.x77 (state) US State Facts and Figures sunspot.month Monthly Sunspot Data, from 1749 to &quot;Present&quot; sunspot.year Yearly Sunspot Data, 1700-1988 sunspots Monthly Sunspot Numbers, 1749-1983 swiss Swiss Fertility and Socioeconomic Indicators (1888) Data treering Yearly Treering Data, -6000-1979 trees Diameter, Height and Volume for Black Cherry Trees uspop Populations Recorded by the US Census volcano Topographic Information on Auckland&#39;s Maunga Whau Volcano warpbreaks The Number of Breaks in Yarn during Weaving women Average Heights and Weights for American Women Use ‘data(package = .packages(all.available = TRUE))’ to list the data sets in all *available* packages. Then if you want to view the details of data set, you can use the data set name CO2 ============= #then you can see this data set as Plant Type Treatment conc uptake 1 Qn1 Quebec nonchilled 95 16.0 2 Qn1 Quebec nonchilled 175 30.4 3 Qn1 Quebec nonchilled 250 34.8 4 Qn1 Quebec nonchilled 350 37.2 5 Qn1 Quebec nonchilled 500 35.3 6 Qn1 Quebec nonchilled 675 39.2 7 Qn1 Quebec nonchilled 1000 39.7 8 Qn2 Quebec nonchilled 95 13.6 9 Qn2 Quebec nonchilled 175 27.3 10 Qn2 Quebec nonchilled 250 37.1 11 Qn2 Quebec nonchilled 350 41.8 12 Qn2 Quebec nonchilled 500 40.6 13 Qn2 Quebec nonchilled 675 41.4 14 Qn2 Quebec nonchilled 1000 44.3 15 Qn3 Quebec nonchilled 95 16.2 16 Qn3 Quebec nonchilled 175 32.4 17 Qn3 Quebec nonchilled 250 40.3 18 Qn3 Quebec nonchilled 350 42.1 19 Qn3 Quebec nonchilled 500 42.9 20 Qn3 Quebec nonchilled 675 43.9 21 Qn3 Quebec nonchilled 1000 45.5 22 Qc1 Quebec chilled 95 14.2 23 Qc1 Quebec chilled 175 24.1 24 Qc1 Quebec chilled 250 30.3 25 Qc1 Quebec chilled 350 34.6 26 Qc1 Quebec chilled 500 32.5 27 Qc1 Quebec chilled 675 35.4 28 Qc1 Quebec chilled 1000 38.7 29 Qc2 Quebec chilled 95 9.3 30 Qc2 Quebec chilled 175 27.3 31 Qc2 Quebec chilled 250 35.0 32 Qc2 Quebec chilled 350 38.8 33 Qc2 Quebec chilled 500 38.6 34 Qc2 Quebec chilled 675 37.5 35 Qc2 Quebec chilled 1000 42.4 36 Qc3 Quebec chilled 95 15.1 37 Qc3 Quebec chilled 175 21.0 38 Qc3 Quebec chilled 250 38.1 39 Qc3 Quebec chilled 350 34.0 40 Qc3 Quebec chilled 500 38.9 41 Qc3 Quebec chilled 675 39.6 42 Qc3 Quebec chilled 1000 41.4 43 Mn1 Mississippi nonchilled 95 10.6 44 Mn1 Mississippi nonchilled 175 19.2 45 Mn1 Mississippi nonchilled 250 26.2 46 Mn1 Mississippi nonchilled 350 30.0 47 Mn1 Mississippi nonchilled 500 30.9 48 Mn1 Mississippi nonchilled 675 32.4 49 Mn1 Mississippi nonchilled 1000 35.5 50 Mn2 Mississippi nonchilled 95 12.0 51 Mn2 Mississippi nonchilled 175 22.0 52 Mn2 Mississippi nonchilled 250 30.6 53 Mn2 Mississippi nonchilled 350 31.8 54 Mn2 Mississippi nonchilled 500 32.4 55 Mn2 Mississippi nonchilled 675 31.1 56 Mn2 Mississippi nonchilled 1000 31.5 57 Mn3 Mississippi nonchilled 95 11.3 58 Mn3 Mississippi nonchilled 175 19.4 59 Mn3 Mississippi nonchilled 250 25.8 60 Mn3 Mississippi nonchilled 350 27.9 61 Mn3 Mississippi nonchilled 500 28.5 62 Mn3 Mississippi nonchilled 675 28.1 63 Mn3 Mississippi nonchilled 1000 27.8 64 Mc1 Mississippi chilled 95 10.5 65 Mc1 Mississippi chilled 175 14.9 66 Mc1 Mississippi chilled 250 18.1 67 Mc1 Mississippi chilled 350 18.9 68 Mc1 Mississippi chilled 500 19.5 69 Mc1 Mississippi chilled 675 22.2 70 Mc1 Mississippi chilled 1000 21.9 71 Mc2 Mississippi chilled 95 7.7 72 Mc2 Mississippi chilled 175 11.4 73 Mc2 Mississippi chilled 250 12.3 74 Mc2 Mississippi chilled 350 13.0 75 Mc2 Mississippi chilled 500 12.5 76 Mc2 Mississippi chilled 675 13.7 77 Mc2 Mississippi chilled 1000 14.4 78 Mc3 Mississippi chilled 95 10.6 79 Mc3 Mississippi chilled 175 18.0 80 Mc3 Mississippi chilled 250 17.9 81 Mc3 Mississippi chilled 350 17.9 82 Mc3 Mississippi chilled 500 17.9 83 Mc3 Mississippi chilled 675 18.9 84 Mc3 Mississippi chilled 1000 19.9 R VARIABLE NAMES You want to choose variable names that make your code readable. You want to choose variable names that will later be clear to you what you meant to do in your code. Now there are some rules in R. Some basic rules are that they have to start with a letter, and they can&#39;t contain spaces. If you have a long name you can replace space with _ R SCRIPTS When you write formulars by scripts, let’s save it and you can reuse it everytime with input variables that you defined in your scripts. R COMMENTS If you want to use comments in your scripts, you can use # or ## in the head of lines. #this is the sample comments KEY POINTS IN R WITH FUNCTIONS AND DATA TYPES In general, to evaluate a function we need to use parentheses. If we type a function without parenthesis, R shows us the code for the function. Most functions also require an argument, that is, something to be written inside the parenthesis. To access help files, we may use the help function, help(function_name), or write the question mark followed by the function name, ?function_name. The help file shows you the arguments the function is expecting, some of which are required and some are optional. If an argument is optional, a default value is assigned with the equal sign. The args() function also shows the arguments a function needs. To specify arguments, we use the equals sign. If no argument name is used, R assumes you’re entering arguments in the order shown in the help file. Creating and saving a script makes code much easier to execute. To make your code more readable, use intuitive variable names and include comments (using the “#” symbol) to remind yourself why you wrote a particular line of code.","mainEntityOfPage":{"@type":"WebPage","@id":"/data-science/2021/09/23/data-science-R-basic.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="StepByStep" /><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NZ8G5007GK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-NZ8G5007GK');
+</script></head><body>
+  <div class="container-flush">
+    <div class="row"><!-- navigation bar -->
+<div class="col-lg-12">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" role="banner"><a class="navbar-brand site-title" rel="author" href="/">StepByStep</a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="nav navbar-nav"><li class="nav-item active">
+          <a class="nav-link" href="/about">About</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/">Java</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/docker">Docker</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/database">Database</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/data-science">Data-Science</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/ci-cd">CI-CD</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/python">Python</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/fe">FE</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/others">Others</a>
+        </li></ul>
+    </div>
+
+    <!-- Html Elements for Search -->
+    <div id="search-container" class="btn-group">
+      <input type="text" id="search-input" placeholder="search...">
+      <button id="clear">clear</button>
+      <ul id="results-container"></ul>
+    </div>
+
+    <!-- Script pointing to search-script.js -->
+    <script src="/java-scripts/search-script.js" type="text/javascript"></script>
+
+    <!-- Configuration -->
+    <script>
+      SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('results-container'),
+        json: '/search.json'
+      })
+    </script>
+
+    <!-- search clear -->
+    <script>
+      window.addEventListener('load', () => {
+        const button = document.querySelector('#clear');
+        button.addEventListener('click', () => {
+          document.querySelector('#search-input').value = "";
+          document.querySelector('#results-container').innerHTML = "";
+        });
+      });
+    </script>
+  </nav>
+</div></div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+  <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+    <header class="post-header">
+      <h1 class="post-title p-name" itemprop="name headline">Data Science: R Language Basic</h1>
+      <p class="post-meta">
+        <time class="dt-published" datetime="2021-09-23T00:00:00+07:00" itemprop="datePublished">Sep 23, 2021
+        </time></p>
+    </header>
+  
+    <div class="post-content e-content" itemprop="articleBody">
+      <blockquote>
+  <p>In this post, you will learn about basic concepts in R language. You can learn full course in <a href="https://learning.edx.org/course/course-v1:HarvardX+PH125.1x+2T2021/home">this link</a></p>
+</blockquote>
+
+<ul id="markdown-toc">
+  <li><a href="#setup-environment" id="markdown-toc-setup-environment">SETUP ENVIRONMENT</a>    <ul>
+      <li><a href="#install-r" id="markdown-toc-install-r">INSTALL R</a></li>
+      <li><a href="#install-r-studio" id="markdown-toc-install-r-studio">INSTALL R STUDIO</a></li>
+      <li><a href="#using-r-in-r-studio" id="markdown-toc-using-r-in-r-studio">USING R IN R STUDIO</a></li>
+    </ul>
+  </li>
+  <li><a href="#r-and-what-you-should-know" id="markdown-toc-r-and-what-you-should-know">R AND WHAT YOU SHOULD KNOW</a>    <ul>
+      <li><a href="#install-library" id="markdown-toc-install-library">INSTALL LIBRARY</a></li>
+      <li><a href="#run-your-first-script" id="markdown-toc-run-your-first-script">RUN YOUR FIRST SCRIPT</a></li>
+      <li><a href="#r-objects-variables" id="markdown-toc-r-objects-variables">R OBJECTS (VARIABLES)</a></li>
+      <li><a href="#r-functions" id="markdown-toc-r-functions">R FUNCTIONS</a></li>
+      <li><a href="#r-variable-names" id="markdown-toc-r-variable-names">R VARIABLE NAMES</a></li>
+      <li><a href="#r-scripts" id="markdown-toc-r-scripts">R SCRIPTS</a></li>
+      <li><a href="#r-comments" id="markdown-toc-r-comments">R COMMENTS</a></li>
+      <li><a href="#key-points-in-r-with-functions-and-data-types" id="markdown-toc-key-points-in-r-with-functions-and-data-types">KEY POINTS IN R WITH FUNCTIONS AND DATA TYPES</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="setup-environment">SETUP ENVIRONMENT</h2>
+
+<h3 id="install-r">INSTALL R</h3>
+
+<ul>
+  <li>You can download <code class="language-plaintext highlighter-rouge">R installer</code> following <a href="https://cran.r-project.org/bin/windows/">this link</a></li>
+  <li>After the download has been successfully, you can install as default on window.</li>
+</ul>
+
+<h3 id="install-r-studio">INSTALL R STUDIO</h3>
+
+<ul>
+  <li>You can download <code class="language-plaintext highlighter-rouge">R Studio</code> following <a href="https://www.rstudio.com/products/rstudio/download/#download">this link</a></li>
+  <li>After the download has been successfully, you can install as default on window.</li>
+</ul>
+
+<h3 id="using-r-in-r-studio">USING R IN R STUDIO</h3>
+
+<ul>
+  <li>After open the <code class="language-plaintext highlighter-rouge">R Studio</code>, you can use <code class="language-plaintext highlighter-rouge">Ctrl + Shift + n</code> to create new R script file.</li>
+  <li>You can go to  <strong>Help</strong> –&gt; <strong>Cheat Sheets</strong> to view more information</li>
+</ul>
+
+<h2 id="r-and-what-you-should-know">R AND WHAT YOU SHOULD KNOW</h2>
+
+<ul>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">R</code> is not a programming language, It was <code class="language-plaintext highlighter-rouge">not created by software engineers for software development</code>. Instead, it was developed by <code class="language-plaintext highlighter-rouge">statisticians and data analysts</code> as an interactive environment for <code class="language-plaintext highlighter-rouge">data analysis</code>.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">R</code> is <code class="language-plaintext highlighter-rouge">free and open source</code>, meaning that you can look at the code. It runs across all major platforms –Windows, Mac OS, Unix, Linux.</p>
+  </li>
+</ul>
+
+<h3 id="install-library">INSTALL LIBRARY</h3>
+
+<ul>
+  <li>To install library you can use command</li>
+</ul>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#install dslabs library</span><span class="w">
+</span><span class="n">install.packages</span><span class="p">(</span><span class="s2">"dslabs"</span><span class="p">)</span><span class="w">
+
+</span><span class="c1">#install tidyverse library</span><span class="w">
+</span><span class="n">install.packages</span><span class="p">(</span><span class="s2">"tidyverse"</span><span class="p">)</span><span class="w">
+
+</span><span class="c1">#you can use this command to download 2 packages</span><span class="w">
+</span><span class="n">install.packages</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="s2">"tidyverse"</span><span class="p">,</span><span class="w"> </span><span class="s2">"dslabs"</span><span class="p">))</span><span class="w">
+
+</span></code></pre></div></div>
+
+<ul>
+  <li>
+    <p>In <code class="language-plaintext highlighter-rouge">R Studio</code> you can install packages by access <code class="language-plaintext highlighter-rouge">tools</code> -&gt; <code class="language-plaintext highlighter-rouge">Install Packages</code> -&gt; enter the library packages that you want to install. This way is very helpful when you don’t remember the name of the package.</p>
+  </li>
+  <li>
+    <p>If you want to check what packages that you installed you can use this command</p>
+  </li>
+</ul>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#you will see a list of packages that you installed</span><span class="w">
+</span><span class="n">install.packages</span><span class="p">()</span><span class="w">
+
+</span></code></pre></div></div>
+
+<ul>
+  <li>To load the library into our R session for using, you can use command</li>
+</ul>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="c1">#using dslabs library</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">dslabs</span><span class="p">)</span><span class="w">
+
+</span></code></pre></div></div>
+
+<h3 id="run-your-first-script">RUN YOUR FIRST SCRIPT</h3>
+
+<ul>
+  <li>Let’s add some scripts as below</li>
+</ul>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">tidyverse</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">dslabs</span><span class="p">)</span><span class="w">
+</span><span class="n">data</span><span class="p">(</span><span class="n">murders</span><span class="p">)</span><span class="w">
+
+</span><span class="n">murders</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">ggplot</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">population</span><span class="p">,</span><span class="w"> </span><span class="n">total</span><span class="p">,</span><span class="w"> </span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">abb</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">region</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_label</span><span class="p">()</span><span class="w">
+
+</span></code></pre></div></div>
+
+<ul>
+  <li>Then use <code class="language-plaintext highlighter-rouge">Ctrl + shift + Enter</code> to execute your file script</li>
+  <li>If you want to run line by line in your file script you can use <code class="language-plaintext highlighter-rouge">Ctrl + Enter</code></li>
+  <li>Note: The code contains a pipe (i.e. %&gt;%) and the ggplot() function. Pipes are from the tidyverse package and are covered in a later section of the course, but ggplot() is not covered in R Basics. You do not need to be able to be able to use pipes or ggplot() at this point.</li>
+</ul>
+
+<h3 id="r-objects-variables">R OBJECTS (VARIABLES)</h3>
+
+<ul>
+  <li>To create <code class="language-plaintext highlighter-rouge">R variables</code>, we use the syntax as below</li>
+</ul>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="n">a</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1</span><span class="w">
+</span><span class="n">b</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">4</span><span class="w">
+</span><span class="n">c</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1</span><span class="w">
+</span><span class="n">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w">
+
+</span><span class="o">========</span><span class="w">
+</span><span class="c1">#we will see the result</span><span class="w">
+</span><span class="m">1</span><span class="w">
+</span><span class="m">4</span><span class="w">
+</span><span class="m">1</span><span class="w">
+
+</span></code></pre></div></div>
+
+<ul>
+  <li>The <code class="language-plaintext highlighter-rouge">varialbes</code> will be saved into the workspace, so to check how many variables that you created, you can use the command as below:</li>
+</ul>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="n">ls</span><span class="p">()</span><span class="w">
+
+</span><span class="o">=======</span><span class="w">
+</span><span class="c1">#then you can see</span><span class="w">
+</span><span class="s2">"a"</span><span class="w"> </span><span class="s2">"b"</span><span class="w"> </span><span class="s2">"c"</span><span class="w">
+
+</span></code></pre></div></div>
+
+<ul>
+  <li>If you are using <code class="language-plaintext highlighter-rouge">R Studio</code> you can see your variables in the tag <code class="language-plaintext highlighter-rouge">Environment</code></li>
+  <li>Now, with these variables you can use the formular to find <code class="language-plaintext highlighter-rouge">x</code> in the example below.</li>
+  <li>Ex: <code class="language-plaintext highlighter-rouge">x^2 + 4x + 1 = 0</code></li>
+</ul>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="p">(</span><span class="o">-</span><span class="n">b</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">sqrt</span><span class="p">(</span><span class="n">b</span><span class="o">^</span><span class="m">2</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">4</span><span class="o">*</span><span class="n">a</span><span class="o">*</span><span class="n">c</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="m">2</span><span class="o">*</span><span class="n">a</span><span class="p">)</span><span class="w">
+
+</span><span class="o">========</span><span class="w">
+</span><span class="c1"># result</span><span class="w">
+</span><span class="n">x1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">-0.2679492</span><span class="w">
+</span><span class="n">x2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">-3.732051</span><span class="w">
+
+</span></code></pre></div></div>
+
+<h3 id="r-functions">R FUNCTIONS</h3>
+
+<ul>
+  <li>R includes several predefined functions.</li>
+  <li>We’ve already shown the <code class="language-plaintext highlighter-rouge">install.packages</code>, <code class="language-plaintext highlighter-rouge">library</code>, and <code class="language-plaintext highlighter-rouge">ls</code> functions.</li>
+  <li>we have some functions in R like:</li>
+</ul>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="nf">exp</span><span class="p">()</span><span class="w">
+</span><span class="nf">log</span><span class="p">()</span><span class="w">
+
+</span><span class="c1">#we can use function in function</span><span class="w">
+</span><span class="nf">log</span><span class="p">(</span><span class="nf">exp</span><span class="p">(</span><span class="m">1</span><span class="p">))</span><span class="w">
+
+</span></code></pre></div></div>
+
+<ul>
+  <li>If you want to know how to use a function, you can function <code class="language-plaintext highlighter-rouge">help("&lt;functionName&gt;")</code>. For example:</li>
+</ul>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="n">help</span><span class="p">(</span><span class="s2">"exp"</span><span class="p">)</span><span class="w">
+</span><span class="n">help</span><span class="p">(</span><span class="s2">"log"</span><span class="p">)</span><span class="w">
+
+</span></code></pre></div></div>
+
+<ul>
+  <li>You should note that, some function requires arguments or optional arguments. If you don’t know which arguments are optional or required you can use the function <code class="language-plaintext highlighter-rouge">args(&lt;functionName&gt;)</code></li>
+</ul>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="n">args</span><span class="p">(</span><span class="n">log</span><span class="p">)</span><span class="w">
+
+</span><span class="o">============</span><span class="w">
+</span><span class="c1">#result</span><span class="w">
+</span><span class="k">function</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">base</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">exp</span><span class="p">(</span><span class="m">1</span><span class="p">))</span><span class="w">
+</span><span class="kc">NULL</span><span class="w">
+
+</span></code></pre></div></div>
+
+<ul>
+  <li>Functions are not the only pre-built objects in R.</li>
+  <li>There are also data sets that are included for users to practice
+and test out functions.</li>
+  <li>To view the list of data set you can use function <code class="language-plaintext highlighter-rouge">data()</code></li>
+</ul>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="n">data</span><span class="p">()</span><span class="w">
+
+</span><span class="o">=============</span><span class="w">
+</span><span class="c1"># you can see the result as below</span><span class="w">
+
+</span><span class="n">Data</span><span class="w"> </span><span class="n">sets</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">package</span><span class="w"> </span><span class="err">‘</span><span class="n">datasets</span><span class="err">’</span><span class="o">:</span><span class="w">
+
+</span><span class="n">AirPassengers</span><span class="w">   </span><span class="n">Monthly</span><span class="w"> </span><span class="n">Airline</span><span class="w"> </span><span class="n">Passenger</span><span class="w">
+                </span><span class="n">Numbers</span><span class="w"> </span><span class="m">1949-1960</span><span class="w">
+</span><span class="n">BJsales</span><span class="w">         </span><span class="n">Sales</span><span class="w"> </span><span class="n">Data</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">Leading</span><span class="w">
+                </span><span class="n">Indicator</span><span class="w">
+</span><span class="n">BJsales.lead</span><span class="w"> </span><span class="p">(</span><span class="n">BJsales</span><span class="p">)</span><span class="w">
+                </span><span class="n">Sales</span><span class="w"> </span><span class="n">Data</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">Leading</span><span class="w">
+                </span><span class="n">Indicator</span><span class="w">
+</span><span class="n">BOD</span><span class="w">             </span><span class="n">Biochemical</span><span class="w"> </span><span class="n">Oxygen</span><span class="w"> </span><span class="n">Demand</span><span class="w">
+</span><span class="n">CO2</span><span class="w">             </span><span class="n">Carbon</span><span class="w"> </span><span class="n">Dioxide</span><span class="w"> </span><span class="n">Uptake</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">Grass</span><span class="w">
+                </span><span class="n">Plants</span><span class="w">
+</span><span class="n">ChickWeight</span><span class="w">     </span><span class="n">Weight</span><span class="w"> </span><span class="n">versus</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">chicks</span><span class="w"> </span><span class="n">on</span><span class="w">
+                </span><span class="n">different</span><span class="w"> </span><span class="n">diets</span><span class="w">
+</span><span class="n">DNase</span><span class="w">           </span><span class="n">Elisa</span><span class="w"> </span><span class="n">assay</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">DNase</span><span class="w">
+</span><span class="n">EuStockMarkets</span><span class="w">
+                </span><span class="n">Daily</span><span class="w"> </span><span class="n">Closing</span><span class="w"> </span><span class="n">Prices</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">Major</span><span class="w">
+                </span><span class="n">European</span><span class="w"> </span><span class="n">Stock</span><span class="w"> </span><span class="n">Indices</span><span class="p">,</span><span class="w">
+                </span><span class="m">1991-1998</span><span class="w">
+</span><span class="n">Formaldehyde</span><span class="w">    </span><span class="n">Determination</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">Formaldehyde</span><span class="w">
+</span><span class="n">HairEyeColor</span><span class="w">    </span><span class="n">Hair</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="n">Eye</span><span class="w"> </span><span class="n">Color</span><span class="w"> </span><span class="n">of</span><span class="w">
+                </span><span class="n">Statistics</span><span class="w"> </span><span class="n">Students</span><span class="w">
+</span><span class="n">Harman23.cor</span><span class="w">    </span><span class="n">Harman</span><span class="w"> </span><span class="n">Example</span><span class="w"> </span><span class="m">2.3</span><span class="w">
+</span><span class="n">Harman74.cor</span><span class="w">    </span><span class="n">Harman</span><span class="w"> </span><span class="n">Example</span><span class="w"> </span><span class="m">7.4</span><span class="w">
+</span><span class="n">Indometh</span><span class="w">        </span><span class="n">Pharmacokinetics</span><span class="w"> </span><span class="n">of</span><span class="w">
+                </span><span class="n">Indomethacin</span><span class="w">
+</span><span class="n">InsectSprays</span><span class="w">    </span><span class="n">Effectiveness</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">Insect</span><span class="w"> </span><span class="n">Sprays</span><span class="w">
+</span><span class="n">JohnsonJohnson</span><span class="w">
+                </span><span class="n">Quarterly</span><span class="w"> </span><span class="n">Earnings</span><span class="w"> </span><span class="n">per</span><span class="w"> </span><span class="n">Johnson</span><span class="w">
+                </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Johnson</span><span class="w"> </span><span class="n">Share</span><span class="w">
+</span><span class="n">LakeHuron</span><span class="w">       </span><span class="n">Level</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">Lake</span><span class="w"> </span><span class="n">Huron</span><span class="w"> </span><span class="m">1875-1972</span><span class="w">
+</span><span class="n">LifeCycleSavings</span><span class="w">
+                </span><span class="n">Intercountry</span><span class="w"> </span><span class="n">Life</span><span class="o">-</span><span class="n">Cycle</span><span class="w"> </span><span class="n">Savings</span><span class="w">
+                </span><span class="n">Data</span><span class="w">
+</span><span class="n">Loblolly</span><span class="w">        </span><span class="n">Growth</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">Loblolly</span><span class="w"> </span><span class="n">pine</span><span class="w"> </span><span class="n">trees</span><span class="w">
+</span><span class="n">Nile</span><span class="w">            </span><span class="n">Flow</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">River</span><span class="w"> </span><span class="n">Nile</span><span class="w">
+</span><span class="n">Orange</span><span class="w">          </span><span class="n">Growth</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">Orange</span><span class="w"> </span><span class="n">Trees</span><span class="w">
+</span><span class="n">OrchardSprays</span><span class="w">   </span><span class="n">Potency</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">Orchard</span><span class="w"> </span><span class="n">Sprays</span><span class="w">
+</span><span class="n">PlantGrowth</span><span class="w">     </span><span class="n">Results</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="n">an</span><span class="w"> </span><span class="n">Experiment</span><span class="w"> </span><span class="n">on</span><span class="w">
+                </span><span class="n">Plant</span><span class="w"> </span><span class="n">Growth</span><span class="w">
+</span><span class="n">Puromycin</span><span class="w">       </span><span class="n">Reaction</span><span class="w"> </span><span class="n">Velocity</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">an</span><span class="w">
+                </span><span class="n">Enzymatic</span><span class="w"> </span><span class="n">Reaction</span><span class="w">
+</span><span class="n">Seatbelts</span><span class="w">       </span><span class="n">Road</span><span class="w"> </span><span class="n">Casualties</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">Great</span><span class="w">
+                </span><span class="n">Britain</span><span class="w"> </span><span class="m">1969-84</span><span class="w">
+</span><span class="n">Theoph</span><span class="w">          </span><span class="n">Pharmacokinetics</span><span class="w"> </span><span class="n">of</span><span class="w">
+                </span><span class="n">Theophylline</span><span class="w">
+</span><span class="n">Titanic</span><span class="w">         </span><span class="n">Survival</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">passengers</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="n">the</span><span class="w">
+                </span><span class="n">Titanic</span><span class="w">
+</span><span class="n">ToothGrowth</span><span class="w">     </span><span class="n">The</span><span class="w"> </span><span class="n">Effect</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">Vitamin</span><span class="w"> </span><span class="n">C</span><span class="w"> </span><span class="n">on</span><span class="w">
+                </span><span class="n">Tooth</span><span class="w"> </span><span class="n">Growth</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">Guinea</span><span class="w"> </span><span class="n">Pigs</span><span class="w">
+</span><span class="n">UCBAdmissions</span><span class="w">   </span><span class="n">Student</span><span class="w"> </span><span class="n">Admissions</span><span class="w"> </span><span class="n">at</span><span class="w"> </span><span class="n">UC</span><span class="w">
+                </span><span class="n">Berkeley</span><span class="w">
+</span><span class="n">UKDriverDeaths</span><span class="w">
+                </span><span class="n">Road</span><span class="w"> </span><span class="n">Casualties</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">Great</span><span class="w">
+                </span><span class="n">Britain</span><span class="w"> </span><span class="m">1969-84</span><span class="w">
+</span><span class="n">UKgas</span><span class="w">           </span><span class="n">UK</span><span class="w"> </span><span class="n">Quarterly</span><span class="w"> </span><span class="n">Gas</span><span class="w"> </span><span class="n">Consumption</span><span class="w">
+</span><span class="n">USAccDeaths</span><span class="w">     </span><span class="n">Accidental</span><span class="w"> </span><span class="n">Deaths</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">US</span><span class="w">
+                </span><span class="m">1973-1978</span><span class="w">
+</span><span class="n">USArrests</span><span class="w">       </span><span class="n">Violent</span><span class="w"> </span><span class="n">Crime</span><span class="w"> </span><span class="n">Rates</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="n">US</span><span class="w"> </span><span class="n">State</span><span class="w">
+</span><span class="n">USJudgeRatings</span><span class="w">
+                </span><span class="n">Lawyers</span><span class="s1">' Ratings of State
+                Judges in the US Superior Court
+USPersonalExpenditure
+                Personal Expenditure Data
+UScitiesD       Distances Between European
+                Cities and Between US Cities
+VADeaths        Death Rates in Virginia (1940)
+WWWusage        Internet Usage per Minute
+WorldPhones     The World'</span><span class="n">s</span><span class="w"> </span><span class="n">Telephones</span><span class="w">
+</span><span class="n">ability.cov</span><span class="w">     </span><span class="n">Ability</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="n">Intelligence</span><span class="w"> </span><span class="n">Tests</span><span class="w">
+</span><span class="n">airmiles</span><span class="w">        </span><span class="n">Passenger</span><span class="w"> </span><span class="n">Miles</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="n">Commercial</span><span class="w">
+                </span><span class="n">US</span><span class="w"> </span><span class="n">Airlines</span><span class="p">,</span><span class="w"> </span><span class="m">1937-1960</span><span class="w">
+</span><span class="n">airquality</span><span class="w">      </span><span class="n">New</span><span class="w"> </span><span class="n">York</span><span class="w"> </span><span class="n">Air</span><span class="w"> </span><span class="n">Quality</span><span class="w">
+                </span><span class="n">Measurements</span><span class="w">
+</span><span class="n">anscombe</span><span class="w">        </span><span class="n">Anscombe</span><span class="s1">'s Quartet of
+                '</span><span class="n">Identical</span><span class="s1">' Simple Linear
+                Regressions
+attenu          The Joyner-Boore Attenuation
+                Data
+attitude        The Chatterjee-Price Attitude
+                Data
+austres         Quarterly Time Series of the
+                Number of Australian Residents
+beaver1 (beavers)
+                Body Temperature Series of Two
+                Beavers
+beaver2 (beavers)
+                Body Temperature Series of Two
+                Beavers
+cars            Speed and Stopping Distances of
+                Cars
+chickwts        Chicken Weights by Feed Type
+co2             Mauna Loa Atmospheric CO2
+                Concentration
+crimtab         Student'</span><span class="n">s</span><span class="w"> </span><span class="m">3000</span><span class="w"> </span><span class="n">Criminals</span><span class="w"> </span><span class="n">Data</span><span class="w">
+</span><span class="n">discoveries</span><span class="w">     </span><span class="n">Yearly</span><span class="w"> </span><span class="n">Numbers</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">Important</span><span class="w">
+                </span><span class="n">Discoveries</span><span class="w">
+</span><span class="n">esoph</span><span class="w">           </span><span class="n">Smoking</span><span class="p">,</span><span class="w"> </span><span class="n">Alcohol</span><span class="w"> </span><span class="n">and</span><span class="w">
+                </span><span class="p">(</span><span class="n">O</span><span class="p">)</span><span class="n">esophageal</span><span class="w"> </span><span class="n">Cancer</span><span class="w">
+</span><span class="n">euro</span><span class="w">            </span><span class="n">Conversion</span><span class="w"> </span><span class="n">Rates</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">Euro</span><span class="w">
+                </span><span class="n">Currencies</span><span class="w">
+</span><span class="n">euro.cross</span><span class="w"> </span><span class="p">(</span><span class="n">euro</span><span class="p">)</span><span class="w">
+                </span><span class="n">Conversion</span><span class="w"> </span><span class="n">Rates</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">Euro</span><span class="w">
+                </span><span class="n">Currencies</span><span class="w">
+</span><span class="n">eurodist</span><span class="w">        </span><span class="n">Distances</span><span class="w"> </span><span class="n">Between</span><span class="w"> </span><span class="n">European</span><span class="w">
+                </span><span class="n">Cities</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="n">Between</span><span class="w"> </span><span class="n">US</span><span class="w"> </span><span class="n">Cities</span><span class="w">
+</span><span class="n">faithful</span><span class="w">        </span><span class="n">Old</span><span class="w"> </span><span class="n">Faithful</span><span class="w"> </span><span class="n">Geyser</span><span class="w"> </span><span class="n">Data</span><span class="w">
+</span><span class="n">fdeaths</span><span class="w"> </span><span class="p">(</span><span class="n">UKLungDeaths</span><span class="p">)</span><span class="w">
+                </span><span class="n">Monthly</span><span class="w"> </span><span class="n">Deaths</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="n">Lung</span><span class="w">
+                </span><span class="n">Diseases</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">UK</span><span class="w">
+</span><span class="n">freeny</span><span class="w">          </span><span class="n">Freeny</span><span class="s1">'s Revenue Data
+freeny.x (freeny)
+                Freeny'</span><span class="n">s</span><span class="w"> </span><span class="n">Revenue</span><span class="w"> </span><span class="n">Data</span><span class="w">
+</span><span class="n">freeny.y</span><span class="w"> </span><span class="p">(</span><span class="n">freeny</span><span class="p">)</span><span class="w">
+                </span><span class="n">Freeny</span><span class="s1">'s Revenue Data
+infert          Infertility after Spontaneous
+                and Induced Abortion
+iris            Edgar Anderson'</span><span class="n">s</span><span class="w"> </span><span class="n">Iris</span><span class="w"> </span><span class="n">Data</span><span class="w">
+</span><span class="n">iris3</span><span class="w">           </span><span class="n">Edgar</span><span class="w"> </span><span class="n">Anderson</span><span class="s1">'s Iris Data
+islands         Areas of the World'</span><span class="n">s</span><span class="w"> </span><span class="n">Major</span><span class="w">
+                </span><span class="n">Landmasses</span><span class="w">
+</span><span class="n">ldeaths</span><span class="w"> </span><span class="p">(</span><span class="n">UKLungDeaths</span><span class="p">)</span><span class="w">
+                </span><span class="n">Monthly</span><span class="w"> </span><span class="n">Deaths</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="n">Lung</span><span class="w">
+                </span><span class="n">Diseases</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">UK</span><span class="w">
+</span><span class="n">lh</span><span class="w">              </span><span class="n">Luteinizing</span><span class="w"> </span><span class="n">Hormone</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">Blood</span><span class="w">
+                </span><span class="n">Samples</span><span class="w">
+</span><span class="n">longley</span><span class="w">         </span><span class="n">Longley</span><span class="s1">'s Economic Regression
+                Data
+lynx            Annual Canadian Lynx trappings
+                1821-1934
+mdeaths (UKLungDeaths)
+                Monthly Deaths from Lung
+                Diseases in the UK
+morley          Michelson Speed of Light Data
+mtcars          Motor Trend Car Road Tests
+nhtemp          Average Yearly Temperatures in
+                New Haven
+nottem          Average Monthly Temperatures at
+                Nottingham, 1920-1939
+npk             Classical N, P, K Factorial
+                Experiment
+occupationalStatus
+                Occupational Status of Fathers
+                and their Sons
+precip          Annual Precipitation in US
+                Cities
+presidents      Quarterly Approval Ratings of
+                US Presidents
+pressure        Vapor Pressure of Mercury as a
+                Function of Temperature
+quakes          Locations of Earthquakes off
+                Fiji
+randu           Random Numbers from
+                Congruential Generator RANDU
+rivers          Lengths of Major North American
+                Rivers
+rock            Measurements on Petroleum Rock
+                Samples
+sleep           Student'</span><span class="n">s</span><span class="w"> </span><span class="n">Sleep</span><span class="w"> </span><span class="n">Data</span><span class="w">
+</span><span class="n">stack.loss</span><span class="w"> </span><span class="p">(</span><span class="n">stackloss</span><span class="p">)</span><span class="w">
+                </span><span class="n">Brownlee</span><span class="s1">'s Stack Loss Plant
+                Data
+stack.x (stackloss)
+                Brownlee'</span><span class="n">s</span><span class="w"> </span><span class="n">Stack</span><span class="w"> </span><span class="n">Loss</span><span class="w"> </span><span class="n">Plant</span><span class="w">
+                </span><span class="n">Data</span><span class="w">
+</span><span class="n">stackloss</span><span class="w">       </span><span class="n">Brownlee</span><span class="s1">'s Stack Loss Plant
+                Data
+state.abb (state)
+                US State Facts and Figures
+state.area (state)
+                US State Facts and Figures
+state.center (state)
+                US State Facts and Figures
+state.division (state)
+                US State Facts and Figures
+state.name (state)
+                US State Facts and Figures
+state.region (state)
+                US State Facts and Figures
+state.x77 (state)
+                US State Facts and Figures
+sunspot.month   Monthly Sunspot Data, from 1749
+                to "Present"
+sunspot.year    Yearly Sunspot Data, 1700-1988
+sunspots        Monthly Sunspot Numbers,
+                1749-1983
+swiss           Swiss Fertility and
+                Socioeconomic Indicators (1888)
+                Data
+treering        Yearly Treering Data,
+                -6000-1979
+trees           Diameter, Height and Volume for
+                Black Cherry Trees
+uspop           Populations Recorded by the US
+                Census
+volcano         Topographic Information on
+                Auckland'</span><span class="n">s</span><span class="w"> </span><span class="n">Maunga</span><span class="w"> </span><span class="n">Whau</span><span class="w"> </span><span class="n">Volcano</span><span class="w">
+</span><span class="n">warpbreaks</span><span class="w">      </span><span class="n">The</span><span class="w"> </span><span class="n">Number</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">Breaks</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">Yarn</span><span class="w">
+                </span><span class="n">during</span><span class="w"> </span><span class="n">Weaving</span><span class="w">
+</span><span class="n">women</span><span class="w">           </span><span class="n">Average</span><span class="w"> </span><span class="n">Heights</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="n">Weights</span><span class="w"> </span><span class="k">for</span><span class="w">
+                </span><span class="n">American</span><span class="w"> </span><span class="n">Women</span><span class="w">
+
+
+</span><span class="n">Use</span><span class="w"> </span><span class="err">‘</span><span class="n">data</span><span class="p">(</span><span class="n">package</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">.packages</span><span class="p">(</span><span class="n">all.available</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">))</span><span class="err">’</span><span class="w">
+</span><span class="n">to</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="n">sets</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">all</span><span class="w"> </span><span class="o">*</span><span class="n">available</span><span class="o">*</span><span class="w"> </span><span class="n">packages.</span><span class="w">
+
+
+</span></code></pre></div></div>
+
+<ul>
+  <li>Then if you want to view the details of data set, you can use the <code class="language-plaintext highlighter-rouge">data set name</code></li>
+</ul>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="n">CO2</span><span class="w">
+
+</span><span class="o">=============</span><span class="w">
+</span><span class="c1">#then you can see this data set as</span><span class="w">
+   </span><span class="n">Plant</span><span class="w">        </span><span class="n">Type</span><span class="w">  </span><span class="n">Treatment</span><span class="w"> </span><span class="n">conc</span><span class="w"> </span><span class="n">uptake</span><span class="w">
+</span><span class="m">1</span><span class="w">    </span><span class="n">Qn1</span><span class="w">      </span><span class="n">Quebec</span><span class="w"> </span><span class="n">nonchilled</span><span class="w">   </span><span class="m">95</span><span class="w">   </span><span class="m">16.0</span><span class="w">
+</span><span class="m">2</span><span class="w">    </span><span class="n">Qn1</span><span class="w">      </span><span class="n">Quebec</span><span class="w"> </span><span class="n">nonchilled</span><span class="w">  </span><span class="m">175</span><span class="w">   </span><span class="m">30.4</span><span class="w">
+</span><span class="m">3</span><span class="w">    </span><span class="n">Qn1</span><span class="w">      </span><span class="n">Quebec</span><span class="w"> </span><span class="n">nonchilled</span><span class="w">  </span><span class="m">250</span><span class="w">   </span><span class="m">34.8</span><span class="w">
+</span><span class="m">4</span><span class="w">    </span><span class="n">Qn1</span><span class="w">      </span><span class="n">Quebec</span><span class="w"> </span><span class="n">nonchilled</span><span class="w">  </span><span class="m">350</span><span class="w">   </span><span class="m">37.2</span><span class="w">
+</span><span class="m">5</span><span class="w">    </span><span class="n">Qn1</span><span class="w">      </span><span class="n">Quebec</span><span class="w"> </span><span class="n">nonchilled</span><span class="w">  </span><span class="m">500</span><span class="w">   </span><span class="m">35.3</span><span class="w">
+</span><span class="m">6</span><span class="w">    </span><span class="n">Qn1</span><span class="w">      </span><span class="n">Quebec</span><span class="w"> </span><span class="n">nonchilled</span><span class="w">  </span><span class="m">675</span><span class="w">   </span><span class="m">39.2</span><span class="w">
+</span><span class="m">7</span><span class="w">    </span><span class="n">Qn1</span><span class="w">      </span><span class="n">Quebec</span><span class="w"> </span><span class="n">nonchilled</span><span class="w"> </span><span class="m">1000</span><span class="w">   </span><span class="m">39.7</span><span class="w">
+</span><span class="m">8</span><span class="w">    </span><span class="n">Qn2</span><span class="w">      </span><span class="n">Quebec</span><span class="w"> </span><span class="n">nonchilled</span><span class="w">   </span><span class="m">95</span><span class="w">   </span><span class="m">13.6</span><span class="w">
+</span><span class="m">9</span><span class="w">    </span><span class="n">Qn2</span><span class="w">      </span><span class="n">Quebec</span><span class="w"> </span><span class="n">nonchilled</span><span class="w">  </span><span class="m">175</span><span class="w">   </span><span class="m">27.3</span><span class="w">
+</span><span class="m">10</span><span class="w">   </span><span class="n">Qn2</span><span class="w">      </span><span class="n">Quebec</span><span class="w"> </span><span class="n">nonchilled</span><span class="w">  </span><span class="m">250</span><span class="w">   </span><span class="m">37.1</span><span class="w">
+</span><span class="m">11</span><span class="w">   </span><span class="n">Qn2</span><span class="w">      </span><span class="n">Quebec</span><span class="w"> </span><span class="n">nonchilled</span><span class="w">  </span><span class="m">350</span><span class="w">   </span><span class="m">41.8</span><span class="w">
+</span><span class="m">12</span><span class="w">   </span><span class="n">Qn2</span><span class="w">      </span><span class="n">Quebec</span><span class="w"> </span><span class="n">nonchilled</span><span class="w">  </span><span class="m">500</span><span class="w">   </span><span class="m">40.6</span><span class="w">
+</span><span class="m">13</span><span class="w">   </span><span class="n">Qn2</span><span class="w">      </span><span class="n">Quebec</span><span class="w"> </span><span class="n">nonchilled</span><span class="w">  </span><span class="m">675</span><span class="w">   </span><span class="m">41.4</span><span class="w">
+</span><span class="m">14</span><span class="w">   </span><span class="n">Qn2</span><span class="w">      </span><span class="n">Quebec</span><span class="w"> </span><span class="n">nonchilled</span><span class="w"> </span><span class="m">1000</span><span class="w">   </span><span class="m">44.3</span><span class="w">
+</span><span class="m">15</span><span class="w">   </span><span class="n">Qn3</span><span class="w">      </span><span class="n">Quebec</span><span class="w"> </span><span class="n">nonchilled</span><span class="w">   </span><span class="m">95</span><span class="w">   </span><span class="m">16.2</span><span class="w">
+</span><span class="m">16</span><span class="w">   </span><span class="n">Qn3</span><span class="w">      </span><span class="n">Quebec</span><span class="w"> </span><span class="n">nonchilled</span><span class="w">  </span><span class="m">175</span><span class="w">   </span><span class="m">32.4</span><span class="w">
+</span><span class="m">17</span><span class="w">   </span><span class="n">Qn3</span><span class="w">      </span><span class="n">Quebec</span><span class="w"> </span><span class="n">nonchilled</span><span class="w">  </span><span class="m">250</span><span class="w">   </span><span class="m">40.3</span><span class="w">
+</span><span class="m">18</span><span class="w">   </span><span class="n">Qn3</span><span class="w">      </span><span class="n">Quebec</span><span class="w"> </span><span class="n">nonchilled</span><span class="w">  </span><span class="m">350</span><span class="w">   </span><span class="m">42.1</span><span class="w">
+</span><span class="m">19</span><span class="w">   </span><span class="n">Qn3</span><span class="w">      </span><span class="n">Quebec</span><span class="w"> </span><span class="n">nonchilled</span><span class="w">  </span><span class="m">500</span><span class="w">   </span><span class="m">42.9</span><span class="w">
+</span><span class="m">20</span><span class="w">   </span><span class="n">Qn3</span><span class="w">      </span><span class="n">Quebec</span><span class="w"> </span><span class="n">nonchilled</span><span class="w">  </span><span class="m">675</span><span class="w">   </span><span class="m">43.9</span><span class="w">
+</span><span class="m">21</span><span class="w">   </span><span class="n">Qn3</span><span class="w">      </span><span class="n">Quebec</span><span class="w"> </span><span class="n">nonchilled</span><span class="w"> </span><span class="m">1000</span><span class="w">   </span><span class="m">45.5</span><span class="w">
+</span><span class="m">22</span><span class="w">   </span><span class="n">Qc1</span><span class="w">      </span><span class="n">Quebec</span><span class="w">    </span><span class="n">chilled</span><span class="w">   </span><span class="m">95</span><span class="w">   </span><span class="m">14.2</span><span class="w">
+</span><span class="m">23</span><span class="w">   </span><span class="n">Qc1</span><span class="w">      </span><span class="n">Quebec</span><span class="w">    </span><span class="n">chilled</span><span class="w">  </span><span class="m">175</span><span class="w">   </span><span class="m">24.1</span><span class="w">
+</span><span class="m">24</span><span class="w">   </span><span class="n">Qc1</span><span class="w">      </span><span class="n">Quebec</span><span class="w">    </span><span class="n">chilled</span><span class="w">  </span><span class="m">250</span><span class="w">   </span><span class="m">30.3</span><span class="w">
+</span><span class="m">25</span><span class="w">   </span><span class="n">Qc1</span><span class="w">      </span><span class="n">Quebec</span><span class="w">    </span><span class="n">chilled</span><span class="w">  </span><span class="m">350</span><span class="w">   </span><span class="m">34.6</span><span class="w">
+</span><span class="m">26</span><span class="w">   </span><span class="n">Qc1</span><span class="w">      </span><span class="n">Quebec</span><span class="w">    </span><span class="n">chilled</span><span class="w">  </span><span class="m">500</span><span class="w">   </span><span class="m">32.5</span><span class="w">
+</span><span class="m">27</span><span class="w">   </span><span class="n">Qc1</span><span class="w">      </span><span class="n">Quebec</span><span class="w">    </span><span class="n">chilled</span><span class="w">  </span><span class="m">675</span><span class="w">   </span><span class="m">35.4</span><span class="w">
+</span><span class="m">28</span><span class="w">   </span><span class="n">Qc1</span><span class="w">      </span><span class="n">Quebec</span><span class="w">    </span><span class="n">chilled</span><span class="w"> </span><span class="m">1000</span><span class="w">   </span><span class="m">38.7</span><span class="w">
+</span><span class="m">29</span><span class="w">   </span><span class="n">Qc2</span><span class="w">      </span><span class="n">Quebec</span><span class="w">    </span><span class="n">chilled</span><span class="w">   </span><span class="m">95</span><span class="w">    </span><span class="m">9.3</span><span class="w">
+</span><span class="m">30</span><span class="w">   </span><span class="n">Qc2</span><span class="w">      </span><span class="n">Quebec</span><span class="w">    </span><span class="n">chilled</span><span class="w">  </span><span class="m">175</span><span class="w">   </span><span class="m">27.3</span><span class="w">
+</span><span class="m">31</span><span class="w">   </span><span class="n">Qc2</span><span class="w">      </span><span class="n">Quebec</span><span class="w">    </span><span class="n">chilled</span><span class="w">  </span><span class="m">250</span><span class="w">   </span><span class="m">35.0</span><span class="w">
+</span><span class="m">32</span><span class="w">   </span><span class="n">Qc2</span><span class="w">      </span><span class="n">Quebec</span><span class="w">    </span><span class="n">chilled</span><span class="w">  </span><span class="m">350</span><span class="w">   </span><span class="m">38.8</span><span class="w">
+</span><span class="m">33</span><span class="w">   </span><span class="n">Qc2</span><span class="w">      </span><span class="n">Quebec</span><span class="w">    </span><span class="n">chilled</span><span class="w">  </span><span class="m">500</span><span class="w">   </span><span class="m">38.6</span><span class="w">
+</span><span class="m">34</span><span class="w">   </span><span class="n">Qc2</span><span class="w">      </span><span class="n">Quebec</span><span class="w">    </span><span class="n">chilled</span><span class="w">  </span><span class="m">675</span><span class="w">   </span><span class="m">37.5</span><span class="w">
+</span><span class="m">35</span><span class="w">   </span><span class="n">Qc2</span><span class="w">      </span><span class="n">Quebec</span><span class="w">    </span><span class="n">chilled</span><span class="w"> </span><span class="m">1000</span><span class="w">   </span><span class="m">42.4</span><span class="w">
+</span><span class="m">36</span><span class="w">   </span><span class="n">Qc3</span><span class="w">      </span><span class="n">Quebec</span><span class="w">    </span><span class="n">chilled</span><span class="w">   </span><span class="m">95</span><span class="w">   </span><span class="m">15.1</span><span class="w">
+</span><span class="m">37</span><span class="w">   </span><span class="n">Qc3</span><span class="w">      </span><span class="n">Quebec</span><span class="w">    </span><span class="n">chilled</span><span class="w">  </span><span class="m">175</span><span class="w">   </span><span class="m">21.0</span><span class="w">
+</span><span class="m">38</span><span class="w">   </span><span class="n">Qc3</span><span class="w">      </span><span class="n">Quebec</span><span class="w">    </span><span class="n">chilled</span><span class="w">  </span><span class="m">250</span><span class="w">   </span><span class="m">38.1</span><span class="w">
+</span><span class="m">39</span><span class="w">   </span><span class="n">Qc3</span><span class="w">      </span><span class="n">Quebec</span><span class="w">    </span><span class="n">chilled</span><span class="w">  </span><span class="m">350</span><span class="w">   </span><span class="m">34.0</span><span class="w">
+</span><span class="m">40</span><span class="w">   </span><span class="n">Qc3</span><span class="w">      </span><span class="n">Quebec</span><span class="w">    </span><span class="n">chilled</span><span class="w">  </span><span class="m">500</span><span class="w">   </span><span class="m">38.9</span><span class="w">
+</span><span class="m">41</span><span class="w">   </span><span class="n">Qc3</span><span class="w">      </span><span class="n">Quebec</span><span class="w">    </span><span class="n">chilled</span><span class="w">  </span><span class="m">675</span><span class="w">   </span><span class="m">39.6</span><span class="w">
+</span><span class="m">42</span><span class="w">   </span><span class="n">Qc3</span><span class="w">      </span><span class="n">Quebec</span><span class="w">    </span><span class="n">chilled</span><span class="w"> </span><span class="m">1000</span><span class="w">   </span><span class="m">41.4</span><span class="w">
+</span><span class="m">43</span><span class="w">   </span><span class="n">Mn1</span><span class="w"> </span><span class="n">Mississippi</span><span class="w"> </span><span class="n">nonchilled</span><span class="w">   </span><span class="m">95</span><span class="w">   </span><span class="m">10.6</span><span class="w">
+</span><span class="m">44</span><span class="w">   </span><span class="n">Mn1</span><span class="w"> </span><span class="n">Mississippi</span><span class="w"> </span><span class="n">nonchilled</span><span class="w">  </span><span class="m">175</span><span class="w">   </span><span class="m">19.2</span><span class="w">
+</span><span class="m">45</span><span class="w">   </span><span class="n">Mn1</span><span class="w"> </span><span class="n">Mississippi</span><span class="w"> </span><span class="n">nonchilled</span><span class="w">  </span><span class="m">250</span><span class="w">   </span><span class="m">26.2</span><span class="w">
+</span><span class="m">46</span><span class="w">   </span><span class="n">Mn1</span><span class="w"> </span><span class="n">Mississippi</span><span class="w"> </span><span class="n">nonchilled</span><span class="w">  </span><span class="m">350</span><span class="w">   </span><span class="m">30.0</span><span class="w">
+</span><span class="m">47</span><span class="w">   </span><span class="n">Mn1</span><span class="w"> </span><span class="n">Mississippi</span><span class="w"> </span><span class="n">nonchilled</span><span class="w">  </span><span class="m">500</span><span class="w">   </span><span class="m">30.9</span><span class="w">
+</span><span class="m">48</span><span class="w">   </span><span class="n">Mn1</span><span class="w"> </span><span class="n">Mississippi</span><span class="w"> </span><span class="n">nonchilled</span><span class="w">  </span><span class="m">675</span><span class="w">   </span><span class="m">32.4</span><span class="w">
+</span><span class="m">49</span><span class="w">   </span><span class="n">Mn1</span><span class="w"> </span><span class="n">Mississippi</span><span class="w"> </span><span class="n">nonchilled</span><span class="w"> </span><span class="m">1000</span><span class="w">   </span><span class="m">35.5</span><span class="w">
+</span><span class="m">50</span><span class="w">   </span><span class="n">Mn2</span><span class="w"> </span><span class="n">Mississippi</span><span class="w"> </span><span class="n">nonchilled</span><span class="w">   </span><span class="m">95</span><span class="w">   </span><span class="m">12.0</span><span class="w">
+</span><span class="m">51</span><span class="w">   </span><span class="n">Mn2</span><span class="w"> </span><span class="n">Mississippi</span><span class="w"> </span><span class="n">nonchilled</span><span class="w">  </span><span class="m">175</span><span class="w">   </span><span class="m">22.0</span><span class="w">
+</span><span class="m">52</span><span class="w">   </span><span class="n">Mn2</span><span class="w"> </span><span class="n">Mississippi</span><span class="w"> </span><span class="n">nonchilled</span><span class="w">  </span><span class="m">250</span><span class="w">   </span><span class="m">30.6</span><span class="w">
+</span><span class="m">53</span><span class="w">   </span><span class="n">Mn2</span><span class="w"> </span><span class="n">Mississippi</span><span class="w"> </span><span class="n">nonchilled</span><span class="w">  </span><span class="m">350</span><span class="w">   </span><span class="m">31.8</span><span class="w">
+</span><span class="m">54</span><span class="w">   </span><span class="n">Mn2</span><span class="w"> </span><span class="n">Mississippi</span><span class="w"> </span><span class="n">nonchilled</span><span class="w">  </span><span class="m">500</span><span class="w">   </span><span class="m">32.4</span><span class="w">
+</span><span class="m">55</span><span class="w">   </span><span class="n">Mn2</span><span class="w"> </span><span class="n">Mississippi</span><span class="w"> </span><span class="n">nonchilled</span><span class="w">  </span><span class="m">675</span><span class="w">   </span><span class="m">31.1</span><span class="w">
+</span><span class="m">56</span><span class="w">   </span><span class="n">Mn2</span><span class="w"> </span><span class="n">Mississippi</span><span class="w"> </span><span class="n">nonchilled</span><span class="w"> </span><span class="m">1000</span><span class="w">   </span><span class="m">31.5</span><span class="w">
+</span><span class="m">57</span><span class="w">   </span><span class="n">Mn3</span><span class="w"> </span><span class="n">Mississippi</span><span class="w"> </span><span class="n">nonchilled</span><span class="w">   </span><span class="m">95</span><span class="w">   </span><span class="m">11.3</span><span class="w">
+</span><span class="m">58</span><span class="w">   </span><span class="n">Mn3</span><span class="w"> </span><span class="n">Mississippi</span><span class="w"> </span><span class="n">nonchilled</span><span class="w">  </span><span class="m">175</span><span class="w">   </span><span class="m">19.4</span><span class="w">
+</span><span class="m">59</span><span class="w">   </span><span class="n">Mn3</span><span class="w"> </span><span class="n">Mississippi</span><span class="w"> </span><span class="n">nonchilled</span><span class="w">  </span><span class="m">250</span><span class="w">   </span><span class="m">25.8</span><span class="w">
+</span><span class="m">60</span><span class="w">   </span><span class="n">Mn3</span><span class="w"> </span><span class="n">Mississippi</span><span class="w"> </span><span class="n">nonchilled</span><span class="w">  </span><span class="m">350</span><span class="w">   </span><span class="m">27.9</span><span class="w">
+</span><span class="m">61</span><span class="w">   </span><span class="n">Mn3</span><span class="w"> </span><span class="n">Mississippi</span><span class="w"> </span><span class="n">nonchilled</span><span class="w">  </span><span class="m">500</span><span class="w">   </span><span class="m">28.5</span><span class="w">
+</span><span class="m">62</span><span class="w">   </span><span class="n">Mn3</span><span class="w"> </span><span class="n">Mississippi</span><span class="w"> </span><span class="n">nonchilled</span><span class="w">  </span><span class="m">675</span><span class="w">   </span><span class="m">28.1</span><span class="w">
+</span><span class="m">63</span><span class="w">   </span><span class="n">Mn3</span><span class="w"> </span><span class="n">Mississippi</span><span class="w"> </span><span class="n">nonchilled</span><span class="w"> </span><span class="m">1000</span><span class="w">   </span><span class="m">27.8</span><span class="w">
+</span><span class="m">64</span><span class="w">   </span><span class="n">Mc1</span><span class="w"> </span><span class="n">Mississippi</span><span class="w">    </span><span class="n">chilled</span><span class="w">   </span><span class="m">95</span><span class="w">   </span><span class="m">10.5</span><span class="w">
+</span><span class="m">65</span><span class="w">   </span><span class="n">Mc1</span><span class="w"> </span><span class="n">Mississippi</span><span class="w">    </span><span class="n">chilled</span><span class="w">  </span><span class="m">175</span><span class="w">   </span><span class="m">14.9</span><span class="w">
+</span><span class="m">66</span><span class="w">   </span><span class="n">Mc1</span><span class="w"> </span><span class="n">Mississippi</span><span class="w">    </span><span class="n">chilled</span><span class="w">  </span><span class="m">250</span><span class="w">   </span><span class="m">18.1</span><span class="w">
+</span><span class="m">67</span><span class="w">   </span><span class="n">Mc1</span><span class="w"> </span><span class="n">Mississippi</span><span class="w">    </span><span class="n">chilled</span><span class="w">  </span><span class="m">350</span><span class="w">   </span><span class="m">18.9</span><span class="w">
+</span><span class="m">68</span><span class="w">   </span><span class="n">Mc1</span><span class="w"> </span><span class="n">Mississippi</span><span class="w">    </span><span class="n">chilled</span><span class="w">  </span><span class="m">500</span><span class="w">   </span><span class="m">19.5</span><span class="w">
+</span><span class="m">69</span><span class="w">   </span><span class="n">Mc1</span><span class="w"> </span><span class="n">Mississippi</span><span class="w">    </span><span class="n">chilled</span><span class="w">  </span><span class="m">675</span><span class="w">   </span><span class="m">22.2</span><span class="w">
+</span><span class="m">70</span><span class="w">   </span><span class="n">Mc1</span><span class="w"> </span><span class="n">Mississippi</span><span class="w">    </span><span class="n">chilled</span><span class="w"> </span><span class="m">1000</span><span class="w">   </span><span class="m">21.9</span><span class="w">
+</span><span class="m">71</span><span class="w">   </span><span class="n">Mc2</span><span class="w"> </span><span class="n">Mississippi</span><span class="w">    </span><span class="n">chilled</span><span class="w">   </span><span class="m">95</span><span class="w">    </span><span class="m">7.7</span><span class="w">
+</span><span class="m">72</span><span class="w">   </span><span class="n">Mc2</span><span class="w"> </span><span class="n">Mississippi</span><span class="w">    </span><span class="n">chilled</span><span class="w">  </span><span class="m">175</span><span class="w">   </span><span class="m">11.4</span><span class="w">
+</span><span class="m">73</span><span class="w">   </span><span class="n">Mc2</span><span class="w"> </span><span class="n">Mississippi</span><span class="w">    </span><span class="n">chilled</span><span class="w">  </span><span class="m">250</span><span class="w">   </span><span class="m">12.3</span><span class="w">
+</span><span class="m">74</span><span class="w">   </span><span class="n">Mc2</span><span class="w"> </span><span class="n">Mississippi</span><span class="w">    </span><span class="n">chilled</span><span class="w">  </span><span class="m">350</span><span class="w">   </span><span class="m">13.0</span><span class="w">
+</span><span class="m">75</span><span class="w">   </span><span class="n">Mc2</span><span class="w"> </span><span class="n">Mississippi</span><span class="w">    </span><span class="n">chilled</span><span class="w">  </span><span class="m">500</span><span class="w">   </span><span class="m">12.5</span><span class="w">
+</span><span class="m">76</span><span class="w">   </span><span class="n">Mc2</span><span class="w"> </span><span class="n">Mississippi</span><span class="w">    </span><span class="n">chilled</span><span class="w">  </span><span class="m">675</span><span class="w">   </span><span class="m">13.7</span><span class="w">
+</span><span class="m">77</span><span class="w">   </span><span class="n">Mc2</span><span class="w"> </span><span class="n">Mississippi</span><span class="w">    </span><span class="n">chilled</span><span class="w"> </span><span class="m">1000</span><span class="w">   </span><span class="m">14.4</span><span class="w">
+</span><span class="m">78</span><span class="w">   </span><span class="n">Mc3</span><span class="w"> </span><span class="n">Mississippi</span><span class="w">    </span><span class="n">chilled</span><span class="w">   </span><span class="m">95</span><span class="w">   </span><span class="m">10.6</span><span class="w">
+</span><span class="m">79</span><span class="w">   </span><span class="n">Mc3</span><span class="w"> </span><span class="n">Mississippi</span><span class="w">    </span><span class="n">chilled</span><span class="w">  </span><span class="m">175</span><span class="w">   </span><span class="m">18.0</span><span class="w">
+</span><span class="m">80</span><span class="w">   </span><span class="n">Mc3</span><span class="w"> </span><span class="n">Mississippi</span><span class="w">    </span><span class="n">chilled</span><span class="w">  </span><span class="m">250</span><span class="w">   </span><span class="m">17.9</span><span class="w">
+</span><span class="m">81</span><span class="w">   </span><span class="n">Mc3</span><span class="w"> </span><span class="n">Mississippi</span><span class="w">    </span><span class="n">chilled</span><span class="w">  </span><span class="m">350</span><span class="w">   </span><span class="m">17.9</span><span class="w">
+</span><span class="m">82</span><span class="w">   </span><span class="n">Mc3</span><span class="w"> </span><span class="n">Mississippi</span><span class="w">    </span><span class="n">chilled</span><span class="w">  </span><span class="m">500</span><span class="w">   </span><span class="m">17.9</span><span class="w">
+</span><span class="m">83</span><span class="w">   </span><span class="n">Mc3</span><span class="w"> </span><span class="n">Mississippi</span><span class="w">    </span><span class="n">chilled</span><span class="w">  </span><span class="m">675</span><span class="w">   </span><span class="m">18.9</span><span class="w">
+</span><span class="m">84</span><span class="w">   </span><span class="n">Mc3</span><span class="w"> </span><span class="n">Mississippi</span><span class="w">    </span><span class="n">chilled</span><span class="w"> </span><span class="m">1000</span><span class="w">   </span><span class="m">19.9</span><span class="w">
+
+</span></code></pre></div></div>
+
+<h3 id="r-variable-names">R VARIABLE NAMES</h3>
+
+<ul>
+  <li>You want to choose <code class="language-plaintext highlighter-rouge">variable names</code> that make your code readable. You want to choose <code class="language-plaintext highlighter-rouge">variable names</code> that will later <code class="language-plaintext highlighter-rouge">be clear</code> to you what you meant to do in your code. Now there are some rules in R. Some basic rules are that <code class="language-plaintext highlighter-rouge">they have to start with a letter</code>, and <code class="language-plaintext highlighter-rouge">they can't contain spaces</code>. If you have a long name you can replace <code class="language-plaintext highlighter-rouge">space</code> with <code class="language-plaintext highlighter-rouge">_</code></li>
+</ul>
+
+<h3 id="r-scripts">R SCRIPTS</h3>
+
+<ul>
+  <li>When you write formulars by scripts, let’s save it and you can reuse it everytime with input variables that you defined in your scripts.</li>
+</ul>
+
+<h3 id="r-comments">R COMMENTS</h3>
+
+<ul>
+  <li>If you want to use comments in your scripts, you can use <code class="language-plaintext highlighter-rouge">#</code> or <code class="language-plaintext highlighter-rouge">##</code> in the head of lines.</li>
+</ul>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="c1">#this is the sample comments</span><span class="w">
+
+</span></code></pre></div></div>
+
+<h3 id="key-points-in-r-with-functions-and-data-types">KEY POINTS IN R WITH FUNCTIONS AND DATA TYPES</h3>
+
+<ul>
+  <li>
+    <p>In general, to evaluate a function we need to use parentheses. If we type a function without parenthesis, R shows us the code for the function. Most functions also require an argument, that is, something to be written inside the parenthesis.</p>
+  </li>
+  <li>
+    <p>To access help files, we may use the help function, help(function_name), or write the question mark followed by the function name, ?function_name.
+The help file shows you the arguments the function is expecting, some of which are required and some are optional. If an argument is optional, a default value is assigned with the equal sign. The args() function also shows the arguments a function needs.</p>
+  </li>
+  <li>
+    <p>To specify arguments, we use the equals sign. If no argument name is used, R assumes you’re entering arguments in the order shown in the help file.
+Creating and saving a script makes code much easier to execute.</p>
+  </li>
+  <li>
+    <p>To make your code more readable, use intuitive variable names and include comments (using the “#” symbol) to remind yourself why you wrote a particular line of code.</p>
+  </li>
+</ul>
+
+    </div><a class="u-url" href="/data-science/2021/09/23/data-science-R-basic.html" hidden></a>
+  </article>
+  
+</div>
+
+
+    </div>
+  </div>
+  <script src="https://unpkg.com/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js"></script>
+  <script>addBackToTop()</script>
+</body>
+<footer><footer class="site-footer h-card">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <h2 class="footer-heading">StepByStep</h2>
+        <div>
+          <div>
+            <ul>
+              <li>Duc Nguyen</li><li><a class="u-email" href="mailto:minhducnguyen189@gmail.com">minhducnguyen189@gmail.com</a></li><li>&copy; 2021 Duc Nguyen. Powered by <a href="https://jekyllrb.com/">Jekyll</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <data class="u-url" href="/%20/"></data>
+        <div><ul class="social-media-list"><li><a href="https://github.com/minhducnguyen189"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">minhducnguyen189</span></a></li><li><a href="https://www.linkedin.com/in/duc-nguyen-03109b141"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#linkedin"></use></svg> <span class="username">duc-nguyen-03109b141</span></a></li></ul>
+</div>
+      </div>
+      <div class="col-md-4">
+        
+      </div>
+    </div>
+
+    <div class="row">
+      <p>Hi there! Let&#39;s explore some general knowleadges and briefly definitions in programming. I hope that this website can help people saving time in learning, also give some motivations for those who have choice the developer path.</p>
+    </div>
+</footer></footer>
+</html>
