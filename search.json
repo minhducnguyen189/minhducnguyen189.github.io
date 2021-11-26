@@ -98,6 +98,18 @@
   
     {
 
+      "title"    : "Spring Security: SQL Injection",
+      "url"      : "/java/2021/09/26/java-springboot-security-SQL-Injection.html",
+      "category" : "java",
+      "tags"     : "Java, SpringBoot, Sql, Database",
+      "date"     : "2021-09-26 00:00:00 +0700",
+      "discription" : ""
+
+    }
+    ,
+  
+    {
+
       "title"    : "Data Science: R Sorting",
       "url"      : "/data-science/2021/09/26/data-science-R-sorting.html",
       "category" : "data-science",
