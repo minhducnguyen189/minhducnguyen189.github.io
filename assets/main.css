@@ -109,6 +109,10 @@ footer .container { margin-top: 40px; color: #dfe6e9; margin-bottom: 60px; }
 
 footer .container a { color: #159957; }
 
+footer .container #sponsor { background-color: #bdc3c7; }
+
+footer .container #sponsor img { display: flex; }
+
 /** Page content */
 .page-heading { font-size: 36px; }
 
