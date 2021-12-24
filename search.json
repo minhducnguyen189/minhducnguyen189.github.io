@@ -14,6 +14,18 @@
   
     {
 
+      "title"    : "SQL Recursive in ORACLE DB",
+      "url"      : "/database/2021/11/11/SQL-Recusive.html",
+      "category" : "database",
+      "tags"     : "Database, SQL, tree",
+      "date"     : "2021-11-11 00:00:00 +0700",
+      "discription" : ""
+
+    }
+    ,
+  
+    {
+
       "title"    : "Data Science: R Programming Basics - For Loops",
       "url"      : "/data-science/2021/11/07/data-science-R-programming-basics-for-loops.html",
       "category" : "data-science",

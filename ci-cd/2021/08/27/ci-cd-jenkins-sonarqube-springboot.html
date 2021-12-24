@@ -16,7 +16,7 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script><!-- Begin Jekyll SEO tag v2.7.1 -->
-<title>Jenkins With Sonarqube Plugin For Building SpringBoot | StepByStep</title>
+<title>Jenkins With Sonarqube Plugin For Building SpringBoot | KaizenThink</title>
 <meta name="generator" content="Jekyll v4.2.1" />
 <meta property="og:title" content="Jenkins With Sonarqube Plugin For Building SpringBoot" />
 <meta name="author" content="Duc Nguyen" />
@@ -25,7 +25,7 @@
 <meta property="og:description" content="In this post we will learn how to use sonarqube scanner in jenkins pipeline for springboot project. If you haven’t known how to create a Sonarqube server or Jenkins Server yet you can view posts below: Docker For Sonarqube Server Docker For Jenkins Server SONARQUBE CONFIGURATION JENKINS CONFIGURATION TESTING SONARQUBE CONFIGURATION Firstly, you should access Sonarqube server. Then go to Administration -&gt; Security -&gt; Permission Template and check the checkbox for Execute Analysis for your Sonarqube account that you will use on Jenkins. So for this configuration, the user will have permission to execute sonar analysis when we use this user on Jenkins Server. Next, you should go to Administration -&gt; Configuration -&gt; WebHooks and click Create button. Then add some information as Name and URL. Note: the URL has format like {JENKINS SERVER}/sonarqube-webhook/. For exmaple: your Jenkins Server is running at http://192.168.0.100:8081 so the URL should be http://192.168.0.100:8081/sonarqube-webhook/. Note: On Jenkins Server we have to add plugin Sonarqube Scanner which will do in the Step JENKINS CONFIGURATION below, then the URL above will be available. JENKINS CONFIGURATION First, let’s go to Manage Jenkins -&gt; Manage Plugins -&gt; Then choose tag Available and find SonarQube Scanner for Jenkins -&gt; then click Install Next, go to the Manage Jenkins -&gt; Global Tool Configuration -&gt; scroll down to tag SonarQube Scanner and fill some information as below: Next, go to Manage Jenkins -&gt; Configure System -&gt; scroll down to tag SonarQube servers and fill some information as Name, URL of sonarqube server. Note: in Additional analysis properties add the username and password that you configuration in Sonarqube Server. Ex: sonar.login=admin sonar.password=password Next Let’s update the Jenkins scripts in Jenkinfile file in your repository as below pipeline { agent any tools { maven &#39;Maven 3.8.2&#39; jdk &#39;JDK8&#39; } stages { stage(&#39;Build&#39;) { steps { sh &#39;printenv&#39; sh &#39;ls -la&#39; sh &#39;mvn clean package -DskipTests&#39; } } stage(&quot;Run Test&quot;) { steps { sh &#39;mvn test&#39; } } stage(&quot;SonarQube Analysis&quot;) { steps { withSonarQubeEnv(&#39;SonarQube-Scanner&#39;) { sh &#39;mvn clean package sonar:sonar&#39; } } } stage(&quot;Quality Gate&quot;) { steps { // wait for Webhook call back from Sonarqube for the result timeout(time: 1, unit: &#39;HOURS&#39;) { waitForQualityGate abortPipeline: true } } } } } TESTING Finally, commit and push the Jenkinfile in your repository then go to Jenkins server to check the build result So, that’s it. Thanks and Good luck!" />
 <link rel="canonical" href="/ci-cd/2021/08/27/ci-cd-jenkins-sonarqube-springboot.html" />
 <meta property="og:url" content="/ci-cd/2021/08/27/ci-cd-jenkins-sonarqube-springboot.html" />
-<meta property="og:site_name" content="StepByStep" />
+<meta property="og:site_name" content="KaizenThink" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2021-08-27T12:00:00+07:00" />
 <meta name="twitter:card" content="summary" />
@@ -33,7 +33,7 @@
 <script type="application/ld+json">
 {"@type":"BlogPosting","url":"/ci-cd/2021/08/27/ci-cd-jenkins-sonarqube-springboot.html","author":{"@type":"Person","name":"Duc Nguyen"},"headline":"Jenkins With Sonarqube Plugin For Building SpringBoot","dateModified":"2021-08-27T12:00:00+07:00","datePublished":"2021-08-27T12:00:00+07:00","description":"In this post we will learn how to use sonarqube scanner in jenkins pipeline for springboot project. If you haven’t known how to create a Sonarqube server or Jenkins Server yet you can view posts below: Docker For Sonarqube Server Docker For Jenkins Server SONARQUBE CONFIGURATION JENKINS CONFIGURATION TESTING SONARQUBE CONFIGURATION Firstly, you should access Sonarqube server. Then go to Administration -&gt; Security -&gt; Permission Template and check the checkbox for Execute Analysis for your Sonarqube account that you will use on Jenkins. So for this configuration, the user will have permission to execute sonar analysis when we use this user on Jenkins Server. Next, you should go to Administration -&gt; Configuration -&gt; WebHooks and click Create button. Then add some information as Name and URL. Note: the URL has format like {JENKINS SERVER}/sonarqube-webhook/. For exmaple: your Jenkins Server is running at http://192.168.0.100:8081 so the URL should be http://192.168.0.100:8081/sonarqube-webhook/. Note: On Jenkins Server we have to add plugin Sonarqube Scanner which will do in the Step JENKINS CONFIGURATION below, then the URL above will be available. JENKINS CONFIGURATION First, let’s go to Manage Jenkins -&gt; Manage Plugins -&gt; Then choose tag Available and find SonarQube Scanner for Jenkins -&gt; then click Install Next, go to the Manage Jenkins -&gt; Global Tool Configuration -&gt; scroll down to tag SonarQube Scanner and fill some information as below: Next, go to Manage Jenkins -&gt; Configure System -&gt; scroll down to tag SonarQube servers and fill some information as Name, URL of sonarqube server. Note: in Additional analysis properties add the username and password that you configuration in Sonarqube Server. Ex: sonar.login=admin sonar.password=password Next Let’s update the Jenkins scripts in Jenkinfile file in your repository as below pipeline { agent any tools { maven &#39;Maven 3.8.2&#39; jdk &#39;JDK8&#39; } stages { stage(&#39;Build&#39;) { steps { sh &#39;printenv&#39; sh &#39;ls -la&#39; sh &#39;mvn clean package -DskipTests&#39; } } stage(&quot;Run Test&quot;) { steps { sh &#39;mvn test&#39; } } stage(&quot;SonarQube Analysis&quot;) { steps { withSonarQubeEnv(&#39;SonarQube-Scanner&#39;) { sh &#39;mvn clean package sonar:sonar&#39; } } } stage(&quot;Quality Gate&quot;) { steps { // wait for Webhook call back from Sonarqube for the result timeout(time: 1, unit: &#39;HOURS&#39;) { waitForQualityGate abortPipeline: true } } } } } TESTING Finally, commit and push the Jenkinfile in your repository then go to Jenkins server to check the build result So, that’s it. Thanks and Good luck!","mainEntityOfPage":{"@type":"WebPage","@id":"/ci-cd/2021/08/27/ci-cd-jenkins-sonarqube-springboot.html"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
-<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="StepByStep" /><!-- Global site tag (gtag.js) - Google Analytics -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="KaizenThink" /><!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZ8G5007GK"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -45,7 +45,7 @@
   <div class="container-flush">
     <div class="row"><!-- navigation bar -->
 <div class="col-lg-12">
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" role="banner"><a class="navbar-brand site-title" rel="author" href="/">StepByStep</a>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" role="banner"><a class="navbar-brand site-title" rel="author" href="/">KaizenThink</a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
       aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -245,7 +245,7 @@ If you haven’t known how to create a Sonarqube server or Jenkins Server yet yo
   <div class="container">
     <div class="row">
       <div class="col-md-4">
-        <h2 class="footer-heading">StepByStep</h2>
+        <h2 class="footer-heading">KaizenThink</h2>
         <div>
           <div>
             <ul>
