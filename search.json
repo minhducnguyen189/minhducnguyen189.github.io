@@ -14,10 +14,10 @@
   
     {
 
-      "title"    : "SQL Recursive in ORACLE DB",
-      "url"      : "/database/2021/11/11/SQL-Recusive.html",
+      "title"    : "SQL INSERT, DELELE, UPDATE, MERGE TABLE",
+      "url"      : "/database/2021/11/11/SQL-CRUID-TABLE.html",
       "category" : "database",
-      "tags"     : "Database, SQL, tree",
+      "tags"     : "CRUID, CREATE, READ, DELETE, UPDATE, MERGE",
       "date"     : "2021-11-11 00:00:00 +0700",
       "discription" : ""
 
