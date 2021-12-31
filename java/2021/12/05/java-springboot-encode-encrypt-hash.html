@@ -1,0 +1,1320 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- bootstrap library and JS, Jquery -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Encode, Encrypt And Hash In SpringBoot | KaizenThink</title>
+<meta name="generator" content="Jekyll v4.2.1" />
+<meta property="og:title" content="Encode, Encrypt And Hash In SpringBoot" />
+<meta name="author" content="Duc Nguyen" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="In this topic we will learn about Encode, Encrypt and Hash. Differencies between these types and make example Apis with Springboot." />
+<meta property="og:description" content="In this topic we will learn about Encode, Encrypt and Hash. Differencies between these types and make example Apis with Springboot." />
+<link rel="canonical" href="/java/2021/12/05/java-springboot-encode-encrypt-hash.html" />
+<meta property="og:url" content="/java/2021/12/05/java-springboot-encode-encrypt-hash.html" />
+<meta property="og:site_name" content="KaizenThink" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-12-05T00:00:00+07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Encode, Encrypt And Hash In SpringBoot" />
+<script type="application/ld+json">
+{"mainEntityOfPage":{"@type":"WebPage","@id":"/java/2021/12/05/java-springboot-encode-encrypt-hash.html"},"@type":"BlogPosting","url":"/java/2021/12/05/java-springboot-encode-encrypt-hash.html","author":{"@type":"Person","name":"Duc Nguyen"},"headline":"Encode, Encrypt And Hash In SpringBoot","dateModified":"2021-12-05T00:00:00+07:00","datePublished":"2021-12-05T00:00:00+07:00","description":"In this topic we will learn about Encode, Encrypt and Hash. Differencies between these types and make example Apis with Springboot.","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="KaizenThink" /><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NZ8G5007GK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-NZ8G5007GK');
+</script></head><body>
+  <div class="container-flush">
+    <div class="row"><!-- navigation bar -->
+<div class="col-lg-12">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" role="banner"><a class="navbar-brand site-title" rel="author" href="/">KaizenThink</a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="nav navbar-nav"><li class="nav-item active">
+          <a class="nav-link" href="/about">About</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/">Java</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/docker">Docker</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/database">Database</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/data-science">Data-Science</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/ci-cd">CI-CD</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/python">Python</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/fe">FE</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/others">Others</a>
+        </li></ul>
+    </div>
+
+    <!-- Html Elements for Search -->
+    <div id="search-container" class="btn-group">
+      <input type="text" id="search-input" placeholder="search...">
+      <button id="clear">clear</button>
+      <ul id="results-container"></ul>
+    </div>
+
+    <!-- Script pointing to search-script.js -->
+    <script src="/java-scripts/search-script.js" type="text/javascript"></script>
+
+    <!-- Configuration -->
+    <script>
+      SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('results-container'),
+        json: '/search.json'
+      })
+    </script>
+
+    <!-- search clear -->
+    <script>
+      window.addEventListener('load', () => {
+        const button = document.querySelector('#clear');
+        button.addEventListener('click', () => {
+          document.querySelector('#search-input').value = "";
+          document.querySelector('#results-container').innerHTML = "";
+        });
+      });
+    </script>
+  </nav>
+</div></div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+  <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+    <header class="post-header">
+      <h1 class="post-title p-name" itemprop="name headline">Encode, Encrypt And Hash In SpringBoot</h1>
+      <p class="post-meta">
+        <time class="dt-published" datetime="2021-12-05T00:00:00+07:00" itemprop="datePublished">Dec 5, 2021
+        </time></p>
+    </header>
+  
+    <div class="post-content e-content" itemprop="articleBody">
+      <blockquote>
+  <p>In this topic we will learn about Encode, Encrypt and Hash. Differencies between these types and make example Apis with Springboot.</p>
+</blockquote>
+
+<ul id="markdown-toc">
+  <li><a href="#what-is-encode" id="markdown-toc-what-is-encode">WHAT IS ENCODE?</a></li>
+  <li><a href="#what-is-encrypt" id="markdown-toc-what-is-encrypt">WHAT IS ENCRYPT?</a></li>
+  <li><a href="#what-is-hash" id="markdown-toc-what-is-hash">WHAT IS HASH?</a></li>
+  <li><a href="#example-with-encodedecode" id="markdown-toc-example-with-encodedecode">EXAMPLE WITH ENCODE/DECODE</a></li>
+  <li><a href="#example-with-encryptdecrypt" id="markdown-toc-example-with-encryptdecrypt">EXAMPLE WITH ENCRYPT/DECRYPT</a></li>
+  <li><a href="#example-with-hash-and-salt" id="markdown-toc-example-with-hash-and-salt">EXAMPLE WITH HASH AND SALT</a></li>
+  <li><a href="#sumarry" id="markdown-toc-sumarry">SUMARRY</a></li>
+</ul>
+
+<h2 id="what-is-encode">WHAT IS ENCODE?</h2>
+
+<ul>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Encoding and decoding</code> in Java is a method of representing data in a different format to efficiently transfer information through a network or the web. The encoder converts data into a web representation. Once received, the decoder converts the web representation data into its original format.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Encode is not used for security</code> it is used for data transformation for proper consumsion. So it’s easy to encode/decode data and you just need to know the encoding. We have 2 popular types of encoding: <strong>URL encoding</strong>, <strong>Base64 encoding</strong>.</p>
+
+    <ul>
+      <li>
+        <p>In <code class="language-plaintext highlighter-rouge">URL encoding</code>, certain characters like space or question mark in URL could be misleading. For example, instead if using Api param like this <code class="language-plaintext highlighter-rouge">subject=what is the biggest animal on earth</code> we can encode it to this <code class="language-plaintext highlighter-rouge">subject%3Dwhat%20is%20the%20biggest%20animal%20on%20earth</code>. <a href="https://www.w3schools.com/tags/ref_urlencode.ASP">More information</a></p>
+      </li>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">Base64 encoding</code>, when we transfer media data like Music, Files, Images, video… as binaries throw network environment, errors or lossing data will happen easily, some protocols may interpret your binary data as control characters (like modem or router) or they could be screwed up because the underlying protocol might think that you’ve entered a special character combination (like how FTP translates line endings).</p>
+
+        <ul>
+          <li>
+            <p>In the past, a quick method of verifying data integrity was used: <strong>bit parity</strong>. So in this method a byte will contain 7 bits of data and one bit for calculating even or odd on total number of 1 in 7 bits in data.</p>
+          </li>
+          <li>
+            <p>Ex: we have a byte which is transferred through network 10100101, then we have 7 bits of data [1010010], this this 7 bits of data we have 3 bits with 1, so the addition bit will be 1 (for odd). So if the end modem received a byte like this 10110101, so there is an even byte but the additional bit is 1, so this byte is not correct or invalid. <a href="https://en.wikipedia.org/wiki/Parity_bit">More information</a>.</p>
+          </li>
+          <li>
+            <p>So nowaday, many router support parity check and byte translation into hardware and will force the computers to attach the parity check and byte translation to deal with 7-bit data. This force email attachments (and all other data, which is why HTTP &amp; SMTP protocols are text-based), to be convert into a text-only format. Then Base64 encoding will help us to handle this issue. <a href="https://stackoverflow.com/questions/201479/what-is-base-64-encoding-used-for">More information</a></p>
+          </li>
+          <li>
+            <p>So in base64 original data will turn into bytes which contain 8 bits for each of them. Then these bits will be chunked together and divided into 6 bits for every byte and these byte will be converted into character. See the example in the table below.</p>
+          </li>
+        </ul>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Original</th>
+              <th>8 bits</th>
+              <th>Chunked</th>
+              <th>6 bits</th>
+              <th>Base64</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>duc</td>
+              <td>01100100 01110101 01100011</td>
+              <td>011001000111010101100011</td>
+              <td>011001 000111 010101 100011</td>
+              <td>ZHVj</td>
+            </tr>
+            <tr>
+              <td>ducz</td>
+              <td>01100100 01110101 01100011 01111010</td>
+              <td>01100100011101010110001101111010</td>
+              <td>011001 000111 010101 100011 011110 10<code class="language-plaintext highlighter-rouge">0000</code></td>
+              <td>ZHVjeg==</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <ul>
+          <li>Base64 will contains these all these characters:
+            <ul>
+              <li>10 numeric value i.e., <code class="language-plaintext highlighter-rouge">0,1,2,3,…..9</code>.</li>
+              <li>26 Uppercase alphabets i.e., <code class="language-plaintext highlighter-rouge">A,B,C,D,…….Z</code>.</li>
+              <li>26 Lowercase alphabets i.e., <code class="language-plaintext highlighter-rouge">a,b,c,d,……..z</code>.</li>
+              <li>special characters i.e., <code class="language-plaintext highlighter-rouge">+</code>,<code class="language-plaintext highlighter-rouge">/</code> and <code class="language-plaintext highlighter-rouge">=</code> ( <code class="language-plaintext highlighter-rouge">=</code> used to replace empty bits in the last 6-bits byte one <code class="language-plaintext highlighter-rouge">=</code> is equal <code class="language-plaintext highlighter-rouge">00</code>  ).</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="what-is-encrypt">WHAT IS ENCRYPT?</h2>
+
+<ul>
+  <li>
+    <p>In cryptography, <code class="language-plaintext highlighter-rouge">encryption</code> is the process of encoding information. This process converts the original representation of the information, known as plaintext (human readable contents), into an alternative form known as ciphertext (incomprehensible text). Ideally, only authorized parties with a <code class="language-plaintext highlighter-rouge">cryptographic key</code> can decipher a ciphertext back to plaintext and access the original information. <a href="https://en.wikipedia.org/wiki/Encryption">More information</a>.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Encryption</code> is part of security, the goal is to ensure the data can only be consumed by valid recipient using key/password to decrypt (reverse encrypt). Remember that key/password has to be kept secretly. There are two main types of data encrytion are <strong>asymmetric encryption</strong> and <strong>symmetric encryption</strong>. <a href="https://www.ibm.com/my-en/topics/encryption">More information</a></p>
+  </li>
+  <li>
+    <p><strong>Symmetric encryption</strong> is a type of encryption where only one secret symmetric key is used to encrypt the plaintext and decrypt the ciphertext. We have some common symmetric encryption methods as AES (Advanced Encryption Standard), 3DES (Triple Data Encryption Standards), Twofish… In this post we will make some an example with AES only, <a href="https://www.ibm.com/docs/en/ztpf/1.1.0.14?topic=concepts-symmetric-cryptography">more information</a>. Let’s see example below. We can convert original text to AES encrypted text and back with a secret key.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Original</th>
+          <th>Secret Key</th>
+          <th>AES Encrypted Text</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>minhduc</td>
+          <td>adwasekewqmdrqwd</td>
+          <td>6A64685E851ACF474ADD069AB6B4965F</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <p><strong>Asymmetric encryption</strong>, also known as Public-Key Cryptography, encrypts and decrypts the data using two separate cryptographic asymmetric keys. These two keys are known as a <strong>public key</strong> and a <strong>private key</strong>. We have some common asymmetric encryption methods as RSA (named after computer scientists Ron Rivest, Adi Shamir, and Leonard Adleman), PKI (Public key infrastructure). <a href="https://www.ibm.com/docs/en/ztpf/1.1.0.14?topic=concepts-public-key-cryptography">More information</a></p>
+  </li>
+</ul>
+
+<h2 id="what-is-hash">WHAT IS HASH?</h2>
+
+<ul>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Hashing</code> is simply passing some data through a formula that produces a result, called a hash. That hash is usually a string of characters and the hashes generated by a formula are always the same length, regardless of how much data you feed into it. For example, the MD5 formula always produces 32 character-long hashes. Moreover, each time you run the same data through the formula, you will get the exact same hash out of it and there are no ways to convert a hash back to the original data. <a href="https://dataspace.com/big-data-applications/what-does-it-mean-to-hash-data/">More information</a>.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Hash</code> is a path of security. It is used to ensure data integrity, this is commonly referred as checksum, or signature. In order words, if some part of data is changed, then you can know that it’s changed.</p>
+  </li>
+  <li>
+    <p>There are a huge number of widely accepted hashing algorithms available for general use. For example, MD5, SHA1, SHA224, SHA256, SHA512…</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Data</th>
+          <th>HASHED DATA</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>minhduc</td>
+          <td>0D54D2191C796096A19C01D9D98BD4DC2706EFEABB79747B1EC506C00C481DC2</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Salt &amp; Hash</code>, <code class="language-plaintext highlighter-rouge">salt</code> a salt is random data that is used as an additional input to a one-way function that hashes data, a password or passphrase, salts are used to safeguard passwords in storage.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Data</th>
+          <th>SALT</th>
+          <th>HASHED DATA</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>minhduc</td>
+          <td>CEAB0B1771049333E44D20A880509292E9 2781CC3D03F80AC41B73EC068E3EFF</td>
+          <td>F9799760BFC12492E91A8B70A84C3E8EE 90996ACAC6D0B6FD19448DACECAE4A4</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>So why should we use hash for storing password?
+    <ul>
+      <li>Not reversible, no plain Password</li>
+      <li>If attacker can steal user database there are no way to get plain passwords.</li>
+      <li>Better hash with salt</li>
+      <li>Unique salt each user</li>
+    </ul>
+  </li>
+  <li>why do we should not store encrypt password?
+    <ul>
+      <li>Attacker can steal user database &amp; Encryption secret Key</li>
+      <li>Decrypt all user data and get plain password</li>
+      <li>When hacker have username and password, they can re-use username &amp; password</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="example-with-encodedecode">EXAMPLE WITH ENCODE/DECODE</h2>
+
+<ul>
+  <li>
+    <p>By default, Spring Boot has default libraries for encode and decode Base64 and Uri, so we don’t need to add any dependency into Spring Boot project.</p>
+  </li>
+  <li>
+    <p>So let’s create a Service class named <code class="language-plaintext highlighter-rouge">CipherService</code> with codes as below.</p>
+  </li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kn">import</span> <span class="nn">com.springboot.project.cipher.api.CipherApi</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.springboot.project.cipher.api.model.DataRequest</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.springboot.project.cipher.api.model.HmacDataRequest</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.springboot.project.cipher.api.model.MatchDataRequest</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.http.HttpStatus</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.http.MediaType</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.http.ResponseEntity</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.*</span><span class="o">;</span>
+
+<span class="nd">@RestController</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CipherControllerApi</span> <span class="o">{</span>
+
+  <span class="nd">@Autowired</span>
+	<span class="kd">private</span> <span class="nc">CipherApi</span> <span class="n">cipherApi</span><span class="o">;</span>
+
+	<span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">method</span> <span class="o">=</span> <span class="nc">RequestMethod</span><span class="o">.</span><span class="na">POST</span><span class="o">,</span> <span class="n">path</span> <span class="o">=</span> <span class="s">"v1/cipher/encode/base64"</span><span class="o">,</span> <span class="n">produces</span> <span class="o">=</span> <span class="nc">MediaType</span><span class="o">.</span><span class="na">TEXT_PLAIN_VALUE</span><span class="o">)</span>
+	<span class="kd">public</span> <span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="nf">encodeData</span><span class="o">(</span><span class="nd">@RequestBody</span> <span class="nc">DataRequest</span> <span class="n">inputData</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="k">new</span> <span class="nc">ResponseEntity</span><span class="o">&lt;&gt;(</span><span class="n">cipherApi</span><span class="o">.</span><span class="na">encodeData</span><span class="o">(</span><span class="n">inputData</span><span class="o">),</span> <span class="nc">HttpStatus</span><span class="o">.</span><span class="na">CREATED</span><span class="o">);</span>
+	<span class="o">}</span>
+
+	<span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">method</span> <span class="o">=</span> <span class="nc">RequestMethod</span><span class="o">.</span><span class="na">POST</span><span class="o">,</span> <span class="n">path</span> <span class="o">=</span> <span class="s">"v1/cipher/decode/base64"</span><span class="o">,</span> <span class="n">produces</span> <span class="o">=</span> <span class="nc">MediaType</span><span class="o">.</span><span class="na">TEXT_PLAIN_VALUE</span><span class="o">)</span>
+	<span class="kd">public</span> <span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="nf">decodeData</span><span class="o">(</span><span class="nd">@RequestBody</span> <span class="nc">DataRequest</span> <span class="n">inputData</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="k">new</span> <span class="nc">ResponseEntity</span><span class="o">&lt;&gt;(</span><span class="n">cipherApi</span><span class="o">.</span><span class="na">decodeData</span><span class="o">(</span><span class="n">inputData</span><span class="o">),</span> <span class="nc">HttpStatus</span><span class="o">.</span><span class="na">CREATED</span><span class="o">);</span>
+	<span class="o">}</span>
+
+	<span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">method</span> <span class="o">=</span> <span class="nc">RequestMethod</span><span class="o">.</span><span class="na">POST</span><span class="o">,</span> <span class="n">path</span> <span class="o">=</span> <span class="s">"v1/cipher/encode/url"</span><span class="o">,</span> <span class="n">produces</span> <span class="o">=</span> <span class="nc">MediaType</span><span class="o">.</span><span class="na">TEXT_PLAIN_VALUE</span><span class="o">)</span>
+	<span class="kd">public</span> <span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="nf">encodeUrl</span><span class="o">(</span><span class="nd">@RequestBody</span> <span class="nc">DataRequest</span> <span class="n">inputData</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="k">new</span> <span class="nc">ResponseEntity</span><span class="o">&lt;&gt;(</span><span class="n">cipherApi</span><span class="o">.</span><span class="na">encodeUrl</span><span class="o">(</span><span class="n">inputData</span><span class="o">),</span> <span class="nc">HttpStatus</span><span class="o">.</span><span class="na">CREATED</span><span class="o">);</span>
+	<span class="o">}</span>
+
+	<span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">method</span> <span class="o">=</span> <span class="nc">RequestMethod</span><span class="o">.</span><span class="na">POST</span><span class="o">,</span> <span class="n">path</span> <span class="o">=</span> <span class="s">"v1/cipher/decode/url"</span><span class="o">,</span> <span class="n">produces</span> <span class="o">=</span> <span class="nc">MediaType</span><span class="o">.</span><span class="na">TEXT_PLAIN_VALUE</span><span class="o">)</span>
+	<span class="kd">public</span> <span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="nf">decodeUrl</span><span class="o">(</span><span class="nd">@RequestBody</span> <span class="nc">DataRequest</span> <span class="n">inputData</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="k">new</span> <span class="nc">ResponseEntity</span><span class="o">&lt;&gt;(</span><span class="n">cipherApi</span><span class="o">.</span><span class="na">decodeUrl</span><span class="o">(</span><span class="n">inputData</span><span class="o">),</span> <span class="nc">HttpStatus</span><span class="o">.</span><span class="na">CREATED</span><span class="o">);</span>
+	<span class="o">}</span>
+
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<ul>
+  <li>Now, let’s create an interface <code class="language-plaintext highlighter-rouge">CipherApi</code> and the implementation class <code class="language-plaintext highlighter-rouge">CipherControllerApiImpl</code> which will call <code class="language-plaintext highlighter-rouge">CipherService</code> as below</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//CipherApi</span>
+
+<span class="kn">import</span> <span class="nn">com.springboot.project.cipher.api.model.DataRequest</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.springboot.project.cipher.api.model.HmacDataRequest</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.springboot.project.cipher.api.model.MatchDataRequest</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">CipherApi</span> <span class="o">{</span>
+
+	<span class="nc">String</span> <span class="nf">encodeData</span><span class="o">(</span><span class="nc">DataRequest</span> <span class="n">inputData</span><span class="o">);</span>
+
+	<span class="nc">String</span> <span class="nf">decodeData</span><span class="o">(</span><span class="nc">DataRequest</span> <span class="n">inputData</span><span class="o">);</span>
+
+	<span class="nc">String</span> <span class="nf">encodeUrl</span><span class="o">(</span><span class="nc">DataRequest</span> <span class="n">inputData</span><span class="o">);</span>
+
+	<span class="nc">String</span> <span class="nf">decodeUrl</span><span class="o">(</span><span class="nc">DataRequest</span> <span class="n">inputData</span><span class="o">);</span>
+
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<hr />
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="c1">//CipherControllerApiImpl</span>
+
+<span class="kn">package</span> <span class="nn">com.springboot.project.cipher.app.application</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.fasterxml.jackson.databind.ObjectMapper</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.springboot.project.cipher.api.CipherApi</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.springboot.project.cipher.api.model.DataRequest</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.springboot.project.cipher.app.service.CipherService</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RestController</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">lombok.RequiredArgsConstructor</span><span class="o">;</span>
+
+
+<span class="nd">@RestController</span>
+<span class="nd">@RequiredArgsConstructor</span><span class="o">(</span><span class="n">onConstructor</span> <span class="o">=</span><span class="nd">@__</span><span class="o">(</span><span class="nd">@Autowired</span><span class="o">))</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CipherControllerApiImpl</span> <span class="kd">implements</span> <span class="nc">CipherApi</span> <span class="o">{</span>
+
+	<span class="kd">private</span> <span class="kd">final</span> <span class="nc">CipherService</span> <span class="n">cipherService</span><span class="o">;</span>
+
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">encodeData</span><span class="o">(</span><span class="nc">DataRequest</span> <span class="n">inputData</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">cipherService</span><span class="o">.</span><span class="na">encodeBase64</span><span class="o">(</span><span class="n">inputData</span><span class="o">.</span><span class="na">getData</span><span class="o">());</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">decodeData</span><span class="o">(</span><span class="nc">DataRequest</span> <span class="n">inputData</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">cipherService</span><span class="o">.</span><span class="na">decodeBase64</span><span class="o">(</span><span class="n">inputData</span><span class="o">.</span><span class="na">getData</span><span class="o">());</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">encodeUrl</span><span class="o">(</span><span class="nc">DataRequest</span> <span class="n">inputData</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">cipherService</span><span class="o">.</span><span class="na">encodeUrl</span><span class="o">(</span><span class="n">inputData</span><span class="o">.</span><span class="na">getData</span><span class="o">());</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">decodeUrl</span><span class="o">(</span><span class="nc">DataRequest</span> <span class="n">inputData</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">cipherService</span><span class="o">.</span><span class="na">decodeUrl</span><span class="o">(</span><span class="n">inputData</span><span class="o">.</span><span class="na">getData</span><span class="o">());</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">createEncryptKey</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">cipherService</span><span class="o">.</span><span class="na">createEncryptKey</span><span class="o">();</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">encryptData</span><span class="o">(</span><span class="nc">DataRequest</span> <span class="n">inputData</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">cipherService</span><span class="o">.</span><span class="na">encryptData</span><span class="o">(</span><span class="n">inputData</span><span class="o">.</span><span class="na">getData</span><span class="o">());</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">decryptData</span><span class="o">(</span><span class="nc">DataRequest</span> <span class="n">inputData</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">cipherService</span><span class="o">.</span><span class="na">decryptData</span><span class="o">(</span><span class="n">inputData</span><span class="o">.</span><span class="na">getData</span><span class="o">());</span>
+	<span class="o">}</span>
+
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<hr />
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="c1">//CipherControllerApiImpl</span>
+
+<span class="kn">import</span> <span class="nn">com.springboot.project.cipher.app.model.EncryptionConfig</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.stereotype.Service</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.util.Base64Utils</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.util.UriUtils</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.nio.charset.StandardCharsets</span><span class="o">;</span>
+
+<span class="nd">@Service</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CipherService</span> <span class="o">{</span>
+
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">encodeBase64</span><span class="o">(</span><span class="nc">String</span> <span class="n">data</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="nc">Base64Utils</span><span class="o">.</span><span class="na">encodeToString</span><span class="o">(</span><span class="n">data</span><span class="o">.</span><span class="na">getBytes</span><span class="o">());</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">decodeBase64</span><span class="o">(</span><span class="nc">String</span> <span class="n">data</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">String</span><span class="o">(</span><span class="nc">Base64Utils</span><span class="o">.</span><span class="na">decode</span><span class="o">(</span><span class="n">data</span><span class="o">.</span><span class="na">getBytes</span><span class="o">()));</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">encodeUrl</span><span class="o">(</span><span class="nc">String</span> <span class="n">urlString</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="nc">UriUtils</span><span class="o">.</span><span class="na">encode</span><span class="o">(</span><span class="n">urlString</span><span class="o">,</span> <span class="nc">StandardCharsets</span><span class="o">.</span><span class="na">UTF_8</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">decodeUrl</span><span class="o">(</span><span class="nc">String</span> <span class="n">urlString</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="nc">UriUtils</span><span class="o">.</span><span class="na">decode</span><span class="o">(</span><span class="n">urlString</span><span class="o">,</span> <span class="nc">StandardCharsets</span><span class="o">.</span><span class="na">UTF_8</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>Now, run the Spring Boot project and try to call apis by postman, you will see results as below</p>
+  </li>
+  <li>
+    <p>Encode Base64</p>
+  </li>
+</ul>
+
+<p><a href="/assets/images/spring-boot-encode-result.png"><img src="/assets/images/spring-boot-encode-result.png" alt="encode base64 result" title="encode base64 result" /></a></p>
+
+<ul>
+  <li>Decode Base64</li>
+</ul>
+
+<p><a href="/assets/images/spring-boot-decode-result.png"><img src="/assets/images/spring-boot-decode-result.png" alt="decode base64 result" title="decode base64 result" /></a></p>
+
+<ul>
+  <li>Encode Uri</li>
+</ul>
+
+<p><a href="/assets/images/spring-boot-encode-uri-result.png"><img src="/assets/images/spring-boot-encode-uri-result.png" alt="encode uri result" title="encode uri result" /></a></p>
+
+<ul>
+  <li>Decode Uri</li>
+</ul>
+
+<p><a href="/assets/images/spring-boot-decode-uri-result.png"><img src="/assets/images/spring-boot-decode-uri-result.png" alt="decode base64 result" title="decode base64 result" /></a></p>
+
+<h2 id="example-with-encryptdecrypt">EXAMPLE WITH ENCRYPT/DECRYPT</h2>
+
+<ul>
+  <li>
+    <p>In this post, we will do an example with 256-bit AES. Spring Boot has default libraries for us to use encrypt and decrypt with AES, so we don’t need to add more any dependency.</p>
+  </li>
+  <li>
+    <p>So let’s add the codes below into <code class="language-plaintext highlighter-rouge">CipherService</code>.</p>
+  </li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kn">package</span> <span class="nn">com.springboot.project.cipher.app.service</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.springboot.project.cipher.app.exception.CipherException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.springboot.project.cipher.app.model.EncryptionConfig</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.stereotype.Service</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.util.Base64Utils</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.util.UriUtils</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">javax.crypto.Cipher</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.crypto.KeyGenerator</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.crypto.SecretKey</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.crypto.spec.IvParameterSpec</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.crypto.spec.SecretKeySpec</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.xml.bind.DatatypeConverter</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.nio.charset.StandardCharsets</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.security.SecureRandom</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Arrays</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Objects</span><span class="o">;</span>
+
+<span class="nd">@Service</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CipherService</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="nc">String</span> <span class="no">CIPHER_TRANSFORMATION</span> <span class="o">=</span> <span class="s">"AES/CBC/PKCS5PADDING"</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="nc">String</span> <span class="no">ENCRYPTION_ALGORITHM</span> <span class="o">=</span> <span class="s">"AES"</span><span class="o">;</span>
+
+    <span class="nd">@Autowired</span>
+    <span class="kd">private</span> <span class="nc">EncryptionConfig</span> <span class="n">encryptionConfig</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">encodeBase64</span><span class="o">(</span><span class="nc">String</span> <span class="n">data</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="nc">Base64Utils</span><span class="o">.</span><span class="na">encodeToString</span><span class="o">(</span><span class="n">data</span><span class="o">.</span><span class="na">getBytes</span><span class="o">());</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">decodeBase64</span><span class="o">(</span><span class="nc">String</span> <span class="n">data</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">String</span><span class="o">(</span><span class="nc">Base64Utils</span><span class="o">.</span><span class="na">decode</span><span class="o">(</span><span class="n">data</span><span class="o">.</span><span class="na">getBytes</span><span class="o">()));</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">encodeUrl</span><span class="o">(</span><span class="nc">String</span> <span class="n">urlString</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="nc">UriUtils</span><span class="o">.</span><span class="na">encode</span><span class="o">(</span><span class="n">urlString</span><span class="o">,</span> <span class="nc">StandardCharsets</span><span class="o">.</span><span class="na">UTF_8</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">decodeUrl</span><span class="o">(</span><span class="nc">String</span> <span class="n">urlString</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="nc">UriUtils</span><span class="o">.</span><span class="na">decode</span><span class="o">(</span><span class="n">urlString</span><span class="o">,</span> <span class="nc">StandardCharsets</span><span class="o">.</span><span class="na">UTF_8</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">createEncryptKey</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="nc">SecureRandom</span> <span class="n">secureRandom</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">SecureRandom</span><span class="o">();</span>
+            <span class="nc">KeyGenerator</span> <span class="n">keyGenerator</span> <span class="o">=</span> <span class="nc">KeyGenerator</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="no">ENCRYPTION_ALGORITHM</span><span class="o">);</span>
+            <span class="n">keyGenerator</span><span class="o">.</span><span class="na">init</span><span class="o">(</span><span class="mi">256</span><span class="o">,</span> <span class="n">secureRandom</span><span class="o">);</span>
+            <span class="nc">SecretKey</span> <span class="n">key</span> <span class="o">=</span> <span class="n">keyGenerator</span><span class="o">.</span><span class="na">generateKey</span><span class="o">();</span>
+            <span class="k">return</span> <span class="nc">DatatypeConverter</span><span class="o">.</span><span class="na">printHexBinary</span><span class="o">(</span><span class="n">key</span><span class="o">.</span><span class="na">getEncoded</span><span class="o">());</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">ex</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nf">CipherException</span><span class="o">(</span><span class="s">"Can not generate Secret Key"</span><span class="o">,</span> <span class="n">ex</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">encryptData</span><span class="o">(</span><span class="nc">String</span> <span class="n">data</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="nc">Cipher</span> <span class="n">cipher</span> <span class="o">=</span> <span class="nc">Cipher</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="no">CIPHER_TRANSFORMATION</span><span class="o">);</span>
+            <span class="kt">byte</span><span class="o">[]</span> <span class="n">key</span> <span class="o">=</span> <span class="nc">DatatypeConverter</span><span class="o">.</span><span class="na">parseHexBinary</span><span class="o">(</span><span class="n">encryptionConfig</span><span class="o">.</span><span class="na">getAes</span><span class="o">().</span><span class="na">getSecret</span><span class="o">());</span>
+            <span class="nc">SecretKeySpec</span> <span class="n">secretKeySpec</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">SecretKeySpec</span><span class="o">(</span><span class="n">key</span><span class="o">,</span> <span class="no">ENCRYPTION_ALGORITHM</span><span class="o">);</span>
+            <span class="k">if</span> <span class="o">(</span><span class="nc">Objects</span><span class="o">.</span><span class="na">isNull</span><span class="o">(</span><span class="n">encryptionConfig</span><span class="o">.</span><span class="na">getAes</span><span class="o">().</span><span class="na">getIvSecret</span><span class="o">()))</span> <span class="o">{</span>
+                <span class="kt">byte</span><span class="o">[]</span> <span class="n">ivParameterSpecKey</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">generateIvParameterSpec</span><span class="o">();</span>
+                <span class="nc">IvParameterSpec</span> <span class="n">ivParameterSpec</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">IvParameterSpec</span><span class="o">(</span><span class="n">ivParameterSpecKey</span><span class="o">);</span>
+                <span class="n">cipher</span><span class="o">.</span><span class="na">init</span><span class="o">(</span><span class="nc">Cipher</span><span class="o">.</span><span class="na">ENCRYPT_MODE</span><span class="o">,</span> <span class="n">secretKeySpec</span><span class="o">,</span> <span class="n">ivParameterSpec</span><span class="o">);</span>
+                <span class="kt">byte</span><span class="o">[]</span> <span class="n">encryptedData</span> <span class="o">=</span> <span class="n">cipher</span><span class="o">.</span><span class="na">doFinal</span><span class="o">(</span><span class="n">data</span><span class="o">.</span><span class="na">getBytes</span><span class="o">(</span><span class="nc">StandardCharsets</span><span class="o">.</span><span class="na">UTF_8</span><span class="o">));</span>
+                <span class="nc">String</span> <span class="n">ivParameterSpecKeyString</span> <span class="o">=</span> <span class="nc">DatatypeConverter</span><span class="o">.</span><span class="na">printHexBinary</span><span class="o">(</span><span class="n">ivParameterSpecKey</span><span class="o">);</span>
+                <span class="nc">String</span> <span class="n">encryptedDataString</span> <span class="o">=</span> <span class="nc">DatatypeConverter</span><span class="o">.</span><span class="na">printHexBinary</span><span class="o">(</span><span class="n">encryptedData</span><span class="o">);</span>
+                <span class="k">return</span> <span class="n">ivParameterSpecKeyString</span><span class="o">.</span><span class="na">concat</span><span class="o">(</span><span class="n">encryptedDataString</span><span class="o">);</span>
+            <span class="o">}</span>
+            <span class="nc">IvParameterSpec</span> <span class="n">ivParameterSpec</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">IvParameterSpec</span><span class="o">(</span><span class="n">encryptionConfig</span>
+                    <span class="o">.</span><span class="na">getAes</span><span class="o">()</span>
+                    <span class="o">.</span><span class="na">getIvSecret</span><span class="o">()</span>
+                    <span class="o">.</span><span class="na">getBytes</span><span class="o">(</span><span class="nc">StandardCharsets</span><span class="o">.</span><span class="na">UTF_8</span><span class="o">));</span>
+            <span class="n">cipher</span><span class="o">.</span><span class="na">init</span><span class="o">(</span><span class="nc">Cipher</span><span class="o">.</span><span class="na">ENCRYPT_MODE</span><span class="o">,</span> <span class="n">secretKeySpec</span><span class="o">,</span> <span class="n">ivParameterSpec</span><span class="o">);</span>
+            <span class="kt">byte</span><span class="o">[]</span> <span class="n">encryptedData</span> <span class="o">=</span> <span class="n">cipher</span><span class="o">.</span><span class="na">doFinal</span><span class="o">(</span><span class="n">data</span><span class="o">.</span><span class="na">getBytes</span><span class="o">(</span><span class="nc">StandardCharsets</span><span class="o">.</span><span class="na">UTF_8</span><span class="o">));</span>
+            <span class="k">return</span> <span class="nc">DatatypeConverter</span><span class="o">.</span><span class="na">printHexBinary</span><span class="o">(</span><span class="n">encryptedData</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">ex</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nf">CipherException</span><span class="o">(</span><span class="s">"Can not encrypt Data"</span><span class="o">,</span> <span class="n">ex</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">decryptData</span><span class="o">(</span><span class="nc">String</span> <span class="n">data</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="nc">Cipher</span> <span class="n">cipher</span> <span class="o">=</span> <span class="nc">Cipher</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="no">CIPHER_TRANSFORMATION</span><span class="o">);</span>
+            <span class="kt">byte</span><span class="o">[]</span> <span class="n">key</span> <span class="o">=</span> <span class="nc">DatatypeConverter</span><span class="o">.</span><span class="na">parseHexBinary</span><span class="o">(</span><span class="n">encryptionConfig</span><span class="o">.</span><span class="na">getAes</span><span class="o">().</span><span class="na">getSecret</span><span class="o">());</span>
+            <span class="nc">SecretKeySpec</span> <span class="n">secretKeySpec</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">SecretKeySpec</span><span class="o">(</span><span class="n">key</span><span class="o">,</span> <span class="no">ENCRYPTION_ALGORITHM</span><span class="o">);</span>
+            <span class="kt">byte</span><span class="o">[]</span> <span class="n">dataBytes</span> <span class="o">=</span> <span class="nc">DatatypeConverter</span><span class="o">.</span><span class="na">parseHexBinary</span><span class="o">(</span><span class="n">data</span><span class="o">);</span>
+            <span class="k">if</span> <span class="o">(</span><span class="nc">Objects</span><span class="o">.</span><span class="na">isNull</span><span class="o">(</span><span class="n">encryptionConfig</span><span class="o">.</span><span class="na">getAes</span><span class="o">().</span><span class="na">getIvSecret</span><span class="o">())</span> <span class="o">&amp;&amp;</span> <span class="n">dataBytes</span><span class="o">.</span><span class="na">length</span> <span class="o">&gt;</span> <span class="mi">16</span><span class="o">)</span> <span class="o">{</span>
+                <span class="kt">byte</span><span class="o">[]</span> <span class="n">ivParameterSpecKey</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">getIvParameterSpecKey</span><span class="o">(</span><span class="n">dataBytes</span><span class="o">);</span>
+                <span class="kt">byte</span><span class="o">[]</span> <span class="n">payload</span> <span class="o">=</span> <span class="nc">Arrays</span><span class="o">.</span><span class="na">copyOfRange</span><span class="o">(</span><span class="n">dataBytes</span><span class="o">,</span> <span class="mi">16</span><span class="o">,</span> <span class="n">dataBytes</span><span class="o">.</span><span class="na">length</span><span class="o">);</span>
+                <span class="nc">IvParameterSpec</span> <span class="n">ivParameterSpec</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">IvParameterSpec</span><span class="o">(</span><span class="n">ivParameterSpecKey</span><span class="o">);</span>
+                <span class="n">cipher</span><span class="o">.</span><span class="na">init</span><span class="o">(</span><span class="nc">Cipher</span><span class="o">.</span><span class="na">DECRYPT_MODE</span><span class="o">,</span> <span class="n">secretKeySpec</span><span class="o">,</span> <span class="n">ivParameterSpec</span><span class="o">);</span>
+                <span class="kt">byte</span><span class="o">[]</span> <span class="n">decryptedData</span> <span class="o">=</span> <span class="n">cipher</span><span class="o">.</span><span class="na">doFinal</span><span class="o">(</span><span class="n">payload</span><span class="o">);</span>
+                <span class="k">return</span> <span class="k">new</span> <span class="nf">String</span><span class="o">(</span><span class="n">decryptedData</span><span class="o">,</span> <span class="nc">StandardCharsets</span><span class="o">.</span><span class="na">UTF_8</span><span class="o">);</span>
+            <span class="o">}</span>
+            <span class="nc">IvParameterSpec</span> <span class="n">ivParameterSpec</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">IvParameterSpec</span><span class="o">(</span><span class="n">encryptionConfig</span>
+                    <span class="o">.</span><span class="na">getAes</span><span class="o">()</span>
+                    <span class="o">.</span><span class="na">getIvSecret</span><span class="o">()</span>
+                    <span class="o">.</span><span class="na">getBytes</span><span class="o">(</span><span class="nc">StandardCharsets</span><span class="o">.</span><span class="na">UTF_8</span><span class="o">));</span>
+            <span class="n">cipher</span><span class="o">.</span><span class="na">init</span><span class="o">(</span><span class="nc">Cipher</span><span class="o">.</span><span class="na">DECRYPT_MODE</span><span class="o">,</span> <span class="n">secretKeySpec</span><span class="o">,</span> <span class="n">ivParameterSpec</span><span class="o">);</span>
+            <span class="kt">byte</span><span class="o">[]</span> <span class="n">decryptedData</span> <span class="o">=</span> <span class="n">cipher</span><span class="o">.</span><span class="na">doFinal</span><span class="o">(</span><span class="n">dataBytes</span><span class="o">);</span>
+            <span class="k">return</span> <span class="k">new</span> <span class="nf">String</span><span class="o">(</span><span class="n">decryptedData</span><span class="o">,</span> <span class="nc">StandardCharsets</span><span class="o">.</span><span class="na">UTF_8</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">ex</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nf">CipherException</span><span class="o">(</span><span class="s">"Can not decrypt Data"</span><span class="o">,</span> <span class="n">ex</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kt">byte</span><span class="o">[]</span> <span class="nf">generateIvParameterSpec</span><span class="o">()</span> <span class="o">{</span>
+        <span class="kt">byte</span><span class="o">[]</span> <span class="n">iv</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">byte</span><span class="o">[</span><span class="mi">16</span><span class="o">];</span>
+        <span class="nc">SecureRandom</span> <span class="n">random</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">SecureRandom</span><span class="o">();</span>
+        <span class="n">random</span><span class="o">.</span><span class="na">nextBytes</span><span class="o">(</span><span class="n">iv</span><span class="o">);</span>
+        <span class="k">return</span> <span class="n">iv</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kt">byte</span><span class="o">[]</span> <span class="nf">getIvParameterSpecKey</span><span class="o">(</span><span class="kt">byte</span><span class="o">[]</span> <span class="n">dataBytes</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="nc">Arrays</span><span class="o">.</span><span class="na">copyOfRange</span><span class="o">(</span><span class="n">dataBytes</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">16</span><span class="o">);</span>
+    <span class="o">}</span>
+
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<ul>
+  <li>So the first method <code class="language-plaintext highlighter-rouge">createEncryptKey</code> is used to create a 256-bit AES secret key. In this method we will use <code class="language-plaintext highlighter-rouge">KeyGenerator</code> to generate 256 bits AES secret key. As we know 1 bytes = 8 bits, so 256 bits = 32 bytes and when we convert 32 bytes to string type with the support of <code class="language-plaintext highlighter-rouge">DatatypeConverter.printHexBinary</code>, we will received a string with 64 characters.</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+&lt;!-- Example 256-bits AES String Key --&gt;
+
+0EFBADA688B68590B23BDF10EA0CBEAC3C94F5CE86A8E62642CD575012A59CF8
+
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>Then the second method <code class="language-plaintext highlighter-rouge">encryptData</code> is used to encrypt data by AES. Spring Boot provide an api java call <code class="language-plaintext highlighter-rouge">Cipher</code> to do encrypt and decrypt. So if we want to use AES, we have to getInstance Cipher for AES by using <code class="language-plaintext highlighter-rouge">Cipher.getInstance("AES/CBC/PKCS5PADDING")</code>, then init the <strong>cipher</strong> with 3 main params, <strong>Cipher Mode</strong>, <strong>SecretKeySpec</strong> and <strong>IvParameterSpec</strong>.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Cipher Mode</code>: Define the mode of Cipher that we want to use (Encrypt or Decrypt…)</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">SecretKeySpec</code>: <code class="language-plaintext highlighter-rouge">SecretKey</code> is an interface and <code class="language-plaintext highlighter-rouge">SecretKeySpec</code> is an implementation of <code class="language-plaintext highlighter-rouge">SecretKey</code>. Every <code class="language-plaintext highlighter-rouge">SecretKey</code> has an associated algorithm name. So to make Cipher understands that which type of keys that you are using, so we need to create <code class="language-plaintext highlighter-rouge">SecretKeySpec</code> which contains our <strong>secret key</strong> and <strong>algorithm name</strong>.</p>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">IvParameterSpec</code>: When using AES with a mode known as CBC (Cipher Block Chaining), you need to generate an initialization vector (IV).
+    <ul>
+      <li>An initialization vector (IV) or starting variable is a block of bits that is used by several modes to randomize the encryption and hence to produce distinct ciphertexts even if the same plaintext is encrypted multiple times, without the need for a slower re-keying process.</li>
+      <li>In CBC mode, each block of plaintext is XORed with the previous ciphertext block before being encrypted. Each ciphertext block depends on all plaintext blocks processed up to that point. To make each message unique, an initialization vector must be used in the first block.</li>
+      <li>For CBC and CFB, reusing an IV leaks some information about the first block of plaintext, and about any common prefix shared by the two messages, so we need to generate IV randomly for every encoding.</li>
+      <li><a href="https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation">More information</a></li>
+    </ul>
+  </li>
+  <li>So in method <code class="language-plaintext highlighter-rouge">encryptData</code> you can see we generate random IV every time this method is called, so it will make encrypted data will be different although we use the same input data for encryption. After the encryption has done we will add the IV key together with the encrypted data then the method <code class="language-plaintext highlighter-rouge">decryptData</code> will use this IV key for decryption. Let’s see the example below</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>Times</th>
+      <th>Original</th>
+      <th>Encrypted Data Contain IV Key</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>minhduc</td>
+      <td>8689D232432F34D52BAE769CAF6F8D38BD4C44ADB22445A3F5F0D6825741F437</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>minhduc</td>
+      <td>70184CA95125BBEC963B17D8E4FE1374C591C967C749C3C8C5378201539CD0FE</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>minhduc</td>
+      <td>057499CD9561BED01B084CE9C3455A41AB7490CB2B98EC239761AD45CE49AEA1</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>
+    <p>Now, The final method is <code class="language-plaintext highlighter-rouge">decryptData</code>, in this method, we just simply extract the encrypted data to get the IV key, then we will do decryption with steps like encryption but we use value <strong>Decrypt</strong> for <code class="language-plaintext highlighter-rouge">Cipher Mode</code>.</p>
+  </li>
+  <li>
+    <p>So, let’s add more apis in controller class named <code class="language-plaintext highlighter-rouge">CipherControllerApi</code> and  <code class="language-plaintext highlighter-rouge">CipherApi</code> and <code class="language-plaintext highlighter-rouge">CipherControllerApiImpl</code> classes as below</p>
+  </li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// CipherControllerApi</span>
+
+
+<span class="kn">package</span> <span class="nn">com.springboot.project.root.application.controller</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.springboot.project.cipher.api.CipherApi</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.springboot.project.cipher.api.model.DataRequest</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.http.HttpStatus</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.http.MediaType</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.http.ResponseEntity</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.*</span><span class="o">;</span>
+
+<span class="nd">@RestController</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CipherControllerApi</span> <span class="o">{</span>
+
+	<span class="nd">@Autowired</span>
+	<span class="kd">private</span> <span class="nc">CipherApi</span> <span class="n">cipherApi</span><span class="o">;</span>
+
+	<span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">method</span> <span class="o">=</span> <span class="nc">RequestMethod</span><span class="o">.</span><span class="na">POST</span><span class="o">,</span> <span class="n">path</span> <span class="o">=</span> <span class="s">"v1/cipher/encode/base64"</span><span class="o">,</span> <span class="n">produces</span> <span class="o">=</span> <span class="nc">MediaType</span><span class="o">.</span><span class="na">TEXT_PLAIN_VALUE</span><span class="o">)</span>
+	<span class="kd">public</span> <span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="nf">encodeData</span><span class="o">(</span><span class="nd">@RequestBody</span> <span class="nc">DataRequest</span> <span class="n">inputData</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="k">new</span> <span class="nc">ResponseEntity</span><span class="o">&lt;&gt;(</span><span class="n">cipherApi</span><span class="o">.</span><span class="na">encodeData</span><span class="o">(</span><span class="n">inputData</span><span class="o">),</span> <span class="nc">HttpStatus</span><span class="o">.</span><span class="na">CREATED</span><span class="o">);</span>
+	<span class="o">}</span>
+
+	<span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">method</span> <span class="o">=</span> <span class="nc">RequestMethod</span><span class="o">.</span><span class="na">POST</span><span class="o">,</span> <span class="n">path</span> <span class="o">=</span> <span class="s">"v1/cipher/decode/base64"</span><span class="o">,</span> <span class="n">produces</span> <span class="o">=</span> <span class="nc">MediaType</span><span class="o">.</span><span class="na">TEXT_PLAIN_VALUE</span><span class="o">)</span>
+	<span class="kd">public</span> <span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="nf">decodeData</span><span class="o">(</span><span class="nd">@RequestBody</span> <span class="nc">DataRequest</span> <span class="n">inputData</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="k">new</span> <span class="nc">ResponseEntity</span><span class="o">&lt;&gt;(</span><span class="n">cipherApi</span><span class="o">.</span><span class="na">decodeData</span><span class="o">(</span><span class="n">inputData</span><span class="o">),</span> <span class="nc">HttpStatus</span><span class="o">.</span><span class="na">CREATED</span><span class="o">);</span>
+	<span class="o">}</span>
+
+	<span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">method</span> <span class="o">=</span> <span class="nc">RequestMethod</span><span class="o">.</span><span class="na">POST</span><span class="o">,</span> <span class="n">path</span> <span class="o">=</span> <span class="s">"v1/cipher/encode/url"</span><span class="o">,</span> <span class="n">produces</span> <span class="o">=</span> <span class="nc">MediaType</span><span class="o">.</span><span class="na">TEXT_PLAIN_VALUE</span><span class="o">)</span>
+	<span class="kd">public</span> <span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="nf">encodeUrl</span><span class="o">(</span><span class="nd">@RequestBody</span> <span class="nc">DataRequest</span> <span class="n">inputData</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="k">new</span> <span class="nc">ResponseEntity</span><span class="o">&lt;&gt;(</span><span class="n">cipherApi</span><span class="o">.</span><span class="na">encodeUrl</span><span class="o">(</span><span class="n">inputData</span><span class="o">),</span> <span class="nc">HttpStatus</span><span class="o">.</span><span class="na">CREATED</span><span class="o">);</span>
+	<span class="o">}</span>
+
+	<span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">method</span> <span class="o">=</span> <span class="nc">RequestMethod</span><span class="o">.</span><span class="na">POST</span><span class="o">,</span> <span class="n">path</span> <span class="o">=</span> <span class="s">"v1/cipher/decode/url"</span><span class="o">,</span> <span class="n">produces</span> <span class="o">=</span> <span class="nc">MediaType</span><span class="o">.</span><span class="na">TEXT_PLAIN_VALUE</span><span class="o">)</span>
+	<span class="kd">public</span> <span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="nf">decodeUrl</span><span class="o">(</span><span class="nd">@RequestBody</span> <span class="nc">DataRequest</span> <span class="n">inputData</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="k">new</span> <span class="nc">ResponseEntity</span><span class="o">&lt;&gt;(</span><span class="n">cipherApi</span><span class="o">.</span><span class="na">decodeUrl</span><span class="o">(</span><span class="n">inputData</span><span class="o">),</span> <span class="nc">HttpStatus</span><span class="o">.</span><span class="na">CREATED</span><span class="o">);</span>
+	<span class="o">}</span>
+
+	<span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">method</span> <span class="o">=</span> <span class="nc">RequestMethod</span><span class="o">.</span><span class="na">GET</span><span class="o">,</span> <span class="n">path</span> <span class="o">=</span> <span class="s">"v1/cipher/encrypt/key"</span><span class="o">,</span> <span class="n">produces</span> <span class="o">=</span> <span class="nc">MediaType</span><span class="o">.</span><span class="na">TEXT_PLAIN_VALUE</span><span class="o">)</span>
+	<span class="kd">public</span> <span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="nf">createEncryptKey</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="k">new</span> <span class="nc">ResponseEntity</span><span class="o">&lt;&gt;(</span><span class="n">cipherApi</span><span class="o">.</span><span class="na">createEncryptKey</span><span class="o">(),</span> <span class="nc">HttpStatus</span><span class="o">.</span><span class="na">CREATED</span><span class="o">);</span>
+	<span class="o">}</span>
+
+	<span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">method</span> <span class="o">=</span> <span class="nc">RequestMethod</span><span class="o">.</span><span class="na">POST</span><span class="o">,</span> <span class="n">path</span> <span class="o">=</span> <span class="s">"v1/cipher/encrypt"</span><span class="o">,</span> <span class="n">produces</span> <span class="o">=</span> <span class="nc">MediaType</span><span class="o">.</span><span class="na">TEXT_PLAIN_VALUE</span><span class="o">)</span>
+	<span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="nf">encryptData</span><span class="o">(</span><span class="nd">@RequestBody</span> <span class="nc">DataRequest</span> <span class="n">inputData</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="k">new</span> <span class="nc">ResponseEntity</span><span class="o">&lt;&gt;(</span><span class="n">cipherApi</span><span class="o">.</span><span class="na">encryptData</span><span class="o">(</span><span class="n">inputData</span><span class="o">),</span> <span class="nc">HttpStatus</span><span class="o">.</span><span class="na">CREATED</span><span class="o">);</span>
+	<span class="o">}</span>
+
+	<span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">method</span> <span class="o">=</span> <span class="nc">RequestMethod</span><span class="o">.</span><span class="na">POST</span><span class="o">,</span> <span class="n">path</span> <span class="o">=</span> <span class="s">"v1/cipher/decrypt"</span><span class="o">,</span> <span class="n">produces</span> <span class="o">=</span> <span class="nc">MediaType</span><span class="o">.</span><span class="na">TEXT_PLAIN_VALUE</span><span class="o">)</span>
+	<span class="kd">public</span> <span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="nf">decryptData</span><span class="o">(</span><span class="nd">@RequestBody</span> <span class="nc">DataRequest</span> <span class="n">inputData</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="k">new</span> <span class="nc">ResponseEntity</span><span class="o">&lt;&gt;(</span><span class="n">cipherApi</span><span class="o">.</span><span class="na">decryptData</span><span class="o">(</span><span class="n">inputData</span><span class="o">),</span> <span class="nc">HttpStatus</span><span class="o">.</span><span class="na">CREATED</span><span class="o">);</span>
+	<span class="o">}</span>
+
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<hr />
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="c1">//CipherApi</span>
+
+<span class="kn">package</span> <span class="nn">com.springboot.project.cipher.api</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.springboot.project.cipher.api.model.DataRequest</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">CipherApi</span> <span class="o">{</span>
+
+	<span class="nc">String</span> <span class="nf">encodeData</span><span class="o">(</span><span class="nc">DataRequest</span> <span class="n">inputData</span><span class="o">);</span>
+
+	<span class="nc">String</span> <span class="nf">decodeData</span><span class="o">(</span><span class="nc">DataRequest</span> <span class="n">inputData</span><span class="o">);</span>
+
+	<span class="nc">String</span> <span class="nf">encodeUrl</span><span class="o">(</span><span class="nc">DataRequest</span> <span class="n">inputData</span><span class="o">);</span>
+
+	<span class="nc">String</span> <span class="nf">decodeUrl</span><span class="o">(</span><span class="nc">DataRequest</span> <span class="n">inputData</span><span class="o">);</span>
+
+	<span class="nc">String</span> <span class="nf">createEncryptKey</span><span class="o">();</span>
+
+	<span class="nc">String</span> <span class="nf">encryptData</span><span class="o">(</span><span class="nc">DataRequest</span> <span class="n">inputData</span><span class="o">);</span>
+
+	<span class="nc">String</span> <span class="nf">decryptData</span><span class="o">(</span><span class="nc">DataRequest</span> <span class="n">inputData</span><span class="o">);</span>
+
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<hr />
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="c1">//CipherControllerApiImpl</span>
+
+<span class="kn">package</span> <span class="nn">com.springboot.project.cipher.app.application</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.springboot.project.cipher.api.CipherApi</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.springboot.project.cipher.api.model.DataRequest</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.springboot.project.cipher.app.service.CipherService</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RestController</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">lombok.RequiredArgsConstructor</span><span class="o">;</span>
+
+
+<span class="nd">@RestController</span>
+<span class="nd">@RequiredArgsConstructor</span><span class="o">(</span><span class="n">onConstructor</span> <span class="o">=</span><span class="nd">@__</span><span class="o">(</span><span class="nd">@Autowired</span><span class="o">))</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CipherControllerApiImpl</span> <span class="kd">implements</span> <span class="nc">CipherApi</span> <span class="o">{</span>
+
+	<span class="kd">private</span> <span class="kd">final</span> <span class="nc">CipherService</span> <span class="n">cipherService</span><span class="o">;</span>
+
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">encodeData</span><span class="o">(</span><span class="nc">DataRequest</span> <span class="n">inputData</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">cipherService</span><span class="o">.</span><span class="na">encodeBase64</span><span class="o">(</span><span class="n">inputData</span><span class="o">.</span><span class="na">getData</span><span class="o">());</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">decodeData</span><span class="o">(</span><span class="nc">DataRequest</span> <span class="n">inputData</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">cipherService</span><span class="o">.</span><span class="na">decodeBase64</span><span class="o">(</span><span class="n">inputData</span><span class="o">.</span><span class="na">getData</span><span class="o">());</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">encodeUrl</span><span class="o">(</span><span class="nc">DataRequest</span> <span class="n">inputData</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">cipherService</span><span class="o">.</span><span class="na">encodeUrl</span><span class="o">(</span><span class="n">inputData</span><span class="o">.</span><span class="na">getData</span><span class="o">());</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">decodeUrl</span><span class="o">(</span><span class="nc">DataRequest</span> <span class="n">inputData</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">cipherService</span><span class="o">.</span><span class="na">decodeUrl</span><span class="o">(</span><span class="n">inputData</span><span class="o">.</span><span class="na">getData</span><span class="o">());</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">createEncryptKey</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">cipherService</span><span class="o">.</span><span class="na">createEncryptKey</span><span class="o">();</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">encryptData</span><span class="o">(</span><span class="nc">DataRequest</span> <span class="n">inputData</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">cipherService</span><span class="o">.</span><span class="na">encryptData</span><span class="o">(</span><span class="n">inputData</span><span class="o">.</span><span class="na">getData</span><span class="o">());</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">decryptData</span><span class="o">(</span><span class="nc">DataRequest</span> <span class="n">inputData</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">cipherService</span><span class="o">.</span><span class="na">decryptData</span><span class="o">(</span><span class="n">inputData</span><span class="o">.</span><span class="na">getData</span><span class="o">());</span>
+	<span class="o">}</span>
+
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>Now, run the Spring Boot project and try to call apis for testing.</p>
+  </li>
+  <li>
+    <p>Firstly, you can use api <strong>v1/cipher/encrypt/key</strong> to create a random AES-256 secret key or you can also go to <a href="https://www.allkeysgenerator.com/Random/Security-Encryption-Key-Generator.aspx">this page</a> to get one.</p>
+  </li>
+</ul>
+
+<p><a href="/assets/images/spring-boot-generate-AES-256-secret-key-result.png"><img src="/assets/images/spring-boot-generate-AES-256-secret-key-result.png" alt="generate AES 256 secret key" title="generate AES 256 secret key" /></a></p>
+
+<ul>
+  <li>Then you can put the AES-256 secret key into the <strong>application.yml</strong> as below, then you can load it into your <code class="language-plaintext highlighter-rouge">CipherService</code>.</li>
+</ul>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="na">cipher</span><span class="pi">:</span>
+  <span class="na">encryption</span><span class="pi">:</span>
+    <span class="na">aes</span><span class="pi">:</span>
+<span class="c1">#      ivSecret: 94A15E1F08550FF2</span>
+      <span class="na">secret</span><span class="pi">:</span> <span class="s">1A40C17CA7B7BED888D1E439BFD393C306E53086712AB4CD6940028C51916337</span>
+
+</code></pre></div></div>
+
+<ul>
+  <li>Next, you should restart your service again to reload your AES-256 secret key configuration. Then we can call api <strong>v1/cipher/encrypt</strong> to encrypt your data. Note that, every time you send a request you will always get a different ciphertext although your input data is the same, this is the result of using random IV as explained above.</li>
+</ul>
+
+<p><a href="/assets/images/spring-boot-encrypt-AES-256-data-result.png"><img src="/assets/images/spring-boot-encrypt-AES-256-data-result.png" alt="encrypt data with AES 256" title="encrypt data with AES 256" /></a></p>
+
+<ul>
+  <li>Then we can use api <strong>v1/cipher/decrypt</strong> to decrypt your ciphertexts above.</li>
+</ul>
+
+<p><a href="/assets/images/spring-boot-decrypt-AES-256-data-result.png"><img src="/assets/images/spring-boot-decrypt-AES-256-data-result.png" alt="decrypt data with AES 256" title="encrypt data with AES 256" /></a></p>
+
+<h2 id="example-with-hash-and-salt">EXAMPLE WITH HASH AND SALT</h2>
+
+<ul>
+  <li>
+    <p>In this example we will use SHA-256, there is a SHA-512 which use newer hashing algorithms and usually used in blockchain, but in require more bandwidth to store and transmit data. So in projects which are not blockchain I recommend we use SHA-256 because in recent It is lightweight and still secure for us.</p>
+  </li>
+  <li>
+    <p>Now let’s add more two methods <code class="language-plaintext highlighter-rouge">hashSHA256</code> and <code class="language-plaintext highlighter-rouge">isSHA256Match</code> below into <code class="language-plaintext highlighter-rouge">CipherService</code> for Hash data and checking the hashed data with the original.</p>
+  </li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="c1">//CipherService</span>
+<span class="kn">package</span> <span class="nn">com.springboot.project.cipher.app.service</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.springboot.project.cipher.app.exception.CipherException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.springboot.project.cipher.app.model.EncryptionConfig</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.stereotype.Service</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.util.Base64Utils</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.util.UriUtils</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">javax.crypto.Cipher</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.crypto.KeyGenerator</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.crypto.SecretKey</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.crypto.spec.IvParameterSpec</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.crypto.spec.SecretKeySpec</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.xml.bind.DatatypeConverter</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.nio.charset.StandardCharsets</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.security.MessageDigest</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.security.SecureRandom</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Arrays</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Objects</span><span class="o">;</span>
+
+
+<span class="nd">@Service</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CipherService</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="nc">String</span> <span class="no">CIPHER_TRANSFORMATION</span> <span class="o">=</span> <span class="s">"AES/CBC/PKCS5PADDING"</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="nc">String</span> <span class="no">ENCRYPTION_ALGORITHM</span> <span class="o">=</span> <span class="s">"AES"</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="nc">String</span> <span class="no">HASH_ALGORITHM</span> <span class="o">=</span> <span class="s">"SHA-256"</span><span class="o">;</span>
+
+    <span class="nd">@Autowired</span>
+    <span class="kd">private</span> <span class="nc">EncryptionConfig</span> <span class="n">encryptionConfig</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">encodeBase64</span><span class="o">(</span><span class="nc">String</span> <span class="n">data</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="nc">Base64Utils</span><span class="o">.</span><span class="na">encodeToString</span><span class="o">(</span><span class="n">data</span><span class="o">.</span><span class="na">getBytes</span><span class="o">());</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">decodeBase64</span><span class="o">(</span><span class="nc">String</span> <span class="n">data</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">String</span><span class="o">(</span><span class="nc">Base64Utils</span><span class="o">.</span><span class="na">decode</span><span class="o">(</span><span class="n">data</span><span class="o">.</span><span class="na">getBytes</span><span class="o">()));</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">encodeUrl</span><span class="o">(</span><span class="nc">String</span> <span class="n">urlString</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="nc">UriUtils</span><span class="o">.</span><span class="na">encode</span><span class="o">(</span><span class="n">urlString</span><span class="o">,</span> <span class="nc">StandardCharsets</span><span class="o">.</span><span class="na">UTF_8</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">decodeUrl</span><span class="o">(</span><span class="nc">String</span> <span class="n">urlString</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="nc">UriUtils</span><span class="o">.</span><span class="na">decode</span><span class="o">(</span><span class="n">urlString</span><span class="o">,</span> <span class="nc">StandardCharsets</span><span class="o">.</span><span class="na">UTF_8</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">createEncryptKey</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="nc">SecureRandom</span> <span class="n">secureRandom</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">SecureRandom</span><span class="o">();</span>
+            <span class="nc">KeyGenerator</span> <span class="n">keyGenerator</span> <span class="o">=</span> <span class="nc">KeyGenerator</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="no">ENCRYPTION_ALGORITHM</span><span class="o">);</span>
+            <span class="n">keyGenerator</span><span class="o">.</span><span class="na">init</span><span class="o">(</span><span class="mi">256</span><span class="o">,</span> <span class="n">secureRandom</span><span class="o">);</span>
+            <span class="nc">SecretKey</span> <span class="n">key</span> <span class="o">=</span> <span class="n">keyGenerator</span><span class="o">.</span><span class="na">generateKey</span><span class="o">();</span>
+            <span class="k">return</span> <span class="nc">DatatypeConverter</span><span class="o">.</span><span class="na">printHexBinary</span><span class="o">(</span><span class="n">key</span><span class="o">.</span><span class="na">getEncoded</span><span class="o">());</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">ex</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nf">CipherException</span><span class="o">(</span><span class="s">"Can not generate Secret Key"</span><span class="o">,</span> <span class="n">ex</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">encryptData</span><span class="o">(</span><span class="nc">String</span> <span class="n">data</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="nc">Cipher</span> <span class="n">cipher</span> <span class="o">=</span> <span class="nc">Cipher</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="no">CIPHER_TRANSFORMATION</span><span class="o">);</span>
+            <span class="kt">byte</span><span class="o">[]</span> <span class="n">key</span> <span class="o">=</span> <span class="nc">DatatypeConverter</span><span class="o">.</span><span class="na">parseHexBinary</span><span class="o">(</span><span class="n">encryptionConfig</span><span class="o">.</span><span class="na">getAes</span><span class="o">().</span><span class="na">getSecret</span><span class="o">());</span>
+            <span class="nc">SecretKeySpec</span> <span class="n">secretKeySpec</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">SecretKeySpec</span><span class="o">(</span><span class="n">key</span><span class="o">,</span> <span class="no">ENCRYPTION_ALGORITHM</span><span class="o">);</span>
+            <span class="k">if</span> <span class="o">(</span><span class="nc">Objects</span><span class="o">.</span><span class="na">isNull</span><span class="o">(</span><span class="n">encryptionConfig</span><span class="o">.</span><span class="na">getAes</span><span class="o">().</span><span class="na">getIvSecret</span><span class="o">()))</span> <span class="o">{</span>
+                <span class="kt">byte</span><span class="o">[]</span> <span class="n">ivParameterSpecKey</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">generateIvParameterSpec</span><span class="o">();</span>
+                <span class="nc">IvParameterSpec</span> <span class="n">ivParameterSpec</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">IvParameterSpec</span><span class="o">(</span><span class="n">ivParameterSpecKey</span><span class="o">);</span>
+                <span class="n">cipher</span><span class="o">.</span><span class="na">init</span><span class="o">(</span><span class="nc">Cipher</span><span class="o">.</span><span class="na">ENCRYPT_MODE</span><span class="o">,</span> <span class="n">secretKeySpec</span><span class="o">,</span> <span class="n">ivParameterSpec</span><span class="o">);</span>
+                <span class="kt">byte</span><span class="o">[]</span> <span class="n">encryptedData</span> <span class="o">=</span> <span class="n">cipher</span><span class="o">.</span><span class="na">doFinal</span><span class="o">(</span><span class="n">data</span><span class="o">.</span><span class="na">getBytes</span><span class="o">(</span><span class="nc">StandardCharsets</span><span class="o">.</span><span class="na">UTF_8</span><span class="o">));</span>
+                <span class="nc">String</span> <span class="n">ivParameterSpecKeyString</span> <span class="o">=</span> <span class="nc">DatatypeConverter</span><span class="o">.</span><span class="na">printHexBinary</span><span class="o">(</span><span class="n">ivParameterSpecKey</span><span class="o">);</span>
+                <span class="nc">String</span> <span class="n">encryptedDataString</span> <span class="o">=</span> <span class="nc">DatatypeConverter</span><span class="o">.</span><span class="na">printHexBinary</span><span class="o">(</span><span class="n">encryptedData</span><span class="o">);</span>
+                <span class="k">return</span> <span class="n">ivParameterSpecKeyString</span><span class="o">.</span><span class="na">concat</span><span class="o">(</span><span class="n">encryptedDataString</span><span class="o">);</span>
+            <span class="o">}</span>
+            <span class="nc">IvParameterSpec</span> <span class="n">ivParameterSpec</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">IvParameterSpec</span><span class="o">(</span><span class="n">encryptionConfig</span>
+                    <span class="o">.</span><span class="na">getAes</span><span class="o">()</span>
+                    <span class="o">.</span><span class="na">getIvSecret</span><span class="o">()</span>
+                    <span class="o">.</span><span class="na">getBytes</span><span class="o">(</span><span class="nc">StandardCharsets</span><span class="o">.</span><span class="na">UTF_8</span><span class="o">));</span>
+            <span class="n">cipher</span><span class="o">.</span><span class="na">init</span><span class="o">(</span><span class="nc">Cipher</span><span class="o">.</span><span class="na">ENCRYPT_MODE</span><span class="o">,</span> <span class="n">secretKeySpec</span><span class="o">,</span> <span class="n">ivParameterSpec</span><span class="o">);</span>
+            <span class="kt">byte</span><span class="o">[]</span> <span class="n">encryptedData</span> <span class="o">=</span> <span class="n">cipher</span><span class="o">.</span><span class="na">doFinal</span><span class="o">(</span><span class="n">data</span><span class="o">.</span><span class="na">getBytes</span><span class="o">(</span><span class="nc">StandardCharsets</span><span class="o">.</span><span class="na">UTF_8</span><span class="o">));</span>
+            <span class="k">return</span> <span class="nc">DatatypeConverter</span><span class="o">.</span><span class="na">printHexBinary</span><span class="o">(</span><span class="n">encryptedData</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">ex</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nf">CipherException</span><span class="o">(</span><span class="s">"Can not encrypt Data"</span><span class="o">,</span> <span class="n">ex</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">decryptData</span><span class="o">(</span><span class="nc">String</span> <span class="n">data</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="nc">Cipher</span> <span class="n">cipher</span> <span class="o">=</span> <span class="nc">Cipher</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="no">CIPHER_TRANSFORMATION</span><span class="o">);</span>
+            <span class="kt">byte</span><span class="o">[]</span> <span class="n">key</span> <span class="o">=</span> <span class="nc">DatatypeConverter</span><span class="o">.</span><span class="na">parseHexBinary</span><span class="o">(</span><span class="n">encryptionConfig</span><span class="o">.</span><span class="na">getAes</span><span class="o">().</span><span class="na">getSecret</span><span class="o">());</span>
+            <span class="nc">SecretKeySpec</span> <span class="n">secretKeySpec</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">SecretKeySpec</span><span class="o">(</span><span class="n">key</span><span class="o">,</span> <span class="no">ENCRYPTION_ALGORITHM</span><span class="o">);</span>
+            <span class="kt">byte</span><span class="o">[]</span> <span class="n">dataBytes</span> <span class="o">=</span> <span class="nc">DatatypeConverter</span><span class="o">.</span><span class="na">parseHexBinary</span><span class="o">(</span><span class="n">data</span><span class="o">);</span>
+            <span class="k">if</span> <span class="o">(</span><span class="nc">Objects</span><span class="o">.</span><span class="na">isNull</span><span class="o">(</span><span class="n">encryptionConfig</span><span class="o">.</span><span class="na">getAes</span><span class="o">().</span><span class="na">getIvSecret</span><span class="o">())</span> <span class="o">&amp;&amp;</span> <span class="n">dataBytes</span><span class="o">.</span><span class="na">length</span> <span class="o">&gt;</span> <span class="mi">16</span><span class="o">)</span> <span class="o">{</span>
+                <span class="kt">byte</span><span class="o">[]</span> <span class="n">ivParameterSpecKey</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">getIvParameterSpecKey</span><span class="o">(</span><span class="n">dataBytes</span><span class="o">);</span>
+                <span class="kt">byte</span><span class="o">[]</span> <span class="n">payload</span> <span class="o">=</span> <span class="nc">Arrays</span><span class="o">.</span><span class="na">copyOfRange</span><span class="o">(</span><span class="n">dataBytes</span><span class="o">,</span> <span class="mi">16</span><span class="o">,</span> <span class="n">dataBytes</span><span class="o">.</span><span class="na">length</span><span class="o">);</span>
+                <span class="nc">IvParameterSpec</span> <span class="n">ivParameterSpec</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">IvParameterSpec</span><span class="o">(</span><span class="n">ivParameterSpecKey</span><span class="o">);</span>
+                <span class="n">cipher</span><span class="o">.</span><span class="na">init</span><span class="o">(</span><span class="nc">Cipher</span><span class="o">.</span><span class="na">DECRYPT_MODE</span><span class="o">,</span> <span class="n">secretKeySpec</span><span class="o">,</span> <span class="n">ivParameterSpec</span><span class="o">);</span>
+                <span class="kt">byte</span><span class="o">[]</span> <span class="n">decryptedData</span> <span class="o">=</span> <span class="n">cipher</span><span class="o">.</span><span class="na">doFinal</span><span class="o">(</span><span class="n">payload</span><span class="o">);</span>
+                <span class="k">return</span> <span class="k">new</span> <span class="nf">String</span><span class="o">(</span><span class="n">decryptedData</span><span class="o">,</span> <span class="nc">StandardCharsets</span><span class="o">.</span><span class="na">UTF_8</span><span class="o">);</span>
+            <span class="o">}</span>
+            <span class="nc">IvParameterSpec</span> <span class="n">ivParameterSpec</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">IvParameterSpec</span><span class="o">(</span><span class="n">encryptionConfig</span>
+                    <span class="o">.</span><span class="na">getAes</span><span class="o">()</span>
+                    <span class="o">.</span><span class="na">getIvSecret</span><span class="o">()</span>
+                    <span class="o">.</span><span class="na">getBytes</span><span class="o">(</span><span class="nc">StandardCharsets</span><span class="o">.</span><span class="na">UTF_8</span><span class="o">));</span>
+            <span class="n">cipher</span><span class="o">.</span><span class="na">init</span><span class="o">(</span><span class="nc">Cipher</span><span class="o">.</span><span class="na">DECRYPT_MODE</span><span class="o">,</span> <span class="n">secretKeySpec</span><span class="o">,</span> <span class="n">ivParameterSpec</span><span class="o">);</span>
+            <span class="kt">byte</span><span class="o">[]</span> <span class="n">decryptedData</span> <span class="o">=</span> <span class="n">cipher</span><span class="o">.</span><span class="na">doFinal</span><span class="o">(</span><span class="n">dataBytes</span><span class="o">);</span>
+            <span class="k">return</span> <span class="k">new</span> <span class="nf">String</span><span class="o">(</span><span class="n">decryptedData</span><span class="o">,</span> <span class="nc">StandardCharsets</span><span class="o">.</span><span class="na">UTF_8</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">ex</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nf">CipherException</span><span class="o">(</span><span class="s">"Can not decrypt Data"</span><span class="o">,</span> <span class="n">ex</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+
+    <span class="kd">private</span> <span class="kt">byte</span><span class="o">[]</span> <span class="nf">generateIvParameterSpec</span><span class="o">()</span> <span class="o">{</span>
+        <span class="kt">byte</span><span class="o">[]</span> <span class="n">iv</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">byte</span><span class="o">[</span><span class="mi">16</span><span class="o">];</span>
+        <span class="nc">SecureRandom</span> <span class="n">random</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">SecureRandom</span><span class="o">();</span>
+        <span class="n">random</span><span class="o">.</span><span class="na">nextBytes</span><span class="o">(</span><span class="n">iv</span><span class="o">);</span>
+        <span class="k">return</span> <span class="n">iv</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kt">byte</span><span class="o">[]</span> <span class="nf">getIvParameterSpecKey</span><span class="o">(</span><span class="kt">byte</span><span class="o">[]</span> <span class="n">dataBytes</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="nc">Arrays</span><span class="o">.</span><span class="na">copyOfRange</span><span class="o">(</span><span class="n">dataBytes</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">16</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">hashSHA256</span><span class="o">(</span><span class="nc">String</span> <span class="n">data</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="nc">String</span> <span class="n">dataWithSalt</span> <span class="o">=</span> <span class="n">encryptionConfig</span><span class="o">.</span><span class="na">getSha256</span><span class="o">().</span><span class="na">getSalt</span><span class="o">().</span><span class="na">concat</span><span class="o">(</span><span class="n">data</span><span class="o">);</span>
+            <span class="nc">MessageDigest</span> <span class="n">messageDigest</span> <span class="o">=</span> <span class="nc">MessageDigest</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="no">HASH_ALGORITHM</span><span class="o">);</span>
+            <span class="kt">byte</span><span class="o">[]</span> <span class="n">hash</span> <span class="o">=</span> <span class="n">messageDigest</span><span class="o">.</span><span class="na">digest</span><span class="o">(</span><span class="n">dataWithSalt</span><span class="o">.</span><span class="na">getBytes</span><span class="o">(</span><span class="nc">StandardCharsets</span><span class="o">.</span><span class="na">UTF_8</span><span class="o">));</span>
+            <span class="k">return</span> <span class="nc">DatatypeConverter</span><span class="o">.</span><span class="na">printHexBinary</span><span class="o">(</span><span class="n">hash</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">ex</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nf">CipherException</span><span class="o">(</span><span class="s">"Can not hash Data"</span><span class="o">,</span> <span class="n">ex</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isSHA256Match</span><span class="o">(</span><span class="nc">String</span> <span class="n">data</span><span class="o">,</span> <span class="nc">String</span> <span class="n">hashData</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">String</span> <span class="n">reHashData</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">hashSHA256</span><span class="o">(</span><span class="n">data</span><span class="o">);</span>
+        <span class="k">return</span> <span class="n">reHashData</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">hashData</span><span class="o">);</span>
+    <span class="o">}</span>
+
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>In Spring Boot we don’t need to add more any dependency to do the Hashing with SHA-256, we will use <code class="language-plaintext highlighter-rouge">MessageDigest</code> with hash algorithm is <code class="language-plaintext highlighter-rouge">SHA-256</code> that Spring Boot provided. This class provide a method <code class="language-plaintext highlighter-rouge">getInstance</code> with input is the name of hash algorithm to create MessageDigest. What is the Message Digest? <a href="https://www.ibm.com/docs/en/ibm-mq/7.5?topic=concepts-message-digests">More information</a>.</p>
+  </li>
+  <li>
+    <p>Then we will hash the data together with the salt that we load from the <code class="language-plaintext highlighter-rouge">application.yml</code>. The Salt will be any string, see the example below.</p>
+  </li>
+</ul>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="na">cipher</span><span class="pi">:</span>
+  <span class="na">encryption</span><span class="pi">:</span>
+    <span class="na">aes</span><span class="pi">:</span>
+<span class="c1">#      ivSecret: 94A15E1F08550FF2</span>
+      <span class="na">secret</span><span class="pi">:</span> <span class="s">0C2FB501A93B550B4550D685B4E1582888C18F65742C3D945A8014114FA268B9</span>
+    <span class="na">sha256</span><span class="pi">:</span>
+      <span class="na">salt</span><span class="pi">:</span> <span class="s">CEAB0B1771049333E44D20A880509292E92781CC3D03F80AC41B73EC068E3EFF</span>
+
+</code></pre></div></div>
+
+<ul>
+  <li>So, let’s add more apis in controller class named <code class="language-plaintext highlighter-rouge">CipherControllerApi</code> and  <code class="language-plaintext highlighter-rouge">CipherApi</code> and <code class="language-plaintext highlighter-rouge">CipherControllerApiImpl</code> classes as below</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// CipherControllerApi</span>
+
+
+<span class="kn">package</span> <span class="nn">com.springboot.project.root.application.controller</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.springboot.project.cipher.api.CipherApi</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.springboot.project.cipher.api.model.DataRequest</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.springboot.project.cipher.api.model.MatchDataRequest</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.http.HttpStatus</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.http.MediaType</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.http.ResponseEntity</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.*</span><span class="o">;</span>
+
+<span class="nd">@RestController</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CipherControllerApi</span> <span class="o">{</span>
+
+	<span class="nd">@Autowired</span>
+	<span class="kd">private</span> <span class="nc">CipherApi</span> <span class="n">cipherApi</span><span class="o">;</span>
+
+	<span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">method</span> <span class="o">=</span> <span class="nc">RequestMethod</span><span class="o">.</span><span class="na">POST</span><span class="o">,</span> <span class="n">path</span> <span class="o">=</span> <span class="s">"v1/cipher/encode/base64"</span><span class="o">,</span> <span class="n">produces</span> <span class="o">=</span> <span class="nc">MediaType</span><span class="o">.</span><span class="na">TEXT_PLAIN_VALUE</span><span class="o">)</span>
+	<span class="kd">public</span> <span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="nf">encodeData</span><span class="o">(</span><span class="nd">@RequestBody</span> <span class="nc">DataRequest</span> <span class="n">inputData</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="k">new</span> <span class="nc">ResponseEntity</span><span class="o">&lt;&gt;(</span><span class="n">cipherApi</span><span class="o">.</span><span class="na">encodeData</span><span class="o">(</span><span class="n">inputData</span><span class="o">),</span> <span class="nc">HttpStatus</span><span class="o">.</span><span class="na">CREATED</span><span class="o">);</span>
+	<span class="o">}</span>
+
+	<span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">method</span> <span class="o">=</span> <span class="nc">RequestMethod</span><span class="o">.</span><span class="na">POST</span><span class="o">,</span> <span class="n">path</span> <span class="o">=</span> <span class="s">"v1/cipher/decode/base64"</span><span class="o">,</span> <span class="n">produces</span> <span class="o">=</span> <span class="nc">MediaType</span><span class="o">.</span><span class="na">TEXT_PLAIN_VALUE</span><span class="o">)</span>
+	<span class="kd">public</span> <span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="nf">decodeData</span><span class="o">(</span><span class="nd">@RequestBody</span> <span class="nc">DataRequest</span> <span class="n">inputData</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="k">new</span> <span class="nc">ResponseEntity</span><span class="o">&lt;&gt;(</span><span class="n">cipherApi</span><span class="o">.</span><span class="na">decodeData</span><span class="o">(</span><span class="n">inputData</span><span class="o">),</span> <span class="nc">HttpStatus</span><span class="o">.</span><span class="na">CREATED</span><span class="o">);</span>
+	<span class="o">}</span>
+
+	<span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">method</span> <span class="o">=</span> <span class="nc">RequestMethod</span><span class="o">.</span><span class="na">POST</span><span class="o">,</span> <span class="n">path</span> <span class="o">=</span> <span class="s">"v1/cipher/encode/url"</span><span class="o">,</span> <span class="n">produces</span> <span class="o">=</span> <span class="nc">MediaType</span><span class="o">.</span><span class="na">TEXT_PLAIN_VALUE</span><span class="o">)</span>
+	<span class="kd">public</span> <span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="nf">encodeUrl</span><span class="o">(</span><span class="nd">@RequestBody</span> <span class="nc">DataRequest</span> <span class="n">inputData</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="k">new</span> <span class="nc">ResponseEntity</span><span class="o">&lt;&gt;(</span><span class="n">cipherApi</span><span class="o">.</span><span class="na">encodeUrl</span><span class="o">(</span><span class="n">inputData</span><span class="o">),</span> <span class="nc">HttpStatus</span><span class="o">.</span><span class="na">CREATED</span><span class="o">);</span>
+	<span class="o">}</span>
+
+	<span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">method</span> <span class="o">=</span> <span class="nc">RequestMethod</span><span class="o">.</span><span class="na">POST</span><span class="o">,</span> <span class="n">path</span> <span class="o">=</span> <span class="s">"v1/cipher/decode/url"</span><span class="o">,</span> <span class="n">produces</span> <span class="o">=</span> <span class="nc">MediaType</span><span class="o">.</span><span class="na">TEXT_PLAIN_VALUE</span><span class="o">)</span>
+	<span class="kd">public</span> <span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="nf">decodeUrl</span><span class="o">(</span><span class="nd">@RequestBody</span> <span class="nc">DataRequest</span> <span class="n">inputData</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="k">new</span> <span class="nc">ResponseEntity</span><span class="o">&lt;&gt;(</span><span class="n">cipherApi</span><span class="o">.</span><span class="na">decodeUrl</span><span class="o">(</span><span class="n">inputData</span><span class="o">),</span> <span class="nc">HttpStatus</span><span class="o">.</span><span class="na">CREATED</span><span class="o">);</span>
+	<span class="o">}</span>
+
+	<span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">method</span> <span class="o">=</span> <span class="nc">RequestMethod</span><span class="o">.</span><span class="na">GET</span><span class="o">,</span> <span class="n">path</span> <span class="o">=</span> <span class="s">"v1/cipher/encrypt/key"</span><span class="o">,</span> <span class="n">produces</span> <span class="o">=</span> <span class="nc">MediaType</span><span class="o">.</span><span class="na">TEXT_PLAIN_VALUE</span><span class="o">)</span>
+	<span class="kd">public</span> <span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="nf">createEncryptKey</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="k">new</span> <span class="nc">ResponseEntity</span><span class="o">&lt;&gt;(</span><span class="n">cipherApi</span><span class="o">.</span><span class="na">createEncryptKey</span><span class="o">(),</span> <span class="nc">HttpStatus</span><span class="o">.</span><span class="na">CREATED</span><span class="o">);</span>
+	<span class="o">}</span>
+
+	<span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">method</span> <span class="o">=</span> <span class="nc">RequestMethod</span><span class="o">.</span><span class="na">POST</span><span class="o">,</span> <span class="n">path</span> <span class="o">=</span> <span class="s">"v1/cipher/encrypt"</span><span class="o">,</span> <span class="n">produces</span> <span class="o">=</span> <span class="nc">MediaType</span><span class="o">.</span><span class="na">TEXT_PLAIN_VALUE</span><span class="o">)</span>
+	<span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="nf">encryptData</span><span class="o">(</span><span class="nd">@RequestBody</span> <span class="nc">DataRequest</span> <span class="n">inputData</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="k">new</span> <span class="nc">ResponseEntity</span><span class="o">&lt;&gt;(</span><span class="n">cipherApi</span><span class="o">.</span><span class="na">encryptData</span><span class="o">(</span><span class="n">inputData</span><span class="o">),</span> <span class="nc">HttpStatus</span><span class="o">.</span><span class="na">CREATED</span><span class="o">);</span>
+	<span class="o">}</span>
+
+	<span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">method</span> <span class="o">=</span> <span class="nc">RequestMethod</span><span class="o">.</span><span class="na">POST</span><span class="o">,</span> <span class="n">path</span> <span class="o">=</span> <span class="s">"v1/cipher/decrypt"</span><span class="o">,</span> <span class="n">produces</span> <span class="o">=</span> <span class="nc">MediaType</span><span class="o">.</span><span class="na">TEXT_PLAIN_VALUE</span><span class="o">)</span>
+	<span class="kd">public</span> <span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="nf">decryptData</span><span class="o">(</span><span class="nd">@RequestBody</span> <span class="nc">DataRequest</span> <span class="n">inputData</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="k">new</span> <span class="nc">ResponseEntity</span><span class="o">&lt;&gt;(</span><span class="n">cipherApi</span><span class="o">.</span><span class="na">decryptData</span><span class="o">(</span><span class="n">inputData</span><span class="o">),</span> <span class="nc">HttpStatus</span><span class="o">.</span><span class="na">CREATED</span><span class="o">);</span>
+	<span class="o">}</span>
+
+	<span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">method</span> <span class="o">=</span> <span class="nc">RequestMethod</span><span class="o">.</span><span class="na">POST</span><span class="o">,</span> <span class="n">path</span> <span class="o">=</span> <span class="s">"v1/cipher/hash/sha256"</span><span class="o">,</span> <span class="n">produces</span> <span class="o">=</span> <span class="nc">MediaType</span><span class="o">.</span><span class="na">TEXT_PLAIN_VALUE</span><span class="o">)</span>
+	<span class="kd">public</span> <span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="nf">hashSHA256</span><span class="o">(</span><span class="nd">@RequestBody</span> <span class="nc">DataRequest</span> <span class="n">inputData</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="k">new</span> <span class="nc">ResponseEntity</span><span class="o">&lt;&gt;(</span><span class="n">cipherApi</span><span class="o">.</span><span class="na">hashSHA256</span><span class="o">(</span><span class="n">inputData</span><span class="o">),</span> <span class="nc">HttpStatus</span><span class="o">.</span><span class="na">CREATED</span><span class="o">);</span>
+	<span class="o">}</span>
+
+	<span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">method</span> <span class="o">=</span> <span class="nc">RequestMethod</span><span class="o">.</span><span class="na">POST</span><span class="o">,</span> <span class="n">path</span> <span class="o">=</span> <span class="s">"v1/cipher/hash/sha256/check"</span><span class="o">,</span> <span class="n">produces</span> <span class="o">=</span> <span class="nc">MediaType</span><span class="o">.</span><span class="na">APPLICATION_JSON_VALUE</span><span class="o">)</span>
+	<span class="kd">public</span> <span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">Boolean</span><span class="o">&gt;</span> <span class="nf">checkMatchSha256</span><span class="o">(</span><span class="nd">@RequestBody</span> <span class="nc">MatchDataRequest</span> <span class="n">inputData</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="k">new</span> <span class="nc">ResponseEntity</span><span class="o">&lt;&gt;(</span><span class="n">cipherApi</span><span class="o">.</span><span class="na">checkMatchSha256</span><span class="o">(</span><span class="n">inputData</span><span class="o">),</span> <span class="nc">HttpStatus</span><span class="o">.</span><span class="na">OK</span><span class="o">);</span>
+	<span class="o">}</span>
+
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<hr />
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="c1">//CipherApi</span>
+
+<span class="kn">package</span> <span class="nn">com.springboot.project.cipher.api</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.springboot.project.cipher.api.model.DataRequest</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.springboot.project.cipher.api.model.MatchDataRequest</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">CipherApi</span> <span class="o">{</span>
+
+	<span class="nc">String</span> <span class="nf">encodeData</span><span class="o">(</span><span class="nc">DataRequest</span> <span class="n">inputData</span><span class="o">);</span>
+
+	<span class="nc">String</span> <span class="nf">decodeData</span><span class="o">(</span><span class="nc">DataRequest</span> <span class="n">inputData</span><span class="o">);</span>
+
+	<span class="nc">String</span> <span class="nf">encodeUrl</span><span class="o">(</span><span class="nc">DataRequest</span> <span class="n">inputData</span><span class="o">);</span>
+
+	<span class="nc">String</span> <span class="nf">decodeUrl</span><span class="o">(</span><span class="nc">DataRequest</span> <span class="n">inputData</span><span class="o">);</span>
+
+	<span class="nc">String</span> <span class="nf">createEncryptKey</span><span class="o">();</span>
+
+	<span class="nc">String</span> <span class="nf">encryptData</span><span class="o">(</span><span class="nc">DataRequest</span> <span class="n">inputData</span><span class="o">);</span>
+
+	<span class="nc">String</span> <span class="nf">decryptData</span><span class="o">(</span><span class="nc">DataRequest</span> <span class="n">inputData</span><span class="o">);</span>
+
+	<span class="nc">String</span> <span class="nf">hashSHA256</span><span class="o">(</span><span class="nc">DataRequest</span> <span class="n">inputData</span><span class="o">);</span>
+
+	<span class="nc">Boolean</span> <span class="nf">checkMatchSha256</span><span class="o">(</span><span class="nc">MatchDataRequest</span> <span class="n">inputData</span><span class="o">);</span>
+
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<hr />
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="c1">//CipherControllerApiImpl</span>
+
+<span class="kn">package</span> <span class="nn">com.springboot.project.cipher.app.application</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.fasterxml.jackson.databind.ObjectMapper</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.springboot.project.cipher.api.CipherApi</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.springboot.project.cipher.api.model.DataRequest</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.springboot.project.cipher.api.model.MatchDataRequest</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.springboot.project.cipher.app.service.CipherService</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RestController</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">lombok.RequiredArgsConstructor</span><span class="o">;</span>
+
+
+<span class="nd">@RestController</span>
+<span class="nd">@RequiredArgsConstructor</span><span class="o">(</span><span class="n">onConstructor</span> <span class="o">=</span><span class="nd">@__</span><span class="o">(</span><span class="nd">@Autowired</span><span class="o">))</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CipherControllerApiImpl</span> <span class="kd">implements</span> <span class="nc">CipherApi</span> <span class="o">{</span>
+
+	<span class="kd">private</span> <span class="kd">final</span> <span class="nc">CipherService</span> <span class="n">cipherService</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="kd">final</span> <span class="nc">ObjectMapper</span> <span class="n">objectMapper</span><span class="o">;</span>
+
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">encodeData</span><span class="o">(</span><span class="nc">DataRequest</span> <span class="n">inputData</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">cipherService</span><span class="o">.</span><span class="na">encodeBase64</span><span class="o">(</span><span class="n">inputData</span><span class="o">.</span><span class="na">getData</span><span class="o">());</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">decodeData</span><span class="o">(</span><span class="nc">DataRequest</span> <span class="n">inputData</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">cipherService</span><span class="o">.</span><span class="na">decodeBase64</span><span class="o">(</span><span class="n">inputData</span><span class="o">.</span><span class="na">getData</span><span class="o">());</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">encodeUrl</span><span class="o">(</span><span class="nc">DataRequest</span> <span class="n">inputData</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">cipherService</span><span class="o">.</span><span class="na">encodeUrl</span><span class="o">(</span><span class="n">inputData</span><span class="o">.</span><span class="na">getData</span><span class="o">());</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">decodeUrl</span><span class="o">(</span><span class="nc">DataRequest</span> <span class="n">inputData</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">cipherService</span><span class="o">.</span><span class="na">decodeUrl</span><span class="o">(</span><span class="n">inputData</span><span class="o">.</span><span class="na">getData</span><span class="o">());</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">createEncryptKey</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">cipherService</span><span class="o">.</span><span class="na">createEncryptKey</span><span class="o">();</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">encryptData</span><span class="o">(</span><span class="nc">DataRequest</span> <span class="n">inputData</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">cipherService</span><span class="o">.</span><span class="na">encryptData</span><span class="o">(</span><span class="n">inputData</span><span class="o">.</span><span class="na">getData</span><span class="o">());</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">decryptData</span><span class="o">(</span><span class="nc">DataRequest</span> <span class="n">inputData</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">cipherService</span><span class="o">.</span><span class="na">decryptData</span><span class="o">(</span><span class="n">inputData</span><span class="o">.</span><span class="na">getData</span><span class="o">());</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">hashSHA256</span><span class="o">(</span><span class="nc">DataRequest</span> <span class="n">inputData</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">cipherService</span><span class="o">.</span><span class="na">hashSHA256</span><span class="o">(</span><span class="n">inputData</span><span class="o">.</span><span class="na">getData</span><span class="o">());</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="nc">Boolean</span> <span class="nf">checkMatchSha256</span><span class="o">(</span><span class="nc">MatchDataRequest</span> <span class="n">inputData</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">cipherService</span><span class="o">.</span><span class="na">isSHA256Match</span><span class="o">(</span><span class="n">inputData</span><span class="o">.</span><span class="na">getRawData</span><span class="o">(),</span> <span class="n">inputData</span><span class="o">.</span><span class="na">getHashedData</span><span class="o">());</span>
+	<span class="o">}</span>
+
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<ul>
+  <li>Now, run the Spring Boot project and try to call api <code class="language-plaintext highlighter-rouge">v1/cipher/hash/sha256</code> for testing hasing data. Then you will receive the result as below</li>
+</ul>
+
+<p><a href="/assets/images/spring-boot-Hash-SHA-256-result.png"><img src="/assets/images/spring-boot-Hash-SHA-256-result.png" alt="Hash data with SHA 256" title="hash data with SHA 256" /></a></p>
+
+<ul>
+  <li>Then with the hash result above, we will use it to check with the original data by calling api <code class="language-plaintext highlighter-rouge">v1/cipher/hash/sha256/check</code>. Then you will see the original data and hashed data are matched.</li>
+</ul>
+
+<p><a href="/assets/images/spring-boot-Hash-SHA-256-check-result.png"><img src="/assets/images/spring-boot-Hash-SHA-256-check-result.png" alt="check data with SHA 256" title="check data with SHA 256" /></a></p>
+
+<ul>
+  <li>Now let’s try to change a single character in original data and check again with hashed data. Then you will see the api return failed.</li>
+</ul>
+
+<p><a href="/assets/images/spring-boot-Hash-SHA-256-check-result-failed.png"><img src="/assets/images/spring-boot-Hash-SHA-256-check-result-failed.png" alt="check data with SHA 256 failed" title="check data with SHA 256 failed" /></a></p>
+
+<h2 id="sumarry">SUMARRY</h2>
+
+<ul>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Encode is not used for security</code> it is used for data transformation for proper consumsion. So it’s easy to encode/decode data and you just need to know the encoding. We have 2 popular types of encoding: <strong>URL encoding</strong>, <strong>Base64 encoding</strong>.</p>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">Encryption</code> is part of security, the goal is to ensure the data can only be consumed by valid recipient using key/password to decrypt (reverse encrypt). Remember that key/password has to be kept secretly. There are two main types of data encrytion are <strong>asymmetric encryption</strong> and <strong>symmetric encryption</strong>.
+    <ul>
+      <li><strong>Symmetric encryption</strong> is a type of encryption where only one secret symmetric key is used to encrypt the plaintext and decrypt the ciphertext. Some common symmetric encryption methods as AES (Advanced Encryption Standard), 3DES (Triple Data Encryption Standards), Twofish</li>
+      <li><strong>Asymmetric encryption</strong>, also known as Public-Key Cryptography, encrypts and decrypts the data using two separate cryptographic asymmetric keys. These two keys are known as a <strong>public key</strong> and a <strong>private key</strong>. Some common asymmetric encryption methods as RSA (named after computer scientists Ron Rivest, Adi Shamir, and Leonard Adleman), PKI (Public key infrastructure)</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">Hash</code> is a path of security. It is used to ensure data integrity, this is commonly referred as checksum, or signature. In order words, if some part of data is changed, then you can know that it’s changed. We will learn about data integrity with HMAC (hash-based message authentication) in another post.
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">Salt</code> is a random data that is used as an additional input to a one-way function that hashes data, a password or passphrase, salts are used to safeguard passwords in storage.</li>
+      <li>There are a huge number of widely accepted hashing algorithms available for general use. For example, MD5, SHA1, SHA224, SHA256, SHA512…</li>
+    </ul>
+  </li>
+  <li>You can view full source code at <a href="https://github.com/minhducnguyen189/com.springboot.project/tree/master/cipher-app/src/main/java/com/springboot/project/cipher/app">this link</a></li>
+  <li>Thanks and see you in the next topics.</li>
+</ul>
+
+    </div><a class="u-url" href="/java/2021/12/05/java-springboot-encode-encrypt-hash.html" hidden></a>
+  </article>
+  
+</div>
+
+
+    </div>
+  </div>
+  <script src="https://unpkg.com/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js"></script>
+  <script>addBackToTop()</script>
+</body>
+<footer><footer class="site-footer h-card">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <h2 class="footer-heading">KaizenThink</h2>
+        <div>
+          <div>
+            <ul>
+              <li>Duc Nguyen</li><li><a class="u-email" href="mailto:minhducnguyen189@gmail.com">minhducnguyen189@gmail.com</a></li><li>&copy; 2021 Duc Nguyen. Powered by <a href="https://jekyllrb.com/">Jekyll</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <data class="u-url" href="/%20/"></data>
+        <div><ul class="social-media-list"><li><a href="https://github.com/minhducnguyen189"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">minhducnguyen189</span></a></li><li><a href="https://www.linkedin.com/in/duc-nguyen-03109b141"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#linkedin"></use></svg> <span class="username">duc-nguyen-03109b141</span></a></li></ul>
+</div>
+      </div>
+      <div class="col-md-4">
+        <h3>Support me</h3>
+        <!-- PayPal Logo -->
+        <table id="sponsor" border='0' cellpadding='10' cellspacing='0' align='center'>
+          <tr>
+            <td align='center'>
+              <a href='https://www.paypal.com/paypalme/minhduc189' title='Sponsor me'
+                onclick="javascript:window.open('https://www.paypal.com/paypalme/minhduc189','WIPaypal','toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=1060, height=700'); return false;">
+                <img src='https://www.paypalobjects.com/webstatic/en_US/i/buttons/PP_logo_h_150x38.png' alt='PayPal Acceptance | Medium v2' />
+              </a>
+            </td>
+          </tr>
+        </table>
+        <!-- PayPal Logo -->
+      </div>
+    </div>
+  </div>
+</footer>
+</footer>
+</html>
