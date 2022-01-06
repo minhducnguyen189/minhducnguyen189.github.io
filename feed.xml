@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.1">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2021-12-31T14:03:29+07:00</updated><id>/feed.xml</id><title type="html">KaizenThink</title><subtitle>Hi there! Let's explore some general knowleadges and briefly definitions in programming. I hope that this website can help people saving time in learning, also give some motivations for those who have choice the developer path.</subtitle><author><name>Duc Nguyen</name></author><entry><title type="html">Encode, Encrypt And Hash In SpringBoot</title><link href="/java/2021/12/05/java-springboot-encode-encrypt-hash.html" rel="alternate" type="text/html" title="Encode, Encrypt And Hash In SpringBoot" /><published>2021-12-05T00:00:00+07:00</published><updated>2021-12-05T00:00:00+07:00</updated><id>/java/2021/12/05/java-springboot-encode-encrypt-hash</id><content type="html" xml:base="/java/2021/12/05/java-springboot-encode-encrypt-hash.html">&lt;blockquote&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.1">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2022-01-06T16:50:13+07:00</updated><id>/feed.xml</id><title type="html">KaizenThink</title><subtitle>Hi there! Let's explore some general knowleadges and briefly definitions in programming. I hope that this website can help people saving time in learning, also give some motivations for those who have choice the developer path.</subtitle><author><name>Duc Nguyen</name></author><entry><title type="html">Encode, Encrypt And Hash In SpringBoot</title><link href="/java/2021/12/05/java-springboot-encode-encrypt-hash.html" rel="alternate" type="text/html" title="Encode, Encrypt And Hash In SpringBoot" /><published>2021-12-05T00:00:00+07:00</published><updated>2021-12-05T00:00:00+07:00</updated><id>/java/2021/12/05/java-springboot-encode-encrypt-hash</id><content type="html" xml:base="/java/2021/12/05/java-springboot-encode-encrypt-hash.html">&lt;blockquote&gt;
   &lt;p&gt;In this topic we will learn about Encode, Encrypt and Hash. Differencies between these types and make example Apis with Springboot.&lt;/p&gt;
 &lt;/blockquote&gt;
 
@@ -72,7 +72,7 @@
         &lt;/table&gt;
 
         &lt;ul&gt;
-          &lt;li&gt;Base64 will contains these all these characters:
+          &lt;li&gt;Base64 will contains all these characters:
             &lt;ul&gt;
               &lt;li&gt;10 numeric value i.e., &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0,1,2,3,…..9&lt;/code&gt;.&lt;/li&gt;
               &lt;li&gt;26 Uppercase alphabets i.e., &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;A,B,C,D,…….Z&lt;/code&gt;.&lt;/li&gt;
@@ -114,6 +114,8 @@
         &lt;/tr&gt;
       &lt;/tbody&gt;
     &lt;/table&gt;
+
+    &lt;p&gt;&lt;a href=&quot;/assets/images/spring-boot-symmetric-encryption.png&quot;&gt;&lt;img src=&quot;/assets/images/spring-boot-symmetric-encryption.png&quot; alt=&quot;symmetric encryption image&quot; title=&quot;symmetric encryption image&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;&lt;strong&gt;Asymmetric encryption&lt;/strong&gt;, also known as Public-Key Cryptography, encrypts and decrypts the data using two separate cryptographic asymmetric keys. These two keys are known as a &lt;strong&gt;public key&lt;/strong&gt; and a &lt;strong&gt;private key&lt;/strong&gt;. We have some common asymmetric encryption methods as RSA (named after computer scientists Ron Rivest, Adi Shamir, and Leonard Adleman), PKI (Public key infrastructure). &lt;a href=&quot;https://www.ibm.com/docs/en/ztpf/1.1.0.14?topic=concepts-public-key-cryptography&quot;&gt;More information&lt;/a&gt;&lt;/p&gt;
