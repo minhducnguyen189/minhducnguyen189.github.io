@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- bootstrap library and JS, Jquery -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>HMAC And Data Integrity | KaizenThink</title>
+<meta name="generator" content="Jekyll v4.2.1" />
+<meta property="og:title" content="HMAC And Data Integrity" />
+<meta name="author" content="Duc Nguyen" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="In this post we will learn about Data Integrity which is a part of information security and we will make an example with HMAC on spring boot service." />
+<meta property="og:description" content="In this post we will learn about Data Integrity which is a part of information security and we will make an example with HMAC on spring boot service." />
+<link rel="canonical" href="/java/2021/12/31/java-springboot-HMAC.html" />
+<meta property="og:url" content="/java/2021/12/31/java-springboot-HMAC.html" />
+<meta property="og:site_name" content="KaizenThink" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-12-31T00:00:00+07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="HMAC And Data Integrity" />
+<script type="application/ld+json">
+{"mainEntityOfPage":{"@type":"WebPage","@id":"/java/2021/12/31/java-springboot-HMAC.html"},"@type":"BlogPosting","url":"/java/2021/12/31/java-springboot-HMAC.html","author":{"@type":"Person","name":"Duc Nguyen"},"headline":"HMAC And Data Integrity","dateModified":"2021-12-31T00:00:00+07:00","datePublished":"2021-12-31T00:00:00+07:00","description":"In this post we will learn about Data Integrity which is a part of information security and we will make an example with HMAC on spring boot service.","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="KaizenThink" /><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NZ8G5007GK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-NZ8G5007GK');
+</script></head><body>
+  <div class="container-flush">
+    <div class="row"><!-- navigation bar -->
+<div class="col-lg-12">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" role="banner"><a class="navbar-brand site-title" rel="author" href="/">KaizenThink</a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="nav navbar-nav"><li class="nav-item active">
+          <a class="nav-link" href="/about">About</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/">Java</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/docker">Docker</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/database">Database</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/data-science">Data-Science</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/ci-cd">CI-CD</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/python">Python</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/fe">FE</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/others">Others</a>
+        </li></ul>
+    </div>
+
+    <!-- Html Elements for Search -->
+    <div id="search-container" class="btn-group">
+      <input type="text" id="search-input" placeholder="search...">
+      <button id="clear">clear</button>
+      <ul id="results-container"></ul>
+    </div>
+
+    <!-- Script pointing to search-script.js -->
+    <script src="/java-scripts/search-script.js" type="text/javascript"></script>
+
+    <!-- Configuration -->
+    <script>
+      SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('results-container'),
+        json: '/search.json'
+      })
+    </script>
+
+    <!-- search clear -->
+    <script>
+      window.addEventListener('load', () => {
+        const button = document.querySelector('#clear');
+        button.addEventListener('click', () => {
+          document.querySelector('#search-input').value = "";
+          document.querySelector('#results-container').innerHTML = "";
+        });
+      });
+    </script>
+  </nav>
+</div></div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+  <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+    <header class="post-header">
+      <h1 class="post-title p-name" itemprop="name headline">HMAC And Data Integrity</h1>
+      <p class="post-meta">
+        <time class="dt-published" datetime="2021-12-31T00:00:00+07:00" itemprop="datePublished">Dec 31, 2021
+        </time></p>
+    </header>
+  
+    <div class="post-content e-content" itemprop="articleBody">
+      <blockquote>
+  <p>In this post we will learn about Data Integrity which is a part of information security and we will make an example with HMAC on spring boot service.</p>
+</blockquote>
+
+<ul id="markdown-toc">
+  <li><a href="#what-is-the-data-integrity" id="markdown-toc-what-is-the-data-integrity">WHAT IS THE DATA INTEGRITY?</a></li>
+  <li><a href="#what-is-the-hmac" id="markdown-toc-what-is-the-hmac">WHAT IS THE HMAC?</a></li>
+  <li><a href="#simple-example-with-hmac" id="markdown-toc-simple-example-with-hmac">SIMPLE EXAMPLE WITH HMAC</a>    <ul>
+      <li><a href="#summary" id="markdown-toc-summary">SUMMARY</a></li>
+      <li><a href="#references" id="markdown-toc-references">REFERENCES</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="what-is-the-data-integrity">WHAT IS THE DATA INTEGRITY?</h2>
+
+<ul>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Data integrity</code> is the maintenance of, and the assurance of, data accuracy and consistency over its entire life-cycle and is a critical aspect to the design, implementation, and usage of any system that stores, processes, or retrieves data. <a href="https://en.wikipedia.org/wiki/Data_integrity">More information</a>.</p>
+  </li>
+  <li>
+    <p>Basiclly, In computer network, data which is sent or transfered between computers has to ensure completeness, consistency, accuracy and the validity of the data. In order words, data which are sent through internet environment must not be modified or got errors.</p>
+  </li>
+  <li>
+    <p>So to ensure data integrity, some methods have been applied into servers or website as using signatures with shared secret key (HMAC) or private-public keys pair (DSA, RSA,…)</p>
+  </li>
+</ul>
+
+<h2 id="what-is-the-hmac">WHAT IS THE HMAC?</h2>
+
+<ul>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">HMAC, Data integrity</code>, HMAC (hash-based message authentication) is a specific type of message authentication code (MAC) involving a cryptographic hash function and a secret cryptographic key. As with any MAC, it may be used to simultaneously verify both the data integrity and authenticity of a message. <a href="https://en.wikipedia.org/wiki/HMAC">More information</a></p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">The HMAC</code> is used to verify that the data has not been altered or replaced. For example, In <code class="language-plaintext highlighter-rouge">HMAC</code>, <strong>Api provider</strong> will share <strong>a secret key</strong> to the consumer. <strong>Consumer</strong> then generate signature, using certain HMAC method, with constructed message and secret key as input. When a request from consumer which contains data and a signature (usually put in header) to <strong>Api provider</strong>, Then the <strong>Api provider</strong> will calculate the HMAC signature base on request data of <strong>Consumer</strong> and shared secret key. Next, the <strong>Api provider</strong> will compare the calculated signature with the sent signature from <strong>Consumer</strong>, if they are matched, the <strong>Api provider</strong> knows that the request is authentic and the data is not changed when it transferred through the internet. We discuss more in another topic.</p>
+  </li>
+</ul>
+
+<p><a href="/assets/images/spring-boot-HMAC-diagram.png"><img src="/assets/images/spring-boot-HMAC-diagram.png" alt="HMAC example diagram" title="hmac example diagram" /></a></p>
+
+<h2 id="simple-example-with-hmac">SIMPLE EXAMPLE WITH HMAC</h2>
+
+<ul>
+  <li>In this post we will make a simple example with using HMAC for data integrity with spring boot project.</li>
+  <li>We will learn how to create a signature with hmac and how to check the signature is valid or not.</li>
+  <li>So let create a <code class="language-plaintext highlighter-rouge">HmacController</code> controller with two api as below.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="c1">//HmacController</span>
+
+<span class="kn">package</span> <span class="nn">com.springboot.project.root.application.controller</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.springboot.project.hmac.api.HmacApi</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.springboot.project.hmac.api.model.HmacDataRequest</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.http.HttpStatus</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.http.MediaType</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.http.ResponseEntity</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RequestBody</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RequestHeader</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RequestMapping</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RequestMethod</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RestController</span><span class="o">;</span>
+
+<span class="nd">@RestController</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">HmacController</span> <span class="o">{</span>
+
+    <span class="nd">@Autowired</span>
+    <span class="kd">private</span> <span class="nc">HmacApi</span> <span class="n">hmacApi</span><span class="o">;</span>
+
+    <span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">method</span> <span class="o">=</span> <span class="nc">RequestMethod</span><span class="o">.</span><span class="na">POST</span><span class="o">,</span> <span class="n">path</span> <span class="o">=</span> <span class="s">"v1/cipher/hmac"</span><span class="o">,</span> <span class="n">produces</span> <span class="o">=</span> <span class="nc">MediaType</span><span class="o">.</span><span class="na">TEXT_PLAIN_VALUE</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="nf">hmac</span><span class="o">(</span><span class="nd">@RequestHeader</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"x-nonce"</span><span class="o">)</span> <span class="nc">String</span> <span class="n">nonce</span><span class="o">,</span>
+                                       <span class="nd">@RequestHeader</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"x-uri-calculate"</span><span class="o">)</span> <span class="nc">String</span> <span class="n">urlCalculate</span><span class="o">,</span>
+                                       <span class="nd">@RequestHeader</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"x-timestamp"</span><span class="o">)</span> <span class="nc">String</span> <span class="n">timestamp</span><span class="o">,</span>
+                                       <span class="nd">@RequestBody</span> <span class="nc">HmacDataRequest</span> <span class="n">inputData</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nc">ResponseEntity</span><span class="o">&lt;&gt;(</span><span class="n">hmacApi</span><span class="o">.</span><span class="na">hmac</span><span class="o">(</span><span class="n">nonce</span><span class="o">,</span> <span class="n">urlCalculate</span><span class="o">,</span> <span class="n">timestamp</span><span class="o">,</span> <span class="n">inputData</span><span class="o">),</span> <span class="nc">HttpStatus</span><span class="o">.</span><span class="na">CREATED</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">method</span> <span class="o">=</span> <span class="nc">RequestMethod</span><span class="o">.</span><span class="na">POST</span><span class="o">,</span> <span class="n">path</span> <span class="o">=</span> <span class="s">"v1/cipher/hmac/check"</span><span class="o">,</span> <span class="n">produces</span> <span class="o">=</span> <span class="nc">MediaType</span><span class="o">.</span><span class="na">APPLICATION_JSON_VALUE</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">Boolean</span><span class="o">&gt;</span> <span class="nf">checkMatchHmac</span><span class="o">(</span><span class="nd">@RequestHeader</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"x-nonce"</span><span class="o">)</span> <span class="nc">String</span> <span class="n">nonce</span><span class="o">,</span>
+                                                  <span class="nd">@RequestHeader</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"x-uri-calculate"</span><span class="o">)</span> <span class="nc">String</span> <span class="n">urlCalculate</span><span class="o">,</span>
+                                                  <span class="nd">@RequestHeader</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"x-timestamp"</span><span class="o">)</span> <span class="nc">String</span> <span class="n">timestamp</span><span class="o">,</span>
+                                                  <span class="nd">@RequestHeader</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"x-hmac"</span><span class="o">)</span> <span class="nc">String</span> <span class="n">hmac</span><span class="o">,</span>
+                                                  <span class="nd">@RequestBody</span> <span class="nc">HmacDataRequest</span> <span class="n">inputData</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nc">ResponseEntity</span><span class="o">&lt;&gt;(</span><span class="n">hmacApi</span><span class="o">.</span><span class="na">checkMatchHmac</span><span class="o">(</span><span class="n">nonce</span><span class="o">,</span> <span class="n">urlCalculate</span><span class="o">,</span> <span class="n">timestamp</span><span class="o">,</span> <span class="n">hmac</span><span class="o">,</span> <span class="n">inputData</span><span class="o">),</span> <span class="nc">HttpStatus</span><span class="o">.</span><span class="na">OK</span><span class="o">);</span>
+    <span class="o">}</span>
+
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<ul>
+  <li>The api <strong>hmac</strong> is used to show you how a hmac signature is created, in real systems this api should not be existed, creating HMAC signature will be made privately before the consumer send data to the API provider as in the image above.</li>
+  <li>The <strong>checkMatchHmac</strong> is used to check the request data and attached calculated HMAC <code class="language-plaintext highlighter-rouge">x-hmac</code> (that generated before) are matched or not.</li>
+</ul>
+
+<hr />
+
+<ul>
+  <li>Then we create <code class="language-plaintext highlighter-rouge">CipherApi</code> interface, <code class="language-plaintext highlighter-rouge">CipherControllerApiImpl</code> class and <code class="language-plaintext highlighter-rouge">CipherService</code> as below</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="c1">//HmacApi</span>
+
+<span class="kn">package</span> <span class="nn">com.springboot.project.hmac.api</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.springboot.project.hmac.api.model.HmacDataRequest</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">HmacApi</span> <span class="o">{</span>
+
+    <span class="nc">String</span> <span class="nf">hmac</span><span class="o">(</span><span class="nc">String</span> <span class="n">nonce</span><span class="o">,</span> <span class="nc">String</span> <span class="n">urlCalculate</span><span class="o">,</span>
+                <span class="nc">String</span> <span class="n">timestamp</span><span class="o">,</span> <span class="nc">HmacDataRequest</span> <span class="n">inputData</span><span class="o">);</span>
+
+    <span class="nc">Boolean</span> <span class="nf">checkMatchHmac</span><span class="o">(</span><span class="nc">String</span> <span class="n">nonce</span><span class="o">,</span> <span class="nc">String</span> <span class="n">urlCalculate</span><span class="o">,</span> <span class="nc">String</span> <span class="n">timestamp</span><span class="o">,</span>
+                           <span class="nc">String</span> <span class="n">hmac</span><span class="o">,</span> <span class="nc">HmacDataRequest</span> <span class="n">inputData</span><span class="o">);</span>
+
+<span class="o">}</span>
+
+
+
+</code></pre></div></div>
+
+<hr />
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="c1">//HmacApiImpl</span>
+
+<span class="kn">package</span> <span class="nn">com.springboot.project.hmac.app.application</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.fasterxml.jackson.core.JsonProcessingException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.fasterxml.jackson.databind.ObjectMapper</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.springboot.project.hmac.api.HmacApi</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.springboot.project.hmac.api.model.HmacDataRequest</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.springboot.project.hmac.app.model.HmacMessage</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.springboot.project.hmac.app.service.HmacService</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">lombok.RequiredArgsConstructor</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.stereotype.Service</span><span class="o">;</span>
+
+<span class="nd">@Service</span>
+<span class="nd">@RequiredArgsConstructor</span><span class="o">(</span><span class="n">onConstructor</span> <span class="o">=</span><span class="nd">@__</span><span class="o">(</span><span class="nd">@Autowired</span><span class="o">))</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">HmacApiImpl</span> <span class="kd">implements</span> <span class="nc">HmacApi</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">HmacService</span> <span class="n">hmacService</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">ObjectMapper</span> <span class="n">objectMapper</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">hmac</span><span class="o">(</span><span class="nc">String</span> <span class="n">nonce</span><span class="o">,</span> <span class="nc">String</span> <span class="n">urlCalculate</span><span class="o">,</span> <span class="nc">String</span> <span class="n">timestamp</span><span class="o">,</span> <span class="nc">HmacDataRequest</span> <span class="n">inputData</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">String</span> <span class="n">hmacMessageString</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">buildHmacMessage</span><span class="o">(</span><span class="n">nonce</span><span class="o">,</span> <span class="n">urlCalculate</span><span class="o">,</span> <span class="n">timestamp</span><span class="o">,</span> <span class="n">inputData</span><span class="o">);</span>
+        <span class="k">return</span> <span class="n">hmacService</span><span class="o">.</span><span class="na">hmac</span><span class="o">(</span><span class="n">hmacMessageString</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">Boolean</span> <span class="nf">checkMatchHmac</span><span class="o">(</span><span class="nc">String</span> <span class="n">nonce</span><span class="o">,</span> <span class="nc">String</span> <span class="n">urlCalculate</span><span class="o">,</span> <span class="nc">String</span> <span class="n">timestamp</span><span class="o">,</span> <span class="nc">String</span> <span class="n">hmac</span><span class="o">,</span> <span class="nc">HmacDataRequest</span> <span class="n">inputData</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">String</span> <span class="n">hmacMessageString</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">buildHmacMessage</span><span class="o">(</span><span class="n">nonce</span><span class="o">,</span> <span class="n">urlCalculate</span><span class="o">,</span> <span class="n">timestamp</span><span class="o">,</span> <span class="n">inputData</span><span class="o">);</span>
+        <span class="k">return</span> <span class="n">hmacService</span><span class="o">.</span><span class="na">isHmacMatch</span><span class="o">(</span><span class="n">hmacMessageString</span><span class="o">,</span> <span class="n">hmac</span><span class="o">);</span>
+    <span class="o">}</span>
+
+
+    <span class="kd">private</span> <span class="nc">String</span> <span class="nf">buildHmacMessage</span><span class="o">(</span><span class="nc">String</span> <span class="n">nonce</span><span class="o">,</span> <span class="nc">String</span> <span class="n">urlCalculate</span><span class="o">,</span> <span class="nc">String</span> <span class="n">timestamp</span><span class="o">,</span> <span class="nc">HmacDataRequest</span> <span class="n">inputData</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">HmacMessage</span> <span class="n">hmacMessage</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HmacMessage</span><span class="o">();</span>
+        <span class="n">hmacMessage</span><span class="o">.</span><span class="na">setNonce</span><span class="o">(</span><span class="n">nonce</span><span class="o">);</span>
+        <span class="n">hmacMessage</span><span class="o">.</span><span class="na">setTimestamp</span><span class="o">(</span><span class="n">urlCalculate</span><span class="o">);</span>
+        <span class="n">hmacMessage</span><span class="o">.</span><span class="na">setTimestamp</span><span class="o">(</span><span class="n">timestamp</span><span class="o">);</span>
+        <span class="n">hmacMessage</span><span class="o">.</span><span class="na">setHmacDataRequest</span><span class="o">(</span><span class="n">inputData</span><span class="o">);</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">objectMapper</span><span class="o">.</span><span class="na">writeValueAsString</span><span class="o">(</span><span class="n">hmacMessage</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">JsonProcessingException</span> <span class="n">ex</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nf">RuntimeException</span><span class="o">(</span><span class="s">"can not parse hmac message: "</span><span class="o">,</span> <span class="n">ex</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+<span class="o">}</span>
+
+
+</code></pre></div></div>
+
+<ul>
+  <li>In this <code class="language-plaintext highlighter-rouge">HmacApiImpl</code> we will create a formular to prepare data for hashing, in this example we will use some information of request as
+    <ul>
+      <li>headers: x-nonce, x-uri-calculate, x-timestamp.</li>
+      <li>body: all body request</li>
+    </ul>
+  </li>
+  <li>So using these request data means that if there is any change on these headers and request body in transferring data in the internet then the recalculated HMAC signature by Consumer will be different with the attached one. So the Consumer will know and give action as rejecting the request.</li>
+</ul>
+
+<hr />
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="c1">//HmacService</span>
+
+<span class="kn">package</span> <span class="nn">com.springboot.project.hmac.app.service</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.springboot.project.hmac.app.model.HmacConfig</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.stereotype.Service</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">javax.crypto.Mac</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.crypto.spec.SecretKeySpec</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.xml.bind.DatatypeConverter</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.nio.charset.StandardCharsets</span><span class="o">;</span>
+
+<span class="nd">@Service</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">HmacService</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="nc">String</span> <span class="no">HMAC_SHA256</span> <span class="o">=</span> <span class="s">"HmacSHA256"</span><span class="o">;</span>
+
+    <span class="nd">@Autowired</span>
+    <span class="kd">private</span> <span class="nc">HmacConfig</span> <span class="n">hmacConfig</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">hmac</span><span class="o">(</span><span class="nc">String</span> <span class="n">data</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="nc">Mac</span> <span class="n">mac</span> <span class="o">=</span> <span class="nc">Mac</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="no">HMAC_SHA256</span><span class="o">);</span>
+            <span class="nc">SecretKeySpec</span> <span class="n">secretKeySpec</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">SecretKeySpec</span><span class="o">(</span>
+                    <span class="n">hmacConfig</span><span class="o">.</span><span class="na">getSecret</span><span class="o">().</span><span class="na">getBytes</span><span class="o">(</span><span class="nc">StandardCharsets</span><span class="o">.</span><span class="na">UTF_8</span><span class="o">),</span> <span class="no">HMAC_SHA256</span><span class="o">);</span>
+            <span class="n">mac</span><span class="o">.</span><span class="na">init</span><span class="o">(</span><span class="n">secretKeySpec</span><span class="o">);</span>
+            <span class="kt">byte</span><span class="o">[]</span> <span class="n">hmacBytes</span> <span class="o">=</span> <span class="n">mac</span><span class="o">.</span><span class="na">doFinal</span><span class="o">(</span><span class="n">data</span><span class="o">.</span><span class="na">getBytes</span><span class="o">(</span><span class="nc">StandardCharsets</span><span class="o">.</span><span class="na">UTF_8</span><span class="o">));</span>
+            <span class="k">return</span> <span class="nc">DatatypeConverter</span><span class="o">.</span><span class="na">printHexBinary</span><span class="o">(</span><span class="n">hmacBytes</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">ex</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nf">RuntimeException</span><span class="o">(</span><span class="s">"Can not Hmac Data"</span><span class="o">,</span> <span class="n">ex</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isHmacMatch</span><span class="o">(</span><span class="nc">String</span> <span class="n">data</span><span class="o">,</span> <span class="nc">String</span> <span class="n">hmacData</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">String</span> <span class="n">reHmacData</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">hmac</span><span class="o">(</span><span class="n">data</span><span class="o">);</span>
+        <span class="k">return</span> <span class="n">reHmacData</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">hmacData</span><span class="o">);</span>
+    <span class="o">}</span>
+
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<ul>
+  <li>So Java provide for us a build-in <code class="language-plaintext highlighter-rouge">Mac</code> class for HMAC genderation so we don’t need to add more any dependency. We can initialze <code class="language-plaintext highlighter-rouge">Mac</code> class by method **getInstance(<algorithms-name>)**, this class supports various of hasing algorithms as: **HmacMD5**, **HmacSHA1**, **HmacSHA256**, **HmacSHA384**, **HmacSHA512**. In this example we will use **HmacSHA256** as you can see in the code above.</algorithms-name></li>
+  <li>Next, we will init <code class="language-plaintext highlighter-rouge">Mac</code> class with a secret key, we note that this secret key will be shared secretly between <strong>Consumer</strong> and <strong>Api Provider</strong>.</li>
+  <li>Then we call the <code class="language-plaintext highlighter-rouge">doFinal()</code> method to generate a byte array containing the HMAC signature result.</li>
+  <li>Now let start your spring boot servie for testing, you would see results as below</li>
+</ul>
+
+<hr />
+
+<ul>
+  <li>Firstly, we will try the api <code class="language-plaintext highlighter-rouge">POST /v1/cipher/hmac</code> to generate the HMAC signature for the request that we want to send. Again, I want to note that this api is used for making example, it should not existed/published in real system, generating HMAC signature will be made secretly by services and attach into header or somewhere before sending the request to Api Providers.</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+curl <span class="nt">--location</span> <span class="nt">--request</span> POST <span class="s1">'http://localhost:8080/v1/cipher/hmac'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'x-nonce: 1'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'x-uri-calculate: /v1/cipher/hmac'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'x-timestamp: 2022-01-08'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+<span class="nt">--data-raw</span> <span class="s1">'{
+    "fullName": "Nguyen Minh Duc",
+    "city": "HCM",
+    "gender": "M",
+    "amount": 10
+}'</span>
+
+</code></pre></div></div>
+
+<p><a href="/assets/images/spring-boot-HMAC-header-request.png"><img src="/assets/images/spring-boot-HMAC-header-request.png" alt="HMAC header request" title="hmac header request" /></a></p>
+
+<p><a href="/assets/images/spring-boot-HMAC-body-request.png"><img src="/assets/images/spring-boot-HMAC-body-request.png" alt="HMAC body request" title="hmac body request" /></a></p>
+
+<ul>
+  <li>You can see we will received a Hmac signature string like this</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+46B44922F5844B7F90A4A42CD5191150782B866EA426CA9129AC69C51993AD63
+
+</code></pre></div></div>
+
+<ul>
+  <li>Now, we will use the result Hmac signature string above and put into the header of the request that you want to call to <strong>Api Provider</strong> as in the image</li>
+</ul>
+
+<p><a href="/assets/images/spring-boot-HMAC-diagram.png"><img src="/assets/images/spring-boot-HMAC-diagram.png" alt="HMAC example diagram" title="hmac example diagram" /></a></p>
+
+<ul>
+  <li>The <strong>Api Provider</strong> will recalculate the Hmac signature and compare with the attached Hmac signature that we put into the header.</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+curl <span class="nt">--location</span> <span class="nt">--request</span> POST <span class="s1">'http://localhost:8080/v1/cipher/hmac/check'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'x-nonce: 1'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'x-uri-calculate: v1/cipher/hmac'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'x-timestamp: 2022-01-08'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'x-hmac: 46B44922F5844B7F90A4A42CD5191150782B866EA426CA9129AC69C51993AD63'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+<span class="nt">--data-raw</span> <span class="s1">'{
+    "fullName": "Nguyen Minh Duc",
+    "city": "HCM",
+    "gender": "M",
+    "amount": 10
+}'</span>
+
+</code></pre></div></div>
+
+<p><a href="/assets/images/spring-boot-HMAC-header-check-request.png"><img src="/assets/images/spring-boot-HMAC-header-check-request.png" alt="HMAC header check request" title="hmac header check request" /></a></p>
+
+<p><a href="/assets/images/spring-boot-HMAC-body-check-request.png"><img src="/assets/images/spring-boot-HMAC-body-check-request.png" alt="HMAC body check request" title="hmac body check request" /></a></p>
+
+<ul>
+  <li>
+    <p>As you can see the response is <strong>true</strong>, it means the attached Hmac signature is matched with the re-calculated Hmac signature from your request data. So this request is legal and there are not any data changes.</p>
+  </li>
+  <li>
+    <p>Now we will try to change a small character in the request body and call api <code class="language-plaintext highlighter-rouge">v1/cipher/hmac/check</code> again.</p>
+  </li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+curl <span class="nt">--location</span> <span class="nt">--request</span> POST <span class="s1">'http://localhost:8080/v1/cipher/hmac/check'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'x-nonce: 1'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'x-uri-calculate: v1/cipher/hmac'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'x-timestamp: 2022-01-08'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'x-hmac: 46B44922F5844B7F90A4A42CD5191150782B866EA426CA9129AC69C51993AD63'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+<span class="nt">--data-raw</span> <span class="s1">'{
+    "fullName": "Nguyen Minh Duc1",
+    "city": "HCM",
+    "gender": "M",
+    "amount": 10
+}'</span>
+
+</code></pre></div></div>
+
+<p><a href="/assets/images/spring-boot-HMAC-change-body-check-request.png"><img src="/assets/images/spring-boot-HMAC-change-body-check-request.png" alt="HMAC body check request failed" title="hmac body check request failed" /></a></p>
+
+<ul>
+  <li>Then the api return <strong>failed</strong>, it means your request data has been changed and it is not the same as the original.</li>
+  <li>Next, We will put the request body as the original, but we will do a small change on header of the request.</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+curl <span class="nt">--location</span> <span class="nt">--request</span> POST <span class="s1">'http://localhost:8080/v1/cipher/hmac/check'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'x-nonce: 1'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'x-uri-calculate: v1/cipher/hmac'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'x-timestamp: 2022-01-09'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'x-hmac: 46B44922F5844B7F90A4A42CD5191150782B866EA426CA9129AC69C51993AD63'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+<span class="nt">--data-raw</span> <span class="s1">'{
+    "fullName": "Nguyen Minh Duc",
+    "city": "HCM",
+    "gender": "M",
+    "amount": 10
+}'</span>
+
+</code></pre></div></div>
+
+<p><a href="/assets/images/spring-boot-HMAC-change-header-check-request.png"><img src="/assets/images/spring-boot-HMAC-change-header-check-request.png" alt="HMAC header check request failed" title="hmac header check request failed" /></a></p>
+
+<ul>
+  <li>We will also received the false result, because the request data has changed.</li>
+</ul>
+
+<h3 id="summary">SUMMARY</h3>
+
+<ul>
+  <li>Data integrity is the overall accuracy, completeness, and consistency of data. Data integrity also refers to the safety of data in regard to regulatory compliance. <a href="https://www.talend.com/resources/what-is-data-integrity/">More information</a></li>
+  <li><code class="language-plaintext highlighter-rouge">HMAC, Data integrity</code>, HMAC (hash-based message authentication) is a specific type of message authentication code (MAC) involving a cryptographic hash function and a secret cryptographic key. As with any MAC, it may be used to simultaneously verify both the data integrity and authenticity of a message. <a href="https://en.wikipedia.org/wiki/HMAC">More information</a></li>
+  <li>Java provide a built-in Mac class to generate HMAC, so we don’t need to add any more dependency for HMAC generating.</li>
+</ul>
+
+<h3 id="references">REFERENCES</h3>
+
+<ul>
+  <li><a href="https://en.wikipedia.org/wiki/HMAC">WIKI</a></li>
+  <li><a href="https://www.talend.com/resources/what-is-data-integrity/">TALEND</a></li>
+</ul>
+
+    </div><a class="u-url" href="/java/2021/12/31/java-springboot-HMAC.html" hidden></a>
+  </article>
+  
+</div>
+
+
+    </div>
+  </div>
+  <script src="https://unpkg.com/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js"></script>
+  <script>addBackToTop()</script>
+</body>
+<footer><footer class="site-footer h-card">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <h2 class="footer-heading">KaizenThink</h2>
+        <div>
+          <div>
+            <ul>
+              <li>Duc Nguyen</li><li><a class="u-email" href="mailto:minhducnguyen189@gmail.com">minhducnguyen189@gmail.com</a></li><li>&copy; 2021 Duc Nguyen. Powered by <a href="https://jekyllrb.com/">Jekyll</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <data class="u-url" href="/%20/"></data>
+        <div><ul class="social-media-list"><li><a href="https://github.com/minhducnguyen189"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">minhducnguyen189</span></a></li><li><a href="https://www.linkedin.com/in/duc-nguyen-03109b141"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#linkedin"></use></svg> <span class="username">duc-nguyen-03109b141</span></a></li></ul>
+</div>
+      </div>
+      <div class="col-md-4">
+        <h3>Support me</h3>
+        <!-- PayPal Logo -->
+        <table id="sponsor" border='0' cellpadding='10' cellspacing='0' align='center'>
+          <tr>
+            <td align='center'>
+              <a href='https://www.paypal.com/paypalme/minhduc189' title='Sponsor me'
+                onclick="javascript:window.open('https://www.paypal.com/paypalme/minhduc189','WIPaypal','toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=1060, height=700'); return false;">
+                <img src='https://www.paypalobjects.com/webstatic/en_US/i/buttons/PP_logo_h_150x38.png' alt='PayPal Acceptance | Medium v2' />
+              </a>
+            </td>
+          </tr>
+        </table>
+        <!-- PayPal Logo -->
+      </div>
+    </div>
+  </div>
+</footer>
+</footer>
+</html>
