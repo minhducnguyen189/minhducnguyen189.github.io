@@ -2,6 +2,18 @@
   
     {
 
+      "title"    : "HMAC AND DATA INTEGRITY",
+      "url"      : "/java/2021/12/05/java-springboot-HMAC.html",
+      "category" : "java",
+      "tags"     : "Java, SpringBoot, HMAC, hash",
+      "date"     : "2021-12-05 00:00:00 +0700",
+      "discription" : ""
+
+    }
+    ,
+  
+    {
+
       "title"    : "Encode, Encrypt And Hash In SpringBoot",
       "url"      : "/java/2021/12/05/java-springboot-encode-encrypt-hash.html",
       "category" : "java",
