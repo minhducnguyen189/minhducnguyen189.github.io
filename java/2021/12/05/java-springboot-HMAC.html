@@ -16,9 +16,9 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script><!-- Begin Jekyll SEO tag v2.7.1 -->
-<title>HMAC AND DATA INTEGRITY | KaizenThink</title>
+<title>HMAC And Data Integrity | KaizenThink</title>
 <meta name="generator" content="Jekyll v4.2.1" />
-<meta property="og:title" content="HMAC AND DATA INTEGRITY" />
+<meta property="og:title" content="HMAC And Data Integrity" />
 <meta name="author" content="Duc Nguyen" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="In this post we will learn about Data Integrity which is a part of information security and we will make an example with HMAC on spring boot service." />
@@ -29,9 +29,9 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2021-12-05T00:00:00+07:00" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="HMAC AND DATA INTEGRITY" />
+<meta property="twitter:title" content="HMAC And Data Integrity" />
 <script type="application/ld+json">
-{"mainEntityOfPage":{"@type":"WebPage","@id":"/java/2021/12/05/java-springboot-HMAC.html"},"@type":"BlogPosting","url":"/java/2021/12/05/java-springboot-HMAC.html","author":{"@type":"Person","name":"Duc Nguyen"},"headline":"HMAC AND DATA INTEGRITY","dateModified":"2021-12-05T00:00:00+07:00","datePublished":"2021-12-05T00:00:00+07:00","description":"In this post we will learn about Data Integrity which is a part of information security and we will make an example with HMAC on spring boot service.","@context":"https://schema.org"}</script>
+{"mainEntityOfPage":{"@type":"WebPage","@id":"/java/2021/12/05/java-springboot-HMAC.html"},"@type":"BlogPosting","url":"/java/2021/12/05/java-springboot-HMAC.html","author":{"@type":"Person","name":"Duc Nguyen"},"headline":"HMAC And Data Integrity","dateModified":"2021-12-05T00:00:00+07:00","datePublished":"2021-12-05T00:00:00+07:00","description":"In this post we will learn about Data Integrity which is a part of information security and we will make an example with HMAC on spring boot service.","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="KaizenThink" /><!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZ8G5007GK"></script>
@@ -111,7 +111,7 @@
       <div class="col-lg-8 mx-auto">
   <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
     <header class="post-header">
-      <h1 class="post-title p-name" itemprop="name headline">HMAC AND DATA INTEGRITY</h1>
+      <h1 class="post-title p-name" itemprop="name headline">HMAC And Data Integrity</h1>
       <p class="post-meta">
         <time class="dt-published" datetime="2021-12-05T00:00:00+07:00" itemprop="datePublished">Dec 5, 2021
         </time></p>
@@ -303,7 +303,7 @@
       <li>body: all body request</li>
     </ul>
   </li>
-  <li>So using these request data means that if there is any change on these headers and request body in transferring data in the internet then the recalculated HMAC data by Consumer will be different with the attached one. So the Consumer will know and give action as rejecting the request.</li>
+  <li>So using these request data means that if there is any change on these headers and request body in transferring data in the internet then the recalculated HMAC signature by Consumer will be different with the attached one. So the Consumer will know and give action as rejecting the request.</li>
 </ul>
 
 <hr />
@@ -355,14 +355,14 @@
 <ul>
   <li>So Java provide for us a build-in <code class="language-plaintext highlighter-rouge">Mac</code> class for HMAC genderation so we don’t need to add more any dependency. We can initialze <code class="language-plaintext highlighter-rouge">Mac</code> class by method **getInstance(<algorithms-name>)**, this class supports various of hasing algorithms as: **HmacMD5**, **HmacSHA1**, **HmacSHA256**, **HmacSHA384**, **HmacSHA512**. In this example we will use **HmacSHA256** as you can see in the code above.</algorithms-name></li>
   <li>Next, we will init <code class="language-plaintext highlighter-rouge">Mac</code> class with a secret key, we note that this secret key will be shared secretly between <strong>Consumer</strong> and <strong>Api Provider</strong>.</li>
-  <li>Then we call the <code class="language-plaintext highlighter-rouge">doFinal()</code> method to generate a byte array containing the HMAC result.</li>
+  <li>Then we call the <code class="language-plaintext highlighter-rouge">doFinal()</code> method to generate a byte array containing the HMAC signature result.</li>
   <li>Now let start your spring boot servie for testing, you would see results as below</li>
 </ul>
 
 <hr />
 
 <ul>
-  <li>Firstly, we will try the api <code class="language-plaintext highlighter-rouge">POST /v1/cipher/hmac</code> to generate the HMAC for the request that we want to send. Again, I want to note that this api is used for making example, it should not existed/published in real system, generating HMAC will be made secretly by services and attach into header or somewhere before sending the request to Api Providers.</li>
+  <li>Firstly, we will try the api <code class="language-plaintext highlighter-rouge">POST /v1/cipher/hmac</code> to generate the HMAC signature for the request that we want to send. Again, I want to note that this api is used for making example, it should not existed/published in real system, generating HMAC signature will be made secretly by services and attach into header or somewhere before sending the request to Api Providers.</li>
 </ul>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
@@ -385,7 +385,7 @@ curl <span class="nt">--location</span> <span class="nt">--request</span> POST <
 <p><a href="/assets/images/spring-boot-HMAC-body-request.png"><img src="/assets/images/spring-boot-HMAC-body-request.png" alt="HMAC body request" title="hmac body request" /></a></p>
 
 <ul>
-  <li>You can see we will received a Hmac String like this</li>
+  <li>You can see we will received a Hmac signature string like this</li>
 </ul>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
@@ -394,13 +394,13 @@ curl <span class="nt">--location</span> <span class="nt">--request</span> POST <
 </code></pre></div></div>
 
 <ul>
-  <li>Now, we will use the result Hmac string above and put into the header of the request that you want to call to <strong>Api Provider</strong> as in the image</li>
+  <li>Now, we will use the result Hmac signature string above and put into the header of the request that you want to call to <strong>Api Provider</strong> as in the image</li>
 </ul>
 
 <p><a href="/assets/images/spring-boot-HMAC-diagram.png"><img src="/assets/images/spring-boot-HMAC-diagram.png" alt="HMAC example diagram" title="hmac example diagram" /></a></p>
 
 <ul>
-  <li>The <strong>Api Provider</strong> will recalculate the Hmac and compare with the attached Hmac that we put into the header.</li>
+  <li>The <strong>Api Provider</strong> will recalculate the Hmac signature and compare with the attached Hmac signature that we put into the header.</li>
 </ul>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
@@ -425,7 +425,7 @@ curl <span class="nt">--location</span> <span class="nt">--request</span> POST <
 
 <ul>
   <li>
-    <p>As you can see the response is <strong>true</strong>, it means the attached Hmac is matched with the re-calculated Hmac from your request data. So this request is legal and there are not any data changes.</p>
+    <p>As you can see the response is <strong>true</strong>, it means the attached Hmac signature is matched with the re-calculated Hmac signature from your request data. So this request is legal and there are not any data changes.</p>
   </li>
   <li>
     <p>Now we will try to change a small character in the request body and call api <code class="language-plaintext highlighter-rouge">v1/cipher/hmac/check</code> again.</p>
@@ -452,7 +452,7 @@ curl <span class="nt">--location</span> <span class="nt">--request</span> POST <
 
 <ul>
   <li>Then the api return <strong>failed</strong>, it means your request data has been changed and it is not the same as the original.</li>
-  <li>Next, We will put the data as the original, but we will do a small change on header of the request.</li>
+  <li>Next, We will put the request body as the original, but we will do a small change on header of the request.</li>
 </ul>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
@@ -474,7 +474,7 @@ curl <span class="nt">--location</span> <span class="nt">--request</span> POST <
 <p><a href="/assets/images/spring-boot-HMAC-change-header-check-request.png"><img src="/assets/images/spring-boot-HMAC-change-header-check-request.png" alt="HMAC header check request failed" title="hmac header check request failed" /></a></p>
 
 <ul>
-  <li>We will also received the false result.</li>
+  <li>We will also received the false result, because the request data has changed.</li>
 </ul>
 
 <h3 id="summary">SUMMARY</h3>

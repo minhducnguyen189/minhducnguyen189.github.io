@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.1">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2022-01-08T18:52:18+07:00</updated><id>/feed.xml</id><title type="html">KaizenThink</title><subtitle>Hi there! Let's explore some general knowleadges and briefly definitions in programming. I hope that this website can help people saving time in learning, also give some motivations for those who have choice the developer path.</subtitle><author><name>Duc Nguyen</name></author><entry><title type="html">Encode, Encrypt And Hash In SpringBoot</title><link href="/java/2021/12/05/java-springboot-encode-encrypt-hash.html" rel="alternate" type="text/html" title="Encode, Encrypt And Hash In SpringBoot" /><published>2021-12-05T00:00:00+07:00</published><updated>2021-12-05T00:00:00+07:00</updated><id>/java/2021/12/05/java-springboot-encode-encrypt-hash</id><content type="html" xml:base="/java/2021/12/05/java-springboot-encode-encrypt-hash.html">&lt;blockquote&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.1">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2022-01-08T19:06:34+07:00</updated><id>/feed.xml</id><title type="html">KaizenThink</title><subtitle>Hi there! Let's explore some general knowleadges and briefly definitions in programming. I hope that this website can help people saving time in learning, also give some motivations for those who have choice the developer path.</subtitle><author><name>Duc Nguyen</name></author><entry><title type="html">Encode, Encrypt And Hash In SpringBoot</title><link href="/java/2021/12/05/java-springboot-encode-encrypt-hash.html" rel="alternate" type="text/html" title="Encode, Encrypt And Hash In SpringBoot" /><published>2021-12-05T00:00:00+07:00</published><updated>2021-12-05T00:00:00+07:00</updated><id>/java/2021/12/05/java-springboot-encode-encrypt-hash</id><content type="html" xml:base="/java/2021/12/05/java-springboot-encode-encrypt-hash.html">&lt;blockquote&gt;
   &lt;p&gt;In this topic we will learn about Encode, Encrypt and Hash. Differencies between these types and make example Apis with Springboot.&lt;/p&gt;
 &lt;/blockquote&gt;
 
@@ -1153,7 +1153,7 @@
   &lt;/li&gt;
   &lt;li&gt;You can view full source code at &lt;a href=&quot;https://github.com/minhducnguyen189/com.springboot.project/tree/master/cipher-app/src/main/java/com/springboot/project/cipher/app&quot;&gt;this link&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;Thanks and see you in the next topics.&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Duc Nguyen</name></author><category term="java" /><category term="Java" /><category term="SpringBoot" /><category term="cipher" /><category term="encode" /><category term="decode" /><category term="encrypt" /><category term="decrypt" /><category term="hash" /><summary type="html">In this topic we will learn about Encode, Encrypt and Hash. Differencies between these types and make example Apis with Springboot.</summary></entry><entry><title type="html">HMAC AND DATA INTEGRITY</title><link href="/java/2021/12/05/java-springboot-HMAC.html" rel="alternate" type="text/html" title="HMAC AND DATA INTEGRITY" /><published>2021-12-05T00:00:00+07:00</published><updated>2021-12-05T00:00:00+07:00</updated><id>/java/2021/12/05/java-springboot-HMAC</id><content type="html" xml:base="/java/2021/12/05/java-springboot-HMAC.html">&lt;blockquote&gt;
+&lt;/ul&gt;</content><author><name>Duc Nguyen</name></author><category term="java" /><category term="Java" /><category term="SpringBoot" /><category term="cipher" /><category term="encode" /><category term="decode" /><category term="encrypt" /><category term="decrypt" /><category term="hash" /><summary type="html">In this topic we will learn about Encode, Encrypt and Hash. Differencies between these types and make example Apis with Springboot.</summary></entry><entry><title type="html">HMAC And Data Integrity</title><link href="/java/2021/12/05/java-springboot-HMAC.html" rel="alternate" type="text/html" title="HMAC And Data Integrity" /><published>2021-12-05T00:00:00+07:00</published><updated>2021-12-05T00:00:00+07:00</updated><id>/java/2021/12/05/java-springboot-HMAC</id><content type="html" xml:base="/java/2021/12/05/java-springboot-HMAC.html">&lt;blockquote&gt;
   &lt;p&gt;In this post we will learn about Data Integrity which is a part of information security and we will make an example with HMAC on spring boot service.&lt;/p&gt;
 &lt;/blockquote&gt;
 
@@ -1338,7 +1338,7 @@
       &lt;li&gt;body: all body request&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
-  &lt;li&gt;So using these request data means that if there is any change on these headers and request body in transferring data in the internet then the recalculated HMAC data by Consumer will be different with the attached one. So the Consumer will know and give action as rejecting the request.&lt;/li&gt;
+  &lt;li&gt;So using these request data means that if there is any change on these headers and request body in transferring data in the internet then the recalculated HMAC signature by Consumer will be different with the attached one. So the Consumer will know and give action as rejecting the request.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;hr /&gt;
@@ -1390,14 +1390,14 @@
 &lt;ul&gt;
   &lt;li&gt;So Java provide for us a build-in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Mac&lt;/code&gt; class for HMAC genderation so we don’t need to add more any dependency. We can initialze &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Mac&lt;/code&gt; class by method **getInstance(&lt;algorithms-name&gt;)**, this class supports various of hasing algorithms as: **HmacMD5**, **HmacSHA1**, **HmacSHA256**, **HmacSHA384**, **HmacSHA512**. In this example we will use **HmacSHA256** as you can see in the code above.&lt;/algorithms-name&gt;&lt;/li&gt;
   &lt;li&gt;Next, we will init &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Mac&lt;/code&gt; class with a secret key, we note that this secret key will be shared secretly between &lt;strong&gt;Consumer&lt;/strong&gt; and &lt;strong&gt;Api Provider&lt;/strong&gt;.&lt;/li&gt;
-  &lt;li&gt;Then we call the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;doFinal()&lt;/code&gt; method to generate a byte array containing the HMAC result.&lt;/li&gt;
+  &lt;li&gt;Then we call the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;doFinal()&lt;/code&gt; method to generate a byte array containing the HMAC signature result.&lt;/li&gt;
   &lt;li&gt;Now let start your spring boot servie for testing, you would see results as below&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;hr /&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;Firstly, we will try the api &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;POST /v1/cipher/hmac&lt;/code&gt; to generate the HMAC for the request that we want to send. Again, I want to note that this api is used for making example, it should not existed/published in real system, generating HMAC will be made secretly by services and attach into header or somewhere before sending the request to Api Providers.&lt;/li&gt;
+  &lt;li&gt;Firstly, we will try the api &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;POST /v1/cipher/hmac&lt;/code&gt; to generate the HMAC signature for the request that we want to send. Again, I want to note that this api is used for making example, it should not existed/published in real system, generating HMAC signature will be made secretly by services and attach into header or somewhere before sending the request to Api Providers.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
@@ -1420,7 +1420,7 @@ curl &lt;span class=&quot;nt&quot;&gt;--location&lt;/span&gt; &lt;span class=&qu
 &lt;p&gt;&lt;a href=&quot;/assets/images/spring-boot-HMAC-body-request.png&quot;&gt;&lt;img src=&quot;/assets/images/spring-boot-HMAC-body-request.png&quot; alt=&quot;HMAC body request&quot; title=&quot;hmac body request&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;You can see we will received a Hmac String like this&lt;/li&gt;
+  &lt;li&gt;You can see we will received a Hmac signature string like this&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
@@ -1429,13 +1429,13 @@ curl &lt;span class=&quot;nt&quot;&gt;--location&lt;/span&gt; &lt;span class=&qu
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;Now, we will use the result Hmac string above and put into the header of the request that you want to call to &lt;strong&gt;Api Provider&lt;/strong&gt; as in the image&lt;/li&gt;
+  &lt;li&gt;Now, we will use the result Hmac signature string above and put into the header of the request that you want to call to &lt;strong&gt;Api Provider&lt;/strong&gt; as in the image&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;&lt;a href=&quot;/assets/images/spring-boot-HMAC-diagram.png&quot;&gt;&lt;img src=&quot;/assets/images/spring-boot-HMAC-diagram.png&quot; alt=&quot;HMAC example diagram&quot; title=&quot;hmac example diagram&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;The &lt;strong&gt;Api Provider&lt;/strong&gt; will recalculate the Hmac and compare with the attached Hmac that we put into the header.&lt;/li&gt;
+  &lt;li&gt;The &lt;strong&gt;Api Provider&lt;/strong&gt; will recalculate the Hmac signature and compare with the attached Hmac signature that we put into the header.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
@@ -1460,7 +1460,7 @@ curl &lt;span class=&quot;nt&quot;&gt;--location&lt;/span&gt; &lt;span class=&qu
 
 &lt;ul&gt;
   &lt;li&gt;
-    &lt;p&gt;As you can see the response is &lt;strong&gt;true&lt;/strong&gt;, it means the attached Hmac is matched with the re-calculated Hmac from your request data. So this request is legal and there are not any data changes.&lt;/p&gt;
+    &lt;p&gt;As you can see the response is &lt;strong&gt;true&lt;/strong&gt;, it means the attached Hmac signature is matched with the re-calculated Hmac signature from your request data. So this request is legal and there are not any data changes.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;Now we will try to change a small character in the request body and call api &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;v1/cipher/hmac/check&lt;/code&gt; again.&lt;/p&gt;
@@ -1487,7 +1487,7 @@ curl &lt;span class=&quot;nt&quot;&gt;--location&lt;/span&gt; &lt;span class=&qu
 
 &lt;ul&gt;
   &lt;li&gt;Then the api return &lt;strong&gt;failed&lt;/strong&gt;, it means your request data has been changed and it is not the same as the original.&lt;/li&gt;
-  &lt;li&gt;Next, We will put the data as the original, but we will do a small change on header of the request.&lt;/li&gt;
+  &lt;li&gt;Next, We will put the request body as the original, but we will do a small change on header of the request.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
@@ -1509,7 +1509,7 @@ curl &lt;span class=&quot;nt&quot;&gt;--location&lt;/span&gt; &lt;span class=&qu
 &lt;p&gt;&lt;a href=&quot;/assets/images/spring-boot-HMAC-change-header-check-request.png&quot;&gt;&lt;img src=&quot;/assets/images/spring-boot-HMAC-change-header-check-request.png&quot; alt=&quot;HMAC header check request failed&quot; title=&quot;hmac header check request failed&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;We will also received the false result.&lt;/li&gt;
+  &lt;li&gt;We will also received the false result, because the request data has changed.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h3 id=&quot;summary&quot;&gt;SUMMARY&lt;/h3&gt;
