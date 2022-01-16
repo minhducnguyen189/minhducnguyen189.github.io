@@ -101,6 +101,15 @@
         });
       });
     </script>
+    <!-- enable checkboxes-->
+    <script>
+      window.addEventListener('DOMContentLoaded', () => {
+        const checkboxes = document.getElementsByClassName('task-list-item-checkbox');
+        for(ind=0;ind<checkboxes.length;ind++) {
+          checkboxes[ind].removeAttribute('disabled');
+        }
+      });
+    </script>
   </nav>
 </div></div>
   </div>
