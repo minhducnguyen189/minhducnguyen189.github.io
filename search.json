@@ -230,6 +230,18 @@
   
     {
 
+      "title"    : "JDBC And JPA In SpringBoot",
+      "url"      : "/java/2021/09/11/java-springboot-JDBC-JPA.html",
+      "category" : "java",
+      "tags"     : "Database, Jpa, Jdbc, SpringBoot",
+      "date"     : "2021-09-11 00:00:00 +0700",
+      "discription" : ""
+
+    }
+    ,
+  
+    {
+
       "title"    : "Jenkins With Sonarqube Plugin For Building SpringBoot",
       "url"      : "/ci-cd/2021/08/27/ci-cd-jenkins-sonarqube-springboot.html",
       "category" : "ci-cd",
