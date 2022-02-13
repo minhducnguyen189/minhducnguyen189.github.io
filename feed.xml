@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.1">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2022-02-08T13:30:04+07:00</updated><id>/feed.xml</id><title type="html">KaizenThink</title><subtitle>Hi there! Let's explore some general knowleadges and briefly definitions in programming. I hope that this website can help people saving time in learning, also give some motivations for those who have choice the developer path.</subtitle><author><name>Duc Nguyen</name></author><entry><title type="html">Java Road Map</title><link href="/java/2022/02/08/java-road-map.html" rel="alternate" type="text/html" title="Java Road Map" /><published>2022-02-08T00:00:00+07:00</published><updated>2022-02-08T00:00:00+07:00</updated><id>/java/2022/02/08/java-road-map</id><content type="html" xml:base="/java/2022/02/08/java-road-map.html">&lt;ul id=&quot;markdown-toc&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.1">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2022-02-13T14:12:11+07:00</updated><id>/feed.xml</id><title type="html">KaizenThink</title><subtitle>Hi there! Let's explore some general knowleadges and briefly definitions in programming. I hope that this website can help people saving time in learning, also give some motivations for those who have choice the developer path.</subtitle><author><name>Duc Nguyen</name></author><entry><title type="html">Java Road Map</title><link href="/java/2022/02/08/java-road-map.html" rel="alternate" type="text/html" title="Java Road Map" /><published>2022-02-08T00:00:00+07:00</published><updated>2022-02-08T00:00:00+07:00</updated><id>/java/2022/02/08/java-road-map</id><content type="html" xml:base="/java/2022/02/08/java-road-map.html">&lt;ul id=&quot;markdown-toc&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;#java-developer-road-map&quot; id=&quot;markdown-toc-java-developer-road-map&quot;&gt;JAVA DEVELOPER ROAD MAP&lt;/a&gt;    &lt;ul&gt;
       &lt;li&gt;&lt;a href=&quot;#learn-the-fundamentals&quot; id=&quot;markdown-toc-learn-the-fundamentals&quot;&gt;LEARN THE FUNDAMENTALS&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;&lt;a href=&quot;#getting-deeper&quot; id=&quot;markdown-toc-getting-deeper&quot;&gt;GETTING DEEPER&lt;/a&gt;&lt;/li&gt;
@@ -2655,17 +2655,61 @@ WHEN NOT MATCHED THEN INSERT | DELETE | UPDATE
     &lt;p&gt;To be more clear about merge please refer below 2 example&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;This is data in table Person
-| refPerson | preName | name | doB | legalName|
-| —- | —- | —- | —- | —- |
-| 01A100 | WL. | Morman | 1990 |  |
-| 02B101 | W. | Fred | 1980 |  |
-| 03B103 | H. | Han | 1992 |  |
-| 04B104 | Y. | Yammi | 1980 | Agency CL - L2 |
-| 05V104 | G. | Alan | 1875 | Agency CL - L1  |&lt;/p&gt;
+    &lt;p&gt;This is data in table Person&lt;/p&gt;
   &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;MERGE: add new person because refPerson  05G104 is not exist&lt;/p&gt;
+&lt;/ul&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;refPerson&lt;/th&gt;
+      &lt;th&gt;preName&lt;/th&gt;
+      &lt;th&gt;name&lt;/th&gt;
+      &lt;th&gt;doB&lt;/th&gt;
+      &lt;th&gt;legalName&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;01A100&lt;/td&gt;
+      &lt;td&gt;WL.&lt;/td&gt;
+      &lt;td&gt;Morman&lt;/td&gt;
+      &lt;td&gt;1990&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;02B101&lt;/td&gt;
+      &lt;td&gt;W.&lt;/td&gt;
+      &lt;td&gt;Fred&lt;/td&gt;
+      &lt;td&gt;1980&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;03B103&lt;/td&gt;
+      &lt;td&gt;H.&lt;/td&gt;
+      &lt;td&gt;Han&lt;/td&gt;
+      &lt;td&gt;1992&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;04B104&lt;/td&gt;
+      &lt;td&gt;Y.&lt;/td&gt;
+      &lt;td&gt;Yammi&lt;/td&gt;
+      &lt;td&gt;1980&lt;/td&gt;
+      &lt;td&gt;Agency CL - L2&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;05V104&lt;/td&gt;
+      &lt;td&gt;G.&lt;/td&gt;
+      &lt;td&gt;Alan&lt;/td&gt;
+      &lt;td&gt;1875&lt;/td&gt;
+      &lt;td&gt;Agency CL - L1&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;MERGE: add new person because refPerson  05G104 is not exist
     &lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;MERGE&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;INTO&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;PERSONS&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;P&lt;/span&gt;                                            
 &lt;span class=&quot;k&quot;&gt;USING&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;SELECT&lt;/span&gt;  &lt;span class=&quot;s1&quot;&gt;'05G104'&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
              &lt;span class=&quot;s1&quot;&gt;'F'&lt;/span&gt;      &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;

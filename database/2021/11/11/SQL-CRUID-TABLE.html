@@ -31,7 +31,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="SQL INSERT, DELELE, UPDATE, MERGE TABLE" />
 <script type="application/ld+json">
-{"mainEntityOfPage":{"@type":"WebPage","@id":"/database/2021/11/11/SQL-CRUID-TABLE.html"},"@type":"BlogPosting","url":"/database/2021/11/11/SQL-CRUID-TABLE.html","author":{"@type":"Person","name":"Duc Nguyen"},"headline":"SQL INSERT, DELELE, UPDATE, MERGE TABLE","dateModified":"2021-11-11T00:00:00+07:00","datePublished":"2021-11-11T00:00:00+07:00","description":"Hi there! Let’s explore some general knowleadges and briefly definitions in programming. I hope that this website can help people saving time in learning, also give some motivations for those who have choice the developer path.","@context":"https://schema.org"}</script>
+{"@type":"BlogPosting","url":"/database/2021/11/11/SQL-CRUID-TABLE.html","author":{"@type":"Person","name":"Duc Nguyen"},"headline":"SQL INSERT, DELELE, UPDATE, MERGE TABLE","dateModified":"2021-11-11T00:00:00+07:00","datePublished":"2021-11-11T00:00:00+07:00","description":"Hi there! Let’s explore some general knowleadges and briefly definitions in programming. I hope that this website can help people saving time in learning, also give some motivations for those who have choice the developer path.","mainEntityOfPage":{"@type":"WebPage","@id":"/database/2021/11/11/SQL-CRUID-TABLE.html"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="KaizenThink" /><!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZ8G5007GK"></script>
@@ -416,17 +416,61 @@ WHEN NOT MATCHED THEN INSERT | DELETE | UPDATE
     <p>To be more clear about merge please refer below 2 example</p>
   </li>
   <li>
-    <p>This is data in table Person
-| refPerson | preName | name | doB | legalName|
-| —- | —- | —- | —- | —- |
-| 01A100 | WL. | Morman | 1990 |  |
-| 02B101 | W. | Fred | 1980 |  |
-| 03B103 | H. | Han | 1992 |  |
-| 04B104 | Y. | Yammi | 1980 | Agency CL - L2 |
-| 05V104 | G. | Alan | 1875 | Agency CL - L1  |</p>
+    <p>This is data in table Person</p>
   </li>
-  <li>
-    <p>MERGE: add new person because refPerson  05G104 is not exist</p>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>refPerson</th>
+      <th>preName</th>
+      <th>name</th>
+      <th>doB</th>
+      <th>legalName</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>01A100</td>
+      <td>WL.</td>
+      <td>Morman</td>
+      <td>1990</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>02B101</td>
+      <td>W.</td>
+      <td>Fred</td>
+      <td>1980</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>03B103</td>
+      <td>H.</td>
+      <td>Han</td>
+      <td>1992</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>04B104</td>
+      <td>Y.</td>
+      <td>Yammi</td>
+      <td>1980</td>
+      <td>Agency CL - L2</td>
+    </tr>
+    <tr>
+      <td>05V104</td>
+      <td>G.</td>
+      <td>Alan</td>
+      <td>1875</td>
+      <td>Agency CL - L1</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>MERGE: add new person because refPerson  05G104 is not exist
     <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">MERGE</span> <span class="k">INTO</span> <span class="n">PERSONS</span> <span class="n">P</span>                                            
 <span class="k">USING</span> <span class="p">(</span><span class="k">SELECT</span>  <span class="s1">'05G104'</span> <span class="p">,</span>
              <span class="s1">'F'</span>      <span class="p">,</span>
