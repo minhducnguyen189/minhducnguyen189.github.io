@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- bootstrap library and JS, Jquery -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Spring Cloud: OpenApi And OpenFeign For Server - Client Sides In SpringBoot | KaizenThink</title>
+<meta name="generator" content="Jekyll v4.2.1" />
+<meta property="og:title" content="Spring Cloud: OpenApi And OpenFeign For Server - Client Sides In SpringBoot" />
+<meta name="author" content="Duc Nguyen" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="In this post we will learn how to use openapi generator to generate server and client apis. Then we will configure openfeign on client to call to server side by service name with support of Eureka server." />
+<meta property="og:description" content="In this post we will learn how to use openapi generator to generate server and client apis. Then we will configure openfeign on client to call to server side by service name with support of Eureka server." />
+<link rel="canonical" href="/java/2022/02/13/java-springboot-openapi-openfeign.html" />
+<meta property="og:url" content="/java/2022/02/13/java-springboot-openapi-openfeign.html" />
+<meta property="og:site_name" content="KaizenThink" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-02-13T00:00:00+07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Spring Cloud: OpenApi And OpenFeign For Server - Client Sides In SpringBoot" />
+<script type="application/ld+json">
+{"mainEntityOfPage":{"@type":"WebPage","@id":"/java/2022/02/13/java-springboot-openapi-openfeign.html"},"@type":"BlogPosting","url":"/java/2022/02/13/java-springboot-openapi-openfeign.html","author":{"@type":"Person","name":"Duc Nguyen"},"headline":"Spring Cloud: OpenApi And OpenFeign For Server - Client Sides In SpringBoot","dateModified":"2022-02-13T00:00:00+07:00","datePublished":"2022-02-13T00:00:00+07:00","description":"In this post we will learn how to use openapi generator to generate server and client apis. Then we will configure openfeign on client to call to server side by service name with support of Eureka server.","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="KaizenThink" /><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NZ8G5007GK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-NZ8G5007GK');
+</script></head><body>
+  <div class="container-flush">
+    <div class="row"><!-- navigation bar -->
+<div class="col-lg-12">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" role="banner"><a class="navbar-brand site-title" rel="author" href="/">KaizenThink</a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="nav navbar-nav"><li class="nav-item active">
+          <a class="nav-link" href="/about">About</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/">Java</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/docker">Docker</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/database">Database</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/data-science">Data-Science</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/ci-cd">CI-CD</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/python">Python</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/fe">FE</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/others">Others</a>
+        </li></ul>
+    </div>
+
+    <!-- Html Elements for Search -->
+    <div id="search-container" class="btn-group">
+      <input type="text" id="search-input" placeholder="search...">
+      <button id="clear">clear</button>
+      <ul id="results-container"></ul>
+    </div>
+
+    <!-- Script pointing to search-script.js -->
+    <script src="/java-scripts/search-script.js" type="text/javascript"></script>
+
+    <!-- Configuration -->
+    <script>
+      SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('results-container'),
+        json: '/search.json'
+      })
+    </script>
+
+    <!-- search clear -->
+    <script>
+      window.addEventListener('load', () => {
+        const button = document.querySelector('#clear');
+        button.addEventListener('click', () => {
+          document.querySelector('#search-input').value = "";
+          document.querySelector('#results-container').innerHTML = "";
+        });
+      });
+    </script>
+    <!-- enable checkboxes-->
+    <script>
+      window.addEventListener('DOMContentLoaded', () => {
+        const checkboxes = document.getElementsByClassName('task-list-item-checkbox');
+        for(ind=0;ind<checkboxes.length;ind++) {
+          checkboxes[ind].removeAttribute('disabled');
+        }
+      });
+    </script>
+  </nav>
+</div></div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+  <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+    <header class="post-header">
+      <h1 class="post-title p-name" itemprop="name headline">Spring Cloud: OpenApi And OpenFeign For Server - Client Sides In SpringBoot</h1>
+      <p class="post-meta">
+        <time class="dt-published" datetime="2022-02-13T00:00:00+07:00" itemprop="datePublished">Feb 13, 2022
+        </time></p>
+    </header>
+  
+    <div class="post-content e-content" itemprop="articleBody">
+      <blockquote>
+  <p>In this post we will learn how to use openapi generator to generate server and client apis. Then we will configure openfeign on client to call to server side by service name with support of Eureka server.</p>
+</blockquote>
+
+<blockquote>
+  <p>If you have not used Eureka before, you can view <a href="/_posts/java/2021-07-05-java-springboot-eureka-zuul.markdown">this post</a></p>
+</blockquote>
+
+<blockquote>
+  <p>If you have not used Feign Client before, you can view <a href="/_posts/java/2021-07-15-java-springboot-feign-client.markdown">this post</a></p>
+</blockquote>
+
+<h2 id="what-is-the-openapi">WHAT IS THE OPENAPI?</h2>
+
+<ul>
+  <li>
+    <p>Like <a href="/_posts//java/2021-03-11-java-springboot-with-swagger.markdown">Swagger Specification</a>, the <code class="language-plaintext highlighter-rouge">OpenAPI Specification</code> (OAS) defines a standard, language-agnostic interface to RESTful APIs which allows both humans and computers to discover and understand the capabilities of the service without access to source code, documentation, or through network traffic inspection. When properly defined, a consumer can understand and interact with the remote service with a minimal amount of implementation logic.</p>
+  </li>
+  <li>
+    <p>An <code class="language-plaintext highlighter-rouge">OpenAPI</code> definition can then be used by documentation generation tools to display the API, code generation tools to generate servers and clients in various programming languages, testing tools, and many other use cases.</p>
+  </li>
+  <li>For all information and systax, <a href="https://swagger.io/specification/">you can find more here</a></li>
+  <li>To practise writting openapi spec, you can go to <a href="https://editor.swagger.io/">this page</a></li>
+</ul>
+
+<h2 id="example">EXAMPLE</h2>
+
+<ul>
+  <li>
+    <p>In this example, assume that we received <code class="language-plaintext highlighter-rouge">an openapi specification</code> from a technical analysis guy, with some apis, requests, responses and models. Then instead of wirting code manually, we will use openapi generator plugin on SpringBoot service which will help us to generate controller and models and we will use it for building our springboot service application quickly, we will name this service as <code class="language-plaintext highlighter-rouge">openfeign-openapi-server</code>.</p>
+  </li>
+  <li>
+    <p>After the code implementation on <code class="language-plaintext highlighter-rouge">openfeign-openapi-server</code>. Another spring boot service will need to configure spring cloud openfeign to use apis from <code class="language-plaintext highlighter-rouge">openfeign-openapi-server</code>. So instead of writing code manually, we also use the openapi generator plugin on SpringBoot service to generate <code class="language-plaintext highlighter-rouge">openfeign client</code> and models from the <code class="language-plaintext highlighter-rouge">openapi specification</code> of <code class="language-plaintext highlighter-rouge">openfeign-openapi-server</code>. Let’s call this service as <code class="language-plaintext highlighter-rouge">openfeign-openapi-client</code>.</p>
+  </li>
+  <li>
+    <p>Usually, the service <code class="language-plaintext highlighter-rouge">openfeign-openapi-client</code> will call to <code class="language-plaintext highlighter-rouge">openfeign-openapi-server</code> by url, using this way is okay but when <code class="language-plaintext highlighter-rouge">openfeign-openapi-server</code> changes ports or url, so we have to update <code class="language-plaintext highlighter-rouge">openfeign-openapi-client</code> configuration. To avoid this issue, spring cloud openfeign support us to use the name of target service instead of url to make connection. To do this we need an <code class="language-plaintext highlighter-rouge">Eureka Server</code> with registrations of <code class="language-plaintext highlighter-rouge">openfeign-openapi-server</code> and <code class="language-plaintext highlighter-rouge">openfeign-openapi-client</code>. You can view the image below for more details.</p>
+  </li>
+</ul>
+
+<p><a href="/assets/images/OpenApi-OpenFeign-System-Overview.PNG"><img src="/assets/images/OpenApi-OpenFeign-System-Overview.PNG" alt="services system overview&quot;" title="services system overview" /></a></p>
+
+<h3 id="eureka-server">EUREKA SERVER</h3>
+
+<blockquote>
+  <p>DEPENDENCIES</p>
+</blockquote>
+
+<ul>
+  <li>So for Eureka Server, you need to add some dependencies as below in your <code class="language-plaintext highlighter-rouge">pom.xml</code>.</li>
+</ul>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+	<span class="nt">&lt;dependencyManagement&gt;</span>
+		<span class="nt">&lt;dependencies&gt;</span>
+			<span class="nt">&lt;dependency&gt;</span>
+				<span class="nt">&lt;groupId&gt;</span>org.springframework.cloud<span class="nt">&lt;/groupId&gt;</span>
+				<span class="nt">&lt;artifactId&gt;</span>spring-cloud-dependencies<span class="nt">&lt;/artifactId&gt;</span>
+				<span class="nt">&lt;version&gt;</span>2021.0.0<span class="nt">&lt;/version&gt;</span>
+				<span class="nt">&lt;type&gt;</span>pom<span class="nt">&lt;/type&gt;</span>
+				<span class="nt">&lt;scope&gt;</span>import<span class="nt">&lt;/scope&gt;</span>
+			<span class="nt">&lt;/dependency&gt;</span>
+		<span class="nt">&lt;/dependencies&gt;</span>
+	<span class="nt">&lt;/dependencyManagement&gt;</span>
+
+
+  <span class="nt">&lt;dependencies&gt;</span>
+
+		<span class="nt">&lt;dependency&gt;</span>
+			<span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+			<span class="nt">&lt;artifactId&gt;</span>spring-boot-starter-web<span class="nt">&lt;/artifactId&gt;</span>
+			<span class="nt">&lt;version&gt;</span>2.6.3<span class="nt">&lt;/version&gt;</span>
+		<span class="nt">&lt;/dependency&gt;</span>
+
+		<span class="nt">&lt;dependency&gt;</span>
+			<span class="nt">&lt;groupId&gt;</span>org.springframework.cloud<span class="nt">&lt;/groupId&gt;</span>
+			<span class="nt">&lt;artifactId&gt;</span>spring-cloud-starter-netflix-eureka-server<span class="nt">&lt;/artifactId&gt;</span>
+		<span class="nt">&lt;/dependency&gt;</span>
+
+		<span class="nt">&lt;dependency&gt;</span>
+			<span class="nt">&lt;groupId&gt;</span>com.google.code.gson<span class="nt">&lt;/groupId&gt;</span>
+			<span class="nt">&lt;artifactId&gt;</span>gson<span class="nt">&lt;/artifactId&gt;</span>
+			<span class="nt">&lt;version&gt;</span>2.8.9<span class="nt">&lt;/version&gt;</span>
+		<span class="nt">&lt;/dependency&gt;</span>
+
+  <span class="nt">&lt;/dependencies&gt;</span>
+
+
+</code></pre></div></div>
+
+<ul>
+  <li>Note: in this new version of <code class="language-plaintext highlighter-rouge">spring-cloud-starter-netflix-eureka-server</code>, it requires dependency <code class="language-plaintext highlighter-rouge">gson</code>, so that’s why we have to add it into our spring boot project.</li>
+</ul>
+
+<blockquote>
+  <p>CONFIGURATION</p>
+</blockquote>
+
+<ul>
+  <li>Now, let’s add annotation <code class="language-plaintext highlighter-rouge">@EnableEurekaServer</code> into the main class.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kn">package</span> <span class="nn">com.eureka.server</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.springframework.boot.SpringApplication</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.boot.autoconfigure.SpringBootApplication</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.cloud.netflix.eureka.server.EnableEurekaServer</span><span class="o">;</span>
+
+<span class="nd">@SpringBootApplication</span>
+<span class="nd">@EnableEurekaServer</span>
+<span class="kd">public</span> <span class="kd">class</span>  <span class="nc">ServerApplication</span> <span class="o">{</span>
+
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">SpringApplication</span><span class="o">.</span><span class="na">run</span><span class="o">(</span><span class="nc">ServerApplication</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">args</span><span class="o">);</span>
+	<span class="o">}</span>
+
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<ul>
+  <li>In <code class="language-plaintext highlighter-rouge">application.properties</code> file, add some configuration as below</li>
+</ul>
+
+<div class="language-properties highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    <span class="c">#application name
+</span>    <span class="py">spring.application.name</span><span class="p">=</span><span class="s">eureka-server</span>
+    <span class="c">#server run at port 8761
+</span>    <span class="py">server.port</span><span class="p">=</span><span class="s">8761</span>
+    <span class="c">#self register is false
+</span>    <span class="py">eureka.client.register-with-eureka</span><span class="p">=</span><span class="s">false</span>
+    <span class="c">#self fetch registry is false
+</span>    <span class="py">eureka.client.fetch-registry</span><span class="p">=</span><span class="s">false</span>
+
+</code></pre></div></div>
+
+<p>Then run the service and access to <code class="language-plaintext highlighter-rouge">http://localhost:8761</code> to check the eureka service has run successfully.</p>
+
+<p><a href="/assets/images/spring-boot-eureka-server.JPG"><img src="/assets/images/spring-boot-eureka-server.JPG" alt="Eureka server" title="Eureka server" /></a></p>
+
+<ul>
+  <li>Then you can check your service log and you can see the url as in the image below which will be used for client to register to eureka server (<code class="language-plaintext highlighter-rouge">http://localhost:8761/eureka/</code>)</li>
+</ul>
+
+<p><a href="/assets/images/spring-boot-eureka-server-console.JPG"><img src="/assets/images/spring-boot-eureka-server-console.JPG" alt="Eureka server Console" title="Eureka server Console" /></a></p>
+
+<h3 id="openfeign-openapi-server">OPENFEIGN-OPENAPI-SERVER</h3>
+
+<blockquote>
+  <p>DEPENDENCIES</p>
+</blockquote>
+
+<ul>
+  <li>For <code class="language-plaintext highlighter-rouge">openfeign-openapi-server</code> we need to add some dependencies as below</li>
+</ul>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+  <span class="nt">&lt;dependencyManagement&gt;</span>
+			<span class="nt">&lt;dependencies&gt;</span>
+					<span class="nt">&lt;dependency&gt;</span>
+							<span class="nt">&lt;groupId&gt;</span>org.springframework.cloud<span class="nt">&lt;/groupId&gt;</span>
+							<span class="nt">&lt;artifactId&gt;</span>spring-cloud-dependencies<span class="nt">&lt;/artifactId&gt;</span>
+							<span class="nt">&lt;version&gt;</span>2021.0.0<span class="nt">&lt;/version&gt;</span>
+							<span class="nt">&lt;type&gt;</span>pom<span class="nt">&lt;/type&gt;</span>
+							<span class="nt">&lt;scope&gt;</span>import<span class="nt">&lt;/scope&gt;</span>
+					<span class="nt">&lt;/dependency&gt;</span>
+			<span class="nt">&lt;/dependencies&gt;</span>
+	<span class="nt">&lt;/dependencyManagement&gt;</span>
+
+
+  <span class="nt">&lt;dependencies&gt;</span>
+
+				<span class="c">&lt;!--Spring Boot Starter --&gt;</span>
+        <span class="nt">&lt;dependency&gt;</span>
+            <span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+            <span class="nt">&lt;artifactId&gt;</span>spring-boot-starter-web<span class="nt">&lt;/artifactId&gt;</span>
+            <span class="nt">&lt;version&gt;</span>2.6.3<span class="nt">&lt;/version&gt;</span>
+        <span class="nt">&lt;/dependency&gt;</span>
+
+        <span class="c">&lt;!--Openapi Generator--&gt;</span>
+        <span class="nt">&lt;dependency&gt;</span>
+            <span class="nt">&lt;groupId&gt;</span>org.openapitools<span class="nt">&lt;/groupId&gt;</span>
+            <span class="nt">&lt;artifactId&gt;</span>openapi-generator<span class="nt">&lt;/artifactId&gt;</span>
+            <span class="nt">&lt;version&gt;</span>5.4.0<span class="nt">&lt;/version&gt;</span>
+        <span class="nt">&lt;/dependency&gt;</span>
+
+
+        <span class="c">&lt;!--Openapi UI with validation--&gt;</span>
+        <span class="nt">&lt;dependency&gt;</span>
+            <span class="nt">&lt;groupId&gt;</span>com.fasterxml.jackson.core<span class="nt">&lt;/groupId&gt;</span>
+            <span class="nt">&lt;artifactId&gt;</span>jackson-core<span class="nt">&lt;/artifactId&gt;</span>
+            <span class="nt">&lt;version&gt;</span>2.13.1<span class="nt">&lt;/version&gt;</span>
+        <span class="nt">&lt;/dependency&gt;</span>
+
+        <span class="nt">&lt;dependency&gt;</span>
+            <span class="nt">&lt;groupId&gt;</span>com.fasterxml.jackson.core<span class="nt">&lt;/groupId&gt;</span>
+            <span class="nt">&lt;artifactId&gt;</span>jackson-annotations<span class="nt">&lt;/artifactId&gt;</span>
+            <span class="nt">&lt;version&gt;</span>2.13.1<span class="nt">&lt;/version&gt;</span>
+        <span class="nt">&lt;/dependency&gt;</span>
+
+        <span class="nt">&lt;dependency&gt;</span>
+            <span class="nt">&lt;groupId&gt;</span>org.openapitools<span class="nt">&lt;/groupId&gt;</span>
+            <span class="nt">&lt;artifactId&gt;</span>jackson-databind-nullable<span class="nt">&lt;/artifactId&gt;</span>
+            <span class="nt">&lt;version&gt;</span>0.2.2<span class="nt">&lt;/version&gt;</span>
+        <span class="nt">&lt;/dependency&gt;</span>
+
+        <span class="nt">&lt;dependency&gt;</span>
+            <span class="nt">&lt;groupId&gt;</span>org.springdoc<span class="nt">&lt;/groupId&gt;</span>
+            <span class="nt">&lt;artifactId&gt;</span>springdoc-openapi-ui<span class="nt">&lt;/artifactId&gt;</span>
+            <span class="nt">&lt;version&gt;</span>1.6.5<span class="nt">&lt;/version&gt;</span>
+        <span class="nt">&lt;/dependency&gt;</span>
+
+        <span class="c">&lt;!--JPA--&gt;</span>
+        <span class="nt">&lt;dependency&gt;</span>
+            <span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+            <span class="nt">&lt;artifactId&gt;</span>spring-boot-starter-data-jpa<span class="nt">&lt;/artifactId&gt;</span>
+            <span class="nt">&lt;version&gt;</span>2.6.3<span class="nt">&lt;/version&gt;</span>
+        <span class="nt">&lt;/dependency&gt;</span>
+
+				<span class="c">&lt;!--Database H2--&gt;</span>
+        <span class="nt">&lt;dependency&gt;</span>
+            <span class="nt">&lt;groupId&gt;</span>com.h2database<span class="nt">&lt;/groupId&gt;</span>
+            <span class="nt">&lt;artifactId&gt;</span>h2<span class="nt">&lt;/artifactId&gt;</span>
+            <span class="nt">&lt;version&gt;</span>2.1.210<span class="nt">&lt;/version&gt;</span>
+            <span class="nt">&lt;scope&gt;</span>runtime<span class="nt">&lt;/scope&gt;</span>
+        <span class="nt">&lt;/dependency&gt;</span>
+
+        <span class="c">&lt;!--lombok--&gt;</span>
+        <span class="nt">&lt;dependency&gt;</span>
+            <span class="nt">&lt;groupId&gt;</span>org.projectlombok<span class="nt">&lt;/groupId&gt;</span>
+            <span class="nt">&lt;artifactId&gt;</span>lombok<span class="nt">&lt;/artifactId&gt;</span>
+            <span class="nt">&lt;version&gt;</span>1.18.22<span class="nt">&lt;/version&gt;</span>
+            <span class="nt">&lt;scope&gt;</span>provided<span class="nt">&lt;/scope&gt;</span>
+        <span class="nt">&lt;/dependency&gt;</span>
+
+        <span class="c">&lt;!--spring cloud eureka client With Gson--&gt;</span>
+        <span class="nt">&lt;dependency&gt;</span>
+            <span class="nt">&lt;groupId&gt;</span>org.springframework.cloud<span class="nt">&lt;/groupId&gt;</span>
+            <span class="nt">&lt;artifactId&gt;</span>spring-cloud-starter-netflix-eureka-client<span class="nt">&lt;/artifactId&gt;</span>
+        <span class="nt">&lt;/dependency&gt;</span>
+
+        <span class="nt">&lt;dependency&gt;</span>
+            <span class="nt">&lt;groupId&gt;</span>com.google.code.gson<span class="nt">&lt;/groupId&gt;</span>
+            <span class="nt">&lt;artifactId&gt;</span>gson<span class="nt">&lt;/artifactId&gt;</span>
+            <span class="nt">&lt;version&gt;</span>2.8.9<span class="nt">&lt;/version&gt;</span>
+        <span class="nt">&lt;/dependency&gt;</span>
+
+    <span class="nt">&lt;/dependencies&gt;</span>
+
+		<span class="nt">&lt;build&gt;</span>
+        <span class="nt">&lt;plugins&gt;</span>
+						<span class="c">&lt;!-- Openapi Generator Plugin Configuration --&gt;</span>
+            <span class="nt">&lt;plugin&gt;</span>
+                <span class="nt">&lt;groupId&gt;</span>org.openapitools<span class="nt">&lt;/groupId&gt;</span>
+                <span class="nt">&lt;artifactId&gt;</span>openapi-generator-maven-plugin<span class="nt">&lt;/artifactId&gt;</span>
+                <span class="nt">&lt;version&gt;</span>5.4.0<span class="nt">&lt;/version&gt;</span>
+                <span class="nt">&lt;executions&gt;</span>
+                    <span class="nt">&lt;execution&gt;</span>
+                        <span class="nt">&lt;goals&gt;</span>
+                            <span class="nt">&lt;goal&gt;</span>generate<span class="nt">&lt;/goal&gt;</span>
+                        <span class="nt">&lt;/goals&gt;</span>
+                        <span class="nt">&lt;configuration&gt;</span>
+														<span class="c">&lt;!-- path to the openapi Specification file --&gt;</span>
+                            <span class="nt">&lt;inputSpec&gt;</span>
+                                ${project.basedir}/src/main/resources/openapi/openapi-server.yml
+                            <span class="nt">&lt;/inputSpec&gt;</span>
+
+														<span class="c">&lt;!-- type of openapi generator --&gt;</span>
+                            <span class="nt">&lt;generatorName&gt;</span>spring<span class="nt">&lt;/generatorName&gt;</span>
+
+														<span class="c">&lt;!-- path to generated api package --&gt;</span>
+                            <span class="nt">&lt;apiPackage&gt;</span>com.springboot.cloud.openfeign.openapi.server.app.api<span class="nt">&lt;/apiPackage&gt;</span>
+
+														<span class="c">&lt;!-- path to generated model package --&gt;</span>
+                            <span class="nt">&lt;modelPackage&gt;</span>com.springboot.cloud.openfeign.openapi.server.app.model<span class="nt">&lt;/modelPackage&gt;</span>
+
+                            <span class="nt">&lt;supportingFilesToGenerate&gt;</span>
+                                ApiUtil.java
+                            <span class="nt">&lt;/supportingFilesToGenerate&gt;</span>
+
+														<span class="c">&lt;!-- other config options --&gt;</span>
+                            <span class="nt">&lt;configOptions&gt;</span>
+                                <span class="nt">&lt;delegatePattern&gt;</span>true<span class="nt">&lt;/delegatePattern&gt;</span>
+                                <span class="nt">&lt;dateLibrary&gt;</span>java8<span class="nt">&lt;/dateLibrary&gt;</span>
+                                <span class="nt">&lt;interfaceOnly&gt;</span>true<span class="nt">&lt;/interfaceOnly&gt;</span>
+                                <span class="nt">&lt;useBeanValidation&gt;</span>true<span class="nt">&lt;/useBeanValidation&gt;</span>
+                            <span class="nt">&lt;/configOptions&gt;</span>
+                        <span class="nt">&lt;/configuration&gt;</span>
+                    <span class="nt">&lt;/execution&gt;</span>
+                <span class="nt">&lt;/executions&gt;</span>
+            <span class="nt">&lt;/plugin&gt;</span>
+        <span class="nt">&lt;/plugins&gt;</span>
+    <span class="nt">&lt;/build&gt;</span>
+
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>To view more configuration that you can use in openapi generator plugin, you can view <a href="https://github.com/OpenAPITools/openapi-generator/blob/master/docs/generators/spring.md">this page</a>.</p>
+  </li>
+  <li>
+    <p>In this <code class="language-plaintext highlighter-rouge">openfeign-openapi-server</code> we just simply read the openapi specification yaml file to generate apis and models, then we also generate openapi ui to interact with these apis without using postman.</p>
+  </li>
+  <li>
+    <p>You can get sample openapi specification yaml <a href="https://github.com/minhducnguyen189/com.springboot.cloud/blob/master/openfeign-openapi-server/src/main/resources/openapi/openapi-server.yml">in this link</a></p>
+  </li>
+</ul>
+
+<blockquote>
+  <p>CONFIGURATION</p>
+</blockquote>
+
+<ul>
+  <li>After you import the dependencies, then you need to add the annotation <code class="language-plaintext highlighter-rouge">@EnableDiscoveryClient</code> in your file main as below</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kn">package</span> <span class="nn">com.springboot.cloud.openfeign.openapi.server.app</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.springframework.boot.SpringApplication</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.boot.autoconfigure.SpringBootApplication</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.cloud.client.discovery.EnableDiscoveryClient</span><span class="o">;</span>
+
+<span class="nd">@EnableDiscoveryClient</span>
+<span class="nd">@SpringBootApplication</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">OpenFeignOpenApiServer</span> <span class="o">{</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">SpringApplication</span><span class="o">.</span><span class="na">run</span><span class="o">(</span><span class="nc">OpenFeignOpenApiServer</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">args</span><span class="o">);</span>
+    <span class="o">}</span>
+
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<ul>
+  <li>Then in your <code class="language-plaintext highlighter-rouge">application.yml</code>, you will need to add some configurations for datasource, JPA, h2 database, spring cloud and eureka client as below:</li>
+</ul>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="na">server</span><span class="pi">:</span>
+  <span class="na">port</span><span class="pi">:</span> <span class="m">8081</span>
+
+<span class="na">spring</span><span class="pi">:</span>
+  <span class="na">mandatory-file-encoding</span><span class="pi">:</span> <span class="s">UTF-8</span>
+  <span class="na">http</span><span class="pi">:</span>
+    <span class="na">encoding</span><span class="pi">:</span>
+      <span class="na">charset</span><span class="pi">:</span> <span class="s">UTF-8</span>
+      <span class="na">enabled</span><span class="pi">:</span> <span class="no">true</span>
+  <span class="na">datasource</span><span class="pi">:</span>
+    <span class="na">url</span><span class="pi">:</span> <span class="s">jdbc:h2:file:./testdb</span>
+    <span class="na">username</span><span class="pi">:</span> <span class="s">sa</span>
+    <span class="na">password</span><span class="pi">:</span> <span class="s">password</span>
+    <span class="na">driver-class-name</span><span class="pi">:</span> <span class="s">org.h2.Driver</span>
+    <span class="na">platform</span><span class="pi">:</span> <span class="s">h2</span>
+  <span class="na">jpa</span><span class="pi">:</span>
+    <span class="na">database-platform</span><span class="pi">:</span> <span class="s">org.hibernate.dialect.H2Dialect</span>
+    <span class="na">hibernate.ddl-auto</span><span class="pi">:</span> <span class="s">update</span>
+    <span class="na">generate-ddl</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="na">show-sql</span><span class="pi">:</span> <span class="no">true</span>
+  <span class="na">h2</span><span class="pi">:</span>
+    <span class="na">console</span><span class="pi">:</span>
+      <span class="na">enabled</span><span class="pi">:</span> <span class="no">true</span>
+      <span class="na">path</span><span class="pi">:</span> <span class="s">/h2</span>
+      <span class="na">settings</span><span class="pi">:</span>
+        <span class="na">trace</span><span class="pi">:</span> <span class="no">false</span>
+        <span class="na">web-allow-others</span><span class="pi">:</span> <span class="no">false</span>
+
+  <span class="c1">#spring cloud configuration</span>
+  <span class="na">application</span><span class="pi">:</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s">openfeign-openapi-server</span>
+  <span class="na">cloud</span><span class="pi">:</span>
+    <span class="na">discovery</span><span class="pi">:</span>
+      <span class="na">enabled</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="na">loadbalancer</span><span class="pi">:</span>
+      <span class="na">retry</span><span class="pi">:</span>
+        <span class="na">enable</span><span class="pi">:</span> <span class="no">true</span>
+        <span class="na">maxRetriesOnSameServiceInstance</span><span class="pi">:</span> <span class="m">5</span>
+        <span class="na">backoff</span><span class="pi">:</span>
+          <span class="na">maxBackoff</span><span class="pi">:</span> <span class="m">5000</span>
+
+<span class="c1">#connect eureka server configuration</span>
+<span class="na">eureka</span><span class="pi">:</span>
+  <span class="na">client</span><span class="pi">:</span>
+    <span class="na">serviceUrl</span><span class="pi">:</span>
+      <span class="na">defaultZone</span><span class="pi">:</span> <span class="s">http://localhost:8761/eureka</span>
+    <span class="na">fetch-registry</span><span class="pi">:</span> <span class="no">true</span>
+
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>The property <code class="language-plaintext highlighter-rouge">“eureka.client.serviceUrl.defaultZone”</code> will be <code class="language-plaintext highlighter-rouge">the url for register of eureka server</code>.</p>
+  </li>
+  <li>
+    <p>Now let’s build your service then check generated code at <code class="language-plaintext highlighter-rouge">target/generated-sources/openapi/src/main/java/**</code>, then you should see your generated codes as in the image below</p>
+  </li>
+</ul>
+
+<p><a href="/assets/images/spring-boot-openfeign-openapi-server-generated-codes.png"><img src="/assets/images/spring-boot-openfeign-openapi-server-generated-codes.png" alt="openapi openfeign server generated codes" title="openapi openfeign server generated codes" /></a></p>
+
+<ul>
+  <li>Next, start your <code class="language-plaintext highlighter-rouge">eureka-server</code> and <code class="language-plaintext highlighter-rouge">openfeign-openapi-server</code> and go to <code class="language-plaintext highlighter-rouge">http://localhost:8761/eureka/</code> you will see <code class="language-plaintext highlighter-rouge">openfeign-openapi-server</code> has been registered into <code class="language-plaintext highlighter-rouge">eureka-server</code>.</li>
+</ul>
+
+<p><a href="/assets/images/spring-boot-openfeign-openapi-server-eureka-server.png"><img src="/assets/images/spring-boot-openfeign-openapi-server-eureka-server.png" alt="openapi openfeign server eureka registration" title="openapi openfeign server eureka registration" /></a></p>
+
+<ul>
+  <li>Then when you go to <code class="language-plaintext highlighter-rouge">http://localhost:8081/swagger-ui/index.html</code> you should see the openapi ui is displayed as below:</li>
+</ul>
+
+<p><a href="/assets/images/spring-boot-openfeign-openapi-server-openapi-ui.png"><img src="/assets/images/spring-boot-openfeign-openapi-server-openapi-ui.png" alt="openapi openfeign server openapi ui&quot;" title="openapi openfeign server openapi ui" /></a></p>
+
+<blockquote>
+  <p>CONTROLLER</p>
+</blockquote>
+
+<ul>
+  <li>Now, to implement codes for generated api class, you need to create a <code class="language-plaintext highlighter-rouge">controller</code> then you will implement the generated api class and <code class="language-plaintext highlighter-rouge">@Override</code> methods corresponding with apis as below:</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="c1">//ServerController.class</span>
+
+<span class="kn">package</span> <span class="nn">com.springboot.cloud.openfeign.openapi.server.app.controller</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.springboot.cloud.openfeign.openapi.server.app.api.V1Api</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.springboot.cloud.openfeign.openapi.server.app.model.Customer</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.springboot.cloud.openfeign.openapi.server.app.model.CustomerRequest</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.springboot.cloud.openfeign.openapi.server.app.service.CustomerService</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">lombok.AllArgsConstructor</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.http.HttpStatus</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.http.ResponseEntity</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RestController</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.UUID</span><span class="o">;</span>
+
+<span class="nd">@RestController</span>
+<span class="nd">@AllArgsConstructor</span><span class="o">(</span><span class="n">onConstructor</span> <span class="o">=</span> <span class="nd">@__</span><span class="o">(</span><span class="nd">@Autowired</span><span class="o">))</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ServerController</span> <span class="kd">implements</span> <span class="nc">V1Api</span> <span class="o">{</span>
+
+
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">CustomerService</span> <span class="n">customerService</span><span class="o">;</span>
+
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="no">UUID</span><span class="o">&gt;</span> <span class="nf">createCustomer</span><span class="o">(</span><span class="nc">CustomerRequest</span> <span class="n">customerRequest</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nc">ResponseEntity</span><span class="o">&lt;&gt;(</span><span class="k">this</span><span class="o">.</span><span class="na">customerService</span><span class="o">.</span><span class="na">createCustomer</span><span class="o">(</span><span class="n">customerRequest</span><span class="o">),</span> <span class="nc">HttpStatus</span><span class="o">.</span><span class="na">CREATED</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">List</span><span class="o">&lt;</span><span class="nc">Customer</span><span class="o">&gt;&gt;</span> <span class="nf">getCustomers</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nc">ResponseEntity</span><span class="o">&lt;&gt;(</span><span class="k">this</span><span class="o">.</span><span class="na">customerService</span><span class="o">.</span><span class="na">getCustomers</span><span class="o">(),</span> <span class="nc">HttpStatus</span><span class="o">.</span><span class="na">OK</span><span class="o">);</span>
+    <span class="o">}</span>
+
+<span class="o">}</span>
+
+</code></pre></div></div>
+<ul>
+  <li>These methods will call to <code class="language-plaintext highlighter-rouge">CustomerService</code> where we handle logic for these apis.</li>
+</ul>
+
+<blockquote>
+  <p>SERVICE</p>
+</blockquote>
+
+<ul>
+  <li>Like other normal applications, we need to create <code class="language-plaintext highlighter-rouge">CustomerService</code> class to handle logic for Customer apis.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="c1">//CustomerService.class</span>
+
+
+<span class="kn">package</span> <span class="nn">com.springboot.cloud.openfeign.openapi.server.app.service</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.springboot.cloud.openfeign.openapi.server.app.entity.CustomerEntity</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.springboot.cloud.openfeign.openapi.server.app.entity.Gender</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.springboot.cloud.openfeign.openapi.server.app.model.Customer</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.springboot.cloud.openfeign.openapi.server.app.model.CustomerRequest</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.springboot.cloud.openfeign.openapi.server.app.repository.CustomerRepository</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">lombok.AllArgsConstructor</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.stereotype.Service</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.UUID</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.stream.Collectors</span><span class="o">;</span>
+
+<span class="nd">@Service</span>
+<span class="nd">@AllArgsConstructor</span><span class="o">(</span><span class="n">onConstructor</span> <span class="o">=</span> <span class="nd">@__</span><span class="o">(</span><span class="nd">@Autowired</span><span class="o">))</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CustomerService</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">CustomerRepository</span> <span class="n">customerRepository</span><span class="o">;</span>
+
+
+    <span class="kd">public</span> <span class="no">UUID</span> <span class="nf">createCustomer</span><span class="o">(</span><span class="nc">CustomerRequest</span> <span class="n">customerRequest</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">CustomerEntity</span> <span class="n">customerEntity</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">toCustomerEntity</span><span class="o">(</span><span class="k">new</span> <span class="nc">CustomerEntity</span><span class="o">(),</span> <span class="n">customerRequest</span><span class="o">);</span>
+        <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">customerRepository</span><span class="o">.</span><span class="na">save</span><span class="o">(</span><span class="n">customerEntity</span><span class="o">).</span><span class="na">getId</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Customer</span><span class="o">&gt;</span> <span class="nf">getCustomers</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">List</span><span class="o">&lt;</span><span class="nc">CustomerEntity</span><span class="o">&gt;</span> <span class="n">customerEntities</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">customerRepository</span><span class="o">.</span><span class="na">findAll</span><span class="o">();</span>
+        <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">toCustomers</span><span class="o">(</span><span class="n">customerEntities</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="nc">CustomerEntity</span> <span class="nf">toCustomerEntity</span><span class="o">(</span><span class="nc">CustomerEntity</span> <span class="n">customerEntity</span><span class="o">,</span> <span class="nc">CustomerRequest</span> <span class="n">customerRequest</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">customerEntity</span><span class="o">.</span><span class="na">setAddress</span><span class="o">(</span><span class="n">customerRequest</span><span class="o">.</span><span class="na">getAddress</span><span class="o">());</span>
+        <span class="n">customerEntity</span><span class="o">.</span><span class="na">setDob</span><span class="o">(</span><span class="n">customerRequest</span><span class="o">.</span><span class="na">getDob</span><span class="o">());</span>
+        <span class="n">customerEntity</span><span class="o">.</span><span class="na">setEmail</span><span class="o">(</span><span class="n">customerRequest</span><span class="o">.</span><span class="na">getEmail</span><span class="o">());</span>
+        <span class="n">customerEntity</span><span class="o">.</span><span class="na">setGender</span><span class="o">(</span><span class="nc">Gender</span><span class="o">.</span><span class="na">toGender</span><span class="o">(</span><span class="n">customerRequest</span><span class="o">.</span><span class="na">getGender</span><span class="o">().</span><span class="na">getValue</span><span class="o">()));</span>
+        <span class="n">customerEntity</span><span class="o">.</span><span class="na">setFullName</span><span class="o">(</span><span class="n">customerRequest</span><span class="o">.</span><span class="na">getFullName</span><span class="o">());</span>
+        <span class="n">customerEntity</span><span class="o">.</span><span class="na">setPhone</span><span class="o">(</span><span class="n">customerRequest</span><span class="o">.</span><span class="na">getPhone</span><span class="o">());</span>
+        <span class="k">return</span> <span class="n">customerEntity</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Customer</span><span class="o">&gt;</span> <span class="nf">toCustomers</span><span class="o">(</span><span class="nc">List</span><span class="o">&lt;</span><span class="nc">CustomerEntity</span><span class="o">&gt;</span> <span class="n">customerEntities</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">customerEntities</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">map</span><span class="o">(</span><span class="n">c</span> <span class="o">-&gt;</span> <span class="k">this</span><span class="o">.</span><span class="na">toCustomer</span><span class="o">(</span><span class="n">c</span><span class="o">,</span> <span class="k">new</span> <span class="nc">Customer</span><span class="o">())).</span><span class="na">collect</span><span class="o">(</span><span class="nc">Collectors</span><span class="o">.</span><span class="na">toList</span><span class="o">());</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="nc">Customer</span> <span class="nf">toCustomer</span><span class="o">(</span><span class="nc">CustomerEntity</span> <span class="n">customerEntity</span><span class="o">,</span> <span class="nc">Customer</span> <span class="n">customer</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">customer</span><span class="o">.</span><span class="na">setId</span><span class="o">(</span><span class="n">customerEntity</span><span class="o">.</span><span class="na">getId</span><span class="o">());</span>
+        <span class="n">customer</span><span class="o">.</span><span class="na">setAddress</span><span class="o">(</span><span class="n">customerEntity</span><span class="o">.</span><span class="na">getAddress</span><span class="o">());</span>
+        <span class="n">customer</span><span class="o">.</span><span class="na">setFullName</span><span class="o">(</span><span class="n">customerEntity</span><span class="o">.</span><span class="na">getFullName</span><span class="o">());</span>
+        <span class="n">customer</span><span class="o">.</span><span class="na">setEmail</span><span class="o">(</span><span class="n">customerEntity</span><span class="o">.</span><span class="na">getEmail</span><span class="o">());</span>
+        <span class="n">customer</span><span class="o">.</span><span class="na">setGender</span><span class="o">(</span><span class="nc">Customer</span><span class="o">.</span><span class="na">GenderEnum</span><span class="o">.</span><span class="na">fromValue</span><span class="o">(</span><span class="n">customerEntity</span><span class="o">.</span><span class="na">getGender</span><span class="o">().</span><span class="na">name</span><span class="o">()));</span>
+        <span class="n">customer</span><span class="o">.</span><span class="na">setPhone</span><span class="o">(</span><span class="n">customerEntity</span><span class="o">.</span><span class="na">getPhone</span><span class="o">());</span>
+        <span class="n">customer</span><span class="o">.</span><span class="na">setDob</span><span class="o">(</span><span class="n">customerEntity</span><span class="o">.</span><span class="na">getDob</span><span class="o">());</span>
+        <span class="n">customer</span><span class="o">.</span><span class="na">setCreatedAt</span><span class="o">(</span><span class="n">customerEntity</span><span class="o">.</span><span class="na">getCreatedAt</span><span class="o">());</span>
+        <span class="n">customer</span><span class="o">.</span><span class="na">setUpdatedAt</span><span class="o">(</span><span class="n">customerEntity</span><span class="o">.</span><span class="na">getUpdatedAt</span><span class="o">());</span>
+        <span class="k">return</span> <span class="n">customer</span><span class="o">;</span>
+    <span class="o">}</span>
+
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<ul>
+  <li>As you can see we will handle creating and getting Customers from database, you we need to define CustomerEntity and CustomerRepository.</li>
+</ul>
+
+<blockquote>
+  <p>ENTITY</p>
+</blockquote>
+
+<ul>
+  <li>We are using JPA in this sample, so we will create a sample Customer Entity as below</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="c1">//CustomerEntity.class</span>
+
+
+<span class="kn">package</span> <span class="nn">com.springboot.cloud.openfeign.openapi.server.app.entity</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">lombok.AllArgsConstructor</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">lombok.Builder</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">lombok.Getter</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">lombok.NoArgsConstructor</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">lombok.Setter</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.hibernate.annotations.Type</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">javax.persistence.Column</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.persistence.Entity</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.persistence.EnumType</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.persistence.Enumerated</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.persistence.GeneratedValue</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.persistence.Id</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.persistence.PrePersist</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.persistence.PreUpdate</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.persistence.Table</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.validation.constraints.Email</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.time.LocalDate</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.time.OffsetDateTime</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.UUID</span><span class="o">;</span>
+
+<span class="nd">@Entity</span>
+<span class="nd">@Table</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"customers"</span><span class="o">)</span>
+<span class="nd">@Getter</span>
+<span class="nd">@Setter</span>
+<span class="nd">@NoArgsConstructor</span>
+<span class="nd">@AllArgsConstructor</span>
+<span class="nd">@Builder</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CustomerEntity</span> <span class="o">{</span>
+
+    <span class="nd">@Id</span>
+    <span class="nd">@GeneratedValue</span>
+    <span class="nd">@Type</span><span class="o">(</span><span class="n">type</span><span class="o">=</span><span class="s">"uuid-char"</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="no">UUID</span> <span class="n">id</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">fullName</span><span class="o">;</span>
+    <span class="nd">@Email</span>
+    <span class="nd">@Column</span><span class="o">(</span><span class="n">unique</span> <span class="o">=</span> <span class="kc">true</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">email</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">address</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">phone</span><span class="o">;</span>
+    <span class="nd">@Enumerated</span><span class="o">(</span><span class="nc">EnumType</span><span class="o">.</span><span class="na">STRING</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="nc">Gender</span> <span class="n">gender</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">LocalDate</span> <span class="n">dob</span><span class="o">;</span>
+
+    <span class="kd">private</span> <span class="nc">OffsetDateTime</span> <span class="n">createdAt</span><span class="o">;</span>
+
+    <span class="kd">private</span> <span class="nc">OffsetDateTime</span> <span class="n">updatedAt</span><span class="o">;</span>
+
+    <span class="nd">@PrePersist</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">prePersist</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">OffsetDateTime</span> <span class="n">offsetDateTime</span> <span class="o">=</span> <span class="nc">OffsetDateTime</span><span class="o">.</span><span class="na">now</span><span class="o">();</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">createdAt</span> <span class="o">=</span> <span class="n">offsetDateTime</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">updatedAt</span> <span class="o">=</span> <span class="n">offsetDateTime</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@PreUpdate</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">preUpdate</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">updatedAt</span> <span class="o">=</span> <span class="nc">OffsetDateTime</span><span class="o">.</span><span class="na">now</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="c1">//Gender</span>
+
+<span class="kn">package</span> <span class="nn">com.springboot.cloud.openfeign.openapi.server.app.entity</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">enum</span> <span class="nc">Gender</span> <span class="o">{</span>
+
+    <span class="no">M</span><span class="o">,</span> <span class="no">F</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="nc">Gender</span> <span class="nf">toGender</span><span class="o">(</span><span class="nc">String</span> <span class="n">genderStr</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="nc">Gender</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">genderStr</span><span class="o">);</span>
+    <span class="o">}</span>
+
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<ul>
+  <li>If you havem’t know JPA before, so you can view <a href="/_posts/java/2021-09-11-java-springboot-JDBC-JPA.markdown">this post for more details</a>.</li>
+</ul>
+
+<blockquote>
+  <p>REPOSITORY</p>
+</blockquote>
+
+<ul>
+  <li>Finally we will create the <code class="language-plaintext highlighter-rouge">CustomerRepository</code> as below</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kn">package</span> <span class="nn">com.springboot.cloud.openfeign.openapi.server.app.repository</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.springboot.cloud.openfeign.openapi.server.app.entity.CustomerEntity</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.data.jpa.repository.JpaRepository</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.stereotype.Repository</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.UUID</span><span class="o">;</span>
+
+<span class="nd">@Repository</span>
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">CustomerRepository</span> <span class="kd">extends</span> <span class="nc">JpaRepository</span><span class="o">&lt;</span><span class="nc">CustomerEntity</span><span class="o">,</span> <span class="no">UUID</span><span class="o">&gt;</span> <span class="o">{</span>
+
+
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<blockquote>
+  <p>TESTING</p>
+</blockquote>
+
+<ul>
+  <li>So, let’s start <code class="language-plaintext highlighter-rouge">eureka-server</code> and <code class="language-plaintext highlighter-rouge">openfeign-openapi-server</code> again, and go to <code class="language-plaintext highlighter-rouge">http://localhost:8081/swagger-ui/index.html</code> then trigger creating customer api and getting customer api, you should see result as below</li>
+</ul>
+
+<p><a href="/assets/images/spring-boot-openfeign-openapi-server-openapi-ui-create-customer.png"><img src="/assets/images/spring-boot-openfeign-openapi-server-openapi-ui-create-customer.png" alt="openapi openfeign server openapi ui create customer&quot;" title="openapi openfeign server openapi ui create customer" /></a></p>
+
+<p><a href="/assets/images/spring-boot-openfeign-openapi-server-openapi-ui-get-customer.png"><img src="/assets/images/spring-boot-openfeign-openapi-server-openapi-ui-get-customer.png" alt="openapi openfeign server openapi ui get customers&quot;" title="openapi openfeign server openapi ui get customers" /></a></p>
+
+<ul>
+  <li>So that’s all for <code class="language-plaintext highlighter-rouge">openfeign-openapi-server</code>, now we will move to <code class="language-plaintext highlighter-rouge">openfeign-openapi-client</code>.</li>
+</ul>
+
+<h3 id="openfeign-openapi-client">OPENFEIGN-OPENAPI-CLIENT</h3>
+
+<ul>
+  <li>So in this <code class="language-plaintext highlighter-rouge">openfeign-openapi-client</code> we will use the openapi specification yaml file from <code class="language-plaintext highlighter-rouge">openfeign-openapi-server</code> to generate client.</li>
+</ul>
+
+<blockquote>
+  <p>DEPENDENCIES</p>
+</blockquote>
+
+<ul>
+  <li>For <code class="language-plaintext highlighter-rouge">openfeign-openapi-client</code> we need to add some dependencies as below</li>
+</ul>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+
+	<span class="nt">&lt;dependencyManagement&gt;</span>
+			<span class="nt">&lt;dependencies&gt;</span>
+					<span class="nt">&lt;dependency&gt;</span>
+							<span class="nt">&lt;groupId&gt;</span>org.springframework.cloud<span class="nt">&lt;/groupId&gt;</span>
+							<span class="nt">&lt;artifactId&gt;</span>spring-cloud-dependencies<span class="nt">&lt;/artifactId&gt;</span>
+							<span class="nt">&lt;version&gt;</span>2021.0.0<span class="nt">&lt;/version&gt;</span>
+							<span class="nt">&lt;type&gt;</span>pom<span class="nt">&lt;/type&gt;</span>
+							<span class="nt">&lt;scope&gt;</span>import<span class="nt">&lt;/scope&gt;</span>
+					<span class="nt">&lt;/dependency&gt;</span>
+			<span class="nt">&lt;/dependencies&gt;</span>
+	<span class="nt">&lt;/dependencyManagement&gt;</span>
+
+	<span class="nt">&lt;dependencies&gt;</span>
+
+			<span class="c">&lt;!-- spring boot starter --&gt;</span>
+			<span class="nt">&lt;dependency&gt;</span>
+					<span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+					<span class="nt">&lt;artifactId&gt;</span>spring-boot-starter-web<span class="nt">&lt;/artifactId&gt;</span>
+					<span class="nt">&lt;version&gt;</span>2.6.3<span class="nt">&lt;/version&gt;</span>
+			<span class="nt">&lt;/dependency&gt;</span>
+
+			<span class="c">&lt;!--Openapi Generator--&gt;</span>
+			<span class="nt">&lt;dependency&gt;</span>
+					<span class="nt">&lt;groupId&gt;</span>org.openapitools<span class="nt">&lt;/groupId&gt;</span>
+					<span class="nt">&lt;artifactId&gt;</span>openapi-generator<span class="nt">&lt;/artifactId&gt;</span>
+					<span class="nt">&lt;version&gt;</span>5.4.0<span class="nt">&lt;/version&gt;</span>
+			<span class="nt">&lt;/dependency&gt;</span>
+
+			<span class="c">&lt;!--Openapi with validation--&gt;</span>
+			<span class="nt">&lt;dependency&gt;</span>
+					<span class="nt">&lt;groupId&gt;</span>com.fasterxml.jackson.core<span class="nt">&lt;/groupId&gt;</span>
+					<span class="nt">&lt;artifactId&gt;</span>jackson-core<span class="nt">&lt;/artifactId&gt;</span>
+					<span class="nt">&lt;version&gt;</span>2.13.1<span class="nt">&lt;/version&gt;</span>
+			<span class="nt">&lt;/dependency&gt;</span>
+
+			<span class="nt">&lt;dependency&gt;</span>
+					<span class="nt">&lt;groupId&gt;</span>com.fasterxml.jackson.core<span class="nt">&lt;/groupId&gt;</span>
+					<span class="nt">&lt;artifactId&gt;</span>jackson-annotations<span class="nt">&lt;/artifactId&gt;</span>
+					<span class="nt">&lt;version&gt;</span>2.13.1<span class="nt">&lt;/version&gt;</span>
+			<span class="nt">&lt;/dependency&gt;</span>
+
+			<span class="nt">&lt;dependency&gt;</span>
+					<span class="nt">&lt;groupId&gt;</span>org.openapitools<span class="nt">&lt;/groupId&gt;</span>
+					<span class="nt">&lt;artifactId&gt;</span>jackson-databind-nullable<span class="nt">&lt;/artifactId&gt;</span>
+					<span class="nt">&lt;version&gt;</span>0.2.2<span class="nt">&lt;/version&gt;</span>
+			<span class="nt">&lt;/dependency&gt;</span>
+
+			<span class="c">&lt;!--lombok--&gt;</span>
+			<span class="nt">&lt;dependency&gt;</span>
+					<span class="nt">&lt;groupId&gt;</span>org.projectlombok<span class="nt">&lt;/groupId&gt;</span>
+					<span class="nt">&lt;artifactId&gt;</span>lombok<span class="nt">&lt;/artifactId&gt;</span>
+					<span class="nt">&lt;version&gt;</span>1.18.22<span class="nt">&lt;/version&gt;</span>
+					<span class="nt">&lt;scope&gt;</span>provided<span class="nt">&lt;/scope&gt;</span>
+			<span class="nt">&lt;/dependency&gt;</span>
+
+			<span class="c">&lt;!--Spring cloud openfeign--&gt;</span>
+			<span class="nt">&lt;dependency&gt;</span>
+					<span class="nt">&lt;groupId&gt;</span>org.springframework.cloud<span class="nt">&lt;/groupId&gt;</span>
+					<span class="nt">&lt;artifactId&gt;</span>spring-cloud-starter-openfeign<span class="nt">&lt;/artifactId&gt;</span>
+					<span class="nt">&lt;version&gt;</span>3.1.0<span class="nt">&lt;/version&gt;</span>
+			<span class="nt">&lt;/dependency&gt;</span>
+
+			<span class="nt">&lt;dependency&gt;</span>
+					<span class="nt">&lt;groupId&gt;</span>org.springframework.cloud<span class="nt">&lt;/groupId&gt;</span>
+					<span class="nt">&lt;artifactId&gt;</span>spring-cloud-starter-loadbalancer<span class="nt">&lt;/artifactId&gt;</span>
+			<span class="nt">&lt;/dependency&gt;</span>
+
+			<span class="c">&lt;!-- eureka client --&gt;</span>
+			<span class="nt">&lt;dependency&gt;</span>
+					<span class="nt">&lt;groupId&gt;</span>org.springframework.cloud<span class="nt">&lt;/groupId&gt;</span>
+					<span class="nt">&lt;artifactId&gt;</span>spring-cloud-starter-netflix-eureka-client<span class="nt">&lt;/artifactId&gt;</span>
+			<span class="nt">&lt;/dependency&gt;</span>
+
+			<span class="nt">&lt;dependency&gt;</span>
+					<span class="nt">&lt;groupId&gt;</span>com.google.code.gson<span class="nt">&lt;/groupId&gt;</span>
+					<span class="nt">&lt;artifactId&gt;</span>gson<span class="nt">&lt;/artifactId&gt;</span>
+					<span class="nt">&lt;version&gt;</span>2.8.9<span class="nt">&lt;/version&gt;</span>
+			<span class="nt">&lt;/dependency&gt;</span>
+
+	<span class="nt">&lt;/dependencies&gt;</span>
+
+
+	<span class="nt">&lt;build&gt;</span>
+			<span class="nt">&lt;plugins&gt;</span>
+					<span class="nt">&lt;plugin&gt;</span>
+							<span class="nt">&lt;groupId&gt;</span>org.openapitools<span class="nt">&lt;/groupId&gt;</span>
+							<span class="nt">&lt;artifactId&gt;</span>openapi-generator-maven-plugin<span class="nt">&lt;/artifactId&gt;</span>
+							<span class="nt">&lt;version&gt;</span>5.4.0<span class="nt">&lt;/version&gt;</span>
+							<span class="nt">&lt;executions&gt;</span>
+									<span class="nt">&lt;execution&gt;</span>
+											<span class="nt">&lt;goals&gt;</span>
+													<span class="nt">&lt;goal&gt;</span>generate<span class="nt">&lt;/goal&gt;</span>
+											<span class="nt">&lt;/goals&gt;</span>
+											<span class="nt">&lt;configuration&gt;</span>
+													<span class="c">&lt;!-- path to the openapi Specification file --&gt;</span>
+													<span class="nt">&lt;inputSpec&gt;</span>
+															${project.basedir}/src/main/resources/openapi/openapi-server.yml
+													<span class="nt">&lt;/inputSpec&gt;</span>
+
+													<span class="c">&lt;!-- type of openapi generator --&gt;</span>
+													<span class="nt">&lt;generatorName&gt;</span>spring<span class="nt">&lt;/generatorName&gt;</span>
+
+													<span class="c">&lt;!-- path to generated api package --&gt;</span>
+													<span class="nt">&lt;apiPackage&gt;</span>com.springboot.cloud.openfeign.openapi.server.app.api<span class="nt">&lt;/apiPackage&gt;</span>
+
+													<span class="c">&lt;!-- path to generated model package --&gt;</span>
+													<span class="nt">&lt;modelPackage&gt;</span>com.springboot.cloud.openfeign.openapi.server.app.model<span class="nt">&lt;/modelPackage&gt;</span>
+													<span class="nt">&lt;supportingFilesToGenerate&gt;</span>
+															ApiUtil.java
+													<span class="nt">&lt;/supportingFilesToGenerate&gt;</span>
+
+													<span class="c">&lt;!-- other config options --&gt;</span>
+													<span class="nt">&lt;configOptions&gt;</span>
+															<span class="nt">&lt;library&gt;</span>spring-cloud<span class="nt">&lt;/library&gt;</span>
+															<span class="nt">&lt;delegatePattern&gt;</span>true<span class="nt">&lt;/delegatePattern&gt;</span>
+															<span class="nt">&lt;dateLibrary&gt;</span>java8<span class="nt">&lt;/dateLibrary&gt;</span>
+															<span class="nt">&lt;interfaceOnly&gt;</span>true<span class="nt">&lt;/interfaceOnly&gt;</span>
+															<span class="nt">&lt;useBeanValidation&gt;</span>true<span class="nt">&lt;/useBeanValidation&gt;</span>
+													<span class="nt">&lt;/configOptions&gt;</span>
+											<span class="nt">&lt;/configuration&gt;</span>
+									<span class="nt">&lt;/execution&gt;</span>
+							<span class="nt">&lt;/executions&gt;</span>
+					<span class="nt">&lt;/plugin&gt;</span>
+			<span class="nt">&lt;/plugins&gt;</span>
+	<span class="nt">&lt;/build&gt;</span>
+
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>We should note that, to generate openapi client side, we have to config <code class="language-plaintext highlighter-rouge">library</code> with value as <code class="language-plaintext highlighter-rouge">spring-cloud</code> in the tag <code class="language-plaintext highlighter-rouge">configOptions</code>.</p>
+  </li>
+  <li>
+    <p>To view more configuration that you can use in openapi generator plugin, you can view <a href="https://github.com/OpenAPITools/openapi-generator/blob/master/docs/generators/spring.md">this page</a>.</p>
+  </li>
+</ul>
+
+<blockquote>
+  <p>CONFIGURATION</p>
+</blockquote>
+
+<ul>
+  <li>After you import the dependencies, then you need to add annotations <code class="language-plaintext highlighter-rouge">@EnableDiscoveryClient</code> and <code class="language-plaintext highlighter-rouge">@EnableFeignClients</code> in your file main as below:</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kn">package</span> <span class="nn">com.springboot.cloud.openfeign.openapi.client.app</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.springframework.boot.SpringApplication</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.boot.autoconfigure.SpringBootApplication</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.cloud.client.discovery.EnableDiscoveryClient</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.cloud.openfeign.EnableFeignClients</span><span class="o">;</span>
+
+<span class="nd">@EnableFeignClients</span>
+<span class="nd">@EnableDiscoveryClient</span>
+<span class="nd">@SpringBootApplication</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">OpenFeignOpenApiClient</span> <span class="o">{</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">SpringApplication</span><span class="o">.</span><span class="na">run</span><span class="o">(</span><span class="nc">OpenFeignOpenApiClient</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">args</span><span class="o">);</span>
+    <span class="o">}</span>
+
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<ul>
+  <li>Then in your <code class="language-plaintext highlighter-rouge">application.yml</code>, you will need to add some configurations for openfeign server name, spring cloud, spring cloud load loadbalancer and eureka client as below:</li>
+</ul>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="na">server</span><span class="pi">:</span>
+  <span class="na">port</span><span class="pi">:</span> <span class="m">8082</span>
+
+<span class="na">openfeign</span><span class="pi">:</span>
+  <span class="na">server</span><span class="pi">:</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s">OPENFEIGN-OPENAPI-SERVER</span>
+
+<span class="na">spring</span><span class="pi">:</span>
+  <span class="na">application</span><span class="pi">:</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s">openfeign-openapi-client</span>
+  <span class="na">cloud</span><span class="pi">:</span>
+    <span class="na">discovery</span><span class="pi">:</span>
+      <span class="na">enabled</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="na">loadbalancer</span><span class="pi">:</span>
+      <span class="na">retry</span><span class="pi">:</span>
+        <span class="na">enable</span><span class="pi">:</span> <span class="no">true</span>
+        <span class="na">maxRetriesOnSameServiceInstance</span><span class="pi">:</span> <span class="m">5</span>
+        <span class="na">backoff</span><span class="pi">:</span>
+          <span class="na">minBackoff</span><span class="pi">:</span> <span class="m">10000</span>
+          <span class="na">maxBackoff</span><span class="pi">:</span> <span class="m">30000</span>
+          <span class="na">jitter</span><span class="pi">:</span> <span class="m">5000</span>
+
+<span class="na">eureka</span><span class="pi">:</span>
+  <span class="na">client</span><span class="pi">:</span>
+    <span class="na">serviceUrl</span><span class="pi">:</span>
+      <span class="na">defaultZone</span><span class="pi">:</span> <span class="s">http://localhost:8761/eureka</span>
+    <span class="na">fetch-registry</span><span class="pi">:</span> <span class="no">true</span>
+
+</code></pre></div></div>
+
+<ul>
+  <li>Now, let’s build your <code class="language-plaintext highlighter-rouge">openfeign-openapi-client</code>, then check generated code at <code class="language-plaintext highlighter-rouge">target/generated-sources/openapi/src/main/java/**</code> and you should see your generated codes as in the image below:</li>
+</ul>
+
+<p><a href="/assets/images/spring-boot-openfeign-openapi-client-generated-codes.png"><img src="/assets/images/spring-boot-openfeign-openapi-client-generated-codes.png" alt="openapi openfeign client generated codes" title="openapi openfeign client generated codes" /></a></p>
+
+<ul>
+  <li>Next, to openfeign can recognize and use your generated client apis, you should create a configuration class and make some configuration as below:</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="c1">// FeignClientConfig</span>
+<span class="kn">package</span> <span class="nn">com.springboot.cloud.openfeign.openapi.client.app.config</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.springboot.cloud.openfeign.openapi.server.app.api.ServerApi</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Value</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.cloud.openfeign.FeignClientBuilder</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.context.ApplicationContext</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Bean</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.context.annotation.ComponentScan</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Configuration</span><span class="o">;</span>
+
+<span class="nd">@Configuration</span>
+<span class="nd">@ComponentScan</span><span class="o">(</span><span class="s">"com.springboot.cloud.openfeign.openapi.server.app"</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">FeignClientConfig</span> <span class="o">{</span>
+
+    <span class="nd">@Value</span><span class="o">(</span><span class="s">"${openfeign.server.name}"</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">serverName</span><span class="o">;</span>
+
+    <span class="nd">@Autowired</span>
+    <span class="kd">private</span> <span class="nc">ApplicationContext</span> <span class="n">applicationContext</span><span class="o">;</span>
+
+    <span class="nd">@Bean</span>
+    <span class="kd">public</span> <span class="nc">ServerApi</span> <span class="nf">v1ApiFeignClient</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">FeignClientBuilder</span><span class="o">(</span><span class="n">applicationContext</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">forType</span><span class="o">(</span><span class="nc">ServerApi</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">serverName</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+    <span class="o">}</span>
+
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>So in this class we will use <code class="language-plaintext highlighter-rouge">ApplicationContext</code> and generated client api class <code class="language-plaintext highlighter-rouge">ServerApi</code> to create <code class="language-plaintext highlighter-rouge">ServerApi</code> feign client. At this point you will confuse that how client can connect to server, so connecting to <code class="language-plaintext highlighter-rouge">openfeign-openapi-client</code> will be handle apart by <code class="language-plaintext highlighter-rouge">eureka-server</code>. both <code class="language-plaintext highlighter-rouge">openfeign-openapi-client</code> and <code class="language-plaintext highlighter-rouge">openfeign-openapi-server</code> are connected to <code class="language-plaintext highlighter-rouge">eureka-server</code>, so its know exactly the application names and urls correspondingly. Thus, in spring cloud openfeign, we just use the application name of <code class="language-plaintext highlighter-rouge">openfeign-openapi-server</code> then we can make the connection to. Doing this way, we won’t worry about changing url or port on <code class="language-plaintext highlighter-rouge">openfeign-openapi-server</code> anymore.</p>
+  </li>
+  <li>
+    <p>Note: we should use application name with all capital letters because <code class="language-plaintext highlighter-rouge">eureka-server</code> will automatically capitalize all application names of clients when they connect to.</p>
+  </li>
+</ul>
+
+<blockquote>
+  <p>CONTROLLER</p>
+</blockquote>
+
+<ul>
+  <li>Finally, we will create a controller with an api, this api will use openfeign client that we configure above to get data from <code class="language-plaintext highlighter-rouge">openfeign-openapi-server</code>. The controller is as below:</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kn">package</span> <span class="nn">com.springboot.cloud.openfeign.openapi.client.app.controller</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.springboot.cloud.openfeign.openapi.server.app.api.ServerApi</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.springboot.cloud.openfeign.openapi.server.app.model.Customer</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">lombok.AllArgsConstructor</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.http.MediaType</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.http.ResponseEntity</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RequestMapping</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RequestMethod</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RestController</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+
+<span class="nd">@RestController</span>
+<span class="nd">@AllArgsConstructor</span><span class="o">(</span><span class="n">onConstructor</span> <span class="o">=</span> <span class="nd">@__</span><span class="o">(</span><span class="nd">@Autowired</span><span class="o">))</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ClientController</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">ServerApi</span> <span class="n">serverApi</span><span class="o">;</span>
+
+    <span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">method</span> <span class="o">=</span> <span class="nc">RequestMethod</span><span class="o">.</span><span class="na">GET</span><span class="o">,</span> <span class="n">path</span> <span class="o">=</span> <span class="s">"/v1/client/customers"</span><span class="o">,</span> <span class="n">produces</span> <span class="o">=</span> <span class="nc">MediaType</span><span class="o">.</span><span class="na">APPLICATION_JSON_VALUE</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">List</span><span class="o">&lt;</span><span class="nc">Customer</span><span class="o">&gt;&gt;</span> <span class="nf">getCustomer</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">serverApi</span><span class="o">.</span><span class="na">_getCustomers</span><span class="o">();</span>
+    <span class="o">}</span>
+
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<blockquote>
+  <p>TESTING</p>
+</blockquote>
+
+<ul>
+  <li>Let’s start 3 services, then go to <code class="language-plaintext highlighter-rouge">http://localhost:8761/eureka</code> to check the client connections. You should see result as below</li>
+</ul>
+
+<p><a href="/assets/images/spring-boot-openfeign-openapi-server-client-eureka-server.png"><img src="/assets/images/spring-boot-openfeign-openapi-server-client-eureka-server.png" alt="openapi openfeign server-client eureka registration" title="openapi openfeign server-client eureka registration" /></a></p>
+
+<ul>
+  <li>Now, using postman to call to the export api of <code class="language-plaintext highlighter-rouge">openfeign-openapi-server</code>, you will see the result as below</li>
+</ul>
+
+<pre><code class="language-curl">
+curl --location --request GET 'http://localhost:8082/v1/client/customers'
+
+</code></pre>
+
+<p><a href="/assets/images/spring-boot-openfeign-openapi-client-test.png"><img src="/assets/images/spring-boot-openfeign-openapi-client-test.png" alt="openapi openfeign client api test" title="openapi openfeign client api test" /></a></p>
+
+<ul>
+  <li>So it means, all configuration has been successful, request from postman will go to <code class="language-plaintext highlighter-rouge">openfeign-openapi-client</code>, then <code class="language-plaintext highlighter-rouge">openfeign-openapi-client</code> will call to <code class="language-plaintext highlighter-rouge">openfeign-openapi-server</code> by application name with supports of <code class="language-plaintext highlighter-rouge">eureka-server</code>.</li>
+</ul>
+
+<h2 id="summary">SUMMARY</h2>
+
+<ul>
+  <li>
+    <p>The <code class="language-plaintext highlighter-rouge">OpenAPI Specification</code> (OAS) defines a standard, language-agnostic interface to RESTful APIs which allows both humans and computers to discover and understand the capabilities of the service without access to source code, documentation, or through network traffic inspection. When properly defined, a consumer can understand and interact with the remote service with a minimal amount of implementation logic</p>
+  </li>
+  <li>
+    <p>With OpenApi Generator in Spring Boot: we can generate source code for boths server side and client side which will help use reduce writting codes, making developing application faster. Moreover, we also can generate OpenApi UI for server apis that we defined in OpenApi specification file.</p>
+  </li>
+  <li>
+    <p>Combining openfeign and spring cloud eureka server will help us using generated openapi client easily and avoid issues that come from server side as changing domain url and ports. Moreover, we also can keep tract services that are running/available in our system.</p>
+  </li>
+  <li>
+    <p>You can <a href="https://github.com/minhducnguyen189/com.springboot.cloud">view full source code here</a></p>
+  </li>
+</ul>
+
+<h2 id="references">REFERENCES</h2>
+
+<ul>
+  <li><a href="https://swagger.io/specification/">SWAGGER IO</a></li>
+  <li><a href="https://editor.swagger.io/">SWAGGER EDITOR</a></li>
+</ul>
+
+    </div><a class="u-url" href="/java/2022/02/13/java-springboot-openapi-openfeign.html" hidden></a>
+  </article>
+  
+</div>
+
+
+    </div>
+  </div>
+  <script src="https://unpkg.com/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js"></script>
+  <script>addBackToTop()</script>
+</body>
+<footer><footer class="site-footer h-card">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <h2 class="footer-heading">KaizenThink</h2>
+        <div>
+          <div>
+            <ul>
+              <li>Duc Nguyen</li><li><a class="u-email" href="mailto:minhducnguyen189@gmail.com">minhducnguyen189@gmail.com</a></li><li>&copy; 2021 Duc Nguyen. Powered by <a href="https://jekyllrb.com/">Jekyll</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <data class="u-url" href="/%20/"></data>
+        <div><ul class="social-media-list"><li><a href="https://github.com/minhducnguyen189"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">minhducnguyen189</span></a></li><li><a href="https://www.linkedin.com/in/duc-nguyen-03109b141"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#linkedin"></use></svg> <span class="username">duc-nguyen-03109b141</span></a></li></ul>
+</div>
+      </div>
+      <div class="col-md-4">
+        <h3>Support me</h3>
+        <!-- PayPal Logo -->
+        <table id="sponsor" border='0' cellpadding='10' cellspacing='0' align='center'>
+          <tr>
+            <td align='center'>
+              <a href='https://www.paypal.com/paypalme/minhduc189' title='Sponsor me'
+                onclick="javascript:window.open('https://www.paypal.com/paypalme/minhduc189','WIPaypal','toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=1060, height=700'); return false;">
+                <img src='https://www.paypalobjects.com/webstatic/en_US/i/buttons/PP_logo_h_150x38.png' alt='PayPal Acceptance | Medium v2' />
+              </a>
+            </td>
+          </tr>
+        </table>
+        <!-- PayPal Logo -->
+      </div>
+    </div>
+  </div>
+</footer>
+</footer>
+</html>

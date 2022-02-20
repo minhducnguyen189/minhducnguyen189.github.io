@@ -2,6 +2,18 @@
   
     {
 
+      "title"    : "Spring Cloud: OpenApi And OpenFeign For Server - Client Sides In SpringBoot",
+      "url"      : "/java/2022/02/13/java-springboot-openapi-openfeign.html",
+      "category" : "java",
+      "tags"     : "Java, SpringBoot, OpenApi, OpenFeign",
+      "date"     : "2022-02-13 00:00:00 +0700",
+      "discription" : ""
+
+    }
+    ,
+  
+    {
+
       "title"    : "Java Road Map",
       "url"      : "/java/2022/02/08/java-road-map.html",
       "category" : "java",
