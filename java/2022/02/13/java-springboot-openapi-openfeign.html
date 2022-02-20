@@ -31,7 +31,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Spring Cloud: OpenApi And OpenFeign For Server - Client Sides In SpringBoot" />
 <script type="application/ld+json">
-{"mainEntityOfPage":{"@type":"WebPage","@id":"/java/2022/02/13/java-springboot-openapi-openfeign.html"},"@type":"BlogPosting","url":"/java/2022/02/13/java-springboot-openapi-openfeign.html","author":{"@type":"Person","name":"Duc Nguyen"},"headline":"Spring Cloud: OpenApi And OpenFeign For Server - Client Sides In SpringBoot","dateModified":"2022-02-13T00:00:00+07:00","datePublished":"2022-02-13T00:00:00+07:00","description":"In this post we will learn how to use openapi generator to generate server and client apis. Then we will configure openfeign on client to call to server side by service name with support of Eureka server.","@context":"https://schema.org"}</script>
+{"@type":"BlogPosting","url":"/java/2022/02/13/java-springboot-openapi-openfeign.html","author":{"@type":"Person","name":"Duc Nguyen"},"headline":"Spring Cloud: OpenApi And OpenFeign For Server - Client Sides In SpringBoot","dateModified":"2022-02-13T00:00:00+07:00","datePublished":"2022-02-13T00:00:00+07:00","description":"In this post we will learn how to use openapi generator to generate server and client apis. Then we will configure openfeign on client to call to server side by service name with support of Eureka server.","mainEntityOfPage":{"@type":"WebPage","@id":"/java/2022/02/13/java-springboot-openapi-openfeign.html"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="KaizenThink" /><!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZ8G5007GK"></script>
@@ -297,141 +297,141 @@
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
   <span class="nt">&lt;dependencyManagement&gt;</span>
-			<span class="nt">&lt;dependencies&gt;</span>
-					<span class="nt">&lt;dependency&gt;</span>
-							<span class="nt">&lt;groupId&gt;</span>org.springframework.cloud<span class="nt">&lt;/groupId&gt;</span>
-							<span class="nt">&lt;artifactId&gt;</span>spring-cloud-dependencies<span class="nt">&lt;/artifactId&gt;</span>
-							<span class="nt">&lt;version&gt;</span>2021.0.0<span class="nt">&lt;/version&gt;</span>
-							<span class="nt">&lt;type&gt;</span>pom<span class="nt">&lt;/type&gt;</span>
-							<span class="nt">&lt;scope&gt;</span>import<span class="nt">&lt;/scope&gt;</span>
-					<span class="nt">&lt;/dependency&gt;</span>
-			<span class="nt">&lt;/dependencies&gt;</span>
-	<span class="nt">&lt;/dependencyManagement&gt;</span>
+      <span class="nt">&lt;dependencies&gt;</span>
+          <span class="nt">&lt;dependency&gt;</span>
+              <span class="nt">&lt;groupId&gt;</span>org.springframework.cloud<span class="nt">&lt;/groupId&gt;</span>
+              <span class="nt">&lt;artifactId&gt;</span>spring-cloud-dependencies<span class="nt">&lt;/artifactId&gt;</span>
+              <span class="nt">&lt;version&gt;</span>2021.0.0<span class="nt">&lt;/version&gt;</span>
+              <span class="nt">&lt;type&gt;</span>pom<span class="nt">&lt;/type&gt;</span>
+              <span class="nt">&lt;scope&gt;</span>import<span class="nt">&lt;/scope&gt;</span>
+          <span class="nt">&lt;/dependency&gt;</span>
+      <span class="nt">&lt;/dependencies&gt;</span>
+  <span class="nt">&lt;/dependencyManagement&gt;</span>
 
 
   <span class="nt">&lt;dependencies&gt;</span>
 
-				<span class="c">&lt;!--Spring Boot Starter --&gt;</span>
-        <span class="nt">&lt;dependency&gt;</span>
-            <span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
-            <span class="nt">&lt;artifactId&gt;</span>spring-boot-starter-web<span class="nt">&lt;/artifactId&gt;</span>
-            <span class="nt">&lt;version&gt;</span>2.6.3<span class="nt">&lt;/version&gt;</span>
-        <span class="nt">&lt;/dependency&gt;</span>
+    <span class="c">&lt;!--Spring Boot Starter --&gt;</span>
+    <span class="nt">&lt;dependency&gt;</span>
+        <span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+        <span class="nt">&lt;artifactId&gt;</span>spring-boot-starter-web<span class="nt">&lt;/artifactId&gt;</span>
+        <span class="nt">&lt;version&gt;</span>2.6.3<span class="nt">&lt;/version&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>
 
-        <span class="c">&lt;!--Openapi Generator--&gt;</span>
-        <span class="nt">&lt;dependency&gt;</span>
+    <span class="c">&lt;!--Openapi Generator--&gt;</span>
+    <span class="nt">&lt;dependency&gt;</span>
+        <span class="nt">&lt;groupId&gt;</span>org.openapitools<span class="nt">&lt;/groupId&gt;</span>
+        <span class="nt">&lt;artifactId&gt;</span>openapi-generator<span class="nt">&lt;/artifactId&gt;</span>
+        <span class="nt">&lt;version&gt;</span>5.4.0<span class="nt">&lt;/version&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>
+
+
+    <span class="c">&lt;!--Openapi UI with validation--&gt;</span>
+    <span class="nt">&lt;dependency&gt;</span>
+        <span class="nt">&lt;groupId&gt;</span>com.fasterxml.jackson.core<span class="nt">&lt;/groupId&gt;</span>
+        <span class="nt">&lt;artifactId&gt;</span>jackson-core<span class="nt">&lt;/artifactId&gt;</span>
+        <span class="nt">&lt;version&gt;</span>2.13.1<span class="nt">&lt;/version&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>
+
+    <span class="nt">&lt;dependency&gt;</span>
+        <span class="nt">&lt;groupId&gt;</span>com.fasterxml.jackson.core<span class="nt">&lt;/groupId&gt;</span>
+        <span class="nt">&lt;artifactId&gt;</span>jackson-annotations<span class="nt">&lt;/artifactId&gt;</span>
+        <span class="nt">&lt;version&gt;</span>2.13.1<span class="nt">&lt;/version&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>
+
+    <span class="nt">&lt;dependency&gt;</span>
+        <span class="nt">&lt;groupId&gt;</span>org.openapitools<span class="nt">&lt;/groupId&gt;</span>
+        <span class="nt">&lt;artifactId&gt;</span>jackson-databind-nullable<span class="nt">&lt;/artifactId&gt;</span>
+        <span class="nt">&lt;version&gt;</span>0.2.2<span class="nt">&lt;/version&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>
+
+    <span class="nt">&lt;dependency&gt;</span>
+        <span class="nt">&lt;groupId&gt;</span>org.springdoc<span class="nt">&lt;/groupId&gt;</span>
+        <span class="nt">&lt;artifactId&gt;</span>springdoc-openapi-ui<span class="nt">&lt;/artifactId&gt;</span>
+        <span class="nt">&lt;version&gt;</span>1.6.5<span class="nt">&lt;/version&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>
+
+    <span class="c">&lt;!--JPA--&gt;</span>
+    <span class="nt">&lt;dependency&gt;</span>
+        <span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+        <span class="nt">&lt;artifactId&gt;</span>spring-boot-starter-data-jpa<span class="nt">&lt;/artifactId&gt;</span>
+        <span class="nt">&lt;version&gt;</span>2.6.3<span class="nt">&lt;/version&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>
+
+    <span class="c">&lt;!--Database H2--&gt;</span>
+    <span class="nt">&lt;dependency&gt;</span>
+        <span class="nt">&lt;groupId&gt;</span>com.h2database<span class="nt">&lt;/groupId&gt;</span>
+        <span class="nt">&lt;artifactId&gt;</span>h2<span class="nt">&lt;/artifactId&gt;</span>
+        <span class="nt">&lt;version&gt;</span>2.1.210<span class="nt">&lt;/version&gt;</span>
+        <span class="nt">&lt;scope&gt;</span>runtime<span class="nt">&lt;/scope&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>
+
+    <span class="c">&lt;!--lombok--&gt;</span>
+    <span class="nt">&lt;dependency&gt;</span>
+        <span class="nt">&lt;groupId&gt;</span>org.projectlombok<span class="nt">&lt;/groupId&gt;</span>
+        <span class="nt">&lt;artifactId&gt;</span>lombok<span class="nt">&lt;/artifactId&gt;</span>
+        <span class="nt">&lt;version&gt;</span>1.18.22<span class="nt">&lt;/version&gt;</span>
+        <span class="nt">&lt;scope&gt;</span>provided<span class="nt">&lt;/scope&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>
+
+    <span class="c">&lt;!--spring cloud eureka client With Gson--&gt;</span>
+    <span class="nt">&lt;dependency&gt;</span>
+        <span class="nt">&lt;groupId&gt;</span>org.springframework.cloud<span class="nt">&lt;/groupId&gt;</span>
+        <span class="nt">&lt;artifactId&gt;</span>spring-cloud-starter-netflix-eureka-client<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>
+
+    <span class="nt">&lt;dependency&gt;</span>
+        <span class="nt">&lt;groupId&gt;</span>com.google.code.gson<span class="nt">&lt;/groupId&gt;</span>
+        <span class="nt">&lt;artifactId&gt;</span>gson<span class="nt">&lt;/artifactId&gt;</span>
+        <span class="nt">&lt;version&gt;</span>2.8.9<span class="nt">&lt;/version&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>
+
+  <span class="nt">&lt;/dependencies&gt;</span>
+
+  <span class="nt">&lt;build&gt;</span>
+    <span class="nt">&lt;plugins&gt;</span>
+        <span class="c">&lt;!-- Openapi Generator Plugin Configuration --&gt;</span>
+        <span class="nt">&lt;plugin&gt;</span>
             <span class="nt">&lt;groupId&gt;</span>org.openapitools<span class="nt">&lt;/groupId&gt;</span>
-            <span class="nt">&lt;artifactId&gt;</span>openapi-generator<span class="nt">&lt;/artifactId&gt;</span>
+            <span class="nt">&lt;artifactId&gt;</span>openapi-generator-maven-plugin<span class="nt">&lt;/artifactId&gt;</span>
             <span class="nt">&lt;version&gt;</span>5.4.0<span class="nt">&lt;/version&gt;</span>
-        <span class="nt">&lt;/dependency&gt;</span>
+            <span class="nt">&lt;executions&gt;</span>
+                <span class="nt">&lt;execution&gt;</span>
+                    <span class="nt">&lt;goals&gt;</span>
+                        <span class="nt">&lt;goal&gt;</span>generate<span class="nt">&lt;/goal&gt;</span>
+                    <span class="nt">&lt;/goals&gt;</span>
+                    <span class="nt">&lt;configuration&gt;</span>
+                      <span class="c">&lt;!-- path to the openapi Specification file --&gt;</span>
+                        <span class="nt">&lt;inputSpec&gt;</span>
+                            ${project.basedir}/src/main/resources/openapi/openapi-server.yml
+                        <span class="nt">&lt;/inputSpec&gt;</span>
 
+                      <span class="c">&lt;!-- type of openapi generator --&gt;</span>
+                        <span class="nt">&lt;generatorName&gt;</span>spring<span class="nt">&lt;/generatorName&gt;</span>
 
-        <span class="c">&lt;!--Openapi UI with validation--&gt;</span>
-        <span class="nt">&lt;dependency&gt;</span>
-            <span class="nt">&lt;groupId&gt;</span>com.fasterxml.jackson.core<span class="nt">&lt;/groupId&gt;</span>
-            <span class="nt">&lt;artifactId&gt;</span>jackson-core<span class="nt">&lt;/artifactId&gt;</span>
-            <span class="nt">&lt;version&gt;</span>2.13.1<span class="nt">&lt;/version&gt;</span>
-        <span class="nt">&lt;/dependency&gt;</span>
+                      <span class="c">&lt;!-- path to generated api package --&gt;</span>
+                        <span class="nt">&lt;apiPackage&gt;</span>com.springboot.cloud.openfeign.openapi.server.app.api<span class="nt">&lt;/apiPackage&gt;</span>
 
-        <span class="nt">&lt;dependency&gt;</span>
-            <span class="nt">&lt;groupId&gt;</span>com.fasterxml.jackson.core<span class="nt">&lt;/groupId&gt;</span>
-            <span class="nt">&lt;artifactId&gt;</span>jackson-annotations<span class="nt">&lt;/artifactId&gt;</span>
-            <span class="nt">&lt;version&gt;</span>2.13.1<span class="nt">&lt;/version&gt;</span>
-        <span class="nt">&lt;/dependency&gt;</span>
+                      <span class="c">&lt;!-- path to generated model package --&gt;</span>
+                        <span class="nt">&lt;modelPackage&gt;</span>com.springboot.cloud.openfeign.openapi.server.app.model<span class="nt">&lt;/modelPackage&gt;</span>
 
-        <span class="nt">&lt;dependency&gt;</span>
-            <span class="nt">&lt;groupId&gt;</span>org.openapitools<span class="nt">&lt;/groupId&gt;</span>
-            <span class="nt">&lt;artifactId&gt;</span>jackson-databind-nullable<span class="nt">&lt;/artifactId&gt;</span>
-            <span class="nt">&lt;version&gt;</span>0.2.2<span class="nt">&lt;/version&gt;</span>
-        <span class="nt">&lt;/dependency&gt;</span>
+                        <span class="nt">&lt;supportingFilesToGenerate&gt;</span>
+                            ApiUtil.java
+                        <span class="nt">&lt;/supportingFilesToGenerate&gt;</span>
 
-        <span class="nt">&lt;dependency&gt;</span>
-            <span class="nt">&lt;groupId&gt;</span>org.springdoc<span class="nt">&lt;/groupId&gt;</span>
-            <span class="nt">&lt;artifactId&gt;</span>springdoc-openapi-ui<span class="nt">&lt;/artifactId&gt;</span>
-            <span class="nt">&lt;version&gt;</span>1.6.5<span class="nt">&lt;/version&gt;</span>
-        <span class="nt">&lt;/dependency&gt;</span>
-
-        <span class="c">&lt;!--JPA--&gt;</span>
-        <span class="nt">&lt;dependency&gt;</span>
-            <span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
-            <span class="nt">&lt;artifactId&gt;</span>spring-boot-starter-data-jpa<span class="nt">&lt;/artifactId&gt;</span>
-            <span class="nt">&lt;version&gt;</span>2.6.3<span class="nt">&lt;/version&gt;</span>
-        <span class="nt">&lt;/dependency&gt;</span>
-
-				<span class="c">&lt;!--Database H2--&gt;</span>
-        <span class="nt">&lt;dependency&gt;</span>
-            <span class="nt">&lt;groupId&gt;</span>com.h2database<span class="nt">&lt;/groupId&gt;</span>
-            <span class="nt">&lt;artifactId&gt;</span>h2<span class="nt">&lt;/artifactId&gt;</span>
-            <span class="nt">&lt;version&gt;</span>2.1.210<span class="nt">&lt;/version&gt;</span>
-            <span class="nt">&lt;scope&gt;</span>runtime<span class="nt">&lt;/scope&gt;</span>
-        <span class="nt">&lt;/dependency&gt;</span>
-
-        <span class="c">&lt;!--lombok--&gt;</span>
-        <span class="nt">&lt;dependency&gt;</span>
-            <span class="nt">&lt;groupId&gt;</span>org.projectlombok<span class="nt">&lt;/groupId&gt;</span>
-            <span class="nt">&lt;artifactId&gt;</span>lombok<span class="nt">&lt;/artifactId&gt;</span>
-            <span class="nt">&lt;version&gt;</span>1.18.22<span class="nt">&lt;/version&gt;</span>
-            <span class="nt">&lt;scope&gt;</span>provided<span class="nt">&lt;/scope&gt;</span>
-        <span class="nt">&lt;/dependency&gt;</span>
-
-        <span class="c">&lt;!--spring cloud eureka client With Gson--&gt;</span>
-        <span class="nt">&lt;dependency&gt;</span>
-            <span class="nt">&lt;groupId&gt;</span>org.springframework.cloud<span class="nt">&lt;/groupId&gt;</span>
-            <span class="nt">&lt;artifactId&gt;</span>spring-cloud-starter-netflix-eureka-client<span class="nt">&lt;/artifactId&gt;</span>
-        <span class="nt">&lt;/dependency&gt;</span>
-
-        <span class="nt">&lt;dependency&gt;</span>
-            <span class="nt">&lt;groupId&gt;</span>com.google.code.gson<span class="nt">&lt;/groupId&gt;</span>
-            <span class="nt">&lt;artifactId&gt;</span>gson<span class="nt">&lt;/artifactId&gt;</span>
-            <span class="nt">&lt;version&gt;</span>2.8.9<span class="nt">&lt;/version&gt;</span>
-        <span class="nt">&lt;/dependency&gt;</span>
-
-    <span class="nt">&lt;/dependencies&gt;</span>
-
-		<span class="nt">&lt;build&gt;</span>
-        <span class="nt">&lt;plugins&gt;</span>
-						<span class="c">&lt;!-- Openapi Generator Plugin Configuration --&gt;</span>
-            <span class="nt">&lt;plugin&gt;</span>
-                <span class="nt">&lt;groupId&gt;</span>org.openapitools<span class="nt">&lt;/groupId&gt;</span>
-                <span class="nt">&lt;artifactId&gt;</span>openapi-generator-maven-plugin<span class="nt">&lt;/artifactId&gt;</span>
-                <span class="nt">&lt;version&gt;</span>5.4.0<span class="nt">&lt;/version&gt;</span>
-                <span class="nt">&lt;executions&gt;</span>
-                    <span class="nt">&lt;execution&gt;</span>
-                        <span class="nt">&lt;goals&gt;</span>
-                            <span class="nt">&lt;goal&gt;</span>generate<span class="nt">&lt;/goal&gt;</span>
-                        <span class="nt">&lt;/goals&gt;</span>
-                        <span class="nt">&lt;configuration&gt;</span>
-														<span class="c">&lt;!-- path to the openapi Specification file --&gt;</span>
-                            <span class="nt">&lt;inputSpec&gt;</span>
-                                ${project.basedir}/src/main/resources/openapi/openapi-server.yml
-                            <span class="nt">&lt;/inputSpec&gt;</span>
-
-														<span class="c">&lt;!-- type of openapi generator --&gt;</span>
-                            <span class="nt">&lt;generatorName&gt;</span>spring<span class="nt">&lt;/generatorName&gt;</span>
-
-														<span class="c">&lt;!-- path to generated api package --&gt;</span>
-                            <span class="nt">&lt;apiPackage&gt;</span>com.springboot.cloud.openfeign.openapi.server.app.api<span class="nt">&lt;/apiPackage&gt;</span>
-
-														<span class="c">&lt;!-- path to generated model package --&gt;</span>
-                            <span class="nt">&lt;modelPackage&gt;</span>com.springboot.cloud.openfeign.openapi.server.app.model<span class="nt">&lt;/modelPackage&gt;</span>
-
-                            <span class="nt">&lt;supportingFilesToGenerate&gt;</span>
-                                ApiUtil.java
-                            <span class="nt">&lt;/supportingFilesToGenerate&gt;</span>
-
-														<span class="c">&lt;!-- other config options --&gt;</span>
-                            <span class="nt">&lt;configOptions&gt;</span>
-                                <span class="nt">&lt;delegatePattern&gt;</span>true<span class="nt">&lt;/delegatePattern&gt;</span>
-                                <span class="nt">&lt;dateLibrary&gt;</span>java8<span class="nt">&lt;/dateLibrary&gt;</span>
-                                <span class="nt">&lt;interfaceOnly&gt;</span>true<span class="nt">&lt;/interfaceOnly&gt;</span>
-                                <span class="nt">&lt;useBeanValidation&gt;</span>true<span class="nt">&lt;/useBeanValidation&gt;</span>
-                            <span class="nt">&lt;/configOptions&gt;</span>
-                        <span class="nt">&lt;/configuration&gt;</span>
-                    <span class="nt">&lt;/execution&gt;</span>
-                <span class="nt">&lt;/executions&gt;</span>
-            <span class="nt">&lt;/plugin&gt;</span>
-        <span class="nt">&lt;/plugins&gt;</span>
-    <span class="nt">&lt;/build&gt;</span>
+                      <span class="c">&lt;!-- other config options --&gt;</span>
+                        <span class="nt">&lt;configOptions&gt;</span>
+                            <span class="nt">&lt;delegatePattern&gt;</span>true<span class="nt">&lt;/delegatePattern&gt;</span>
+                            <span class="nt">&lt;dateLibrary&gt;</span>java8<span class="nt">&lt;/dateLibrary&gt;</span>
+                            <span class="nt">&lt;interfaceOnly&gt;</span>true<span class="nt">&lt;/interfaceOnly&gt;</span>
+                            <span class="nt">&lt;useBeanValidation&gt;</span>true<span class="nt">&lt;/useBeanValidation&gt;</span>
+                        <span class="nt">&lt;/configOptions&gt;</span>
+                    <span class="nt">&lt;/configuration&gt;</span>
+                <span class="nt">&lt;/execution&gt;</span>
+            <span class="nt">&lt;/executions&gt;</span>
+        <span class="nt">&lt;/plugin&gt;</span>
+    <span class="nt">&lt;/plugins&gt;</span>
+  <span class="nt">&lt;/build&gt;</span>
 
 </code></pre></div></div>
 
@@ -837,131 +837,129 @@
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 
-	<span class="nt">&lt;dependencyManagement&gt;</span>
-			<span class="nt">&lt;dependencies&gt;</span>
-					<span class="nt">&lt;dependency&gt;</span>
-							<span class="nt">&lt;groupId&gt;</span>org.springframework.cloud<span class="nt">&lt;/groupId&gt;</span>
-							<span class="nt">&lt;artifactId&gt;</span>spring-cloud-dependencies<span class="nt">&lt;/artifactId&gt;</span>
-							<span class="nt">&lt;version&gt;</span>2021.0.0<span class="nt">&lt;/version&gt;</span>
-							<span class="nt">&lt;type&gt;</span>pom<span class="nt">&lt;/type&gt;</span>
-							<span class="nt">&lt;scope&gt;</span>import<span class="nt">&lt;/scope&gt;</span>
-					<span class="nt">&lt;/dependency&gt;</span>
-			<span class="nt">&lt;/dependencies&gt;</span>
-	<span class="nt">&lt;/dependencyManagement&gt;</span>
+  <span class="nt">&lt;dependencyManagement&gt;</span>
+      <span class="nt">&lt;dependencies&gt;</span>
+          <span class="nt">&lt;dependency&gt;</span>
+              <span class="nt">&lt;groupId&gt;</span>org.springframework.cloud<span class="nt">&lt;/groupId&gt;</span>
+              <span class="nt">&lt;artifactId&gt;</span>spring-cloud-dependencies<span class="nt">&lt;/artifactId&gt;</span>
+              <span class="nt">&lt;version&gt;</span>2021.0.0<span class="nt">&lt;/version&gt;</span>
+              <span class="nt">&lt;type&gt;</span>pom<span class="nt">&lt;/type&gt;</span>
+              <span class="nt">&lt;scope&gt;</span>import<span class="nt">&lt;/scope&gt;</span>
+          <span class="nt">&lt;/dependency&gt;</span>
+      <span class="nt">&lt;/dependencies&gt;</span>
+  <span class="nt">&lt;/dependencyManagement&gt;</span>
 
-	<span class="nt">&lt;dependencies&gt;</span>
+  <span class="nt">&lt;dependencies&gt;</span>
+    <span class="c">&lt;!-- spring boot starter --&gt;</span>
+    <span class="nt">&lt;dependency&gt;</span>
+        <span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+        <span class="nt">&lt;artifactId&gt;</span>spring-boot-starter-web<span class="nt">&lt;/artifactId&gt;</span>
+        <span class="nt">&lt;version&gt;</span>2.6.3<span class="nt">&lt;/version&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>
 
-			<span class="c">&lt;!-- spring boot starter --&gt;</span>
-			<span class="nt">&lt;dependency&gt;</span>
-					<span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
-					<span class="nt">&lt;artifactId&gt;</span>spring-boot-starter-web<span class="nt">&lt;/artifactId&gt;</span>
-					<span class="nt">&lt;version&gt;</span>2.6.3<span class="nt">&lt;/version&gt;</span>
-			<span class="nt">&lt;/dependency&gt;</span>
+    <span class="c">&lt;!--Openapi Generator--&gt;</span>
+    <span class="nt">&lt;dependency&gt;</span>
+        <span class="nt">&lt;groupId&gt;</span>org.openapitools<span class="nt">&lt;/groupId&gt;</span>
+        <span class="nt">&lt;artifactId&gt;</span>openapi-generator<span class="nt">&lt;/artifactId&gt;</span>
+        <span class="nt">&lt;version&gt;</span>5.4.0<span class="nt">&lt;/version&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>
 
-			<span class="c">&lt;!--Openapi Generator--&gt;</span>
-			<span class="nt">&lt;dependency&gt;</span>
-					<span class="nt">&lt;groupId&gt;</span>org.openapitools<span class="nt">&lt;/groupId&gt;</span>
-					<span class="nt">&lt;artifactId&gt;</span>openapi-generator<span class="nt">&lt;/artifactId&gt;</span>
-					<span class="nt">&lt;version&gt;</span>5.4.0<span class="nt">&lt;/version&gt;</span>
-			<span class="nt">&lt;/dependency&gt;</span>
+    <span class="c">&lt;!--Openapi with validation--&gt;</span>
+    <span class="nt">&lt;dependency&gt;</span>
+        <span class="nt">&lt;groupId&gt;</span>com.fasterxml.jackson.core<span class="nt">&lt;/groupId&gt;</span>
+        <span class="nt">&lt;artifactId&gt;</span>jackson-core<span class="nt">&lt;/artifactId&gt;</span>
+        <span class="nt">&lt;version&gt;</span>2.13.1<span class="nt">&lt;/version&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>
 
-			<span class="c">&lt;!--Openapi with validation--&gt;</span>
-			<span class="nt">&lt;dependency&gt;</span>
-					<span class="nt">&lt;groupId&gt;</span>com.fasterxml.jackson.core<span class="nt">&lt;/groupId&gt;</span>
-					<span class="nt">&lt;artifactId&gt;</span>jackson-core<span class="nt">&lt;/artifactId&gt;</span>
-					<span class="nt">&lt;version&gt;</span>2.13.1<span class="nt">&lt;/version&gt;</span>
-			<span class="nt">&lt;/dependency&gt;</span>
+    <span class="nt">&lt;dependency&gt;</span>
+        <span class="nt">&lt;groupId&gt;</span>com.fasterxml.jackson.core<span class="nt">&lt;/groupId&gt;</span>
+        <span class="nt">&lt;artifactId&gt;</span>jackson-annotations<span class="nt">&lt;/artifactId&gt;</span>
+        <span class="nt">&lt;version&gt;</span>2.13.1<span class="nt">&lt;/version&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>
 
-			<span class="nt">&lt;dependency&gt;</span>
-					<span class="nt">&lt;groupId&gt;</span>com.fasterxml.jackson.core<span class="nt">&lt;/groupId&gt;</span>
-					<span class="nt">&lt;artifactId&gt;</span>jackson-annotations<span class="nt">&lt;/artifactId&gt;</span>
-					<span class="nt">&lt;version&gt;</span>2.13.1<span class="nt">&lt;/version&gt;</span>
-			<span class="nt">&lt;/dependency&gt;</span>
+    <span class="nt">&lt;dependency&gt;</span>
+        <span class="nt">&lt;groupId&gt;</span>org.openapitools<span class="nt">&lt;/groupId&gt;</span>
+        <span class="nt">&lt;artifactId&gt;</span>jackson-databind-nullable<span class="nt">&lt;/artifactId&gt;</span>
+        <span class="nt">&lt;version&gt;</span>0.2.2<span class="nt">&lt;/version&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>
 
-			<span class="nt">&lt;dependency&gt;</span>
-					<span class="nt">&lt;groupId&gt;</span>org.openapitools<span class="nt">&lt;/groupId&gt;</span>
-					<span class="nt">&lt;artifactId&gt;</span>jackson-databind-nullable<span class="nt">&lt;/artifactId&gt;</span>
-					<span class="nt">&lt;version&gt;</span>0.2.2<span class="nt">&lt;/version&gt;</span>
-			<span class="nt">&lt;/dependency&gt;</span>
+    <span class="c">&lt;!--lombok--&gt;</span>
+    <span class="nt">&lt;dependency&gt;</span>
+        <span class="nt">&lt;groupId&gt;</span>org.projectlombok<span class="nt">&lt;/groupId&gt;</span>
+        <span class="nt">&lt;artifactId&gt;</span>lombok<span class="nt">&lt;/artifactId&gt;</span>
+        <span class="nt">&lt;version&gt;</span>1.18.22<span class="nt">&lt;/version&gt;</span>
+        <span class="nt">&lt;scope&gt;</span>provided<span class="nt">&lt;/scope&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>
 
-			<span class="c">&lt;!--lombok--&gt;</span>
-			<span class="nt">&lt;dependency&gt;</span>
-					<span class="nt">&lt;groupId&gt;</span>org.projectlombok<span class="nt">&lt;/groupId&gt;</span>
-					<span class="nt">&lt;artifactId&gt;</span>lombok<span class="nt">&lt;/artifactId&gt;</span>
-					<span class="nt">&lt;version&gt;</span>1.18.22<span class="nt">&lt;/version&gt;</span>
-					<span class="nt">&lt;scope&gt;</span>provided<span class="nt">&lt;/scope&gt;</span>
-			<span class="nt">&lt;/dependency&gt;</span>
+    <span class="c">&lt;!--Spring cloud openfeign--&gt;</span>
+    <span class="nt">&lt;dependency&gt;</span>
+        <span class="nt">&lt;groupId&gt;</span>org.springframework.cloud<span class="nt">&lt;/groupId&gt;</span>
+        <span class="nt">&lt;artifactId&gt;</span>spring-cloud-starter-openfeign<span class="nt">&lt;/artifactId&gt;</span>
+        <span class="nt">&lt;version&gt;</span>3.1.0<span class="nt">&lt;/version&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>
 
-			<span class="c">&lt;!--Spring cloud openfeign--&gt;</span>
-			<span class="nt">&lt;dependency&gt;</span>
-					<span class="nt">&lt;groupId&gt;</span>org.springframework.cloud<span class="nt">&lt;/groupId&gt;</span>
-					<span class="nt">&lt;artifactId&gt;</span>spring-cloud-starter-openfeign<span class="nt">&lt;/artifactId&gt;</span>
-					<span class="nt">&lt;version&gt;</span>3.1.0<span class="nt">&lt;/version&gt;</span>
-			<span class="nt">&lt;/dependency&gt;</span>
+    <span class="nt">&lt;dependency&gt;</span>
+        <span class="nt">&lt;groupId&gt;</span>org.springframework.cloud<span class="nt">&lt;/groupId&gt;</span>
+        <span class="nt">&lt;artifactId&gt;</span>spring-cloud-starter-loadbalancer<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>
 
-			<span class="nt">&lt;dependency&gt;</span>
-					<span class="nt">&lt;groupId&gt;</span>org.springframework.cloud<span class="nt">&lt;/groupId&gt;</span>
-					<span class="nt">&lt;artifactId&gt;</span>spring-cloud-starter-loadbalancer<span class="nt">&lt;/artifactId&gt;</span>
-			<span class="nt">&lt;/dependency&gt;</span>
+    <span class="c">&lt;!-- eureka client --&gt;</span>
+    <span class="nt">&lt;dependency&gt;</span>
+        <span class="nt">&lt;groupId&gt;</span>org.springframework.cloud<span class="nt">&lt;/groupId&gt;</span>
+        <span class="nt">&lt;artifactId&gt;</span>spring-cloud-starter-netflix-eureka-client<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>
 
-			<span class="c">&lt;!-- eureka client --&gt;</span>
-			<span class="nt">&lt;dependency&gt;</span>
-					<span class="nt">&lt;groupId&gt;</span>org.springframework.cloud<span class="nt">&lt;/groupId&gt;</span>
-					<span class="nt">&lt;artifactId&gt;</span>spring-cloud-starter-netflix-eureka-client<span class="nt">&lt;/artifactId&gt;</span>
-			<span class="nt">&lt;/dependency&gt;</span>
-
-			<span class="nt">&lt;dependency&gt;</span>
-					<span class="nt">&lt;groupId&gt;</span>com.google.code.gson<span class="nt">&lt;/groupId&gt;</span>
-					<span class="nt">&lt;artifactId&gt;</span>gson<span class="nt">&lt;/artifactId&gt;</span>
-					<span class="nt">&lt;version&gt;</span>2.8.9<span class="nt">&lt;/version&gt;</span>
-			<span class="nt">&lt;/dependency&gt;</span>
-
-	<span class="nt">&lt;/dependencies&gt;</span>
+    <span class="nt">&lt;dependency&gt;</span>
+        <span class="nt">&lt;groupId&gt;</span>com.google.code.gson<span class="nt">&lt;/groupId&gt;</span>
+        <span class="nt">&lt;artifactId&gt;</span>gson<span class="nt">&lt;/artifactId&gt;</span>
+        <span class="nt">&lt;version&gt;</span>2.8.9<span class="nt">&lt;/version&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>
+  <span class="nt">&lt;/dependencies&gt;</span>
 
 
-	<span class="nt">&lt;build&gt;</span>
-			<span class="nt">&lt;plugins&gt;</span>
-					<span class="nt">&lt;plugin&gt;</span>
-							<span class="nt">&lt;groupId&gt;</span>org.openapitools<span class="nt">&lt;/groupId&gt;</span>
-							<span class="nt">&lt;artifactId&gt;</span>openapi-generator-maven-plugin<span class="nt">&lt;/artifactId&gt;</span>
-							<span class="nt">&lt;version&gt;</span>5.4.0<span class="nt">&lt;/version&gt;</span>
-							<span class="nt">&lt;executions&gt;</span>
-									<span class="nt">&lt;execution&gt;</span>
-											<span class="nt">&lt;goals&gt;</span>
-													<span class="nt">&lt;goal&gt;</span>generate<span class="nt">&lt;/goal&gt;</span>
-											<span class="nt">&lt;/goals&gt;</span>
-											<span class="nt">&lt;configuration&gt;</span>
-													<span class="c">&lt;!-- path to the openapi Specification file --&gt;</span>
-													<span class="nt">&lt;inputSpec&gt;</span>
-															${project.basedir}/src/main/resources/openapi/openapi-server.yml
-													<span class="nt">&lt;/inputSpec&gt;</span>
+  <span class="nt">&lt;build&gt;</span>
+    <span class="nt">&lt;plugins&gt;</span>
+          <span class="nt">&lt;plugin&gt;</span>
+              <span class="nt">&lt;groupId&gt;</span>org.openapitools<span class="nt">&lt;/groupId&gt;</span>
+              <span class="nt">&lt;artifactId&gt;</span>openapi-generator-maven-plugin<span class="nt">&lt;/artifactId&gt;</span>
+              <span class="nt">&lt;version&gt;</span>5.4.0<span class="nt">&lt;/version&gt;</span>
+              <span class="nt">&lt;executions&gt;</span>
+                  <span class="nt">&lt;execution&gt;</span>
+                      <span class="nt">&lt;goals&gt;</span>
+                          <span class="nt">&lt;goal&gt;</span>generate<span class="nt">&lt;/goal&gt;</span>
+                      <span class="nt">&lt;/goals&gt;</span>
+                      <span class="nt">&lt;configuration&gt;</span>
+                          <span class="c">&lt;!-- path to the openapi Specification file --&gt;</span>
+                          <span class="nt">&lt;inputSpec&gt;</span>
+                              ${project.basedir}/src/main/resources/openapi/openapi-server.yml
+                          <span class="nt">&lt;/inputSpec&gt;</span>
 
-													<span class="c">&lt;!-- type of openapi generator --&gt;</span>
-													<span class="nt">&lt;generatorName&gt;</span>spring<span class="nt">&lt;/generatorName&gt;</span>
+                          <span class="c">&lt;!-- type of openapi generator --&gt;</span>
+                          <span class="nt">&lt;generatorName&gt;</span>spring<span class="nt">&lt;/generatorName&gt;</span>
 
-													<span class="c">&lt;!-- path to generated api package --&gt;</span>
-													<span class="nt">&lt;apiPackage&gt;</span>com.springboot.cloud.openfeign.openapi.server.app.api<span class="nt">&lt;/apiPackage&gt;</span>
+                          <span class="c">&lt;!-- path to generated api package --&gt;</span>
+                          <span class="nt">&lt;apiPackage&gt;</span>com.springboot.cloud.openfeign.openapi.server.app.api<span class="nt">&lt;/apiPackage&gt;</span>
 
-													<span class="c">&lt;!-- path to generated model package --&gt;</span>
-													<span class="nt">&lt;modelPackage&gt;</span>com.springboot.cloud.openfeign.openapi.server.app.model<span class="nt">&lt;/modelPackage&gt;</span>
-													<span class="nt">&lt;supportingFilesToGenerate&gt;</span>
-															ApiUtil.java
-													<span class="nt">&lt;/supportingFilesToGenerate&gt;</span>
+                          <span class="c">&lt;!-- path to generated model package --&gt;</span>
+                          <span class="nt">&lt;modelPackage&gt;</span>com.springboot.cloud.openfeign.openapi.server.app.model<span class="nt">&lt;/modelPackage&gt;</span>
+                          <span class="nt">&lt;supportingFilesToGenerate&gt;</span>
+                              ApiUtil.java
+                          <span class="nt">&lt;/supportingFilesToGenerate&gt;</span>
 
-													<span class="c">&lt;!-- other config options --&gt;</span>
-													<span class="nt">&lt;configOptions&gt;</span>
-															<span class="nt">&lt;library&gt;</span>spring-cloud<span class="nt">&lt;/library&gt;</span>
-															<span class="nt">&lt;delegatePattern&gt;</span>true<span class="nt">&lt;/delegatePattern&gt;</span>
-															<span class="nt">&lt;dateLibrary&gt;</span>java8<span class="nt">&lt;/dateLibrary&gt;</span>
-															<span class="nt">&lt;interfaceOnly&gt;</span>true<span class="nt">&lt;/interfaceOnly&gt;</span>
-															<span class="nt">&lt;useBeanValidation&gt;</span>true<span class="nt">&lt;/useBeanValidation&gt;</span>
-													<span class="nt">&lt;/configOptions&gt;</span>
-											<span class="nt">&lt;/configuration&gt;</span>
-									<span class="nt">&lt;/execution&gt;</span>
-							<span class="nt">&lt;/executions&gt;</span>
-					<span class="nt">&lt;/plugin&gt;</span>
-			<span class="nt">&lt;/plugins&gt;</span>
-	<span class="nt">&lt;/build&gt;</span>
+                          <span class="c">&lt;!-- other config options --&gt;</span>
+                          <span class="nt">&lt;configOptions&gt;</span>
+                              <span class="nt">&lt;library&gt;</span>spring-cloud<span class="nt">&lt;/library&gt;</span>
+                              <span class="nt">&lt;delegatePattern&gt;</span>true<span class="nt">&lt;/delegatePattern&gt;</span>
+                              <span class="nt">&lt;dateLibrary&gt;</span>java8<span class="nt">&lt;/dateLibrary&gt;</span>
+                              <span class="nt">&lt;interfaceOnly&gt;</span>true<span class="nt">&lt;/interfaceOnly&gt;</span>
+                              <span class="nt">&lt;useBeanValidation&gt;</span>true<span class="nt">&lt;/useBeanValidation&gt;</span>
+                          <span class="nt">&lt;/configOptions&gt;</span>
+                      <span class="nt">&lt;/configuration&gt;</span>
+                  <span class="nt">&lt;/execution&gt;</span>
+              <span class="nt">&lt;/executions&gt;</span>
+          <span class="nt">&lt;/plugin&gt;</span>
+    <span class="nt">&lt;/plugins&gt;</span>
+  <span class="nt">&lt;/build&gt;</span>
 
 </code></pre></div></div>
 
