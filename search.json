@@ -5,7 +5,7 @@
       "title"    : "Spring Cloud: OpenApi And OpenFeign For Server - Client Sides In SpringBoot",
       "url"      : "/java/2022/02/13/java-springboot-openapi-openfeign.html",
       "category" : "java",
-      "tags"     : "Java, SpringBoot, OpenApi, OpenFeign",
+      "tags"     : "Java, SpringBoot, SpringCloud, Maven",
       "date"     : "2022-02-13 00:00:00 +0700",
       "discription" : ""
 
@@ -17,7 +17,7 @@
       "title"    : "Java Road Map",
       "url"      : "/java/2022/02/08/java-road-map.html",
       "category" : "java",
-      "tags"     : "Java, others, road",
+      "tags"     : "Java, Other",
       "date"     : "2022-02-08 00:00:00 +0700",
       "discription" : ""
 
@@ -29,7 +29,7 @@
       "title"    : "HMAC And Data Integrity",
       "url"      : "/java/2021/12/31/java-springboot-HMAC.html",
       "category" : "java",
-      "tags"     : "Java, SpringBoot, HMAC, hash",
+      "tags"     : "Java, SpringBoot, Maven",
       "date"     : "2021-12-31 00:00:00 +0700",
       "discription" : ""
 
@@ -41,7 +41,7 @@
       "title"    : "Encode, Encrypt And Hash In SpringBoot",
       "url"      : "/java/2021/12/05/java-springboot-encode-encrypt-hash.html",
       "category" : "java",
-      "tags"     : "Java, SpringBoot, cipher, encode, decode, encrypt, decrypt, hash",
+      "tags"     : "Java, SpringBoot, cipher, Maven",
       "date"     : "2021-12-05 00:00:00 +0700",
       "discription" : ""
 
@@ -53,7 +53,7 @@
       "title"    : "Exception Handler With Message Source In SpringBoot",
       "url"      : "/java/2021/11/28/java-springboot-exception-handler-message-source.html",
       "category" : "java",
-      "tags"     : "Java, SpringBoot",
+      "tags"     : "Java, SpringBoot, Maven",
       "date"     : "2021-11-28 00:00:00 +0700",
       "discription" : ""
 
@@ -65,7 +65,7 @@
       "title"    : "SQL INSERT, DELELE, UPDATE, MERGE TABLE",
       "url"      : "/database/2021/11/11/SQL-CRUID-TABLE.html",
       "category" : "database",
-      "tags"     : "CRUID, CREATE, READ, DELETE, UPDATE, MERGE",
+      "tags"     : "Database, SQL",
       "date"     : "2021-11-11 00:00:00 +0700",
       "discription" : ""
 
@@ -173,7 +173,7 @@
       "title"    : "Spring Security: SQL Injection",
       "url"      : "/java/2021/09/26/java-springboot-security-SQL-Injection.html",
       "category" : "java",
-      "tags"     : "Java, SpringBoot, Sql, Database",
+      "tags"     : "Java, SpringBoot, Sql, Database, Maven",
       "date"     : "2021-09-26 00:00:00 +0700",
       "discription" : ""
 
@@ -257,7 +257,7 @@
       "title"    : "JDBC And JPA In SpringBoot",
       "url"      : "/java/2021/09/11/java-springboot-JDBC-JPA.html",
       "category" : "java",
-      "tags"     : "Database, Jpa, Jdbc, SpringBoot",
+      "tags"     : "Database, Jpa, Jdbc, SpringBoot, Maven",
       "date"     : "2021-09-11 00:00:00 +0700",
       "discription" : ""
 
@@ -317,7 +317,7 @@
       "title"    : "Spring Boot With Sonarqube",
       "url"      : "/java/2021/07/25/java-springboot-sonarqube.html",
       "category" : "java",
-      "tags"     : "Java, SpringBoot, Sonarqube",
+      "tags"     : "Java, SpringBoot, Sonarqube, Maven",
       "date"     : "2021-07-25 00:00:00 +0700",
       "discription" : ""
 
@@ -341,7 +341,7 @@
       "title"    : "Spring Boot With FeignClient",
       "url"      : "/java/2021/07/15/java-springboot-feign-client.html",
       "category" : "java",
-      "tags"     : "Java, SpringBoot",
+      "tags"     : "Java, SpringBoot, Maven, SpringCloud",
       "date"     : "2021-07-15 00:00:00 +0700",
       "discription" : ""
 
@@ -353,7 +353,7 @@
       "title"    : "Using Eureka And Zuul In Spring Boot Microservices",
       "url"      : "/java/2021/07/05/java-springboot-eureka-zuul.html",
       "category" : "java",
-      "tags"     : "Java, SpringBoot",
+      "tags"     : "Java, SpringBoot, Maven, SpringCloud",
       "date"     : "2021-07-05 00:00:00 +0700",
       "discription" : ""
 
@@ -413,7 +413,7 @@
       "title"    : "@ConfigurationProperties to create Spring Bean",
       "url"      : "/java/2021/07/01/java-springboot-configuration-properties.html",
       "category" : "java",
-      "tags"     : "Java, SpringBoot",
+      "tags"     : "Java, SpringBoot, Maven",
       "date"     : "2021-07-01 00:00:00 +0700",
       "discription" : ""
 
@@ -437,7 +437,7 @@
       "title"    : "Generate Swagger UI from Controller in Spring Boot",
       "url"      : "/java/2021/06/20/java-springboot-swaggerui-by-controller.html",
       "category" : "java",
-      "tags"     : "Java, SpringBoot",
+      "tags"     : "Java, SpringBoot, Maven",
       "date"     : "2021-06-20 00:00:00 +0700",
       "discription" : ""
 
@@ -449,7 +449,7 @@
       "title"    : "Connect to WebService(SOAP) by Spring Cloud Feign",
       "url"      : "/java/2021/06/17/java-springboot-connect-SOAP-with-FeignClient.html",
       "category" : "java",
-      "tags"     : "SpringBoot, Java",
+      "tags"     : "SpringBoot, Java, Maven",
       "date"     : "2021-06-17 00:00:00 +0700",
       "discription" : ""
 
@@ -461,7 +461,7 @@
       "title"    : "Spring boot with Multiple Datasources",
       "url"      : "/java/2021/06/06/java-springboot-multi-datasource.html",
       "category" : "java",
-      "tags"     : "Database, Jpa, SpringBoot",
+      "tags"     : "Database, Jpa, SpringBoot, Maven",
       "date"     : "2021-06-06 00:00:00 +0700",
       "discription" : ""
 
@@ -473,7 +473,7 @@
       "title"    : "Pagination With JPA In Spring Boot",
       "url"      : "/java/2021/04/03/java-springboot-pagination-with-jpa.html",
       "category" : "java",
-      "tags"     : "Database, Jpa, SpringBoot",
+      "tags"     : "Database, Jpa, SpringBoot, Maven",
       "date"     : "2021-04-03 00:00:00 +0700",
       "discription" : ""
 
@@ -485,7 +485,7 @@
       "title"    : "Spring Boot And Basic Concepts",
       "url"      : "/java/2021/03/12/java-springboot-basic-concepts.html",
       "category" : "java",
-      "tags"     : "SpringBoot, Java",
+      "tags"     : "SpringBoot, Java, Maven",
       "date"     : "2021-03-12 00:00:00 +0700",
       "discription" : ""
 
@@ -509,7 +509,7 @@
       "title"    : "SpringBoot With Swagger",
       "url"      : "/java/2021/03/11/java-springboot-with-swagger.html",
       "category" : "java",
-      "tags"     : "SpringBoot, Java",
+      "tags"     : "SpringBoot, Java, Maven",
       "date"     : "2021-03-11 00:00:00 +0700",
       "discription" : ""
 
