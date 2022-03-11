@@ -31,7 +31,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Lambda Expression in Java 8" />
 <script type="application/ld+json">
-{"mainEntityOfPage":{"@type":"WebPage","@id":"/java/2021/02/10/java-lambda-expression.html"},"@type":"BlogPosting","url":"/java/2021/02/10/java-lambda-expression.html","author":{"@type":"Person","name":"Duc Nguyen"},"headline":"Lambda Expression in Java 8","dateModified":"2021-02-10T10:15:47+07:00","datePublished":"2021-02-10T10:15:47+07:00","description":"Before going to the lambda expression we will take a look about functional interface in java 8. Then we can understand lamda expression easily.","@context":"https://schema.org"}</script>
+{"@type":"BlogPosting","url":"/java/2021/02/10/java-lambda-expression.html","author":{"@type":"Person","name":"Duc Nguyen"},"headline":"Lambda Expression in Java 8","dateModified":"2021-02-10T10:15:47+07:00","datePublished":"2021-02-10T10:15:47+07:00","description":"Before going to the lambda expression we will take a look about functional interface in java 8. Then we can understand lamda expression easily.","mainEntityOfPage":{"@type":"WebPage","@id":"/java/2021/02/10/java-lambda-expression.html"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="KaizenThink" /><!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZ8G5007GK"></script>
@@ -132,36 +132,43 @@
 </blockquote>
 
 <ul id="markdown-toc">
-  <li><a href="#functional-interface-in-java-8" id="markdown-toc-functional-interface-in-java-8">FUNCTIONAL INTERFACE IN JAVA 8</a></li>
-  <li><a href="#lambda-expression-in-java-8" id="markdown-toc-lambda-expression-in-java-8">LAMBDA EXPRESSION IN JAVA 8</a></li>
+  <li><a href="#functional-interface" id="markdown-toc-functional-interface">Functional Interface</a></li>
+  <li><a href="#lamda-expression" id="markdown-toc-lamda-expression">Lamda Expression</a></li>
 </ul>
 
-<h2 id="functional-interface-in-java-8">FUNCTIONAL INTERFACE IN JAVA 8</h2>
+<h2 id="functional-interface">Functional Interface</h2>
 <ul>
   <li>An interface that only contain <strong>one abstract method</strong> is called <code class="language-plaintext highlighter-rouge">functional interface</code> (A functional interface may contain one or more <strong>default methods</strong> or <strong>static methods</strong>). It can be called as <strong>Single Abstract Method (SAM)</strong> also.</li>
-  <li>We can use anotation <code class="language-plaintext highlighter-rouge">@FunctionalInterface</code> to declare <strong>functional interface</strong>. However, there are no issue if you don’t use this anotation, using this anotation just ensures for compile process which will throw exception if there are 2 abstract methods.</li>
+  <li>We can use annotation <code class="language-plaintext highlighter-rouge">@FunctionalInterface</code> to declare <strong>functional interface</strong>. However, there are no issue if you don’t use this annotation, using this annotation just ensures for compile process which will throw exception if there are 2 abstract methods.</li>
 </ul>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// functional interface without anotation</span>
-<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Application</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getApplicationId</span><span class="o">(</span><span class="nc">String</span> <span class="n">appNumber</span><span class="o">);</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// functional interface with anotation</span>
-<span class="nd">@FunctionalInterface</span>
-<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Application</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getApplicationId</span><span class="o">(</span><span class="nc">String</span> <span class="n">appNumber</span><span class="o">);</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<ul>
-  <li>The main benefit of java 8 <code class="language-plaintext highlighter-rouge">functional interface</code> is helping us can use <code class="language-plaintext highlighter-rouge">lambda expression</code> to declare <code class="language-plaintext highlighter-rouge">body method</code> and avoid using <strong>anonymous class</strong>.</li>
-</ul>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+	<span class="c1">// functional interface without anotation</span>
+	<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Application</span> <span class="o">{</span>
 
-<blockquote>
-  <p>We will disscus on <code class="language-plaintext highlighter-rouge">lambda expression</code> in the next section below.</p>
-</blockquote>
+		<span class="kd">public</span> <span class="nc">String</span> <span class="nf">getApplicationId</span><span class="o">(</span><span class="nc">String</span> <span class="n">appNumber</span><span class="o">);</span>
+
+	<span class="o">}</span>
+
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+	<span class="c1">// functional interface with anotation</span>
+	<span class="nd">@FunctionalInterface</span>
+	<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Application</span> <span class="o">{</span>
+
+		<span class="kd">public</span> <span class="nc">String</span> <span class="nf">getApplicationId</span><span class="o">(</span><span class="nc">String</span> <span class="n">appNumber</span><span class="o">);</span>
+		
+	<span class="o">}</span>
+
+</code></pre></div></div>
 
 <ul>
+  <li>The main benefit of java 8 <code class="language-plaintext highlighter-rouge">functional interface</code> is helping us can use <code class="language-plaintext highlighter-rouge">lambda expression</code> to declare <code class="language-plaintext highlighter-rouge">body method</code> and avoid using <strong>anonymous class</strong>.
+    <blockquote>
+      <p>We will disscus on <code class="language-plaintext highlighter-rouge">lambda expression</code> in the next section below.</p>
+    </blockquote>
+  </li>
   <li>Java 8 collection API has been rewritten and new Stream API is introduced that uses a lot of <strong>functional interface</strong> in <code class="language-plaintext highlighter-rouge">java.util.function</code> package. Some of the useful java 8 <strong>function interface</strong> are <code class="language-plaintext highlighter-rouge">Consumer</code>, <code class="language-plaintext highlighter-rouge">Supplier</code>, <code class="language-plaintext highlighter-rouge">Function</code> and <code class="language-plaintext highlighter-rouge">Predicate</code> …</li>
 </ul>
 
@@ -192,13 +199,14 @@
   </tbody>
 </table>
 
-<h2 id="lambda-expression-in-java-8">LAMBDA EXPRESSION IN JAVA 8</h2>
-
+<h2 id="lamda-expression">Lamda Expression</h2>
 <ul>
-  <li>Java 8 introduced an <strong>arrow</strong>(function pointer) <strong><code class="language-plaintext highlighter-rouge">-&gt;</code></strong>. This is used in Lamda methods with the main purpose is seperating a Lamda method into 2 parts: <strong>parameters</strong> and <strong>body method/function</strong>(Lamda function body).</li>
+  <li>Java 8 introduced an <strong>arrow</strong>(function pointer) <strong><code class="language-plaintext highlighter-rouge">-&gt;</code></strong>. This is used in Lamda methods with the main purpose is separating a Lamda method into 2 parts: <strong>parameters</strong> and <strong>body method/function</strong>(Lamda function body).</li>
 </ul>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">(</span><span class="kt">int</span> <span class="n">a</span><span class="o">,</span> <span class="kt">int</span> <span class="n">b</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="o">{</span><span class="k">do</span> <span class="n">something</span><span class="o">};</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+	<span class="o">(</span><span class="kt">int</span> <span class="n">a</span><span class="o">,</span> <span class="kt">int</span> <span class="n">b</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="o">{</span><span class="k">do</span> <span class="n">something</span><span class="o">};</span>
+
 </code></pre></div></div>
 
 <ul>
@@ -208,22 +216,24 @@
   <li><code class="language-plaintext highlighter-rouge">Lambda expression</code> helps us to reduce the number of codes and support sequential and parallel streams effectively in <code class="language-plaintext highlighter-rouge">Stream API</code>.</li>
 </ul>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@FunctionalInterface</span>
-<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Hello</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">sayHello</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">);</span>
-<span class="o">}</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+	<span class="nd">@FunctionalInterface</span>
+	<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Hello</span> <span class="o">{</span>
+		<span class="kd">public</span> <span class="nc">String</span> <span class="nf">sayHello</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">);</span>
+	<span class="o">}</span>
 
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">LambdaExpression</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-        <span class="nc">Hello</span> <span class="n">hello</span> <span class="o">=</span> <span class="o">(</span><span class="n">name</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="s">"Hello "</span> <span class="o">+</span> <span class="n">name</span><span class="o">;</span>
-        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">hello</span><span class="o">.</span><span class="na">sayHello</span><span class="o">(</span><span class="s">"Lambda"</span><span class="o">));</span>
-    <span class="o">}</span>
-<span class="o">}</span>
+	<span class="kd">public</span> <span class="kd">class</span> <span class="nc">LambdaExpression</span> <span class="o">{</span>
+		<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+			<span class="nc">Hello</span> <span class="n">hello</span> <span class="o">=</span> <span class="o">(</span><span class="n">name</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="s">"Hello "</span> <span class="o">+</span> <span class="n">name</span><span class="o">;</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">hello</span><span class="o">.</span><span class="na">sayHello</span><span class="o">(</span><span class="s">"Lambda"</span><span class="o">));</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+
 </code></pre></div></div>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//the result in the terminal
-
-Hello Lambda
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+  //the result in the terminal
+  Hello Lambda
 
 </code></pre></div></div>
 

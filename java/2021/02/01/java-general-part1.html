@@ -31,7 +31,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="General Knowledges About Java Part 1" />
 <script type="application/ld+json">
-{"mainEntityOfPage":{"@type":"WebPage","@id":"/java/2021/02/01/java-general-part1.html"},"@type":"BlogPosting","url":"/java/2021/02/01/java-general-part1.html","author":{"@type":"Person","name":"Duc Nguyen"},"headline":"General Knowledges About Java Part 1","dateModified":"2021-02-01T20:15:47+07:00","datePublished":"2021-02-01T20:15:47+07:00","description":"Hi there! Let’s explore some general knowleadges and briefly definitions in programming. I hope that this website can help people saving time in learning, also give some motivations for those who have choice the developer path.","@context":"https://schema.org"}</script>
+{"@type":"BlogPosting","url":"/java/2021/02/01/java-general-part1.html","author":{"@type":"Person","name":"Duc Nguyen"},"headline":"General Knowledges About Java Part 1","dateModified":"2021-02-01T20:15:47+07:00","datePublished":"2021-02-01T20:15:47+07:00","description":"Hi there! Let’s explore some general knowleadges and briefly definitions in programming. I hope that this website can help people saving time in learning, also give some motivations for those who have choice the developer path.","mainEntityOfPage":{"@type":"WebPage","@id":"/java/2021/02/01/java-general-part1.html"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="KaizenThink" /><!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZ8G5007GK"></script>
@@ -128,19 +128,19 @@
   
     <div class="post-content e-content" itemprop="articleBody">
       <ul id="markdown-toc">
-  <li><a href="#history" id="markdown-toc-history">HISTORY</a></li>
-  <li><a href="#java-basic" id="markdown-toc-java-basic">JAVA BASIC</a>    <ul>
-      <li><a href="#collection-farmework-" id="markdown-toc-collection-farmework-">COLLECTION FARMEWORK <br /></a></li>
-      <li><a href="#java-generic-" id="markdown-toc-java-generic-">JAVA GENERIC <br /></a></li>
-      <li><a href="#java-8-optional-" id="markdown-toc-java-8-optional-">JAVA 8 OPTIONAL <br /></a></li>
-      <li><a href="#java-8-interface-with-default-method" id="markdown-toc-java-8-interface-with-default-method">JAVA 8 INTERFACE WITH DEFAULT METHOD</a></li>
-      <li><a href="#java-8-interface-with-static-method" id="markdown-toc-java-8-interface-with-static-method">JAVA 8 INTERFACE WITH STATIC METHOD</a></li>
+  <li><a href="#history" id="markdown-toc-history">History</a></li>
+  <li><a href="#java-basic" id="markdown-toc-java-basic">Java Basic</a>    <ul>
+      <li><a href="#access-modifiers" id="markdown-toc-access-modifiers">Access Modifiers</a></li>
+      <li><a href="#collection-framework" id="markdown-toc-collection-framework">Collection Framework</a></li>
+      <li><a href="#java-generic" id="markdown-toc-java-generic">Java Generic</a></li>
     </ul>
   </li>
+  <li><a href="#java-8-optional" id="markdown-toc-java-8-optional">Java 8 Optional</a></li>
+  <li><a href="#java-8-interface-with-default-method" id="markdown-toc-java-8-interface-with-default-method">Java 8 Interface With Default Method</a></li>
+  <li><a href="#java-8-interface-with-static-method" id="markdown-toc-java-8-interface-with-static-method">Java 8 Interface With Static Method</a></li>
 </ul>
 
-<h2 id="history">HISTORY</h2>
-
+<h2 id="history">History</h2>
 <ul>
   <li>
     <p><strong>James Gosling, Mike Sheridan, and Patrick Naughton</strong> initiated the Java language project in June 1991. Java was originally designed for interactive television, but it was too advanced for the digital cable television industry at the time. The language was initially called Oak after an oak tree that stood outside Gosling’s office. Later the project went by the name Green and was finally renamed Java, from Java coffee. Gosling designed Java with a C/C++-style syntax that system and application programmers would find familiar.</p>
@@ -150,33 +150,95 @@
   </li>
 </ul>
 
-<h2 id="java-basic">JAVA BASIC</h2>
-
-<blockquote>
-  <h3 id="collection-farmework-">COLLECTION FARMEWORK <br /></h3>
-</blockquote>
+<h2 id="java-basic">Java Basic</h2>
+<h3 id="access-modifiers">Access Modifiers</h3>
 
 <ul>
-  <li>
-    <p><strong>java.util.collection</strong> is the root interface of Collection Framework. It constains some important methods such as <strong>size(), iterator(), add(), remove() and clear()</strong>.</p>
-  </li>
-  <li>
-    <p><strong>List, Set Queue</strong> are other important interfaces that inherit from the Collection interface.</p>
-  </li>
-  <li>
-    <p><strong>Map</strong> is the only interface that does not inherit from the Collection interface but it is part of Collection Framework.</p>
-  </li>
-  <li>
-    <p>All the collection framework interfaces are present in <strong>java.util.package</strong></p>
-  </li>
+  <li>There are two types of <code class="language-plaintext highlighter-rouge">modifiers</code> in Java: <code class="language-plaintext highlighter-rouge">access modifiers</code> and <code class="language-plaintext highlighter-rouge">non-access modifiers</code>.</li>
+  <li>The access modifiers in Java specifies the accessibility or scope of a field, method, constructor, or class. We can change the access level of fields, constructors, methods, and class by applying the access modifier on it.</li>
+  <li>There are 4 types of Java access modifiers:</li>
 </ul>
 
-<blockquote>
-  <h3 id="java-generic-">JAVA GENERIC <br /></h3>
-</blockquote>
+<table>
+  <thead>
+    <tr>
+      <th>Access Modifier</th>
+      <th>Descriptions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">private</code></td>
+      <td>The access level of a private modifier is only within the class. It cannot be accessed from outside the class.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">default</code></td>
+      <td>The access level of a default modifier is only within the package. It cannot be accessed from outside the package. If you do not specify any access level, it will be the default.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">protected</code></td>
+      <td>The access level of a protected modifier is within the package and outside the package through child class. If you do not make the child class, it cannot be accessed from outside the package.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">public</code></td>
+      <td>The access level of a public modifier is everywhere. It can be accessed from within the class, outside the class, within the package and outside the package.</td>
+    </tr>
+  </tbody>
+</table>
 
+<table>
+  <thead>
+    <tr>
+      <th>Access Modifier</th>
+      <th>Within Class</th>
+      <th>Within Package</th>
+      <th>Outside Package By Subclass Only</th>
+      <th>Outside Package</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">private</code></td>
+      <td>Y</td>
+      <td>N</td>
+      <td>N</td>
+      <td>N</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">default</code></td>
+      <td>Y</td>
+      <td>Y</td>
+      <td>N</td>
+      <td>N</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">protected</code></td>
+      <td>Y</td>
+      <td>Y</td>
+      <td>Y</td>
+      <td>N</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">public</code></td>
+      <td>Y</td>
+      <td>Y</td>
+      <td>Y</td>
+      <td>Y</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="collection-framework">Collection Framework</h3>
 <ul>
-  <li>Java Generics was added in Java 5 to provide complile time type checking and removing risk of <strong>ClassCastException</strong> which was common while working with collection classes.</li>
+  <li><strong>java.util.collection</strong> is the root interface of Collection Framework. It contains some important methods such as <strong>size(), iterator(), add(), remove() and clear()</strong>.</li>
+  <li><strong>List, Set Queue</strong> are other important interfaces that inherit from the Collection interface.</li>
+  <li><strong>Map</strong> is the only interface that does not inherit from the Collection interface but it is part of Collection Framework.</li>
+  <li>All the collection framework interfaces are present in <strong>java.util.package</strong></li>
+</ul>
+
+<h3 id="java-generic">Java Generic</h3>
+<ul>
+  <li>Java Generics was added in Java 5 to provide compile time type checking and removing risk of <strong>ClassCastException</strong> which was common while working with collection classes.</li>
 </ul>
 
 <hr />
@@ -244,7 +306,8 @@ S, U, V etc - 2nd, 3rdm 4th types
   <li>Java Generic Method <br /></li>
 </ul>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="no">T</span> <span class="nf">cloneObject</span><span class="o">(</span><span class="no">T</span> <span class="n">t</span><span class="o">,</span> <span class="nc">Class</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="n">type</span><span class="o">)</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kd">public</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="no">T</span> <span class="nf">cloneObject</span><span class="o">(</span><span class="no">T</span> <span class="n">t</span><span class="o">,</span> <span class="nc">Class</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="n">type</span><span class="o">)</span> <span class="o">{</span>
     <span class="k">try</span> <span class="o">{</span>
         <span class="nc">ObjectMapper</span> <span class="n">mapper</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ObjectMapper</span><span class="o">();</span>
         <span class="nc">String</span> <span class="n">objectString</span> <span class="o">=</span> <span class="n">mapper</span><span class="o">.</span><span class="na">writeValueAsString</span><span class="o">(</span><span class="n">t</span><span class="o">);</span>
@@ -253,13 +316,13 @@ S, U, V etc - 2nd, 3rdm 4th types
         <span class="nc">Throw</span> <span class="k">new</span> <span class="nf">RuntimeException</span><span class="o">(</span><span class="s">"Clone object error!: "</span> <span class="o">+</span> <span class="n">e</span><span class="o">.</span><span class="na">getMessage</span><span class="o">());</span>
     <span class="o">}</span>
 <span class="o">}</span>
+
 </code></pre></div></div>
-<blockquote>
-  <h3 id="java-8-optional-">JAVA 8 OPTIONAL <br /></h3>
-</blockquote>
+
+<h2 id="java-8-optional">Java 8 Optional</h2>
 
 <ul>
-  <li><strong>Optional</strong> is a container object which may or maynot contain a non-null value. There are various methods available in the API to deal with the Optional in a convenient and reliable maner.
+  <li><strong>Optional</strong> is a container object which may or may not contain a non-null value. There are various methods available in the API to deal with the Optional in a convenient and reliable maner.
 <br /></li>
 </ul>
 
@@ -282,18 +345,15 @@ S, U, V etc - 2nd, 3rdm 4th types
  <span class="nc">Optional</span><span class="o">.</span><span class="na">ofNullable</span><span class="o">(</span><span class="n">foobar</span><span class="o">);</span> <span class="c1">//Safe from NullPointerException</span>
 </code></pre></div></div>
 <ul>
-  <li>Answer: If you expect that your <strong>foobar</strong> is <strong>never null</strong> due to the program logic, it’s much better to use <code class="language-plaintext highlighter-rouge">Optional.of(foobar)</code> as you will see a <strong>NullPointerException</strong> which will indicate that your program has a bug. If you use <code class="language-plaintext highlighter-rouge">Optional.ofNullable(foobar)</code> and the <strong>foobar</strong> happens to be <strong>null</strong> due to the bug, then your program will silently continue working incorectly, which maybe a bigger disaster. This way of error may occur much later and it would be much harder to understand at which point it went wrong.</li>
+  <li>Answer: If you expect that your <strong>foobar</strong> is <strong>never null</strong> due to the program logic, it’s much better to use <code class="language-plaintext highlighter-rouge">Optional.of(foobar)</code> as you will see a <strong>NullPointerException</strong> which will indicate that your program has a bug. If you use <code class="language-plaintext highlighter-rouge">Optional.ofNullable(foobar)</code> and the <strong>foobar</strong> happens to be <strong>null</strong> due to the bug, then your program will silently continue working incorrectly, which maybe a bigger disaster. This way of error may occur much later and it would be much harder to understand at which point it went wrong.</li>
 </ul>
 
-<blockquote>
-  <h3 id="java-8-interface-with-default-method">JAVA 8 INTERFACE WITH DEFAULT METHOD</h3>
-</blockquote>
-
+<h2 id="java-8-interface-with-default-method">Java 8 Interface With Default Method</h2>
 <ul>
   <li>Default methods help us expand interface without broken classes that implemented.</li>
-  <li>Deafult methods will help us in avoiding utility classes.</li>
-  <li>Default methods will help us in removing base implementabtion classes, we can provide default implementation and the implementation classes can choose which one to ooverride.</li>
-  <li>If there are any class that inherit a same default method, the this default method will not be valid. The same thing is that a default method can not override a method from <strong>java.lang.object</strong> bacause <strong>Object</strong> is the base class of all classes in java. So, If we have methods in Object class which are defined as default methods in interface, the methods in Object class will be always used. This is the reason why we do not have any default methos can override methods of Object class.</li>
+  <li>Default methods will help us in avoiding utility classes.</li>
+  <li>Default methods will help us in removing base implementation classes, we can provide default implementation and the implementation classes can choose which one to override.</li>
+  <li>If there are any class that inherit a same default method, the this default method will not be valid. The same thing is that a default method can not override a method from <strong>java.lang.object</strong> because <strong>Object</strong> is the base class of all classes in java. So, If we have methods in Object class which are defined as default methods in interface, the methods in Object class will be always used. This is the reason why we do not have any default methods can override methods of Object class.</li>
 </ul>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// default method of interface example</span>
@@ -307,7 +367,7 @@ S, U, V etc - 2nd, 3rdm 4th types
 </code></pre></div></div>
 
 <ul>
-  <li>As we know that, Java does not allow multi inheritances with class because the compiler does not know choose which method of super class to use. So, this happens the same for dafeult method bacause if you implement a class from 2 interface Ex: <strong>FirstInterface</strong> and <strong>SecondInterface</strong>, the compiler does not know choosing which one to execute. Multi ingeritances is a normal thing in java, we usually see this issue in java core classes, also most of enterprise and framwework application. To ensure this issue can not with interface, class has to implement common mothods default from 2 interface. So, as in the example below, class have to implement <strong>log()</strong> method for compiler can not throw exception.</li>
+  <li>As we know that, Java does not allow multi inheritances with class because the compiler does not know choose which method of super class to use. So, this happens the same for default method because if you implement a class from 2 interface Ex: <strong>FirstInterface</strong> and <strong>SecondInterface</strong>, the compiler does not know choosing which one to execute. Multi inheritances is a normal thing in java, we usually see this issue in java core classes, also most of enterprise and framework application. To ensure this issue can not with interface, class has to implement common methods default from 2 interface. So, as in the example below, class have to implement <strong>log()</strong> method for compiler can not throw exception.</li>
 </ul>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// default method of first interface example</span>
@@ -346,12 +406,9 @@ S, U, V etc - 2nd, 3rdm 4th types
 
 </code></pre></div></div>
 
-<blockquote>
-  <h3 id="java-8-interface-with-static-method">JAVA 8 INTERFACE WITH STATIC METHOD</h3>
-</blockquote>
-
+<h2 id="java-8-interface-with-static-method">Java 8 Interface With Static Method</h2>
 <ul>
-  <li>Java interface static method is similar to default method except that we  can not override them in the implementation classes. This feature helps us in avoiding undesired results incase of poor implementation in implementation classes.</li>
+  <li>Java interface static method is similar to default method except that we  can not override them in the implementation classes. This feature helps us in avoiding undesired results in case of poor implementation in implementation classes.</li>
 </ul>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">ThirdInterface</span> <span class="o">{</span>
