@@ -132,7 +132,15 @@
 </blockquote>
 
 <ul id="markdown-toc">
-  <li><a href="#what-is-the-jpa" id="markdown-toc-what-is-the-jpa">WHAT IS THE JPA?</a></li>
+  <li><a href="#what-is-the-jpa" id="markdown-toc-what-is-the-jpa">What Is The JPA?</a>    <ul>
+      <li><a href="#what-is-the-persistence-unit" id="markdown-toc-what-is-the-persistence-unit">What Is The Persistence Unit?</a></li>
+      <li><a href="#what-is-the-entitymanagerfactory" id="markdown-toc-what-is-the-entitymanagerfactory">What Is The EntityManagerFactory?</a></li>
+      <li><a href="#what-is-the-entitymanager" id="markdown-toc-what-is-the-entitymanager">What Is The EntityManager?</a></li>
+      <li><a href="#what-is-the-persistence-context" id="markdown-toc-what-is-the-persistence-context">What Is The Persistence Context</a></li>
+      <li><a href="#what-is-the-entity" id="markdown-toc-what-is-the-entity">What Is The Entity?</a></li>
+      <li><a href="#entity-example" id="markdown-toc-entity-example">Entity Example</a></li>
+    </ul>
+  </li>
   <li><a href="#what-is-the-object-relational-mapping-orm" id="markdown-toc-what-is-the-object-relational-mapping-orm">WHAT IS THE OBJECT-RELATIONAL MAPPING (ORM)?</a></li>
   <li><a href="#what-is-the-hibernate" id="markdown-toc-what-is-the-hibernate">WHAT IS THE HIBERNATE?</a></li>
   <li><a href="#what-is-the-jdbc" id="markdown-toc-what-is-the-jdbc">WHAT IS THE JDBC?</a></li>
@@ -160,86 +168,528 @@
   <li><a href="#references" id="markdown-toc-references">REFERENCES</a></li>
 </ul>
 
-<h2 id="what-is-the-jpa">WHAT IS THE JPA?</h2>
+<h2 id="what-is-the-jpa">What Is The JPA?</h2>
+<ul>
+  <li>The <code class="language-plaintext highlighter-rouge">Java Persistence API (JPA)</code> represents a simplification of the persistence programming model.</li>
+  <li>Data persistence, the ability to maintain data between application sessions in some form of nonvolatile storage (such as a relational database), is crucial to enterprise applications. Applications that are developed for this environment must either manage data persistence themselves or make use of third-party solutions to handle database updates and retrievals. <code class="language-plaintext highlighter-rouge">JPA</code> provides a mechanism for managing data persistence and object-relational mapping and functions.</li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td><code class="language-plaintext highlighter-rouge">JPA</code> is based on the Java programming model that applies to Java EE environments, but JPA can also function within the Java SE environment. The JPA specification defines the [[Object Relational Mapping</td>
+          <td>object-relational mapping (ORM)]] internally, rather than relying on vendor-specific mapping implementations, and uses either annotations or XML to map objects into database tables. By default, <code class="language-plaintext highlighter-rouge">JPA</code> use Hibernate as the implementation for it’s <code class="language-plaintext highlighter-rouge">ORM</code>. So we can say that, <code class="language-plaintext highlighter-rouge">JPA</code> defines interfaces for <code class="language-plaintext highlighter-rouge">ORM</code> and <code class="language-plaintext highlighter-rouge">Hibernate</code> is the implementation of these interfaces.</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">JPA</code> is designed to operate both inside and outside of a Java Enterprise Edition (Java EE) container. When you run JPA inside a container, applications can use the container to manage the persistence. If there is no container to manage JPA, the application must handle the persistence management itself. Applications that are designed for container managed persistence cannot be used outside a container, while applications that manage their own persistence can function either in a container environment or a Java SE environment.</li>
+  <li><code class="language-plaintext highlighter-rouge">JPA</code> also provides a query language - JPQL - that you can use to retrieve objects without writing SQL queries specific to the database you are working with.</li>
+  <li>Java EE containers that support JPA must supply a persistence provider. A JPA persistence provider uses the following elements to persist data in an EJB 3.0 environment:</li>
+</ul>
+
+<h3 id="what-is-the-persistence-unit">What Is The Persistence Unit?</h3>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Persistence Unit</code>:  Defines a complete Object-Relational Model mapping (ORM) (entities + supporting structures) with a relational database. The EntityManagerFactory uses this data to create a EntityManager that is associated with a [[Persistence Context]].</li>
+  <li>A<code class="language-plaintext highlighter-rouge"> persistence unit</code> specifies all entities, which are managed by the <code class="language-plaintext highlighter-rouge">EntityManagers</code> of the application. Each <code class="language-plaintext highlighter-rouge">persistence unit</code> contains all entities classes representing the data stored in a single database.</li>
+</ul>
+
+<h3 id="what-is-the-entitymanagerfactory">What Is The EntityManagerFactory?</h3>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">EntityManagerFactory</code>: Used to create an EntityManager for database interactions. An instance of an EntityManager represents a Persistence context.</li>
+</ul>
+
+<h3 id="what-is-the-entitymanager">What Is The EntityManager?</h3>
+<p>-<code class="language-plaintext highlighter-rouge">EntityManager</code>: The resource manager that maintains the active collection of Entity objects that are being used by the application. The <code class="language-plaintext highlighter-rouge">EntityManager</code> handles the database interaction and metadata for <code class="language-plaintext highlighter-rouge">object-relational mappings (ORM)</code> . An instance of an <code class="language-plaintext highlighter-rouge">EntityManager</code> represents a [[Persistence Context]].</p>
+<ul>
+  <li>An <code class="language-plaintext highlighter-rouge">application in a container</code> can obtain the <code class="language-plaintext highlighter-rouge">EntityManage</code> through injection into the application or by looking it up in the Java component name-space.</li>
+  <li>If the application manages its persistence, the <code class="language-plaintext highlighter-rouge">EntityManager</code> is obtained from the <code class="language-plaintext highlighter-rouge">EntityManagerFactory</code> .</li>
+  <li>In JPA, the <code class="language-plaintext highlighter-rouge">EntityManager</code> interface is used to allow applications to manage and search for entities in the relational database.</li>
+  <li>The <code class="language-plaintext highlighter-rouge">EntityManager</code> is an API that manages the life-cycle of Entity instances. An <code class="language-plaintext highlighter-rouge">EntityManager</code> object manages a set of entities that are defined by a Persistence Unit. Each <code class="language-plaintext highlighter-rouge">EntityManager</code> instance is associated with a <code class="language-plaintext highlighter-rouge">persistence context</code>. A <code class="language-plaintext highlighter-rouge">persistence context</code> defines the scope under which particular entity instances are created, persisted, and removed through the APIs made available by <code class="language-plaintext highlighter-rouge">EntityManager</code>. In some ways, a <code class="language-plaintext highlighter-rouge">persistence context</code> is conceptually similar to a transaction context.</li>
+  <li>The <code class="language-plaintext highlighter-rouge">EntityManager</code> tracks all Entity objects within a<code class="language-plaintext highlighter-rouge"> persistence context</code> for changes and updates that are made, and flushes these changes to the database. Once a <code class="language-plaintext highlighter-rouge">persistence context</code> is closed, all managed entity object instances become detached from the <code class="language-plaintext highlighter-rouge">persistence context</code> and its associated <code class="language-plaintext highlighter-rouge">entity manager</code>, and are no longer managed. Once an object is detached from a <code class="language-plaintext highlighter-rouge">persistence context</code>, it can no longer be managed by an <code class="language-plaintext highlighter-rouge">entity manager</code>, and any state changes to this object instance will not be synchronized with the database.</li>
+  <li>There’s always a new <code class="language-plaintext highlighter-rouge">Persistence Context</code> if there’s a new <code class="language-plaintext highlighter-rouge">EntityManager</code>.</li>
+  <li><a href="https://www.ibm.com/docs/en/wasdtfe?topic=architecture-entity-manager">You can view more here</a></li>
+</ul>
+
+<h3 id="what-is-the-persistence-context">What Is The Persistence Context</h3>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Persistence context</code>: The <code class="language-plaintext highlighter-rouge">persistence context</code> defines the set of active instances that the application is handling. The <code class="language-plaintext highlighter-rouge">persistence context</code> can be created manually or through injection.
+    <ul>
+      <li>The <code class="language-plaintext highlighter-rouge">Persistence Context</code> is responsible for JPA entity management: When an application loads an Entity from the database, the <code class="language-plaintext highlighter-rouge">entity</code> is in fact stored in the <code class="language-plaintext highlighter-rouge">Persistence Context</code>, so the <code class="language-plaintext highlighter-rouge">entity</code> becomes managed by the <code class="language-plaintext highlighter-rouge">Persistence Context</code>. Any further change made over that same <code class="language-plaintext highlighter-rouge">entity</code> will be monitored by the <code class="language-plaintext highlighter-rouge">Persistence Context</code>.</li>
+      <li>The <code class="language-plaintext highlighter-rouge">Persistence Context</code> will also flush changed <code class="language-plaintext highlighter-rouge">entities</code> to the database when appropriate. When a transaction commits, the associated <code class="language-plaintext highlighter-rouge">Persistence Context</code> will also flush any eventual pending changes to the Database.</li>
+      <li>We can understand like the <code class="language-plaintext highlighter-rouge">persistence context</code> is the first-level cache where all the <code class="language-plaintext highlighter-rouge">entities</code> are fetched from the database or saved to the database.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="what-is-the-entity">What Is The Entity?</h3>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Entity</code> objects: An entity is a simple Java class that represents a row in a database table.</li>
+  <li><code class="language-plaintext highlighter-rouge">Entities</code> can be concrete classes or abstract classes. They maintain states by using properties or fields.</li>
+  <li>So in <code class="language-plaintext highlighter-rouge">Entity</code> classes we will use a lot of mapping annotations from JPA, you can review these annotations in the table below:</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>Annotation</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>@Entity</td>
+      <td>The @Entity annotation is used to specify that the currently annotated class represents an entity type. Unlike basic and embeddable types, entity types have an identity and their state is managed by the underlying Persistence Context.</td>
+    </tr>
+    <tr>
+      <td>@Table</td>
+      <td>The @Table annotation is used to specify the primary table of the currently annotated entity.</td>
+    </tr>
+    <tr>
+      <td>@Id</td>
+      <td>The @Id annotation specifies the entity identifier. An entity must always have an identifier attribute which is used when loading the entity in a given Persistence Context.</td>
+    </tr>
+    <tr>
+      <td>@GeneratedValue</td>
+      <td>The @GeneratedValue annotation specifies that the entity identifier value is automatically generated using an identity column, a database sequence, or a table generator. Hibernate supports the @GeneratedValue mapping even for UUID identifiers.</td>
+    </tr>
+    <tr>
+      <td>@Type</td>
+      <td>The @Type annotation is used to specify the Hibernate @Type used by the currently annotated basic attribute.</td>
+    </tr>
+    <tr>
+      <td>@Column</td>
+      <td>The @Column annotation is used to specify the mapping between a basic entity attribute and the database table column.</td>
+    </tr>
+    <tr>
+      <td>@Enumerated</td>
+      <td>The @Enumerated annotation is used to specify that an entity attribute represents an enumerated type. In which, ORDINAL: stored according to the enum value’s ordinal position within the enum class, as indicated by java.lang.Enum#ordinal STRING: stored according to the enum value’s name, as indicated by java.lang.Enum#name</td>
+    </tr>
+    <tr>
+      <td>@OneToMany</td>
+      <td>The @OneToMany annotation is used to specify a one-to-many database relationship.</td>
+    </tr>
+    <tr>
+      <td>@ManyToOne</td>
+      <td>The @ManyToOne annotation is used to specify a many-to-one database relationship.</td>
+    </tr>
+    <tr>
+      <td>@JoinColumn</td>
+      <td>The @JoinColumn annotation is used to specify the FOREIGN KEY column used when joining an entity association or an embeddable collection.</td>
+    </tr>
+    <tr>
+      <td>@PrePersist</td>
+      <td>The @PrePersist annotation is used to specify a callback method that fires before an entity is persisted.</td>
+    </tr>
+    <tr>
+      <td>@PreUpdate</td>
+      <td>The @PreUpdate annotation is used to specify a callback method that fires before an entity is updated.</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li><a href="https://docs.jboss.org/hibernate/orm/5.4/userguide/html_single/Hibernate_User_Guide.html#configurations-internal">You can find more here</a>.</li>
+</ul>
+
+<h3 id="entity-example">Entity Example</h3>
+<ul>
+  <li>We will create entities which represent for 3 tables in the database.</li>
+</ul>
+
+<p><a href="/assets/images/spring-boot-jdbc-core-database-tables.png"><img src="/assets/images/spring-boot-jdbc-core-database-tables.png" alt="Tables Relationships" title="Tables Relationships" /></a></p>
+
+<ul>
+  <li>Note: You don’t need to create these 3 tables in the database because JPA will create for you automatically when the Spring Boot application has started.</li>
+  <li>So in Entity classes we will use a lot of mapping annotations from JPA, so you can review these annotations in the table below:</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>Annotation</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>@Entity</td>
+      <td>The @Entity annotation is used to specify that the currently annotated class represents an entity type. Unlike basic and embeddable types, entity types have an identity and their state is managed by the underlying Persistence Context.</td>
+    </tr>
+    <tr>
+      <td>@Table</td>
+      <td>The @Table annotation is used to specify the primary table of the currently annotated entity.</td>
+    </tr>
+    <tr>
+      <td>@Id</td>
+      <td>The @Id annotation specifies the entity identifier. An entity must always have an identifier attribute which is used when loading the entity in a given Persistence Context.</td>
+    </tr>
+    <tr>
+      <td>@GeneratedValue</td>
+      <td>The @GeneratedValue annotation specifies that the entity identifier value is automatically generated using an identity column, a database sequence, or a table generator. Hibernate supports the @GeneratedValue mapping even for UUID identifiers.</td>
+    </tr>
+    <tr>
+      <td>@Type</td>
+      <td>The @Type annotation is used to specify the Hibernate @Type used by the currently annotated basic attribute.</td>
+    </tr>
+    <tr>
+      <td>@Column</td>
+      <td>The @Column annotation is used to specify the mapping between a basic entity attribute and the database table column.</td>
+    </tr>
+    <tr>
+      <td>@Enumerated</td>
+      <td>The @Enumerated annotation is used to specify that an entity attribute represents an enumerated type. In which, ORDINAL: stored according to the enum value’s ordinal position within the enum class, as indicated by java.lang.Enum#ordinal STRING: stored according to the enum value’s name, as indicated by java.lang.Enum#name</td>
+    </tr>
+    <tr>
+      <td>@OneToMany</td>
+      <td>The @OneToMany annotation is used to specify a one-to-many database relationship.</td>
+    </tr>
+    <tr>
+      <td>@ManyToOne</td>
+      <td>The @ManyToOne annotation is used to specify a many-to-one database relationship.</td>
+    </tr>
+    <tr>
+      <td>@JoinColumn</td>
+      <td>The @JoinColumn annotation is used to specify the FOREIGN KEY column used when joining an entity association or an embeddable collection.</td>
+    </tr>
+    <tr>
+      <td>@PrePersist</td>
+      <td>The @PrePersist annotation is used to specify a callback method that fires before an entity is persisted.</td>
+    </tr>
+    <tr>
+      <td>@PreUpdate</td>
+      <td>The @PreUpdate annotation is used to specify a callback method that fires before an entity is updated.</td>
+    </tr>
+  </tbody>
+</table>
 
 <ul>
   <li>
-    <p>The <code class="language-plaintext highlighter-rouge">Java Persistence API (JPA)</code> represents a simplification of the persistence programming model.</p>
+    <p><a href="https://docs.jboss.org/hibernate/orm/5.4/userguide/html_single/Hibernate_User_Guide.html#configurations-internal">You can find more here</a>.</p>
   </li>
   <li>
-    <p>Data persistence, the ability to maintain data between application sessions in some form of nonvolatile storage (such as a relational database), is crucial to enterprise applications. Applications that are developed for this environment must either manage data persistence themselves or make use of third-party solutions to handle database updates and retrievals. JPA provides a mechanism for managing data persistence and object-relational mapping and functions.</p>
+    <p>The fist Entity is <code class="language-plaintext highlighter-rouge">CustomerEntity</code>, this Entity will be the parent of <code class="language-plaintext highlighter-rouge">OrderEntity</code> and one <code class="language-plaintext highlighter-rouge">CustomerEntity</code> will have many <code class="language-plaintext highlighter-rouge">OrderEntity</code>. The <code class="language-plaintext highlighter-rouge">CustomerEntity</code> java class will look like the code below.</p>
   </li>
-  <li>
-    <p><code class="language-plaintext highlighter-rouge">JPA</code> is based on the Java programming model that applies to Java EE environments, but JPA can also function within the Java SE environment. The JPA specification defines the <code class="language-plaintext highlighter-rouge">object-relational mapping (ORM)</code> internally, rather than relying on vendor-specific mapping implementations, and uses either annotations or XML to map objects into database tables.</p>
-  </li>
-  <li>
-    <p><code class="language-plaintext highlighter-rouge">JPA</code> is designed to operate both inside and outside of a Java Enterprise Edition (Java EE) container. When you run JPA inside a container, applications can use the container to manage the persistence. If there is no container to manage JPA, the application must handle the persistence management itself. Applications that are designed for container managed persistence cannot be used outside a container, while applications that manage their own persistence can function either in a container environment or a Java SE environment.</p>
-  </li>
-  <li>
-    <p><code class="language-plaintext highlighter-rouge">JPA</code> also provides a query language - JPQL - that you can use to retrieve objects without writing SQL queries specific to the database you are working with.</p>
-  </li>
-  <li>Java EE containers that support JPA must supply a persistence provider. A JPA persistence provider uses the following elements to persist data in an EJB 3.0 environment:
-    <ul>
-      <li><code class="language-plaintext highlighter-rouge">Entity</code> objects: An entity is a simple Java class that represents a row in a database table. Entities can be concrete classes or abstract classes. They maintain states by using properties or fields.</li>
-      <li><code class="language-plaintext highlighter-rouge">EntityManager</code>: An <code class="language-plaintext highlighter-rouge">EntityManager</code> object maintains the active collection of entity objects that are being used by the application. The <code class="language-plaintext highlighter-rouge">EntityManager</code> object handles the database interaction and metadata for object-relational mappings. An instance of an <code class="language-plaintext highlighter-rouge">EntityManager</code> object represents a persistence context. An application in a container can obtain the <code class="language-plaintext highlighter-rouge">EntityManager</code> either through injection into the application or by looking it up in the Java component namespace. If the application manages its persistence, the <code class="language-plaintext highlighter-rouge">EntityManager</code> is obtained from the <code class="language-plaintext highlighter-rouge">EntityManagerFactory</code>. The application server containers typically supply this function, but the <code class="language-plaintext highlighter-rouge">EntityManagerFactory</code> is required if you are using JPA application-managed persistence.</li>
-      <li><code class="language-plaintext highlighter-rouge">EntityManagerFactory</code>: The factory is used to create an <code class="language-plaintext highlighter-rouge">EntityManager</code> for database interactions.</li>
-      <li><code class="language-plaintext highlighter-rouge">Persistence unit</code>: A persistence unit consists of the declarative metadata that describes the relationship of entity class objects to a relational database. The EntityManagerFactory uses this data to create a persistence context that can be accessed through the EntityManager.</li>
-      <li><code class="language-plaintext highlighter-rouge">Persistence context</code>: The persistence context is the set of active instances that the application is handling. The persistence context can be created manually or through injection.</li>
-    </ul>
-  </li>
-  <li>
-    <p><a href="https://www.ibm.com/docs/en/wasdtfe?topic=applications-jpa-architecture">You can find more here</a></p>
-  </li>
-  <li>
-    <p>In JPA, the <code class="language-plaintext highlighter-rouge">EntityManager</code> interface is used to allow applications to manage and search for entities in the relational database.</p>
-  </li>
-  <li>
-    <p>The <code class="language-plaintext highlighter-rouge">EntityManager</code> is an API that manages the lifecycle of entity instances. An <code class="language-plaintext highlighter-rouge">EntityManager</code> object manages a set of entities that are defined by a persistence unit. Each <code class="language-plaintext highlighter-rouge">EntityManager</code> instance is associated with a persistence context. A persistence context defines the scope under which particular entity instances are created, persisted, and removed through the APIs made available by <code class="language-plaintext highlighter-rouge">EntityManager</code>. In some ways, a persistence context is conceptually similar to a transaction context.</p>
-  </li>
-  <li>
-    <p>The entity manager tracks all entity objects within a persistence context for changes and updates that are made, and flushes these changes to the database. Once a persistence context is closed, all managed entity object instances become detached from the persistence context and its associated entity manager, and are no longer managed. Once an object is detached from a persistence context, it can no longer be managed by an entity manager, and any state changes to this object instance will not be synchronized with the database.</p>
-  </li>
-  <li>
-    <p><a href="https://www.ibm.com/docs/en/wasdtfe?topic=architecture-entity-manager">You can view more here</a></p>
-  </li>
-  <li>
-    <p>The <code class="language-plaintext highlighter-rouge">Persistence Contex</code>t is responsible for JPA entity management: When an application loads an entity from the database, the entity is in fact stored in the Persistence Context, so the entity becomes managed by the Persistence Context. Any further change made over that same entity will be monitored by the Persistence Context.</p>
-  </li>
-  <li>
-    <p>The <code class="language-plaintext highlighter-rouge">Persistence Context</code> will also flush changed entities to the database when appropriate. When a transaction commits, the associated Persistence Context will also flush any eventual pending changes to the Database. These are some of the operations that are handled by the Persistence Context.</p>
-  </li>
-  <li>
-    <p>There are two distinct types of Persistence Context: <code class="language-plaintext highlighter-rouge">Container Managed</code> and <code class="language-plaintext highlighter-rouge">Application Managed</code>.</p>
-  </li>
-  <li>
-    <p>The <code class="language-plaintext highlighter-rouge">Container Managed Persistence Context</code> - as the name states - is managed by the enterprise container (JEE Container or Spring). The container is responsible for Persistence Context injection into enterprise components, and is also responsible for its disposal at the end of the current transaction. <code class="language-plaintext highlighter-rouge">Container-managed persistence context</code>  might be defined to have one of two different scopes: <code class="language-plaintext highlighter-rouge">Transaction persistence scope</code> or <code class="language-plaintext highlighter-rouge">Extended persistence scope</code>.</p>
-  </li>
-  <li>
-    <p>The <code class="language-plaintext highlighter-rouge">Application Managed Persistence Context</code> is managed by the application (JSE): The application is responsible for Persistence Context creation and disposal. The application is also required to ensure that the application created Persistence Context is aware of any eventual ongoing transaction. An <code class="language-plaintext highlighter-rouge">Application Managed Persistence Context scope</code> is always <code class="language-plaintext highlighter-rouge">Extended persistence scope</code>.</p>
-  </li>
-  <li>
-    <p><a href="https://www.byteslounge.com/tutorials/container-vs-application-managed-entitymanager">You can find more here</a></p>
-  </li>
-  <li>
-    <p>The container, before performing an operation on the Entity, checks if there is a <code class="language-plaintext highlighter-rouge">Persistence Context</code> connected to the transaction; if not present, it creates a new Persistence Context (session) and connects it. In practice, an EntityManager is automatically created for each new transaction. Operations such as commits and rollbacks are handled automatically by the Container.</p>
-  </li>
-  <li>
-    <p>For the Application Managed Persistence Context, developers have to create each time the EntityManager from the EntityManagerFactory. They have more control over the flow, but also more responsibilities (e.g. they have to remember to close the EntityManager, they have to explicitly call commit and rollback operations).</p>
-  </li>
-  <li>
-    <p><a href="https://www.vincenzoracca.com/en/blog/framework/jpa/jpa-em/">You can find more here</a></p>
-  </li>
-  <li>
-    <p>Session per request is a transactional pattern to tie the persistence session and request life-cycles together. Not surprisingly, Spring comes with its own implementation of this pattern, named OpenSessionInViewInterceptor, to facilitate working with lazy associations and therefore, improving developer productivity.</p>
-  </li>
-  <li>
-    <p>By default In Spring Boot Service, JPA use OSIV (Open session in view) parttern with <code class="language-plaintext highlighter-rouge">open-in-view=true</code> configuration which allow a session will be created when the a HTTP request come in the Spring Boot service and this seesion will be closed until the HTTP request has been end. This Session is bound into the TransactionSynchronizationManager. So It means that there is a transaction that will be opened from from the beginning to the end of the HTTP request. So that’s the reason why although you put a lot of queries and do update to many tables in Database or get child entities from parent entities you just can see in the log just one JDBC connection is used (physical database connection) with many SQL statements. So, if your service is small and you don’t call any request to another system, just work with your DB so it is okay for you, you can manipulate with data in DB anywhere in your service methods. But if you have to call to another system, so using this way is not too good, because the transaction and database connection will be hold for a long time and can make the connection pool become full if there are may request at the same time, you can see this issue happen when you run your spring boot service on production.</p>
-  </li>
-  <li>
-    <p>If we set <code class="language-plaintext highlighter-rouge">open-in-view=false</code>, then be careful when you use Lazy loading because now, every executed query will be made in a transaction and connection privately, you can image that if there are 3 queries in your service method, so every time the query is executed, then a transaction and connection will be created and executed into the database and closed, then 3 queries you will have 3 times to make connections to DB. So if you use lazy load, you get parent from the first query, then you get childs from parent the LazyInitializationException will be through because the transaction of getting parent has been closed. So using this way is better when your service is interacting with many systems, the DB connections in pool will not be hold for a long time and we can improve our service performance on production when we received many connections because connections are opened and closed instantly.</p>
-  </li>
-  <li><a href="https://stackoverflow.com/questions/30549489/what-is-this-spring-jpa-open-in-view-true-property-in-spring-boot">You can find more here</a></li>
-  <li><a href="https://www.baeldung.com/spring-open-session-in-view#choose-wisely">You can find more here</a></li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+  <span class="kn">package</span> <span class="nn">com.springboot.data.jpa.app.entity</span><span class="o">;</span>
+
+  <span class="kn">import</span> <span class="nn">com.springboot.data.jpa.app.model.response.CustomerResponse</span><span class="o">;</span>
+  <span class="kn">import</span> <span class="nn">org.hibernate.annotations.Type</span><span class="o">;</span>
+
+  <span class="kn">import</span> <span class="nn">javax.persistence.CascadeType</span><span class="o">;</span>
+  <span class="kn">import</span> <span class="nn">javax.persistence.Column</span><span class="o">;</span>
+  <span class="kn">import</span> <span class="nn">javax.persistence.Entity</span><span class="o">;</span>
+  <span class="kn">import</span> <span class="nn">javax.persistence.EnumType</span><span class="o">;</span>
+  <span class="kn">import</span> <span class="nn">javax.persistence.Enumerated</span><span class="o">;</span>
+  <span class="kn">import</span> <span class="nn">javax.persistence.FetchType</span><span class="o">;</span>
+  <span class="kn">import</span> <span class="nn">javax.persistence.GeneratedValue</span><span class="o">;</span>
+  <span class="kn">import</span> <span class="nn">javax.persistence.Id</span><span class="o">;</span>
+  <span class="kn">import</span> <span class="nn">javax.persistence.OneToMany</span><span class="o">;</span>
+  <span class="kn">import</span> <span class="nn">javax.persistence.Table</span><span class="o">;</span>
+  <span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
+  <span class="kn">import</span> <span class="nn">java.util.Date</span><span class="o">;</span>
+  <span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+  <span class="kn">import</span> <span class="nn">java.util.UUID</span><span class="o">;</span>
+
+  <span class="c1">//The @Entity annotation is used to specify that the currently annotated class represents an entity type. Unlike basic and embeddable types, entity types have an identity and their state is managed by the underlying Persistence Context.</span>
+  <span class="nd">@Entity</span>
+  <span class="c1">//The @Table annotation is used to specify the primary table of the currently annotated entity.</span>
+  <span class="nd">@Table</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"customers"</span><span class="o">)</span>
+  <span class="kd">public</span> <span class="kd">class</span> <span class="nc">CustomerEntity</span> <span class="o">{</span>
+
+      <span class="c1">//The @Id annotation specifies the entity identifier. An entity must always have an identifier attribute which is used when loading the entity in a given Persistence Context.</span>
+      <span class="nd">@Id</span>
+      <span class="c1">//The @GeneratedValue annotation specifies that the entity identifier value is automatically generated using an identity column, a database sequence, or a table generator. Hibernate supports the @GeneratedValue mapping even for UUID identifiers.</span>
+      <span class="nd">@GeneratedValue</span>
+      <span class="c1">//The @Type annotation is used to specify the Hibernate @Type used by the currently annotated basic attribute.</span>
+      <span class="nd">@Type</span><span class="o">(</span><span class="n">type</span><span class="o">=</span><span class="s">"uuid-char"</span><span class="o">)</span>
+      <span class="kd">private</span> <span class="no">UUID</span> <span class="n">id</span><span class="o">;</span>
+      <span class="kd">private</span> <span class="nc">String</span> <span class="n">fullName</span><span class="o">;</span>
+      <span class="c1">//The @Column annotation is used to specify the mapping between a basic entity attribute and the database table column.</span>
+      <span class="nd">@Column</span><span class="o">(</span><span class="n">unique</span> <span class="o">=</span> <span class="kc">true</span><span class="o">)</span>
+      <span class="kd">private</span> <span class="nc">String</span> <span class="n">email</span><span class="o">;</span>
+      <span class="kd">private</span> <span class="nc">String</span> <span class="n">address</span><span class="o">;</span>
+      <span class="kd">private</span> <span class="nc">String</span> <span class="n">phone</span><span class="o">;</span>
+      <span class="c1">//The @Enumerated annotation is used to specify that an entity attribute represents an enumerated type.</span>
+      <span class="nd">@Enumerated</span><span class="o">(</span><span class="nc">EnumType</span><span class="o">.</span><span class="na">STRING</span><span class="o">)</span>
+      <span class="kd">private</span> <span class="nc">Gender</span> <span class="n">gender</span><span class="o">;</span>
+      <span class="kd">private</span> <span class="nc">Date</span> <span class="n">dob</span><span class="o">;</span>
+
+      <span class="c1">//The @OneToMany annotation is used to specify a one-to-many database relationship.</span>
+      <span class="nd">@OneToMany</span><span class="o">(</span><span class="n">mappedBy</span> <span class="o">=</span> <span class="s">"customer"</span><span class="o">,</span> <span class="n">fetch</span> <span class="o">=</span> <span class="nc">FetchType</span><span class="o">.</span><span class="na">LAZY</span><span class="o">,</span> <span class="n">cascade</span> <span class="o">=</span> <span class="nc">CascadeType</span><span class="o">.</span><span class="na">ALL</span><span class="o">)</span>
+      <span class="kd">private</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">OrderEntity</span><span class="o">&gt;</span> <span class="n">orders</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+
+      <span class="kd">public</span> <span class="no">UUID</span> <span class="nf">getId</span><span class="o">()</span> <span class="o">{</span>
+          <span class="k">return</span> <span class="n">id</span><span class="o">;</span>
+      <span class="o">}</span>
+
+      <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setId</span><span class="o">(</span><span class="no">UUID</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span>
+          <span class="k">this</span><span class="o">.</span><span class="na">id</span> <span class="o">=</span> <span class="n">id</span><span class="o">;</span>
+      <span class="o">}</span>
+
+      <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getFullName</span><span class="o">()</span> <span class="o">{</span>
+          <span class="k">return</span> <span class="n">fullName</span><span class="o">;</span>
+      <span class="o">}</span>
+
+      <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setFullName</span><span class="o">(</span><span class="nc">String</span> <span class="n">fullName</span><span class="o">)</span> <span class="o">{</span>
+          <span class="k">this</span><span class="o">.</span><span class="na">fullName</span> <span class="o">=</span> <span class="n">fullName</span><span class="o">;</span>
+      <span class="o">}</span>
+
+      <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getEmail</span><span class="o">()</span> <span class="o">{</span>
+          <span class="k">return</span> <span class="n">email</span><span class="o">;</span>
+      <span class="o">}</span>
+
+      <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setEmail</span><span class="o">(</span><span class="nc">String</span> <span class="n">email</span><span class="o">)</span> <span class="o">{</span>
+          <span class="k">this</span><span class="o">.</span><span class="na">email</span> <span class="o">=</span> <span class="n">email</span><span class="o">;</span>
+      <span class="o">}</span>
+
+      <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getAddress</span><span class="o">()</span> <span class="o">{</span>
+          <span class="k">return</span> <span class="n">address</span><span class="o">;</span>
+      <span class="o">}</span>
+
+      <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setAddress</span><span class="o">(</span><span class="nc">String</span> <span class="n">address</span><span class="o">)</span> <span class="o">{</span>
+          <span class="k">this</span><span class="o">.</span><span class="na">address</span> <span class="o">=</span> <span class="n">address</span><span class="o">;</span>
+      <span class="o">}</span>
+
+      <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getPhone</span><span class="o">()</span> <span class="o">{</span>
+          <span class="k">return</span> <span class="n">phone</span><span class="o">;</span>
+      <span class="o">}</span>
+
+      <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setPhone</span><span class="o">(</span><span class="nc">String</span> <span class="n">phone</span><span class="o">)</span> <span class="o">{</span>
+          <span class="k">this</span><span class="o">.</span><span class="na">phone</span> <span class="o">=</span> <span class="n">phone</span><span class="o">;</span>
+      <span class="o">}</span>
+
+      <span class="kd">public</span> <span class="nc">Gender</span> <span class="nf">getGender</span><span class="o">()</span> <span class="o">{</span>
+          <span class="k">return</span> <span class="n">gender</span><span class="o">;</span>
+      <span class="o">}</span>
+
+      <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setGender</span><span class="o">(</span><span class="nc">Gender</span> <span class="n">gender</span><span class="o">)</span> <span class="o">{</span>
+          <span class="k">this</span><span class="o">.</span><span class="na">gender</span> <span class="o">=</span> <span class="n">gender</span><span class="o">;</span>
+      <span class="o">}</span>
+
+      <span class="kd">public</span> <span class="nc">Date</span> <span class="nf">getDob</span><span class="o">()</span> <span class="o">{</span>
+          <span class="k">return</span> <span class="n">dob</span><span class="o">;</span>
+      <span class="o">}</span>
+
+      <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setDob</span><span class="o">(</span><span class="nc">Date</span> <span class="n">dob</span><span class="o">)</span> <span class="o">{</span>
+          <span class="k">this</span><span class="o">.</span><span class="na">dob</span> <span class="o">=</span> <span class="n">dob</span><span class="o">;</span>
+      <span class="o">}</span>
+
+      <span class="kd">public</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">OrderEntity</span><span class="o">&gt;</span> <span class="nf">getOrders</span><span class="o">()</span> <span class="o">{</span>
+          <span class="k">return</span> <span class="n">orders</span><span class="o">;</span>
+      <span class="o">}</span>
+
+      <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setOrders</span><span class="o">(</span><span class="nc">List</span><span class="o">&lt;</span><span class="nc">OrderEntity</span><span class="o">&gt;</span> <span class="n">orders</span><span class="o">)</span> <span class="o">{</span>
+          <span class="k">this</span><span class="o">.</span><span class="na">orders</span> <span class="o">=</span> <span class="n">orders</span><span class="o">;</span>
+      <span class="o">}</span>
+  <span class="o">}</span>
+
+
+</code></pre></div></div>
+
+<ul>
+  <li>Next we will create <code class="language-plaintext highlighter-rouge">OrderEntity</code>, so this Entity will be the parent of <code class="language-plaintext highlighter-rouge">ItemEntity</code> and One <code class="language-plaintext highlighter-rouge">OrderEntity</code> will have many <code class="language-plaintext highlighter-rouge">ItemEntity</code>. The <code class="language-plaintext highlighter-rouge">OrderEntity</code> java class will be look like as below</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kn">package</span> <span class="nn">com.springboot.data.jpa.app.entity</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.springboot.data.jpa.app.model.response.OrderResponse</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.hibernate.annotations.Type</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">javax.persistence.CascadeType</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.persistence.Entity</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.persistence.EnumType</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.persistence.Enumerated</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.persistence.FetchType</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.persistence.GeneratedValue</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.persistence.Id</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.persistence.JoinColumn</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.persistence.ManyToOne</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.persistence.OneToMany</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.persistence.PrePersist</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.persistence.PreUpdate</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.persistence.Table</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.time.LocalDateTime</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.UUID</span><span class="o">;</span>
+
+<span class="nd">@Entity</span>
+<span class="nd">@Table</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"orders"</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">OrderEntity</span> <span class="o">{</span>
+
+    <span class="nd">@Id</span>
+    <span class="nd">@GeneratedValue</span>
+    <span class="nd">@Type</span><span class="o">(</span><span class="n">type</span><span class="o">=</span><span class="s">"uuid-char"</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="no">UUID</span> <span class="n">id</span><span class="o">;</span>
+
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">orderName</span><span class="o">;</span>
+
+    <span class="kd">private</span> <span class="nc">LocalDateTime</span> <span class="n">createdDate</span><span class="o">;</span>
+
+    <span class="kd">private</span> <span class="nc">LocalDateTime</span> <span class="n">lastUpdatedDate</span><span class="o">;</span>
+
+    <span class="nd">@Enumerated</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="nc">EnumType</span><span class="o">.</span><span class="na">STRING</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="nc">OrderStatus</span> <span class="n">orderStatus</span><span class="o">;</span>
+
+    <span class="c1">//The @ManyToOne annotation is used to specify a many-to-one database relationship.</span>
+    <span class="nd">@ManyToOne</span><span class="o">(</span><span class="n">fetch</span> <span class="o">=</span> <span class="nc">FetchType</span><span class="o">.</span><span class="na">LAZY</span><span class="o">)</span>
+    <span class="c1">//The @JoinColumn annotation is used to specify the FOREIGN KEY column used when joining an entity association or an embeddable collection.</span>
+    <span class="nd">@JoinColumn</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"customer_id"</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="nc">CustomerEntity</span> <span class="n">customer</span><span class="o">;</span>
+
+    <span class="nd">@OneToMany</span><span class="o">(</span><span class="n">mappedBy</span> <span class="o">=</span> <span class="s">"order"</span><span class="o">,</span> <span class="n">cascade</span> <span class="o">=</span> <span class="nc">CascadeType</span><span class="o">.</span><span class="na">ALL</span><span class="o">,</span> <span class="n">fetch</span> <span class="o">=</span> <span class="nc">FetchType</span><span class="o">.</span><span class="na">LAZY</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">ItemEntity</span><span class="o">&gt;</span> <span class="n">items</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+
+
+    <span class="kd">public</span> <span class="no">UUID</span> <span class="nf">getId</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">id</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setId</span><span class="o">(</span><span class="no">UUID</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">id</span> <span class="o">=</span> <span class="n">id</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getOrderName</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">orderName</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setOrderName</span><span class="o">(</span><span class="nc">String</span> <span class="n">orderName</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">orderName</span> <span class="o">=</span> <span class="n">orderName</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">CustomerEntity</span> <span class="nf">getCustomer</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">customer</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setCustomer</span><span class="o">(</span><span class="nc">CustomerEntity</span> <span class="n">customer</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">customer</span> <span class="o">=</span> <span class="n">customer</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">LocalDateTime</span> <span class="nf">getCreatedDate</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">createdDate</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@PrePersist</span>
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">setCreatedDate</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">LocalDateTime</span> <span class="n">localDateTime</span> <span class="o">=</span> <span class="nc">LocalDateTime</span><span class="o">.</span><span class="na">now</span><span class="o">();</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">createdDate</span> <span class="o">=</span> <span class="n">localDateTime</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">lastUpdatedDate</span> <span class="o">=</span> <span class="n">localDateTime</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">LocalDateTime</span> <span class="nf">getLastUpdatedDate</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">lastUpdatedDate</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@PreUpdate</span>
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">setLastUpdatedDate</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">lastUpdatedDate</span> <span class="o">=</span> <span class="nc">LocalDateTime</span><span class="o">.</span><span class="na">now</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">OrderStatus</span> <span class="nf">getOrderStatus</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">orderStatus</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setOrderStatus</span><span class="o">(</span><span class="nc">OrderStatus</span> <span class="n">orderStatus</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">orderStatus</span> <span class="o">=</span> <span class="n">orderStatus</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">ItemEntity</span><span class="o">&gt;</span> <span class="nf">getItems</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">items</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setItems</span><span class="o">(</span><span class="nc">List</span><span class="o">&lt;</span><span class="nc">ItemEntity</span><span class="o">&gt;</span> <span class="n">items</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">items</span> <span class="o">=</span> <span class="n">items</span><span class="o">;</span>
+    <span class="o">}</span>
+
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<ul>
+  <li>Next we will create <code class="language-plaintext highlighter-rouge">ItemEntity</code>. The <code class="language-plaintext highlighter-rouge">OrderEntity</code> java class will be look like as below</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+  <span class="kn">package</span> <span class="nn">com.springboot.data.jpa.app.entity</span><span class="o">;</span>
+
+  <span class="kn">import</span> <span class="nn">com.springboot.data.jpa.app.model.response.ItemResponse</span><span class="o">;</span>
+  <span class="kn">import</span> <span class="nn">org.hibernate.annotations.Type</span><span class="o">;</span>
+
+  <span class="kn">import</span> <span class="nn">javax.persistence.Entity</span><span class="o">;</span>
+  <span class="kn">import</span> <span class="nn">javax.persistence.FetchType</span><span class="o">;</span>
+  <span class="kn">import</span> <span class="nn">javax.persistence.GeneratedValue</span><span class="o">;</span>
+  <span class="kn">import</span> <span class="nn">javax.persistence.Id</span><span class="o">;</span>
+  <span class="kn">import</span> <span class="nn">javax.persistence.JoinColumn</span><span class="o">;</span>
+  <span class="kn">import</span> <span class="nn">javax.persistence.ManyToOne</span><span class="o">;</span>
+  <span class="kn">import</span> <span class="nn">javax.persistence.Table</span><span class="o">;</span>
+  <span class="kn">import</span> <span class="nn">java.util.UUID</span><span class="o">;</span>
+
+  <span class="nd">@Entity</span>
+  <span class="nd">@Table</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"items"</span><span class="o">)</span>
+  <span class="kd">public</span> <span class="kd">class</span> <span class="nc">ItemEntity</span> <span class="o">{</span>
+
+      <span class="nd">@Id</span>
+      <span class="nd">@GeneratedValue</span>
+      <span class="nd">@Type</span><span class="o">(</span><span class="n">type</span><span class="o">=</span><span class="s">"uuid-char"</span><span class="o">)</span>
+      <span class="kd">private</span> <span class="no">UUID</span> <span class="n">id</span><span class="o">;</span>
+
+      <span class="kd">private</span> <span class="nc">String</span> <span class="n">itemName</span><span class="o">;</span>
+
+      <span class="kd">private</span> <span class="nc">Long</span> <span class="n">quantity</span><span class="o">;</span>
+
+      <span class="kd">private</span> <span class="nc">Float</span> <span class="n">price</span><span class="o">;</span>
+
+      <span class="nd">@ManyToOne</span><span class="o">(</span><span class="n">fetch</span> <span class="o">=</span> <span class="nc">FetchType</span><span class="o">.</span><span class="na">LAZY</span><span class="o">)</span>
+      <span class="nd">@JoinColumn</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"order_id"</span><span class="o">)</span>
+      <span class="kd">private</span> <span class="nc">OrderEntity</span> <span class="n">order</span><span class="o">;</span>
+
+      <span class="kd">public</span> <span class="no">UUID</span> <span class="nf">getId</span><span class="o">()</span> <span class="o">{</span>
+          <span class="k">return</span> <span class="n">id</span><span class="o">;</span>
+      <span class="o">}</span>
+
+      <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setId</span><span class="o">(</span><span class="no">UUID</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span>
+          <span class="k">this</span><span class="o">.</span><span class="na">id</span> <span class="o">=</span> <span class="n">id</span><span class="o">;</span>
+      <span class="o">}</span>
+
+      <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getItemName</span><span class="o">()</span> <span class="o">{</span>
+          <span class="k">return</span> <span class="n">itemName</span><span class="o">;</span>
+      <span class="o">}</span>
+
+      <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setItemName</span><span class="o">(</span><span class="nc">String</span> <span class="n">itemName</span><span class="o">)</span> <span class="o">{</span>
+          <span class="k">this</span><span class="o">.</span><span class="na">itemName</span> <span class="o">=</span> <span class="n">itemName</span><span class="o">;</span>
+      <span class="o">}</span>
+
+      <span class="kd">public</span> <span class="nc">Long</span> <span class="nf">getQuantity</span><span class="o">()</span> <span class="o">{</span>
+          <span class="k">return</span> <span class="n">quantity</span><span class="o">;</span>
+      <span class="o">}</span>
+
+      <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setQuantity</span><span class="o">(</span><span class="nc">Long</span> <span class="n">quantity</span><span class="o">)</span> <span class="o">{</span>
+          <span class="k">this</span><span class="o">.</span><span class="na">quantity</span> <span class="o">=</span> <span class="n">quantity</span><span class="o">;</span>
+      <span class="o">}</span>
+
+      <span class="kd">public</span> <span class="nc">Float</span> <span class="nf">getPrice</span><span class="o">()</span> <span class="o">{</span>
+          <span class="k">return</span> <span class="n">price</span><span class="o">;</span>
+      <span class="o">}</span>
+
+      <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setPrice</span><span class="o">(</span><span class="nc">Float</span> <span class="n">price</span><span class="o">)</span> <span class="o">{</span>
+          <span class="k">this</span><span class="o">.</span><span class="na">price</span> <span class="o">=</span> <span class="n">price</span><span class="o">;</span>
+      <span class="o">}</span>
+
+      <span class="kd">public</span> <span class="nc">OrderEntity</span> <span class="nf">getOrder</span><span class="o">()</span> <span class="o">{</span>
+          <span class="k">return</span> <span class="n">order</span><span class="o">;</span>
+      <span class="o">}</span>
+
+      <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setOrder</span><span class="o">(</span><span class="nc">OrderEntity</span> <span class="n">order</span><span class="o">)</span> <span class="o">{</span>
+          <span class="k">this</span><span class="o">.</span><span class="na">order</span> <span class="o">=</span> <span class="n">order</span><span class="o">;</span>
+      <span class="o">}</span>
+  <span class="o">}</span>
+
+</code></pre></div></div>
+<ul>
+  <li>So that’s all for creating Entities and relationships.</li>
 </ul>
 
 <h2 id="what-is-the-object-relational-mapping-orm">WHAT IS THE OBJECT-RELATIONAL MAPPING (ORM)?</h2>
