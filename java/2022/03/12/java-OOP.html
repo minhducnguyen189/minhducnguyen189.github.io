@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- bootstrap library and JS, Jquery -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Object Oriented Programming (OOP) | KaizenThink</title>
+<meta name="generator" content="Jekyll v4.2.1" />
+<meta property="og:title" content="Object Oriented Programming (OOP)" />
+<meta name="author" content="Duc Nguyen" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="What Is The Object? Every entity in this universe can be an object. An object can have attributes and behaviors. Attributes: are properties of the object, for ex: Name, Color, Size and so on. Behaviors: actions of the object, for ex: Do, Move, Run, and so on. For example, we have a motorcycle object. So this motorcycle object can have attributes: Name: Honda Color: Black Made-In: Japanese Model: Wave This motorcycle object also can have behaviors; Run Stop Start Engine" />
+<meta property="og:description" content="What Is The Object? Every entity in this universe can be an object. An object can have attributes and behaviors. Attributes: are properties of the object, for ex: Name, Color, Size and so on. Behaviors: actions of the object, for ex: Do, Move, Run, and so on. For example, we have a motorcycle object. So this motorcycle object can have attributes: Name: Honda Color: Black Made-In: Japanese Model: Wave This motorcycle object also can have behaviors; Run Stop Start Engine" />
+<link rel="canonical" href="/java/2022/03/12/java-OOP.html" />
+<meta property="og:url" content="/java/2022/03/12/java-OOP.html" />
+<meta property="og:site_name" content="KaizenThink" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-03-12T13:15:47+07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Object Oriented Programming (OOP)" />
+<script type="application/ld+json">
+{"mainEntityOfPage":{"@type":"WebPage","@id":"/java/2022/03/12/java-OOP.html"},"@type":"BlogPosting","url":"/java/2022/03/12/java-OOP.html","author":{"@type":"Person","name":"Duc Nguyen"},"headline":"Object Oriented Programming (OOP)","dateModified":"2022-03-12T13:15:47+07:00","datePublished":"2022-03-12T13:15:47+07:00","description":"What Is The Object? Every entity in this universe can be an object. An object can have attributes and behaviors. Attributes: are properties of the object, for ex: Name, Color, Size and so on. Behaviors: actions of the object, for ex: Do, Move, Run, and so on. For example, we have a motorcycle object. So this motorcycle object can have attributes: Name: Honda Color: Black Made-In: Japanese Model: Wave This motorcycle object also can have behaviors; Run Stop Start Engine","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="KaizenThink" /><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NZ8G5007GK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-NZ8G5007GK');
+</script></head><body>
+  <div class="container-flush">
+    <div class="row"><!-- navigation bar -->
+<div class="col-lg-12">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" role="banner"><a class="navbar-brand site-title" rel="author" href="/">KaizenThink</a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="nav navbar-nav"><li class="nav-item active">
+          <a class="nav-link" href="/about">About</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/">Java</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/docker">Docker</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/database">Database</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/data-science">Data-Science</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/ci-cd">CI-CD</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/python">Python</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/fe">FE</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="/others">Others</a>
+        </li></ul>
+    </div>
+
+    <!-- Html Elements for Search -->
+    <div id="search-container" class="btn-group">
+      <input type="text" id="search-input" placeholder="search...">
+      <button id="clear">clear</button>
+      <ul id="results-container"></ul>
+    </div>
+
+    <!-- Script pointing to search-script.js -->
+    <script src="/java-scripts/search-script.js" type="text/javascript"></script>
+
+    <!-- Configuration -->
+    <script>
+      SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('results-container'),
+        json: '/search.json'
+      })
+    </script>
+
+    <!-- search clear -->
+    <script>
+      window.addEventListener('load', () => {
+        const button = document.querySelector('#clear');
+        button.addEventListener('click', () => {
+          document.querySelector('#search-input').value = "";
+          document.querySelector('#results-container').innerHTML = "";
+        });
+      });
+    </script>
+    <!-- enable checkboxes-->
+    <script>
+      window.addEventListener('DOMContentLoaded', () => {
+        const checkboxes = document.getElementsByClassName('task-list-item-checkbox');
+        for(ind=0;ind<checkboxes.length;ind++) {
+          checkboxes[ind].removeAttribute('disabled');
+        }
+      });
+    </script>
+  </nav>
+</div></div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+  <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+    <header class="post-header">
+      <h1 class="post-title p-name" itemprop="name headline">Object Oriented Programming (OOP)</h1>
+      <p class="post-meta">
+        <time class="dt-published" datetime="2022-03-12T13:15:47+07:00" itemprop="datePublished">Mar 12, 2022
+        </time></p>
+    </header>
+  
+    <div class="post-content e-content" itemprop="articleBody">
+      <h2 id="what-is-the-object">What Is The Object?</h2>
+<ul>
+  <li>Every entity in this universe can be an <code class="language-plaintext highlighter-rouge">object</code>. An <code class="language-plaintext highlighter-rouge">object</code> can have <code class="language-plaintext highlighter-rouge">attributes</code> and <code class="language-plaintext highlighter-rouge">behaviors</code>.
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">Attributes</code>:  are properties of the object, for ex: Name, Color, Size and so on.</li>
+      <li><code class="language-plaintext highlighter-rouge">Behaviors</code>: actions of the object, for ex: Do, Move, Run, and so on.</li>
+    </ul>
+  </li>
+  <li>For example, we have a motorcycle object.
+    <ul>
+      <li>So this motorcycle object can have <code class="language-plaintext highlighter-rouge">attributes</code>:
+        <ul>
+          <li>Name: Honda</li>
+          <li>Color: Black</li>
+          <li>Made-In: Japanese</li>
+          <li>Model: Wave</li>
+        </ul>
+      </li>
+      <li>This motorcycle object also can have <code class="language-plaintext highlighter-rouge">behaviors</code>;
+        <ul>
+          <li>Run</li>
+          <li>Stop</li>
+          <li>Start Engine</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="what-is-the-class">What Is The Class?</h2>
+<ul>
+  <li>In <code class="language-plaintext highlighter-rouge">OOP</code>, the <code class="language-plaintext highlighter-rouge">Class</code> defines the blueprint of Objects. They define the properties and behaviors of the objects. For example, Laptop is a class and your laptop is an instance of it.</li>
+</ul>
+
+<h2 id="what-is-the-oop">What Is The OOP?</h2>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Object-oriented programming (OOP)</code> is a programming paradigm based on the concept of object, which can contain data and code:
+    <ul>
+      <li>Data in the form of fields (often known as attributes or properties).</li>
+      <li>Code, in the form of procedures (often known as methods or functions).</li>
+    </ul>
+  </li>
+  <li>Another definition of <code class="language-plaintext highlighter-rouge">OOP</code> is a way to build flexible and reusable code to develop more advanced modules and libraries.</li>
+  <li><code class="language-plaintext highlighter-rouge">OOP</code> has 4 main concepts:
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">Encapsulation</code></li>
+      <li><code class="language-plaintext highlighter-rouge">Abstraction</code></li>
+      <li><code class="language-plaintext highlighter-rouge">Inheritance</code></li>
+      <li><code class="language-plaintext highlighter-rouge">Polymorphism</code></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="what-is-the-encapsulation-in-oop">What Is The Encapsulation In OOP?</h2>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Encapsulation</code> in Java is a mechanism to wrap up variables(data) and methods(code) together as a single unit. It is the process of hiding information details and protecting data and behavior of the object.</li>
+  <li>In Java, a <code class="language-plaintext highlighter-rouge">class</code> is an example of <code class="language-plaintext highlighter-rouge">encapsulation</code> in that it consists of data and methods that have been bundled into a single unit (wrapping) and restricted accesses from other classes by <code class="language-plaintext highlighter-rouge">access modifiers</code> (hiding information).</li>
+  <li>To achieve <code class="language-plaintext highlighter-rouge">encapsulation</code> in Java, a class has to set attributes (variables) as <code class="language-plaintext highlighter-rouge">private</code> and provide public <code class="language-plaintext highlighter-rouge">setter</code> and <code class="language-plaintext highlighter-rouge">getter</code> methods to modify and view these attributes. See example below.</li>
+</ul>
+
+<h3 id="encapsulation-example">Encapsulation Example</h3>
+<ul>
+  <li>Create an <code class="language-plaintext highlighter-rouge">encapsulation</code> class with name Motorcycle.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Motorcycle</span> <span class="o">{</span>
+	
+	<span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="nc">String</span> <span class="n">color</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="nc">String</span> <span class="n">model</span><span class="o">;</span>
+	
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>  
+    <span class="k">return</span> <span class="n">name</span><span class="o">;</span>  
+	<span class="o">}</span>  
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>  
+    <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>  
+	<span class="o">}</span>  
+
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">getColor</span><span class="o">()</span> <span class="o">{</span>  
+    <span class="k">return</span> <span class="n">color</span><span class="o">;</span>  
+	<span class="o">}</span>  
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setColor</span><span class="o">(</span><span class="nc">String</span> <span class="n">color</span><span class="o">)</span> <span class="o">{</span>  
+    <span class="k">this</span><span class="o">.</span><span class="na">color</span> <span class="o">=</span> <span class="n">color</span><span class="o">;</span>  
+	<span class="o">}</span>  
+
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">getModel</span><span class="o">()</span> <span class="o">{</span>  
+    <span class="k">return</span> <span class="n">model</span><span class="o">;</span>  
+	<span class="o">}</span>  
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setModel</span><span class="o">(</span><span class="nc">String</span> <span class="n">model</span><span class="o">)</span> <span class="o">{</span>  
+    <span class="k">this</span><span class="o">.</span><span class="na">model</span> <span class="o">=</span> <span class="n">model</span><span class="o">;</span>  
+	<span class="o">}</span>
+
+<span class="o">}</span>
+
+
+</code></pre></div></div>
+
+<ul>
+  <li>Test the class Motorcycle.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+	
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		
+    <span class="nc">Motorcycle</span> <span class="n">motorcycle</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Motorcycle</span><span class="o">();</span>
+    <span class="n">motorcycle</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="s">"Wave"</span><span class="o">);</span>
+    <span class="n">motorcycle</span><span class="o">.</span><span class="na">setColor</span><span class="o">(</span><span class="s">"Black"</span><span class="o">);</span>
+    <span class="n">motorcycle</span><span class="o">.</span><span class="na">setModel</span><span class="o">(</span><span class="s">"Wave Alpha"</span><span class="o">);</span>
+    
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">motorcycle</span><span class="o">.</span><span class="na">getName</span><span class="o">());</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">motorcycle</span><span class="o">.</span><span class="na">getColor</span><span class="o">());</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">motorcycle</span><span class="o">.</span><span class="na">getModel</span><span class="o">());</span>
+
+	<span class="o">}</span>
+
+
+
+</code></pre></div></div>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+//result
+
+Wave
+Black
+Wave Alpha
+
+</code></pre></div></div>
+
+<h2 id="what-is-the-abstraction-in-oop">What Is The Abstraction In OOP?</h2>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Abstraction</code> is a process of hiding the implementation details from the user, only the functionality will be provided to the user. In other words, the user will have the information on what the object does instead of how it does it.</li>
+  <li>In Java, <code class="language-plaintext highlighter-rouge">abstraction</code> is achieved using Abstract classes and interfaces.</li>
+</ul>
+
+<h3 id="abstract-class">Abstract Class</h3>
+<ul>
+  <li>A class which contains the <code class="language-plaintext highlighter-rouge">abstract</code> keyword in its declaration is known as abstract class.
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">Abstract classes</code> may or may not contain <code class="language-plaintext highlighter-rouge">abstract methods</code>, i.e., methods without body ( public void get(); )</li>
+      <li>But, if a class has at least one <code class="language-plaintext highlighter-rouge">abstract method</code>, then the class <strong>must</strong> be declared abstract.</li>
+      <li>If a class is declared abstract, it cannot be instantiated.</li>
+      <li>To use an abstract class, you have to inherit it from another class, provide implementations to the abstract methods in it.</li>
+      <li>If you inherit an abstract class, you have to provide implementations to all the abstract methods in it.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="abstraction-example">Abstraction Example</h3>
+<ul>
+  <li>To create an abstract class, just use the <code class="language-plaintext highlighter-rouge">abstract</code> keyword before the class keyword, in the class declaration. Then to create <code class="language-plaintext highlighter-rouge">abstract</code> methods, you also put the <code class="language-plaintext highlighter-rouge">abstract</code> keyword after the access modifier of methods and these methods must not have body.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+	<span class="kn">package</span> <span class="nn">com.java.core.abstraction</span><span class="o">;</span>
+
+	<span class="kd">public</span> <span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">Employee</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">address</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">id</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">Employee</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">,</span> <span class="nc">String</span> <span class="n">address</span><span class="o">,</span> <span class="nc">String</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span>
+      <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+      <span class="k">this</span><span class="o">.</span><span class="na">address</span> <span class="o">=</span> <span class="n">address</span><span class="o">;</span>
+      <span class="k">this</span><span class="o">.</span><span class="na">id</span> <span class="o">=</span> <span class="n">id</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">protected</span> <span class="kd">abstract</span> <span class="kt">double</span> <span class="nf">getBaseSalary</span><span class="o">();</span>
+    <span class="kd">protected</span> <span class="kd">abstract</span> <span class="kt">double</span> <span class="nf">getBonus</span><span class="o">();</span>
+
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
+      <span class="k">return</span> <span class="n">name</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+      <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getAddress</span><span class="o">()</span> <span class="o">{</span>
+      <span class="k">return</span> <span class="n">address</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setAddress</span><span class="o">(</span><span class="nc">String</span> <span class="n">address</span><span class="o">)</span> <span class="o">{</span>
+      <span class="k">this</span><span class="o">.</span><span class="na">address</span> <span class="o">=</span> <span class="n">address</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getId</span><span class="o">()</span> <span class="o">{</span>
+      <span class="k">return</span> <span class="n">id</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setId</span><span class="o">(</span><span class="nc">String</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">id</span> <span class="o">=</span> <span class="n">id</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
+      <span class="k">return</span> <span class="s">"Employee{"</span> <span class="o">+</span>
+              <span class="s">"name='"</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="sc">'\''</span> <span class="o">+</span>
+              <span class="s">", address='"</span> <span class="o">+</span> <span class="n">address</span> <span class="o">+</span> <span class="sc">'\''</span> <span class="o">+</span>
+              <span class="s">", id='"</span> <span class="o">+</span> <span class="n">id</span> <span class="o">+</span> <span class="sc">'\''</span> <span class="o">+</span>
+              <span class="sc">'}'</span><span class="o">;</span>
+    <span class="o">}</span>
+	<span class="o">}</span>
+
+
+</code></pre></div></div>
+
+<ul>
+  <li>We can inherit the properties of <code class="language-plaintext highlighter-rouge">Employee abstract class</code> just like concrete class in the following way.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+	<span class="kn">package</span> <span class="nn">com.java.core.abstraction</span><span class="o">;</span>
+
+	<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Developer</span> <span class="kd">extends</span> <span class="nc">Employee</span> <span class="o">{</span>
+
+    <span class="kd">public</span> <span class="nf">Developer</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">,</span> <span class="nc">String</span> <span class="n">address</span><span class="o">,</span> <span class="nc">String</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span>
+      <span class="kd">super</span><span class="o">(</span><span class="n">name</span><span class="o">,</span> <span class="n">address</span><span class="o">,</span> <span class="n">id</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">protected</span> <span class="kt">double</span> <span class="nf">getBaseSalary</span><span class="o">()</span> <span class="o">{</span>
+      <span class="k">return</span> <span class="mi">100</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">protected</span> <span class="kt">double</span> <span class="nf">getBonus</span><span class="o">()</span> <span class="o">{</span>
+      <span class="k">return</span> <span class="mi">50</span><span class="o">;</span>
+    <span class="o">}</span>
+	<span class="o">}</span>
+
+
+</code></pre></div></div>
+<ul>
+  <li>
+    <p>As you can see, in then <code class="language-plaintext highlighter-rouge">Employee abstract class</code> we have two <code class="language-plaintext highlighter-rouge">abstract methods</code> so we have to <code class="language-plaintext highlighter-rouge">@Override</code> them in <code class="language-plaintext highlighter-rouge">Developer</code> child class for providing implementations.</p>
+  </li>
+  <li>
+    <p>Here, for testing, you cannot instantiate the <code class="language-plaintext highlighter-rouge">Employee</code> class, but you can instantiate the <code class="language-plaintext highlighter-rouge">Developer</code> Class, and using this instance you can access all the fields and methods of <code class="language-plaintext highlighter-rouge">Employee</code> class as shown below.</p>
+  </li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+	<span class="kn">package</span> <span class="nn">com.java.core.abstraction</span><span class="o">;</span>
+
+	<span class="kd">public</span> <span class="kd">class</span> <span class="nc">JavaAbstractionMain</span> <span class="o">{</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+      <span class="nc">Employee</span> <span class="n">developer</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Developer</span><span class="o">(</span><span class="s">"Duc"</span><span class="o">,</span> <span class="s">"HCM"</span><span class="o">,</span> <span class="s">"12345"</span><span class="o">);</span>
+      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">developer</span><span class="o">);</span>
+      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Base-Salary: "</span> <span class="o">+</span> <span class="n">developer</span><span class="o">.</span><span class="na">getBaseSalary</span><span class="o">());</span>
+      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Bonus: "</span> <span class="o">+</span> <span class="n">developer</span><span class="o">.</span><span class="na">getBonus</span><span class="o">());</span>
+    <span class="o">}</span>
+
+	<span class="o">}</span>
+
+</code></pre></div></div>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+Employee{name='Duc', address='HCM', id='12345'}
+Base-Salary: 100.0
+Bonus: 50.0
+
+Process finished with exit code 0
+
+</code></pre></div></div>
+
+<h2 id="what-is-the-inheritance-in-oop">What Is The Inheritance In OOP?</h2>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Inheritance</code> in Java is a mechanism in which one object acquires all the properties and behaviors of a parent object. It is an important part of OOP.</li>
+  <li>The idea behind <code class="language-plaintext highlighter-rouge">inheritance</code> in Java is that you can create new classes that are built upon existing classes. When you inherit from an existing class, you can reuse methods and fields of the parent class. Moreover, you can add new methods and fields in your current class also.</li>
+  <li>Inheritance represents the <strong>IS-A relationship</strong> which is also known as a <code class="language-plaintext highlighter-rouge">parent-child</code> relationship.</li>
+  <li>Using <code class="language-plaintext highlighter-rouge">inheritance</code> in Java will help us:
+    <ul>
+      <li>Overriding methods.</li>
+      <li>Code reusability.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="java-inheritance-syntax">Java Inheritance Syntax</h3>
+<ul>
+  <li>The <code class="language-plaintext highlighter-rouge">extends</code> keyword indicates that you are making a new class that derives from an existing class. The meaning of “extends” is to increase the functionality.</li>
+  <li>In the terminology of Java, a class which is inherited is called a <code class="language-plaintext highlighter-rouge">parent</code> or <code class="language-plaintext highlighter-rouge">superclass</code>, and the new class is called <code class="language-plaintext highlighter-rouge">child</code> or <code class="language-plaintext highlighter-rouge">subclass</code>.</li>
+</ul>
+
+<h3 id="inheritance-example">Inheritance Example</h3>
+<ul>
+  <li>Let’s define a parent class <code class="language-plaintext highlighter-rouge">Animal</code> as below</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+	<span class="kn">package</span> <span class="nn">com.java.core.inheritance</span><span class="o">;</span>
+
+	<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Animal</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">eat</span><span class="o">()</span> <span class="o">{</span>
+      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"eating..."</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">sleep</span><span class="o">()</span> <span class="o">{</span>
+      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"sleeping at forest!"</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
+      <span class="k">return</span> <span class="n">name</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+      <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+    <span class="o">}</span>
+	<span class="o">}</span>
+
+</code></pre></div></div>
+
+<ul>
+  <li>Then create a subclass which is <code class="language-plaintext highlighter-rouge">extends</code> from <code class="language-plaintext highlighter-rouge">Animal</code></li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+	<span class="kn">package</span> <span class="nn">com.java.core.inheritance</span><span class="o">;</span>
+
+	<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Dog</span> <span class="kd">extends</span> <span class="nc">Animal</span> <span class="o">{</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">bark</span><span class="o">()</span> <span class="o">{</span>
+      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"barking..."</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">sleep</span><span class="o">()</span> <span class="o">{</span>
+      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"sleeping at human's house!"</span><span class="o">);</span>
+    <span class="o">}</span>
+
+	<span class="o">}</span>
+
+</code></pre></div></div>
+
+<ul>
+  <li>Now, test the child class <code class="language-plaintext highlighter-rouge">Dog</code> and you will see the child class can inherit attribute name and method eat from parent class <code class="language-plaintext highlighter-rouge">Animal</code>. Moreover, It is also <code class="language-plaintext highlighter-rouge">@Override</code> the method <code class="language-plaintext highlighter-rouge">sleep()</code> from it’s parent.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+	<span class="kn">package</span> <span class="nn">com.java.core.inheritance</span><span class="o">;</span>  
+
+	<span class="kd">public</span> <span class="kd">class</span> <span class="nc">JavaInheritanceMain</span> <span class="o">{</span>  
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>  
+      <span class="nc">Dog</span> <span class="n">dog</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Dog</span><span class="o">();</span>  
+      <span class="n">dog</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="s">"Bulldog"</span><span class="o">);</span>  
+
+      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">dog</span><span class="o">.</span><span class="na">getName</span><span class="o">());</span>  
+      <span class="n">dog</span><span class="o">.</span><span class="na">eat</span><span class="o">();</span>  
+      <span class="n">dog</span><span class="o">.</span><span class="na">bark</span><span class="o">();</span>  
+      <span class="n">dog</span><span class="o">.</span><span class="na">sleep</span><span class="o">();</span>  
+    <span class="o">}</span>
+	<span class="o">}</span>
+
+</code></pre></div></div>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+Bulldog
+eating...
+barking...
+sleeping at human's house!
+
+</code></pre></div></div>
+
+<h3 id="what-is-the-method-overriding">What Is The Method Overriding?</h3>
+<ul>
+  <li>If subclass (child class) has the same method as declared in the parent class, it is known as <code class="language-plaintext highlighter-rouge">method overriding in Java</code>.</li>
+  <li>In other words, If a subclass provides the specific implementation of the method that has been declared by one of its parent class, it is known as method overriding.</li>
+</ul>
+
+<h3 id="usage-of-java-method-overriding">Usage Of Java Method Overriding</h3>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Method overriding</code> is used to provide the specific implementation of a method which is already provided by its superclass.</li>
+  <li>Method overriding is used for runtime polymorphism.</li>
+</ul>
+
+<h3 id="rules-for-java-method-overriding">Rules For Java Method Overriding</h3>
+<ul>
+  <li>The method must have the same name as in the parent class</li>
+  <li>The method must have the same parameter as in the parent class.</li>
+  <li>There must be an IS-A relationship (inheritance).</li>
+</ul>
+
+<h2 id="what-is-the-polymorphims-in-oop">What Is The Polymorphims In OOP?</h2>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Polymorphism</code> is the ability of an object to take on many forms. The most common use of <code class="language-plaintext highlighter-rouge">polymorphism</code> in OOP occurs when a parent class reference is used to refer to a child class object.</li>
+  <li>Any Java object that can pass more than one IS-A test is considered to be polymorphic. In Java, all Java objects are polymorphic since any object will pass the IS-A test for their own type and for the class Object.</li>
+  <li>It is important to know that the only possible way to access an object is through a reference variable. A reference variable can be of only one type. Once declared, the type of a reference variable cannot be changed.</li>
+  <li>The reference variable can be reassigned to other objects provided that it is not declared final. The type of the reference variable would determine the methods that it can invoke on the object.</li>
+  <li>A reference variable can refer to any object of its declared type or any sub-type of its declared type. A reference variable can be declared as a class or interface type.</li>
+</ul>
+
+<h3 id="polymorphims-example">Polymorphims Example</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+	<span class="kn">package</span> <span class="nn">com.java.core.polymorphims</span><span class="o">;</span>  
+
+	<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Animal</span> <span class="o">{</span>  
+
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>  
+
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>  
+      <span class="k">return</span> <span class="n">name</span><span class="o">;</span>  
+    <span class="o">}</span>  
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>  
+      <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>  
+    <span class="o">}</span>  
+
+    <span class="nd">@Override</span>  
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>  
+      <span class="k">return</span> <span class="s">"Animal{"</span> <span class="o">+</span>  
+              <span class="s">"name='"</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="sc">'\''</span> <span class="o">+</span>  
+              <span class="sc">'}'</span><span class="o">;</span>  
+    <span class="o">}</span>  
+	<span class="o">}</span>
+
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+	<span class="kn">package</span> <span class="nn">com.java.core.polymorphims</span><span class="o">;</span>  
+
+	<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Vegetarian</span> <span class="o">{</span>  
+
+    <span class="nc">String</span> <span class="nf">eatVegetables</span><span class="o">();</span>  
+
+	<span class="o">}</span>
+
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+	<span class="kn">package</span> <span class="nn">com.java.core.polymorphims</span><span class="o">;</span>  
+
+	<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Deer</span> <span class="kd">extends</span> <span class="nc">Animal</span> <span class="kd">implements</span> <span class="nc">Vegetarian</span> <span class="o">{</span>  
+
+    <span class="nd">@Override</span>  
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">eatVegetables</span><span class="o">()</span> <span class="o">{</span>  
+        <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">" eating grass!"</span><span class="o">;</span>  
+    <span class="o">}</span>  
+
+	<span class="o">}</span>
+
+</code></pre></div></div>
+
+<ul>
+  <li>Now, the Deer class is considered to be polymorphic since this has multiple inheritance. Following are true for the above examples −
+    <ul>
+      <li>A Deer IS-A Animal</li>
+      <li>A Deer IS-A Vegetarian</li>
+      <li>A Deer IS-A Deer</li>
+      <li>A Deer IS-A Object</li>
+    </ul>
+  </li>
+  <li>When we apply the reference variable facts to a Deer object reference, the following declarations are legal.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kn">package</span> <span class="nn">com.java.core.polymorphims</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">JavaPolymorphimsMain</span> <span class="o">{</span>
+
+  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nc">Deer</span> <span class="n">deer</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Deer</span><span class="o">();</span>
+    <span class="n">deer</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="s">"Deer"</span><span class="o">);</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">deer</span><span class="o">.</span><span class="na">eatVegetables</span><span class="o">());</span>
+
+    <span class="nc">Animal</span> <span class="n">animal</span> <span class="o">=</span> <span class="n">deer</span><span class="o">;</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">animal</span><span class="o">.</span><span class="na">getName</span><span class="o">());</span>
+
+    <span class="nc">Vegetarian</span> <span class="n">vegetarian</span> <span class="o">=</span> <span class="n">deer</span><span class="o">;</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">vegetarian</span><span class="o">.</span><span class="na">eatVegetables</span><span class="o">());</span>
+
+    <span class="nc">Object</span> <span class="n">object</span> <span class="o">=</span> <span class="n">deer</span><span class="o">;</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">object</span><span class="o">);</span>
+  <span class="o">}</span>
+
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<ul>
+  <li>Then you will see the result as below:</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="nc">Deer</span> <span class="n">eating</span> <span class="n">grass</span><span class="o">!</span>
+<span class="nc">Deer</span>
+<span class="nc">Deer</span> <span class="n">eating</span> <span class="n">grass</span><span class="o">!</span>
+<span class="nc">Animal</span><span class="o">{</span><span class="n">name</span><span class="o">=</span><span class="err">'</span><span class="nc">Deer</span><span class="err">'</span><span class="o">}</span>
+
+</code></pre></div></div>
+
+<ul>
+  <li>Now let do another example with with <code class="language-plaintext highlighter-rouge">Polymorphims</code> about virtual method. See example below.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kn">package</span> <span class="nn">com.java.core.polymorphims</span><span class="o">;</span>  
+  
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Employee</span> <span class="o">{</span>  
+  
+  <span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>  
+  <span class="kd">private</span> <span class="nc">String</span> <span class="n">id</span><span class="o">;</span>  
+  <span class="kd">private</span> <span class="kt">double</span> <span class="n">salary</span><span class="o">;</span>  
+
+  <span class="kd">public</span> <span class="nf">Employee</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">,</span> <span class="nc">String</span> <span class="n">id</span><span class="o">,</span> <span class="kt">double</span> <span class="n">salary</span><span class="o">)</span> <span class="o">{</span>  
+    <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>  
+    <span class="k">this</span><span class="o">.</span><span class="na">id</span> <span class="o">=</span> <span class="n">id</span><span class="o">;</span>  
+    <span class="k">this</span><span class="o">.</span><span class="na">salary</span> <span class="o">=</span> <span class="n">salary</span><span class="o">;</span>  
+  <span class="o">}</span>  
+
+  <span class="kd">public</span> <span class="kt">double</span> <span class="nf">calculateSalary</span><span class="o">()</span> <span class="o">{</span>  
+    <span class="k">return</span> <span class="n">salary</span><span class="o">;</span>  
+  <span class="o">}</span>  
+
+  <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>  
+    <span class="k">return</span> <span class="n">name</span><span class="o">;</span>  
+  <span class="o">}</span>  
+
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>  
+    <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>  
+  <span class="o">}</span>  
+
+  <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getId</span><span class="o">()</span> <span class="o">{</span>  
+    <span class="k">return</span> <span class="n">id</span><span class="o">;</span>  
+  <span class="o">}</span>  
+
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setId</span><span class="o">(</span><span class="nc">String</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span>  
+    <span class="k">this</span><span class="o">.</span><span class="na">id</span> <span class="o">=</span> <span class="n">id</span><span class="o">;</span>  
+  <span class="o">}</span>  
+
+  <span class="kd">public</span> <span class="kt">double</span> <span class="nf">getSalary</span><span class="o">()</span> <span class="o">{</span>  
+    <span class="k">return</span> <span class="n">salary</span><span class="o">;</span>  
+  <span class="o">}</span>  
+
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setSalary</span><span class="o">(</span><span class="kt">double</span> <span class="n">salary</span><span class="o">)</span> <span class="o">{</span>  
+    <span class="k">this</span><span class="o">.</span><span class="na">salary</span> <span class="o">=</span> <span class="n">salary</span><span class="o">;</span>  
+  <span class="o">}</span>  
+<span class="o">}</span>
+
+
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+	<span class="kn">package</span> <span class="nn">com.java.core.polymorphims</span><span class="o">;</span>
+
+	<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Developer</span> <span class="kd">extends</span> <span class="nc">Employee</span> <span class="o">{</span>
+
+    <span class="kd">public</span> <span class="nf">Developer</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">,</span> <span class="nc">String</span> <span class="n">id</span><span class="o">,</span> <span class="kt">double</span> <span class="n">salary</span><span class="o">)</span> <span class="o">{</span>
+      <span class="kd">super</span><span class="o">(</span><span class="n">name</span><span class="o">,</span> <span class="n">id</span><span class="o">,</span> <span class="n">salary</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">double</span> <span class="nf">calculateSalary</span><span class="o">()</span> <span class="o">{</span>
+      <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">getSalary</span><span class="o">()</span> <span class="o">+</span> <span class="mi">100</span><span class="o">;</span>
+    <span class="o">}</span>
+
+	<span class="o">}</span>
+
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+	<span class="kn">package</span> <span class="nn">com.java.core.polymorphims</span><span class="o">;</span>
+
+	<span class="kd">public</span> <span class="kd">class</span> <span class="nc">JavaPolymorphimsMain</span> <span class="o">{</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+
+      <span class="nc">Employee</span> <span class="n">developer</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Developer</span><span class="o">(</span><span class="s">"Duc"</span><span class="o">,</span> <span class="s">"12345"</span><span class="o">,</span> <span class="mi">100</span><span class="o">);</span>
+      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Duc "</span> <span class="o">+</span> <span class="n">developer</span><span class="o">.</span><span class="na">calculateSalary</span><span class="o">());</span>
+
+      <span class="nc">Employee</span> <span class="n">employee</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Developer</span><span class="o">(</span><span class="s">"Han"</span><span class="o">,</span> <span class="s">"56789"</span><span class="o">,</span> <span class="mi">200</span><span class="o">);</span>
+      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Han "</span> <span class="o">+</span> <span class="n">employee</span><span class="o">.</span><span class="na">calculateSalary</span><span class="o">());</span>
+
+      <span class="nc">Employee</span> <span class="n">director</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Employee</span><span class="o">(</span><span class="s">"John"</span><span class="o">,</span> <span class="s">"55555"</span><span class="o">,</span> <span class="mi">100</span><span class="o">);</span>
+      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"John "</span> <span class="o">+</span> <span class="n">director</span><span class="o">.</span><span class="na">getSalary</span><span class="o">());</span>
+            
+    <span class="o">}</span>
+
+	<span class="o">}</span>
+
+</code></pre></div></div>
+
+<ul>
+  <li>Now, let’s run test and you will see the result as below:</li>
+</ul>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+Duc 200.0
+Han 300.0
+John 100.0
+
+</code></pre></div></div>
+
+<ul>
+  <li>As you can see, so base on creating <code class="language-plaintext highlighter-rouge">Employee</code> or <code class="language-plaintext highlighter-rouge">Developer</code> by <code class="language-plaintext highlighter-rouge">new</code> keyword, the method <code class="language-plaintext highlighter-rouge">calculateSalary</code> would be different at the runtime.</li>
+  <li>This behavior is referred to as virtual method invocation, and these methods are referred to as virtual methods. An overridden method is invoked at run time, no matter what data type the reference is that was used in the source code at compile time, It will choose the data type that defined after <code class="language-plaintext highlighter-rouge">new</code> keyword.</li>
+</ul>
+
+<h2 id="references">References</h2>
+<ul>
+  <li><a href="https://www.javatpoint.com/inheritance-in-java">Javatpoint - Inheritance</a></li>
+  <li><a href="https://www.tutorialspoint.com/java/java_abstraction.htm">Tutorialspoint - abstraction</a></li>
+  <li><a href="https://www.javatpoint.com/method-overriding-in-java">Javatpoint - method overriding</a></li>
+  <li><a href="https://www.tutorialspoint.com/java/java_polymorphism.htm">tutorialspoint - polymorphism</a></li>
+</ul>
+
+
+    </div><a class="u-url" href="/java/2022/03/12/java-OOP.html" hidden></a>
+  </article>
+  
+</div>
+
+
+    </div>
+  </div>
+  <script src="https://unpkg.com/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js"></script>
+  <script>addBackToTop()</script>
+</body>
+<footer><footer class="site-footer h-card">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <h2 class="footer-heading">KaizenThink</h2>
+        <div>
+          <div>
+            <ul>
+              <li>Duc Nguyen</li><li><a class="u-email" href="mailto:minhducnguyen189@gmail.com">minhducnguyen189@gmail.com</a></li><li>&copy; 2021 Duc Nguyen. Powered by <a href="https://jekyllrb.com/">Jekyll</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <data class="u-url" href="/%20/"></data>
+        <div><ul class="social-media-list"><li><a href="https://github.com/minhducnguyen189"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">minhducnguyen189</span></a></li><li><a href="https://www.linkedin.com/in/duc-nguyen-03109b141"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#linkedin"></use></svg> <span class="username">duc-nguyen-03109b141</span></a></li></ul>
+</div>
+      </div>
+      <div class="col-md-4">
+        <h3>Support me</h3>
+        <!-- PayPal Logo -->
+        <table id="sponsor" border='0' cellpadding='10' cellspacing='0' align='center'>
+          <tr>
+            <td align='center'>
+              <a href='https://www.paypal.com/paypalme/minhduc189' title='Sponsor me'
+                onclick="javascript:window.open('https://www.paypal.com/paypalme/minhduc189','WIPaypal','toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=1060, height=700'); return false;">
+                <img src='https://www.paypalobjects.com/webstatic/en_US/i/buttons/PP_logo_h_150x38.png' alt='PayPal Acceptance | Medium v2' />
+              </a>
+            </td>
+          </tr>
+        </table>
+        <!-- PayPal Logo -->
+      </div>
+    </div>
+  </div>
+</footer>
+</footer>
+</html>
