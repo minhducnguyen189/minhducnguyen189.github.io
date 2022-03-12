@@ -141,6 +141,7 @@
   <li><a href="#step-7-declare-entity-in-using-with-multi-datasource" id="markdown-toc-step-7-declare-entity-in-using-with-multi-datasource">STEP 7: DECLARE ENTITY IN USING WITH MULTI DATASOURCE</a></li>
   <li><a href="#step-8-using-transaction-of-primary-and-secondary-datasource-in-service-class" id="markdown-toc-step-8-using-transaction-of-primary-and-secondary-datasource-in-service-class">STEP 8: USING TRANSACTION OF PRIMARY AND SECONDARY DATASOURCE IN SERVICE CLASS</a></li>
   <li><a href="#step-9-testing" id="markdown-toc-step-9-testing">STEP 9: TESTING</a></li>
+  <li><a href="#references" id="markdown-toc-references">REFERENCES</a></li>
 </ul>
 
 <h2 id="step-1-add-dependenies-in-pomxml">STEP 1: ADD DEPENDENIES IN POM.XML</h2>
@@ -167,7 +168,7 @@
 
 <ul>
   <li>
-    <p>As you can see in the picture above. We have two <code class="language-plaintext highlighter-rouge">packages</code>, one is <code class="language-plaintext highlighter-rouge">camunda package</code> which contains all <strong>repositories</strong> and <strong>entities</strong> for the <code class="language-plaintext highlighter-rouge">primary</code> datasource. The second one is the <code class="language-plaintext highlighter-rouge">secondary package</code> which contains all <strong>repositories</strong> and <strong>entities</strong> for the <code class="language-plaintext highlighter-rouge">secondary</code> datasource.</p>
+    <p>As you can see in the picture above. We have two sub <code class="language-plaintext highlighter-rouge">packages</code> (<code class="language-plaintext highlighter-rouge">primary</code>, <code class="language-plaintext highlighter-rouge">secondary</code>) in <code class="language-plaintext highlighter-rouge">entity</code> and <code class="language-plaintext highlighter-rouge">repository</code> package respectively, one is <code class="language-plaintext highlighter-rouge">primary package</code> which contains all <strong>repositories</strong> and <strong>entities</strong> for the <code class="language-plaintext highlighter-rouge">primary</code> datasource. The second one is the <code class="language-plaintext highlighter-rouge">secondary package</code> which contains all <strong>repositories</strong> and <strong>entities</strong> for the <code class="language-plaintext highlighter-rouge">secondary</code> datasource.</p>
   </li>
   <li>
     <p>Then we also have <code class="language-plaintext highlighter-rouge">configurations package</code> which contains all <strong>datasource configuration</strong>.</p>
@@ -177,25 +178,25 @@
 <h2 id="step-3-applicationyaml">STEP 3: APPLICATION.YAML</h2>
 
 <ul>
-  <li>to connect to two database schemas we need to add some configuration in the <code class="language-plaintext highlighter-rouge">application.yaml</code> as below:</li>
+  <li>to connect to two database schemas we need to add some configuration in the <code class="language-plaintext highlighter-rouge">application.yml</code> as below:</li>
 </ul>
 
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="na">spring</span><span class="pi">:</span>
-    <span class="na">datasource</span><span class="pi">:</span>
-      <span class="na">driverClassName</span><span class="pi">:</span> <span class="s">com.mysql.jdbc.Driver</span>
-      <span class="na">url</span><span class="pi">:</span> <span class="s">jdbc:mysql://localhost:3306/camunda?useSSL=false</span>  <span class="c1">#This is the primary DB connection url</span>
-      <span class="na">username</span><span class="pi">:</span> <span class="s">root</span>
-      <span class="na">password</span><span class="pi">:</span> <span class="s">password</span>
-    <span class="na">second-datasource</span><span class="pi">:</span>
-      <span class="na">driverClassName</span><span class="pi">:</span> <span class="s">com.mysql.jdbc.Driver</span>
-      <span class="na">url</span><span class="pi">:</span> <span class="s">jdbc:mysql://localhost:3306/mydb?useSSL=false</span>  <span class="c1">#This is the secondary DB connection url</span>
-      <span class="na">username</span><span class="pi">:</span> <span class="s">root</span>
-      <span class="na">password</span><span class="pi">:</span> <span class="s">password</span>
-    <span class="na">jpa</span><span class="pi">:</span>
-      <span class="na">hibernate.ddl-auto</span><span class="pi">:</span> <span class="s">update</span>
-      <span class="na">hibernate.dialect</span><span class="pi">:</span> <span class="s">org.hibernate.dialect.MySQL5Dialect</span>
-      <span class="na">generate-ddl</span><span class="pi">:</span> <span class="no">true</span>
-      <span class="na">show-sql</span><span class="pi">:</span> <span class="no">true</span>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">spring</span><span class="pi">:</span>
+  <span class="na">datasource</span><span class="pi">:</span>
+    <span class="na">driverClassName</span><span class="pi">:</span> <span class="s">com.mysql.jdbc.Driver</span>
+    <span class="na">url</span><span class="pi">:</span> <span class="s">jdbc:mysql://localhost:3306/primaryDb?useSSL=false</span>  <span class="c1">#This is the primary DB connection url</span>
+    <span class="na">username</span><span class="pi">:</span> <span class="s">root</span>
+    <span class="na">password</span><span class="pi">:</span> <span class="s">password</span>
+  <span class="na">second-datasource</span><span class="pi">:</span>
+    <span class="na">driverClassName</span><span class="pi">:</span> <span class="s">com.mysql.jdbc.Driver</span>
+    <span class="na">url</span><span class="pi">:</span> <span class="s">jdbc:mysql://localhost:3306/secondaryDb?useSSL=false</span>  <span class="c1">#This is the secondary DB connection url</span>
+    <span class="na">username</span><span class="pi">:</span> <span class="s">root</span>
+    <span class="na">password</span><span class="pi">:</span> <span class="s">password</span>
+  <span class="na">jpa</span><span class="pi">:</span>
+    <span class="na">hibernate.ddl-auto</span><span class="pi">:</span> <span class="s">update</span>
+    <span class="na">hibernate.dialect</span><span class="pi">:</span> <span class="s">org.hibernate.dialect.MySQL5Dialect</span>
+    <span class="na">generate-ddl</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="na">show-sql</span><span class="pi">:</span> <span class="no">true</span>
 </code></pre></div></div>
 
 <h2 id="step-4-create-and-config-configuration-file-for-primary-schema">STEP 4: CREATE AND CONFIG CONFIGURATION FILE FOR PRIMARY SCHEMA</h2>
@@ -205,78 +206,77 @@
   <li>The configuration for the <code class="language-plaintext highlighter-rouge">primary datasource</code> is showed as below:</li>
 </ul>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kn">package</span> <span class="nn">com.example.workflow.configurations</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">com.springboot.data.jpa.multi.datasource.configuration</span><span class="o">;</span>
 
-  <span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="o">;</span>
-  <span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Bean</span><span class="o">;</span>
-  <span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Configuration</span><span class="o">;</span>
-  <span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Primary</span><span class="o">;</span>
-  <span class="kn">import</span> <span class="nn">org.springframework.core.env.Environment</span><span class="o">;</span>
-  <span class="kn">import</span> <span class="nn">org.springframework.data.jpa.repository.config.EnableJpaRepositories</span><span class="o">;</span>
-  <span class="kn">import</span> <span class="nn">org.springframework.jdbc.datasource.DriverManagerDataSource</span><span class="o">;</span>
-  <span class="kn">import</span> <span class="nn">org.springframework.orm.jpa.JpaTransactionManager</span><span class="o">;</span>
-  <span class="kn">import</span> <span class="nn">org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean</span><span class="o">;</span>
-  <span class="kn">import</span> <span class="nn">org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter</span><span class="o">;</span>
-  <span class="kn">import</span> <span class="nn">org.springframework.transaction.PlatformTransactionManager</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Bean</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Configuration</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Primary</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.core.env.Environment</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.data.jpa.repository.config.EnableJpaRepositories</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.jdbc.datasource.DriverManagerDataSource</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.orm.jpa.JpaTransactionManager</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.transaction.PlatformTransactionManager</span><span class="o">;</span>
 
-  <span class="kn">import</span> <span class="nn">javax.sql.DataSource</span><span class="o">;</span>
-  <span class="kn">import</span> <span class="nn">java.util.HashMap</span><span class="o">;</span>
-  <span class="kn">import</span> <span class="nn">java.util.Objects</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.sql.DataSource</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.HashMap</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Objects</span><span class="o">;</span>
 
-  <span class="nd">@Configuration</span>
-   <span class="cm">/**
-        use this anotation to define the base package repository for primary data source,
-        the EntityFactory and the transactionManager
-    **/</span>
-  <span class="nd">@EnableJpaRepositories</span><span class="o">(</span><span class="n">basePackages</span> <span class="o">=</span> <span class="s">"com.example.workflow.camunda.repository"</span><span class="o">,</span>
-  <span class="n">entityManagerFactoryRef</span> <span class="o">=</span> <span class="s">"primaryEntityManager"</span><span class="o">,</span>
-  <span class="n">transactionManagerRef</span> <span class="o">=</span> <span class="s">"primaryTransactionManager"</span><span class="o">)</span>
-  <span class="kd">public</span> <span class="kd">class</span> <span class="nc">PrimarySchemaConfiguration</span> <span class="o">{</span>
+<span class="nd">@Configuration</span>
+<span class="cm">/**
+ use this anotation to define the base package repository for primary data source,
+ the EntityFactory and the transactionManager
+ **/</span>
+<span class="nd">@EnableJpaRepositories</span><span class="o">(</span>
+        <span class="n">basePackages</span> <span class="o">=</span> <span class="s">"com.springboot.data.jpa.multi.datasource.repository.primary"</span><span class="o">,</span>
+        <span class="n">entityManagerFactoryRef</span> <span class="o">=</span> <span class="s">"primaryEntityManager"</span><span class="o">,</span>
+        <span class="n">transactionManagerRef</span> <span class="o">=</span> <span class="s">"primaryTransactionManager"</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">PrimarySchemaConfiguration</span> <span class="o">{</span>
 
+  <span class="nd">@Autowired</span>
+  <span class="kd">private</span> <span class="nc">Environment</span> <span class="n">env</span><span class="o">;</span>
 
-      <span class="nd">@Autowired</span>
-      <span class="kd">private</span> <span class="nc">Environment</span> <span class="n">env</span><span class="o">;</span>
-
-
-      <span class="nd">@Bean</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"primaryDataSource"</span><span class="o">)</span>
-      <span class="nd">@Primary</span>
-      <span class="kd">public</span> <span class="nc">DataSource</span> <span class="nf">primaryDataSourceConfiguration</span><span class="o">()</span> <span class="o">{</span>
-          <span class="nc">DriverManagerDataSource</span> <span class="n">dataSource</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">DriverManagerDataSource</span><span class="o">();</span>
-          <span class="n">dataSource</span><span class="o">.</span><span class="na">setDriverClassName</span><span class="o">(</span><span class="nc">Objects</span><span class="o">.</span><span class="na">requireNonNull</span><span class="o">(</span><span class="n">env</span><span class="o">.</span><span class="na">getProperty</span><span class="o">(</span><span class="s">"spring.datasource.driverClassName"</span><span class="o">)));</span>
-          <span class="n">dataSource</span><span class="o">.</span><span class="na">setUrl</span><span class="o">(</span><span class="n">env</span><span class="o">.</span><span class="na">getProperty</span><span class="o">(</span><span class="s">"spring.datasource.url"</span><span class="o">));</span>
-          <span class="n">dataSource</span><span class="o">.</span><span class="na">setUsername</span><span class="o">(</span><span class="n">env</span><span class="o">.</span><span class="na">getProperty</span><span class="o">(</span><span class="s">"spring.datasource.username"</span><span class="o">));</span>
-          <span class="n">dataSource</span><span class="o">.</span><span class="na">setPassword</span><span class="o">(</span><span class="n">env</span><span class="o">.</span><span class="na">getProperty</span><span class="o">(</span><span class="s">"spring.datasource.password"</span><span class="o">));</span>
-          <span class="k">return</span> <span class="n">dataSource</span><span class="o">;</span>
-      <span class="o">}</span>
-
-
-      <span class="nd">@Bean</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"primaryEntityManager"</span><span class="o">)</span>
-      <span class="nd">@Primary</span>
-      <span class="kd">public</span> <span class="nc">LocalContainerEntityManagerFactoryBean</span> <span class="nf">primaryEntityManager</span><span class="o">()</span> <span class="o">{</span>
-          <span class="nc">LocalContainerEntityManagerFactoryBean</span> <span class="n">em</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LocalContainerEntityManagerFactoryBean</span><span class="o">();</span>
-          <span class="n">em</span><span class="o">.</span><span class="na">setDataSource</span><span class="o">(</span><span class="n">primaryDataSourceConfiguration</span><span class="o">());</span>
-          <span class="cm">/**
-            this is the package url which contains entities of primary datasource
-          **/</span>
-          <span class="n">em</span><span class="o">.</span><span class="na">setPackagesToScan</span><span class="o">(</span><span class="s">"com.example.workflow.camunda.entity"</span><span class="o">);</span>
-
-          <span class="nc">HibernateJpaVendorAdapter</span> <span class="n">vendorAdapter</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HibernateJpaVendorAdapter</span><span class="o">();</span>
-          <span class="n">em</span><span class="o">.</span><span class="na">setJpaVendorAdapter</span><span class="o">(</span><span class="n">vendorAdapter</span><span class="o">);</span>
-          <span class="nc">HashMap</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Object</span><span class="o">&gt;</span> <span class="n">properties</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashMap</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Object</span><span class="o">&gt;();</span>
-          <span class="n">properties</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"hibernate.hbm2ddl.auto"</span><span class="o">,</span> <span class="n">env</span><span class="o">.</span><span class="na">getProperty</span><span class="o">(</span><span class="s">"spring.jpa.hibernate.ddl-auto"</span><span class="o">));</span>
-          <span class="n">properties</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"hibernate.dialect"</span><span class="o">,</span> <span class="n">env</span><span class="o">.</span><span class="na">getProperty</span><span class="o">(</span><span class="s">"spring.jpa.hibernate.hibernate.dialect"</span><span class="o">));</span>
-          <span class="n">em</span><span class="o">.</span><span class="na">setJpaPropertyMap</span><span class="o">(</span><span class="n">properties</span><span class="o">);</span>
-          <span class="k">return</span> <span class="n">em</span><span class="o">;</span>
-      <span class="o">}</span>
-
-      <span class="nd">@Bean</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"primaryTransactionManager"</span><span class="o">)</span>
-      <span class="nd">@Primary</span>
-      <span class="kd">public</span> <span class="nc">PlatformTransactionManager</span> <span class="nf">primaryTransactionManager</span><span class="o">()</span> <span class="o">{</span>
-          <span class="nc">JpaTransactionManager</span> <span class="n">jpaTransactionManager</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">JpaTransactionManager</span><span class="o">();</span>
-          <span class="n">jpaTransactionManager</span><span class="o">.</span><span class="na">setEntityManagerFactory</span><span class="o">(</span><span class="n">primaryEntityManager</span><span class="o">().</span><span class="na">getObject</span><span class="o">());</span>
-          <span class="k">return</span> <span class="n">jpaTransactionManager</span><span class="o">;</span>
-      <span class="o">}</span>
+  <span class="nd">@Bean</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"primaryDataSource"</span><span class="o">)</span>
+  <span class="nd">@Primary</span>
+  <span class="kd">public</span> <span class="nc">DataSource</span> <span class="nf">primaryDataSourceConfiguration</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nc">DriverManagerDataSource</span> <span class="n">dataSource</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">DriverManagerDataSource</span><span class="o">();</span>
+    <span class="n">dataSource</span><span class="o">.</span><span class="na">setDriverClassName</span><span class="o">(</span><span class="nc">Objects</span><span class="o">.</span><span class="na">requireNonNull</span><span class="o">(</span><span class="n">env</span><span class="o">.</span><span class="na">getProperty</span><span class="o">(</span><span class="s">"spring.datasource.driverClassName"</span><span class="o">)));</span>
+    <span class="n">dataSource</span><span class="o">.</span><span class="na">setUrl</span><span class="o">(</span><span class="n">env</span><span class="o">.</span><span class="na">getProperty</span><span class="o">(</span><span class="s">"spring.datasource.url"</span><span class="o">));</span>
+    <span class="n">dataSource</span><span class="o">.</span><span class="na">setUsername</span><span class="o">(</span><span class="n">env</span><span class="o">.</span><span class="na">getProperty</span><span class="o">(</span><span class="s">"spring.datasource.username"</span><span class="o">));</span>
+    <span class="n">dataSource</span><span class="o">.</span><span class="na">setPassword</span><span class="o">(</span><span class="n">env</span><span class="o">.</span><span class="na">getProperty</span><span class="o">(</span><span class="s">"spring.datasource.password"</span><span class="o">));</span>
+    <span class="k">return</span> <span class="n">dataSource</span><span class="o">;</span>
   <span class="o">}</span>
+
+  <span class="nd">@Bean</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"primaryEntityManager"</span><span class="o">)</span>
+  <span class="nd">@Primary</span>
+  <span class="kd">public</span> <span class="nc">LocalContainerEntityManagerFactoryBean</span> <span class="nf">primaryEntityManager</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nc">LocalContainerEntityManagerFactoryBean</span> <span class="n">em</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LocalContainerEntityManagerFactoryBean</span><span class="o">();</span>
+    <span class="n">em</span><span class="o">.</span><span class="na">setDataSource</span><span class="o">(</span><span class="n">primaryDataSourceConfiguration</span><span class="o">());</span>
+    <span class="cm">/**
+      this is the package url which contains entities of primary datasource
+      **/</span>
+    <span class="n">em</span><span class="o">.</span><span class="na">setPackagesToScan</span><span class="o">(</span><span class="s">"com.springboot.data.jpa.multi.datasource.entity.primary"</span><span class="o">);</span>
+
+    <span class="nc">HibernateJpaVendorAdapter</span> <span class="n">vendorAdapter</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HibernateJpaVendorAdapter</span><span class="o">();</span>
+    <span class="n">em</span><span class="o">.</span><span class="na">setJpaVendorAdapter</span><span class="o">(</span><span class="n">vendorAdapter</span><span class="o">);</span>
+    <span class="nc">HashMap</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Object</span><span class="o">&gt;</span> <span class="n">properties</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashMap</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Object</span><span class="o">&gt;();</span>
+    <span class="n">properties</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"hibernate.hbm2ddl.auto"</span><span class="o">,</span> <span class="n">env</span><span class="o">.</span><span class="na">getProperty</span><span class="o">(</span><span class="s">"spring.jpa.hibernate.ddl-auto"</span><span class="o">));</span>
+    <span class="n">properties</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"hibernate.dialect"</span><span class="o">,</span> <span class="n">env</span><span class="o">.</span><span class="na">getProperty</span><span class="o">(</span><span class="s">"spring.jpa.hibernate.hibernate.dialect"</span><span class="o">));</span>
+    <span class="n">em</span><span class="o">.</span><span class="na">setJpaPropertyMap</span><span class="o">(</span><span class="n">properties</span><span class="o">);</span>
+    <span class="k">return</span> <span class="n">em</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="nd">@Bean</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"primaryTransactionManager"</span><span class="o">)</span>
+  <span class="nd">@Primary</span>
+  <span class="kd">public</span> <span class="nc">PlatformTransactionManager</span> <span class="nf">primaryTransactionManager</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nc">JpaTransactionManager</span> <span class="n">jpaTransactionManager</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">JpaTransactionManager</span><span class="o">();</span>
+    <span class="n">jpaTransactionManager</span><span class="o">.</span><span class="na">setEntityManagerFactory</span><span class="o">(</span><span class="n">primaryEntityManager</span><span class="o">().</span><span class="na">getObject</span><span class="o">());</span>
+    <span class="k">return</span> <span class="n">jpaTransactionManager</span><span class="o">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+
 </code></pre></div></div>
 
 <h2 id="step-5-create-and-config-configuration-file-for-secondary-schema">STEP 5: CREATE AND CONFIG CONFIGURATION FILE FOR SECONDARY SCHEMA</h2>
@@ -286,70 +286,72 @@
   <li>The configuration for the <code class="language-plaintext highlighter-rouge">secondary datasource</code> is showed as below:</li>
 </ul>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kn">package</span> <span class="nn">com.example.workflow.configurations</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">com.springboot.data.jpa.multi.datasource.configuration</span><span class="o">;</span>
 
-  <span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="o">;</span>
-  <span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Bean</span><span class="o">;</span>
-  <span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Configuration</span><span class="o">;</span>
-  <span class="kn">import</span> <span class="nn">org.springframework.core.env.Environment</span><span class="o">;</span>
-  <span class="kn">import</span> <span class="nn">org.springframework.data.jpa.repository.config.EnableJpaRepositories</span><span class="o">;</span>
-  <span class="kn">import</span> <span class="nn">org.springframework.jdbc.datasource.DriverManagerDataSource</span><span class="o">;</span>
-  <span class="kn">import</span> <span class="nn">org.springframework.orm.jpa.JpaTransactionManager</span><span class="o">;</span>
-  <span class="kn">import</span> <span class="nn">org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean</span><span class="o">;</span>
-  <span class="kn">import</span> <span class="nn">org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter</span><span class="o">;</span>
-  <span class="kn">import</span> <span class="nn">org.springframework.transaction.PlatformTransactionManager</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Bean</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Configuration</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.core.env.Environment</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.data.jpa.repository.config.EnableJpaRepositories</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.jdbc.datasource.DriverManagerDataSource</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.orm.jpa.JpaTransactionManager</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.transaction.PlatformTransactionManager</span><span class="o">;</span>
 
-  <span class="kn">import</span> <span class="nn">javax.sql.DataSource</span><span class="o">;</span>
-  <span class="kn">import</span> <span class="nn">java.util.HashMap</span><span class="o">;</span>
-  <span class="kn">import</span> <span class="nn">java.util.Objects</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.sql.DataSource</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.HashMap</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Objects</span><span class="o">;</span>
 
-  <span class="nd">@Configuration</span>
-        <span class="cm">/**
-          use this anotation to define the base package repository for secondary data source,
-          the EntityFactory and the transactionManager
-        **/</span>
-  <span class="nd">@EnableJpaRepositories</span><span class="o">(</span><span class="n">basePackages</span> <span class="o">=</span> <span class="s">"com.example.workflow.secondary.repository"</span><span class="o">,</span>
-  <span class="n">entityManagerFactoryRef</span> <span class="o">=</span> <span class="s">"secondaryEntityManager"</span><span class="o">,</span>
-  <span class="n">transactionManagerRef</span> <span class="o">=</span> <span class="s">"secondaryTransactionManager"</span><span class="o">)</span>
-  <span class="kd">public</span> <span class="kd">class</span> <span class="nc">SecondarySchemaConfiguration</span> <span class="o">{</span>
+<span class="nd">@Configuration</span>
+<span class="cm">/**
+ use this anotation to define the base package repository for secondary data source,
+ the EntityFactory and the transactionManager
+ **/</span>
+<span class="nd">@EnableJpaRepositories</span><span class="o">(</span><span class="n">basePackages</span> <span class="o">=</span> <span class="s">"com.springboot.data.jpa.multi.datasource.repository.secondary"</span><span class="o">,</span>
+        <span class="n">entityManagerFactoryRef</span> <span class="o">=</span> <span class="s">"secondaryEntityManager"</span><span class="o">,</span>
+        <span class="n">transactionManagerRef</span> <span class="o">=</span> <span class="s">"secondaryTransactionManager"</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SecondarySchemaConfiguration</span> <span class="o">{</span>
 
-      <span class="nd">@Autowired</span>
-      <span class="kd">private</span> <span class="nc">Environment</span> <span class="n">env</span><span class="o">;</span>
+  <span class="nd">@Autowired</span>
+  <span class="kd">private</span> <span class="nc">Environment</span> <span class="n">env</span><span class="o">;</span>
 
-      <span class="nd">@Bean</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"secondaryDataSource"</span><span class="o">)</span>
-      <span class="kd">public</span> <span class="nc">DataSource</span> <span class="nf">secondaryDataSourceConfiguration</span><span class="o">()</span> <span class="o">{</span>
-          <span class="nc">DriverManagerDataSource</span> <span class="n">dataSource</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">DriverManagerDataSource</span><span class="o">();</span>
-          <span class="n">dataSource</span><span class="o">.</span><span class="na">setDriverClassName</span><span class="o">(</span><span class="nc">Objects</span><span class="o">.</span><span class="na">requireNonNull</span><span class="o">(</span><span class="n">env</span><span class="o">.</span><span class="na">getProperty</span><span class="o">(</span><span class="s">"spring.second-datasource.driverClassName"</span><span class="o">)));</span>
-          <span class="n">dataSource</span><span class="o">.</span><span class="na">setUrl</span><span class="o">(</span><span class="n">env</span><span class="o">.</span><span class="na">getProperty</span><span class="o">(</span><span class="s">"spring.second-datasource.url"</span><span class="o">));</span>
-          <span class="n">dataSource</span><span class="o">.</span><span class="na">setUsername</span><span class="o">(</span><span class="n">env</span><span class="o">.</span><span class="na">getProperty</span><span class="o">(</span><span class="s">"spring.second-datasource.username"</span><span class="o">));</span>
-          <span class="n">dataSource</span><span class="o">.</span><span class="na">setPassword</span><span class="o">(</span><span class="n">env</span><span class="o">.</span><span class="na">getProperty</span><span class="o">(</span><span class="s">"spring.second-datasource.password"</span><span class="o">));</span>
-          <span class="k">return</span> <span class="n">dataSource</span><span class="o">;</span>
-      <span class="o">}</span>
-
-      <span class="nd">@Bean</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"secondaryEntityManager"</span><span class="o">)</span>
-      <span class="kd">public</span> <span class="nc">LocalContainerEntityManagerFactoryBean</span> <span class="nf">secondaryEntityManager</span><span class="o">()</span> <span class="o">{</span>
-          <span class="nc">LocalContainerEntityManagerFactoryBean</span> <span class="n">em</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LocalContainerEntityManagerFactoryBean</span><span class="o">();</span>
-          <span class="n">em</span><span class="o">.</span><span class="na">setDataSource</span><span class="o">(</span><span class="n">secondaryDataSourceConfiguration</span><span class="o">());</span>
-           <span class="cm">/**
-              this is the package which contains entities of primary datasource
-            **/</span>
-          <span class="n">em</span><span class="o">.</span><span class="na">setPackagesToScan</span><span class="o">(</span><span class="s">"com.example.workflow.secondary.entity"</span><span class="o">);</span>
-          <span class="nc">HibernateJpaVendorAdapter</span> <span class="n">jpaVendorAdapter</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HibernateJpaVendorAdapter</span><span class="o">();</span>
-          <span class="n">em</span><span class="o">.</span><span class="na">setJpaVendorAdapter</span><span class="o">(</span><span class="n">jpaVendorAdapter</span><span class="o">);</span>
-          <span class="nc">HashMap</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Object</span><span class="o">&gt;</span> <span class="n">properties</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashMap</span><span class="o">&lt;&gt;();</span>
-          <span class="n">properties</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"hibernate.hbm2ddl.auto"</span><span class="o">,</span> <span class="n">env</span><span class="o">.</span><span class="na">getProperty</span><span class="o">(</span><span class="s">"spring.jpa.hibernate.ddl-auto"</span><span class="o">));</span>
-          <span class="n">properties</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"hibernate.dialect"</span><span class="o">,</span> <span class="n">env</span><span class="o">.</span><span class="na">getProperty</span><span class="o">(</span><span class="s">"spring.jpa.hibernate.hibernate.dialect"</span><span class="o">));</span>
-          <span class="n">em</span><span class="o">.</span><span class="na">setJpaPropertyMap</span><span class="o">(</span><span class="n">properties</span><span class="o">);</span>
-          <span class="k">return</span> <span class="n">em</span><span class="o">;</span>
-      <span class="o">}</span>
-
-      <span class="nd">@Bean</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"secondaryTransactionManager"</span><span class="o">)</span>
-      <span class="kd">public</span> <span class="nc">PlatformTransactionManager</span> <span class="nf">secondaryTransactionManager</span><span class="o">()</span> <span class="o">{</span>
-          <span class="nc">JpaTransactionManager</span> <span class="n">transactionManager</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">JpaTransactionManager</span><span class="o">();</span>
-          <span class="n">transactionManager</span><span class="o">.</span><span class="na">setEntityManagerFactory</span><span class="o">(</span><span class="n">secondaryEntityManager</span><span class="o">().</span><span class="na">getObject</span><span class="o">());</span>
-          <span class="k">return</span> <span class="n">transactionManager</span><span class="o">;</span>
-      <span class="o">}</span>
+  <span class="nd">@Bean</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"secondaryDataSource"</span><span class="o">)</span>
+  <span class="kd">public</span> <span class="nc">DataSource</span> <span class="nf">secondaryDataSourceConfiguration</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nc">DriverManagerDataSource</span> <span class="n">dataSource</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">DriverManagerDataSource</span><span class="o">();</span>
+    <span class="n">dataSource</span><span class="o">.</span><span class="na">setDriverClassName</span><span class="o">(</span><span class="nc">Objects</span><span class="o">.</span><span class="na">requireNonNull</span><span class="o">(</span><span class="n">env</span><span class="o">.</span><span class="na">getProperty</span><span class="o">(</span><span class="s">"spring.second-datasource.driverClassName"</span><span class="o">)));</span>
+    <span class="n">dataSource</span><span class="o">.</span><span class="na">setUrl</span><span class="o">(</span><span class="n">env</span><span class="o">.</span><span class="na">getProperty</span><span class="o">(</span><span class="s">"spring.second-datasource.url"</span><span class="o">));</span>
+    <span class="n">dataSource</span><span class="o">.</span><span class="na">setUsername</span><span class="o">(</span><span class="n">env</span><span class="o">.</span><span class="na">getProperty</span><span class="o">(</span><span class="s">"spring.second-datasource.username"</span><span class="o">));</span>
+    <span class="n">dataSource</span><span class="o">.</span><span class="na">setPassword</span><span class="o">(</span><span class="n">env</span><span class="o">.</span><span class="na">getProperty</span><span class="o">(</span><span class="s">"spring.second-datasource.password"</span><span class="o">));</span>
+    <span class="k">return</span> <span class="n">dataSource</span><span class="o">;</span>
   <span class="o">}</span>
+
+  <span class="nd">@Bean</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"secondaryEntityManager"</span><span class="o">)</span>
+  <span class="kd">public</span> <span class="nc">LocalContainerEntityManagerFactoryBean</span> <span class="nf">secondaryEntityManager</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nc">LocalContainerEntityManagerFactoryBean</span> <span class="n">em</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LocalContainerEntityManagerFactoryBean</span><span class="o">();</span>
+    <span class="n">em</span><span class="o">.</span><span class="na">setDataSource</span><span class="o">(</span><span class="n">secondaryDataSourceConfiguration</span><span class="o">());</span>
+    <span class="cm">/**
+      this is the package which contains entities of primary datasource
+      **/</span>
+    <span class="n">em</span><span class="o">.</span><span class="na">setPackagesToScan</span><span class="o">(</span><span class="s">"com.springboot.data.jpa.multi.datasource.entity.secondary"</span><span class="o">);</span>
+    <span class="nc">HibernateJpaVendorAdapter</span> <span class="n">jpaVendorAdapter</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HibernateJpaVendorAdapter</span><span class="o">();</span>
+    <span class="n">em</span><span class="o">.</span><span class="na">setJpaVendorAdapter</span><span class="o">(</span><span class="n">jpaVendorAdapter</span><span class="o">);</span>
+    <span class="nc">HashMap</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Object</span><span class="o">&gt;</span> <span class="n">properties</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashMap</span><span class="o">&lt;&gt;();</span>
+    <span class="n">properties</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"hibernate.hbm2ddl.auto"</span><span class="o">,</span> <span class="n">env</span><span class="o">.</span><span class="na">getProperty</span><span class="o">(</span><span class="s">"spring.jpa.hibernate.ddl-auto"</span><span class="o">));</span>
+    <span class="n">properties</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"hibernate.dialect"</span><span class="o">,</span> <span class="n">env</span><span class="o">.</span><span class="na">getProperty</span><span class="o">(</span><span class="s">"spring.jpa.hibernate.hibernate.dialect"</span><span class="o">));</span>
+    <span class="n">em</span><span class="o">.</span><span class="na">setJpaPropertyMap</span><span class="o">(</span><span class="n">properties</span><span class="o">);</span>
+    <span class="k">return</span> <span class="n">em</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="nd">@Bean</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"secondaryTransactionManager"</span><span class="o">)</span>
+  <span class="kd">public</span> <span class="nc">PlatformTransactionManager</span> <span class="nf">secondaryTransactionManager</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nc">JpaTransactionManager</span> <span class="n">transactionManager</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">JpaTransactionManager</span><span class="o">();</span>
+    <span class="n">transactionManager</span><span class="o">.</span><span class="na">setEntityManagerFactory</span><span class="o">(</span><span class="n">secondaryEntityManager</span><span class="o">().</span><span class="na">getObject</span><span class="o">());</span>
+    <span class="k">return</span> <span class="n">transactionManager</span><span class="o">;</span>
+  <span class="o">}</span>
+
+<span class="o">}</span>
+
 </code></pre></div></div>
 
 <h2 id="step-6-create-and-config-configuration-file-for-transaction-chain">STEP 6: CREATE AND CONFIG CONFIGURATION FILE FOR TRANSACTION CHAIN</h2>
@@ -366,82 +368,197 @@
   </li>
 </ul>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kn">package</span> <span class="nn">com.example.workflow.configurations</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">com.springboot.data.jpa.multi.datasource.configuration</span><span class="o">;</span>
 
-  <span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Qualifier</span><span class="o">;</span>
-  <span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Bean</span><span class="o">;</span>
-  <span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Configuration</span><span class="o">;</span>
-  <span class="kn">import</span> <span class="nn">org.springframework.data.transaction.ChainedTransactionManager</span><span class="o">;</span>
-  <span class="kn">import</span> <span class="nn">org.springframework.transaction.PlatformTransactionManager</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Qualifier</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Bean</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Configuration</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.data.transaction.ChainedTransactionManager</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.transaction.PlatformTransactionManager</span><span class="o">;</span>
 
+<span class="nd">@Configuration</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TransactionChainConfiguration</span> <span class="o">{</span>
 
-  <span class="nd">@Configuration</span>
-  <span class="kd">public</span> <span class="kd">class</span> <span class="nc">TransactionChainConfiguration</span> <span class="o">{</span>
-
-      <span class="cm">/**
-          we will create ChainedTransactionManager by two PlatformTransactionManager
-          which are `primaryTransactionManager` and `secondaryTransactionManager`
-          because we want to revert transaction if one of them happens issue in saving data.
-      **/</span>
-
-      <span class="nd">@Bean</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"chainedTransactionManager"</span><span class="o">)</span>
-      <span class="kd">public</span> <span class="nc">ChainedTransactionManager</span> <span class="nf">transactionChainConfiguration</span><span class="o">(</span>
-              <span class="nd">@Qualifier</span><span class="o">(</span><span class="s">"primaryTransactionManager"</span><span class="o">)</span> <span class="nc">PlatformTransactionManager</span> <span class="n">primaryTransaction</span><span class="o">,</span>
-              <span class="nd">@Qualifier</span><span class="o">(</span><span class="s">"secondaryTransactionManager"</span><span class="o">)</span> <span class="nc">PlatformTransactionManager</span> <span class="n">secondaryTransaction</span><span class="o">)</span> <span class="o">{</span>
-          <span class="k">return</span> <span class="k">new</span> <span class="nf">ChainedTransactionManager</span><span class="o">(</span><span class="n">primaryTransaction</span><span class="o">,</span> <span class="n">secondaryTransaction</span><span class="o">);</span>
-      <span class="o">}</span>
+  <span class="cm">/**
+    we will create ChainedTransactionManager by two PlatformTransactionManager
+    which are `primaryTransactionManager` and `secondaryTransactionManager`
+    because we want to revert transaction if one of them happens issue in saving data.
+    **/</span>
+  <span class="nd">@Bean</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"chainedTransactionManager"</span><span class="o">)</span>
+  <span class="kd">public</span> <span class="nc">ChainedTransactionManager</span> <span class="nf">transactionChainConfiguration</span><span class="o">(</span>
+          <span class="nd">@Qualifier</span><span class="o">(</span><span class="s">"primaryTransactionManager"</span><span class="o">)</span> <span class="nc">PlatformTransactionManager</span> <span class="n">primaryTransaction</span><span class="o">,</span>
+          <span class="nd">@Qualifier</span><span class="o">(</span><span class="s">"secondaryTransactionManager"</span><span class="o">)</span> <span class="nc">PlatformTransactionManager</span> <span class="n">secondaryTransaction</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="nf">ChainedTransactionManager</span><span class="o">(</span><span class="n">primaryTransaction</span><span class="o">,</span> <span class="n">secondaryTransaction</span><span class="o">);</span>
   <span class="o">}</span>
+
+<span class="o">}</span>
+
 </code></pre></div></div>
 
 <h2 id="step-7-declare-entity-in-using-with-multi-datasource">STEP 7: DECLARE ENTITY IN USING WITH MULTI DATASOURCE</h2>
 
 <ul>
-  <li>for delaration entities, please look at the examples belows:</li>
+  <li>For delaration entities, please look at the examples belows:</li>
 </ul>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nd">@Entity</span>
-  <span class="cm">/**
-      This entity is used for primary DB with the schema = "camunda"
-  **/</span>
-  <span class="nd">@Table</span><span class="o">(</span><span class="n">schema</span> <span class="o">=</span> <span class="s">"camunda"</span><span class="o">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s">"new_table"</span><span class="o">)</span>
-  <span class="kd">public</span> <span class="kd">class</span> <span class="nc">NewTableEntity</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kn">package</span> <span class="nn">com.springboot.data.jpa.multi.datasource.entity.primary</span><span class="o">;</span>
 
-      <span class="nd">@Id</span>
-      <span class="kd">private</span> <span class="nc">String</span> <span class="n">id</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.hibernate.annotations.Type</span><span class="o">;</span>
 
-      <span class="nd">@Column</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"createdDate"</span><span class="o">)</span>
-      <span class="kd">private</span> <span class="nc">String</span> <span class="n">createdDate</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.persistence.Entity</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.persistence.GeneratedValue</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.persistence.Id</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.persistence.Table</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Date</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.UUID</span><span class="o">;</span>
 
-      <span class="nd">@Column</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"title"</span><span class="o">)</span>
-      <span class="kd">private</span> <span class="nc">String</span> <span class="n">title</span><span class="o">;</span>
+<span class="nd">@Entity</span>
+<span class="cm">/**
+ This entity is used for primary DB with the schema = "primaryDb"
+ **/</span>
+<span class="nd">@Table</span><span class="o">(</span><span class="n">schema</span> <span class="o">=</span> <span class="s">"primaryDb"</span><span class="o">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s">"customers"</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">PrimaryCustomerEntity</span> <span class="o">{</span>
 
-      <span class="nd">@Column</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"content"</span><span class="o">)</span>
-      <span class="kd">private</span> <span class="nc">String</span> <span class="n">content</span><span class="o">;</span>
+  <span class="nd">@Id</span>
+  <span class="nd">@GeneratedValue</span>
+  <span class="nd">@Type</span><span class="o">(</span><span class="n">type</span><span class="o">=</span><span class="s">"uuid-char"</span><span class="o">)</span>
+  <span class="kd">private</span> <span class="no">UUID</span> <span class="n">id</span><span class="o">;</span>
+  <span class="kd">private</span> <span class="nc">String</span> <span class="n">fullName</span><span class="o">;</span>
+  <span class="kd">private</span> <span class="nc">String</span> <span class="n">email</span><span class="o">;</span>
+  <span class="kd">private</span> <span class="nc">String</span> <span class="n">address</span><span class="o">;</span>
+  <span class="kd">private</span> <span class="nc">String</span> <span class="n">phone</span><span class="o">;</span>
+  <span class="kd">private</span> <span class="nc">Date</span> <span class="n">dob</span><span class="o">;</span>
 
-      <span class="o">...........</span>
+  <span class="kd">public</span> <span class="no">UUID</span> <span class="nf">getId</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">id</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setId</span><span class="o">(</span><span class="no">UUID</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">id</span> <span class="o">=</span> <span class="n">id</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getFullName</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">fullName</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setFullName</span><span class="o">(</span><span class="nc">String</span> <span class="n">fullName</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">fullName</span> <span class="o">=</span> <span class="n">fullName</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getEmail</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">email</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setEmail</span><span class="o">(</span><span class="nc">String</span> <span class="n">email</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">email</span> <span class="o">=</span> <span class="n">email</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getAddress</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">address</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setAddress</span><span class="o">(</span><span class="nc">String</span> <span class="n">address</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">address</span> <span class="o">=</span> <span class="n">address</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getPhone</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">phone</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setPhone</span><span class="o">(</span><span class="nc">String</span> <span class="n">phone</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">phone</span> <span class="o">=</span> <span class="n">phone</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="nc">Date</span> <span class="nf">getDob</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">dob</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setDob</span><span class="o">(</span><span class="nc">Date</span> <span class="n">dob</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">dob</span> <span class="o">=</span> <span class="n">dob</span><span class="o">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+
+
+
 </code></pre></div></div>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-  <span class="nd">@Entity</span>
-  <span class="cm">/**
-      This entity is used for secondary DB with the schema = "mydb"
-  **/</span>
-  <span class="nd">@Table</span><span class="o">(</span><span class="n">schema</span> <span class="o">=</span> <span class="s">"mydb"</span><span class="o">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s">"new_table"</span><span class="o">)</span>
-  <span class="kd">public</span> <span class="kd">class</span> <span class="nc">NewTableEntity</span> <span class="o">{</span>
+<span class="kn">package</span> <span class="nn">com.springboot.data.jpa.multi.datasource.entity.secondary</span><span class="o">;</span>
 
-    <span class="nd">@Id</span>
-    <span class="kd">private</span> <span class="nc">String</span> <span class="n">id</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.hibernate.annotations.Type</span><span class="o">;</span>
 
-    <span class="nd">@Column</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"createdDate"</span><span class="o">)</span>
-    <span class="kd">private</span> <span class="nc">String</span> <span class="n">createdDate</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.persistence.Entity</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.persistence.GeneratedValue</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.persistence.Id</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.persistence.Table</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Date</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.UUID</span><span class="o">;</span>
 
-    <span class="nd">@Column</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"title"</span><span class="o">)</span>
-    <span class="kd">private</span> <span class="nc">String</span> <span class="n">title</span><span class="o">;</span>
+<span class="nd">@Entity</span>
+<span class="nd">@Table</span><span class="o">(</span><span class="n">schema</span> <span class="o">=</span> <span class="s">"secondaryDb"</span><span class="o">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s">"customers"</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CustomerEntity</span> <span class="o">{</span>
 
-    <span class="nd">@Column</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"content"</span><span class="o">)</span>
-    <span class="kd">private</span> <span class="nc">String</span> <span class="n">content</span><span class="o">;</span>
+  <span class="nd">@Id</span>
+  <span class="nd">@GeneratedValue</span>
+  <span class="nd">@Type</span><span class="o">(</span><span class="n">type</span><span class="o">=</span><span class="s">"uuid-char"</span><span class="o">)</span>
+  <span class="kd">private</span> <span class="no">UUID</span> <span class="n">id</span><span class="o">;</span>
+  <span class="kd">private</span> <span class="nc">String</span> <span class="n">fullName</span><span class="o">;</span>
+  <span class="kd">private</span> <span class="nc">String</span> <span class="n">email</span><span class="o">;</span>
+  <span class="kd">private</span> <span class="nc">String</span> <span class="n">address</span><span class="o">;</span>
+  <span class="kd">private</span> <span class="nc">String</span> <span class="n">phone</span><span class="o">;</span>
+  <span class="kd">private</span> <span class="nc">Date</span> <span class="n">dob</span><span class="o">;</span>
 
-      <span class="o">...........</span>
+  <span class="kd">public</span> <span class="no">UUID</span> <span class="nf">getId</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">id</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setId</span><span class="o">(</span><span class="no">UUID</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">id</span> <span class="o">=</span> <span class="n">id</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getFullName</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">fullName</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setFullName</span><span class="o">(</span><span class="nc">String</span> <span class="n">fullName</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">fullName</span> <span class="o">=</span> <span class="n">fullName</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getEmail</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">email</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setEmail</span><span class="o">(</span><span class="nc">String</span> <span class="n">email</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">email</span> <span class="o">=</span> <span class="n">email</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getAddress</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">address</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setAddress</span><span class="o">(</span><span class="nc">String</span> <span class="n">address</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">address</span> <span class="o">=</span> <span class="n">address</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getPhone</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">phone</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setPhone</span><span class="o">(</span><span class="nc">String</span> <span class="n">phone</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">phone</span> <span class="o">=</span> <span class="n">phone</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="nc">Date</span> <span class="nf">getDob</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">dob</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setDob</span><span class="o">(</span><span class="nc">Date</span> <span class="n">dob</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">dob</span> <span class="o">=</span> <span class="n">dob</span><span class="o">;</span>
+  <span class="o">}</span>
+
+<span class="o">}</span>
+
 </code></pre></div></div>
 
 <h2 id="step-8-using-transaction-of-primary-and-secondary-datasource-in-service-class">STEP 8: USING TRANSACTION OF PRIMARY AND SECONDARY DATASOURCE IN SERVICE CLASS</h2>
@@ -456,96 +573,99 @@
 </ul>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-  <span class="kn">package</span> <span class="nn">com.example.workflow.service</span><span class="o">;</span>
+<span class="kn">package</span> <span class="nn">com.springboot.data.jpa.multi.datasource.service</span><span class="o">;</span>
 
-  <span class="kn">import</span> <span class="nn">com.example.workflow.camunda.entity.NewTableEntity</span><span class="o">;</span>
-  <span class="kn">import</span> <span class="nn">com.example.workflow.camunda.repository.CamundaNewTableRepository</span><span class="o">;</span>
-  <span class="kn">import</span> <span class="nn">com.example.workflow.model.NewTable</span><span class="o">;</span>
-  <span class="kn">import</span> <span class="nn">com.example.workflow.secondary.repository.MyNewTableRepository</span><span class="o">;</span>
-  <span class="kn">import</span> <span class="nn">org.camunda.bpm.engine.HistoryService</span><span class="o">;</span>
-  <span class="kn">import</span> <span class="nn">org.camunda.bpm.engine.history.HistoricTaskInstance</span><span class="o">;</span>
-  <span class="kn">import</span> <span class="nn">org.camunda.bpm.engine.history.HistoricVariableInstance</span><span class="o">;</span>
-  <span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="o">;</span>
-  <span class="kn">import</span> <span class="nn">org.springframework.stereotype.Service</span><span class="o">;</span>
-  <span class="kn">import</span> <span class="nn">org.springframework.transaction.annotation.EnableTransactionManagement</span><span class="o">;</span>
-  <span class="kn">import</span> <span class="nn">org.springframework.transaction.annotation.Transactional</span><span class="o">;</span>
-  <span class="kn">import</span> <span class="nn">org.springframework.transaction.interceptor.TransactionAspectSupport</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.springboot.data.jpa.multi.datasource.entity.primary.PrimaryCustomerEntity</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.springboot.data.jpa.multi.datasource.entity.secondary.CustomerEntity</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.springboot.data.jpa.multi.datasource.model.Customer</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.springboot.data.jpa.multi.datasource.repository.primary.PrimaryCustomerRepository</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.springboot.data.jpa.multi.datasource.repository.secondary.CustomerRepository</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.stereotype.Service</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.transaction.annotation.EnableTransactionManagement</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.transaction.annotation.Transactional</span><span class="o">;</span>
 
+<span class="kn">import</span> <span class="nn">java.util.Arrays</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.UUID</span><span class="o">;</span>
 
-  <span class="kn">import</span> <span class="nn">java.util.*</span><span class="o">;</span>
+<span class="nd">@Service</span>
+<span class="cm">/**
+ use  @EnableTransactionManagement to enable using Transactional Management
+ **/</span>
+<span class="nd">@EnableTransactionManagement</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">GeneralService</span> <span class="o">{</span>
 
-  <span class="nd">@Service</span>
+  <span class="nd">@Autowired</span>
+  <span class="kd">private</span> <span class="nc">PrimaryCustomerRepository</span> <span class="n">primaryCustomerRepository</span><span class="o">;</span>
+
+  <span class="nd">@Autowired</span>
+  <span class="kd">private</span> <span class="nc">CustomerRepository</span> <span class="n">customerRepository</span><span class="o">;</span>
+
   <span class="cm">/**
-    use  @EnableTransactionManagement to enable using Transactional Management
-  **/</span>
-  <span class="nd">@EnableTransactionManagement</span>
-  <span class="kd">public</span> <span class="kd">class</span> <span class="nc">GeneralService</span> <span class="o">{</span>
-
-
-      <span class="nd">@Autowired</span>
-      <span class="kd">private</span> <span class="nc">CamundaNewTableRepository</span> <span class="n">camundaNewTableRepository</span><span class="o">;</span>
-
-      <span class="nd">@Autowired</span>
-      <span class="kd">private</span> <span class="nc">MyNewTableRepository</span> <span class="n">myNewTableRepository</span><span class="o">;</span>
-
-      <span class="nd">@Autowired</span>
-      <span class="kd">private</span> <span class="nc">HistoryService</span> <span class="n">historyService</span><span class="o">;</span>
-
-      <span class="cm">/**
-          use @Transactional with value (bean name of primaryTransactionManager)
-          so the Jpa will know which transaction that we want to use.
-      **/</span>
-      <span class="nd">@Transactional</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">"primaryTransactionManager"</span><span class="o">)</span>
-      <span class="kd">public</span> <span class="nc">String</span> <span class="nf">saveDataToCamundaNewTable</span><span class="o">(</span><span class="nc">NewTable</span> <span class="n">newTable</span><span class="o">)</span> <span class="o">{</span>
-          <span class="nc">NewTableEntity</span> <span class="n">entity</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">NewTableEntity</span><span class="o">();</span>
-          <span class="nc">String</span> <span class="n">id</span> <span class="o">=</span> <span class="no">UUID</span><span class="o">.</span><span class="na">randomUUID</span><span class="o">().</span><span class="na">toString</span><span class="o">();</span>
-          <span class="n">entity</span><span class="o">.</span><span class="na">setId</span><span class="o">(</span><span class="n">id</span><span class="o">);</span>
-          <span class="n">entity</span><span class="o">.</span><span class="na">setCreatedDate</span><span class="o">(</span><span class="k">new</span> <span class="nc">Date</span><span class="o">().</span><span class="na">toString</span><span class="o">());</span>
-          <span class="n">entity</span><span class="o">.</span><span class="na">setTitle</span><span class="o">(</span><span class="n">newTable</span><span class="o">.</span><span class="na">getTitle</span><span class="o">());</span>
-          <span class="n">entity</span><span class="o">.</span><span class="na">setContent</span><span class="o">(</span><span class="n">newTable</span><span class="o">.</span><span class="na">getContent</span><span class="o">());</span>
-          <span class="n">camundaNewTableRepository</span><span class="o">.</span><span class="na">save</span><span class="o">(</span><span class="n">entity</span><span class="o">);</span>
-          <span class="k">return</span> <span class="n">id</span><span class="o">;</span>
-      <span class="o">}</span>
-
-      <span class="cm">/**
-        use @Transactional with value (bean name of secondaryTransactionManager)
-        so the Jpa will know which transaction that we want to use.
-      **/</span>
-      <span class="nd">@Transactional</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">"secondaryTransactionManager"</span><span class="o">)</span>
-      <span class="kd">public</span> <span class="nc">String</span> <span class="nf">saveDataToMyDB</span><span class="o">(</span><span class="nc">NewTable</span> <span class="n">newTable</span><span class="o">)</span> <span class="o">{</span>
-          <span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">workflow</span><span class="o">.</span><span class="na">secondary</span><span class="o">.</span><span class="na">entity</span><span class="o">.</span><span class="na">NewTableEntity</span> <span class="n">entity</span> <span class="o">=</span> <span class="k">new</span> <span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">workflow</span><span class="o">.</span><span class="na">secondary</span><span class="o">.</span><span class="na">entity</span><span class="o">.</span><span class="na">NewTableEntity</span><span class="o">();</span>
-          <span class="nc">String</span> <span class="n">id</span> <span class="o">=</span> <span class="no">UUID</span><span class="o">.</span><span class="na">randomUUID</span><span class="o">().</span><span class="na">toString</span><span class="o">();</span>
-          <span class="n">entity</span><span class="o">.</span><span class="na">setId</span><span class="o">(</span><span class="n">id</span><span class="o">);</span>
-          <span class="n">entity</span><span class="o">.</span><span class="na">setCreatedDate</span><span class="o">(</span><span class="k">new</span> <span class="nc">Date</span><span class="o">().</span><span class="na">toString</span><span class="o">());</span>
-          <span class="n">entity</span><span class="o">.</span><span class="na">setTitle</span><span class="o">(</span><span class="n">newTable</span><span class="o">.</span><span class="na">getTitle</span><span class="o">());</span>
-          <span class="n">entity</span><span class="o">.</span><span class="na">setContent</span><span class="o">(</span><span class="n">newTable</span><span class="o">.</span><span class="na">getContent</span><span class="o">());</span>
-          <span class="n">myNewTableRepository</span><span class="o">.</span><span class="na">save</span><span class="o">(</span><span class="n">entity</span><span class="o">);</span>
-          <span class="k">return</span> <span class="n">id</span><span class="o">;</span>
-      <span class="o">}</span>
-
-      <span class="cm">/**
-        use @Transactional with value (bean name of chainedTransactionManager)
-        so the Jpa will know which transaction that we want to use.
-        If saving data to secondary is failed, so the data
-        which is saved in primary DB will be reverted.
-      **/</span>
-      <span class="nd">@Transactional</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">"chainedTransactionManager"</span><span class="o">)</span>
-      <span class="kd">public</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="nf">saveDataToAllDB</span><span class="o">(</span><span class="nc">NewTable</span> <span class="n">newTable</span><span class="o">)</span> <span class="o">{</span>
-          <span class="nc">String</span> <span class="n">camundaId</span> <span class="o">=</span> <span class="n">saveDataToCamundaNewTable</span><span class="o">(</span><span class="n">newTable</span><span class="o">);</span>
-          <span class="nc">String</span> <span class="n">myDBId</span> <span class="o">=</span> <span class="n">saveDataToMyDB</span><span class="o">(</span><span class="n">newTable</span><span class="o">);</span>
-        <span class="cm">/**
-          this comment function is used for revert all data in DB
-          when this function is executed successfully
-        **/</span>
-        <span class="c1">// TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();</span>
-
-          <span class="k">return</span> <span class="nc">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="n">camundaId</span><span class="o">,</span> <span class="n">myDBId</span><span class="o">);</span>
-      <span class="o">}</span>
+    use @Transactional with value (bean name of primaryTransactionManager)
+    so the Jpa will know which transaction that we want to use.
+    **/</span>
+  <span class="nd">@Transactional</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">"primaryTransactionManager"</span><span class="o">)</span>
+  <span class="kd">public</span> <span class="no">UUID</span> <span class="nf">saveDataToPrimaryCustomerSchema</span><span class="o">(</span><span class="nc">Customer</span> <span class="n">customer</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nc">PrimaryCustomerEntity</span> <span class="n">primaryCustomerEntity</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">PrimaryCustomerEntity</span><span class="o">();</span>
+    <span class="n">primaryCustomerEntity</span><span class="o">.</span><span class="na">setAddress</span><span class="o">(</span><span class="n">customer</span><span class="o">.</span><span class="na">getAddress</span><span class="o">());</span>
+    <span class="n">primaryCustomerEntity</span><span class="o">.</span><span class="na">setEmail</span><span class="o">(</span><span class="n">customer</span><span class="o">.</span><span class="na">getEmail</span><span class="o">());</span>
+    <span class="n">primaryCustomerEntity</span><span class="o">.</span><span class="na">setFullName</span><span class="o">(</span><span class="n">customer</span><span class="o">.</span><span class="na">getFullName</span><span class="o">());</span>
+    <span class="n">primaryCustomerEntity</span><span class="o">.</span><span class="na">setPhone</span><span class="o">(</span><span class="n">customer</span><span class="o">.</span><span class="na">getPhone</span><span class="o">());</span>
+    <span class="n">primaryCustomerEntity</span><span class="o">.</span><span class="na">setDob</span><span class="o">(</span><span class="n">customer</span><span class="o">.</span><span class="na">getDob</span><span class="o">());</span>
+    <span class="k">return</span> <span class="n">primaryCustomerRepository</span><span class="o">.</span><span class="na">save</span><span class="o">(</span><span class="n">primaryCustomerEntity</span><span class="o">).</span><span class="na">getId</span><span class="o">();</span>
   <span class="o">}</span>
+
+  <span class="cm">/**
+    use @Transactional with value (bean name of secondaryTransactionManager)
+    so the Jpa will know which transaction that we want to use.
+    **/</span>
+  <span class="nd">@Transactional</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">"secondaryTransactionManager"</span><span class="o">)</span>
+  <span class="kd">public</span> <span class="no">UUID</span> <span class="nf">saveDataToSecondaryCustomerSchema</span><span class="o">(</span><span class="nc">Customer</span> <span class="n">customer</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nc">CustomerEntity</span> <span class="n">customerEntity</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">CustomerEntity</span><span class="o">();</span>
+    <span class="n">customerEntity</span><span class="o">.</span><span class="na">setAddress</span><span class="o">(</span><span class="n">customer</span><span class="o">.</span><span class="na">getAddress</span><span class="o">());</span>
+    <span class="n">customerEntity</span><span class="o">.</span><span class="na">setEmail</span><span class="o">(</span><span class="n">customer</span><span class="o">.</span><span class="na">getEmail</span><span class="o">());</span>
+    <span class="n">customerEntity</span><span class="o">.</span><span class="na">setFullName</span><span class="o">(</span><span class="n">customer</span><span class="o">.</span><span class="na">getFullName</span><span class="o">());</span>
+    <span class="n">customerEntity</span><span class="o">.</span><span class="na">setPhone</span><span class="o">(</span><span class="n">customer</span><span class="o">.</span><span class="na">getPhone</span><span class="o">());</span>
+    <span class="n">customerEntity</span><span class="o">.</span><span class="na">setDob</span><span class="o">(</span><span class="n">customer</span><span class="o">.</span><span class="na">getDob</span><span class="o">());</span>
+    <span class="k">return</span> <span class="n">customerRepository</span><span class="o">.</span><span class="na">save</span><span class="o">(</span><span class="n">customerEntity</span><span class="o">).</span><span class="na">getId</span><span class="o">();</span>
+  <span class="o">}</span>
+
+  <span class="cm">/**
+    use @Transactional with value (bean name of chainedTransactionManager)
+    so the Jpa will know which transaction that we want to use.
+    If saving data to secondary is failed, so the data
+    which is saved in primary DB will be reverted.
+    **/</span>
+  <span class="nd">@Transactional</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">"chainedTransactionManager"</span><span class="o">)</span>
+  <span class="kd">public</span> <span class="nc">List</span><span class="o">&lt;</span><span class="no">UUID</span><span class="o">&gt;</span> <span class="nf">saveDataToAllSchemas</span><span class="o">(</span><span class="nc">Customer</span> <span class="n">customer</span><span class="o">)</span> <span class="o">{</span>
+    <span class="no">UUID</span> <span class="n">primaryCustomerId</span> <span class="o">=</span> <span class="n">saveDataToPrimaryCustomerSchema</span><span class="o">(</span><span class="n">customer</span><span class="o">);</span>
+    <span class="no">UUID</span> <span class="n">customerId</span> <span class="o">=</span> <span class="n">saveDataToSecondaryCustomerSchema</span><span class="o">(</span><span class="n">customer</span><span class="o">);</span>
+    <span class="cm">/**
+      this comment function is used for revert all data in DB
+      when this function is executed successfully
+      **/</span>
+    <span class="c1">// TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();</span>
+    <span class="k">return</span> <span class="nc">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="n">primaryCustomerId</span><span class="o">,</span> <span class="n">customerId</span><span class="o">);</span>
+  <span class="o">}</span>
+
+<span class="o">}</span>
 
 </code></pre></div></div>
 
 <h2 id="step-9-testing">STEP 9: TESTING</h2>
+
+<ul>
+  <li>Now, execute apis to primary datasource, secondary datasource and for all schemas, you can see the results as below</li>
+</ul>
+
+<p><a href="/assets/images/spring-boot-multi-datasource-project-primary-db-test.PNG"><img src="/assets/images/spring-boot-multi-datasource-project-primary-db-test.PNG" alt="&quot;test Data in primary database&quot;" title="test Data in primary database" /></a></p>
+
+<p><a href="/assets/images/spring-boot-multi-datasource-project-secondary-db-test.PNG"><img src="/assets/images/spring-boot-multi-datasource-project-secondary-db-test.PNG" alt="&quot;test Data in secondary database&quot;" title="test Data in secondary database" /></a></p>
+
+<p><a href="/assets/images/spring-boot-multi-datasource-project-all-dbs-test.PNG"><img src="/assets/images/spring-boot-multi-datasource-project-all-dbs-test.PNG" alt="&quot;test Data in all databases&quot;" title="test Data in all databases" /></a>
+spring-boot-multi-datasource-project-all-dbs-test.PNG</p>
 
 <ul>
   <li>After saving data into two databases, we can go to primary and secondary database to check the data as the images below:</li>
@@ -554,6 +674,11 @@
 <p><a href="/assets/images/spring-boot-multi-datasource-project-primary-db-table.JPG"><img src="/assets/images/spring-boot-multi-datasource-project-primary-db-table.JPG" alt="&quot;Data in primary database (camunda schema)&quot;" title="Data in primary database (camunda schema)" /></a></p>
 
 <p><a href="/assets/images/spring-boot-multi-datasource-project-secondary-db-table.JPG"><img src="/assets/images/spring-boot-multi-datasource-project-secondary-db-table.JPG" alt="&quot;Data in secondary database (mydb schema)&quot;" title="Data in secondary database (mydb schema)" /></a>.</p>
+
+<h2 id="references">REFERENCES</h2>
+<ul>
+  <li>You can view <a href="https://github.com/minhducnguyen189/com.springboot.data/tree/master/jpa-multi-datasource">all source code here</a></li>
+</ul>
 
     </div><a class="u-url" href="/java/2021/06/06/java-springboot-multi-datasource.html" hidden></a>
   </article>
