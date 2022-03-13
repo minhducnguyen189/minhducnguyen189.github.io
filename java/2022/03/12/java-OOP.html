@@ -21,8 +21,8 @@
 <meta property="og:title" content="Object Oriented Programming (OOP)" />
 <meta name="author" content="Duc Nguyen" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="What Is The Object? Every entity in this universe can be an object. An object can have attributes and behaviors. Attributes: are properties of the object, for ex: Name, Color, Size and so on. Behaviors: actions of the object, for ex: Do, Move, Run, and so on. For example, we have a motorcycle object. So this motorcycle object can have attributes: Name: Honda Color: Black Made-In: Japanese Model: Wave This motorcycle object also can have behaviors; Run Stop Start Engine" />
-<meta property="og:description" content="What Is The Object? Every entity in this universe can be an object. An object can have attributes and behaviors. Attributes: are properties of the object, for ex: Name, Color, Size and so on. Behaviors: actions of the object, for ex: Do, Move, Run, and so on. For example, we have a motorcycle object. So this motorcycle object can have attributes: Name: Honda Color: Black Made-In: Japanese Model: Wave This motorcycle object also can have behaviors; Run Stop Start Engine" />
+<meta name="description" content="Hi there! Let’s explore some general knowleadges and briefly definitions in programming. I hope that this website can help people saving time in learning, also give some motivations for those who have choice the developer path." />
+<meta property="og:description" content="Hi there! Let’s explore some general knowleadges and briefly definitions in programming. I hope that this website can help people saving time in learning, also give some motivations for those who have choice the developer path." />
 <link rel="canonical" href="/java/2022/03/12/java-OOP.html" />
 <meta property="og:url" content="/java/2022/03/12/java-OOP.html" />
 <meta property="og:site_name" content="KaizenThink" />
@@ -31,7 +31,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Object Oriented Programming (OOP)" />
 <script type="application/ld+json">
-{"mainEntityOfPage":{"@type":"WebPage","@id":"/java/2022/03/12/java-OOP.html"},"@type":"BlogPosting","url":"/java/2022/03/12/java-OOP.html","author":{"@type":"Person","name":"Duc Nguyen"},"headline":"Object Oriented Programming (OOP)","dateModified":"2022-03-12T13:15:47+07:00","datePublished":"2022-03-12T13:15:47+07:00","description":"What Is The Object? Every entity in this universe can be an object. An object can have attributes and behaviors. Attributes: are properties of the object, for ex: Name, Color, Size and so on. Behaviors: actions of the object, for ex: Do, Move, Run, and so on. For example, we have a motorcycle object. So this motorcycle object can have attributes: Name: Honda Color: Black Made-In: Japanese Model: Wave This motorcycle object also can have behaviors; Run Stop Start Engine","@context":"https://schema.org"}</script>
+{"mainEntityOfPage":{"@type":"WebPage","@id":"/java/2022/03/12/java-OOP.html"},"author":{"@type":"Person","name":"Duc Nguyen"},"@type":"BlogPosting","description":"Hi there! Let’s explore some general knowleadges and briefly definitions in programming. I hope that this website can help people saving time in learning, also give some motivations for those who have choice the developer path.","url":"/java/2022/03/12/java-OOP.html","headline":"Object Oriented Programming (OOP)","dateModified":"2022-03-12T13:15:47+07:00","datePublished":"2022-03-12T13:15:47+07:00","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="KaizenThink" /><!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZ8G5007GK"></script>
@@ -127,7 +127,35 @@
     </header>
   
     <div class="post-content e-content" itemprop="articleBody">
-      <h2 id="what-is-the-object">What Is The Object?</h2>
+      <ul id="markdown-toc">
+  <li><a href="#what-is-the-object" id="markdown-toc-what-is-the-object">What Is The Object?</a></li>
+  <li><a href="#what-is-the-class" id="markdown-toc-what-is-the-class">What Is The Class?</a></li>
+  <li><a href="#what-is-the-oop" id="markdown-toc-what-is-the-oop">What Is The OOP?</a></li>
+  <li><a href="#what-is-the-encapsulation-in-oop" id="markdown-toc-what-is-the-encapsulation-in-oop">What Is The Encapsulation In OOP?</a>    <ul>
+      <li><a href="#encapsulation-example" id="markdown-toc-encapsulation-example">Encapsulation Example</a></li>
+    </ul>
+  </li>
+  <li><a href="#what-is-the-abstraction-in-oop" id="markdown-toc-what-is-the-abstraction-in-oop">What Is The Abstraction In OOP?</a>    <ul>
+      <li><a href="#abstract-class" id="markdown-toc-abstract-class">Abstract Class</a></li>
+      <li><a href="#abstraction-example" id="markdown-toc-abstraction-example">Abstraction Example</a></li>
+    </ul>
+  </li>
+  <li><a href="#what-is-the-inheritance-in-oop" id="markdown-toc-what-is-the-inheritance-in-oop">What Is The Inheritance In OOP?</a>    <ul>
+      <li><a href="#java-inheritance-syntax" id="markdown-toc-java-inheritance-syntax">Java Inheritance Syntax</a></li>
+      <li><a href="#inheritance-example" id="markdown-toc-inheritance-example">Inheritance Example</a></li>
+      <li><a href="#what-is-the-method-overriding" id="markdown-toc-what-is-the-method-overriding">What Is The Method Overriding?</a></li>
+      <li><a href="#usage-of-java-method-overriding" id="markdown-toc-usage-of-java-method-overriding">Usage Of Java Method Overriding</a></li>
+      <li><a href="#rules-for-java-method-overriding" id="markdown-toc-rules-for-java-method-overriding">Rules For Java Method Overriding</a></li>
+    </ul>
+  </li>
+  <li><a href="#what-is-the-polymorphims-in-oop" id="markdown-toc-what-is-the-polymorphims-in-oop">What Is The Polymorphims In OOP?</a>    <ul>
+      <li><a href="#polymorphims-example" id="markdown-toc-polymorphims-example">Polymorphims Example</a></li>
+    </ul>
+  </li>
+  <li><a href="#references" id="markdown-toc-references">References</a></li>
+</ul>
+
+<h2 id="what-is-the-object">What Is The Object?</h2>
 <ul>
   <li>Every entity in this universe can be an <code class="language-plaintext highlighter-rouge">object</code>. An <code class="language-plaintext highlighter-rouge">object</code> can have <code class="language-plaintext highlighter-rouge">attributes</code> and <code class="language-plaintext highlighter-rouge">behaviors</code>.
     <ul>
@@ -193,37 +221,37 @@
 </ul>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Motorcycle</span> <span class="o">{</span>
-	
-	<span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
-	<span class="kd">private</span> <span class="nc">String</span> <span class="n">color</span><span class="o">;</span>
-	<span class="kd">private</span> <span class="nc">String</span> <span class="n">model</span><span class="o">;</span>
-	
-	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>  
-    <span class="k">return</span> <span class="n">name</span><span class="o">;</span>  
-	<span class="o">}</span>  
+  <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Motorcycle</span> <span class="o">{</span>
+    
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">color</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">model</span><span class="o">;</span>
+    
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>  
+      <span class="k">return</span> <span class="n">name</span><span class="o">;</span>  
+    <span class="o">}</span>  
 
-	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>  
-    <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>  
-	<span class="o">}</span>  
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>  
+      <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>  
+    <span class="o">}</span>  
 
-	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">getColor</span><span class="o">()</span> <span class="o">{</span>  
-    <span class="k">return</span> <span class="n">color</span><span class="o">;</span>  
-	<span class="o">}</span>  
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getColor</span><span class="o">()</span> <span class="o">{</span>  
+      <span class="k">return</span> <span class="n">color</span><span class="o">;</span>  
+    <span class="o">}</span>  
 
-	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setColor</span><span class="o">(</span><span class="nc">String</span> <span class="n">color</span><span class="o">)</span> <span class="o">{</span>  
-    <span class="k">this</span><span class="o">.</span><span class="na">color</span> <span class="o">=</span> <span class="n">color</span><span class="o">;</span>  
-	<span class="o">}</span>  
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setColor</span><span class="o">(</span><span class="nc">String</span> <span class="n">color</span><span class="o">)</span> <span class="o">{</span>  
+      <span class="k">this</span><span class="o">.</span><span class="na">color</span> <span class="o">=</span> <span class="n">color</span><span class="o">;</span>  
+    <span class="o">}</span>  
 
-	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">getModel</span><span class="o">()</span> <span class="o">{</span>  
-    <span class="k">return</span> <span class="n">model</span><span class="o">;</span>  
-	<span class="o">}</span>  
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getModel</span><span class="o">()</span> <span class="o">{</span>  
+      <span class="k">return</span> <span class="n">model</span><span class="o">;</span>  
+    <span class="o">}</span>  
 
-	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setModel</span><span class="o">(</span><span class="nc">String</span> <span class="n">model</span><span class="o">)</span> <span class="o">{</span>  
-    <span class="k">this</span><span class="o">.</span><span class="na">model</span> <span class="o">=</span> <span class="n">model</span><span class="o">;</span>  
-	<span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setModel</span><span class="o">(</span><span class="nc">String</span> <span class="n">model</span><span class="o">)</span> <span class="o">{</span>  
+      <span class="k">this</span><span class="o">.</span><span class="na">model</span> <span class="o">=</span> <span class="n">model</span><span class="o">;</span>  
+    <span class="o">}</span>
 
-<span class="o">}</span>
+  <span class="o">}</span>
 
 
 </code></pre></div></div>
@@ -233,9 +261,8 @@
 </ul>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-	
-	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-		
+  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+    
     <span class="nc">Motorcycle</span> <span class="n">motorcycle</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Motorcycle</span><span class="o">();</span>
     <span class="n">motorcycle</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="s">"Wave"</span><span class="o">);</span>
     <span class="n">motorcycle</span><span class="o">.</span><span class="na">setColor</span><span class="o">(</span><span class="s">"Black"</span><span class="o">);</span>
@@ -245,9 +272,7 @@
     <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">motorcycle</span><span class="o">.</span><span class="na">getColor</span><span class="o">());</span>
     <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">motorcycle</span><span class="o">.</span><span class="na">getModel</span><span class="o">());</span>
 
-	<span class="o">}</span>
-
-
+  <span class="o">}</span>
 
 </code></pre></div></div>
 
@@ -285,9 +310,9 @@ Wave Alpha
 </ul>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-	<span class="kn">package</span> <span class="nn">com.java.core.abstraction</span><span class="o">;</span>
+  <span class="kn">package</span> <span class="nn">com.java.core.abstraction</span><span class="o">;</span>
 
-	<span class="kd">public</span> <span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">Employee</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">Employee</span> <span class="o">{</span>
 
     <span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
     <span class="kd">private</span> <span class="nc">String</span> <span class="n">address</span><span class="o">;</span>
@@ -334,7 +359,7 @@ Wave Alpha
               <span class="s">", id='"</span> <span class="o">+</span> <span class="n">id</span> <span class="o">+</span> <span class="sc">'\''</span> <span class="o">+</span>
               <span class="sc">'}'</span><span class="o">;</span>
     <span class="o">}</span>
-	<span class="o">}</span>
+  <span class="o">}</span>
 
 
 </code></pre></div></div>
@@ -344,9 +369,9 @@ Wave Alpha
 </ul>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-	<span class="kn">package</span> <span class="nn">com.java.core.abstraction</span><span class="o">;</span>
+  <span class="kn">package</span> <span class="nn">com.java.core.abstraction</span><span class="o">;</span>
 
-	<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Developer</span> <span class="kd">extends</span> <span class="nc">Employee</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Developer</span> <span class="kd">extends</span> <span class="nc">Employee</span> <span class="o">{</span>
 
     <span class="kd">public</span> <span class="nf">Developer</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">,</span> <span class="nc">String</span> <span class="n">address</span><span class="o">,</span> <span class="nc">String</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span>
       <span class="kd">super</span><span class="o">(</span><span class="n">name</span><span class="o">,</span> <span class="n">address</span><span class="o">,</span> <span class="n">id</span><span class="o">);</span>
@@ -361,7 +386,8 @@ Wave Alpha
     <span class="kd">protected</span> <span class="kt">double</span> <span class="nf">getBonus</span><span class="o">()</span> <span class="o">{</span>
       <span class="k">return</span> <span class="mi">50</span><span class="o">;</span>
     <span class="o">}</span>
-	<span class="o">}</span>
+  
+  <span class="o">}</span>
 
 
 </code></pre></div></div>
@@ -375,18 +401,18 @@ Wave Alpha
 </ul>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-	<span class="kn">package</span> <span class="nn">com.java.core.abstraction</span><span class="o">;</span>
+  <span class="kn">package</span> <span class="nn">com.java.core.abstraction</span><span class="o">;</span>
 
-	<span class="kd">public</span> <span class="kd">class</span> <span class="nc">JavaAbstractionMain</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="kd">class</span> <span class="nc">JavaAbstractionMain</span> <span class="o">{</span>
 
     <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
       <span class="nc">Employee</span> <span class="n">developer</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Developer</span><span class="o">(</span><span class="s">"Duc"</span><span class="o">,</span> <span class="s">"HCM"</span><span class="o">,</span> <span class="s">"12345"</span><span class="o">);</span>
       <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">developer</span><span class="o">);</span>
       <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Base-Salary: "</span> <span class="o">+</span> <span class="n">developer</span><span class="o">.</span><span class="na">getBaseSalary</span><span class="o">());</span>
       <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Bonus: "</span> <span class="o">+</span> <span class="n">developer</span><span class="o">.</span><span class="na">getBonus</span><span class="o">());</span>
-    <span class="o">}</span>
 
-	<span class="o">}</span>
+
+  <span class="o">}</span>
 
 </code></pre></div></div>
 
@@ -424,9 +450,9 @@ Process finished with exit code 0
 </ul>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-	<span class="kn">package</span> <span class="nn">com.java.core.inheritance</span><span class="o">;</span>
+  <span class="kn">package</span> <span class="nn">com.java.core.inheritance</span><span class="o">;</span>
 
-	<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Animal</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Animal</span> <span class="o">{</span>
 
     <span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
 
@@ -445,7 +471,8 @@ Process finished with exit code 0
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
       <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
     <span class="o">}</span>
-	<span class="o">}</span>
+
+  <span class="o">}</span>
 
 </code></pre></div></div>
 
@@ -454,9 +481,9 @@ Process finished with exit code 0
 </ul>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-	<span class="kn">package</span> <span class="nn">com.java.core.inheritance</span><span class="o">;</span>
+  <span class="kn">package</span> <span class="nn">com.java.core.inheritance</span><span class="o">;</span>
 
-	<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Dog</span> <span class="kd">extends</span> <span class="nc">Animal</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Dog</span> <span class="kd">extends</span> <span class="nc">Animal</span> <span class="o">{</span>
 
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">bark</span><span class="o">()</span> <span class="o">{</span>
       <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"barking..."</span><span class="o">);</span>
@@ -467,7 +494,7 @@ Process finished with exit code 0
       <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"sleeping at human's house!"</span><span class="o">);</span>
     <span class="o">}</span>
 
-	<span class="o">}</span>
+  <span class="o">}</span>
 
 </code></pre></div></div>
 
@@ -476,20 +503,20 @@ Process finished with exit code 0
 </ul>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-	<span class="kn">package</span> <span class="nn">com.java.core.inheritance</span><span class="o">;</span>  
+  <span class="kn">package</span> <span class="nn">com.java.core.inheritance</span><span class="o">;</span>  
 
-	<span class="kd">public</span> <span class="kd">class</span> <span class="nc">JavaInheritanceMain</span> <span class="o">{</span>  
+  <span class="kd">public</span> <span class="kd">class</span> <span class="nc">JavaInheritanceMain</span> <span class="o">{</span>  
 
     <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>  
       <span class="nc">Dog</span> <span class="n">dog</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Dog</span><span class="o">();</span>  
       <span class="n">dog</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="s">"Bulldog"</span><span class="o">);</span>  
 
       <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">dog</span><span class="o">.</span><span class="na">getName</span><span class="o">());</span>  
-      <span class="n">dog</span><span class="o">.</span><span class="na">eat</span><span class="o">();</span>  
+      <span class="n">dog</span><span class="o">.</span><span class="na">eat</span> <span class="o">);</span>  
       <span class="n">dog</span><span class="o">.</span><span class="na">bark</span><span class="o">();</span>  
       <span class="n">dog</span><span class="o">.</span><span class="na">sleep</span><span class="o">();</span>  
     <span class="o">}</span>
-	<span class="o">}</span>
+  <span class="o">}</span>
 
 </code></pre></div></div>
 
@@ -532,9 +559,9 @@ sleeping at human's house!
 <h3 id="polymorphims-example">Polymorphims Example</h3>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-	<span class="kn">package</span> <span class="nn">com.java.core.polymorphims</span><span class="o">;</span>  
+  <span class="kn">package</span> <span class="nn">com.java.core.polymorphims</span><span class="o">;</span>  
 
-	<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Animal</span> <span class="o">{</span>  
+  <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Animal</span> <span class="o">{</span>  
 
     <span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>  
 
@@ -548,36 +575,36 @@ sleeping at human's house!
 
     <span class="nd">@Override</span>  
     <span class="kd">public</span> <span class="nc">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>  
-      <span class="k">return</span> <span class="s">"Animal{"</span> <span class="o">+</span>  
+      <span class="k">return</span> <span class="s">"  nimal{"</span> <span class="o">+</span>  
               <span class="s">"name='"</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="sc">'\''</span> <span class="o">+</span>  
               <span class="sc">'}'</span><span class="o">;</span>  
-    <span class="o">}</span>  
-	<span class="o">}</span>
+    <span class="o">}</span>
+
+  <span class="o">}</span>
 
 </code></pre></div></div>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-	<span class="kn">package</span> <span class="nn">com.java.core.polymorphims</span><span class="o">;</span>  
+  <span class="kn">package</span> <span class="nn">com.java.core.polymorphims</span><span class="o">;</span>  
 
-	<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Vegetarian</span> <span class="o">{</span>  
+  <span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Vegetarian</span> <span class="o">{</span>  
 
-    <span class="nc">String</span> <span class="nf">eatVegetables</span><span class="o">();</span>  
-
-	<span class="o">}</span>
+    <span class="nc">String</span> <span class="nf">eatVegetables</span><span class="o">();</span>   
+  <span class="o">}</span>
 
 </code></pre></div></div>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-	<span class="kn">package</span> <span class="nn">com.java.core.polymorphims</span><span class="o">;</span>  
+  <span class="kn">package</span> <span class="nn">com.java.core.polymorphims</span><span class="o">;</span>  
 
-	<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Deer</span> <span class="kd">extends</span> <span class="nc">Animal</span> <span class="kd">implements</span> <span class="nc">Vegetarian</span> <span class="o">{</span>  
+  <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Deer</span> <span class="kd">extends</span> <span class="nc">Animal</span> <span class="kd">implements</span> <span class="nc">Vegetarian</span> <span class="o">{</span>  
 
     <span class="nd">@Override</span>  
     <span class="kd">public</span> <span class="nc">String</span> <span class="nf">eatVegetables</span><span class="o">()</span> <span class="o">{</span>  
         <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">" eating grass!"</span><span class="o">;</span>  
-    <span class="o">}</span>  
+    <span class="o">}</span>   
 
-	<span class="o">}</span>
+  <span class="o">}</span>
 
 </code></pre></div></div>
 
@@ -594,26 +621,26 @@ sleeping at human's house!
 </ul>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-<span class="kn">package</span> <span class="nn">com.java.core.polymorphims</span><span class="o">;</span>
+  <span class="kn">package</span> <span class="nn">com.java.core.polymorphims</span><span class="o">;</span>
 
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">JavaPolymorphimsMain</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="kd">class</span> <span class="nc">JavaPolymorphimsMain</span> <span class="o">{</span>
 
-  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-    <span class="nc">Deer</span> <span class="n">deer</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Deer</span><span class="o">();</span>
-    <span class="n">deer</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="s">"Deer"</span><span class="o">);</span>
-    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">deer</span><span class="o">.</span><span class="na">eatVegetables</span><span class="o">());</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+      <span class="nc">Deer</span> <span class="n">deer</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Deer</span><span class="o">();</span>
+      <span class="n">deer</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="s">"Deer"</span><span class="o">);</span>
+      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">deer</span><span class="o">.</span><span class="na">eatVegetables</span><span class="o">());</span>
 
-    <span class="nc">Animal</span> <span class="n">animal</span> <span class="o">=</span> <span class="n">deer</span><span class="o">;</span>
-    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">animal</span><span class="o">.</span><span class="na">getName</span><span class="o">());</span>
+      <span class="nc">Animal</span> <span class="n">animal</span> <span class="o">=</span> <span class="n">deer</span><span class="o">;</span>
+      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">animal</span><span class="o">.</span><span class="na">getName</span><span class="o">());</span>
 
-    <span class="nc">Vegetarian</span> <span class="n">vegetarian</span> <span class="o">=</span> <span class="n">deer</span><span class="o">;</span>
-    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">vegetarian</span><span class="o">.</span><span class="na">eatVegetables</span><span class="o">());</span>
+      <span class="nc">Vegetarian</span> <span class="n">vegetarian</span> <span class="o">=</span> <span class="n">deer</span><span class="o">;</span>
+      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">vegetarian</span><span class="o">.</span><span class="na">eatVegetables</span><span class="o">());</span>
 
-    <span class="nc">Object</span> <span class="n">object</span> <span class="o">=</span> <span class="n">deer</span><span class="o">;</span>
-    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">object</span><span class="o">);</span>
+      <span class="nc">Object</span> <span class="n">object</span> <span class="o">=</span> <span class="n">deer</span><span class="o">;</span>
+      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">object</span><span class="o">);</span>
+    <span class="o">}</span>
+
   <span class="o">}</span>
-
-<span class="o">}</span>
 
 </code></pre></div></div>
 
@@ -634,56 +661,56 @@ sleeping at human's house!
 </ul>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-<span class="kn">package</span> <span class="nn">com.java.core.polymorphims</span><span class="o">;</span>  
+  <span class="kn">package</span> <span class="nn">com.java.core.polymorphims</span><span class="o">;</span>  
   
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Employee</span> <span class="o">{</span>  
+  <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Employee</span> <span class="o">{</span>  
   
-  <span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>  
-  <span class="kd">private</span> <span class="nc">String</span> <span class="n">id</span><span class="o">;</span>  
-  <span class="kd">private</span> <span class="kt">double</span> <span class="n">salary</span><span class="o">;</span>  
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>  
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">id</span><span class="o">;</span>  
+    <span class="kd">private</span> <span class="kt">double</span> <span class="n">salary</span><span class="o">;</span>  
 
-  <span class="kd">public</span> <span class="nf">Employee</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">,</span> <span class="nc">String</span> <span class="n">id</span><span class="o">,</span> <span class="kt">double</span> <span class="n">salary</span><span class="o">)</span> <span class="o">{</span>  
-    <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>  
-    <span class="k">this</span><span class="o">.</span><span class="na">id</span> <span class="o">=</span> <span class="n">id</span><span class="o">;</span>  
-    <span class="k">this</span><span class="o">.</span><span class="na">salary</span> <span class="o">=</span> <span class="n">salary</span><span class="o">;</span>  
-  <span class="o">}</span>  
+    <span class="kd">public</span> <span class="nf">Employee</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">,</span> <span class="nc">String</span> <span class="n">id</span><span class="o">,</span> <span class="kt">double</span> <span class="n">salary</span><span class="o">)</span> <span class="o">{</span>  
+      <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>  
+      <span class="k">this</span><span class="o">.</span><span class="na">id</span> <span class="o">=</span> <span class="n">id</span><span class="o">;</span>  
+      <span class="k">this</span><span class="o">.</span><span class="na">salary</span> <span class="o">=</span> <span class="n">salary</span><span class="o">;</span>  
+    <span class="o">}</span>  
 
-  <span class="kd">public</span> <span class="kt">double</span> <span class="nf">calculateSalary</span><span class="o">()</span> <span class="o">{</span>  
-    <span class="k">return</span> <span class="n">salary</span><span class="o">;</span>  
-  <span class="o">}</span>  
+    <span class="kd">public</span> <span class="kt">double</span> <span class="nf">calculateSalary</span><span class="o">()</span> <span class="o">{</span>  
+      <span class="k">return</span> <span class="n">salary</span><span class="o">;</span>  
+    <span class="o">}</span>  
 
-  <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>  
-    <span class="k">return</span> <span class="n">name</span><span class="o">;</span>  
-  <span class="o">}</span>  
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>  
+      <span class="k">return</span> <span class="n">name</span><span class="o">;</span>  
+    <span class="o">}</span>  
 
-  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>  
-    <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>  
-  <span class="o">}</span>  
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>  
+      <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>  
+    <span class="o">}</span>  
 
-  <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getId</span><span class="o">()</span> <span class="o">{</span>  
-    <span class="k">return</span> <span class="n">id</span><span class="o">;</span>  
-  <span class="o">}</span>  
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getId</span><span class="o">()</span> <span class="o">{</span>  
+      <span class="k">return</span> <span class="n">id</span><span class="o">;</span>  
+    <span class="o">}</span>  
 
-  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setId</span><span class="o">(</span><span class="nc">String</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span>  
-    <span class="k">this</span><span class="o">.</span><span class="na">id</span> <span class="o">=</span> <span class="n">id</span><span class="o">;</span>  
-  <span class="o">}</span>  
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setId</span><span class="o">(</span><span class="nc">String</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span>  
+      <span class="k">this</span><span class="o">.</span><span class="na">id</span> <span class="o">=</span> <span class="n">id</span><span class="o">;</span>  
+    <span class="o">}</span>  
 
-  <span class="kd">public</span> <span class="kt">double</span> <span class="nf">getSalary</span><span class="o">()</span> <span class="o">{</span>  
-    <span class="k">return</span> <span class="n">salary</span><span class="o">;</span>  
-  <span class="o">}</span>  
+    <span class="kd">public</span> <span class="kt">double</span> <span class="nf">getSalary</span><span class="o">()</span> <span class="o">{</span>   
+      <span class="k">return</span> <span class="n">salary</span><span class="o">;</span>  
+    <span class="o">}</span>  
 
-  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setSalary</span><span class="o">(</span><span class="kt">double</span> <span class="n">salary</span><span class="o">)</span> <span class="o">{</span>  
-    <span class="k">this</span><span class="o">.</span><span class="na">salary</span> <span class="o">=</span> <span class="n">salary</span><span class="o">;</span>  
-  <span class="o">}</span>  
-<span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setSalary</span><span class="o">(</span><span class="kt">double</span> <span class="n">salary</span><span class="o">)</span> <span class="o">{</span>  
+      <span class="k">this</span><span class="o">.</span><span class="na">salary</span> <span class="o">=</span> <span class="n">salary</span><span class="o">;</span>  
+    <span class="o">}</span>  
+  <span class="o">}</span>
 
 
 </code></pre></div></div>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-	<span class="kn">package</span> <span class="nn">com.java.core.polymorphims</span><span class="o">;</span>
+  <span class="kn">package</span> <span class="nn">com.java.core.polymorphims</span><span class="o">;</span>
 
-	<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Developer</span> <span class="kd">extends</span> <span class="nc">Employee</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Developer</span> <span class="kd">extends</span> <span class="nc">Employee</span> <span class="o">{</span>
 
     <span class="kd">public</span> <span class="nf">Developer</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">,</span> <span class="nc">String</span> <span class="n">id</span><span class="o">,</span> <span class="kt">double</span> <span class="n">salary</span><span class="o">)</span> <span class="o">{</span>
       <span class="kd">super</span><span class="o">(</span><span class="n">name</span><span class="o">,</span> <span class="n">id</span><span class="o">,</span> <span class="n">salary</span><span class="o">);</span>
@@ -694,14 +721,14 @@ sleeping at human's house!
       <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">getSalary</span><span class="o">()</span> <span class="o">+</span> <span class="mi">100</span><span class="o">;</span>
     <span class="o">}</span>
 
-	<span class="o">}</span>
+  <span class="o">}</span>
 
 </code></pre></div></div>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-	<span class="kn">package</span> <span class="nn">com.java.core.polymorphims</span><span class="o">;</span>
+  <span class="kn">package</span> <span class="nn">com.java.core.polymorphims</span><span class="o">;</span>
 
-	<span class="kd">public</span> <span class="kd">class</span> <span class="nc">JavaPolymorphimsMain</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="kd">class</span> <span class="nc">JavaPolymorphimsMain</span> <span class="o">{</span>
 
     <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
 
@@ -716,7 +743,7 @@ sleeping at human's house!
             
     <span class="o">}</span>
 
-	<span class="o">}</span>
+  <span class="o">}</span>
 
 </code></pre></div></div>
 
